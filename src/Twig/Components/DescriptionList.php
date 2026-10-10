@@ -93,11 +93,7 @@ final class DescriptionList
                 $itemArr = $item;
 
                 if (isset($itemArr['link'])) {
-                    if (\is_array($itemArr['link']) && isset($itemArr['link']['url']) && \is_string($itemArr['link']['url'])) {
-                        $itemArr['link_href'] = $itemArr['link']['url'];
-                    } elseif (\is_string($itemArr['link'])) {
-                        $itemArr['link_href'] = $itemArr['link'];
-                    }
+                    $itemArr['link_href'] = PropsResolver::resolveUrl($itemArr['link']);
                 }
 
                 $normalized[] = $itemArr;
