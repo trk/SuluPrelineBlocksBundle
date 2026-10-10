@@ -6,9 +6,9 @@
     {% endif %}
 
     {% if img_url %}
-        <div class="relative w-full rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-900">
+        <div class="hotspot-container relative w-full rounded-2xl shadow-lg border border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-900">
             <img
-                class="w-full h-auto object-cover"
+                class="w-full h-auto object-cover rounded-2xl"
                 src="{{ img_url }}"
                 {% if this.imageSrcSet %}srcset="{{ this.imageSrcSet }}" sizes="{{ this.imageSizes }}"{% endif %}
                 alt="{{ this.title|default('Interactive media hotspots') }}"
@@ -18,8 +18,14 @@
 
             {% for item in items %}
                 {% set marker_colors = this.markerColorClasses(item.marker_color) %}
+                {% set is_left = item.x < 35 %}
+                {% set is_right = item.x > 65 %}
+                {% set is_top = item.y <= 50 %}
+                {% set x_placement = is_left ? 'left-0' : (is_right ? 'right-0' : 'left-1/2 -translate-x-1/2') %}
+                {% set y_placement = is_top ? 'top-full mt-3' : 'bottom-full mb-3' %}
+
                 <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">
-                    <div class="hs-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:fixed] [--adaptive:none] sm:[--placement:top]">
+                    <div class="hs-dropdown hotspot-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:absolute] [--adaptive:none]">
                         <button id="hs-hotspot-item-{{ loop.index }}"
                                 type="button"
                                 class="hs-dropdown-toggle relative group flex items-center justify-center size-8 rounded-full transition-all duration-200 hover:scale-115 focus:outline-hidden focus:ring-4 {{ marker_colors.button }}"
@@ -60,7 +66,7 @@
                             {% endif %}
                         </button>
 
-                        <div class="hs-dropdown-menu transition-[opacity,margin] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 w-72 max-w-xs bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-neutral-700 overflow-hidden"
+                        <div class="hs-dropdown-menu hotspot-menu transition-[opacity,transform] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 w-72 sm:w-80 md:w-88 max-w-[calc(100vw-2.5rem)] shrink-0 bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-neutral-700 overflow-hidden {{ y_placement }} {{ x_placement }}"
                              role="menu"
                              aria-orientation="vertical"
                              aria-labelledby="hs-hotspot-item-{{ loop.index }}">
@@ -103,7 +109,7 @@
                                 {% endif %}
 
                                 {% if item.content %}
-                                    <div class="text-xs text-gray-600 dark:text-neutral-300 leading-relaxed mb-3">
+                                    <div class="text-xs text-gray-600 dark:text-neutral-300 leading-relaxed mb-3 max-h-48 overflow-y-auto pr-1">
                                         {{ item.content|raw }}
                                     </div>
                                 {% endif %}
