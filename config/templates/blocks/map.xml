@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>map</key>
+    <meta>
+        <title lang="en">Map</title>
+        <title lang="tr">Harita</title>
+        <title lang="de">Karte</title>
+        <title lang="ru">Карта</title>
+        <title lang="es">Mapa</title>
+        <title lang="fr">Carte</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="location_query" type="text_line">
+            <meta>
+                <title lang="en">Location or Address</title>
+                <title lang="tr">Konum veya Adres</title>
+                <info_text lang="en">Enter an address or coordinates (e.g. 'Istanbul, Turkey' or '41.0082, 28.9784')</info_text>
+                <info_text lang="tr">Bir adres veya koordinat girin (örn: 'İstanbul, Türkiye' veya '41.0082, 28.9784')</info_text>
+            </meta>
+        </property>
+
+        <property name="zoom" type="number">
+            <meta>
+                <title lang="en">Zoom Level</title>
+                <title lang="tr">Yakınlaştırma Düzeyi</title>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+                <param name="max" value="20"/>
+                <param name="step" value="1"/>
+                <param name="default_value" value="14"/>
+            </params>
+        </property>
+
+        <property name="aspect_ratio" type="single_select">
+            <meta>
+                <title lang="en">Aspect Ratio</title>
+                <title lang="tr">En/Boy Oranı</title>
+            </meta>
+            <params>
+                <param name="default_value" value="16/9"/>
+                <param name="values" type="collection">
+                    <param name="16/9">
+                        <meta><title lang="en">16:9 (Widescreen)</title><title lang="tr">16:9 (Geniş)</title></meta>
+                    </param>
+                    <param name="4/3">
+                        <meta><title lang="en">4:3 (Standard)</title><title lang="tr">4:3 (Standart)</title></meta>
+                    </param>
+                    <param name="21/9">
+                        <meta><title lang="en">21:9 (Ultrawide)</title><title lang="tr">21:9 (Ultra Geniş)</title></meta>
+                    </param>
+                    <param name="1/1">
+                        <meta><title lang="en">1:1 (Square)</title><title lang="tr">1:1 (Kare)</title></meta>
+                    </param>
+                    <param name="auto">
+                        <meta><title lang="en">Auto / Fixed Height</title><title lang="tr">Otomatik / Sabit Yükseklik</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <block name="items" default-type="map_item">
+            <meta>
+                <title lang="en">Additional Location Pins</title>
+                <title lang="tr">Ek Konum Noktaları</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/map_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="map"/>
+            </params>
+        </property>
+    </properties>
+</template>

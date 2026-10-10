@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<type name="map_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Map Location</title>
+        <title lang="tr">Harita Konumu</title>
+        <title lang="de">Kartenstandort</title>
+        <title lang="ru">Точка на карте</title>
+        <title lang="es">Ubicación en el mapa</title>
+        <title lang="fr">Emplacement sur la carte</title>
+    </meta>
+    <properties>
+        <property name="location" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Address or Coordinates</title>
+                <title lang="tr">Adres veya Koordinat</title>
+                <info_text lang="en">e.g. 'Levent, Istanbul' or '41.0822, 29.0118'</info_text>
+                <info_text lang="tr">Örn: 'Levent, İstanbul' veya '41.0822, 29.0118'</info_text>
+            </meta>
+        </property>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

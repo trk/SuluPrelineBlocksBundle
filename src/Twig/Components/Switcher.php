@@ -163,11 +163,11 @@ final class Switcher
                 default => 'justify-start',
             };
 
-            if ($style === 'segmented') {
+            if ('segmented' === $style) {
                 $classes[] = 'p-1.5 bg-gray-100 rounded-xl dark:bg-neutral-800 gap-1';
-            } elseif ($style === 'underline') {
+            } elseif ('underline' === $style) {
                 $classes[] = 'gap-x-6 border-b border-gray-200 dark:border-neutral-700';
-            } elseif ($style === 'bordered') {
+            } elseif ('bordered' === $style) {
                 $classes[] = 'gap-2';
             } else {
                 // pills
@@ -187,20 +187,20 @@ final class Switcher
         $isVert = $this->isVertical();
         $align = $this->getAlignment();
 
-        if ($align === 'full' && !$isVert) {
+        if ('full' === $align && !$isVert) {
             $classes[] = 'justify-center';
         }
 
-        if ($style === 'pills') {
+        if ('pills' === $style) {
             $classes[] = 'rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800';
             $classes[] = 'hs-tab-active:bg-primary-600 hs-tab-active:text-white dark:hs-tab-active:bg-primary-600 dark:hs-tab-active:text-white';
-        } elseif ($style === 'segmented') {
+        } elseif ('segmented' === $style) {
             $classes[] = 'rounded-lg text-gray-600 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-white';
             $classes[] = 'hs-tab-active:bg-white hs-tab-active:text-gray-900 hs-tab-active:shadow-2xs hs-tab-active:font-semibold dark:hs-tab-active:bg-neutral-700 dark:hs-tab-active:text-white';
-        } elseif ($style === 'underline') {
+        } elseif ('underline' === $style) {
             $classes[] = 'border-b-2 -mb-px border-transparent text-gray-500 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200';
             $classes[] = 'hs-tab-active:border-primary-600 hs-tab-active:text-primary-600 hs-tab-active:font-semibold dark:hs-tab-active:border-primary-500 dark:hs-tab-active:text-primary-400';
-        } elseif ($style === 'bordered') {
+        } elseif ('bordered' === $style) {
             $classes[] = 'rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800';
             $classes[] = 'hs-tab-active:border-primary-600 hs-tab-active:bg-primary-50 hs-tab-active:text-primary-700 dark:hs-tab-active:border-primary-500 dark:hs-tab-active:bg-primary-950/40 dark:hs-tab-active:text-primary-300';
         }

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>html</key>
+    <meta>
+        <title lang="en">Custom HTML / Embed</title>
+        <title lang="tr">Özel HTML / Gömülü Kod</title>
+        <title lang="de">Benutzerdefiniertes HTML / Embed</title>
+        <title lang="ru">Пользовательский HTML</title>
+        <title lang="es">HTML personalizado</title>
+        <title lang="fr">HTML personnalisé</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="content" type="text_area" mandatory="true">
+            <meta>
+                <title lang="en">HTML / Embed Code</title>
+                <title lang="tr">HTML / Gömülü Kod</title>
+                <info_text lang="en">Raw HTML, embed widgets, or external scripts. Note: Raw output should be trusted.</info_text>
+                <info_text lang="tr">Ham HTML, gömülü widget'lar veya harici komut dosyaları.</info_text>
+            </meta>
+        </property>
+
+        <property name="raw_output" type="checkbox">
+            <meta>
+                <title lang="en">Render without wrapper</title>
+                <title lang="tr">Sarmalayıcı olmadan doğrudan oluştur</title>
+                <info_text lang="en">If checked, outputs HTML directly without any surrounding container div.</info_text>
+                <info_text lang="tr">İşaretlenirse, herhangi bir sarmalayıcı div olmadan doğrudan HTML çıktısı verir.</info_text>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="html"/>
+            </params>
+        </property>
+    </properties>
+</template>

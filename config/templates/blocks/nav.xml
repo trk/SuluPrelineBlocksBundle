@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>nav</key>
+    <meta>
+        <title lang="en">Sidebar / Vertical Nav</title>
+        <title lang="tr">Dikey Menü (Kenar Çubuğu)</title>
+        <title lang="de">Vertikale Navigation</title>
+        <title lang="ru">Вертикальное меню</title>
+        <title lang="es">Navegación vertical</title>
+        <title lang="fr">Navigation verticale</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="nav_item" minOccurs="1">
+            <meta>
+                <title lang="en">Navigation Items</title>
+                <title lang="tr">Menü Öğeleri</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/nav_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="nav"/>
+            </params>
+        </property>
+    </properties>
+</template>

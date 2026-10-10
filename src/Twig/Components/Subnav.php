@@ -148,11 +148,11 @@ final class Subnav
             default => 'justify-start',
         };
 
-        if ($style === 'segmented') {
+        if ('segmented' === $style) {
             $classes[] = 'p-1.5 bg-gray-100 rounded-xl dark:bg-neutral-800 gap-1';
-        } elseif ($style === 'underline') {
+        } elseif ('underline' === $style) {
             $classes[] = 'gap-x-6 border-b border-gray-200 dark:border-neutral-700';
-        } elseif ($style === 'divider') {
+        } elseif ('divider' === $style) {
             $classes[] = 'gap-x-4 divide-x divide-gray-200 dark:divide-neutral-700';
         } else {
             // pills
@@ -174,28 +174,28 @@ final class Subnav
             default => 'text-sm py-2 px-3.5',
         };
 
-        if ($style === 'pills') {
+        if ('pills' === $style) {
             $classes[] = 'rounded-lg';
             if ($isActive) {
                 $classes[] = 'bg-primary-600 text-white shadow-2xs dark:bg-primary-500';
             } else {
                 $classes[] = 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800';
             }
-        } elseif ($style === 'segmented') {
+        } elseif ('segmented' === $style) {
             $classes[] = 'rounded-lg';
             if ($isActive) {
                 $classes[] = 'bg-white text-gray-900 shadow-2xs font-semibold dark:bg-neutral-700 dark:text-white';
             } else {
                 $classes[] = 'text-gray-600 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-white';
             }
-        } elseif ($style === 'underline') {
+        } elseif ('underline' === $style) {
             $classes[] = 'border-b-2 -mb-px px-1';
             if ($isActive) {
                 $classes[] = 'border-primary-600 text-primary-600 font-semibold dark:border-primary-500 dark:text-primary-400';
             } else {
                 $classes[] = 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:border-neutral-600';
             }
-        } elseif ($style === 'divider') {
+        } elseif ('divider' === $style) {
             $classes[] = 'first:ps-0 ps-4';
             if ($isActive) {
                 $classes[] = 'text-primary-600 font-semibold dark:text-primary-400';

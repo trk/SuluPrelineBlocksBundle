@@ -1,0 +1,89 @@
+{# Preline UI 5 / Tailwind CSS 4 Map Component #}
+<div {{ attributes.defaults({ class: 'w-full my-6' }) }}>
+    {% if this.title %}
+        <div class="mb-4">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-neutral-200">{{ this.title }}</h3>
+        </div>
+    {% endif %}
+
+    {% if this.hasMap %}
+        <div class="{{ this.wrapperClasses }} {{ this.aspectRatioClasses }}">
+            <iframe
+                src="{{ this.embedUrl }}"
+                class="w-full h-full border-0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+                title="{{ this.title|default('Interactive Map') }}">
+            </iframe>
+        </div>
+    {% else %}
+        <div class="p-8 text-center bg-gray-100 rounded-2xl border border-dashed border-gray-300 dark:bg-neutral-800 dark:border-neutral-700">
+            <p class="text-sm text-gray-500 dark:text-neutral-400">No map location provided.</p>
+        </div>
+    {% endif %}
+
+    {% if this.hasItems %}
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for item in this.normalizedItems %}
+                <div class="flex flex-col bg-white border border-gray-200 rounded-xl p-4 md:p-5 shadow-xs transition hover:shadow-md dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
+                    {% if item.image_url %}
+                        <div class="mb-3 rounded-lg overflow-hidden aspect-video bg-gray-100 dark:bg-neutral-800">
+                            <img src="{{ item.image_url }}" alt="{{ item.title|default(item.location) }}" class="w-full h-full object-cover">
+                        </div>
+                    {% endif %}
+
+                    {% if item.title %}
+                        <h4 class="text-base font-semibold text-gray-800 dark:text-neutral-200">
+                            {{ item.title }}
+                        </h4>
+                    {% endif %}
+
+                    {% if item.meta %}
+                        <p class="text-xs font-medium text-gray-500 dark:text-neutral-400 mt-1">
+                            {{ item.meta }}
+                        </p>
+                    {% endif %}
+
+                    <div class="flex items-start gap-1.5 text-xs text-gray-600 dark:text-neutral-300 mt-2">
+                        <svg class="shrink-0 size-4 text-primary-600 dark:text-primary-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
+                        <span>{{ item.location }}</span>
+                    </div>
+
+                    {% if item.content %}
+                        <div class="mt-2 text-xs text-gray-600 dark:text-neutral-400 prose prose-xs dark:prose-invert">
+                            {{ item.content|raw }}
+                        </div>
+                    {% endif %}
+
+                    <div class="mt-auto pt-4 flex flex-wrap items-center gap-2">
+                        <a
+                            href="{{ item.directions_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-lg text-xs font-medium bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-colors">
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689A1.125 1.125 0 0 0 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+                            </svg>
+                            Directions
+                        </a>
+
+                        {% if item.link %}
+                            <a
+                                href="{{ item.link }}"
+                                class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-lg text-xs font-medium border border-gray-200 text-gray-800 hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-gray-300 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 transition-colors">
+                                {{ item.link_title }}
+                                <svg class="shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

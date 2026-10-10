@@ -14,9 +14,6 @@ final class Popover
 {
     public ?string $title = null;
 
-    /**
-     * @var mixed
-     */
     public mixed $image = null;
 
     /**
@@ -71,11 +68,11 @@ final class Popover
             $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
 
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
-            if ($link === '#') {
+            if ('#' === $link) {
                 $link = null;
             }
 
-            $linkTitle = \is_string($item['link_title'] ?? null) && $item['link_title'] !== ''
+            $linkTitle = \is_string($item['link_title'] ?? null) && '' !== $item['link_title']
                 ? $item['link_title']
                 : 'Learn More';
 

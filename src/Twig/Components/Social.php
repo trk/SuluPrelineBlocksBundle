@@ -29,7 +29,7 @@ final class Social
         $resolvedProps = $this->resolveProps();
         $style = $resolvedProps['style'] ?? 'icon_only';
 
-        return \is_string($style) && $style !== '' ? $style : 'icon_only';
+        return \is_string($style) && '' !== $style ? $style : 'icon_only';
     }
 
     public function getSize(): string
@@ -37,7 +37,7 @@ final class Social
         $resolvedProps = $this->resolveProps();
         $size = $resolvedProps['size'] ?? 'md';
 
-        return \is_string($size) && $size !== '' ? $size : 'md';
+        return \is_string($size) && '' !== $size ? $size : 'md';
     }
 
     public function getShape(): string
@@ -45,7 +45,7 @@ final class Social
         $resolvedProps = $this->resolveProps();
         $shape = $resolvedProps['shape'] ?? 'rounded';
 
-        return \is_string($shape) && $shape !== '' ? $shape : 'rounded';
+        return \is_string($shape) && '' !== $shape ? $shape : 'rounded';
     }
 
     public function getAlignment(): string
@@ -129,7 +129,7 @@ final class Social
                 continue;
             }
 
-            $network = \is_string($item['network'] ?? null) && $item['network'] !== ''
+            $network = \is_string($item['network'] ?? null) && '' !== $item['network']
                 ? \strtolower($item['network'])
                 : 'website';
 
@@ -141,11 +141,11 @@ final class Social
                 $link = $rawLink['url'];
             }
 
-            if ($link === '') {
+            if ('' === $link) {
                 continue;
             }
 
-            $title = \is_string($item['title'] ?? null) && $item['title'] !== ''
+            $title = \is_string($item['title'] ?? null) && '' !== $item['title']
                 ? $item['title']
                 : \ucfirst($network);
 
@@ -170,6 +170,7 @@ final class Social
         if (isset($this->props['props']) && \is_array($this->props['props'])) {
             /** @var array<string, mixed> $inner */
             $inner = $this->props['props'];
+
             return $inner;
         }
 

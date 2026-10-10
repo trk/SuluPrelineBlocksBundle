@@ -34,7 +34,7 @@ final class Table
         $resolvedProps = $this->resolveProps();
         $style = $resolvedProps['style'] ?? 'default';
 
-        return \is_string($style) && $style !== '' ? $style : 'default';
+        return \is_string($style) && '' !== $style ? $style : 'default';
     }
 
     public function getSize(): string
@@ -42,7 +42,7 @@ final class Table
         $resolvedProps = $this->resolveProps();
         $size = $resolvedProps['size'] ?? 'md';
 
-        return \is_string($size) && $size !== '' ? $size : 'md';
+        return \is_string($size) && '' !== $size ? $size : 'md';
     }
 
     public function isStickyHeader(): bool
@@ -57,16 +57,16 @@ final class Table
     {
         $style = $this->getStyle();
 
-        return $style === 'hover' || $style === 'striped';
+        return 'hover' === $style || 'striped' === $style;
     }
 
     public function hasHeader(): bool
     {
-        return $this->header_title !== null && $this->header_title !== ''
-            || $this->header_meta !== null && $this->header_meta !== ''
-            || $this->header_content !== null && $this->header_content !== ''
-            || $this->header_badge !== null && $this->header_badge !== ''
-            || $this->header_link !== null && $this->header_link !== '';
+        return null !== $this->header_title && '' !== $this->header_title
+            || null !== $this->header_meta && '' !== $this->header_meta
+            || null !== $this->header_content && '' !== $this->header_content
+            || null !== $this->header_badge && '' !== $this->header_badge
+            || null !== $this->header_link && '' !== $this->header_link;
     }
 
     public function getWrapperClasses(): string
@@ -128,8 +128,8 @@ final class Table
 
         $style = $this->getStyle();
 
-        if ($style === 'striped') {
-            $classes[] = $index % 2 === 0
+        if ('striped' === $style) {
+            $classes[] = 0 === $index % 2
                 ? 'bg-white dark:bg-neutral-900'
                 : 'bg-gray-50/70 dark:bg-neutral-800/50';
         } else {
@@ -172,11 +172,11 @@ final class Table
 
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
-            if ($link === '#') {
+            if ('#' === $link) {
                 $link = null;
             }
 
-            $linkTitle = \is_string($item['link_title'] ?? null) && $item['link_title'] !== ''
+            $linkTitle = \is_string($item['link_title'] ?? null) && '' !== $item['link_title']
                 ? $item['link_title']
                 : 'View';
 
@@ -202,6 +202,7 @@ final class Table
         if (isset($this->props['props']) && \is_array($this->props['props'])) {
             /** @var array<string, mixed> $inner */
             $inner = $this->props['props'];
+
             return $inner;
         }
 

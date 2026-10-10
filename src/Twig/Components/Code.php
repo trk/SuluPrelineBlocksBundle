@@ -27,7 +27,7 @@ final class Code
 
     public function getId(): string
     {
-        if ($this->uniqueId === null) {
+        if (null === $this->uniqueId) {
             $this->uniqueId = 'hs-code-' . \bin2hex(\random_bytes(4));
         }
 

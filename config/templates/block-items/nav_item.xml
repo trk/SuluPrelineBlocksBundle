@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<type name="nav_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Navigation Item</title>
+        <title lang="tr">Menü Öğesi</title>
+        <title lang="de">Navigationselement</title>
+        <title lang="ru">Элемент меню</title>
+        <title lang="es">Elemento de navegación</title>
+        <title lang="fr">Élément de navigation</title>
+    </meta>
+    <properties>
+        <property name="item_type" type="single_select">
+            <meta>
+                <title lang="en">Type</title>
+                <title lang="tr">Tür</title>
+            </meta>
+            <params>
+                <param name="default_value" value="link"/>
+                <param name="values" type="collection">
+                    <param name="link">
+                        <meta><title lang="en">Link</title><title lang="tr">Bağlantı</title></meta>
+                    </param>
+                    <param name="header">
+                        <meta><title lang="en">Section Header</title><title lang="tr">Bölüm Başlığı</title></meta>
+                    </param>
+                    <param name="divider">
+                        <meta><title lang="en">Divider Line</title><title lang="tr">Ayırıcı Çizgi</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <property name="is_active" type="checkbox">
+            <meta>
+                <title lang="en">Is Active</title>
+                <title lang="tr">Aktif mi</title>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+    </properties>
+</type>

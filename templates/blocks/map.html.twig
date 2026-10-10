@@ -1,0 +1,8 @@
+<twig:Map
+    title="{{ block.title|default(null) }}"
+    location_query="{{ block.location_query|default(null) }}"
+    zoom="{{ block.zoom|default(14) }}"
+    aspect_ratio="{{ block.aspect_ratio|default('16/9') }}"
+    :items="block.items|default([])"
+    :props="block|merge(block.props|default({}))"
+/>

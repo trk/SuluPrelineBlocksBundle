@@ -177,7 +177,7 @@ final class ListBlock
     {
         $props = $this->getResolvedProps();
         $spacing = $props['spacing'] ?? 'md';
-        $isHoriz = $this->getListType() === 'horizontal';
+        $isHoriz = 'horizontal' === $this->getListType();
 
         if ($isHoriz) {
             return match ($spacing) {
@@ -197,7 +197,7 @@ final class ListBlock
     public function getListClasses(): string
     {
         $classes = [];
-        $isHoriz = $this->getListType() === 'horizontal';
+        $isHoriz = 'horizontal' === $this->getListType();
         $style = $this->getStyle();
         $marker = $this->getMarker();
         $props = $this->getResolvedProps();
@@ -205,32 +205,32 @@ final class ListBlock
         if ($isHoriz) {
             $classes[] = 'flex flex-wrap items-center';
             $classes[] = $this->getSpacingClasses();
-            if ($style === 'divider') {
+            if ('divider' === $style) {
                 $classes[] = 'divide-x divide-gray-200 dark:divide-neutral-700';
             }
         } else {
             $columns = $props['columns'] ?? '1';
-            if ($columns === '2') {
+            if ('2' === $columns) {
                 $classes[] = 'grid sm:grid-cols-2 gap-x-6';
-            } elseif ($columns === '3') {
+            } elseif ('3' === $columns) {
                 $classes[] = 'grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6';
             }
 
-            if ($columns === '1') {
+            if ('1' === $columns) {
                 $classes[] = $this->getSpacingClasses();
             } else {
                 $classes[] = 'gap-y-3';
             }
 
-            if ($style === 'divider') {
+            if ('divider' === $style) {
                 $classes[] = 'divide-y divide-gray-200 dark:divide-neutral-700';
             }
 
-            if ($marker === 'disc') {
+            if ('disc' === $marker) {
                 $classes[] = 'list-disc list-inside';
-            } elseif ($marker === 'circle') {
+            } elseif ('circle' === $marker) {
                 $classes[] = 'list-[circle] list-inside';
-            } elseif ($marker === 'decimal') {
+            } elseif ('decimal' === $marker) {
                 $classes[] = 'list-decimal list-inside';
             }
         }
@@ -243,7 +243,7 @@ final class ListBlock
         $classes = [];
         $style = $this->getStyle();
         $size = $this->getSize();
-        $isHoriz = $this->getListType() === 'horizontal';
+        $isHoriz = 'horizontal' === $this->getListType();
 
         $classes[] = match ($size) {
             'sm' => 'text-xs',
@@ -253,11 +253,11 @@ final class ListBlock
 
         $classes[] = 'text-gray-800 dark:text-neutral-200';
 
-        if ($style === 'striped') {
+        if ('striped' === $style) {
             $classes[] = 'p-3 rounded-lg odd:bg-transparent even:bg-gray-50 dark:even:bg-neutral-800/60';
-        } elseif ($style === 'divider' && !$isHoriz) {
+        } elseif ('divider' === $style && !$isHoriz) {
             $classes[] = 'pt-2.5 pb-2.5 first:pt-0 last:pb-0';
-        } elseif ($style === 'divider' && $isHoriz) {
+        } elseif ('divider' === $style && $isHoriz) {
             $classes[] = 'px-3 first:ps-0 last:pe-0';
         }
 
