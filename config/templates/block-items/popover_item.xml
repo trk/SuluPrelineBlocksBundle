@@ -14,12 +14,10 @@
             <meta>
                 <title lang="en">Marker Position</title>
                 <title lang="tr">İşaretçi Konumu</title>
-                <info_text lang="en">Click on the image to place the hotspot marker</info_text>
-                <info_text lang="tr">Noktayı konumlandırmak için görsel üzerine tıklayın</info_text>
             </meta>
         </property>
 
-        <property name="marker_type" type="single_select" colspan="4">
+        <property name="marker_type" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Marker Style</title>
                 <title lang="tr">İşaretçi Stili</title>
@@ -74,7 +72,7 @@
             </params>
         </property>
 
-        <property name="marker_color" type="single_select" colspan="4">
+        <property name="marker_color" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Marker Color</title>
                 <title lang="tr">İşaretçi Rengi</title>
@@ -129,7 +127,19 @@
             </params>
         </property>
 
-        <xi:include href="../fields/icon.xml"/>
+        <property name="icon" type="single_icon_selection" colspan="12" visibleCondition="marker_type == 'icon'">
+            <meta>
+                <title lang="en">Custom Marker Icon</title>
+                <title lang="tr">Özel İşaretçi İkonu</title>
+                <title lang="de">Eigenes Markierungssymbol</title>
+                <title lang="ru">Пользовательская иконка</title>
+                <title lang="es">Icono personalizado</title>
+                <title lang="fr">Icône personnalisée</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
+            </params>
+        </property>
         <xi:include href="../fields/title.xml"/>
 
         <property name="meta" type="text_line">

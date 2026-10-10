@@ -25,7 +25,7 @@
             </params>
         </property>
 
-        <property name="trigger" type="single_select" colspan="4">
+        <property name="trigger" type="single_select" colspan="12">
             <meta>
                 <title lang="en">Trigger Mode</title>
                 <title lang="tr">Açılma Şekli</title>
@@ -51,7 +51,7 @@
             </params>
         </property>
 
-        <property name="marker_type" type="single_select" colspan="4">
+        <property name="marker_type" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Default Marker Style</title>
                 <title lang="tr">Varsayılan İşaretçi Stili</title>
@@ -99,7 +99,7 @@
             </params>
         </property>
 
-        <property name="marker_color" type="single_select" colspan="4">
+        <property name="marker_color" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Default Marker Color</title>
                 <title lang="tr">Varsayılan İşaretçi Rengi</title>
@@ -144,6 +144,20 @@
                         </meta>
                     </param>
                 </param>
+            </params>
+        </property>
+
+        <property name="icon" type="single_icon_selection" colspan="12" visibleCondition="marker_type == 'icon'">
+            <meta>
+                <title lang="en">Default Marker Icon</title>
+                <title lang="tr">Varsayılan İşaretçi İkonu</title>
+                <title lang="de">Standard-Markierungssymbol</title>
+                <title lang="ru">Иконка маркера по умолчанию</title>
+                <title lang="es">Icono de marcador predeterminado</title>
+                <title lang="fr">Icône de marqueur par défaut</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
             </params>
         </property>
 

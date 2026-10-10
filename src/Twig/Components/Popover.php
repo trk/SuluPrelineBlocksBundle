@@ -26,6 +26,8 @@ final class Popover
 
     public ?string $marker_color = null;
 
+    public mixed $icon = null;
+
     /**
      * @var array<int|string, mixed>
      */
@@ -205,8 +207,8 @@ final class Popover
                 $markerColor = $defaultColor;
             }
 
-            // Custom Icon: Item icon -> Hotspot icon
-            $rawIcon = $item['icon'] ?? $hotspot['marker_icon'] ?? null;
+            // Custom Icon: Item icon -> Hotspot icon -> Block default icon
+            $rawIcon = $item['icon'] ?? $hotspot['marker_icon'] ?? $this->icon ?? null;
             $iconClass = PropsResolver::resolveIcon($rawIcon);
 
             // Trigger: Block level default (with item fallback)
