@@ -15,13 +15,10 @@
         <xi:include href="../fields/video.xml"/>
         <xi:include href="../fields/hover_video.xml"/>
         <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/badge.xml"/>
 
         <xi:include href="../fields/meta.xml"/>
         <xi:include href="../fields/content.xml"/>
         <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
 
         <block name="elements" default-type="button" minOccurs="0">
             <meta>
