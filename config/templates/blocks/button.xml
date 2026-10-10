@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>button</key>
     <meta>
@@ -12,42 +13,9 @@
         <title lang="de">Schaltfläche</title>
     </meta>
     <properties>
-        <property name="content" type="text_line" mandatory="true">
-            <meta>
-                <title lang="en">Label</title>
-                <title lang="tr">Etiket</title>
-                <title lang="ru">Текст кнопки</title>
-                <title lang="fr">Libellé</title>
-                <title lang="es">Etiqueta</title>
-                <title lang="de">Beschriftung</title>
-            </meta>
-        </property>
-
-        <property name="link" type="link" mandatory="true">
-            <meta>
-                <title lang="en">Target Link</title>
-                <title lang="tr">Hedef Bağlantı</title>
-                <title lang="ru">Целевая ссылка</title>
-                <title lang="fr">Lien cible</title>
-                <title lang="es">Enlace de destino</title>
-                <title lang="de">Ziellink</title>
-            </meta>
-            <params>
-                <param name="enable_anchor" value="true"/>
-                <param name="enable_target" value="true"/>
-            </params>
-        </property>
-
-        <property name="link_title" type="text_line">
-            <meta>
-                <title lang="en">Tooltip Title</title>
-                <title lang="tr">İpucu Başlığı</title>
-                <title lang="ru">Заголовок подсказки</title>
-                <title lang="fr">Titre de l'infobulle</title>
-                <title lang="es">Título de información</title>
-                <title lang="de">Tooltip-Titel</title>
-            </meta>
-        </property>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>

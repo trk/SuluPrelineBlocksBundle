@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>image</key>
     <meta>
@@ -12,30 +13,8 @@
         <title lang="de">Bild</title>
     </meta>
     <properties>
-        <property name="image" type="single_media_selection" mandatory="true">
-            <meta>
-                <title lang="en">Media Image</title>
-                <title lang="tr">Medya Görseli</title>
-                <title lang="ru">Изображение из медиатеки</title>
-                <title lang="fr">Image média</title>
-                <title lang="es">Imagen de medios</title>
-                <title lang="de">Medienbild</title>
-            </meta>
-            <params>
-                <param name="types" value="image"/>
-            </params>
-        </property>
-
-        <property name="link" type="link">
-            <meta>
-                <title lang="en">Optional Link</title>
-                <title lang="tr">İsteğe Bağlı Bağlantı</title>
-                <title lang="ru">Необязательная ссылка</title>
-                <title lang="fr">Lien optionnel</title>
-                <title lang="es">Enlace opcional</title>
-                <title lang="de">Optionaler Link</title>
-            </meta>
-        </property>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>

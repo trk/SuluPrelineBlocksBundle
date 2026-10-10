@@ -13,13 +13,31 @@ final class ButtonTest extends TestCase
     {
         $button = new Button();
 
+        self::assertSame('', $button->title);
         self::assertSame('', $button->content);
+        self::assertSame('', $button->getTitle());
         self::assertSame('#', $button->link);
         self::assertNull($button->linkTitle);
         self::assertNull($button->link_title);
         self::assertSame('#', $button->getUrl());
         self::assertNull($button->getLinkTitle());
         self::assertStringContainsString('bg-blue-600', $button->getClasses());
+    }
+
+    public function testTitleAndContentResolution(): void
+    {
+        $buttonTitle = new Button();
+        $buttonTitle->title = 'Primary Action';
+        self::assertSame('Primary Action', $buttonTitle->getTitle());
+
+        $buttonContentFallback = new Button();
+        $buttonContentFallback->content = 'Fallback Action';
+        self::assertSame('Fallback Action', $buttonContentFallback->getTitle());
+
+        $buttonBoth = new Button();
+        $buttonBoth->title = 'Primary Title';
+        $buttonBoth->content = 'Fallback Content';
+        self::assertSame('Primary Title', $buttonBoth->getTitle());
     }
 
     public function testLinkTitleResolution(): void

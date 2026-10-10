@@ -9,10 +9,20 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('Button', template: '@SuluPrelineBlocks/components/Button.html.twig')]
 final class Button
 {
+    public ?string $title = '';
     public ?string $content = '';
     public mixed $link = '#';
     public ?string $linkTitle = null;
     public ?string $link_title = null;
+
+    public function getTitle(): string
+    {
+        if (null !== $this->title && '' !== $this->title) {
+            return $this->title;
+        }
+
+        return $this->content ?? '';
+    }
 
     public ?string $variant = null;
     public ?string $size = null;
