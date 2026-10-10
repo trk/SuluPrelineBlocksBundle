@@ -16,7 +16,7 @@ final class ComponentSuiteTest extends TestCase
     public function testHeadline(): void
     {
         $headline = new Headline();
-        $headline->content = 'Welcome to Totoglu Studio';
+        $headline->title = 'Welcome to Totoglu Studio';
         $headline->props = [
             'tag' => 'h1',
             'title_color' => 'primary',
@@ -26,6 +26,7 @@ final class ComponentSuiteTest extends TestCase
             'id' => 'hero-title',
         ];
 
+        self::assertSame('Welcome to Totoglu Studio', $headline->getTitle());
         self::assertSame('h1', $headline->getTag());
         self::assertSame('hero-title', $headline->getElementId());
         self::assertSame('text-center', $headline->getTextAlign());
@@ -43,6 +44,7 @@ final class ComponentSuiteTest extends TestCase
         $headline = new Headline();
         $headline->content = 'Hello World !';
 
+        self::assertSame('Hello World !', $headline->getTitle());
         self::assertSame('h2', $headline->getTag());
         self::assertNull($headline->getElementId());
         self::assertSame('text-left', $headline->getTextAlign());

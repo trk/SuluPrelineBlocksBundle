@@ -2,6 +2,7 @@
 {% set url = this.getUrl() %}
 {% set img_url = this.getImageUrl() %}
 {% set icon_class = this.iconClass %}
+{% set headline_title = this.getTitle() %}
 
 <{{ tag }} {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
     {{ attributes.defaults({
@@ -15,9 +16,9 @@
     {% endif %}
     {% if url %}
         <a href="{{ url }}" class="hover:underline transition-colors">
-            {{ content }}
+            {{ headline_title }}
         </a>
     {% else %}
-        {{ content }}
+        {{ headline_title }}
     {% endif %}
 </{{ tag }}>

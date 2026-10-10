@@ -9,10 +9,20 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('Headline', template: '@SuluPrelineBlocks/components/Headline.html.twig')]
 final class Headline
 {
+    public ?string $title = '';
     public ?string $content = '';
     public mixed $link = null;
     public mixed $image = null;
     public mixed $icon = null;
+
+    public function getTitle(): string
+    {
+        if (null !== $this->title && '' !== $this->title) {
+            return $this->title;
+        }
+
+        return $this->content ?? '';
+    }
 
     public ?string $tag = null;
     public ?string $size = null;

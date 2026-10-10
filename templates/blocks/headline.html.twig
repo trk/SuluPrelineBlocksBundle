@@ -1,5 +1,5 @@
 <twig:Headline
-    content="{{ block.content|default('') }}"
+    title="{{ block.title|default(block.content|default('')) }}"
     link="{{ block.link|default(null) }}"
     image="{{ block.image|default(null) }}"
     :icon="block.icon|default(null)"
