@@ -298,4 +298,69 @@ final class CardTest extends TestCase
         self::assertStringContainsString('shadow-none', $classes);
         self::assertStringContainsString('flex-1', $classes);
     }
+
+    public function testUnifiedElementsSeparation(): void
+    {
+        $card = new Card();
+        $card->props = [
+            'badge_style' => 'solid',
+            'badge_color' => 'primary',
+            'button_style' => 'solid',
+            'button_color' => 'secondary',
+        ];
+
+        $card->elements = [
+            [
+                'type' => 'badge',
+                'title' => 'Top Badge',
+                'badge_style' => 'inherit',
+                'badge_color' => 'inherit',
+            ],
+            [
+                'type' => 'button',
+                'title' => 'First Action',
+                'link' => '/action-1',
+                'button_style' => 'inherit',
+                'button_color' => 'inherit',
+            ],
+            [
+                'type' => 'badge',
+                'title' => 'Second Badge',
+                'badge_style' => 'outline',
+                'badge_color' => 'danger',
+            ],
+            [
+                'type' => 'button',
+                'title' => 'Second Action',
+                'link' => '/action-2',
+                'button_style' => 'outline',
+                'button_color' => 'primary',
+            ],
+        ];
+
+        self::assertTrue($card->hasBadges());
+        $badges = $card->getNormalizedBadges();
+        self::assertCount(2, $badges);
+        self::assertSame('Top Badge', $badges[0]['title']);
+        self::assertIsString($badges[0]['classes']);
+        self::assertStringContainsString('bg-primary-600', $badges[0]['classes']);
+        self::assertSame('Second Badge', $badges[1]['title']);
+        self::assertIsString($badges[1]['classes']);
+        self::assertStringContainsString('border-red-500', $badges[1]['classes']);
+
+        self::assertTrue($card->hasButtons());
+        $buttons = $card->getNormalizedButtons();
+        self::assertCount(2, $buttons);
+        self::assertSame('First Action', $buttons[0]['title']);
+        self::assertSame('/action-1', $buttons[0]['url']);
+        self::assertIsString($buttons[0]['classes']);
+        self::assertStringContainsString('bg-secondary-600', $buttons[0]['classes']);
+        self::assertSame('Second Action', $buttons[1]['title']);
+        self::assertSame('/action-2', $buttons[1]['url']);
+
+        // Check fallback getLinkUrl and getButtonText from elements
+        self::assertSame('/action-1', $card->getLinkUrl());
+        self::assertSame('First Action', $card->getButtonText());
+    }
 }
+

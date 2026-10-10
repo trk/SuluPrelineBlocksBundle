@@ -45,6 +45,7 @@
                     title="{{ item.title|default(null) }}"
                     meta="{{ item.meta|default(null) }}"
                     badge="{{ item.badge|default(null) }}"
+                    :elements="item.elements|default([])"
                     :badges="item.badges|default([])"
                     content="{{ item.content|default(null) }}"
                     :image="item.image|default(null)"

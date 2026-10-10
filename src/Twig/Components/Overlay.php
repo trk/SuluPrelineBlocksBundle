@@ -41,6 +41,11 @@ final class Overlay
      */
     public array $buttons = [];
 
+    /**
+     * @var list<array<string, mixed>>|array<string, mixed>
+     */
+    public array $elements = [];
+
     public mixed $hoverImage = null;
     public mixed $hover_image = null;
     public mixed $hoverVideo = null;
@@ -443,9 +448,10 @@ final class Overlay
             }
         }
 
-        if ([] !== $this->buttons) {
-            foreach ($this->buttons as $button) {
-                if (\is_array($button) && isset($button['link'])) {
+        $buttonList = [] !== $this->buttons ? $this->buttons : $this->elements;
+        if ([] !== $buttonList) {
+            foreach ($buttonList as $button) {
+                if (\is_array($button) && ('badge' !== ($button['type'] ?? '')) && isset($button['link'])) {
                     $url = PropsResolver::resolveUrl($button['link']);
                     if ('#' !== $url && '' !== $url) {
                         return $url;
@@ -468,9 +474,10 @@ final class Overlay
             return \trim($this->link['title']);
         }
 
-        if ([] !== $this->buttons) {
-            foreach ($this->buttons as $button) {
-                if (\is_array($button)) {
+        $buttonList = [] !== $this->buttons ? $this->buttons : $this->elements;
+        if ([] !== $buttonList) {
+            foreach ($buttonList as $button) {
+                if (\is_array($button) && ('badge' !== ($button['type'] ?? ''))) {
                     $content = $button['title'] ?? ($button['content'] ?? null);
                     if (\is_string($content) && '' !== \trim($content)) {
                         return \trim($content);
@@ -577,61 +584,75 @@ final class Overlay
         /** @var list<array<string, mixed>> $result */
         $result = [];
 
+        /** @var list<array<string, mixed>> $badgeItems */
+        $badgeItems = [];
         if ([] !== $this->badges) {
             foreach ($this->badges as $item) {
                 if (\is_array($item)) {
-                    $itemStyle = isset($item['badge_style']) && \is_string($item['badge_style']) && 'inherit' !== $item['badge_style'] && '' !== \trim($item['badge_style'])
-                        ? $item['badge_style']
-                        : $defaultStyle;
-
-                    $itemColor = isset($item['badge_color']) && \is_string($item['badge_color']) && 'inherit' !== $item['badge_color'] && '' !== \trim($item['badge_color'])
-                        ? $item['badge_color']
-                        : $defaultColor;
-
-                    $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
-                        ? $item['size']
-                        : 'xs';
-
-                    $itemRounded = isset($item['rounded']) && \is_string($item['rounded']) && 'inherit' !== $item['rounded'] && '' !== \trim($item['rounded'])
-                        ? $item['rounded']
-                        : 'pill';
-
-                    $title = '';
-                    if (isset($item['title']) && \is_string($item['title'])) {
-                        $title = \trim($item['title']);
-                    } elseif (isset($item['text']) && \is_string($item['text'])) {
-                        $title = \trim($item['text']);
-                    }
-
-                    if ('' === $title && !isset($item['icon'])) {
-                        continue;
-                    }
-
-                    $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-                    $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
-                    $hasDot = !empty($item['has_dot']);
-                    $link = $item['link'] ?? null;
-                    $url = PropsResolver::resolveUrl($link);
-                    $isClickable = '#' !== $url && '' !== $url;
-
-                    $classes = PropsResolver::badgeClasses([
-                        'badge_style' => $itemStyle,
-                        'badge_color' => $itemColor,
-                        'size' => $itemSize,
-                        'rounded' => $itemRounded,
-                    ], $defaultStyle, $defaultColor, $itemSize, $itemRounded);
-
-                    $result[] = [
-                        'title' => $title,
-                        'url' => $url,
-                        'is_clickable' => $isClickable,
-                        'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
-                        'classes' => $classes,
-                        'icon' => $icon,
-                        'icon_align' => $iconAlign,
-                        'has_dot' => $hasDot,
-                    ];
+                    $badgeItems[] = $item;
                 }
+            }
+        } elseif ([] !== $this->elements) {
+            foreach ($this->elements as $item) {
+                if (\is_array($item) && 'badge' === ($item['type'] ?? '')) {
+                    $badgeItems[] = $item;
+                }
+            }
+        }
+
+        if ([] !== $badgeItems) {
+            foreach ($badgeItems as $item) {
+                $itemStyle = isset($item['badge_style']) && \is_string($item['badge_style']) && 'inherit' !== $item['badge_style'] && '' !== \trim($item['badge_style'])
+                    ? $item['badge_style']
+                    : $defaultStyle;
+
+                $itemColor = isset($item['badge_color']) && \is_string($item['badge_color']) && 'inherit' !== $item['badge_color'] && '' !== \trim($item['badge_color'])
+                    ? $item['badge_color']
+                    : $defaultColor;
+
+                $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
+                    ? $item['size']
+                    : 'xs';
+
+                $itemRounded = isset($item['rounded']) && \is_string($item['rounded']) && 'inherit' !== $item['rounded'] && '' !== \trim($item['rounded'])
+                    ? $item['rounded']
+                    : 'pill';
+
+                $title = '';
+                if (isset($item['title']) && \is_string($item['title'])) {
+                    $title = \trim($item['title']);
+                } elseif (isset($item['text']) && \is_string($item['text'])) {
+                    $title = \trim($item['text']);
+                }
+
+                if ('' === $title && !isset($item['icon'])) {
+                    continue;
+                }
+
+                $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
+                $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
+                $hasDot = !empty($item['has_dot']);
+                $link = $item['link'] ?? null;
+                $url = PropsResolver::resolveUrl($link);
+                $isClickable = '#' !== $url && '' !== $url;
+
+                $classes = PropsResolver::badgeClasses([
+                    'badge_style' => $itemStyle,
+                    'badge_color' => $itemColor,
+                    'size' => $itemSize,
+                    'rounded' => $itemRounded,
+                ], $defaultStyle, $defaultColor, $itemSize, $itemRounded);
+
+                $result[] = [
+                    'title' => $title,
+                    'url' => $url,
+                    'is_clickable' => $isClickable,
+                    'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
+                    'classes' => $classes,
+                    'icon' => $icon,
+                    'icon_align' => $iconAlign,
+                    'has_dot' => $hasDot,
+                ];
             }
         }
 
@@ -677,52 +698,66 @@ final class Overlay
         /** @var list<array<string, mixed>> $result */
         $result = [];
 
+        /** @var list<array<string, mixed>> $buttonItems */
+        $buttonItems = [];
         if ([] !== $this->buttons) {
             foreach ($this->buttons as $item) {
                 if (\is_array($item)) {
-                    $itemStyle = isset($item['button_style']) && \is_string($item['button_style']) && 'inherit' !== $item['button_style'] && '' !== \trim($item['button_style'])
-                        ? $item['button_style']
-                        : $defaultStyle;
-
-                    $itemColor = isset($item['button_color']) && \is_string($item['button_color']) && 'inherit' !== $item['button_color'] && '' !== \trim($item['button_color'])
-                        ? $item['button_color']
-                        : $defaultColor;
-
-                    $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
-                        ? $item['size']
-                        : $defaultSize;
-
-                    $title = '';
-                    if (isset($item['title']) && \is_string($item['title'])) {
-                        $title = \trim($item['title']);
-                    } elseif (isset($item['content']) && \is_string($item['content'])) {
-                        $title = \trim($item['content']);
-                    }
-
-                    $link = $item['link'] ?? null;
-                    $url = PropsResolver::resolveUrl($link);
-                    $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-                    $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
-
-                    $classes = PropsResolver::buttonClasses([
-                        'variant' => $itemStyle,
-                        'color' => $itemColor,
-                        'size' => $itemSize,
-                    ]);
-
-                    $result[] = [
-                        'title' => $title,
-                        'content' => $title,
-                        'url' => $url,
-                        'link' => $link,
-                        'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
-                        'classes' => $classes,
-                        'icon' => $icon,
-                        'icon_align' => $iconAlign,
-                        'button_style' => $itemStyle,
-                        'button_color' => $itemColor,
-                    ];
+                    $buttonItems[] = $item;
                 }
+            }
+        } elseif ([] !== $this->elements) {
+            foreach ($this->elements as $item) {
+                if (\is_array($item) && ('button' === ($item['type'] ?? 'button') || 'badge' !== ($item['type'] ?? ''))) {
+                    $buttonItems[] = $item;
+                }
+            }
+        }
+
+        if ([] !== $buttonItems) {
+            foreach ($buttonItems as $item) {
+                $itemStyle = isset($item['button_style']) && \is_string($item['button_style']) && 'inherit' !== $item['button_style'] && '' !== \trim($item['button_style'])
+                    ? $item['button_style']
+                    : $defaultStyle;
+
+                $itemColor = isset($item['button_color']) && \is_string($item['button_color']) && 'inherit' !== $item['button_color'] && '' !== \trim($item['button_color'])
+                    ? $item['button_color']
+                    : $defaultColor;
+
+                $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
+                    ? $item['size']
+                    : $defaultSize;
+
+                $title = '';
+                if (isset($item['title']) && \is_string($item['title'])) {
+                    $title = \trim($item['title']);
+                } elseif (isset($item['content']) && \is_string($item['content'])) {
+                    $title = \trim($item['content']);
+                }
+
+                $link = $item['link'] ?? null;
+                $url = PropsResolver::resolveUrl($link);
+                $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
+                $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
+
+                $classes = PropsResolver::buttonClasses([
+                    'variant' => $itemStyle,
+                    'color' => $itemColor,
+                    'size' => $itemSize,
+                ]);
+
+                $result[] = [
+                    'title' => $title,
+                    'content' => $title,
+                    'url' => $url,
+                    'link' => $link,
+                    'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
+                    'classes' => $classes,
+                    'icon' => $icon,
+                    'icon_align' => $iconAlign,
+                    'button_style' => $itemStyle,
+                    'button_color' => $itemColor,
+                ];
             }
         }
 

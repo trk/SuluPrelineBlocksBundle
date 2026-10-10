@@ -306,4 +306,69 @@ final class OverlayTest extends TestCase
         self::assertStringContainsString('mb-16', $wrapper);
         self::assertStringContainsString('my-custom-overlay', $wrapper);
     }
+
+    public function testUnifiedElementsSeparation(): void
+    {
+        $overlay = new Overlay();
+        $overlay->props = [
+            'badge_style' => 'glass',
+            'badge_color' => 'primary',
+            'button_style' => 'solid',
+            'button_color' => 'white',
+        ];
+
+        $overlay->elements = [
+            [
+                'type' => 'badge',
+                'title' => 'Top Overlay Badge',
+                'badge_style' => 'inherit',
+                'badge_color' => 'inherit',
+            ],
+            [
+                'type' => 'button',
+                'title' => 'Overlay Action 1',
+                'link' => '/overlay-1',
+                'button_style' => 'inherit',
+                'button_color' => 'inherit',
+            ],
+            [
+                'type' => 'badge',
+                'title' => 'Second Overlay Badge',
+                'badge_style' => 'solid',
+                'badge_color' => 'success',
+            ],
+            [
+                'type' => 'button',
+                'title' => 'Overlay Action 2',
+                'link' => '/overlay-2',
+                'button_style' => 'outline',
+                'button_color' => 'white',
+            ],
+        ];
+
+        self::assertTrue($overlay->hasBadges());
+        $badges = $overlay->getNormalizedBadges();
+        self::assertCount(2, $badges);
+        self::assertSame('Top Overlay Badge', $badges[0]['title']);
+        self::assertIsString($badges[0]['classes']);
+        self::assertStringContainsString('backdrop-blur-md', $badges[0]['classes']);
+        self::assertSame('Second Overlay Badge', $badges[1]['title']);
+        self::assertIsString($badges[1]['classes']);
+        self::assertStringContainsString('bg-teal-500', $badges[1]['classes']);
+
+        self::assertTrue($overlay->hasButtons());
+        $buttons = $overlay->getNormalizedButtons();
+        self::assertCount(2, $buttons);
+        self::assertSame('Overlay Action 1', $buttons[0]['title']);
+        self::assertSame('/overlay-1', $buttons[0]['url']);
+        self::assertIsString($buttons[0]['classes']);
+        self::assertStringContainsString('bg-white', $buttons[0]['classes']);
+        self::assertSame('Overlay Action 2', $buttons[1]['title']);
+        self::assertSame('/overlay-2', $buttons[1]['url']);
+
+        // Check fallback getLinkUrl and getButtonText from elements
+        self::assertSame('/overlay-1', $overlay->getLinkUrl());
+        self::assertSame('Overlay Action 1', $overlay->getButtonText());
+    }
 }
+
