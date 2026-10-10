@@ -102,6 +102,7 @@
             </params>
         </property>
 
+        <!-- IMAGE (Asset) -->
         <property name="image" type="single_media_selection"
                   visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || ((__parent.media_type == null || media_type == null) &amp;&amp; !(__parent.video.id != null || video.id != null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != ''))))">
             <meta>
@@ -117,8 +118,9 @@
             </params>
         </property>
 
+        <!-- HOVER IMAGE (Asset) -->
         <property name="hover_image" type="single_media_selection"
-                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.image.id != null || image.id != null)">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || ((__parent.media_type == null || media_type == null) &amp;&amp; !(__parent.video.id != null || video.id != null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))) &amp;&amp; (__parent.image.id != null || image.id != null)">
             <meta>
                 <title lang="en">Hover Image</title>
                 <title lang="tr">Üzerine gelince değişen görsel</title>
@@ -132,6 +134,7 @@
             </params>
         </property>
 
+        <!-- IMAGE URL (External) -->
         <property name="image_url" type="text_line"
                   visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || (__parent.media_type == null || media_type == null))">
             <meta>
@@ -144,8 +147,9 @@
             </meta>
         </property>
 
+        <!-- HOVER IMAGE URL (External) -->
         <property name="hover_image_url" type="text_line"
-                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; ((__parent.image_url != null &amp;&amp; __parent.image_url != '') || (image_url != null &amp;&amp; image_url != ''))">
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || (__parent.media_type == null || media_type == null)) &amp;&amp; ((__parent.image_url != null &amp;&amp; __parent.image_url != '') || (image_url != null &amp;&amp; image_url != ''))">
             <meta>
                 <title lang="en">Hover Image URL</title>
                 <title lang="tr">Üzerine gelince değişen görsel URL'si</title>
@@ -156,6 +160,7 @@
             </meta>
         </property>
 
+        <!-- VIDEO (Asset) -->
         <property name="video" type="single_media_selection"
                   visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; (__parent.video.id != null || video.id != null)))">
             <meta>
@@ -171,8 +176,9 @@
             </params>
         </property>
 
+        <!-- HOVER VIDEO (Asset) -->
         <property name="hover_video" type="single_media_selection"
-                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.video.id != null || video.id != null)">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; (__parent.video.id != null || video.id != null))) &amp;&amp; (__parent.video.id != null || video.id != null)">
             <meta>
                 <title lang="en">Hover Video</title>
                 <title lang="tr">Üzerine gelince oynatılan video</title>
@@ -186,6 +192,7 @@
             </params>
         </property>
 
+        <!-- VIDEO URL (External) -->
         <property name="video_url" type="text_line"
                   visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'video' || media_type == 'video')">
             <meta>
@@ -198,8 +205,9 @@
             </meta>
         </property>
 
+        <!-- HOVER VIDEO URL (External) -->
         <property name="hover_video_url" type="text_line"
-                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; ((__parent.video_url != null &amp;&amp; __parent.video_url != '') || (video_url != null &amp;&amp; video_url != ''))">
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'video' || media_type == 'video') &amp;&amp; ((__parent.video_url != null &amp;&amp; __parent.video_url != '') || (video_url != null &amp;&amp; video_url != ''))">
             <meta>
                 <title lang="en">Hover Video URL</title>
                 <title lang="tr">Üzerine gelince oynatılan video URL'si</title>
@@ -210,6 +218,7 @@
             </meta>
         </property>
 
+        <!-- ICON -->
         <property name="icon" type="single_icon_selection"
                   visibleCondition="(__parent.media_type == 'icon' || media_type == 'icon') || ((__parent.media_type == null || media_type == null) &amp;&amp; ((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
             <meta>
