@@ -1,0 +1,41 @@
+{# Preline UI 5 / Tailwind CSS 4 Column Component #}
+<div {{ attributes.defaults({ class: this.columnClasses }) }}>
+    {% if this.imageUrl %}
+        <div class="mb-4 rounded-xl overflow-hidden aspect-video bg-gray-100 dark:bg-neutral-800">
+            <img src="{{ this.imageUrl }}" alt="{{ this.title|default('') }}" class="w-full h-full object-cover">
+        </div>
+    {% endif %}
+
+    {% if this.subtitle %}
+        <div class="mb-1 text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+            {{ this.subtitle }}
+        </div>
+    {% endif %}
+
+    {% if this.title %}
+        <h3 class="text-xl font-bold text-gray-800 dark:text-neutral-200 mb-2">
+            {{ this.title }}
+        </h3>
+    {% endif %}
+
+    {% if this.hasContent %}
+        <div class="text-sm text-gray-600 dark:text-neutral-400 leading-relaxed prose prose-sm dark:prose-invert max-w-none">
+            {{ this.content|raw }}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    {% if this.linkUrl %}
+        <div class="mt-4 pt-2">
+            <a
+                href="{{ this.linkUrl }}"
+                class="inline-flex items-center gap-x-1.5 py-2 px-3 rounded-lg text-sm font-medium bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 transition-colors">
+                {{ this.link_title|default('Learn more'|trans({}, 'sulu_website')) }}
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
+        </div>
+    {% endif %}
+</div>

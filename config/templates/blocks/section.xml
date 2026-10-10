@@ -1,0 +1,268 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>section</key>
+    <meta>
+        <title lang="en">Section (Container)</title>
+        <title lang="tr">Bölüm (Konteyner)</title>
+        <title lang="de">Abschnitt (Container)</title>
+        <title lang="ru">Раздел (Контейнер)</title>
+        <title lang="es">Sección (Contenedor)</title>
+        <title lang="fr">Section (Conteneur)</title>
+    </meta>
+    <properties>
+        <property name="title" type="text_line">
+            <meta>
+                <title lang="en">Section Heading</title>
+                <title lang="tr">Bölüm Başlığı</title>
+            </meta>
+        </property>
+
+        <property name="subtitle" type="text_line">
+            <meta>
+                <title lang="en">Section Subtitle / Eyebrow</title>
+                <title lang="tr">Bölüm Alt Başlığı / Açıklaması</title>
+            </meta>
+        </property>
+
+        <property name="title_align" type="single_select">
+            <meta>
+                <title lang="en">Heading Alignment</title>
+                <title lang="tr">Başlık Hizalaması</title>
+            </meta>
+            <params>
+                <param name="default_value" value="center"/>
+                <param name="values" type="collection">
+                    <param name="center">
+                        <meta><title lang="en">Center</title><title lang="tr">Ortala</title></meta>
+                    </param>
+                    <param name="start">
+                        <meta><title lang="en">Left / Start</title><title lang="tr">Sola Yasla</title></meta>
+                    </param>
+                    <param name="end">
+                        <meta><title lang="en">Right / End</title><title lang="tr">Sağa Yasla</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="max_width" type="single_select">
+            <meta>
+                <title lang="en">Container Max Width</title>
+                <title lang="tr">Konteyner Azami Genişliği</title>
+            </meta>
+            <params>
+                <param name="default_value" value="85rem"/>
+                <param name="values" type="collection">
+                    <param name="85rem">
+                        <meta><title lang="en">Preline Standard (max-w-[85rem])</title><title lang="tr">Preline Standart (85rem / 1360px)</title></meta>
+                    </param>
+                    <param name="7xl">
+                        <meta><title lang="en">Extra Large (max-w-7xl / 1280px)</title><title lang="tr">Geniş (7xl)</title></meta>
+                    </param>
+                    <param name="5xl">
+                        <meta><title lang="en">Medium / Focused (max-w-5xl / 1024px)</title><title lang="tr">Orta (5xl)</title></meta>
+                    </param>
+                    <param name="3xl">
+                        <meta><title lang="en">Narrow / Prose (max-w-3xl / 768px)</title><title lang="tr">Dar (3xl)</title></meta>
+                    </param>
+                    <param name="full">
+                        <meta><title lang="en">Full Width (w-full max-w-full)</title><title lang="tr">Tam Genişlik (%100)</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="padding_y" type="single_select">
+            <meta>
+                <title lang="en">Vertical Padding</title>
+                <title lang="tr">Dikey Boşluk (Padding)</title>
+            </meta>
+            <params>
+                <param name="default_value" value="default"/>
+                <param name="values" type="collection">
+                    <param name="default">
+                        <meta><title lang="en">Default (py-10 sm:py-14)</title><title lang="tr">Standart (py-10 sm:py-14)</title></meta>
+                    </param>
+                    <param name="none">
+                        <meta><title lang="en">None (py-0)</title><title lang="tr">Yok (py-0)</title></meta>
+                    </param>
+                    <param name="xs">
+                        <meta><title lang="en">Extra Small (py-4 sm:py-6)</title><title lang="tr">Çok Küçük</title></meta>
+                    </param>
+                    <param name="sm">
+                        <meta><title lang="en">Small (py-6 sm:py-8)</title><title lang="tr">Küçük</title></meta>
+                    </param>
+                    <param name="lg">
+                        <meta><title lang="en">Large (py-14 sm:py-20)</title><title lang="tr">Büyük</title></meta>
+                    </param>
+                    <param name="xl">
+                        <meta><title lang="en">Extra Large (py-20 sm:py-28)</title><title lang="tr">Çok Büyük</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="padding_x" type="single_select">
+            <meta>
+                <title lang="en">Horizontal Padding</title>
+                <title lang="tr">Yatay Boşluk</title>
+            </meta>
+            <params>
+                <param name="default_value" value="default"/>
+                <param name="values" type="collection">
+                    <param name="default">
+                        <meta><title lang="en">Default (px-4 sm:px-6 lg:px-8)</title><title lang="tr">Standart</title></meta>
+                    </param>
+                    <param name="none">
+                        <meta><title lang="en">None (Edge-to-Edge)</title><title lang="tr">Yok (Kenara Sıfır)</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="bg_style" type="single_select">
+            <meta>
+                <title lang="en">Background Color Style</title>
+                <title lang="tr">Arka Plan Rengi</title>
+            </meta>
+            <params>
+                <param name="default_value" value="transparent"/>
+                <param name="values" type="collection">
+                    <param name="transparent">
+                        <meta><title lang="en">Transparent</title><title lang="tr">Şeffaf</title></meta>
+                    </param>
+                    <param name="default">
+                        <meta><title lang="en">Surface (White / Dark Neutral 900)</title><title lang="tr">Yüzey (Beyaz / Koyu Nötr)</title></meta>
+                    </param>
+                    <param name="muted">
+                        <meta><title lang="en">Muted (Gray 50 / Dark Neutral 800)</title><title lang="tr">Mat (Açık Gri / Koyu Gri)</title></meta>
+                    </param>
+                    <param name="subtle">
+                        <meta><title lang="en">Subtle Background</title><title lang="tr">Hafif Arka Plan</title></meta>
+                    </param>
+                    <param name="primary">
+                        <meta><title lang="en">Primary Brand Theme</title><title lang="tr">Ana Vurgu Rengi</title></meta>
+                    </param>
+                    <param name="secondary">
+                        <meta><title lang="en">Secondary Brand Theme</title><title lang="tr">İkincil Vurgu Rengi</title></meta>
+                    </param>
+                    <param name="dark">
+                        <meta><title lang="en">Dark Inverted</title><title lang="tr">Koyu / Siyah</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="bg_image" type="single_media_selection">
+            <meta>
+                <title lang="en">Background Image</title>
+                <title lang="tr">Arka Plan Görseli</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="has_border" type="checkbox">
+            <meta>
+                <title lang="en">Top and Bottom Borders</title>
+                <title lang="tr">Üst ve Alt Kenarlıklar</title>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <property name="row_layout" type="single_select">
+            <meta>
+                <title lang="en">Columns Layout (If Columns Added)</title>
+                <title lang="tr">Sütun Düzeni (Sütun Eklenmişse)</title>
+            </meta>
+            <params>
+                <param name="default_value" value="halves"/>
+                <param name="values" type="collection">
+                    <param name="halves">
+                        <meta><title lang="en">2 Columns - Halves</title><title lang="tr">2 Sütun - Yarı Yarıya</title></meta>
+                    </param>
+                    <param name="thirds">
+                        <meta><title lang="en">3 Columns - Thirds</title><title lang="tr">3 Sütun - Üçte Bir</title></meta>
+                    </param>
+                    <param name="quarters">
+                        <meta><title lang="en">4 Columns - Quarters</title><title lang="tr">4 Sütun - Çeyrek</title></meta>
+                    </param>
+                    <param name="sixths">
+                        <meta><title lang="en">6 Columns - Sixths</title><title lang="tr">6 Sütun - Altıda Bir</title></meta>
+                    </param>
+                    <param name="thirds-2-1">
+                        <meta><title lang="en">Thirds 2-1 (66% / 33%)</title><title lang="tr">Üçte İki - Üçte Bir</title></meta>
+                    </param>
+                    <param name="thirds-1-2">
+                        <meta><title lang="en">Thirds 1-2 (33% / 66%)</title><title lang="tr">Üçte Bir - Üçte İki</title></meta>
+                    </param>
+                    <param name="12-col">
+                        <meta><title lang="en">12-Column Custom Grid</title><title lang="tr">12 Sütunlu Özel Izgara</title></meta>
+                    </param>
+                    <param name="none">
+                        <meta><title lang="en">No Grid (Stack Flow)</title><title lang="tr">Izgarasız (Akış)</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="gap" type="single_select">
+            <meta>
+                <title lang="en">Columns Gap</title>
+                <title lang="tr">Sütunlar Arası Boşluk</title>
+            </meta>
+            <params>
+                <param name="default_value" value="md"/>
+                <param name="values" type="collection">
+                    <param name="none">
+                        <meta><title lang="en">None (gap-0)</title><title lang="tr">Yok (gap-0)</title></meta>
+                    </param>
+                    <param name="xs">
+                        <meta><title lang="en">Extra Small (gap-2 sm:gap-3)</title><title lang="tr">Çok Küçük</title></meta>
+                    </param>
+                    <param name="sm">
+                        <meta><title lang="en">Small (gap-4 sm:gap-6)</title><title lang="tr">Küçük</title></meta>
+                    </param>
+                    <param name="md">
+                        <meta><title lang="en">Medium / Default (gap-6 sm:gap-8)</title><title lang="tr">Orta / Standart</title></meta>
+                    </param>
+                    <param name="lg">
+                        <meta><title lang="en">Large (gap-8 sm:gap-12)</title><title lang="tr">Büyük</title></meta>
+                    </param>
+                    <param name="xl">
+                        <meta><title lang="en">Extra Large (gap-12 sm:gap-16)</title><title lang="tr">Çok Büyük</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="content" type="text_editor">
+            <meta>
+                <title lang="en">Section Introduction / Content</title>
+                <title lang="tr">Bölüm Giriş Metni / İçerik</title>
+            </meta>
+        </property>
+
+        <block name="items" default-type="column_item">
+            <meta>
+                <title lang="en">Columns / Section Items</title>
+                <title lang="tr">Sütunlar / Bölüm Öğeleri</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/column_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="section"/>
+            </params>
+        </property>
+    </properties>
+</template>

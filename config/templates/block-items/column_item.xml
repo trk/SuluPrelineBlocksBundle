@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<type name="column_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Column</title>
+        <title lang="tr">Sütun</title>
+        <title lang="de">Spalte</title>
+        <title lang="ru">Колонка</title>
+        <title lang="es">Columna</title>
+        <title lang="fr">Colonne</title>
+    </meta>
+    <properties>
+        <property name="col_span" type="single_select">
+            <meta>
+                <title lang="en">Column Width (Grid Span)</title>
+                <title lang="tr">Sütun Genişliği</title>
+            </meta>
+            <params>
+                <param name="default_value" value="auto"/>
+                <param name="values" type="collection">
+                    <param name="auto">
+                        <meta><title lang="en">Auto (Equal / Inherit from Row)</title><title lang="tr">Otomatik (Eşit / Satırdan Al)</title></meta>
+                    </param>
+                    <param name="12">
+                        <meta><title lang="en">12/12 - Full Width (100%)</title><title lang="tr">12/12 - Tam Genişlik (%100)</title></meta>
+                    </param>
+                    <param name="6">
+                        <meta><title lang="en">6/12 - Half (50%)</title><title lang="tr">6/12 - Yarım (%50)</title></meta>
+                    </param>
+                    <param name="4">
+                        <meta><title lang="en">4/12 - One Third (33.3%)</title><title lang="tr">4/12 - Üçte Bir (%33.3)</title></meta>
+                    </param>
+                    <param name="8">
+                        <meta><title lang="en">8/12 - Two Thirds (66.6%)</title><title lang="tr">8/12 - Üçte İki (%66.6)</title></meta>
+                    </param>
+                    <param name="3">
+                        <meta><title lang="en">3/12 - One Quarter (25%)</title><title lang="tr">3/12 - Çeyrek (%25)</title></meta>
+                    </param>
+                    <param name="9">
+                        <meta><title lang="en">9/12 - Three Quarters (75%)</title><title lang="tr">9/12 - Dörtte Üç (%75)</title></meta>
+                    </param>
+                    <param name="2">
+                        <meta><title lang="en">2/12 - One Sixth (16.6%)</title><title lang="tr">2/12 - Altıda Bir (%16.6)</title></meta>
+                    </param>
+                    <param name="10">
+                        <meta><title lang="en">10/12 - Five Sixths (83.3%)</title><title lang="tr">10/12 - Altıda Beş (%83.3)</title></meta>
+                    </param>
+                    <param name="5">
+                        <meta><title lang="en">5/12 - Five Twelfths (41.6%)</title><title lang="tr">5/12 - On İkide Beş (%41.6)</title></meta>
+                    </param>
+                    <param name="7">
+                        <meta><title lang="en">7/12 - Seven Twelfths (58.3%)</title><title lang="tr">7/12 - On İkide Yedi (%58.3)</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="style" type="single_select">
+            <meta>
+                <title lang="en">Card / Box Style</title>
+                <title lang="tr">Kart / Kutu Stili</title>
+            </meta>
+            <params>
+                <param name="default_value" value="none"/>
+                <param name="values" type="collection">
+                    <param name="none">
+                        <meta><title lang="en">None (Transparent)</title><title lang="tr">Yok (Şeffaf)</title></meta>
+                    </param>
+                    <param name="card">
+                        <meta><title lang="en">Card (White / Dark Surface + Border + Shadow)</title><title lang="tr">Kart (Beyaz / Koyu Zemin + Kenarlık + Gölge)</title></meta>
+                    </param>
+                    <param name="muted">
+                        <meta><title lang="en">Muted (Light Gray / Dark Gray)</title><title lang="tr">Mat (Açık Gri / Koyu Gri)</title></meta>
+                    </param>
+                    <param name="subtle">
+                        <meta><title lang="en">Subtle Background</title><title lang="tr">Hafif Zemin</title></meta>
+                    </param>
+                    <param name="primary_subtle">
+                        <meta><title lang="en">Primary Accent Subtle</title><title lang="tr">Vurgu Rengi Hafif</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="padding" type="single_select">
+            <meta>
+                <title lang="en">Inner Padding</title>
+                <title lang="tr">İç Boşluk (Padding)</title>
+            </meta>
+            <params>
+                <param name="default_value" value="none"/>
+                <param name="values" type="collection">
+                    <param name="none">
+                        <meta><title lang="en">None</title><title lang="tr">Yok</title></meta>
+                    </param>
+                    <param name="sm">
+                        <meta><title lang="en">Small (p-4)</title><title lang="tr">Küçük (p-4)</title></meta>
+                    </param>
+                    <param name="md">
+                        <meta><title lang="en">Medium (p-6 sm:p-8)</title><title lang="tr">Orta (p-6 sm:p-8)</title></meta>
+                    </param>
+                    <param name="lg">
+                        <meta><title lang="en">Large (p-8 sm:p-10)</title><title lang="tr">Büyük (p-8 sm:p-10)</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="vertical_align" type="single_select">
+            <meta>
+                <title lang="en">Vertical Alignment</title>
+                <title lang="tr">Dikey Hizalama</title>
+            </meta>
+            <params>
+                <param name="default_value" value="top"/>
+                <param name="values" type="collection">
+                    <param name="top">
+                        <meta><title lang="en">Top</title><title lang="tr">Üst</title></meta>
+                    </param>
+                    <param name="center">
+                        <meta><title lang="en">Center</title><title lang="tr">Orta</title></meta>
+                    </param>
+                    <param name="bottom">
+                        <meta><title lang="en">Bottom</title><title lang="tr">Alt</title></meta>
+                    </param>
+                    <param name="between">
+                        <meta><title lang="en">Space Between (Header Top, Footer Bottom)</title><title lang="tr">İki Yana Yasla</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="text_align" type="single_select">
+            <meta>
+                <title lang="en">Text Alignment</title>
+                <title lang="tr">Metin Hizalama</title>
+            </meta>
+            <params>
+                <param name="default_value" value="start"/>
+                <param name="values" type="collection">
+                    <param name="start">
+                        <meta><title lang="en">Left / Start</title><title lang="tr">Sola</title></meta>
+                    </param>
+                    <param name="center">
+                        <meta><title lang="en">Center</title><title lang="tr">Ortala</title></meta>
+                    </param>
+                    <param name="end">
+                        <meta><title lang="en">Right / End</title><title lang="tr">Sağa</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="is_sticky" type="checkbox">
+            <meta>
+                <title lang="en">Sticky on Scroll</title>
+                <title lang="tr">Kaydırmada Sabitle (Sticky)</title>
+                <info_text lang="en">Pins the column to the top while scrolling within the section.</info_text>
+                <info_text lang="tr">Bölüm içinde kaydırırken sütunu üstte sabit tutar.</info_text>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <property name="order" type="single_select">
+            <meta>
+                <title lang="en">Responsive Order</title>
+                <title lang="tr">Duyarlı Sıralama</title>
+            </meta>
+            <params>
+                <param name="default_value" value="default"/>
+                <param name="values" type="collection">
+                    <param name="default">
+                        <meta><title lang="en">Default Order</title><title lang="tr">Varsayılan Sıra</title></meta>
+                    </param>
+                    <param name="first">
+                        <meta><title lang="en">First on Mobile, Natural on Desktop</title><title lang="tr">Mobilde İlk, Masaüstünde Normal</title></meta>
+                    </param>
+                    <param name="last">
+                        <meta><title lang="en">Last on Mobile, Natural on Desktop</title><title lang="tr">Mobilde Son, Masaüstünde Normal</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>
