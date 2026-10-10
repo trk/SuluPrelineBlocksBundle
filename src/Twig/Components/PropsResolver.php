@@ -197,6 +197,16 @@ final class PropsResolver
             }
         }
 
+        if (\is_object($link)) {
+            if (\method_exists($link, 'getUrl')) {
+                /** @var mixed $url */
+                $url = $link->getUrl();
+                if (\is_string($url) && '' !== $url) {
+                    return $url;
+                }
+            }
+        }
+
         return '#';
     }
 

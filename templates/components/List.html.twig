@@ -27,10 +27,8 @@
 
             {% set img_url = item.image_url|default(null) %}
             {% if not img_url and item.image is defined and item.image %}
-                {% if item.image is iterable %}
-                    {% set img_url = item.image.url|default(null) %}
-                {% else %}
-                    {% set img_url = item.image %}
+                {% if item.image.url is defined %}
+                    {% set img_url = item.image.url %}
                 {% endif %}
             {% endif %}
 

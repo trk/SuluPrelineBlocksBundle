@@ -170,20 +170,10 @@ final class Table
             $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
             $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
 
-            $imageUrl = null;
-            $image = $item['image'] ?? null;
-            if (\is_array($image) && isset($image['url']) && \is_string($image['url'])) {
-                $imageUrl = $image['url'];
-            } elseif (\is_string($image) && $image !== '') {
-                $imageUrl = $image;
-            }
-
-            $link = null;
-            $rawLink = $item['link'] ?? null;
-            if (\is_string($rawLink) && $rawLink !== '') {
-                $link = $rawLink;
-            } elseif (\is_array($rawLink) && isset($rawLink['url']) && \is_string($rawLink['url'])) {
-                $link = $rawLink['url'];
+            $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
+            $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
+            if ($link === '#') {
+                $link = null;
             }
 
             $linkTitle = \is_string($item['link_title'] ?? null) && $item['link_title'] !== ''

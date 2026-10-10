@@ -31,15 +31,7 @@ final class Popover
 
     public function getImageUrl(): ?string
     {
-        if (\is_array($this->image) && isset($this->image['url']) && \is_string($this->image['url'])) {
-            return $this->image['url'];
-        }
-
-        if (\is_string($this->image) && $this->image !== '') {
-            return $this->image;
-        }
-
-        return null;
+        return PropsResolver::resolveImageUrl($this->image);
     }
 
     public function getHotspotClasses(): string
@@ -78,12 +70,9 @@ final class Popover
             $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
             $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
 
-            $link = null;
-            $rawLink = $item['link'] ?? null;
-            if (\is_string($rawLink) && $rawLink !== '') {
-                $link = $rawLink;
-            } elseif (\is_array($rawLink) && isset($rawLink['url']) && \is_string($rawLink['url'])) {
-                $link = $rawLink['url'];
+            $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
+            if ($link === '#') {
+                $link = null;
             }
 
             $linkTitle = \is_string($item['link_title'] ?? null) && $item['link_title'] !== ''

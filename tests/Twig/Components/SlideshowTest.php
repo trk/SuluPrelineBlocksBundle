@@ -84,4 +84,26 @@ final class SlideshowTest extends TestCase
         self::assertSame('/uploads/hero2.jpg', $items[1]['image_url']);
         self::assertSame('https://example.com/two', $items[1]['link_href']);
     }
+
+    public function testItemNormalizationWithMediaObject(): void
+    {
+        $slideshow = new Slideshow();
+        $mediaMock = new class {
+            public function getUrl(): string
+            {
+                return '/uploads/media-object.webp';
+            }
+        };
+
+        $slideshow->items = [
+            [
+                'title' => 'Object Slide',
+                'image' => $mediaMock,
+            ],
+        ];
+
+        $items = $slideshow->getNormalizedItems();
+        self::assertCount(1, $items);
+        self::assertSame('/uploads/media-object.webp', $items[0]['image_url']);
+    }
 }
