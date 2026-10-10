@@ -31,6 +31,11 @@ final class Column
     public string $order = 'default';
 
     /**
+     * @var list<array<string, mixed>>|array<string|int, mixed>
+     */
+    public array $blocks = [];
+
+    /**
      * @var array<string, mixed>
      */
     public array $props = [];
@@ -184,5 +189,31 @@ final class Column
     public function hasContent(): bool
     {
         return null !== $this->content && '' !== \trim($this->content);
+    }
+
+    public function hasBlocks(): bool
+    {
+        return !empty($this->getNormalizedBlocks());
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getNormalizedBlocks(): array
+    {
+        $raw = !empty($this->blocks) ? $this->blocks : ($this->props['blocks'] ?? []);
+        if (!\is_array($raw)) {
+            return [];
+        }
+
+        $list = [];
+        foreach ($raw as $item) {
+            if (\is_array($item)) {
+                /** @var array<string, mixed> $item */
+                $list[] = $item;
+            }
+        }
+
+        return $list;
     }
 }

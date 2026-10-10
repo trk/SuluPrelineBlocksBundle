@@ -249,15 +249,30 @@
             </meta>
         </property>
 
+        <block name="rows" default-type="row_item">
+            <meta>
+                <title lang="en">Rows</title>
+                <title lang="tr">Satırlar</title>
+                <title lang="de">Zeilen</title>
+                <title lang="ru">Строки</title>
+                <title lang="es">Filas</title>
+                <title lang="fr">Lignes</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/row_item.xml"/>
+            </types>
+        </block>
+
         <block name="items" default-type="column_item">
             <meta>
-                <title lang="en">Columns / Section Items</title>
-                <title lang="tr">Sütunlar / Bölüm Öğeleri</title>
+                <title lang="en">Columns / Direct Items (Alternative)</title>
+                <title lang="tr">Doğrudan Sütunlar (Alternatif)</title>
             </meta>
             <types>
                 <xi:include href="../block-items/column_item.xml"/>
             </types>
         </block>
+
 
         <property name="props" type="block_props" colspan="12">
             <params>

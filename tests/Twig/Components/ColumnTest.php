@@ -73,4 +73,19 @@ final class ColumnTest extends TestCase
         self::assertSame('/learn-more', $col->getLinkUrl());
         self::assertTrue($col->hasContent());
     }
+
+    public function testBlocksSupport(): void
+    {
+        $col = new Column();
+        self::assertFalse($col->hasBlocks());
+        self::assertEmpty($col->getNormalizedBlocks());
+
+        $col->blocks = [
+            ['type' => 'headline', 'title' => 'Inner Title'],
+            ['type' => 'text', 'content' => '<p>Inner Text</p>'],
+        ];
+
+        self::assertTrue($col->hasBlocks());
+        self::assertCount(2, $col->getNormalizedBlocks());
+    }
 }

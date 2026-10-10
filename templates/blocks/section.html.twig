@@ -11,6 +11,8 @@
     row_layout="{{ block.row_layout|default('halves') }}"
     gap="{{ block.gap|default('md') }}"
     content="{{ block.content|default(null) }}"
+    :rows="block.rows|default([])"
     :items="block.items|default([])"
     :props="block|merge(block.props|default({}))"
 />
+

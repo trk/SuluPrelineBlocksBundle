@@ -24,7 +24,17 @@
         </div>
     {% endif %}
 
+    {% if this.hasBlocks %}
+        <div class="w-full space-y-6">
+            {% for item in this.normalizedBlocks %}
+                {{ include(['blocks/' ~ item.type ~ '.html.twig', '@SuluPrelineBlocks/blocks/' ~ item.type ~ '.html.twig'], { block: item }, with_context: false, ignore_missing: true) }}
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
     {% block content %}{% endblock %}
+
 
     {% if this.linkUrl %}
         <div class="mt-4 pt-2">

@@ -70,4 +70,24 @@ final class SectionTest extends TestCase
         self::assertTrue($sec->hasItems());
         self::assertTrue($sec->isGridEnabled());
     }
+
+    public function testRowsSupport(): void
+    {
+        $sec = new Section();
+        self::assertFalse($sec->hasRows());
+        self::assertEmpty($sec->getNormalizedRows());
+
+        $sec->rows = [
+            [
+                'layout' => 'halves',
+                'columns' => [
+                    ['col_span' => '6'],
+                    ['col_span' => '6'],
+                ],
+            ],
+        ];
+
+        self::assertTrue($sec->hasRows());
+        self::assertCount(1, $sec->getNormalizedRows());
+    }
 }

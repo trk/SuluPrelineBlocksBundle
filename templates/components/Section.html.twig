@@ -30,7 +30,22 @@
             </div>
         {% endif %}
 
-        {% if this.isGridEnabled %}
+        {% if this.hasRows %}
+            <div class="space-y-8">
+                {% for row in this.normalizedRows %}
+                    <twig:Row
+                        title="{{ row.title|default(null) }}"
+                        layout="{{ row.layout|default('halves') }}"
+                        gap="{{ row.gap|default('md') }}"
+                        align_items="{{ row.align_items|default('stretch') }}"
+                        :has_divider="row.has_divider|default(false)"
+                        :columns="row.columns|default([])"
+                        :props="row"
+                    />
+                {% endfor %}
+            </div>
+        {% elseif this.isGridEnabled %}
+
             <twig:Row
                 layout="{{ this.row_layout }}"
                 gap="{{ this.gap }}"

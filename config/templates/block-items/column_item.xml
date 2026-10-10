@@ -190,5 +190,18 @@
         <xi:include href="../fields/image.xml"/>
         <xi:include href="../fields/link.xml"/>
         <xi:include href="../fields/link_title.xml"/>
+
+        <block name="blocks" default-type="text" minOccurs="0">
+            <meta>
+                <title lang="en">Column Blocks</title>
+                <title lang="tr">Sütun İçi Bloklar</title>
+                <title lang="de">Spaltenblöcke</title>
+                <title lang="ru">Блоки колонки</title>
+                <title lang="es">Bloques de columna</title>
+                <title lang="fr">Blocs de colonne</title>
+            </meta>
+            <xi:include href="../includes/content_blocks.xml"/>
+        </block>
     </properties>
 </type>
+

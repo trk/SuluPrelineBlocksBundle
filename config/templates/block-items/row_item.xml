@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<type name="row_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Row</title>
+        <title lang="tr">Satır</title>
+        <title lang="de">Zeile</title>
+        <title lang="ru">Строка</title>
+        <title lang="es">Fila</title>
+        <title lang="fr">Ligne</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="layout" type="single_select">
+            <meta>
+                <title lang="en">Grid Columns Layout</title>
+                <title lang="tr">Izgara Sütun Düzeni</title>
+            </meta>
+            <params>
+                <param name="default_value" value="halves"/>
+                <param name="values" type="collection">
+                    <param name="12-col">
+                        <meta><title lang="en">12-Column Flexible Grid (Columns set custom spans)</title><title lang="tr">12 Sütunlu Esnek Izgara</title></meta>
+                    </param>
+                    <param name="halves">
+                        <meta><title lang="en">2 Columns - Halves (50% / 50%)</title><title lang="tr">2 Sütun - Yarı Yarıya (%50 / %50)</title></meta>
+                    </param>
+                    <param name="thirds">
+                        <meta><title lang="en">3 Columns - Thirds (33% / 33% / 33%)</title><title lang="tr">3 Sütun - Üçte Bir</title></meta>
+                    </param>
+                    <param name="quarters">
+                        <meta><title lang="en">4 Columns - Quarters (25% each)</title><title lang="tr">4 Sütun - Dörtte Bir</title></meta>
+                    </param>
+                    <param name="sixths">
+                        <meta><title lang="en">6 Columns - Sixths (16.6% each)</title><title lang="tr">6 Sütun - Altıda Bir</title></meta>
+                    </param>
+                    <param name="thirds-2-1">
+                        <meta><title lang="en">Thirds 2-1 (66% / 33%)</title><title lang="tr">Üçte İki - Üçte Bir (%66 / %33)</title></meta>
+                    </param>
+                    <param name="thirds-1-2">
+                        <meta><title lang="en">Thirds 1-2 (33% / 66%)</title><title lang="tr">Üçte Bir - Üçte İki (%33 / %66)</title></meta>
+                    </param>
+                    <param name="quarters-3-1">
+                        <meta><title lang="en">Quarters 3-1 (75% / 25%)</title><title lang="tr">Dörtte Üç - Dörtte Bir (%75 / %25)</title></meta>
+                    </param>
+                    <param name="quarters-1-3">
+                        <meta><title lang="en">Quarters 1-3 (25% / 75%)</title><title lang="tr">Dörtte Bir - Dörtte Üç (%25 / %75)</title></meta>
+                    </param>
+                    <param name="auto">
+                        <meta><title lang="en">Auto Columns</title><title lang="tr">Otomatik Sütunlar</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="gap" type="single_select">
+            <meta>
+                <title lang="en">Grid Gap</title>
+                <title lang="tr">Sütunlar Arası Boşluk (Gap)</title>
+            </meta>
+            <params>
+                <param name="default_value" value="md"/>
+                <param name="values" type="collection">
+                    <param name="none">
+                        <meta><title lang="en">None (gap-0)</title><title lang="tr">Yok (gap-0)</title></meta>
+                    </param>
+                    <param name="xs">
+                        <meta><title lang="en">Extra Small (gap-2 sm:gap-3)</title><title lang="tr">Çok Küçük</title></meta>
+                    </param>
+                    <param name="sm">
+                        <meta><title lang="en">Small (gap-4 sm:gap-6)</title><title lang="tr">Küçük</title></meta>
+                    </param>
+                    <param name="md">
+                        <meta><title lang="en">Medium / Default (gap-6 sm:gap-8)</title><title lang="tr">Orta / Standart</title></meta>
+                    </param>
+                    <param name="lg">
+                        <meta><title lang="en">Large (gap-8 sm:gap-12)</title><title lang="tr">Büyük</title></meta>
+                    </param>
+                    <param name="xl">
+                        <meta><title lang="en">Extra Large (gap-12 sm:gap-16)</title><title lang="tr">Çok Büyük</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="align_items" type="single_select">
+            <meta>
+                <title lang="en">Vertical Item Alignment</title>
+                <title lang="tr">Dikey Hizalama</title>
+            </meta>
+            <params>
+                <param name="default_value" value="stretch"/>
+                <param name="values" type="collection">
+                    <param name="stretch">
+                        <meta><title lang="en">Stretch (Equal Height Columns)</title><title lang="tr">Uzat (Eşit Yükseklik)</title></meta>
+                    </param>
+                    <param name="start">
+                        <meta><title lang="en">Top / Start</title><title lang="tr">Üste Hizala</title></meta>
+                    </param>
+                    <param name="center">
+                        <meta><title lang="en">Center (Vertically Centered)</title><title lang="tr">Ortala</title></meta>
+                    </param>
+                    <param name="end">
+                        <meta><title lang="en">Bottom / End</title><title lang="tr">Alta Hizala</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="has_divider" type="checkbox">
+            <meta>
+                <title lang="en">Column Dividers</title>
+                <title lang="tr">Sütunlar Arası Ayırıcı Çizgi</title>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <block name="columns" default-type="column_item" minOccurs="1">
+            <meta>
+                <title lang="en">Columns</title>
+                <title lang="tr">Sütunlar</title>
+            </meta>
+            <types>
+                <xi:include href="column_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="row"/>
+            </params>
+        </property>
+    </properties>
+</type>

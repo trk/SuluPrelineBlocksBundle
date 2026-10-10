@@ -33,6 +33,11 @@ final class Section
     public array $items = [];
 
     /**
+     * @var list<array<string, mixed>>|array<string|int, mixed>
+     */
+    public array $rows = [];
+
+    /**
      * @var array<string, mixed>
      */
     public array $props = [];
@@ -127,5 +132,31 @@ final class Section
     public function isGridEnabled(): bool
     {
         return 'none' !== $this->row_layout && $this->hasItems();
+    }
+
+    public function hasRows(): bool
+    {
+        return !empty($this->getNormalizedRows());
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getNormalizedRows(): array
+    {
+        $raw = !empty($this->rows) ? $this->rows : ($this->props['rows'] ?? []);
+        if (!\is_array($raw)) {
+            return [];
+        }
+
+        $list = [];
+        foreach ($raw as $item) {
+            if (\is_array($item)) {
+                /** @var array<string, mixed> $item */
+                $list[] = $item;
+            }
+        }
+
+        return $list;
     }
 }

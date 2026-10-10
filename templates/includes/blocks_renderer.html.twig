@@ -1,0 +1,40 @@
+{# Preline UI 5 / Tailwind CSS 4 Auto-Sectioning Block Renderer #}
+{% set section_buffer = [] %}
+
+{% for block_item in blocks|default([]) %}
+    {% if block_item.type == 'section' %}
+        {% if section_buffer|length > 0 %}
+            <twig:Section max_width="85rem" padding_y="default">
+                <twig:Row layout="12-col" gap="md">
+                    <twig:Column col_span="12">
+                        <div class="w-full space-y-8">
+                            {% for buffered in section_buffer %}
+                                {{ include(['blocks/' ~ buffered.type ~ '.html.twig', '@SuluPrelineBlocks/blocks/' ~ buffered.type ~ '.html.twig'], { block: buffered }, with_context: false, ignore_missing: true) }}
+                            {% endfor %}
+                        </div>
+                    </twig:Column>
+                </twig:Row>
+            </twig:Section>
+            {% set section_buffer = [] %}
+        {% endif %}
+
+        {{ include('@SuluPrelineBlocks/blocks/section.html.twig', { block: block_item }, with_context: false) }}
+    {% else %}
+        {% set section_buffer = section_buffer|merge([block_item]) %}
+    {% endif %}
+{% endfor %}
+
+{% if section_buffer|length > 0 %}
+    <twig:Section max_width="85rem" padding_y="default">
+        <twig:Row layout="12-col" gap="md">
+            <twig:Column col_span="12">
+                <div class="w-full space-y-8">
+                    {% for buffered in section_buffer %}
+                        {{ include(['blocks/' ~ buffered.type ~ '.html.twig', '@SuluPrelineBlocks/blocks/' ~ buffered.type ~ '.html.twig'], { block: buffered }, with_context: false, ignore_missing: true) }}
+                    {% endfor %}
+
+                </div>
+            </twig:Column>
+        </twig:Row>
+    </twig:Section>
+{% endif %}
