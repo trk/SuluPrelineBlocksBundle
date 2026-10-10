@@ -3,6 +3,10 @@
 {% set alert_id = this.getElementId()|default('hs-alert-' ~ random()) %}
 {% set link_url = this.getLinkUrl() %}
 {% set link_text = this.getButtonText() %}
+{% set link_target = this.getLinkTarget() %}
+{% set link_title_attr = this.getLinkTitle() %}
+{% set alert_title = this.getTitle()|default(title|default(null)) %}
+{% set alert_content = this.getContent()|default(content|default(null)) %}
 
 <div id="{{ alert_id }}"
      role="alert"
@@ -19,21 +23,24 @@
     {% endif %}
 
     <div class="flex-1">
-        {% if title %}
+        {% if alert_title %}
             <h3 id="{{ alert_id }}-label" class="{{ this.getTitleSizeClasses() }} leading-tight mb-1">
-                {{ title }}
+                {{ alert_title }}
             </h3>
         {% endif %}
 
-        {% if content %}
+        {% if alert_content %}
             <div class="text-sm leading-relaxed opacity-90">
-                {{ content|raw }}
+                {{ alert_content|raw }}
             </div>
         {% endif %}
 
         {% if link_url and link_text %}
             <div class="mt-2.5">
-                <a href="{{ link_url }}" class="inline-flex items-center gap-x-1 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
+                <a href="{{ link_url }}"
+                   {% if link_target %}target="{{ link_target }}" rel="noopener noreferrer"{% endif %}
+                   {% if link_title_attr %}title="{{ link_title_attr }}"{% endif %}
+                   class="inline-flex items-center gap-x-1 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
                     {{ link_text }}
                     <i class="ti ti-arrow-right text-xs" aria-hidden="true"></i>
                 </a>

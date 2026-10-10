@@ -82,14 +82,30 @@ final class AlertTest extends TestCase
         self::assertNull($alert->getResolvedIcon());
     }
 
+    public function testTitleAndContent(): void
+    {
+        $alert = new Alert();
+        $alert->title = '  Important Notice  ';
+        $alert->content = '<p>System maintenance tonight.</p>';
+
+        self::assertSame('Important Notice', $alert->getTitle());
+        self::assertSame('<p>System maintenance tonight.</p>', $alert->getContent());
+    }
+
     public function testLinkAndButtonText(): void
     {
         $alert = new Alert();
-        $alert->link = 'https://example.com/docs';
-        $alert->linkTitle = 'Read Documentation';
+        $alert->link = [
+            'url' => 'https://example.com/docs',
+            'target' => '_blank',
+            'title' => 'Documentation Tooltip',
+        ];
+        $alert->link_title = 'Read Documentation';
 
         self::assertSame('https://example.com/docs', $alert->getLinkUrl());
+        self::assertSame('_blank', $alert->getLinkTarget());
         self::assertSame('Read Documentation', $alert->getButtonText());
+        self::assertSame('Documentation Tooltip', $alert->getLinkTitle());
     }
 
     public function testWrapperClassesAndId(): void

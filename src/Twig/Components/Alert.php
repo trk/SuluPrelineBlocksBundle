@@ -183,6 +183,16 @@ final class Alert
         };
     }
 
+    public function getTitle(): ?string
+    {
+        return (null !== $this->title && '' !== \trim($this->title)) ? \trim($this->title) : null;
+    }
+
+    public function getContent(): ?string
+    {
+        return (null !== $this->content && '' !== \trim($this->content)) ? \trim($this->content) : null;
+    }
+
     public function getLinkUrl(): ?string
     {
         if (null !== $this->link) {
@@ -190,6 +200,29 @@ final class Alert
             if ('#' !== $url && '' !== $url) {
                 return $url;
             }
+        }
+
+        return null;
+    }
+
+    public function getLinkTarget(): ?string
+    {
+        if (\is_array($this->link) && isset($this->link['target']) && \is_string($this->link['target']) && '' !== \trim($this->link['target'])) {
+            return \trim($this->link['target']);
+        }
+
+        return null;
+    }
+
+    public function getLinkTitle(): ?string
+    {
+        if (\is_array($this->link) && isset($this->link['title']) && \is_string($this->link['title']) && '' !== \trim($this->link['title'])) {
+            return \trim($this->link['title']);
+        }
+
+        $text = $this->linkTitle ?? $this->link_title;
+        if (null !== $text && '' !== \trim($text)) {
+            return \trim($text);
         }
 
         return null;

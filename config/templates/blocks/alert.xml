@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>alert</key>
     <meta>
@@ -12,67 +13,11 @@
         <title lang="de">Hinweis / Benachrichtigung</title>
     </meta>
     <properties>
-        <property name="title" type="text_line">
-            <meta>
-                <title lang="en">Title</title>
-                <title lang="tr">Başlık</title>
-                <title lang="ru">Заголовок</title>
-                <title lang="fr">Titre</title>
-                <title lang="es">Título</title>
-                <title lang="de">Titel</title>
-            </meta>
-        </property>
-
-        <property name="content" type="text_editor" mandatory="true">
-            <meta>
-                <title lang="en">Content</title>
-                <title lang="tr">İçerik</title>
-                <title lang="ru">Содержимое</title>
-                <title lang="fr">Contenu</title>
-                <title lang="es">Contenido</title>
-                <title lang="de">Inhalt</title>
-            </meta>
-        </property>
-
-        <property name="icon" type="single_icon_selection">
-            <meta>
-                <title lang="en">Custom Icon</title>
-                <title lang="tr">Özel İkon</title>
-                <title lang="ru">Пользовательская иконка</title>
-                <title lang="fr">Icône personnalisée</title>
-                <title lang="es">Icono personalizado</title>
-                <title lang="de">Benutzerdefiniertes Symbol</title>
-            </meta>
-            <params>
-                <param name="icon_set" value="tabler"/>
-            </params>
-        </property>
-
-        <property name="link" type="link">
-            <meta>
-                <title lang="en">Link</title>
-                <title lang="tr">Bağlantı</title>
-                <title lang="ru">Ссылка</title>
-                <title lang="fr">Lien</title>
-                <title lang="es">Enlace</title>
-                <title lang="de">Link</title>
-            </meta>
-            <params>
-                <param name="enable_anchor" value="true"/>
-                <param name="enable_target" value="true"/>
-            </params>
-        </property>
-
-        <property name="link_title" type="text_line">
-            <meta>
-                <title lang="en">Link Text</title>
-                <title lang="tr">Bağlantı Metni</title>
-                <title lang="ru">Текст ссылки</title>
-                <title lang="fr">Texte du lien</title>
-                <title lang="es">Texto del enlace</title>
-                <title lang="de">Linktext</title>
-            </meta>
-        </property>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>
