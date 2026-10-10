@@ -98,4 +98,32 @@ final class DescriptionListTest extends TestCase
         self::assertSame('striped', $dl->getLayout());
         self::assertStringContainsString('font-medium', $dl->getTermClasses());
     }
+
+    public function testLinkNormalization(): void
+    {
+        $dl = new DescriptionList();
+        $dl->items = [
+            [
+                'title' => 'String link',
+                'content' => 'Link as string',
+                'link' => 'https://example.com/item1',
+            ],
+            [
+                'title' => 'Array link',
+                'content' => 'Link as array with url',
+                'link' => ['url' => 'https://example.com/item2'],
+            ],
+            [
+                'title' => 'No link',
+                'content' => 'Plain description',
+            ],
+        ];
+
+        $items = $dl->getNormalizedItems();
+        self::assertCount(3, $items);
+
+        self::assertSame('https://example.com/item1', $items[0]['link_href']);
+        self::assertSame('https://example.com/item2', $items[1]['link_href']);
+        self::assertArrayNotHasKey('link_href', $items[2]);
+    }
 }

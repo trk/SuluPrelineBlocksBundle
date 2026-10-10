@@ -96,6 +96,23 @@ final class Accordion
             if (\is_array($item)) {
                 /** @var array<string, mixed> $itemArr */
                 $itemArr = $item;
+
+                if (isset($itemArr['image'])) {
+                    if (\is_array($itemArr['image']) && isset($itemArr['image']['url']) && \is_string($itemArr['image']['url'])) {
+                        $itemArr['image_url'] = $itemArr['image']['url'];
+                    } elseif (\is_string($itemArr['image'])) {
+                        $itemArr['image_url'] = $itemArr['image'];
+                    }
+                }
+
+                if (isset($itemArr['link'])) {
+                    if (\is_array($itemArr['link']) && isset($itemArr['link']['url']) && \is_string($itemArr['link']['url'])) {
+                        $itemArr['link_href'] = $itemArr['link']['url'];
+                    } elseif (\is_string($itemArr['link'])) {
+                        $itemArr['link_href'] = $itemArr['link'];
+                    }
+                }
+
                 $normalized[] = $itemArr;
             }
         }

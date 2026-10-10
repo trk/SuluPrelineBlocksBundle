@@ -103,4 +103,36 @@ final class AccordionTest extends TestCase
         self::assertSame('bordered', $accordion->getStyle());
         self::assertSame('text-lg font-semibold', $accordion->getTitleSizeClasses());
     }
+
+    public function testImageAndLinkNormalization(): void
+    {
+        $accordion = new Accordion();
+        $accordion->items = [
+            [
+                'title' => 'String inputs',
+                'image' => '/uploads/test.jpg',
+                'link' => 'https://example.com/faq',
+            ],
+            [
+                'title' => 'Array inputs with url',
+                'image' => ['url' => '/uploads/array.jpg', 'id' => 42],
+                'link' => ['url' => 'https://example.com/array', 'title' => 'Click here'],
+            ],
+            [
+                'title' => 'No image or link',
+            ],
+        ];
+
+        $items = $accordion->getNormalizedItems();
+        self::assertCount(3, $items);
+
+        self::assertSame('/uploads/test.jpg', $items[0]['image_url']);
+        self::assertSame('https://example.com/faq', $items[0]['link_href']);
+
+        self::assertSame('/uploads/array.jpg', $items[1]['image_url']);
+        self::assertSame('https://example.com/array', $items[1]['link_href']);
+
+        self::assertArrayNotHasKey('image_url', $items[2]);
+        self::assertArrayNotHasKey('link_href', $items[2]);
+    }
 }
