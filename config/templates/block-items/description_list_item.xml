@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<type name="description_list_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Description List Item</title>
+        <title lang="tr">Tanım Listesi Maddesi</title>
+        <title lang="de">Beschreibungslistenelement</title>
+        <title lang="ru">Элемент списка описаний</title>
+        <title lang="es">Elemento de Lista de Descripción</title>
+        <title lang="fr">Élément de Liste de Description</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

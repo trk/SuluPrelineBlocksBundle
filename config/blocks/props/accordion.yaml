@@ -1,0 +1,128 @@
+tabs:
+  layout:
+    title:
+      en: "Accordion Layout"
+      tr: "Akordeon Düzeni"
+    fields:
+      style:
+        type: select
+        label:
+          en: "Style"
+          tr: "Görsel Stil"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Default (Dividers)"
+              tr: "Varsayılan (Çizgili)"
+          - value: "bordered"
+            label:
+              en: "Bordered Cards"
+              tr: "Çerçeveli Kartlar"
+          - value: "soft"
+            label:
+              en: "Soft Background"
+              tr: "Yumuşak Dolgulu"
+      icon_style:
+        type: select
+        label:
+          en: "Icon Indicator"
+          tr: "Açma/Kapama İkonu"
+        default: "chevron"
+        col_span: 6
+        options:
+          - value: "chevron"
+            label:
+              en: "Chevron (Arrow)"
+              tr: "Ok (Chevron)"
+          - value: "plus"
+            label:
+              en: "Plus / Minus"
+              tr: "Artı / Eksi (+/-)"
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Yok"
+      multiple:
+        type: checkbox
+        label:
+          en: "Allow Multiple Open"
+          tr: "Aynı Anda Çoklu Açılma"
+        default: false
+        col_span: 6
+      collapsible:
+        type: checkbox
+        label:
+          en: "Start All Collapsed"
+          tr: "Tümü Kapalı Başlasın"
+        default: true
+        col_span: 6
+      title_size:
+        type: select
+        label:
+          en: "Title Size"
+          tr: "Başlık Boyutu"
+        default: "base"
+        col_span: 6
+        options:
+          - value: "sm"
+            label: "Small"
+          - value: "base"
+            label: "Base"
+          - value: "lg"
+            label: "Large"
+          - value: "xl"
+            label: "Extra Large"
+      image_align:
+        type: select
+        label:
+          en: "Image Position"
+          tr: "Görsel Konumu"
+        default: "top"
+        col_span: 6
+        options:
+          - value: "top"
+            label: "Top"
+          - value: "bottom"
+            label: "Bottom"
+          - value: "left"
+            label: "Left"
+          - value: "right"
+            label: "Right"
+      margin_top:
+        type: select
+        label:
+          en: "Margin Top"
+          tr: "Üst Boşluk"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "sm"
+            label: "Small"
+          - value: "md"
+            label: "Medium"
+          - value: "lg"
+            label: "Large"
+          - value: "xl"
+            label: "Extra Large"
+      margin_bottom:
+        type: select
+        label:
+          en: "Margin Bottom"
+          tr: "Alt Boşluk"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "sm"
+            label: "Small"
+          - value: "md"
+            label: "Medium"
+          - value: "lg"
+            label: "Large"
+          - value: "xl"
+            label: "Extra Large"

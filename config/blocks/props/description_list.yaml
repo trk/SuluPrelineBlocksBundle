@@ -1,0 +1,119 @@
+tabs:
+  layout:
+    title:
+      en: "List Layout"
+      tr: "Liste Düzeni"
+    fields:
+      layout:
+        type: select
+        label:
+          en: "Layout Mode"
+          tr: "Yerleşim Modu"
+        default: "horizontal"
+        col_span: 6
+        options:
+          - value: "horizontal"
+            label:
+              en: "Horizontal (2 Columns Key-Value)"
+              tr: "Yatay (2 Kolonlu Terim-Açıklama)"
+          - value: "stacked"
+            label:
+              en: "Stacked (Vertical)"
+              tr: "Dikey (Alt Alta)"
+          - value: "striped"
+            label:
+              en: "Striped Rows (Zebra)"
+              tr: "Zebra Çizgili Satırlar"
+          - value: "bordered"
+            label:
+              en: "Bordered Cards"
+              tr: "Çerçeveli Kartlar"
+      term_width:
+        type: select
+        label:
+          en: "Term Width (Horizontal)"
+          tr: "Başlık Genişliği (Yatayda)"
+        default: "1-3"
+        col_span: 6
+        options:
+          - value: "1-4"
+            label: "25% (1/4)"
+          - value: "1-3"
+            label: "33% (1/3)"
+          - value: "1-2"
+            label: "50% (1/2)"
+          - value: "auto"
+            label: "Auto"
+      divider:
+        type: checkbox
+        label:
+          en: "Show Dividers Between Items"
+          tr: "Maddeler Arasında Ayırıcı Çizgi"
+        default: true
+        col_span: 6
+      size:
+        type: select
+        label:
+          en: "Item Spacing & Size"
+          tr: "Madde Boyutu ve Boşluk"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label: "Small"
+          - value: "md"
+            label: "Medium"
+          - value: "lg"
+            label: "Large"
+      term_style:
+        type: select
+        label:
+          en: "Term Font Style"
+          tr: "Terim Başlığı Stili"
+        default: "bold"
+        col_span: 6
+        options:
+          - value: "bold"
+            label: "Bold (Kalın)"
+          - value: "medium"
+            label: "Medium (Orta)"
+          - value: "muted"
+            label: "Muted (Gri / Soluk)"
+          - value: "primary"
+            label: "Primary (Vurgulu)"
+      margin_top:
+        type: select
+        label:
+          en: "Margin Top"
+          tr: "Üst Boşluk"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "sm"
+            label: "Small"
+          - value: "md"
+            label: "Medium"
+          - value: "lg"
+            label: "Large"
+          - value: "xl"
+            label: "Extra Large"
+      margin_bottom:
+        type: select
+        label:
+          en: "Margin Bottom"
+          tr: "Alt Boşluk"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "sm"
+            label: "Small"
+          - value: "md"
+            label: "Medium"
+          - value: "lg"
+            label: "Large"
+          - value: "xl"
+            label: "Extra Large"

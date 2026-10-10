@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>accordion</key>
+    <meta>
+        <title lang="en">Accordion</title>
+        <title lang="tr">Akordeon</title>
+        <title lang="de">Akkordeon</title>
+        <title lang="ru">Аккордеон</title>
+        <title lang="es">Acordeón</title>
+        <title lang="fr">Accordéon</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="accordion_item" minOccurs="1">
+            <meta>
+                <title lang="en">Accordion Items</title>
+                <title lang="tr">Akordeon Maddeleri</title>
+                <title lang="de">Akkordeon-Elemente</title>
+                <title lang="ru">Элементы аккордеона</title>
+                <title lang="es">Elementos de Acordeón</title>
+                <title lang="fr">Éléments d'Accordéon</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/accordion_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="accordion"/>
+            </params>
+        </property>
+    </properties>
+</template>

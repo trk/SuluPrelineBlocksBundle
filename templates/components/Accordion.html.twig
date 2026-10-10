@@ -1,0 +1,133 @@
+{% set custom_id = this.customId %}
+{% set items = this.normalizedItems %}
+{% set is_multiple = this.isMultiple() %}
+{% set is_collapsible = this.isCollapsible() %}
+{% set icon_style = this.iconStyle %}
+{% set title_size_classes = this.titleSizeClasses %}
+{% set image_align = this.imageAlign %}
+{% set accordion_dom_id = custom_id ? custom_id : ('accordion-' ~ random()) %}
+
+<section
+    id="{{ accordion_dom_id }}"
+    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+>
+    {% if title %}
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ title }}</h2>
+        </div>
+    {% endif %}
+
+    <div
+        class="hs-accordion-group {{ this.containerClasses }} w-full"
+        {% if is_multiple %}data-hs-accordion-always-open{% endif %}
+    >
+        {% for item in items %}
+            {% set is_first = loop.first %}
+            {% set item_is_active = item.is_active is defined and (item.is_active == true or item.is_active == '1') %}
+            {% set is_open = item_is_active or (not is_collapsible and is_first) %}
+            {% set item_heading_id = accordion_dom_id ~ '-heading-' ~ loop.index %}
+            {% set item_collapse_id = accordion_dom_id ~ '-collapse-' ~ loop.index %}
+
+            <div
+                class="{{ this.itemClasses }} {% if is_open %}active{% endif %}"
+                id="{{ item_heading_id }}"
+            >
+                <button
+                    type="button"
+                    class="{{ this.toggleClasses }}"
+                    aria-expanded="{{ is_open ? 'true' : 'false' }}"
+                    aria-controls="{{ item_collapse_id }}"
+                >
+                    <span class="{{ title_size_classes }}">{{ item.title|default('') }}</span>
+
+                    {% if icon_style == 'chevron' %}
+                        <svg class="hs-accordion-active:hidden block size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <svg class="hs-accordion-active:block hidden size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                    {% elseif icon_style == 'plus' %}
+                        <svg class="hs-accordion-active:hidden block size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        <svg class="hs-accordion-active:block hidden size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                    {% endif %}
+                </button>
+
+                <div
+                    id="{{ item_collapse_id }}"
+                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {% if not is_open %}hidden{% endif %}"
+                    role="region"
+                    aria-labelledby="{{ item_heading_id }}"
+                >
+                    <div class="{{ this.contentWrapperClasses }}">
+                        {% set img_url = null %}
+                        {% if item.image is defined and item.image %}
+                            {% if item.image is iterable and item.image.url is defined %}
+                                {% set img_url = item.image.url %}
+                            {% elseif item.image is string %}
+                                {% set img_url = item.image %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if img_url and (image_align == 'left' or image_align == 'right') %}
+                            <div class="sm:flex sm:gap-x-6 items-start my-2">
+                                {% if image_align == 'left' %}
+                                    <div class="sm:w-1/3 shrink-0 mb-3 sm:mb-0">
+                                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full rounded-lg object-cover" loading="lazy" />
+                                    </div>
+                                {% endif %}
+                                <div class="sm:flex-1">
+                                    {% if item.content|default('') %}
+                                        <div class="text-gray-600 dark:text-neutral-400 leading-relaxed text-sm">
+                                            {{ item.content|raw }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if image_align == 'right' %}
+                                    <div class="sm:w-1/3 shrink-0 mt-3 sm:mt-0">
+                                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full rounded-lg object-cover" loading="lazy" />
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            {% if img_url and image_align == 'top' %}
+                                <div class="mb-3">
+                                    <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-80 rounded-lg object-cover" loading="lazy" />
+                                </div>
+                            {% endif %}
+
+                            {% if item.content|default('') %}
+                                <div class="text-gray-600 dark:text-neutral-400 leading-relaxed text-sm">
+                                    {{ item.content|raw }}
+                                </div>
+                            {% endif %}
+
+                            {% if img_url and image_align == 'bottom' %}
+                                <div class="mt-3">
+                                    <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-80 rounded-lg object-cover" loading="lazy" />
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% set link_href = null %}
+                        {% if item.link is defined and item.link %}
+                            {% if item.link is iterable and item.link.url is defined %}
+                                {% set link_href = item.link.url %}
+                            {% elseif item.link is string %}
+                                {% set link_href = item.link %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if link_href %}
+                            <div class="mt-3">
+                                <a
+                                    href="{{ link_href }}"
+                                    class="inline-flex items-center gap-x-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
+                                >
+                                    {{ item.link_title|default('Learn more'|trans({}, 'sulu_website')) }}
+                                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>

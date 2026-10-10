@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<type name="accordion_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Accordion Item</title>
+        <title lang="tr">Akordeon Maddesi</title>
+        <title lang="de">Akkordeon-Element</title>
+        <title lang="ru">Элемент аккордеона</title>
+        <title lang="es">Elemento de Acordeón</title>
+        <title lang="fr">Élément d'Accordéon</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+
+        <property name="is_active" type="checkbox" colspan="6">
+            <meta>
+                <title lang="en">Start Opened</title>
+                <title lang="tr">Açık Başlasın</title>
+                <title lang="de">Geöffnet starten</title>
+                <title lang="ru">Открыть при загрузке</title>
+                <title lang="es">Iniciar abierto</title>
+                <title lang="fr">Démarrer ouvert</title>
+                <info_text lang="en">Whether this item is expanded on initial page load</info_text>
+                <info_text lang="tr">Sayfa ilk yüklendiğinde bu maddenin açık görünmesini sağlar</info_text>
+                <info_text lang="de">Ob dieses Element beim anfänglichen Laden der Seite erweitert ist</info_text>
+                <info_text lang="ru">Развернут ли этот элемент при начальной загрузке страницы</info_text>
+                <info_text lang="es">Si este elemento está expandido al cargar la página</info_text>
+                <info_text lang="fr">Si cet élément est développé lors du chargement initial de la page</info_text>
+            </meta>
+        </property>
+    </properties>
+</type>

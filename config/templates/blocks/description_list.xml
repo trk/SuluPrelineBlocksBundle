@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>description_list</key>
+    <meta>
+        <title lang="en">Description List</title>
+        <title lang="tr">Tanım Listesi</title>
+        <title lang="de">Beschreibungsliste</title>
+        <title lang="ru">Список описаний</title>
+        <title lang="es">Lista de Descripción</title>
+        <title lang="fr">Liste de Description</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="description_list_item" minOccurs="1">
+            <meta>
+                <title lang="en">List Items</title>
+                <title lang="tr">Liste Maddeleri</title>
+                <title lang="de">Listenelemente</title>
+                <title lang="ru">Элементы списка</title>
+                <title lang="es">Elementos de Lista</title>
+                <title lang="fr">Éléments de Liste</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/description_list_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="description_list"/>
+            </params>
+        </property>
+    </properties>
+</template>
