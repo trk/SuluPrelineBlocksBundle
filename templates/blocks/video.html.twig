@@ -1,7 +1,7 @@
 <twig:Video
-    video="{{ block.video|default(null) }}"
-    link="{{ block.link|default(null) }}"
-    image="{{ block.image|default(null) }}"
+    :video="block.video|default(null)"
+    :link="block.link|default(null)"
+    :image="block.image|default(null)"
     :icon="block.icon|default(null)"
-    props="{{ block|merge(block.props|default({})) }}"
+    :props="block|merge(block.props|default({}))"
 />

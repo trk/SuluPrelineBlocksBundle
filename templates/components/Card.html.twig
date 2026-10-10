@@ -93,9 +93,9 @@
             {% for btn in btn_list %}
                 <twig:Button
                     content="{{ btn.content|default('') }}"
-                    link="{{ btn.link|default('#') }}"
+                    :link="btn.link|default('#')"
                     linkTitle="{{ btn.link_title|default(null) }}"
-                    props="{{ btn|merge(btn.props|default({})) }}"
+                    :props="btn|merge(btn.props|default({}))"
                 />
             {% endfor %}
         </div>

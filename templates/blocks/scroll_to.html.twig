@@ -2,5 +2,5 @@
     title="{{ block.title|default(null) }}"
     targetId="{{ block.target_id|default(null) }}"
     :icon="block.icon|default(null)"
-    props="{{ block|merge(block.props|default({})) }}"
+    :props="block|merge(block.props|default({}))"
 />

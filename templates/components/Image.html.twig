@@ -8,12 +8,12 @@
     <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
             {{ attributes.defaults({class: this.getWrapperClasses()}) }}>
         {% if url %}
-            <a href="{{ url }}" class="block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.02]">
-                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+            <a href="{{ url }}" class="block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden">
+                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto max-h-[75vh] object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
             </a>
         {% else %}
             <div class="overflow-hidden {{ rounded }}">
-                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto max-h-[75vh] object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
             </div>
         {% endif %}
 

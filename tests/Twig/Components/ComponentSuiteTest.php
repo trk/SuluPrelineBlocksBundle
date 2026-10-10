@@ -122,7 +122,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('Studio Banner', $image->getCaption());
 
         $classes = $image->getWrapperClasses();
-        self::assertStringContainsString('inline-block', $classes);
+        self::assertStringContainsString('w-full', $classes);
         self::assertStringContainsString('mt-4', $classes);
     }
 

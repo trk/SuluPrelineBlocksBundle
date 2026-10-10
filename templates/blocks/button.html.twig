@@ -1,8 +1,8 @@
 <twig:Button
     title="{{ block.title|default(block.content|default('')) }}"
     content="{{ block.title|default(block.content|default('')) }}"
-    link="{{ block.link|default(null) }}"
+    :link="block.link|default(null)"
     link_title="{{ block.link_title|default(null) }}"
     linkTitle="{{ block.link_title|default(null) }}"
-    props="{{ block|merge(block.props|default({})) }}"
+    :props="block|merge(block.props|default({}))"
 />

@@ -527,7 +527,7 @@ final class Overlay
         $rounded = $this->getRoundedClasses();
         $shadow = $this->getShadowClasses();
 
-        $base = \sprintf('group relative overflow-hidden flex flex-col w-full h-full min-h-[220px] %s %s %s', $aspect, $rounded, $shadow);
+        $base = \sprintf('group relative overflow-hidden flex flex-col w-full min-h-[220px] %s %s %s', $aspect, $rounded, $shadow);
 
         return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
     }

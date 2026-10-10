@@ -119,7 +119,11 @@ final class Image
 
     public function getWrapperClasses(): string
     {
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), 'inline-block max-w-full');
+        $props = $this->getResolvedProps();
+        $hasMaxWidth = isset($props['max_width']) && '' !== $props['max_width'] && 'none' !== $props['max_width'];
+        $base = $hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto';
+
+        return ElementTransform::wrapperClasses($props, $base);
     }
 
     public function getElementId(): ?string

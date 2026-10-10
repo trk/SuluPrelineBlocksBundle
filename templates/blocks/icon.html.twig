@@ -1,5 +1,5 @@
 <twig:Icon
     :icon="block.icon|default(null)"
-    link="{{ block.link|default(null) }}"
-    props="{{ block|merge(block.props|default({})) }}"
+    :link="block.link|default(null)"
+    :props="block|merge(block.props|default({}))"
 />

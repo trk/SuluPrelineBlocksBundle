@@ -2,7 +2,7 @@
     content="{{ block.content|default('') }}"
     author="{{ block.author|default(null) }}"
     authorTitle="{{ block.author_title|default(null) }}"
-    image="{{ block.image|default(null) }}"
-    link="{{ block.link|default(null) }}"
-    props="{{ block|merge(block.props|default({})) }}"
+    :image="block.image|default(null)"
+    :link="block.link|default(null)"
+    :props="block|merge(block.props|default({}))"
 />
