@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>divider</key>
     <meta>
@@ -12,19 +13,7 @@
         <title lang="de">Trennlinie</title>
     </meta>
     <properties>
-        <property name="icon" type="single_icon_selection">
-            <meta>
-                <title lang="en">Center Icon</title>
-                <title lang="tr">Orta İkon</title>
-                <title lang="ru">Иконка в центре</title>
-                <title lang="fr">Icône centrale</title>
-                <title lang="es">Icono central</title>
-                <title lang="de">Mittiges Symbol</title>
-            </meta>
-            <params>
-                <param name="icon_set" value="tabler"/>
-            </params>
-        </property>
+        <xi:include href="../fields/icon.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>
@@ -33,3 +22,4 @@
         </property>
     </properties>
 </template>
+

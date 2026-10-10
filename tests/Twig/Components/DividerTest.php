@@ -82,12 +82,42 @@ final class DividerTest extends TestCase
         $divider = new Divider();
         $divider->icon = 'star';
         self::assertSame('ti ti-star', $divider->getResolvedIcon());
+        self::assertSame('icon', $divider->getDividerStyle());
 
         $divider->icon = 'ti ti-heart';
         self::assertSame('ti ti-heart', $divider->getResolvedIcon());
 
         $divider->icon = ['icon' => 'check'];
         self::assertSame('ti ti-check', $divider->getResolvedIcon());
+
+        // Sulu single_icon_selection format
+        $divider->icon = ['name' => 'star', 'icon_set' => 'tabler'];
+        self::assertSame('ti ti-star', $divider->getResolvedIcon());
+    }
+
+    public function testIconAlignmentAndLineClasses(): void
+    {
+        $dividerLeft = new Divider();
+        $dividerLeft->props = ['divider_align' => 'left'];
+        $leftClasses = $dividerLeft->getIconLineClasses();
+        self::assertStringContainsString('after:flex-1', $leftClasses);
+        self::assertStringNotContainsString('before:flex-1', $leftClasses);
+
+        $dividerRight = new Divider();
+        $dividerRight->props = ['divider_align' => 'right'];
+        $rightClasses = $dividerRight->getIconLineClasses();
+        self::assertStringContainsString('before:flex-1', $rightClasses);
+        self::assertStringNotContainsString('after:flex-1', $rightClasses);
+
+        $dividerCenter = new Divider();
+        $dividerCenter->props = ['divider_align' => 'center'];
+        $centerClasses = $dividerCenter->getIconLineClasses();
+        self::assertStringContainsString('before:flex-1', $centerClasses);
+        self::assertStringContainsString('after:flex-1', $centerClasses);
+
+        $dividerPrimary = new Divider();
+        $dividerPrimary->props = ['divider_color' => 'primary'];
+        self::assertStringContainsString('text-blue-600', $dividerPrimary->getIconBadgeColorClasses());
     }
 
     public function testWrapperClassesAndId(): void

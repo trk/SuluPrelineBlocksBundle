@@ -76,14 +76,30 @@ final class Divider
     public function getDividerStyle(): string
     {
         $props = $this->getResolvedProps();
-        $style = $props['divider_style'] ?? 'line';
+        $style = $props['divider_style'] ?? null;
+
+        if (null === $style || 'line' === $style) {
+            return null !== $this->getResolvedIcon() ? 'icon' : 'line';
+        }
 
         return match ($style) {
             'dashed' => 'dashed',
             'dotted' => 'dotted',
             'small' => 'small',
             'icon' => 'icon',
-            default => 'line',
+            default => null !== $this->getResolvedIcon() ? 'icon' : 'line',
+        };
+    }
+
+    public function getDividerAlign(): string
+    {
+        $props = $this->getResolvedProps();
+        $align = $props['divider_align'] ?? 'center';
+
+        return match ($align) {
+            'left', 'start' => 'left',
+            'right', 'end' => 'right',
+            default => 'center',
         };
     }
 
@@ -141,7 +157,7 @@ final class Divider
 
     public function getWrapperClasses(): string
     {
-        $base = 'flex items-center ' . $this->getDividerAlignClasses();
+        $base = 'w-full flex items-center ' . $this->getDividerAlignClasses();
 
         return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
     }
@@ -153,20 +169,84 @@ final class Divider
 
     public function getResolvedIcon(): ?string
     {
-        if (null === $this->icon || '' === $this->icon) {
-            return null;
+        return PropsResolver::resolveIcon($this->icon ?? ($this->props['icon'] ?? null));
+    }
+
+    public function getIconLineClasses(): string
+    {
+        $align = $this->getDividerAlign();
+        $props = $this->getResolvedProps();
+        $thickness = $props['divider_thickness'] ?? '1';
+        $thicknessStr = \is_scalar($thickness) ? (string) $thickness : '1';
+        $color = $props['divider_color'] ?? 'default';
+
+        $afterClass = match ($color) {
+            'primary' => match ($thicknessStr) {
+                '2' => 'after:flex-1 after:border-t-2 after:border-blue-600 dark:after:border-blue-500 after:ms-4',
+                '4' => 'after:flex-1 after:border-t-4 after:border-blue-600 dark:after:border-blue-500 after:ms-4',
+                default => 'after:flex-1 after:border-t after:border-blue-600 dark:after:border-blue-500 after:ms-4',
+            },
+            'muted' => match ($thicknessStr) {
+                '2' => 'after:flex-1 after:border-t-2 after:border-gray-100 dark:after:border-neutral-800 after:ms-4',
+                '4' => 'after:flex-1 after:border-t-4 after:border-gray-100 dark:after:border-neutral-800 after:ms-4',
+                default => 'after:flex-1 after:border-t after:border-gray-100 dark:after:border-neutral-800 after:ms-4',
+            },
+            'dark' => match ($thicknessStr) {
+                '2' => 'after:flex-1 after:border-t-2 after:border-gray-900 dark:after:border-white after:ms-4',
+                '4' => 'after:flex-1 after:border-t-4 after:border-gray-900 dark:after:border-white after:ms-4',
+                default => 'after:flex-1 after:border-t after:border-gray-900 dark:after:border-white after:ms-4',
+            },
+            default => match ($thicknessStr) {
+                '2' => 'after:flex-1 after:border-t-2 after:border-gray-200 dark:after:border-neutral-700 after:ms-4',
+                '4' => 'after:flex-1 after:border-t-4 after:border-gray-200 dark:after:border-neutral-700 after:ms-4',
+                default => 'after:flex-1 after:border-t after:border-gray-200 dark:after:border-neutral-700 after:ms-4',
+            },
+        };
+
+        $beforeClass = match ($color) {
+            'primary' => match ($thicknessStr) {
+                '2' => 'before:flex-1 before:border-t-2 before:border-blue-600 dark:before:border-blue-500 before:me-4',
+                '4' => 'before:flex-1 before:border-t-4 before:border-blue-600 dark:before:border-blue-500 before:me-4',
+                default => 'before:flex-1 before:border-t before:border-blue-600 dark:before:border-blue-500 before:me-4',
+            },
+            'muted' => match ($thicknessStr) {
+                '2' => 'before:flex-1 before:border-t-2 before:border-gray-100 dark:before:border-neutral-800 before:me-4',
+                '4' => 'before:flex-1 before:border-t-4 before:border-gray-100 dark:before:border-neutral-800 before:me-4',
+                default => 'before:flex-1 before:border-t before:border-gray-100 dark:border-neutral-800 before:me-4',
+            },
+            'dark' => match ($thicknessStr) {
+                '2' => 'before:flex-1 before:border-t-2 before:border-gray-900 dark:before:border-white before:me-4',
+                '4' => 'before:flex-1 before:border-t-4 before:border-gray-900 dark:before:border-white before:me-4',
+                default => 'before:flex-1 before:border-t before:border-gray-900 dark:before:border-white before:me-4',
+            },
+            default => match ($thicknessStr) {
+                '2' => 'before:flex-1 before:border-t-2 before:border-gray-200 dark:before:border-neutral-700 before:me-4',
+                '4' => 'before:flex-1 before:border-t-4 before:border-gray-200 dark:before:border-neutral-700 before:me-4',
+                default => 'before:flex-1 before:border-t before:border-gray-200 dark:before:border-neutral-700 before:me-4',
+            },
+        };
+
+        if ('left' === $align) {
+            return $afterClass;
         }
 
-        if (\is_string($this->icon)) {
-            return \str_starts_with($this->icon, 'ti ') ? $this->icon : 'ti ti-' . $this->icon;
+        if ('right' === $align) {
+            return $beforeClass;
         }
 
-        if (\is_array($this->icon) && isset($this->icon['icon']) && \is_string($this->icon['icon'])) {
-            $name = $this->icon['icon'];
+        return $beforeClass . ' ' . $afterClass;
+    }
 
-            return \str_starts_with($name, 'ti ') ? $name : 'ti ti-' . $name;
-        }
+    public function getIconBadgeColorClasses(): string
+    {
+        $props = $this->getResolvedProps();
+        $color = $props['divider_color'] ?? 'default';
 
-        return null;
+        return match ($color) {
+            'primary' => 'border-blue-200 bg-white text-blue-600 dark:bg-neutral-800 dark:border-blue-900/50 dark:text-blue-400',
+            'dark' => 'border-gray-900 bg-gray-900 text-white dark:bg-white dark:text-gray-900 dark:border-white',
+            'muted' => 'border-gray-200 bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400',
+            default => 'border-gray-200 bg-white text-gray-600 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300',
+        };
     }
 }
