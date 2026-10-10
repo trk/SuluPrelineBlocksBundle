@@ -9,8 +9,101 @@
         <title lang="fr">Médias</title>
     </meta>
     <properties>
+        <property name="media_type" type="single_select" colspan="6">
+            <meta>
+                <title lang="en">Media Type</title>
+                <title lang="tr">Medya Türü</title>
+                <title lang="de">Medientyp</title>
+                <title lang="ru">Тип медиа</title>
+                <title lang="es">Tipo de medio</title>
+                <title lang="fr">Type de média</title>
+            </meta>
+            <params>
+                <param name="default_value" value="image"/>
+                <param name="values" type="collection">
+                    <param name="image">
+                        <meta>
+                            <title lang="en">Image</title>
+                            <title lang="tr">Görsel</title>
+                            <title lang="de">Bild</title>
+                            <title lang="ru">Изображение</title>
+                            <title lang="es">Imagen</title>
+                            <title lang="fr">Image</title>
+                        </meta>
+                    </param>
+                    <param name="video">
+                        <meta>
+                            <title lang="en">Video</title>
+                            <title lang="tr">Video</title>
+                            <title lang="de">Video</title>
+                            <title lang="ru">Видео</title>
+                            <title lang="es">Vídeo</title>
+                            <title lang="fr">Vidéo</title>
+                        </meta>
+                    </param>
+                    <param name="icon">
+                        <meta>
+                            <title lang="en">Icon</title>
+                            <title lang="tr">İkon</title>
+                            <title lang="de">Symbol</title>
+                            <title lang="ru">Иконка</title>
+                            <title lang="es">Icono</title>
+                            <title lang="fr">Icône</title>
+                        </meta>
+                    </param>
+                    <param name="none">
+                        <meta>
+                            <title lang="en">None</title>
+                            <title lang="tr">Hiçbiri</title>
+                            <title lang="de">Keine</title>
+                            <title lang="ru">Нет</title>
+                            <title lang="es">Ninguno</title>
+                            <title lang="fr">Aucun</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="media_source" type="single_select" colspan="6"
+                  visibleCondition="(__parent.media_type == 'image' || media_type == 'image' || __parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != ''))))">
+            <meta>
+                <title lang="en">Source</title>
+                <title lang="tr">Kaynak</title>
+                <title lang="de">Quelle</title>
+                <title lang="ru">Источник</title>
+                <title lang="es">Fuente</title>
+                <title lang="fr">Source</title>
+            </meta>
+            <params>
+                <param name="default_value" value="media"/>
+                <param name="values" type="collection">
+                    <param name="media">
+                        <meta>
+                            <title lang="en">Media Library</title>
+                            <title lang="tr">Medya Kütüphanesi</title>
+                            <title lang="de">Medienbibliothek</title>
+                            <title lang="ru">Медиатека</title>
+                            <title lang="es">Mediateca</title>
+                            <title lang="fr">Médiathèque</title>
+                        </meta>
+                    </param>
+                    <param name="url">
+                        <meta>
+                            <title lang="en">External URL</title>
+                            <title lang="tr">Harici URL</title>
+                            <title lang="de">Externe URL</title>
+                            <title lang="ru">Внешний URL</title>
+                            <title lang="es">URL externa</title>
+                            <title lang="fr">URL externe</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
         <property name="image" type="single_media_selection"
-                  visibleCondition="(!(__parent.video.id != null || video.id != null)) &amp;&amp; (!((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || ((__parent.media_type == null || media_type == null) &amp;&amp; !(__parent.video.id != null || video.id != null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != ''))))">
             <meta>
                 <title lang="en">Image</title>
                 <title lang="tr">Görsel</title>
@@ -25,7 +118,7 @@
         </property>
 
         <property name="hover_image" type="single_media_selection"
-                  visibleCondition="__parent.image.id != null || image.id != null">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.image.id != null || image.id != null)">
             <meta>
                 <title lang="en">Hover Image</title>
                 <title lang="tr">Üzerine gelince değişen görsel</title>
@@ -39,8 +132,32 @@
             </params>
         </property>
 
+        <property name="image_url" type="text_line"
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || (__parent.media_type == null || media_type == null))">
+            <meta>
+                <title lang="en">Image URL</title>
+                <title lang="tr">Görsel URL'si</title>
+                <title lang="ru">URL изображения</title>
+                <title lang="fr">URL de l'image</title>
+                <title lang="es">URL de la imagen</title>
+                <title lang="de">Bild-URL</title>
+            </meta>
+        </property>
+
+        <property name="hover_image_url" type="text_line"
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; ((__parent.image_url != null &amp;&amp; __parent.image_url != '') || (image_url != null &amp;&amp; image_url != ''))">
+            <meta>
+                <title lang="en">Hover Image URL</title>
+                <title lang="tr">Üzerine gelince değişen görsel URL'si</title>
+                <title lang="ru">URL изображения при наведении</title>
+                <title lang="fr">URL de l'image au survol</title>
+                <title lang="es">URL de la imagen al pasar el cursor</title>
+                <title lang="de">Bild-URL bei Hover</title>
+            </meta>
+        </property>
+
         <property name="video" type="single_media_selection"
-                  visibleCondition="(!(__parent.image.id != null || image.id != null)) &amp;&amp; (!((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; (__parent.video.id != null || video.id != null)))">
             <meta>
                 <title lang="en">Video</title>
                 <title lang="tr">Video</title>
@@ -55,7 +172,7 @@
         </property>
 
         <property name="hover_video" type="single_media_selection"
-                  visibleCondition="__parent.video.id != null || video.id != null">
+                  visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.video.id != null || video.id != null)">
             <meta>
                 <title lang="en">Hover Video</title>
                 <title lang="tr">Üzerine gelince oynatılan video</title>
@@ -69,8 +186,32 @@
             </params>
         </property>
 
+        <property name="video_url" type="text_line"
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; (__parent.media_type == 'video' || media_type == 'video')">
+            <meta>
+                <title lang="en">Video URL (MP4 / WebM)</title>
+                <title lang="tr">Video URL'si (MP4 / WebM)</title>
+                <title lang="ru">URL видео (MP4 / WebM)</title>
+                <title lang="fr">URL de la vidéo (MP4 / WebM)</title>
+                <title lang="es">URL del vídeo (MP4 / WebM)</title>
+                <title lang="de">Video-URL (MP4 / WebM)</title>
+            </meta>
+        </property>
+
+        <property name="hover_video_url" type="text_line"
+                  visibleCondition="(__parent.media_source == 'url' || media_source == 'url') &amp;&amp; ((__parent.video_url != null &amp;&amp; __parent.video_url != '') || (video_url != null &amp;&amp; video_url != ''))">
+            <meta>
+                <title lang="en">Hover Video URL</title>
+                <title lang="tr">Üzerine gelince oynatılan video URL'si</title>
+                <title lang="ru">URL видео при наведении</title>
+                <title lang="fr">URL de la vidéo au survol</title>
+                <title lang="es">URL del vídeo al pasar el cursor</title>
+                <title lang="de">Video-URL bei Hover</title>
+            </meta>
+        </property>
+
         <property name="icon" type="single_icon_selection"
-                  visibleCondition="(!(__parent.image.id != null || image.id != null)) &amp;&amp; (!(__parent.video.id != null || video.id != null))">
+                  visibleCondition="(__parent.media_type == 'icon' || media_type == 'icon') || ((__parent.media_type == null || media_type == null) &amp;&amp; ((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
             <meta>
                 <title lang="en">Icon</title>
                 <title lang="tr">İkon</title>

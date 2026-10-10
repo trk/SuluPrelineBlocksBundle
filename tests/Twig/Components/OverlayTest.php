@@ -57,6 +57,43 @@ final class OverlayTest extends TestCase
         self::assertSame('https://cdn.example.com/hover-snake.mp4', $overlaySnake->getHoverVideoUrl());
     }
 
+    public function testMediaSourceAndExternalUrls(): void
+    {
+        $overlay = new Overlay();
+        $overlay->mediaType = 'image';
+        $overlay->mediaSource = 'url';
+        $overlay->imageUrl = 'https://cdn.example.com/overlay-image.jpg';
+        $overlay->hoverImageUrl = 'https://cdn.example.com/overlay-hover.jpg';
+
+        self::assertSame('https://cdn.example.com/overlay-image.jpg', $overlay->getImageUrl());
+        self::assertSame('https://cdn.example.com/overlay-hover.jpg', $overlay->getHoverImageUrl());
+        self::assertTrue($overlay->isImage());
+        self::assertFalse($overlay->isVideo());
+
+        // Snake case fallback
+        $overlaySnake = new Overlay();
+        $overlaySnake->media_type = 'video';
+        $overlaySnake->media_source = 'url';
+        $overlaySnake->video_url = 'https://cdn.example.com/overlay-video.mp4';
+        $overlaySnake->hover_video_url = 'https://cdn.example.com/overlay-hover-video.mp4';
+
+        self::assertSame('https://cdn.example.com/overlay-video.mp4', $overlaySnake->getVideoUrl());
+        self::assertSame('https://cdn.example.com/overlay-hover-video.mp4', $overlaySnake->getHoverVideoUrl());
+        self::assertTrue($overlaySnake->isVideo());
+        self::assertFalse($overlaySnake->isImage());
+
+        // Icon exclusivity
+        $overlayIcon = new Overlay();
+        $overlayIcon->mediaType = 'icon';
+        $overlayIcon->icon = 'ti ti-star';
+        self::assertSame('ti ti-star', $overlayIcon->getIconClass());
+
+        $overlayImageWithIcon = new Overlay();
+        $overlayImageWithIcon->mediaType = 'image';
+        $overlayImageWithIcon->icon = 'ti ti-star';
+        self::assertNull($overlayImageWithIcon->getIconClass());
+    }
+
     public function testNormalizedButtons(): void
     {
         $overlay = new Overlay();

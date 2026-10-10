@@ -54,6 +54,18 @@ final class Card
     public mixed $hover_image = null;
     public mixed $hoverVideo = null;
     public mixed $hover_video = null;
+    public ?string $mediaType = null;
+    public ?string $media_type = null;
+    public ?string $mediaSource = null;
+    public ?string $media_source = null;
+    public ?string $imageUrl = null;
+    public ?string $image_url = null;
+    public ?string $hoverImageUrl = null;
+    public ?string $hover_image_url = null;
+    public ?string $videoUrl = null;
+    public ?string $video_url = null;
+    public ?string $hoverVideoUrl = null;
+    public ?string $hover_video_url = null;
 
     public ?string $cardVariant = null;
     public ?string $card_variant = null;
@@ -66,8 +78,6 @@ final class Card
     public ?string $text_align = null;
     public ?string $titleColor = null;
     public ?string $title_color = null;
-    public ?string $mediaType = null;
-    public ?string $media_type = null;
 
     public ?string $marginTop = null;
     public ?string $margin_top = null;
@@ -472,22 +482,58 @@ final class Card
 
     public function getImageUrl(): ?string
     {
-        return PropsResolver::resolveImageUrl($this->image);
+        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        if ('url' === $source) {
+            $url = $this->imageUrl ?? $this->image_url;
+            if (null !== $url && '' !== $url) {
+                return $url;
+            }
+        }
+
+        return PropsResolver::resolveImageUrl($this->image)
+            ?? ($this->imageUrl ?? $this->image_url);
     }
 
     public function getHoverImageUrl(): ?string
     {
-        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image);
+        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        if ('url' === $source) {
+            $url = $this->hoverImageUrl ?? $this->hover_image_url;
+            if (null !== $url && '' !== $url) {
+                return $url;
+            }
+        }
+
+        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image)
+            ?? ($this->hoverImageUrl ?? $this->hover_image_url);
     }
 
     public function getVideoUrl(): ?string
     {
-        return PropsResolver::resolveImageUrl($this->video);
+        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        if ('url' === $source) {
+            $url = $this->videoUrl ?? $this->video_url;
+            if (null !== $url && '' !== $url) {
+                return $url;
+            }
+        }
+
+        return PropsResolver::resolveImageUrl($this->video)
+            ?? ($this->videoUrl ?? $this->video_url);
     }
 
     public function getHoverVideoUrl(): ?string
     {
-        return PropsResolver::resolveImageUrl($this->hoverVideo ?? $this->hover_video);
+        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        if ('url' === $source) {
+            $url = $this->hoverVideoUrl ?? $this->hover_video_url;
+            if (null !== $url && '' !== $url) {
+                return $url;
+            }
+        }
+
+        return PropsResolver::resolveImageUrl($this->hoverVideo ?? $this->hover_video)
+            ?? ($this->hoverVideoUrl ?? $this->hover_video_url);
     }
 
     public function getMediaType(): ?string
@@ -495,7 +541,7 @@ final class Card
         $props = $this->getResolvedProps();
         $forced = isset($props['media_type']) && \is_string($props['media_type'])
             ? $props['media_type']
-            : 'auto';
+            : ($this->mediaType ?? $this->media_type ?? 'auto');
 
         if ('none' === $forced) {
             return null;
@@ -789,6 +835,15 @@ final class Card
 
     public function getIconClass(): ?string
     {
+        $props = $this->getResolvedProps();
+        $mediaType = isset($props['media_type']) && \is_string($props['media_type'])
+            ? $props['media_type']
+            : ($this->mediaType ?? $this->media_type);
+
+        if (null !== $mediaType && 'icon' !== $mediaType) {
+            return null;
+        }
+
         return PropsResolver::resolveIcon($this->icon);
     }
 }

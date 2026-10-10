@@ -51,6 +51,43 @@ final class CardTest extends TestCase
         self::assertSame('https://cdn.example.com/hover-snake.mp4', $cardSnake->getHoverVideoUrl());
     }
 
+    public function testMediaSourceAndExternalUrls(): void
+    {
+        $card = new Card();
+        $card->mediaType = 'image';
+        $card->mediaSource = 'url';
+        $card->imageUrl = 'https://cdn.example.com/external-image.jpg';
+        $card->hoverImageUrl = 'https://cdn.example.com/external-hover.jpg';
+
+        self::assertSame('https://cdn.example.com/external-image.jpg', $card->getImageUrl());
+        self::assertSame('https://cdn.example.com/external-hover.jpg', $card->getHoverImageUrl());
+        self::assertTrue($card->isImage());
+        self::assertFalse($card->isVideo());
+
+        // Snake case fallback
+        $cardSnake = new Card();
+        $cardSnake->media_type = 'video';
+        $cardSnake->media_source = 'url';
+        $cardSnake->video_url = 'https://cdn.example.com/external-video.mp4';
+        $cardSnake->hover_video_url = 'https://cdn.example.com/external-hover-video.mp4';
+
+        self::assertSame('https://cdn.example.com/external-video.mp4', $cardSnake->getVideoUrl());
+        self::assertSame('https://cdn.example.com/external-hover-video.mp4', $cardSnake->getHoverVideoUrl());
+        self::assertTrue($cardSnake->isVideo());
+        self::assertFalse($cardSnake->isImage());
+
+        // Icon exclusivity
+        $cardIcon = new Card();
+        $cardIcon->mediaType = 'icon';
+        $cardIcon->icon = 'ti ti-star';
+        self::assertSame('ti ti-star', $cardIcon->getIconClass());
+
+        $cardImageWithIcon = new Card();
+        $cardImageWithIcon->mediaType = 'image';
+        $cardImageWithIcon->icon = 'ti ti-star';
+        self::assertNull($cardImageWithIcon->getIconClass());
+    }
+
     public function testNormalizedButtons(): void
     {
         $card = new Card();
