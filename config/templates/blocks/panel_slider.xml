@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>panel_slider</key>
+    <meta>
+        <title lang="en">Panel Slider (Cards Carousel)</title>
+        <title lang="tr">Panel Kaydırıcı (Kart Karuseli)</title>
+        <title lang="de">Panel-Schieberegler (Kartenkarussell)</title>
+        <title lang="ru">Слайдер панелей (Карусель карточек)</title>
+        <title lang="es">Control deslizante de paneles (Carrusel de tarjetas)</title>
+        <title lang="fr">Curseur de panneau (Carrousel de cartes)</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="card" minOccurs="1">
+            <meta>
+                <title lang="en">Slider Cards</title>
+                <title lang="tr">Kaydırıcı Kartları</title>
+                <title lang="de">Schieberegler-Karten</title>
+                <title lang="ru">Карточки слайдера</title>
+                <title lang="es">Tarjetas deslizantes</title>
+                <title lang="fr">Cartes de curseur</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/card.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="panel_slider"/>
+            </params>
+        </property>
+    </properties>
+</template>

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>subnav</key>
+    <meta>
+        <title lang="en">Subnav</title>
+        <title lang="tr">Alt Menü</title>
+        <title lang="de">Unternavigation</title>
+        <title lang="ru">Поднавигация</title>
+        <title lang="es">Subnavegación</title>
+        <title lang="fr">Sous-navigation</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="subnav_item" minOccurs="1">
+            <meta>
+                <title lang="en">Subnav Items</title>
+                <title lang="tr">Alt Menü Maddeleri</title>
+                <title lang="de">Unternavigationselemente</title>
+                <title lang="ru">Элементы поднавигации</title>
+                <title lang="es">Elementos de subnavegación</title>
+                <title lang="fr">Éléments de sous-navigation</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/subnav_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="subnav"/>
+            </params>
+        </property>
+    </properties>
+</template>

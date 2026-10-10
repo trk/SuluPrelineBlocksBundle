@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>slideshow</key>
+    <meta>
+        <title lang="en">Slideshow (Hero Carousel)</title>
+        <title lang="tr">Slayt Gösterisi (Hero Karusel)</title>
+        <title lang="de">Diashow (Hero-Karussell)</title>
+        <title lang="ru">Слайд-шоу (Главная карусель)</title>
+        <title lang="es">Presentación de diapositivas (Carrusel de héroe)</title>
+        <title lang="fr">Diaporama (Carrousel héroïque)</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="slideshow_item" minOccurs="1">
+            <meta>
+                <title lang="en">Slides</title>
+                <title lang="tr">Slaytlar</title>
+                <title lang="de">Folien</title>
+                <title lang="ru">Слайды</title>
+                <title lang="es">Diapositivas</title>
+                <title lang="fr">Diapositives</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/slideshow_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="slideshow"/>
+            </params>
+        </property>
+    </properties>
+</template>

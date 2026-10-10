@@ -1,0 +1,72 @@
+{% set normalized_items = this.normalizedItems %}
+{% set marker = this.marker %}
+{% set marker_color = this.markerColor %}
+{% set is_horiz = this.listType == 'horizontal' %}
+{% set tag = marker == 'decimal' ? 'ol' : 'ul' %}
+
+<section
+    {% if this.customId %}id="{{ this.customId }}"{% endif %}
+    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+>
+    {% if title %}
+        <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+            {{ title }}
+        </h3>
+    {% endif %}
+
+    <{{ tag }} class="{{ this.listClasses }}">
+        {% for item in normalized_items %}
+            {% set link_href = item.link_href|default(null) %}
+            {% if not link_href and item.link is defined and item.link %}
+                {% if item.link is iterable %}
+                    {% set link_href = item.link.url|default(null) %}
+                {% else %}
+                    {% set link_href = item.link %}
+                {% endif %}
+            {% endif %}
+
+            {% set img_url = item.image_url|default(null) %}
+            {% if not img_url and item.image is defined and item.image %}
+                {% if item.image is iterable %}
+                    {% set img_url = item.image.url|default(null) %}
+                {% else %}
+                    {% set img_url = item.image %}
+                {% endif %}
+            {% endif %}
+
+            <li class="{{ this.itemClasses }}">
+                <div class="inline-flex items-start gap-x-2.5">
+                    {% if marker == 'checkmark' %}
+                        <svg class="size-4 shrink-0 mt-0.5 {{ marker_color }}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    {% elseif marker == 'icon' and item.icon|default(null) %}
+                        <span class="shrink-0 mt-0.5 {{ marker_color }}">
+                            <i class="{{ item.icon }} text-base"></i>
+                        </span>
+                    {% endif %}
+
+                    {% if img_url %}
+                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="size-5 rounded-full object-cover shrink-0 mt-0.5" loading="lazy" />
+                    {% endif %}
+
+                    <div class="grow">
+                        {% if link_href %}
+                            <a href="{{ link_href }}" class="font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                                {{ item.title|default('') }}
+                            </a>
+                        {% else %}
+                            <span class="font-medium">{{ item.title|default('') }}</span>
+                        {% endif %}
+
+                        {% if item.content|default(null) %}
+                            <div class="text-xs text-gray-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
+                                {{ item.content|raw }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </{{ tag }}>
+</section>

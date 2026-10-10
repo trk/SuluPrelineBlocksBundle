@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<type name="slideshow_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Slide Item</title>
+        <title lang="tr">Slayt Maddesi</title>
+        <title lang="de">Folienelement</title>
+        <title lang="ru">Элемент слайда</title>
+        <title lang="es">Elemento de diapositiva</title>
+        <title lang="fr">Élément de diapositive</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/image.xml"/>
+
+        <property name="overlay_style" type="single_select" colspan="6">
+            <meta>
+                <title lang="en">Overlay Filter</title>
+                <title lang="tr">Karartma / Filtre</title>
+                <title lang="de">Überlagerungsfilter</title>
+            </meta>
+            <params>
+                <param name="values" type="collection">
+                    <param name="dark_medium">
+                        <meta>
+                            <title lang="en">Dark Medium (50%)</title>
+                            <title lang="tr">Karanlık Orta (%50)</title>
+                        </meta>
+                    </param>
+                    <param name="dark_soft">
+                        <meta>
+                            <title lang="en">Dark Soft (30%)</title>
+                            <title lang="tr">Karanlık Hafif (%30)</title>
+                        </meta>
+                    </param>
+                    <param name="dark_strong">
+                        <meta>
+                            <title lang="en">Dark Strong (70%)</title>
+                            <title lang="tr">Karanlık Yoğun (%70)</title>
+                        </meta>
+                    </param>
+                    <param name="gradient">
+                        <meta>
+                            <title lang="en">Bottom Gradient</title>
+                            <title lang="tr">Alttan Gradyan</title>
+                        </meta>
+                    </param>
+                    <param name="none">
+                        <meta>
+                            <title lang="en">None</title>
+                            <title lang="tr">Yok</title>
+                        </meta>
+                    </param>
+                </param>
+                <param name="default_value" value="dark_medium"/>
+            </params>
+        </property>
+
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

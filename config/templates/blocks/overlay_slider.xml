@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>overlay_slider</key>
+    <meta>
+        <title lang="en">Overlay Slider (Overlays Carousel)</title>
+        <title lang="tr">Katman Kaydırıcı (Overlay Karuseli)</title>
+        <title lang="de">Overlay-Schieberegler (Overlay-Karussell)</title>
+        <title lang="ru">Слайдер оверлеев (Карусель оверлеев)</title>
+        <title lang="es">Control deslizante de superposición (Carrusel de superposiciones)</title>
+        <title lang="fr">Curseur de superposition (Carrousel de superpositions)</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="overlay" minOccurs="1">
+            <meta>
+                <title lang="en">Slider Overlays</title>
+                <title lang="tr">Kaydırıcı Katmanları</title>
+                <title lang="de">Schieberegler-Overlays</title>
+                <title lang="ru">Оверлеи слайдера</title>
+                <title lang="es">Superposiciones deslizantes</title>
+                <title lang="fr">Superpositions de curseur</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/overlay.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="overlay_slider"/>
+            </params>
+        </property>
+    </properties>
+</template>

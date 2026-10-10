@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<type name="switcher_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Switcher Tab Item</title>
+        <title lang="tr">Sekme Maddesi</title>
+        <title lang="de">Registerkartenelement</title>
+        <title lang="ru">Элемент вкладки</title>
+        <title lang="es">Elemento de pestaña</title>
+        <title lang="fr">Élément d'onglet</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="nav_title" type="text_line" colspan="6">
+            <meta>
+                <title lang="en">Tab Button Label</title>
+                <title lang="tr">Sekme Buton Başlığı</title>
+                <title lang="de">Tab-Schaltflächenbeschriftung</title>
+                <info_text lang="en">Optional override label for the tab button. If empty, the Title above is used.</info_text>
+                <info_text lang="tr">Sekme butonunda görünecek özel metin. Boş bırakılırsa yukarıdaki Başlık kullanılır.</info_text>
+            </meta>
+        </property>
+
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

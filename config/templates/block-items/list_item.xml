@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<type name="list_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">List Item</title>
+        <title lang="tr">Liste Maddesi</title>
+        <title lang="de">Listenelement</title>
+        <title lang="ru">Элемент списка</title>
+        <title lang="es">Elemento de lista</title>
+        <title lang="fr">Élément de liste</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

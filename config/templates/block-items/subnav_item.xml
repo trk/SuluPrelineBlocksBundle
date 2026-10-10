@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<type name="subnav_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Subnav Item</title>
+        <title lang="tr">Alt Menü Maddesi</title>
+        <title lang="de">Unternavigationselement</title>
+        <title lang="ru">Элемент поднавигации</title>
+        <title lang="es">Elemento de subnavegación</title>
+        <title lang="fr">Élément de sous-navigation</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+
+        <property name="is_active" type="checkbox" colspan="6">
+            <meta>
+                <title lang="en">Active / Selected</title>
+                <title lang="tr">Aktif / Seçili</title>
+                <title lang="de">Aktiv / Ausgewählt</title>
+                <title lang="ru">Активный / Выбранный</title>
+                <title lang="es">Activo / Seleccionado</title>
+                <title lang="fr">Actif / Sélectionné</title>
+                <info_text lang="en">Marks this item as the currently active link</info_text>
+                <info_text lang="tr">Bu maddenin seçili/aktif görünmesini sağlar</info_text>
+            </meta>
+        </property>
+    </properties>
+</type>

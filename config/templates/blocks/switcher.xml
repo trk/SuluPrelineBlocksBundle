@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>switcher</key>
+    <meta>
+        <title lang="en">Switcher (Tabs)</title>
+        <title lang="tr">Sekmeler (Switcher)</title>
+        <title lang="de">Umschalter (Registerkarten)</title>
+        <title lang="ru">Переключатель (Вкладки)</title>
+        <title lang="es">Conmutador (Pestañas)</title>
+        <title lang="fr">Sélecteur (Onglets)</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="switcher_item" minOccurs="1">
+            <meta>
+                <title lang="en">Tabs</title>
+                <title lang="tr">Sekmeler</title>
+                <title lang="de">Registerkarten</title>
+                <title lang="ru">Вкладки</title>
+                <title lang="es">Pestañas</title>
+                <title lang="fr">Onglets</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/switcher_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="switcher"/>
+            </params>
+        </property>
+    </properties>
+</template>
