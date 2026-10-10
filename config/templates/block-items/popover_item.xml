@@ -10,34 +10,46 @@
         <title lang="fr">Marqueur interactif</title>
     </meta>
     <properties>
-        <property name="position_x" type="number">
+        <property name="hotspot" type="hotspot_picker" colspan="12">
             <meta>
-                <title lang="en">Horizontal Position (%)</title>
-                <title lang="tr">Yatay Konum (%)</title>
-                <info_text lang="en">Percentage from left edge (0 to 100)</info_text>
-                <info_text lang="tr">Sol kenardan yüzde mesafe (0 ile 100 arası)</info_text>
+                <title lang="en">Marker Position &amp; Style</title>
+                <title lang="tr">İşaretçi Konumu ve Stili</title>
+                <info_text lang="en">Click on the image to place the hotspot marker</info_text>
+                <info_text lang="tr">Noktayı konumlandırmak için görsel üzerine tıklayın</info_text>
             </meta>
-            <params>
-                <param name="min" value="0"/>
-                <param name="max" value="100"/>
-                <param name="step" value="1"/>
-            </params>
         </property>
-        <property name="position_y" type="number">
-            <meta>
-                <title lang="en">Vertical Position (%)</title>
-                <title lang="tr">Dikey Konum (%)</title>
-                <info_text lang="en">Percentage from top edge (0 to 100)</info_text>
-                <info_text lang="tr">Üst kenardan yüzde mesafe (0 ile 100 arası)</info_text>
-            </meta>
-            <params>
-                <param name="min" value="0"/>
-                <param name="max" value="100"/>
-                <param name="step" value="1"/>
-            </params>
-        </property>
+
         <xi:include href="../fields/title.xml"/>
+
+        <property name="meta" type="text_line">
+            <meta>
+                <title lang="en">Subtitle / Meta (e.g. Price, Category)</title>
+                <title lang="tr">Alt Başlık / Meta Bilgisi (Örn: Fiyat, Kategori)</title>
+            </meta>
+        </property>
+
         <xi:include href="../fields/content.xml"/>
+
+        <property name="image" type="single_media_selection">
+            <meta>
+                <title lang="en">Card Media / Image</title>
+                <title lang="tr">Kart Görseli</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="video" type="single_media_selection">
+            <meta>
+                <title lang="en">Card Video</title>
+                <title lang="tr">Kart Videosu</title>
+            </meta>
+            <params>
+                <param name="types" value="video"/>
+            </params>
+        </property>
+
         <xi:include href="../fields/badge.xml"/>
         <xi:include href="../fields/link.xml"/>
         <xi:include href="../fields/link_title.xml"/>

@@ -6,48 +6,114 @@
     {% endif %}
 
     {% if img_url %}
-        <div class="relative w-full rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-neutral-800">
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-900">
             <img
                 class="w-full h-auto object-cover"
                 src="{{ img_url }}"
                 {% if this.imageSrcSet %}srcset="{{ this.imageSrcSet }}" sizes="{{ this.imageSizes }}"{% endif %}
-                alt="{{ this.title|default('Image with hotspots') }}"
+                alt="{{ this.title|default('Interactive media hotspots') }}"
                 {% if this.imageFocusPointStyle %}style="{{ this.imageFocusPointStyle }}"{% endif %}
                 loading="lazy"
             >
 
             {% for item in items %}
+                {% set marker_colors = this.markerColorClasses(item.marker_color) %}
                 <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">
-                    <div class="hs-tooltip inline-block [--trigger:hover] sm:[--placement:top]">
-                        <button type="button"
-                                class="hs-tooltip-toggle {{ this.hotspotClasses }}"
-                                aria-label="{{ item.title|default('Hotspot details') }}">
-                            <svg class="size-3.5 fill-none stroke-current" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path d="M12 5v14M5 12h14"/>
-                            </svg>
-                        </button>
+                    <div class="hs-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:fixed] [--adaptive:none] sm:[--placement:top]">
+                        <button id="hs-hotspot-item-{{ loop.index }}"
+                                type="button"
+                                class="hs-dropdown-toggle relative group flex items-center justify-center size-8 rounded-full transition-all duration-200 hover:scale-115 focus:outline-hidden focus:ring-4 {{ marker_colors.button }}"
+                                aria-haspopup="menu"
+                                aria-expanded="false"
+                                aria-label="{{ item.title|default('Marker ' ~ loop.index) }}">
 
-                        <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible hidden opacity-0 transition-opacity absolute z-30 w-64 p-3 bg-white dark:bg-neutral-800 rounded-xl shadow-xl text-start border border-gray-100 dark:border-neutral-700" role="tooltip">
-                            {% if item.badge %}
-                                <span class="inline-block py-0.5 px-2 mb-1.5 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400">
-                                    {{ item.badge }}
+                            {% if item.marker_type == 'pulse' %}
+                                <span class="absolute inline-flex size-full rounded-full animate-ping opacity-75 {{ marker_colors.ping }}"></span>
+                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                    <span class="size-2 rounded-full bg-white"></span>
+                                </span>
+                            {% elseif item.marker_type == 'plus' %}
+                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                    <svg class="size-3.5 fill-none stroke-current" stroke-width="2.5" viewBox="0 0 24 24">
+                                        <path d="M12 5v14M5 12h14"/>
+                                    </svg>
+                                </span>
+                            {% elseif item.marker_type == 'number' %}
+                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                    {{ loop.index }}
+                                </span>
+                            {% elseif item.marker_type == 'pin' %}
+                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                    <svg class="size-3.5 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+                                        <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                </span>
+                            {% else %}
+                                <span class="relative inline-flex items-center justify-center size-5 rounded-full {{ marker_colors.inner }}">
+                                    <span class="size-1.5 rounded-full bg-white"></span>
                                 </span>
                             {% endif %}
+                        </button>
 
-                            {% if item.title %}
-                                <h4 class="font-bold text-sm text-gray-900 dark:text-white mb-1">{{ item.title }}</h4>
+                        <div class="hs-dropdown-menu transition-[opacity,margin] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 w-72 max-w-xs bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-neutral-700 overflow-hidden"
+                             role="menu"
+                             aria-orientation="vertical"
+                             aria-labelledby="hs-hotspot-item-{{ loop.index }}">
+
+                            {% if item.video_url %}
+                                <div class="relative w-full aspect-video bg-black overflow-hidden">
+                                    <video class="w-full h-full object-cover" controls playsinline preload="metadata">
+                                        <source src="{{ item.video_url }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            {% elseif item.image_url %}
+                                <div class="relative w-full h-36 bg-gray-100 dark:bg-neutral-900 overflow-hidden">
+                                    <img class="w-full h-full object-cover"
+                                         src="{{ item.image_url }}"
+                                         {% if item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 400px) 320px, 100vw"{% endif %}
+                                         alt="{{ item.title|default('') }}"
+                                         {% if item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
+                                         loading="lazy">
+                                </div>
                             {% endif %}
 
-                            {% if item.content %}
-                                <p class="text-xs text-gray-600 dark:text-neutral-300 leading-relaxed mb-2">{{ item.content }}</p>
-                            {% endif %}
+                            <div class="p-4">
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
+                                    {% if item.badge %}
+                                        <span class="inline-block py-0.5 px-2 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400">
+                                            {{ item.badge }}
+                                        </span>
+                                    {% endif %}
+                                    {% if item.meta %}
+                                        <span class="text-xs font-semibold text-gray-500 dark:text-neutral-400 ms-auto">
+                                            {{ item.meta }}
+                                        </span>
+                                    {% endif %}
+                                </div>
 
-                            {% if item.link %}
-                                <a class="inline-flex items-center gap-x-1 text-xs font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 hover:underline" href="{{ item.link }}">
-                                    {{ item.link_title }}
-                                    <svg class="size-3 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                                </a>
-                            {% endif %}
+                                {% if item.title %}
+                                    <h4 class="font-bold text-sm text-gray-900 dark:text-white mb-1.5 leading-snug">
+                                        {{ item.title }}
+                                    </h4>
+                                {% endif %}
+
+                                {% if item.content %}
+                                    <div class="text-xs text-gray-600 dark:text-neutral-300 leading-relaxed mb-3">
+                                        {{ item.content|raw }}
+                                    </div>
+                                {% endif %}
+
+                                {% if item.link %}
+                                    <a class="inline-flex items-center justify-center gap-x-1.5 w-full py-2 px-3 rounded-lg text-xs font-semibold bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500/50 transition-colors"
+                                       href="{{ item.link }}">
+                                        {{ item.link_title }}
+                                        <svg class="size-3 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6"/>
+                                        </svg>
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
