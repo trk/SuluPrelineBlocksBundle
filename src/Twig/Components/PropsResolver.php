@@ -162,7 +162,7 @@ final class PropsResolver
         string $defaultStyle = 'soft',
         string $defaultColor = 'primary',
         string $defaultSize = 'xs',
-        string $defaultRounded = 'pill'
+        string $defaultRounded = 'pill',
     ): string {
         $variant = isset($props['badge_style']) && \is_string($props['badge_style']) && 'inherit' !== $props['badge_style']
             ? $props['badge_style']
@@ -404,5 +404,133 @@ final class PropsResolver
         }
 
         return 'ti ti-' . $raw;
+    }
+
+    /**
+     * Helper to resolve responsive srcset from a Sulu Media structure.
+     */
+    public static function resolveSrcSet(mixed $media): ?string
+    {
+        if (null === $media || (!\is_array($media) && !\is_object($media))) {
+            return null;
+        }
+
+        /** @var array<string, mixed> $formats */
+        $formats = [];
+        if (\is_array($media) && isset($media['formats']) && \is_array($media['formats'])) {
+            $formats = $media['formats'];
+        } elseif (\is_object($media) && \method_exists($media, 'getFormats')) {
+            /** @var mixed $extracted */
+            $extracted = $media->getFormats();
+            if (\is_array($extracted)) {
+                $formats = $extracted;
+            }
+        }
+
+        if ([] === $formats) {
+            return null;
+        }
+
+        /** @var array<string, int> $standardWidths */
+        $standardWidths = [
+            'col-sm' => 400,
+            'col-md' => 640,
+            'col-lg' => 960,
+            'col-xl' => 1280,
+            'col-2xl' => 1600,
+        ];
+
+        /** @var array<int, string> $sources */
+        $sources = [];
+
+        foreach ($formats as $formatKey => $formatUrl) {
+            if (!\is_string($formatKey) || !\is_string($formatUrl) || '' === \trim($formatUrl)) {
+                continue;
+            }
+
+            $width = $standardWidths[$formatKey] ?? null;
+
+            if (null === $width) {
+                // Match patterns like sulu-400x400, 400x, 640w
+                if (1 === \preg_match('/(?:^|[^\d])(\d+)(?:x\d*|w)?$/', $formatKey, $matches)) {
+                    $width = (int) $matches[1];
+                }
+            }
+
+            if (null !== $width && $width > 0) {
+                $sources[$width] = \sprintf('%s %dw', $formatUrl, $width);
+            }
+        }
+
+        if ([] === $sources) {
+            return null;
+        }
+
+        \ksort($sources);
+
+        return \implode(', ', $sources);
+    }
+
+    /**
+     * Helper to resolve focal/focus point to CSS object-position.
+     */
+    public static function resolveFocusPointStyle(mixed $media): ?string
+    {
+        if (null === $media) {
+            return null;
+        }
+
+        $x = null;
+        $y = null;
+
+        if (\is_array($media)) {
+            $point = $media['focusPoint'] ?? ($media['focalPoint'] ?? null);
+            if (\is_array($point)) {
+                $x = $point['x'] ?? null;
+                $y = $point['y'] ?? null;
+            }
+        } elseif (\is_object($media)) {
+            if (\method_exists($media, 'getFocusPoint')) {
+                /** @var mixed $point */
+                $point = $media->getFocusPoint();
+                if (\is_array($point)) {
+                    $x = $point['x'] ?? null;
+                    $y = $point['y'] ?? null;
+                } elseif (\is_object($point)) {
+                    if (\method_exists($point, 'getX') && \method_exists($point, 'getY')) {
+                        /** @var mixed $xVal */
+                        $xVal = $point->getX();
+                        /** @var mixed $yVal */
+                        $yVal = $point->getY();
+                        $x = $xVal;
+                        $y = $yVal;
+                    }
+                }
+            }
+        }
+
+        if (null !== $x && null !== $y && \is_numeric($x) && \is_numeric($y)) {
+            return \sprintf('object-position: %s%% %s%%;', $x, $y);
+        }
+
+        return null;
+    }
+
+    /**
+     * Helper to resolve object fit utility class.
+     */
+    public static function resolveObjectFit(mixed $fit): string
+    {
+        if (!\is_string($fit) || '' === \trim($fit)) {
+            return 'object-cover';
+        }
+
+        return match (\trim($fit)) {
+            'contain' => 'object-contain',
+            'fill' => 'object-fill',
+            'scale-down' => 'object-scale-down',
+            'none' => 'object-none',
+            default => 'object-cover',
+        };
     }
 }

@@ -207,4 +207,3 @@ final class GridTest extends TestCase
         self::assertSame('group', $itemProps['card_variant']);
     }
 }
-

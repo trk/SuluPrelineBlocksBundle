@@ -399,5 +399,57 @@ final class CardTest extends TestCase
         self::assertSame('/action-1', $card->getLinkUrl());
         self::assertSame('First Action', $card->getButtonText());
     }
-}
 
+    public function testAspectRatioAndResponsiveImages(): void
+    {
+        $card = new Card();
+        self::assertSame('aspect-video', $card->getMediaAspectRatioClass());
+        self::assertSame('', $card->getMediaAspectRatioStyle());
+        self::assertSame('object-cover', $card->getObjectFitClass());
+
+        // Test standard aspect ratios
+        $card->props = ['aspect_ratio' => 'auto'];
+        self::assertSame('aspect-auto', $card->getMediaAspectRatioClass());
+
+        $card->props = ['aspect_ratio' => '16:9'];
+        self::assertSame('aspect-video', $card->getMediaAspectRatioClass());
+
+        $card->props = ['aspect_ratio' => '4:3'];
+        self::assertSame('aspect-4/3', $card->getMediaAspectRatioClass());
+
+        $card->props = ['aspect_ratio' => '1:1'];
+        self::assertSame('aspect-square', $card->getMediaAspectRatioClass());
+
+        // Test manual custom ratio
+        $card->props = [
+            'aspect_ratio' => 'manual',
+            'aspect_ratio_width' => 21,
+            'aspect_ratio_height' => 9,
+            'object_fit' => 'contain',
+        ];
+        self::assertSame('aspect-auto', $card->getMediaAspectRatioClass());
+        self::assertSame('aspect-ratio: 21 / 9;', $card->getMediaAspectRatioStyle());
+        self::assertSame('object-contain', $card->getObjectFitClass());
+
+        // Test responsive srcset and focal point
+        $card->image = [
+            'url' => '/uploads/media/original.jpg',
+            'formats' => [
+                'col-sm' => '/uploads/media/col-sm.webp',
+                'col-md' => '/uploads/media/col-md.webp',
+                'col-lg' => '/uploads/media/col-lg.webp',
+                'col-xl' => '/uploads/media/col-xl.webp',
+            ],
+            'focusPoint' => ['x' => 50, 'y' => 25],
+        ];
+
+        self::assertSame('/uploads/media/original.jpg', $card->getActiveImageUrl());
+        self::assertNotNull($card->getImageSrcSet());
+        self::assertStringContainsString('/uploads/media/col-sm.webp 400w', (string) $card->getImageSrcSet());
+        self::assertStringContainsString('/uploads/media/col-md.webp 640w', (string) $card->getImageSrcSet());
+        self::assertStringContainsString('/uploads/media/col-lg.webp 960w', (string) $card->getImageSrcSet());
+        self::assertStringContainsString('/uploads/media/col-xl.webp 1280w', (string) $card->getImageSrcSet());
+        self::assertSame('object-position: 50% 25%;', $card->getImageFocusPointStyle());
+        self::assertNotEmpty($card->getImageSizes());
+    }
+}

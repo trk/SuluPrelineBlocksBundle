@@ -73,8 +73,16 @@ final class Overlay
     public ?string $overlay_transition = null;
     public ?string $imageTransition = null;
     public ?string $image_transition = null;
+    public ?string $aspectRatio = null;
+    public ?string $aspect_ratio = null;
     public ?string $mediaAspectRatio = null;
     public ?string $media_aspect_ratio = null;
+    public ?string $objectFit = null;
+    public ?string $object_fit = null;
+    public int|string|null $aspectRatioWidth = null;
+    public int|string|null $aspect_ratio_width = null;
+    public int|string|null $aspectRatioHeight = null;
+    public int|string|null $aspect_ratio_height = null;
     public ?string $textAlign = null;
     public ?string $text_align = null;
     public ?string $titleColor = null;
@@ -125,8 +133,20 @@ final class Overlay
         if (null !== ($this->imageTransition ?? $this->image_transition)) {
             $resolved['image_transition'] = $this->imageTransition ?? $this->image_transition;
         }
+        if (null !== ($this->aspectRatio ?? $this->aspect_ratio)) {
+            $resolved['aspect_ratio'] = $this->aspectRatio ?? $this->aspect_ratio;
+        }
         if (null !== ($this->mediaAspectRatio ?? $this->media_aspect_ratio)) {
             $resolved['media_aspect_ratio'] = $this->mediaAspectRatio ?? $this->media_aspect_ratio;
+        }
+        if (null !== ($this->objectFit ?? $this->object_fit)) {
+            $resolved['object_fit'] = $this->objectFit ?? $this->object_fit;
+        }
+        if (null !== ($this->aspectRatioWidth ?? $this->aspect_ratio_width)) {
+            $resolved['aspect_ratio_width'] = $this->aspectRatioWidth ?? $this->aspect_ratio_width;
+        }
+        if (null !== ($this->aspectRatioHeight ?? $this->aspect_ratio_height)) {
+            $resolved['aspect_ratio_height'] = $this->aspectRatioHeight ?? $this->aspect_ratio_height;
         }
         if (null !== ($this->textAlign ?? $this->text_align)) {
             $resolved['text_align'] = $this->textAlign ?? $this->text_align;
@@ -273,15 +293,74 @@ final class Overlay
     public function getMediaAspectRatioClass(): string
     {
         $props = $this->getResolvedProps();
-        $aspect = $props['media_aspect_ratio'] ?? ($props['aspect_ratio'] ?? '16-9');
+        $aspect = $props['aspect_ratio'] ?? ($props['media_aspect_ratio'] ?? '16-9');
 
         return match ($aspect) {
-            '4-3', '4/3' => 'aspect-4/3',
-            '1-1', '1/1', 'square' => 'aspect-square',
-            '21-9', '21/9' => 'aspect-21/9',
+            '4-3', '4/3', '4:3' => 'aspect-4/3',
+            '1-1', '1/1', '1:1', 'square' => 'aspect-square',
+            '21-9', '21/9', '21:9' => 'aspect-21/9',
             'auto' => 'aspect-auto min-h-[300px]',
+            'manual' => 'aspect-auto',
             default => 'aspect-video',
         };
+    }
+
+    public function getMediaAspectRatioStyle(): string
+    {
+        $props = $this->getResolvedProps();
+        $aspect = $props['aspect_ratio'] ?? ($props['media_aspect_ratio'] ?? null);
+
+        if ('manual' === $aspect) {
+            $w = $props['aspect_ratio_width'] ?? ($this->aspectRatioWidth ?? $this->aspect_ratio_width ?? null);
+            $h = $props['aspect_ratio_height'] ?? ($this->aspectRatioHeight ?? $this->aspect_ratio_height ?? null);
+
+            $widthVal = \is_numeric($w) ? (float) $w : 0.0;
+            $heightVal = \is_numeric($h) ? (float) $h : 0.0;
+
+            if ($widthVal > 0.0 && $heightVal > 0.0) {
+                return \sprintf('aspect-ratio: %s / %s;', $widthVal, $heightVal);
+            }
+        }
+
+        return '';
+    }
+
+    public function getObjectFitClass(): string
+    {
+        $props = $this->getResolvedProps();
+        $fit = $props['object_fit'] ?? ($this->objectFit ?? $this->object_fit ?? 'cover');
+
+        return PropsResolver::resolveObjectFit($fit);
+    }
+
+    public function getImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
+    public function getHoverImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->hoverImage ?? $this->hover_image);
+    }
+
+    public function getImageSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->image);
+    }
+
+    public function getHoverImageSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->hoverImage ?? $this->hover_image);
+    }
+
+    public function getImageSizes(): string
+    {
+        return '(min-width: 1280px) 50vw, 100vw';
+    }
+
+    public function getWrapperStyles(): string
+    {
+        return $this->getMediaAspectRatioStyle();
     }
 
     public function getOverlayPaddingClasses(): string

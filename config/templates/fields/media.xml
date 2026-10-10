@@ -102,6 +102,156 @@
             </params>
         </property>
 
+        <property name="aspect_ratio" type="single_select" colspan="6"
+                  visibleCondition="(__parent.media_type == 'image' || media_type == 'image' || __parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != ''))))">
+            <meta>
+                <title lang="en">Aspect Ratio</title>
+                <title lang="tr">En-Boy Oranı</title>
+                <title lang="de">Seitenverhältnis</title>
+                <title lang="ru">Соотношение сторон</title>
+                <title lang="es">Relación de aspecto</title>
+                <title lang="fr">Rapport d'aspect</title>
+            </meta>
+            <params>
+                <param name="default_value" value="auto"/>
+                <param name="values" type="collection">
+                    <param name="auto">
+                        <meta>
+                            <title lang="en">Auto (Original)</title>
+                            <title lang="tr">Otomatik (Orijinal)</title>
+                            <title lang="de">Automatisch (Original)</title>
+                            <title lang="ru">Автоматически (Оригинал)</title>
+                            <title lang="es">Automático (Original)</title>
+                            <title lang="fr">Automatique (Original)</title>
+                        </meta>
+                    </param>
+                    <param name="16:9">
+                        <meta>
+                            <title lang="en">16:9 (Widescreen)</title>
+                            <title lang="tr">16:9 (Geniş Ekran)</title>
+                            <title lang="de">16:9 (Breitbild)</title>
+                            <title lang="ru">16:9 (Широкоформатный)</title>
+                            <title lang="es">16:9 (Panorámico)</title>
+                            <title lang="fr">16:9 (Panoramique)</title>
+                        </meta>
+                    </param>
+                    <param name="4:3">
+                        <meta>
+                            <title lang="en">4:3 (Standard)</title>
+                            <title lang="tr">4:3 (Standart)</title>
+                            <title lang="de">4:3 (Standard)</title>
+                            <title lang="ru">4:3 (Стандартный)</title>
+                            <title lang="es">4:3 (Estándar)</title>
+                            <title lang="fr">4:3 (Standard)</title>
+                        </meta>
+                    </param>
+                    <param name="1:1">
+                        <meta>
+                            <title lang="en">1:1 (Square)</title>
+                            <title lang="tr">1:1 (Kare)</title>
+                            <title lang="de">1:1 (Quadratisch)</title>
+                            <title lang="ru">1:1 (Квадрат)</title>
+                            <title lang="es">1:1 (Cuadrado)</title>
+                            <title lang="fr">1:1 (Carré)</title>
+                        </meta>
+                    </param>
+                    <param name="manual">
+                        <meta>
+                            <title lang="en">Manual (Custom)</title>
+                            <title lang="tr">Özel Oran (Manuel)</title>
+                            <title lang="de">Manuell (Benutzerdefiniert)</title>
+                            <title lang="ru">Вручную (Свой формат)</title>
+                            <title lang="es">Manual (Personalizado)</title>
+                            <title lang="fr">Manuel (Personnalisé)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="object_fit" type="single_select" colspan="6"
+                  visibleCondition="(__parent.media_type == 'image' || media_type == 'image' || __parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))) &amp;&amp; ((__parent.aspect_ratio != null &amp;&amp; __parent.aspect_ratio != 'auto') || (aspect_ratio != null &amp;&amp; aspect_ratio != 'auto'))">
+            <meta>
+                <title lang="en">Fit Mode</title>
+                <title lang="tr">Sığdırma Modu</title>
+                <title lang="de">Anpassungsmodus</title>
+                <title lang="ru">Режим подгонки</title>
+                <title lang="es">Modo de ajuste</title>
+                <title lang="fr">Mode d'ajustement</title>
+            </meta>
+            <params>
+                <param name="default_value" value="cover"/>
+                <param name="values" type="collection">
+                    <param name="cover">
+                        <meta>
+                            <title lang="en">Cover (Crop to fill)</title>
+                            <title lang="tr">Kırp ve Doldur (Cover)</title>
+                            <title lang="de">Ausfüllen (Cover)</title>
+                            <title lang="ru">Заполнить с обрезкой (Cover)</title>
+                            <title lang="es">Cubrir (Cover)</title>
+                            <title lang="fr">Couvrir (Cover)</title>
+                        </meta>
+                    </param>
+                    <param name="contain">
+                        <meta>
+                            <title lang="en">Contain (Fit inside)</title>
+                            <title lang="tr">İçine Sığdır (Contain)</title>
+                            <title lang="de">Einpassen (Contain)</title>
+                            <title lang="ru">Вписать целиком (Contain)</title>
+                            <title lang="es">Contener (Contain)</title>
+                            <title lang="fr">Contenir (Contain)</title>
+                        </meta>
+                    </param>
+                    <param name="fill">
+                        <meta>
+                            <title lang="en">Fill (Stretch)</title>
+                            <title lang="tr">Doldur / Uzat (Fill)</title>
+                            <title lang="de">Strecken (Fill)</title>
+                            <title lang="ru">Растянуть (Fill)</title>
+                            <title lang="es">Estirar (Fill)</title>
+                            <title lang="fr">Étirer (Fill)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="aspect_ratio_width" type="number" colspan="6"
+                  visibleCondition="(__parent.media_type == 'image' || media_type == 'image' || __parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))) &amp;&amp; (__parent.aspect_ratio == 'manual' || aspect_ratio == 'manual')">
+            <meta>
+                <title lang="en">Width Ratio (X)</title>
+                <title lang="tr">Genişlik Oranı (X)</title>
+                <title lang="de">Breitenverhältnis (X)</title>
+                <title lang="ru">Соотношение ширины (X)</title>
+                <title lang="es">Proporción de ancho (X)</title>
+                <title lang="fr">Rapport de largeur (X)</title>
+                <info_text lang="en">E.g. 16, 4, 21 or custom pixel width ratio</info_text>
+                <info_text lang="tr">Örn: 16, 4, 21 veya özel oran genişlik değeri</info_text>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+                <param name="step" value="1"/>
+            </params>
+        </property>
+
+        <property name="aspect_ratio_height" type="number" colspan="6"
+                  visibleCondition="(__parent.media_type == 'image' || media_type == 'image' || __parent.media_type == 'video' || media_type == 'video' || ((__parent.media_type == null || media_type == null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))) &amp;&amp; (__parent.aspect_ratio == 'manual' || aspect_ratio == 'manual')">
+            <meta>
+                <title lang="en">Height Ratio (Y)</title>
+                <title lang="tr">Yükseklik Oranı (Y)</title>
+                <title lang="de">Höhenverhältnis (Y)</title>
+                <title lang="ru">Соотношение высоты (Y)</title>
+                <title lang="es">Proporción de altura (Y)</title>
+                <title lang="fr">Rapport de hauteur (Y)</title>
+                <info_text lang="en">E.g. 9, 3, 10 or custom pixel height ratio</info_text>
+                <info_text lang="tr">Örn: 9, 3, 10 veya özel oran yükseklik değeri</info_text>
+            </meta>
+            <params>
+                <param name="min" value="1"/>
+                <param name="step" value="1"/>
+            </params>
+        </property>
+
         <!-- IMAGE (Asset) -->
         <property name="image" type="single_media_selection"
                   visibleCondition="(!(__parent.media_source == 'url' || media_source == 'url')) &amp;&amp; (__parent.media_type == 'image' || media_type == 'image' || ((__parent.media_type == null || media_type == null) &amp;&amp; !(__parent.video.id != null || video.id != null) &amp;&amp; !((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != ''))))">

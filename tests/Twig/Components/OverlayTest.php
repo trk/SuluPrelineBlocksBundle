@@ -203,6 +203,32 @@ final class OverlayTest extends TestCase
         $overlay->props = ['media_aspect_ratio' => 'auto'];
         self::assertStringContainsString('aspect-auto', $overlay->getMediaAspectRatioClass());
 
+        $overlay->props = ['aspect_ratio' => '16:9'];
+        self::assertSame('aspect-video', $overlay->getMediaAspectRatioClass());
+
+        $overlay->props = [
+            'aspect_ratio' => 'manual',
+            'aspect_ratio_width' => 16,
+            'aspect_ratio_height' => 10,
+            'object_fit' => 'contain',
+        ];
+        self::assertSame('aspect-auto', $overlay->getMediaAspectRatioClass());
+        self::assertSame('aspect-ratio: 16 / 10;', $overlay->getMediaAspectRatioStyle());
+        self::assertSame('aspect-ratio: 16 / 10;', $overlay->getWrapperStyles());
+        self::assertSame('object-contain', $overlay->getObjectFitClass());
+
+        $overlay->image = [
+            'url' => '/uploads/media/overlay.jpg',
+            'formats' => [
+                'col-sm' => '/uploads/media/col-sm.webp',
+                'col-md' => '/uploads/media/col-md.webp',
+            ],
+            'focalPoint' => ['x' => 40, 'y' => 60],
+        ];
+        self::assertNotNull($overlay->getImageSrcSet());
+        self::assertStringContainsString('/uploads/media/col-sm.webp 400w', (string) $overlay->getImageSrcSet());
+        self::assertSame('object-position: 40% 60%;', $overlay->getImageFocusPointStyle());
+
         $overlay->props = ['image_transition' => 'scale-up'];
         self::assertStringContainsString('group-hover:scale-105', $overlay->getImageTransitionClasses());
 
@@ -408,4 +434,3 @@ final class OverlayTest extends TestCase
         self::assertSame('Overlay Action 1', $overlay->getButtonText());
     }
 }
-
