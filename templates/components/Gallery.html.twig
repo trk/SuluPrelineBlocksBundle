@@ -39,6 +39,8 @@
         {% for item in items %}
             {% set item_tags = this.getItemTagSlugs(item) %}
             {% set image_url = this.resolveItemImageUrl(item) %}
+            {% set image_srcset = this.resolveItemImageSrcSet(item) %}
+            {% set image_focus_style = this.resolveItemImageFocusPointStyle(item) %}
             {% set modal_id = gallery_dom_id ~ '-modal-' ~ loop.index %}
             {% set item_props = this.resolveItemProps(item) %}
 
@@ -90,7 +92,14 @@
                                 </button>
                             </div>
                             <div class="p-4 overflow-y-auto text-center bg-black/5 dark:bg-black/40">
-                                <img class="max-h-[75vh] mx-auto object-contain rounded-lg" src="{{ image_url }}" alt="{{ item.title|default('') }}">
+                                <img
+                                    class="max-h-[75vh] mx-auto object-contain rounded-lg"
+                                    src="{{ image_url }}"
+                                    {% if image_srcset %}srcset="{{ image_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
+                                    alt="{{ item.title|default('') }}"
+                                    {% if image_focus_style %}style="{{ image_focus_style }}"{% endif %}
+                                    loading="lazy"
+                                >
                                 {% if item.content|default(null) %}
                                     <div class="mt-4 text-left text-sm text-gray-700 dark:text-neutral-300">
                                         {{ item.content|raw }}

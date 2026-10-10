@@ -74,7 +74,14 @@
                         >
                             {% if img_url %}
                                 <div class="mb-5 overflow-hidden rounded-lg">
-                                    <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-72 object-cover" loading="lazy" />
+                                    <img
+                                        src="{{ img_url }}"
+                                        {% if item.image_srcset|default(null) %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 60vw, 100vw"{% endif %}
+                                        alt="{{ item.title|default('') }}"
+                                        class="w-full max-h-72 object-cover"
+                                        {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %}
+                                        loading="lazy"
+                                    />
                                 </div>
                             {% endif %}
 
@@ -166,7 +173,14 @@
                     >
                         {% if img_url %}
                             <div class="mb-5 overflow-hidden rounded-lg">
-                                <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-80 object-cover" loading="lazy" />
+                                <img
+                                    src="{{ img_url }}"
+                                    {% if item.image_srcset|default(null) %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
+                                    alt="{{ item.title|default('') }}"
+                                    class="w-full max-h-80 object-cover"
+                                    {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %}
+                                    loading="lazy"
+                                />
                             </div>
                         {% endif %}
 

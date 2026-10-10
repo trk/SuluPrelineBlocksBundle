@@ -1,6 +1,7 @@
 {% set author_name = this.getAuthor() %}
 {% set author_title = this.getAuthorTitle() %}
 {% set avatar_url = this.getAvatarUrl() %}
+{% set avatar_focus_style = this.getAvatarFocusPointStyle() %}
 {% set author_url = this.getAuthorUrl() %}
 {% set style = this.getQuoteStyle() %}
 {% set container_classes = this.getContainerClasses() %}
@@ -30,7 +31,9 @@
                 {% if avatar_url %}
                     <img class="inline-block size-10 sm:size-12 rounded-full object-cover shadow-2xs"
                          src="{{ avatar_url }}"
-                         alt="{{ author_name|default('Author Avatar') }}" />
+                         {% if avatar_focus_style %}style="{{ avatar_focus_style }}"{% endif %}
+                         alt="{{ author_name|default('Author Avatar') }}"
+                         loading="lazy" />
                 {% endif %}
 
                 <div class="flex flex-col">

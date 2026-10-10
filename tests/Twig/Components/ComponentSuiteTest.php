@@ -53,6 +53,12 @@ final class ComponentSuiteTest extends TestCase
         $classes = $headline->getWrapperClasses();
         self::assertStringContainsString('text-2xl', $classes);
         self::assertStringContainsString('text-gray-900', $classes);
+
+        $headline->image = [
+            'url' => 'https://cdn.example.com/icon.png',
+            'focalPoint' => ['x' => 25, 'y' => 75],
+        ];
+        self::assertSame('object-position: 25% 75%;', $headline->getImageFocusPointStyle());
     }
 
     public function testHeadlineDecorationsAndStroke(): void
@@ -120,6 +126,33 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('aspect-video', $image->getAspectRatio());
         self::assertSame('rounded-xl', $image->getRounded());
         self::assertSame('Studio Banner', $image->getCaption());
+        self::assertNull($image->getImageSrcSet());
+        self::assertNull($image->getImageFocusPointStyle());
+
+        // Test with responsive formats, focal point, and hover image
+        $image->image = [
+            'url' => 'https://cdn.example.com/banner.jpg',
+            'formats' => [
+                'col-sm' => 'https://cdn.example.com/banner-400.webp',
+                'col-lg' => 'https://cdn.example.com/banner-960.webp',
+            ],
+            'focalPoint' => ['x' => 30, 'y' => 70],
+        ];
+        $image->hover_image = [
+            'url' => 'https://cdn.example.com/banner-hover.jpg',
+            'formats' => [
+                'col-sm' => 'https://cdn.example.com/banner-hover-400.webp',
+            ],
+            'focalPoint' => ['x' => 50, 'y' => 50],
+        ];
+
+        self::assertNotNull($image->getImageSrcSet());
+        self::assertStringContainsString('banner-400.webp 400w', $image->getImageSrcSet());
+        self::assertSame('object-position: 30% 70%;', $image->getImageFocusPointStyle());
+        self::assertSame('https://cdn.example.com/banner-hover.jpg', $image->getHoverImageUrl());
+        self::assertNotNull($image->getHoverImageSrcSet());
+        self::assertStringContainsString('banner-hover-400.webp 400w', $image->getHoverImageSrcSet());
+        self::assertSame('object-position: 50% 50%;', $image->getHoverImageFocusPointStyle());
 
         $classes = $image->getWrapperClasses();
         self::assertStringContainsString('w-full', $classes);
@@ -130,7 +163,14 @@ final class ComponentSuiteTest extends TestCase
     {
         $video = new Video();
         $video->video = 'https://cdn.example.com/intro.mp4';
-        $video->image = 'https://cdn.example.com/poster.jpg';
+        $video->image = [
+            'url' => 'https://cdn.example.com/poster.jpg',
+            'formats' => [
+                'col-md' => 'https://cdn.example.com/poster-640.webp',
+                'col-xl' => 'https://cdn.example.com/poster-1280.webp',
+            ],
+            'focalPoint' => ['x' => 40, 'y' => 60],
+        ];
         $video->props = [
             'aspect_ratio' => '16/9',
             'autoplay' => true,
@@ -143,6 +183,9 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('intro-video', $video->getElementId());
         self::assertSame('https://cdn.example.com/intro.mp4', $video->getVideoUrl());
         self::assertSame('https://cdn.example.com/poster.jpg', $video->getPosterUrl());
+        self::assertNotNull($video->getPosterSrcSet());
+        self::assertStringContainsString('poster-640.webp 640w', $video->getPosterSrcSet());
+        self::assertSame('object-position: 40% 60%;', $video->getPosterFocusPointStyle());
         self::assertSame('aspect-video', $video->getAspectRatio());
         self::assertTrue($video->isAutoplay());
         self::assertNull($video->getAutoplayMode());

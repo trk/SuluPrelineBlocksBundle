@@ -60,7 +60,14 @@ final class SwitcherTest extends TestCase
             ],
             [
                 'title' => 'Tab 2',
-                'image' => ['url' => '/uploads/tab2.jpg'],
+                'image' => [
+                    'url' => '/uploads/tab2.jpg',
+                    'formats' => [
+                        'col-sm' => '/uploads/tab2-400.webp',
+                        'col-lg' => '/uploads/tab2-960.webp',
+                    ],
+                    'focalPoint' => ['x' => 45, 'y' => 60],
+                ],
                 'link' => ['url' => 'https://example.com/tab2'],
             ],
             'invalid',
@@ -71,6 +78,9 @@ final class SwitcherTest extends TestCase
         self::assertSame('/uploads/tab1.jpg', $items[0]['image_url']);
         self::assertSame('https://example.com/tab1', $items[0]['link_href']);
         self::assertSame('/uploads/tab2.jpg', $items[1]['image_url']);
+        self::assertIsString($items[1]['image_srcset']);
+        self::assertStringContainsString('/uploads/tab2-400.webp 400w', $items[1]['image_srcset']);
+        self::assertSame('object-position: 45% 60%;', $items[1]['image_focus_style']);
         self::assertSame('https://example.com/tab2', $items[1]['link_href']);
     }
 }

@@ -101,6 +101,8 @@ final class Slideshow
 
                 if (isset($itemArr['image'])) {
                     $itemArr['image_url'] = PropsResolver::resolveImageUrl($itemArr['image']);
+                    $itemArr['image_srcset'] = PropsResolver::resolveSrcSet($itemArr['image']);
+                    $itemArr['image_focus_style'] = PropsResolver::resolveFocusPointStyle($itemArr['image']);
                 }
 
                 if (isset($itemArr['link'])) {

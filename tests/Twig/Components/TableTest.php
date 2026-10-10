@@ -69,7 +69,10 @@ final class TableTest extends TestCase
                 'meta' => 'Sub alpha',
                 'content' => 'Description of alpha',
                 'badge' => 'Active',
-                'image' => ['url' => '/media/alpha.png'],
+                'image' => [
+                    'url' => '/media/alpha.png',
+                    'focalPoint' => ['x' => 30, 'y' => 80],
+                ],
                 'link' => '/detail/alpha',
                 'link_title' => 'Details',
             ],
@@ -88,6 +91,7 @@ final class TableTest extends TestCase
         self::assertCount(2, $items);
         self::assertSame('Alpha', $items[0]['title']);
         self::assertSame('/media/alpha.png', $items[0]['image_url']);
+        self::assertSame('object-position: 30% 80%;', $items[0]['image_focus_style']);
         self::assertSame('/detail/alpha', $items[0]['link']);
         self::assertSame('Details', $items[0]['link_title']);
 

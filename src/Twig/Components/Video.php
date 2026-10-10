@@ -87,6 +87,16 @@ final class Video
         return PropsResolver::resolveImageUrl($this->image);
     }
 
+    public function getPosterSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->image);
+    }
+
+    public function getPosterFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
     public function getUrl(): ?string
     {
         if (null === $this->link || '' === $this->link) {

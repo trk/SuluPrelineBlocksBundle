@@ -81,7 +81,10 @@ final class ListBlockTest extends TestCase
             ],
             [
                 'title' => 'Feature 2',
-                'image' => ['url' => '/uploads/avatar2.jpg'],
+                'image' => [
+                    'url' => '/uploads/avatar2.jpg',
+                    'focalPoint' => ['x' => 60, 'y' => 40],
+                ],
                 'link' => ['url' => 'https://example.com/two'],
             ],
             'invalid_item',
@@ -92,6 +95,7 @@ final class ListBlockTest extends TestCase
         self::assertSame('/uploads/avatar1.jpg', $normalized[0]['image_url']);
         self::assertSame('https://example.com/one', $normalized[0]['link_href']);
         self::assertSame('/uploads/avatar2.jpg', $normalized[1]['image_url']);
+        self::assertSame('object-position: 60% 40%;', $normalized[1]['image_focus_style']);
         self::assertSame('https://example.com/two', $normalized[1]['link_href']);
     }
 }

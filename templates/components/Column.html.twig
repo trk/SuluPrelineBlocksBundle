@@ -2,7 +2,14 @@
 <div {{ attributes.defaults({ class: this.columnClasses }) }}>
     {% if this.imageUrl %}
         <div class="mb-4 rounded-xl overflow-hidden aspect-video bg-gray-100 dark:bg-neutral-800">
-            <img src="{{ this.imageUrl }}" alt="{{ this.title|default('') }}" class="w-full h-full object-cover">
+            <img
+                src="{{ this.imageUrl }}"
+                {% if this.getImageSrcSet() %}srcset="{{ this.getImageSrcSet() }}" sizes="{{ this.getImageSizes() }}"{% endif %}
+                alt="{{ this.title|default('') }}"
+                class="w-full h-full object-cover"
+                {% if this.getImageFocusPointStyle() %}style="{{ this.getImageFocusPointStyle() }}"{% endif %}
+                loading="lazy"
+            >
         </div>
     {% endif %}
 

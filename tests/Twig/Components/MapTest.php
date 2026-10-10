@@ -83,7 +83,14 @@ final class MapTest extends TestCase
                 'title' => 'Headquarters',
                 'meta' => 'Open 9:00 - 18:00',
                 'content' => '<p>Contact us anytime.</p>',
-                'image' => ['url' => '/media/hq.jpg'],
+                'image' => [
+                    'url' => '/media/hq.jpg',
+                    'formats' => [
+                        'col-sm' => '/media/hq-400.webp',
+                        'col-lg' => '/media/hq-960.webp',
+                    ],
+                    'focalPoint' => ['x' => 55, 'y' => 45],
+                ],
                 'link' => '/contact',
                 'link_title' => 'Details',
             ],
@@ -95,6 +102,9 @@ final class MapTest extends TestCase
         self::assertSame('Levent, Istanbul', $items[0]['location']);
         self::assertSame('Headquarters', $items[0]['title']);
         self::assertSame('/media/hq.jpg', $items[0]['image_url']);
+        self::assertNotNull($items[0]['image_srcset']);
+        self::assertStringContainsString('hq-400.webp 400w', $items[0]['image_srcset']);
+        self::assertSame('object-position: 55% 45%;', $items[0]['image_focus_style']);
         self::assertSame('/contact', $items[0]['link']);
         self::assertSame('Details', $items[0]['link_title']);
         self::assertSame('https://google.com/maps/dir/?api=1&destination=Levent%2C%20Istanbul', \str_replace('https://www.google.com', 'https://google.com', $items[0]['directions_url']));

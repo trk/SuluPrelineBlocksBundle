@@ -191,6 +191,11 @@ final class Headline
         return PropsResolver::resolveImageUrl($this->image);
     }
 
+    public function getImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
     public function getIconClass(): ?string
     {
         return PropsResolver::resolveIcon($this->icon);

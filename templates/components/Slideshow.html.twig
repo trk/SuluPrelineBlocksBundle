@@ -43,8 +43,10 @@
                         {% if img_url %}
                             <img
                                 src="{{ img_url }}"
+                                {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1280px) 1600px, 100vw"{% endif %}
                                 alt="{{ item.title|default('') }}"
                                 class="absolute inset-0 w-full h-full object-cover"
+                                {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
                                 loading="lazy"
                             />
                         {% endif %}

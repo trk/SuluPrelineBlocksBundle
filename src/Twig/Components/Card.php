@@ -270,22 +270,30 @@ final class Card
 
     public function getImageFocusPointStyle(): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($this->image);
+        $props = $this->getResolvedProps();
+
+        return PropsResolver::resolveFocusPointStyle($this->image ?? $props['image'] ?? null);
     }
 
     public function getHoverImageFocusPointStyle(): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($this->hoverImage ?? $this->hover_image);
+        $props = $this->getResolvedProps();
+
+        return PropsResolver::resolveFocusPointStyle($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
     }
 
     public function getImageSrcSet(): ?string
     {
-        return PropsResolver::resolveSrcSet($this->image);
+        $props = $this->getResolvedProps();
+
+        return PropsResolver::resolveSrcSet($this->image ?? $props['image'] ?? null);
     }
 
     public function getHoverImageSrcSet(): ?string
     {
-        return PropsResolver::resolveSrcSet($this->hoverImage ?? $this->hover_image);
+        $props = $this->getResolvedProps();
+
+        return PropsResolver::resolveSrcSet($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
     }
 
     public function getImageSizes(): string
@@ -567,30 +575,32 @@ final class Card
 
     public function getImageUrl(): ?string
     {
-        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        $props = $this->getResolvedProps();
+        $source = $this->mediaSource ?? $this->media_source ?? ($props['media_source'] ?? 'media');
         if ('url' === $source) {
-            $url = $this->imageUrl ?? $this->image_url;
+            $url = $this->imageUrl ?? $this->image_url ?? (isset($props['image_url']) && \is_string($props['image_url']) ? $props['image_url'] : null);
             if (null !== $url && '' !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->image)
-            ?? ($this->imageUrl ?? $this->image_url);
+        return PropsResolver::resolveImageUrl($this->image ?? $props['image'] ?? null)
+            ?? ($this->imageUrl ?? $this->image_url ?? (isset($props['image_url']) && \is_string($props['image_url']) ? $props['image_url'] : null));
     }
 
     public function getHoverImageUrl(): ?string
     {
-        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        $props = $this->getResolvedProps();
+        $source = $this->mediaSource ?? $this->media_source ?? ($props['media_source'] ?? 'media');
         if ('url' === $source) {
-            $url = $this->hoverImageUrl ?? $this->hover_image_url;
+            $url = $this->hoverImageUrl ?? $this->hover_image_url ?? (isset($props['hover_image_url']) && \is_string($props['hover_image_url']) ? $props['hover_image_url'] : null);
             if (null !== $url && '' !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image)
-            ?? ($this->hoverImageUrl ?? $this->hover_image_url);
+        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null)
+            ?? ($this->hoverImageUrl ?? $this->hover_image_url ?? (isset($props['hover_image_url']) && \is_string($props['hover_image_url']) ? $props['hover_image_url'] : null));
     }
 
     public function getVideoUrl(): ?string

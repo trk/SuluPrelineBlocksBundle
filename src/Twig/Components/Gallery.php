@@ -473,6 +473,26 @@ final class Gallery
         return PropsResolver::resolveImageUrl($image);
     }
 
+    /**
+     * @param array<string, mixed> $item
+     */
+    public function resolveItemImageSrcSet(array $item): ?string
+    {
+        $image = $item['image'] ?? null;
+
+        return PropsResolver::resolveSrcSet($image);
+    }
+
+    /**
+     * @param array<string, mixed> $item
+     */
+    public function resolveItemImageFocusPointStyle(array $item): ?string
+    {
+        $image = $item['image'] ?? null;
+
+        return PropsResolver::resolveFocusPointStyle($image);
+    }
+
     public function getMarginClass(): string
     {
         return ElementTransform::margin($this->getResolvedProps());

@@ -1,4 +1,12 @@
 {% set img_url = this.getImageUrl() %}
+{% set img_srcset = this.getImageSrcSet() %}
+{% set img_sizes = this.getImageSizes() %}
+{% set img_focus_style = this.getImageFocusPointStyle() %}
+{% set hover_img_url = this.getHoverImageUrl() %}
+{% set hover_img_srcset = this.getHoverImageSrcSet() %}
+{% set hover_focus_style = this.getHoverImageFocusPointStyle() %}
+{% set aspect_style = this.getMediaAspectRatioStyle() %}
+{% set object_fit = this.getObjectFitClass() %}
 {% set url = this.getUrl() %}
 {% set ratio = this.getAspectRatio() %}
 {% set rounded = this.getRounded() %}
@@ -8,12 +16,46 @@
     <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
             {{ attributes.defaults({class: this.getWrapperClasses()}) }}>
         {% if url %}
-            <a href="{{ url }}" class="block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden">
-                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto max-h-[75vh] object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+            <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
+                <img
+                    src="{{ img_url }}"
+                    {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                    alt="{{ alt|default('') }}"
+                    class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
+                    {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
+                    loading="lazy"
+                />
+                {% if hover_img_url %}
+                    <img
+                        src="{{ hover_img_url }}"
+                        {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                        alt="{{ alt|default('') }}"
+                        class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
+                        loading="lazy"
+                    />
+                {% endif %}
             </a>
         {% else %}
-            <div class="overflow-hidden {{ rounded }}">
-                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto max-h-[75vh] object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+            <div class="{% if hover_img_url %}group relative{% endif %} overflow-hidden {{ rounded }}" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
+                <img
+                    src="{{ img_url }}"
+                    {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                    alt="{{ alt|default('') }}"
+                    class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
+                    {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
+                    loading="lazy"
+                />
+                {% if hover_img_url %}
+                    <img
+                        src="{{ hover_img_url }}"
+                        {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                        alt="{{ alt|default('') }}"
+                        class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
+                        loading="lazy"
+                    />
+                {% endif %}
             </div>
         {% endif %}
 

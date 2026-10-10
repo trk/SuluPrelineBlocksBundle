@@ -2,7 +2,14 @@
 <section {{ attributes.defaults({ class: this.sectionClasses }) }}>
     {% if this.bgImageUrl %}
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <img src="{{ this.bgImageUrl }}" alt="" class="w-full h-full object-cover">
+            <img
+                src="{{ this.bgImageUrl }}"
+                {% if this.getBgImageSrcSet() %}srcset="{{ this.getBgImageSrcSet() }}" sizes="100vw"{% endif %}
+                alt=""
+                class="w-full h-full object-cover"
+                {% if this.getBgImageFocusPointStyle() %}style="{{ this.getBgImageFocusPointStyle() }}"{% endif %}
+                loading="lazy"
+            >
             <div class="absolute inset-0 bg-neutral-950/40"></div>
         </div>
     {% endif %}

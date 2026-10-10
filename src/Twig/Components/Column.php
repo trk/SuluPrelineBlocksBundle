@@ -163,6 +163,21 @@ final class Column
         return PropsResolver::resolveImageUrl($this->image);
     }
 
+    public function getImageSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->image);
+    }
+
+    public function getImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
+    public function getImageSizes(): string
+    {
+        return '(min-width: 1024px) 50vw, 100vw';
+    }
+
     public function getLinkUrl(): ?string
     {
         $url = PropsResolver::resolveUrl($this->link);

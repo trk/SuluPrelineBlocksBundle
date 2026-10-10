@@ -31,6 +31,21 @@ final class Popover
         return PropsResolver::resolveImageUrl($this->image);
     }
 
+    public function getImageSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->image);
+    }
+
+    public function getImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
+    public function getImageSizes(): string
+    {
+        return '(min-width: 1280px) 1200px, 100vw';
+    }
+
     public function getHotspotClasses(): string
     {
         return 'group size-7 rounded-full bg-primary-600 text-white flex items-center justify-center shadow-lg hover:scale-115 hover:bg-primary-700 transition-all focus:outline-hidden focus:ring-4 focus:ring-primary-500/30';

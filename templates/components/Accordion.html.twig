@@ -67,7 +67,14 @@
                             <div class="sm:flex sm:gap-x-6 items-start my-2">
                                 {% if image_align == 'left' %}
                                     <div class="sm:w-1/3 shrink-0 mb-3 sm:mb-0">
-                                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full rounded-lg object-cover" loading="lazy" />
+                                        <img
+                                            src="{{ img_url }}"
+                                            {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 33vw, 100vw"{% endif %}
+                                            alt="{{ item.title|default('') }}"
+                                            class="w-full rounded-lg object-cover"
+                                            {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
+                                            loading="lazy"
+                                        />
                                     </div>
                                 {% endif %}
                                 <div class="sm:flex-1">
@@ -79,14 +86,28 @@
                                 </div>
                                 {% if image_align == 'right' %}
                                     <div class="sm:w-1/3 shrink-0 mt-3 sm:mt-0">
-                                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full rounded-lg object-cover" loading="lazy" />
+                                        <img
+                                            src="{{ img_url }}"
+                                            {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 33vw, 100vw"{% endif %}
+                                            alt="{{ item.title|default('') }}"
+                                            class="w-full rounded-lg object-cover"
+                                            {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
+                                            loading="lazy"
+                                        />
                                     </div>
                                 {% endif %}
                             </div>
                         {% else %}
                             {% if img_url and image_align == 'top' %}
                                 <div class="mb-3">
-                                    <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-80 rounded-lg object-cover" loading="lazy" />
+                                    <img
+                                        src="{{ img_url }}"
+                                        {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 800px, 100vw"{% endif %}
+                                        alt="{{ item.title|default('') }}"
+                                        class="w-full max-h-80 rounded-lg object-cover"
+                                        {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
+                                        loading="lazy"
+                                    />
                                 </div>
                             {% endif %}
 
@@ -98,7 +119,14 @@
 
                             {% if img_url and image_align == 'bottom' %}
                                 <div class="mt-3">
-                                    <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="w-full max-h-80 rounded-lg object-cover" loading="lazy" />
+                                    <img
+                                        src="{{ img_url }}"
+                                        {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 800px, 100vw"{% endif %}
+                                        alt="{{ item.title|default('') }}"
+                                        class="w-full max-h-80 rounded-lg object-cover"
+                                        {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
+                                        loading="lazy"
+                                    />
                                 </div>
                             {% endif %}
                         {% endif %}

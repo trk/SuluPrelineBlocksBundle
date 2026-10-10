@@ -31,12 +31,16 @@ final class QuotationTest extends TestCase
         $quote = new Quotation();
         $quote->author = 'Steve Jobs';
         $quote->authorTitle = 'CEO, Apple';
-        $quote->image = ['url' => '/uploads/avatar.jpg'];
+        $quote->image = [
+            'url' => '/uploads/avatar.jpg',
+            'focalPoint' => ['x' => 50, 'y' => 20],
+        ];
         $quote->link = 'https://apple.com';
 
         self::assertSame('Steve Jobs', $quote->getAuthor());
         self::assertSame('CEO, Apple', $quote->getAuthorTitle());
         self::assertSame('/uploads/avatar.jpg', $quote->getAvatarUrl());
+        self::assertSame('object-position: 50% 20%;', $quote->getAvatarFocusPointStyle());
         self::assertSame('https://apple.com', $quote->getAuthorUrl());
         self::assertTrue($quote->hasAuthor());
     }

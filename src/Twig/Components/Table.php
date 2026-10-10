@@ -152,6 +152,7 @@ final class Table
      *     content: string,
      *     badge: string,
      *     image_url: ?string,
+     *     image_focus_style: ?string,
      *     link: ?string,
      *     link_title: string
      * }>
@@ -171,6 +172,7 @@ final class Table
             $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
 
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
+            $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
             if ('#' === $link) {
                 $link = null;
@@ -186,6 +188,7 @@ final class Table
                 'content' => $content,
                 'badge' => $badge,
                 'image_url' => $imageUrl,
+                'image_focus_style' => $imageFocusStyle,
                 'link' => $link,
                 'link_title' => $linkTitle,
             ];

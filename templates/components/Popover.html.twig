@@ -7,7 +7,14 @@
 
     {% if img_url %}
         <div class="relative w-full rounded-2xl overflow-hidden shadow-md border border-gray-100 dark:border-neutral-800">
-            <img class="w-full h-auto object-cover" src="{{ img_url }}" alt="{{ this.title|default('Image with hotspots') }}">
+            <img
+                class="w-full h-auto object-cover"
+                src="{{ img_url }}"
+                {% if this.imageSrcSet %}srcset="{{ this.imageSrcSet }}" sizes="{{ this.imageSizes }}"{% endif %}
+                alt="{{ this.title|default('Image with hotspots') }}"
+                {% if this.imageFocusPointStyle %}style="{{ this.imageFocusPointStyle }}"{% endif %}
+                loading="lazy"
+            >
 
             {% for item in items %}
                 <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">

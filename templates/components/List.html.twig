@@ -41,7 +41,7 @@
                     {% endif %}
 
                     {% if img_url %}
-                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="size-5 rounded-full object-cover shrink-0 mt-0.5" loading="lazy" />
+                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="size-5 rounded-full object-cover shrink-0 mt-0.5" {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %} loading="lazy" />
                     {% endif %}
 
                     <div class="grow">

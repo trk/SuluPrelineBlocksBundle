@@ -97,6 +97,11 @@ final class Quotation
         return PropsResolver::resolveImageUrl($this->image);
     }
 
+    public function getAvatarFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->image);
+    }
+
     public function getAuthorUrl(): ?string
     {
         if (null === $this->link) {

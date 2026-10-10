@@ -207,6 +207,23 @@ final class GalleryTest extends TestCase
         ]));
 
         self::assertNull($gallery->resolveItemImageUrl([]));
+
+        $itemWithFocalAndFormats = [
+            'image' => [
+                'url' => '/uploads/media/photo.jpg',
+                'formats' => [
+                    'col-sm' => '/uploads/media/photo-400.webp',
+                    'col-lg' => '/uploads/media/photo-960.webp',
+                ],
+                'focalPoint' => ['x' => 40, 'y' => 60],
+            ],
+        ];
+
+        self::assertNotNull($gallery->resolveItemImageSrcSet($itemWithFocalAndFormats));
+        self::assertStringContainsString('photo-400.webp 400w', $gallery->resolveItemImageSrcSet($itemWithFocalAndFormats));
+        self::assertSame('object-position: 40% 60%;', $gallery->resolveItemImageFocusPointStyle($itemWithFocalAndFormats));
+        self::assertNull($gallery->resolveItemImageSrcSet([]));
+        self::assertNull($gallery->resolveItemImageFocusPointStyle([]));
     }
 
     public function testCustomIdAndClass(): void

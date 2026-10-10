@@ -1,5 +1,7 @@
 {% set vid_url = this.getVideoUrl() %}
 {% set poster_url = this.getPosterUrl() %}
+{% set poster_srcset = this.getPosterSrcSet() %}
+{% set poster_focus_style = this.getPosterFocusPointStyle() %}
 {% set autoplay = this.isAutoplay() %}
 {% set autoplay_mode = this.getAutoplayMode() %}
 {% set controls = this.isControls() %}
@@ -26,7 +28,14 @@
         ></video>
     {% elseif poster_url %}
         <div class="relative w-full h-full">
-            <img src="{{ poster_url }}" alt="" class="w-full h-full object-cover" loading="lazy" />
+            <img
+                src="{{ poster_url }}"
+                {% if poster_srcset %}srcset="{{ poster_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
+                alt=""
+                class="w-full h-full object-cover"
+                {% if poster_focus_style %}style="{{ poster_focus_style }}"{% endif %}
+                loading="lazy"
+            />
             {% if url %}
                 <a href="{{ url }}" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group">
                     <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/90 text-primary-600 group-hover:scale-110 group-hover:bg-white transition-all shadow-xl">

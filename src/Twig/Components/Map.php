@@ -110,6 +110,8 @@ final class Map
      *     meta: string,
      *     content: string,
      *     image_url: ?string,
+     *     image_srcset: ?string,
+     *     image_focus_style: ?string,
      *     link: ?string,
      *     link_title: string,
      *     directions_url: string
@@ -134,6 +136,8 @@ final class Map
             $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
 
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
+            $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
+            $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
             if ('#' === $link) {
                 $link = null;
@@ -151,6 +155,8 @@ final class Map
                 'meta' => $meta,
                 'content' => $content,
                 'image_url' => $imageUrl,
+                'image_srcset' => $imageSrcSet,
+                'image_focus_style' => $imageFocusStyle,
                 'link' => $link,
                 'link_title' => $linkTitle,
                 'directions_url' => $directionsUrl,

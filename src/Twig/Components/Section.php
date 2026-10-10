@@ -113,6 +113,16 @@ final class Section
         return PropsResolver::resolveImageUrl($this->bg_image);
     }
 
+    public function getBgImageSrcSet(): ?string
+    {
+        return PropsResolver::resolveSrcSet($this->bg_image);
+    }
+
+    public function getBgImageFocusPointStyle(): ?string
+    {
+        return PropsResolver::resolveFocusPointStyle($this->bg_image);
+    }
+
     public function hasHeader(): bool
     {
         return (null !== $this->title && '' !== \trim($this->title))

@@ -34,7 +34,7 @@
                             <td class="{{ this.tdClasses }} font-medium">
                                 <div class="flex items-center gap-x-3">
                                     {% if item.image_url %}
-                                        <img class="size-8 rounded-full object-cover shrink-0" src="{{ item.image_url }}" alt="{{ item.title }}">
+                                        <img class="size-8 rounded-full object-cover shrink-0" src="{{ item.image_url }}" alt="{{ item.title }}" {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %} loading="lazy">
                                     {% endif %}
                                     <span class="text-gray-900 dark:text-white font-semibold">{{ item.title }}</span>
                                 </div>
