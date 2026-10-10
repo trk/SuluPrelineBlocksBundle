@@ -191,7 +191,7 @@ final class Accordion
 
     public function getToggleClasses(): string
     {
-        return 'hs-accordion-toggle hs-accordion-active:text-blue-600 dark:hs-accordion-active:text-blue-500 inline-flex items-center justify-between gap-x-3 w-full text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-200 dark:hover:text-neutral-400 focus:outline-hidden';
+        return 'hs-accordion-toggle hs-accordion-active:text-primary-600 dark:hs-accordion-active:text-primary-500 inline-flex items-center justify-between gap-x-3 w-full text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-200 dark:hover:text-neutral-400 focus:outline-hidden';
     }
 
     public function getContentWrapperClasses(): string

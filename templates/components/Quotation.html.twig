@@ -14,7 +14,7 @@
     <blockquote class="w-full relative {{ container_classes }}">
         {% if style == 'large' %}
             {# Decorative Large Quote Mark #}
-            <div class="mb-3 text-blue-600/30 dark:text-blue-500/20" aria-hidden="true">
+            <div class="mb-3 text-primary-600/30 dark:text-primary-500/20" aria-hidden="true">
                 <svg class="w-10 h-10 sm:w-12 sm:h-12" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                 </svg>
@@ -37,7 +37,7 @@
                     {% if author_name %}
                         <cite class="not-italic text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
                             {% if author_url %}
-                                <a href="{{ author_url }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                <a href="{{ author_url }}" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                                     {{ author_name }}
                                 </a>
                             {% else %}

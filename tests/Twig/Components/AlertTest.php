@@ -22,7 +22,7 @@ final class AlertTest extends TestCase
         self::assertSame('ti ti-info-circle', $alert->getResolvedIcon());
         self::assertSame('text-base font-semibold', $alert->getTitleSizeClasses());
         self::assertSame('rounded-xl', $alert->getRoundedClasses());
-        self::assertStringContainsString('bg-blue-50', $alert->getAlertClasses());
+        self::assertStringContainsString('bg-primary-50', $alert->getAlertClasses());
     }
 
     public function testStylesAndVariants(): void

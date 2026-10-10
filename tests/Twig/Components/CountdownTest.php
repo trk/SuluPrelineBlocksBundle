@@ -57,7 +57,7 @@ final class CountdownTest extends TestCase
         self::assertSame('reload', $countdown->getOnExpire());
         self::assertSame('Done!', $countdown->getExpireMessage());
         self::assertStringContainsString('justify-start', $countdown->getAlignClasses());
-        self::assertStringContainsString('text-blue-600', $countdown->getNumberClasses());
+        self::assertStringContainsString('text-primary-600', $countdown->getNumberClasses());
         self::assertStringContainsString('text-5xl', $countdown->getNumberClasses());
     }
 

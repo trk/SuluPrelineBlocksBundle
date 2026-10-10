@@ -217,7 +217,7 @@ final class Overlay
             'gradient-full', 'gradient_full' => 'bg-gray-950/60 backdrop-brightness-75',
             'dark-glass', 'dark_glass' => 'backdrop-blur-md bg-gray-950/60 border border-white/10 shadow-lg',
             'light-glass', 'light_glass' => 'backdrop-blur-md bg-white/80 border border-white/40 shadow-lg text-gray-900',
-            'primary' => 'bg-blue-600/80 backdrop-blur-xs',
+            'primary' => 'bg-primary-600/80 backdrop-blur-xs',
             'none', 'transparent' => 'bg-transparent',
             default => 'bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent',
         };
@@ -295,7 +295,7 @@ final class Overlay
         $style = $props['badge_style'] ?? 'glass';
 
         return match ($style) {
-            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-blue-600 text-white shadow-xs',
+            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary-600 text-white shadow-xs',
             'success' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-emerald-600 text-white shadow-xs',
             'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-gray-900 text-white shadow-xs dark:bg-white dark:text-gray-900',
             default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-white/90 text-gray-800 backdrop-blur-md shadow-xs dark:bg-neutral-900/90 dark:text-neutral-200',
@@ -355,7 +355,7 @@ final class Overlay
 
         if ('light-glass' === ($props['overlay_style'] ?? '')) {
             return match ($color) {
-                'primary' => 'text-blue-600',
+                'primary' => 'text-primary-600',
                 'white' => 'text-gray-900',
                 default => 'text-gray-900',
             };
@@ -363,7 +363,7 @@ final class Overlay
 
         return match ($color) {
             'light' => 'text-gray-200',
-            'primary' => 'text-blue-400',
+            'primary' => 'text-primary-400',
             'default' => 'text-white',
             default => 'text-white',
         };
@@ -376,8 +376,8 @@ final class Overlay
 
         return match ($style) {
             'pill' => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-white/20 backdrop-blur-sm text-white rounded-full',
-            'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-blue-300',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-blue-500/80 backdrop-blur-sm text-white rounded-full',
+            'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary-300',
+            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary-500/80 backdrop-blur-sm text-white rounded-full',
         };
     }
 
@@ -390,8 +390,8 @@ final class Overlay
             'white' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-white text-gray-900 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-white shadow-sm transition-all',
             'secondary' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:outline-hidden focus:ring-2 focus:ring-white/50 transition-all',
             'outline' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/60 text-white hover:bg-white hover:text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-white transition-all',
-            'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-white hover:text-blue-300 transition-colors',
-            default => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500 shadow-sm transition-all',
+            'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-white hover:text-primary-300 transition-colors',
+            default => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 shadow-sm transition-all',
         };
     }
 

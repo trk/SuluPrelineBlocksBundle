@@ -122,9 +122,9 @@ final class Alert
         $variant = $this->getAlertVariant();
 
         return match ("{$style}_{$variant}") {
-            'info_solid' => 'bg-blue-600 text-white shadow-xs',
-            'info_outline' => 'border-2 border-blue-500 text-blue-700 bg-transparent dark:text-blue-400',
-            'info_glass' => 'backdrop-blur-md bg-blue-500/10 border border-blue-500/30 text-blue-900 dark:text-blue-200',
+            'info_solid' => 'bg-primary-600 text-white shadow-xs',
+            'info_outline' => 'border-2 border-primary-500 text-primary-700 bg-transparent dark:text-primary-400',
+            'info_glass' => 'backdrop-blur-md bg-primary-500/10 border border-primary-500/30 text-primary-900 dark:text-primary-200',
 
             'success_solid' => 'bg-emerald-600 text-white shadow-xs',
             'success_outline' => 'border-2 border-emerald-500 text-emerald-700 bg-transparent dark:text-emerald-400',
@@ -146,7 +146,7 @@ final class Alert
             'warning_soft' => 'bg-amber-50 border border-amber-200 text-amber-800 dark:bg-amber-950/40 dark:border-amber-800 dark:text-amber-300',
             'danger_soft' => 'bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/40 dark:border-red-800 dark:text-red-300',
             'dark_soft' => 'bg-gray-100 border border-gray-200 text-gray-800 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200',
-            default => 'bg-blue-50 border border-blue-200 text-blue-800 dark:bg-blue-950/40 dark:border-blue-800 dark:text-blue-300',
+            default => 'bg-primary-50 border border-primary-200 text-primary-800 dark:bg-primary-950/40 dark:border-primary-800 dark:text-primary-300',
         };
     }
 

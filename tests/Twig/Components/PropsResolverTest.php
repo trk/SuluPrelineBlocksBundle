@@ -23,8 +23,8 @@ final class PropsResolverTest extends TestCase
     {
         self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor(['title_color' => 'default']));
         self::assertSame('text-white', PropsResolver::titleColor(['title_color' => 'white']));
-        self::assertSame('text-blue-600 dark:text-blue-400', PropsResolver::titleColor(['title_color' => 'primary']));
-        self::assertSame('text-indigo-600 dark:text-indigo-400', PropsResolver::titleColor(['title_color' => 'secondary']));
+        self::assertSame('text-primary-600 dark:text-primary-400', PropsResolver::titleColor(['title_color' => 'primary']));
+        self::assertSame('text-secondary-600 dark:text-secondary-400', PropsResolver::titleColor(['title_color' => 'secondary']));
         self::assertSame('text-gray-500 dark:text-neutral-400', PropsResolver::titleColor(['title_color' => 'muted']));
         self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor(['title_color' => 'unknown']));
         self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor([]));
@@ -32,9 +32,9 @@ final class PropsResolverTest extends TestCase
 
     public function testLinkColor(): void
     {
-        self::assertSame('text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300', PropsResolver::linkColor(['link_color' => 'primary']));
+        self::assertSame('text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300', PropsResolver::linkColor(['link_color' => 'primary']));
         self::assertSame('text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-neutral-300', PropsResolver::linkColor(['link_color' => 'dark']));
-        self::assertSame('text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300', PropsResolver::linkColor([]));
+        self::assertSame('text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300', PropsResolver::linkColor([]));
     }
 
     public function testBgColor(): void
@@ -50,7 +50,7 @@ final class PropsResolverTest extends TestCase
     {
         self::assertSame('text-gray-500 dark:text-neutral-400', PropsResolver::textColor(['text_color' => 'muted']));
         self::assertSame('text-white', PropsResolver::textColor(['text_color' => 'white']));
-        self::assertSame('text-blue-600 dark:text-blue-400', PropsResolver::textColor(['text_color' => 'primary']));
+        self::assertSame('text-primary-600 dark:text-primary-400', PropsResolver::textColor(['text_color' => 'primary']));
         self::assertSame('text-gray-700 dark:text-neutral-300', PropsResolver::textColor(['text_color' => 'default']));
         self::assertSame('text-gray-700 dark:text-neutral-300', PropsResolver::textColor([]));
     }
@@ -58,17 +58,17 @@ final class PropsResolverTest extends TestCase
     public function testButtonClasses(): void
     {
         $primaryClasses = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'primary']);
-        self::assertStringContainsString('bg-blue-600', $primaryClasses);
+        self::assertStringContainsString('bg-primary-600', $primaryClasses);
         self::assertStringContainsString('text-sm', $primaryClasses);
 
         $secondarySolid = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'secondary']);
-        self::assertStringContainsString('bg-indigo-600', $secondarySolid);
+        self::assertStringContainsString('bg-secondary-600', $secondarySolid);
 
         $darkSolid = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'dark']);
         self::assertStringContainsString('bg-gray-900', $darkSolid);
 
         $outlineClasses = PropsResolver::buttonClasses(['variant' => 'outline', 'size' => 'lg', 'link_color' => 'secondary']);
-        self::assertStringContainsString('border-indigo-600', $outlineClasses);
+        self::assertStringContainsString('border-secondary-600', $outlineClasses);
         self::assertStringContainsString('text-base', $outlineClasses);
 
         $ghostClasses = PropsResolver::buttonClasses(['variant' => 'ghost', 'size' => 'sm', 'link_color' => 'dark']);

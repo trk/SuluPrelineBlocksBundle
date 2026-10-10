@@ -21,7 +21,7 @@ final class ButtonTest extends TestCase
         self::assertNull($button->link_title);
         self::assertSame('#', $button->getUrl());
         self::assertNull($button->getLinkTitle());
-        self::assertStringContainsString('bg-blue-600', $button->getClasses());
+        self::assertStringContainsString('bg-primary-600', $button->getClasses());
     }
 
     public function testTitleAndContentResolution(): void
@@ -77,7 +77,7 @@ final class ButtonTest extends TestCase
 
         $classes = $button->getClasses();
         self::assertStringContainsString('border', $classes);
-        self::assertStringContainsString('border-indigo-600', $classes);
+        self::assertStringContainsString('border-secondary-600', $classes);
         self::assertStringContainsString('text-base', $classes);
     }
 

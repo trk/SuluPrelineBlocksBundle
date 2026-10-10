@@ -30,7 +30,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('h1', $headline->getTag());
         self::assertSame('hero-title', $headline->getElementId());
         self::assertSame('text-center', $headline->getTextAlign());
-        self::assertSame('text-blue-600 dark:text-blue-400', $headline->getTitleColor());
+        self::assertSame('text-primary-600 dark:text-primary-400', $headline->getTitleColor());
 
         $classes = $headline->getWrapperClasses();
         self::assertStringContainsString('text-3xl', $classes);
@@ -233,7 +233,7 @@ final class ComponentSuiteTest extends TestCase
         ];
 
         self::assertSame('text-xl', $text->getFontSize());
-        self::assertSame('text-blue-600 dark:text-blue-400', $text->getTextColor());
+        self::assertSame('text-primary-600 dark:text-primary-400', $text->getTextColor());
     }
 
     public function testTextAdvancedFeatures(): void
@@ -289,7 +289,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('h2', $card->getTitleElement());
         self::assertStringContainsString('text-3xl', $card->getTitleSizeClasses());
         self::assertStringContainsString('underline', $card->getTitleDecorationClasses());
-        self::assertStringContainsString('bg-blue-100', $card->getMetaBadgeClasses());
+        self::assertStringContainsString('bg-primary-100', $card->getMetaBadgeClasses());
         self::assertSame('p-6 sm:p-8', $card->getCardPaddingClasses());
         self::assertSame('rounded-2xl', $card->getRoundedClasses());
 
@@ -320,7 +320,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('https://example.com/article', $card->getLinkUrl());
         self::assertSame('Read More', $card->getButtonText());
         self::assertSame('https://example.com/article', $card->getResolvedCardUrl());
-        self::assertStringContainsString('border-primary text-primary', $card->getButtonStyleClasses());
+        self::assertStringContainsString('border-primary-600 text-primary-600', $card->getButtonStyleClasses());
 
         // Legacy cardLink compatibility test
         $legacyCard = new Card();

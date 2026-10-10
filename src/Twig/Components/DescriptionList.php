@@ -197,7 +197,7 @@ final class DescriptionList
         $font = match ($style) {
             'medium' => 'font-medium text-gray-800 dark:text-neutral-200',
             'muted' => 'font-normal text-gray-500 dark:text-neutral-400',
-            'primary' => 'font-semibold text-blue-600 dark:text-blue-500',
+            'primary' => 'font-semibold text-primary-600 dark:text-primary-500',
             default => 'font-semibold text-gray-900 dark:text-white',
         };
 

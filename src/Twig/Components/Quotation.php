@@ -152,9 +152,10 @@ final class Quotation
         $color = $props['accent_color'] ?? 'primary';
 
         return match ($color) {
+            'secondary' => 'border-s-4 border-secondary-600 dark:border-secondary-500 ps-4 sm:ps-6',
             'dark' => 'border-s-4 border-gray-900 dark:border-white ps-4 sm:ps-6',
             'muted' => 'border-s-4 border-gray-300 dark:border-neutral-700 ps-4 sm:ps-6',
-            default => 'border-s-4 border-blue-600 dark:border-blue-500 ps-4 sm:ps-6',
+            default => 'border-s-4 border-primary-600 dark:border-primary-500 ps-4 sm:ps-6',
         };
     }
 

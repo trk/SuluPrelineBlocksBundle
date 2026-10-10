@@ -179,7 +179,7 @@ final class Countdown
         };
 
         $colorClasses = match ($color) {
-            'primary' => 'text-blue-600 dark:text-blue-400',
+            'primary' => 'text-primary-600 dark:text-primary-400',
             'white' => 'text-white',
             'dark' => 'text-gray-900 dark:text-white',
             default => 'text-gray-900 dark:text-white',
@@ -216,7 +216,7 @@ final class Countdown
         };
 
         $colorClasses = match ($color) {
-            'primary' => 'text-blue-400 dark:text-blue-500',
+            'primary' => 'text-primary-400 dark:text-primary-500',
             'white' => 'text-white/60',
             'dark' => 'text-gray-400 dark:text-neutral-500',
             default => 'text-gray-400 dark:text-neutral-500',

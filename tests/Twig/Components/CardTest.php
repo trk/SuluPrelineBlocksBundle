@@ -78,7 +78,7 @@ final class CardTest extends TestCase
         self::assertStringContainsString('backdrop-blur', $card->getCardClasses());
         self::assertStringContainsString('md:flex-row', $card->getCardClasses());
         self::assertSame('text-center', $card->getTextAlign());
-        self::assertSame('text-blue-600 dark:text-blue-400', $card->getTitleColor());
+        self::assertSame('text-primary-600 dark:text-primary-400', $card->getTitleColor());
     }
 
     public function testMutualExclusivityImageOnly(): void
@@ -186,7 +186,7 @@ final class CardTest extends TestCase
         self::assertStringContainsString('backdrop-blur-md', $card->getBadgeClasses());
 
         $card->props = ['badge_style' => 'primary'];
-        self::assertStringContainsString('bg-blue-600', $card->getBadgeClasses());
+        self::assertStringContainsString('bg-primary-600', $card->getBadgeClasses());
 
         $card->props = ['badge_style' => 'success'];
         self::assertStringContainsString('bg-emerald-600', $card->getBadgeClasses());

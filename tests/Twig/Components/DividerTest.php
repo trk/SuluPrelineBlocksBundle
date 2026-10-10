@@ -51,7 +51,7 @@ final class DividerTest extends TestCase
         $divider = new Divider();
 
         $divider->props = ['divider_color' => 'primary'];
-        self::assertStringContainsString('border-blue-600', $divider->getDividerColorClasses());
+        self::assertStringContainsString('border-primary-600', $divider->getDividerColorClasses());
 
         $divider->props = ['divider_color' => 'dark'];
         self::assertStringContainsString('border-gray-900', $divider->getDividerColorClasses());
@@ -117,7 +117,7 @@ final class DividerTest extends TestCase
 
         $dividerPrimary = new Divider();
         $dividerPrimary->props = ['divider_color' => 'primary'];
-        self::assertStringContainsString('text-blue-600', $dividerPrimary->getIconBadgeColorClasses());
+        self::assertStringContainsString('text-primary-600', $dividerPrimary->getIconBadgeColorClasses());
     }
 
     public function testWrapperClassesAndId(): void

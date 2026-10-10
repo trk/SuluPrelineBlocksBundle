@@ -109,7 +109,7 @@ final class Divider
         $color = $props['divider_color'] ?? 'default';
 
         return match ($color) {
-            'primary' => 'border-blue-600 dark:border-blue-500 bg-blue-600',
+            'primary' => 'border-primary-600 dark:border-primary-500 bg-primary-600',
             'muted' => 'border-gray-100 dark:border-neutral-800 bg-gray-100 dark:bg-neutral-800',
             'dark' => 'border-gray-900 dark:border-white bg-gray-900 dark:bg-white',
             default => 'border-gray-200 dark:border-neutral-700 bg-gray-200 dark:bg-neutral-700',
@@ -182,9 +182,9 @@ final class Divider
 
         $afterClass = match ($color) {
             'primary' => match ($thicknessStr) {
-                '2' => 'after:flex-1 after:border-t-2 after:border-blue-600 dark:after:border-blue-500 after:ms-4',
-                '4' => 'after:flex-1 after:border-t-4 after:border-blue-600 dark:after:border-blue-500 after:ms-4',
-                default => 'after:flex-1 after:border-t after:border-blue-600 dark:after:border-blue-500 after:ms-4',
+                '2' => 'after:flex-1 after:border-t-2 after:border-primary-600 dark:after:border-primary-500 after:ms-4',
+                '4' => 'after:flex-1 after:border-t-4 after:border-primary-600 dark:after:border-primary-500 after:ms-4',
+                default => 'after:flex-1 after:border-t after:border-primary-600 dark:after:border-primary-500 after:ms-4',
             },
             'muted' => match ($thicknessStr) {
                 '2' => 'after:flex-1 after:border-t-2 after:border-gray-100 dark:after:border-neutral-800 after:ms-4',
@@ -205,9 +205,9 @@ final class Divider
 
         $beforeClass = match ($color) {
             'primary' => match ($thicknessStr) {
-                '2' => 'before:flex-1 before:border-t-2 before:border-blue-600 dark:before:border-blue-500 before:me-4',
-                '4' => 'before:flex-1 before:border-t-4 before:border-blue-600 dark:before:border-blue-500 before:me-4',
-                default => 'before:flex-1 before:border-t before:border-blue-600 dark:before:border-blue-500 before:me-4',
+                '2' => 'before:flex-1 before:border-t-2 before:border-primary-600 dark:before:border-primary-500 before:me-4',
+                '4' => 'before:flex-1 before:border-t-4 before:border-primary-600 dark:before:border-primary-500 before:me-4',
+                default => 'before:flex-1 before:border-t before:border-primary-600 dark:before:border-primary-500 before:me-4',
             },
             'muted' => match ($thicknessStr) {
                 '2' => 'before:flex-1 before:border-t-2 before:border-gray-100 dark:before:border-neutral-800 before:me-4',
@@ -243,7 +243,7 @@ final class Divider
         $color = $props['divider_color'] ?? 'default';
 
         return match ($color) {
-            'primary' => 'border-blue-200 bg-white text-blue-600 dark:bg-neutral-800 dark:border-blue-900/50 dark:text-blue-400',
+            'primary' => 'border-primary-200 bg-white text-primary-600 dark:bg-neutral-800 dark:border-primary-900/50 dark:text-primary-400',
             'dark' => 'border-gray-900 bg-gray-900 text-white dark:bg-white dark:text-gray-900 dark:border-white',
             'muted' => 'border-gray-200 bg-gray-50 text-gray-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400',
             default => 'border-gray-200 bg-white text-gray-600 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300',

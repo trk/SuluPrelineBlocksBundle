@@ -29,8 +29,8 @@ final class PropsResolver
         $color = isset($props['title_color']) && \is_string($props['title_color']) ? $props['title_color'] : 'default';
 
         return match ($color) {
-            'primary' => 'text-blue-600 dark:text-blue-400',
-            'secondary' => 'text-indigo-600 dark:text-indigo-400',
+            'primary' => 'text-primary-600 dark:text-primary-400',
+            'secondary' => 'text-secondary-600 dark:text-secondary-400',
             'muted' => 'text-gray-500 dark:text-neutral-400',
             'white' => 'text-white',
             default => 'text-gray-900 dark:text-white',
@@ -45,10 +45,10 @@ final class PropsResolver
         $color = isset($props['link_color']) && \is_string($props['link_color']) ? $props['link_color'] : 'primary';
 
         return match ($color) {
-            'secondary' => 'text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300',
+            'secondary' => 'text-secondary-600 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-300',
             'dark' => 'text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-neutral-300',
             'white' => 'text-white hover:text-gray-200',
-            default => 'text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300',
+            default => 'text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300',
         };
     }
 
@@ -64,7 +64,7 @@ final class PropsResolver
         return match ($color) {
             'muted' => 'text-gray-500 dark:text-neutral-400',
             'white' => 'text-white',
-            'primary' => 'text-blue-600 dark:text-blue-400',
+            'primary' => 'text-primary-600 dark:text-primary-400',
             default => 'text-gray-700 dark:text-neutral-300',
         };
     }
@@ -81,7 +81,7 @@ final class PropsResolver
         return match ($color) {
             'white' => 'bg-white dark:bg-neutral-900',
             'muted' => 'bg-gray-50 dark:bg-neutral-800',
-            'primary' => 'bg-blue-600 text-white',
+            'primary' => 'bg-primary-600 text-white',
             'dark' => 'bg-gray-900 text-white dark:bg-black',
             default => 'bg-transparent',
         };
@@ -109,28 +109,28 @@ final class PropsResolver
 
         $variantClasses = match ($variant) {
             'outline' => match ($color) {
-                'secondary' => 'border border-indigo-600 text-indigo-600 hover:bg-indigo-50 dark:border-indigo-400 dark:text-indigo-400 dark:hover:bg-indigo-900/30 focus:ring-indigo-500',
+                'secondary' => 'border border-secondary-600 text-secondary-600 hover:bg-secondary-50 dark:border-secondary-400 dark:text-secondary-400 dark:hover:bg-secondary-950/30 focus:ring-secondary-500',
                 'dark' => 'border border-gray-900 text-gray-900 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:bg-neutral-800 focus:ring-gray-900',
                 'white' => 'border border-white text-white hover:bg-white/10 focus:ring-white',
-                default => 'border border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/30 focus:ring-blue-500',
+                default => 'border border-primary-600 text-primary-600 hover:bg-primary-50 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-950/30 focus:ring-primary-500',
             },
             'ghost' => match ($color) {
-                'secondary' => 'text-indigo-600 hover:bg-indigo-50 dark:text-indigo-400 dark:hover:bg-indigo-900/30 focus:ring-indigo-500',
+                'secondary' => 'text-secondary-600 hover:bg-secondary-50 dark:text-secondary-400 dark:hover:bg-secondary-950/30 focus:ring-secondary-500',
                 'dark' => 'text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-neutral-800 focus:ring-gray-900',
                 'white' => 'text-white hover:bg-white/10 focus:ring-white',
-                default => 'text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/30 focus:ring-blue-500',
+                default => 'text-primary-600 hover:bg-primary-50 dark:text-primary-400 dark:hover:bg-primary-950/30 focus:ring-primary-500',
             },
             'link' => match ($color) {
-                'secondary' => 'text-indigo-600 hover:underline p-0 focus:ring-0 dark:text-indigo-400',
+                'secondary' => 'text-secondary-600 hover:underline p-0 focus:ring-0 dark:text-secondary-400',
                 'dark' => 'text-gray-900 hover:underline p-0 focus:ring-0 dark:text-white',
                 'white' => 'text-white hover:underline p-0 focus:ring-0',
-                default => 'text-blue-600 hover:underline p-0 focus:ring-0 dark:text-blue-400',
+                default => 'text-primary-600 hover:underline p-0 focus:ring-0 dark:text-primary-400',
             },
             default => match ($color) {
-                'secondary' => 'border border-transparent bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500 dark:focus:ring-offset-neutral-800',
+                'secondary' => 'border border-transparent bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-500 dark:focus:ring-offset-neutral-800',
                 'dark' => 'border border-transparent bg-gray-900 text-white hover:bg-gray-800 focus:ring-gray-900 dark:bg-white dark:text-gray-900 dark:hover:bg-neutral-200 dark:focus:ring-offset-neutral-800',
                 'white' => 'border border-transparent bg-white text-gray-800 hover:bg-gray-100 shadow-2xs focus:ring-white dark:focus:ring-offset-neutral-800',
-                default => 'border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 dark:focus:ring-offset-neutral-800',
+                default => 'border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 dark:focus:ring-offset-neutral-800',
             },
         };
 

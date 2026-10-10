@@ -143,7 +143,7 @@ final class OverlayTest extends TestCase
         self::assertStringContainsString('bg-white/80', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'primary'];
-        self::assertStringContainsString('bg-blue-600/80', $overlay->getOverlayStyle());
+        self::assertStringContainsString('bg-primary-600/80', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'none'];
         self::assertSame('bg-transparent', $overlay->getOverlayStyle());
@@ -182,7 +182,7 @@ final class OverlayTest extends TestCase
         self::assertStringContainsString('backdrop-blur-md', $overlay->getBadgeClasses());
 
         $overlay->props = ['badge_style' => 'primary'];
-        self::assertStringContainsString('bg-blue-600', $overlay->getBadgeClasses());
+        self::assertStringContainsString('bg-primary-600', $overlay->getBadgeClasses());
 
         $overlay->props = ['badge_position' => 'top-right'];
         self::assertSame('top-right', $overlay->getBadgePosition());

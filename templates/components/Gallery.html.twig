@@ -19,7 +19,7 @@
             <button
                 type="button"
                 data-filter="*"
-                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden disabled:opacity-50 transition"
+                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden disabled:opacity-50 transition"
             >
                 {{ this.resolvedProps.filter_all_label|default('All') }}
             </button>
@@ -117,12 +117,12 @@
                         var filter = this.getAttribute('data-filter');
 
                         btns.forEach(function(b) {
-                            b.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+                            b.classList.remove('bg-primary-600', 'text-white', 'hover:bg-primary-700', 'active');
                             b.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
                         });
 
                         this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
-                        this.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+                        this.classList.add('bg-primary-600', 'text-white', 'hover:bg-primary-700', 'active');
 
                         items.forEach(function(item) {
                             var tags = (item.getAttribute('data-tags') || '').split(' ');
