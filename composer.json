@@ -53,12 +53,6 @@
             "Totoglu\\SuluPrelineBlocksBundle\\Tests\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../sulu-block-suite-bundle"
-        }
-    ],
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
