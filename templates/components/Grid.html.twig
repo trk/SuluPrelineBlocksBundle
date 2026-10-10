@@ -1,0 +1,102 @@
+{% set custom_id = this.customId %}
+{% set items = this.normalizedItems %}
+{% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
+{% set grid_unique_id = 'grid-' ~ random() %}
+
+<section
+    {% if custom_id %}id="{{ custom_id }}"{% endif %}
+    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    id="{{ grid_unique_id }}"
+>
+    {% if title %}
+        <div class="mb-8 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-neutral-200">{{ title }}</h2>
+        </div>
+    {% endif %}
+
+    {% if is_filter_active %}
+        <div class="mb-8 flex flex-wrap gap-2 {{ this.filterAlignClass }}">
+            <button
+                type="button"
+                data-filter="*"
+                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden disabled:opacity-50 transition"
+            >
+                {{ this.resolvedProps.filter_all_label|default('All') }}
+            </button>
+            {% for slug, label in this.filterTags %}
+                <button
+                    type="button"
+                    data-filter="{{ slug }}"
+                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 shadow-2xs hover:bg-gray-50 focus:outline-hidden disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 transition"
+                >
+                    {{ label }}
+                </button>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="{{ this.containerClasses }} grid-container">
+        {% for item in items %}
+            {% set item_tags = this.getItemTagSlugs(item) %}
+            <div
+                class="grid-item-card transition-all duration-300 ease-in-out {% if this.isMasonry() %}break-inside-avoid mb-6{% endif %}"
+                data-tags="{{ item_tags }}"
+            >
+                <twig:Card
+                    title="{{ item.title|default(null) }}"
+                    meta="{{ item.meta|default(null) }}"
+                    badge="{{ item.badge|default(null) }}"
+                    content="{{ item.content|default(null) }}"
+                    image="{{ item.image|default(null) }}"
+                    video="{{ item.video|default(null) }}"
+                    :icon="item.icon|default(null)"
+                    link="{{ item.link|default(null) }}"
+                    linkTitle="{{ item.link_title|default(null) }}"
+                    hoverImage="{{ item.hover_image|default(null) }}"
+                    hoverVideo="{{ item.hover_video|default(null) }}"
+                    props="{{ this.resolveItemProps(item) }}"
+                />
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if is_filter_active %}
+        <script>
+            (function() {
+                var scope = document.getElementById('{{ grid_unique_id }}');
+                if (!scope) return;
+                var btns = scope.querySelectorAll('.filter-btn');
+                var items = scope.querySelectorAll('.grid-item-card');
+
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var filter = this.getAttribute('data-filter');
+
+                        btns.forEach(function(b) {
+                            b.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+                            b.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
+                        });
+
+                        this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
+                        this.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+
+                        items.forEach(function(item) {
+                            var tags = (item.getAttribute('data-tags') || '').split(' ');
+                            if (filter === '*' || tags.indexOf(filter) !== -1) {
+                                item.style.display = '';
+                                item.style.opacity = '1';
+                            } else {
+                                item.style.display = 'none';
+                                item.style.opacity = '0';
+                            }
+                        });
+
+                        if (typeof window.HSStaticMethods !== 'undefined') {
+                            window.HSStaticMethods.autoInit();
+                        }
+                    });
+                });
+            })();
+        </script>
+    {% endif %}
+</section>

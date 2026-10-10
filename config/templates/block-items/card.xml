@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<type name="card" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Card Item</title>
+        <title lang="tr">Kart Öğesi</title>
+        <title lang="de">Kartenelement</title>
+        <title lang="ru">Элемент карточки</title>
+        <title lang="es">Elemento de Tarjeta</title>
+        <title lang="fr">Élément de Carte</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/video.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/hover_image.xml"/>
+        <xi:include href="../fields/hover_video.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+
+        <property name="tags" type="text_line" colspan="6">
+            <meta>
+                <title lang="en">Filter Tags</title>
+                <title lang="tr">Filtre Etiketleri</title>
+                <title lang="de">Filter-Tags</title>
+                <title lang="ru">Теги фильтра</title>
+                <title lang="es">Etiquetas de Filtro</title>
+                <title lang="fr">Balises de Filtre</title>
+                <info_text lang="en">Comma-separated tags for category filtering (e.g. Design, Tech)</info_text>
+                <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler (örn. Tasarım, Teknoloji)</info_text>
+                <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung (z.B. Design, Tech)</info_text>
+                <info_text lang="ru">Разделенные запятыми теги для фильтрации (например, Дизайн, Технологии)</info_text>
+                <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías (ej. Diseño, Tecnología)</info_text>
+                <info_text lang="fr">Balises séparées par des virgules pour le filtrage (ex. Design, Tech)</info_text>
+            </meta>
+        </property>
+
+        <property name="panel_style" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Card Style Override</title>
+                <title lang="tr">Kart Stili (Özel)</title>
+                <title lang="de">Kartenstil-Überschreibung</title>
+                <title lang="ru">Стиль карточки (переопределение)</title>
+                <title lang="es">Estilo de Tarjeta (Sobrescribir)</title>
+                <title lang="fr">Style de Carte (Remplacement)</title>
+            </meta>
+            <params>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Grid</title>
+                            <title lang="tr">Izgaradan Devral</title>
+                            <title lang="de">Aus Raster übernehmen</title>
+                            <title lang="ru">Наследовать из сетки</title>
+                            <title lang="es">Heredar de cuadrícula</title>
+                            <title lang="fr">Hériter de la grille</title>
+                        </meta>
+                    </param>
+                    <param name="default">
+                        <meta>
+                            <title lang="en">Default</title>
+                            <title lang="tr">Varsayılan</title>
+                            <title lang="de">Standard</title>
+                            <title lang="ru">По умолчанию</title>
+                            <title lang="es">Predeterminado</title>
+                            <title lang="fr">Par défaut</title>
+                        </meta>
+                    </param>
+                    <param name="bordered">
+                        <meta>
+                            <title lang="en">Bordered</title>
+                            <title lang="tr">Kenarlıklı</title>
+                            <title lang="de">Umrandet</title>
+                            <title lang="ru">С рамкой</title>
+                            <title lang="es">Con Borde</title>
+                            <title lang="fr">Bordé</title>
+                        </meta>
+                    </param>
+                    <param name="flat">
+                        <meta>
+                            <title lang="en">Flat</title>
+                            <title lang="tr">Düz</title>
+                            <title lang="de">Flach</title>
+                            <title lang="ru">Плоский</title>
+                            <title lang="es">Plano</title>
+                            <title lang="fr">Plat</title>
+                        </meta>
+                    </param>
+                    <param name="raised">
+                        <meta>
+                            <title lang="en">Raised (Shadow)</title>
+                            <title lang="tr">Gölgeli</title>
+                            <title lang="de">Erhöht (Schatten)</title>
+                            <title lang="ru">С тенью</title>
+                            <title lang="es">Elevado (Sombra)</title>
+                            <title lang="fr">Surélevé (Ombre)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="link_style" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Button Style</title>
+                <title lang="tr">Buton Stili</title>
+                <title lang="de">Schaltflächenstil</title>
+                <title lang="ru">Стиль кнопки</title>
+                <title lang="es">Estilo de Botón</title>
+                <title lang="fr">Style de Bouton</title>
+            </meta>
+            <params>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Grid</title>
+                            <title lang="tr">Izgaradan Devral</title>
+                            <title lang="de">Aus Raster übernehmen</title>
+                            <title lang="ru">Наследовать из сетки</title>
+                            <title lang="es">Heredar de cuadrícula</title>
+                            <title lang="fr">Hériter de la grille</title>
+                        </meta>
+                    </param>
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary</title>
+                            <title lang="tr">Birincil (Primary)</title>
+                            <title lang="de">Primär</title>
+                            <title lang="ru">Основной</title>
+                            <title lang="es">Primario</title>
+                            <title lang="fr">Primaire</title>
+                        </meta>
+                    </param>
+                    <param name="secondary">
+                        <meta>
+                            <title lang="en">Secondary</title>
+                            <title lang="tr">İkincil (Secondary)</title>
+                            <title lang="de">Sekundär</title>
+                            <title lang="ru">Вторичный</title>
+                            <title lang="es">Secundario</title>
+                            <title lang="fr">Secondaire</title>
+                        </meta>
+                    </param>
+                    <param name="outline">
+                        <meta>
+                            <title lang="en">Outline</title>
+                            <title lang="tr">Dış Çizgili (Outline)</title>
+                            <title lang="de">Umriss</title>
+                            <title lang="ru">Контурный</title>
+                            <title lang="es">Contorno</title>
+                            <title lang="fr">Contour</title>
+                        </meta>
+                    </param>
+                    <param name="soft">
+                        <meta>
+                            <title lang="en">Soft</title>
+                            <title lang="tr">Yumuşak (Soft)</title>
+                            <title lang="de">Sanft</title>
+                            <title lang="ru">Мягкий</title>
+                            <title lang="es">Suave</title>
+                            <title lang="fr">Doux</title>
+                        </meta>
+                    </param>
+                    <param name="link">
+                        <meta>
+                            <title lang="en">Simple Link</title>
+                            <title lang="tr">Düz Bağlantı</title>
+                            <title lang="de">Einfacher Link</title>
+                            <title lang="ru">Простая ссылка</title>
+                            <title lang="es">Enlace Simple</title>
+                            <title lang="fr">Lien Simple</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+    </properties>
+</type>

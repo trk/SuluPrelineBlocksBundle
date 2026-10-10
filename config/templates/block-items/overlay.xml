@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<type name="overlay" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Overlay Item</title>
+        <title lang="tr">Katman Öğesi</title>
+        <title lang="de">Overlay-Element</title>
+        <title lang="ru">Элемент оверлея</title>
+        <title lang="es">Elemento de Superposición</title>
+        <title lang="fr">Élément de Superposition</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/hover_image.xml"/>
+        <xi:include href="../fields/video.xml"/>
+        <xi:include href="../fields/hover_video.xml"/>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+
+        <property name="tags" type="text_line" colspan="6">
+            <meta>
+                <title lang="en">Filter Tags</title>
+                <title lang="tr">Filtre Etiketleri</title>
+                <title lang="de">Filter-Tags</title>
+                <title lang="ru">Теги фильтра</title>
+                <title lang="es">Etiquetas de Filtro</title>
+                <title lang="fr">Balises de Filtre</title>
+                <info_text lang="en">Comma-separated tags for category filtering (e.g. Photography, Nature)</info_text>
+                <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler (örn. Fotoğraf, Doğa)</info_text>
+                <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung (z.B. Fotografie, Natur)</info_text>
+                <info_text lang="ru">Разделенные запятыми теги для фильтрации (например, Фотография, Природа)</info_text>
+                <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías (ej. Fotografía, Naturaleza)</info_text>
+                <info_text lang="fr">Balises séparées par des virgules pour le filtrage (ex. Photographie, Nature)</info_text>
+            </meta>
+        </property>
+
+        <property name="overlay_style" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Overlay Style Override</title>
+                <title lang="tr">Katman Stili (Özel)</title>
+                <title lang="de">Overlay-Stil-Überschreibung</title>
+                <title lang="ru">Стиль оверлея (переопределение)</title>
+                <title lang="es">Estilo de Superposición (Sobrescribir)</title>
+                <title lang="fr">Style de Superposition (Remplacement)</title>
+            </meta>
+            <params>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Gallery</title>
+                            <title lang="tr">Galeriden Devral</title>
+                            <title lang="de">Aus Galerie übernehmen</title>
+                            <title lang="ru">Наследовать из галереи</title>
+                            <title lang="es">Heredar de galería</title>
+                            <title lang="fr">Hériter de la galerie</title>
+                        </meta>
+                    </param>
+                    <param name="dark">
+                        <meta>
+                            <title lang="en">Dark</title>
+                            <title lang="tr">Koyu</title>
+                            <title lang="de">Dunkel</title>
+                            <title lang="ru">Темный</title>
+                            <title lang="es">Oscuro</title>
+                            <title lang="fr">Sombre</title>
+                        </meta>
+                    </param>
+                    <param name="light">
+                        <meta>
+                            <title lang="en">Light</title>
+                            <title lang="tr">Açık</title>
+                            <title lang="de">Hell</title>
+                            <title lang="ru">Светлый</title>
+                            <title lang="es">Claro</title>
+                            <title lang="fr">Clair</title>
+                        </meta>
+                    </param>
+                    <param name="gradient">
+                        <meta>
+                            <title lang="en">Gradient</title>
+                            <title lang="tr">Degrade</title>
+                            <title lang="de">Verlauf</title>
+                            <title lang="ru">Градиент</title>
+                            <title lang="es">Gradiente</title>
+                            <title lang="fr">Dégradé</title>
+                        </meta>
+                    </param>
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary</title>
+                            <title lang="tr">Birincil (Primary)</title>
+                            <title lang="de">Primär</title>
+                            <title lang="ru">Основной</title>
+                            <title lang="es">Primario</title>
+                            <title lang="fr">Primaire</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="link_style" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Button Style</title>
+                <title lang="tr">Buton Stili</title>
+                <title lang="de">Schaltflächenstil</title>
+                <title lang="ru">Стиль кнопки</title>
+                <title lang="es">Estilo de Botón</title>
+                <title lang="fr">Style de Bouton</title>
+            </meta>
+            <params>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Gallery</title>
+                            <title lang="tr">Galeriden Devral</title>
+                            <title lang="de">Aus Galerie übernehmen</title>
+                            <title lang="ru">Наследовать из галереи</title>
+                            <title lang="es">Heredar de galería</title>
+                            <title lang="fr">Hériter de la galerie</title>
+                        </meta>
+                    </param>
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary</title>
+                            <title lang="tr">Birincil (Primary)</title>
+                            <title lang="de">Primär</title>
+                            <title lang="ru">Основной</title>
+                            <title lang="es">Primario</title>
+                            <title lang="fr">Primaire</title>
+                        </meta>
+                    </param>
+                    <param name="secondary">
+                        <meta>
+                            <title lang="en">Secondary</title>
+                            <title lang="tr">İkincil (Secondary)</title>
+                            <title lang="de">Sekundär</title>
+                            <title lang="ru">Вторичный</title>
+                            <title lang="es">Secundario</title>
+                            <title lang="fr">Secondaire</title>
+                        </meta>
+                    </param>
+                    <param name="outline">
+                        <meta>
+                            <title lang="en">Outline</title>
+                            <title lang="tr">Dış Çizgili (Outline)</title>
+                            <title lang="de">Umriss</title>
+                            <title lang="ru">Контурный</title>
+                            <title lang="es">Contorno</title>
+                            <title lang="fr">Contour</title>
+                        </meta>
+                    </param>
+                    <param name="soft">
+                        <meta>
+                            <title lang="en">Soft</title>
+                            <title lang="tr">Yumuşak (Soft)</title>
+                            <title lang="de">Sanft</title>
+                            <title lang="ru">Мягкий</title>
+                            <title lang="es">Suave</title>
+                            <title lang="fr">Doux</title>
+                        </meta>
+                    </param>
+                    <param name="link">
+                        <meta>
+                            <title lang="en">Simple Link</title>
+                            <title lang="tr">Düz Bağlantı</title>
+                            <title lang="de">Einfacher Link</title>
+                            <title lang="ru">Простая ссылка</title>
+                            <title lang="es">Enlace Simple</title>
+                            <title lang="fr">Lien Simple</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+    </properties>
+</type>

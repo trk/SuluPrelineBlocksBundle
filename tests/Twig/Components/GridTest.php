@@ -1,0 +1,137 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Totoglu\SuluPrelineBlocksBundle\Tests\Twig\Components;
+
+use PHPUnit\Framework\TestCase;
+use Totoglu\SuluPrelineBlocksBundle\Twig\Components\Grid;
+
+final class GridTest extends TestCase
+{
+    public function testDefaultValues(): void
+    {
+        $grid = new Grid();
+
+        self::assertNull($grid->title);
+        self::assertFalse($grid->isFilterEnabled());
+        self::assertFalse($grid->isMasonry());
+        self::assertEmpty($grid->getNormalizedItems());
+        self::assertEmpty($grid->getFilterTags());
+        self::assertStringContainsString('grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6', $grid->getContainerClasses());
+        self::assertSame('justify-center', $grid->getFilterAlignClass());
+    }
+
+    public function testColumnsAndGapOverrides(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'columns_default' => '2',
+            'columns_sm' => '3',
+            'columns_md' => '4',
+            'columns_lg' => '6',
+            'gap' => 'lg',
+        ];
+
+        $classes = $grid->getContainerClasses();
+        self::assertStringContainsString('grid-cols-2', $classes);
+        self::assertStringContainsString('sm:grid-cols-3', $classes);
+        self::assertStringContainsString('md:grid-cols-4', $classes);
+        self::assertStringContainsString('lg:grid-cols-6', $classes);
+        self::assertStringContainsString('gap-8', $classes);
+    }
+
+    public function testMasonryMode(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'masonry' => 'columns',
+            'columns_default' => '1',
+            'columns_sm' => '2',
+            'columns_md' => '3',
+            'columns_lg' => '4',
+            'gap' => 'sm',
+        ];
+
+        self::assertTrue($grid->isMasonry());
+        $classes = $grid->getContainerClasses();
+        self::assertStringContainsString('columns-1', $classes);
+        self::assertStringContainsString('sm:columns-2', $classes);
+        self::assertStringContainsString('md:columns-3', $classes);
+        self::assertStringContainsString('lg:columns-4', $classes);
+        self::assertStringContainsString('gap-4', $classes);
+    }
+
+    public function testFilterTagsAndSlugs(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'filter' => true,
+            'filter_align' => 'left',
+        ];
+        $grid->items = [
+            ['title' => 'Item 1', 'tags' => 'Design, Tech, Web Development'],
+            ['title' => 'Item 2', 'tags' => 'Tech, Marketing'],
+            ['title' => 'Item 3', 'tags' => ''],
+        ];
+
+        self::assertTrue($grid->isFilterEnabled());
+        self::assertSame('justify-start', $grid->getFilterAlignClass());
+
+        $tags = $grid->getFilterTags();
+        self::assertCount(4, $tags);
+        self::assertSame('Design', $tags['design']);
+        self::assertSame('Tech', $tags['tech']);
+        self::assertSame('Web Development', $tags['web-development']);
+        self::assertSame('Marketing', $tags['marketing']);
+
+        self::assertSame('design tech web-development', $grid->getItemTagSlugs($grid->items[0]));
+        self::assertSame('tech marketing', $grid->getItemTagSlugs($grid->items[1]));
+        self::assertSame('', $grid->getItemTagSlugs($grid->items[2]));
+    }
+
+    public function testItemPropsInheritanceAndOverride(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'card_variant' => 'bordered',
+            'button_style' => 'outline',
+            'media_align' => 'left',
+            'text_align' => 'center',
+        ];
+
+        // Item 1 inherits grid defaults
+        $item1 = [
+            'title' => 'Card 1',
+            'panel_style' => 'inherit',
+            'link_style' => 'inherit',
+        ];
+        $resolved1 = $grid->resolveItemProps($item1);
+        self::assertSame('bordered', $resolved1['card_variant']);
+        self::assertSame('outline', $resolved1['button_style']);
+        self::assertSame('left', $resolved1['media_align']);
+        self::assertSame('center', $resolved1['text_align']);
+
+        // Item 2 overrides card variant and button style
+        $item2 = [
+            'title' => 'Card 2',
+            'panel_style' => 'raised',
+            'link_style' => 'soft',
+        ];
+        $resolved2 = $grid->resolveItemProps($item2);
+        self::assertSame('raised', $resolved2['card_variant']);
+        self::assertSame('soft', $resolved2['button_style']);
+        self::assertSame('left', $resolved2['media_align']);
+        self::assertSame('center', $resolved2['text_align']);
+    }
+
+    public function testCustomIdAndClass(): void
+    {
+        $grid = new Grid();
+        $grid->id = 'portfolio-grid';
+        $grid->customClass = 'custom-grid-class';
+
+        self::assertSame('portfolio-grid', $grid->getCustomId());
+        self::assertSame('custom-grid-class', $grid->getCustomClass());
+    }
+}

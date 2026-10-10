@@ -1,0 +1,146 @@
+{% set custom_id = this.customId %}
+{% set items = this.normalizedItems %}
+{% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
+{% set is_lightbox_active = this.isLightboxEnabled() %}
+{% set gallery_unique_id = 'gallery-' ~ random() %}
+
+<section
+    {% if custom_id %}id="{{ custom_id }}"{% endif %}
+    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    id="{{ gallery_unique_id }}"
+>
+    {% if title %}
+        <div class="mb-8 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-neutral-200">{{ title }}</h2>
+        </div>
+    {% endif %}
+
+    {% if is_filter_active %}
+        <div class="mb-8 flex flex-wrap gap-2 {{ this.filterAlignClass }}">
+            <button
+                type="button"
+                data-filter="*"
+                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden disabled:opacity-50 transition"
+            >
+                {{ this.resolvedProps.filter_all_label|default('All') }}
+            </button>
+            {% for slug, label in this.filterTags %}
+                <button
+                    type="button"
+                    data-filter="{{ slug }}"
+                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 shadow-2xs hover:bg-gray-50 focus:outline-hidden disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 transition"
+                >
+                    {{ label }}
+                </button>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="{{ this.containerClasses }} gallery-container">
+        {% for item in items %}
+            {% set item_tags = this.getItemTagSlugs(item) %}
+            {% set image_url = this.resolveItemImageUrl(item) %}
+            {% set modal_id = gallery_unique_id ~ '-modal-' ~ loop.index %}
+            {% set item_props = this.resolveItemProps(item) %}
+
+            <div
+                class="gallery-item-card transition-all duration-300 ease-in-out {% if this.isMasonry() %}break-inside-avoid mb-6{% endif %}"
+                data-tags="{{ item_tags }}"
+            >
+                <div {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}" class="cursor-pointer"{% endif %}>
+                    <twig:Overlay
+                        title="{{ item.title|default(null) }}"
+                        meta="{{ item.meta|default(null) }}"
+                        badge="{{ item.badge|default(null) }}"
+                        content="{{ item.content|default(null) }}"
+                        image="{{ item.image|default(null) }}"
+                        video="{{ item.video|default(null) }}"
+                        :icon="item.icon|default(null)"
+                        link="{{ item.link|default(null) }}"
+                        linkTitle="{{ item.link_title|default(null) }}"
+                        hoverImage="{{ item.hover_image|default(null) }}"
+                        hoverVideo="{{ item.hover_video|default(null) }}"
+                        props="{{ item_props }}"
+                    />
+                </div>
+            </div>
+
+            {% if is_lightbox_active and image_url %}
+                <div
+                    id="{{ modal_id }}"
+                    class="hs-overlay hidden ti-modal fixed inset-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none"
+                    role="dialog"
+                    tabindex="-1"
+                    aria-labelledby="{{ modal_id }}-label"
+                >
+                    <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-4xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+                        <div class="w-full flex flex-col bg-white border border-gray-200 shadow-xl rounded-2xl pointer-events-auto dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-neutral-700/70 overflow-hidden">
+                            <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-800">
+                                <h3 id="{{ modal_id }}-label" class="font-bold text-gray-800 dark:text-white">
+                                    {{ item.title|default('') }}
+                                </h3>
+                                <button
+                                    type="button"
+                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden disabled:opacity-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400"
+                                    aria-label="Close"
+                                    data-hs-overlay="#{{ modal_id }}"
+                                >
+                                    <span class="sr-only">Close</span>
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                </button>
+                            </div>
+                            <div class="p-4 overflow-y-auto text-center bg-black/5 dark:bg-black/40">
+                                <img class="max-h-[75vh] mx-auto object-contain rounded-lg" src="{{ image_url }}" alt="{{ item.title|default('') }}">
+                                {% if item.content|default(null) %}
+                                    <div class="mt-4 text-left text-sm text-gray-700 dark:text-neutral-300">
+                                        {{ item.content|raw }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if is_filter_active %}
+        <script>
+            (function() {
+                var scope = document.getElementById('{{ gallery_unique_id }}');
+                if (!scope) return;
+                var btns = scope.querySelectorAll('.filter-btn');
+                var items = scope.querySelectorAll('.gallery-item-card');
+
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var filter = this.getAttribute('data-filter');
+
+                        btns.forEach(function(b) {
+                            b.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+                            b.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
+                        });
+
+                        this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
+                        this.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'active');
+
+                        items.forEach(function(item) {
+                            var tags = (item.getAttribute('data-tags') || '').split(' ');
+                            if (filter === '*' || tags.indexOf(filter) !== -1) {
+                                item.style.display = '';
+                                item.style.opacity = '1';
+                            } else {
+                                item.style.display = 'none';
+                                item.style.opacity = '0';
+                            }
+                        });
+
+                        if (typeof window.HSStaticMethods !== 'undefined') {
+                            window.HSStaticMethods.autoInit();
+                        }
+                    });
+                });
+            })();
+        </script>
+    {% endif %}
+</section>

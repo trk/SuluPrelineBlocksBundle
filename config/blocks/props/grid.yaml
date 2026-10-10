@@ -1,0 +1,329 @@
+tabs:
+  layout:
+    title:
+      en: "Grid Layout"
+      tr: "Izgara Düzeni"
+    fields:
+      columns_default:
+        type: select
+        label:
+          en: "Columns (Mobile)"
+          tr: "Sütun Sayısı (Mobil)"
+        default: "1"
+        col_span: 6
+        options:
+          - value: "1"
+            label: "1"
+          - value: "2"
+            label: "2"
+      columns_sm:
+        type: select
+        label:
+          en: "Columns (Small/Tablet)"
+          tr: "Sütun Sayısı (Tablet)"
+        default: "2"
+        col_span: 6
+        options:
+          - value: "1"
+            label: "1"
+          - value: "2"
+            label: "2"
+          - value: "3"
+            label: "3"
+      columns_md:
+        type: select
+        label:
+          en: "Columns (Medium)"
+          tr: "Sütun Sayısı (Orta)"
+        default: "3"
+        col_span: 6
+        options:
+          - value: "1"
+            label: "1"
+          - value: "2"
+            label: "2"
+          - value: "3"
+            label: "3"
+          - value: "4"
+            label: "4"
+      columns_lg:
+        type: select
+        label:
+          en: "Columns (Large Desktop)"
+          tr: "Sütun Sayısı (Masaüstü)"
+        default: "3"
+        col_span: 6
+        options:
+          - value: "1"
+            label: "1"
+          - value: "2"
+            label: "2"
+          - value: "3"
+            label: "3"
+          - value: "4"
+            label: "4"
+          - value: "5"
+            label: "5"
+          - value: "6"
+            label: "6"
+      gap:
+        type: select
+        label:
+          en: "Grid Gap"
+          tr: "Izgara Boşluğu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "collapse"
+            label:
+              en: "None (Collapse)"
+              tr: "Yok (Bitişik)"
+          - value: "sm"
+            label:
+              en: "Small (1rem / 16px)"
+              tr: "Küçük (1rem / 16px)"
+          - value: "md"
+            label:
+              en: "Medium (1.5rem / 24px)"
+              tr: "Orta (1.5rem / 24px)"
+          - value: "lg"
+            label:
+              en: "Large (2rem / 32px)"
+              tr: "Büyük (2rem / 32px)"
+          - value: "xl"
+            label:
+              en: "Extra Large (3rem / 48px)"
+              tr: "Çok Büyük (3rem / 48px)"
+      masonry:
+        type: select
+        label:
+          en: "Masonry Layout"
+          tr: "Duvar (Masonry) Düzeni"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "Disabled (Standard Grid)"
+              tr: "Kapalı (Standart Izgara)"
+          - value: "columns"
+            label:
+              en: "Columns Masonry"
+              tr: "Sütun Tabanlı Duvar"
+  card_defaults:
+    title:
+      en: "Card Defaults"
+      tr: "Varsayılan Kart Stili"
+    fields:
+      card_variant:
+        type: select
+        label:
+          en: "Default Card Variant"
+          tr: "Kart Varyantı"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Default"
+              tr: "Varsayılan"
+          - value: "bordered"
+            label:
+              en: "Bordered"
+              tr: "Kenarlıklı"
+          - value: "flat"
+            label:
+              en: "Flat (Clean)"
+              tr: "Düz (Sade)"
+          - value: "raised"
+            label:
+              en: "Raised (Shadow)"
+              tr: "Gölgeli (Raised)"
+      media_align:
+        type: select
+        label:
+          en: "Media Alignment"
+          tr: "Medya Hizalaması"
+        default: "top"
+        col_span: 6
+        options:
+          - value: "top"
+            label:
+              en: "Top"
+              tr: "Üst"
+          - value: "bottom"
+            label:
+              en: "Bottom"
+              tr: "Alt"
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sol"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağ"
+      text_align:
+        type: select
+        label:
+          en: "Text Alignment"
+          tr: "Metin Hizalaması"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa"
+      button_style:
+        type: select
+        label:
+          en: "Button / Link Style"
+          tr: "Buton Stili"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Primary Button"
+              tr: "Birincil Buton"
+          - value: "secondary"
+            label:
+              en: "Secondary Button"
+              tr: "İkincil Buton"
+          - value: "outline"
+            label:
+              en: "Outline Button"
+              tr: "Kenarlıklı Buton"
+          - value: "soft"
+            label:
+              en: "Soft Button"
+              tr: "Yumuşak Buton"
+          - value: "link"
+            label:
+              en: "Text Link"
+              tr: "Düz Link"
+  filter:
+    title:
+      en: "Filter Navigation"
+      tr: "Kategori Filtresi"
+    fields:
+      filter:
+        type: checkbox
+        label:
+          en: "Enable Filter"
+          tr: "Filtreyi Etkinleştir"
+        default: false
+        col_span: 6
+      filter_style:
+        type: select
+        label:
+          en: "Filter Style"
+          tr: "Filtre Stili"
+        default: "pills"
+        col_span: 6
+        options:
+          - value: "pills"
+            label:
+              en: "Pills (Preline Soft)"
+              tr: "Kapsül Butonlar"
+          - value: "tabs"
+            label:
+              en: "Underline Tabs"
+              tr: "Alt Çizgili Sekmeler"
+          - value: "buttons"
+            label:
+              en: "Outline Buttons"
+              tr: "Çizgili Butonlar"
+      filter_align:
+        type: select
+        label:
+          en: "Filter Alignment"
+          tr: "Filtre Hizalaması"
+        default: "center"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa"
+      filter_all_label:
+        type: text_line
+        label:
+          en: "All Items Button Label"
+          tr: "Tümü Butonu Etiketi"
+        default: "All"
+        col_span: 6
+  spacing:
+    title:
+      en: "Spacing & Advanced"
+      tr: "Boşluklar ve Gelişmiş"
+    fields:
+      margin_top:
+        type: select
+        label:
+          en: "Margin Top"
+          tr: "Üst Boşluk"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "xs"
+            label: "XS"
+          - value: "sm"
+            label: "SM"
+          - value: "default"
+            label: "Default"
+          - value: "lg"
+            label: "LG"
+          - value: "xl"
+            label: "XL"
+      margin_bottom:
+        type: select
+        label:
+          en: "Margin Bottom"
+          tr: "Alt Boşluk"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "none"
+            label: "None"
+          - value: "xs"
+            label: "XS"
+          - value: "sm"
+            label: "SM"
+          - value: "default"
+            label: "Default"
+          - value: "lg"
+            label: "LG"
+          - value: "xl"
+            label: "XL"
+      id:
+        type: text_line
+        label:
+          en: "HTML ID Attribute"
+          tr: "HTML ID Özelliği"
+        col_span: 6
+      custom_class:
+        type: text_line
+        label:
+          en: "Custom CSS Classes"
+          tr: "Özel CSS Sınıfları"
+        col_span: 6

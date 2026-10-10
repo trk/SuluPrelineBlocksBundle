@@ -1,0 +1,54 @@
+presets:
+  - id: "three_columns_feature"
+    name:
+      en: "3-Column Feature Cards"
+      tr: "3 Sütunlu Özellik Kartları"
+    description:
+      en: "Standard 3-column card grid with bordered cards and medium gap"
+      tr: "Kenarlıklı kartlar ve orta boşluklu 3 sütunlu kart ızgarası"
+    props:
+      columns_default: "1"
+      columns_sm: "2"
+      columns_md: "3"
+      columns_lg: "3"
+      gap: "md"
+      card_variant: "bordered"
+      media_align: "top"
+      button_style: "primary"
+
+  - id: "four_columns_flat"
+    name:
+      en: "4-Column Clean Grid"
+      tr: "4 Sütunlu Sade Izgara"
+    description:
+      en: "Clean 4-column layout for product or service showcases"
+      tr: "Ürün veya hizmetler için sade 4 sütunlu düzen"
+    props:
+      columns_default: "1"
+      columns_sm: "2"
+      columns_md: "3"
+      columns_lg: "4"
+      gap: "lg"
+      card_variant: "flat"
+      media_align: "top"
+      button_style: "soft"
+
+  - id: "filterable_portfolio"
+    name:
+      en: "Filterable Card Portfolio"
+      tr: "Filtrelenebilir Kart Portfolyosu"
+    description:
+      en: "3-column card grid with category pills filter and raised cards"
+      tr: "Kategori hap filtreli ve gölgeli kartlara sahip 3 sütunlu portfolyo"
+    props:
+      columns_default: "1"
+      columns_sm: "2"
+      columns_md: "3"
+      columns_lg: "3"
+      gap: "md"
+      filter: true
+      filter_style: "pills"
+      filter_align: "center"
+      card_variant: "raised"
+      media_align: "top"
+      button_style: "outline"

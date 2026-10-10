@@ -1,0 +1,5 @@
+<twig:Grid
+    title="{{ block.title|default(null) }}"
+    items="{{ block.items|default([]) }}"
+    props="{{ block|merge(block.props|default({})) }}"
+/>
