@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>totop</key>
+    <meta>
+        <title lang="en">Back to Top Button</title>
+        <title lang="tr">Yukarı Çık Butonu</title>
+        <title lang="de">Nach-Oben-Button</title>
+        <title lang="ru">Кнопка «Наверх»</title>
+        <title lang="es">Botón volver arriba</title>
+        <title lang="fr">Bouton retour en haut</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="position" type="single_select">
+            <meta>
+                <title lang="en">Position</title>
+                <title lang="tr">Konum</title>
+            </meta>
+            <params>
+                <param name="default_value" value="bottom_right"/>
+                <param name="values" type="collection">
+                    <param name="bottom_right">
+                        <meta><title lang="en">Bottom Right</title><title lang="tr">Sağ Alt</title></meta>
+                    </param>
+                    <param name="bottom_left">
+                        <meta><title lang="en">Bottom Left</title><title lang="tr">Sol Alt</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="show_label" type="checkbox">
+            <meta>
+                <title lang="en">Show Text Label</title>
+                <title lang="tr">Metin Etiketini Göster</title>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="totop"/>
+            </params>
+        </property>
+    </properties>
+</template>

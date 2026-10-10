@@ -1,0 +1,6 @@
+<twig:Popover
+    title="{{ block.title|default(null) }}"
+    :image="block.image|default(null)"
+    :items="block.items|default([])"
+    :props="block|merge(block.props|default({}))"
+/>

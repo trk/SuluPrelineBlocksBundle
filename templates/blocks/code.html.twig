@@ -1,0 +1,8 @@
+<twig:Code
+    title="{{ block.title|default(null) }}"
+    code="{{ block.code|default('') }}"
+    language="{{ block.language|default('plaintext') }}"
+    :show_copy="block.show_copy|default(true)"
+    :show_line_numbers="block.show_line_numbers|default(false)"
+    :props="block|merge(block.props|default({}))"
+/>

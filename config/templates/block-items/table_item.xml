@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<type name="table_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Table Row</title>
+        <title lang="tr">Tablo Satırı</title>
+        <title lang="de">Tabellenzeile</title>
+        <title lang="ru">Строка таблицы</title>
+        <title lang="es">Fila de tabla</title>
+        <title lang="fr">Ligne de tableau</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/meta.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

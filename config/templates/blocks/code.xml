@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>code</key>
+    <meta>
+        <title lang="en">Code Block</title>
+        <title lang="tr">Kod Bloğu</title>
+        <title lang="de">Code-Block</title>
+        <title lang="ru">Блок кода</title>
+        <title lang="es">Bloque de código</title>
+        <title lang="fr">Bloc de code</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="code" type="text_area" mandatory="true">
+            <meta>
+                <title lang="en">Code Content</title>
+                <title lang="tr">Kod İçeriği</title>
+            </meta>
+        </property>
+
+        <property name="language" type="single_select">
+            <meta>
+                <title lang="en">Language</title>
+                <title lang="tr">Programlama Dili</title>
+            </meta>
+            <params>
+                <param name="default_value" value="plaintext"/>
+                <param name="values" type="collection">
+                    <param name="plaintext">
+                        <meta><title lang="en">Plain Text</title></meta>
+                    </param>
+                    <param name="php">
+                        <meta><title lang="en">PHP</title></meta>
+                    </param>
+                    <param name="javascript">
+                        <meta><title lang="en">JavaScript</title></meta>
+                    </param>
+                    <param name="typescript">
+                        <meta><title lang="en">TypeScript</title></meta>
+                    </param>
+                    <param name="html">
+                        <meta><title lang="en">HTML</title></meta>
+                    </param>
+                    <param name="css">
+                        <meta><title lang="en">CSS</title></meta>
+                    </param>
+                    <param name="bash">
+                        <meta><title lang="en">Bash / Shell</title></meta>
+                    </param>
+                    <param name="json">
+                        <meta><title lang="en">JSON</title></meta>
+                    </param>
+                    <param name="yaml">
+                        <meta><title lang="en">YAML</title></meta>
+                    </param>
+                    <param name="sql">
+                        <meta><title lang="en">SQL</title></meta>
+                    </param>
+                    <param name="python">
+                        <meta><title lang="en">Python</title></meta>
+                    </param>
+                    <param name="markdown">
+                        <meta><title lang="en">Markdown</title></meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="show_copy" type="checkbox">
+            <meta>
+                <title lang="en">Show Copy Button</title>
+                <title lang="tr">Kopyala Butonunu Göster</title>
+            </meta>
+            <params>
+                <param name="default_value" value="true"/>
+            </params>
+        </property>
+
+        <property name="show_line_numbers" type="checkbox">
+            <meta>
+                <title lang="en">Show Line Numbers</title>
+                <title lang="tr">Satır Numaralarını Göster</title>
+            </meta>
+            <params>
+                <param name="default_value" value="false"/>
+            </params>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="code"/>
+            </params>
+        </property>
+    </properties>
+</template>

@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>popover</key>
+    <meta>
+        <title lang="en">Media Hotspots (Popover)</title>
+        <title lang="tr">İnteraktif Görsel Noktaları (Popover)</title>
+        <title lang="de">Interaktive Bild-Hotspots</title>
+        <title lang="ru">Интерактивные точки на фото</title>
+        <title lang="es">Marcadores en imagen</title>
+        <title lang="fr">Points interactifs d'image</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="image" type="single_media_selection" mandatory="true">
+            <meta>
+                <title lang="en">Background Image</title>
+                <title lang="tr">Arka Plan Görseli</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <block name="items" default-type="popover_item" minOccurs="1">
+            <meta>
+                <title lang="en">Hotspot Markers</title>
+                <title lang="tr">İnteraktif Noktalar</title>
+                <title lang="de">Hotspot-Markierungen</title>
+                <title lang="ru">Точки на изображении</title>
+                <title lang="es">Marcadores</title>
+                <title lang="fr">Marqueurs</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/popover_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="popover"/>
+            </params>
+        </property>
+    </properties>
+</template>

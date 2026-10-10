@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<type name="social_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Social Link</title>
+        <title lang="tr">Sosyal Medya Bağlantısı</title>
+        <title lang="de">Social-Media-Link</title>
+        <title lang="ru">Ссылка на соцсеть</title>
+        <title lang="es">Enlace de redes sociales</title>
+        <title lang="fr">Lien de réseau social</title>
+    </meta>
+    <properties>
+        <property name="network" type="single_select">
+            <meta>
+                <title lang="en">Platform</title>
+                <title lang="tr">Platform</title>
+                <title lang="de">Plattform</title>
+            </meta>
+            <params>
+                <param name="default_value" value="x"/>
+                <param name="values" type="collection">
+                    <param name="x">
+                        <meta>
+                            <title lang="en">X (Twitter)</title>
+                        </meta>
+                    </param>
+                    <param name="facebook">
+                        <meta>
+                            <title lang="en">Facebook</title>
+                        </meta>
+                    </param>
+                    <param name="instagram">
+                        <meta>
+                            <title lang="en">Instagram</title>
+                        </meta>
+                    </param>
+                    <param name="linkedin">
+                        <meta>
+                            <title lang="en">LinkedIn</title>
+                        </meta>
+                    </param>
+                    <param name="youtube">
+                        <meta>
+                            <title lang="en">YouTube</title>
+                        </meta>
+                    </param>
+                    <param name="github">
+                        <meta>
+                            <title lang="en">GitHub</title>
+                        </meta>
+                    </param>
+                    <param name="telegram">
+                        <meta>
+                            <title lang="en">Telegram</title>
+                        </meta>
+                    </param>
+                    <param name="whatsapp">
+                        <meta>
+                            <title lang="en">WhatsApp</title>
+                        </meta>
+                    </param>
+                    <param name="tiktok">
+                        <meta>
+                            <title lang="en">TikTok</title>
+                        </meta>
+                    </param>
+                    <param name="email">
+                        <meta>
+                            <title lang="en">Email</title>
+                            <title lang="tr">E-posta</title>
+                        </meta>
+                    </param>
+                    <param name="website">
+                        <meta>
+                            <title lang="en">Website</title>
+                            <title lang="tr">Web Sitesi</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+    </properties>
+</type>

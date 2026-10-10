@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>social</key>
+    <meta>
+        <title lang="en">Social Links</title>
+        <title lang="tr">Sosyal Medya</title>
+        <title lang="de">Social Media</title>
+        <title lang="ru">Социальные сети</title>
+        <title lang="es">Redes sociales</title>
+        <title lang="fr">Réseaux sociaux</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <block name="items" default-type="social_item" minOccurs="1">
+            <meta>
+                <title lang="en">Social Links</title>
+                <title lang="tr">Sosyal Medya Bağlantıları</title>
+                <title lang="de">Social-Media-Links</title>
+                <title lang="ru">Ссылки на соцсети</title>
+                <title lang="es">Enlaces de redes sociales</title>
+                <title lang="fr">Liens de réseaux sociaux</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/social_item.xml"/>
+            </types>
+        </block>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="social"/>
+            </params>
+        </property>
+    </properties>
+</template>

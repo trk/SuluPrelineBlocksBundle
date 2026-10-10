@@ -1,0 +1,81 @@
+{% set items = this.normalizedItems %}
+<div {{ attributes.defaults({ class: 'w-full my-6' }) }}>
+    {% if this.title %}
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ this.title }}</h3>
+    {% endif %}
+
+    <div class="{{ this.wrapperClasses }}">
+        <table class="{{ this.tableClasses }}">
+            {% if this.hasHeader %}
+                <thead class="{{ this.theadClasses }}">
+                    <tr>
+                        {% if this.header_title %}
+                            <th scope="col" class="{{ this.thClasses }}">{{ this.header_title }}</th>
+                        {% endif %}
+                        {% if this.header_meta %}
+                            <th scope="col" class="{{ this.thClasses }}">{{ this.header_meta }}</th>
+                        {% endif %}
+                        {% if this.header_content %}
+                            <th scope="col" class="{{ this.thClasses }}">{{ this.header_content }}</th>
+                        {% endif %}
+                        {% if this.header_badge %}
+                            <th scope="col" class="{{ this.thClasses }}">{{ this.header_badge }}</th>
+                        {% endif %}
+                        {% if this.header_link %}
+                            <th scope="col" class="{{ this.thClasses }} text-end">{{ this.header_link }}</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+            {% endif %}
+            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                {% for item in items %}
+                    <tr class="{{ this.getRowClasses(loop.index0) }}">
+                        {% if this.header_title or item.title or item.image_url %}
+                            <td class="{{ this.tdClasses }} font-medium">
+                                <div class="flex items-center gap-x-3">
+                                    {% if item.image_url %}
+                                        <img class="size-8 rounded-full object-cover shrink-0" src="{{ item.image_url }}" alt="{{ item.title }}">
+                                    {% endif %}
+                                    <span class="text-gray-900 dark:text-white font-semibold">{{ item.title }}</span>
+                                </div>
+                            </td>
+                        {% endif %}
+
+                        {% if this.header_meta or item.meta %}
+                            <td class="{{ this.tdClasses }} text-gray-500 dark:text-neutral-400">
+                                {{ item.meta }}
+                            </td>
+                        {% endif %}
+
+                        {% if this.header_content or item.content %}
+                            <td class="{{ this.tdClasses }} text-gray-600 dark:text-neutral-300">
+                                {{ item.content|nl2br }}
+                            </td>
+                        {% endif %}
+
+                        {% if this.header_badge or item.badge %}
+                            <td class="{{ this.tdClasses }}">
+                                {% if item.badge %}
+                                    <span class="inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400">
+                                        {{ item.badge }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+
+                        {% if this.header_link or item.link %}
+                            <td class="{{ this.tdClasses }} text-end font-medium">
+                                {% if item.link %}
+                                    <a class="inline-flex items-center gap-x-1 text-sm text-primary-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-primary-500" href="{{ item.link }}">
+                                        {{ item.link_title }}
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                    </a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

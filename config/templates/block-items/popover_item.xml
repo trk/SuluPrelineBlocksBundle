@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<type name="popover_item" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Hotspot Marker</title>
+        <title lang="tr">İnteraktif Nokta (Hotspot)</title>
+        <title lang="de">Hotspot-Markierung</title>
+        <title lang="ru">Точка на изображении</title>
+        <title lang="es">Marcador interactivo</title>
+        <title lang="fr">Marqueur interactif</title>
+    </meta>
+    <properties>
+        <property name="position_x" type="number">
+            <meta>
+                <title lang="en">Horizontal Position (%)</title>
+                <title lang="tr">Yatay Konum (%)</title>
+                <info_text lang="en">Percentage from left edge (0 to 100)</info_text>
+                <info_text lang="tr">Sol kenardan yüzde mesafe (0 ile 100 arası)</info_text>
+            </meta>
+            <params>
+                <param name="min" value="0"/>
+                <param name="max" value="100"/>
+                <param name="step" value="1"/>
+            </params>
+        </property>
+        <property name="position_y" type="number">
+            <meta>
+                <title lang="en">Vertical Position (%)</title>
+                <title lang="tr">Dikey Konum (%)</title>
+                <info_text lang="en">Percentage from top edge (0 to 100)</info_text>
+                <info_text lang="tr">Üst kenardan yüzde mesafe (0 ile 100 arası)</info_text>
+            </meta>
+            <params>
+                <param name="min" value="0"/>
+                <param name="max" value="100"/>
+                <param name="step" value="1"/>
+            </params>
+        </property>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/content.xml"/>
+        <xi:include href="../fields/badge.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+    </properties>
+</type>

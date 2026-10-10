@@ -1,0 +1,13 @@
+<div {{ attributes.defaults({ class: this.positionClasses }) }}>
+    <button type="button"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="{{ this.buttonClasses }}"
+            aria-label="{{ this.title|default('Scroll to top') }}">
+        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6"/>
+        </svg>
+        {% if this.show_label %}
+            <span class="text-xs font-semibold">{{ this.title|default('Top') }}</span>
+        {% endif %}
+    </button>
+</div>
