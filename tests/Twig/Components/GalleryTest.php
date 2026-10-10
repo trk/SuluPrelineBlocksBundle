@@ -19,8 +19,40 @@ final class GalleryTest extends TestCase
         self::assertFalse($gallery->isMasonry());
         self::assertEmpty($gallery->getNormalizedItems());
         self::assertEmpty($gallery->getFilterTags());
-        self::assertStringContainsString('grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6', $gallery->getContainerClasses());
+        self::assertSame('grid grid-cols-1 md:grid-cols-3 gap-6', $gallery->getContainerClasses());
         self::assertSame('justify-center', $gallery->getFilterAlignClass());
+    }
+
+    public function testInheritLowerBreakpointWhenHigherBreakpointsAreNone(): void
+    {
+        $gallery = new Gallery();
+        $gallery->props = [
+            'columns_default' => '1',
+            'columns_sm' => '',
+            'columns_md' => '2',
+            'columns_lg' => '',
+            'columns_xl' => '',
+        ];
+
+        self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $gallery->getContainerClasses());
+
+        // When only md: 2 is provided, default mobile fallback is 1 and md applies for >= 768px
+        $gallery2 = new Gallery();
+        $gallery2->props = [
+            'columns_md' => '2',
+        ];
+        self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $gallery2->getContainerClasses());
+
+        // When only default: 2 is provided and responsive are inherit/empty, 2 applies everywhere
+        $gallery3 = new Gallery();
+        $gallery3->props = [
+            'columns_default' => '2',
+            'columns_sm' => '',
+            'columns_md' => '',
+            'columns_lg' => '',
+            'columns_xl' => '',
+        ];
+        self::assertSame('grid grid-cols-2 gap-6', $gallery3->getContainerClasses());
     }
 
     public function testColumnsAndGapOverrides(): void

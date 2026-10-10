@@ -194,11 +194,27 @@ final class Gallery
             default => 'gap-6',
         };
 
-        $colsDefault = isset($props['columns_default']) && \is_scalar($props['columns_default']) ? (string) $props['columns_default'] : '1';
-        $colsSm = isset($props['columns_sm']) && \is_scalar($props['columns_sm']) ? (string) $props['columns_sm'] : '2';
-        $colsMd = isset($props['columns_md']) && \is_scalar($props['columns_md']) ? (string) $props['columns_md'] : '3';
-        $colsLg = isset($props['columns_lg']) && \is_scalar($props['columns_lg']) ? (string) $props['columns_lg'] : '4';
-        $colsXl = isset($props['columns_xl']) && \is_scalar($props['columns_xl']) ? (string) $props['columns_xl'] : '';
+        $colsDefault = isset($props['columns_default']) && \is_scalar($props['columns_default']) && '' !== (string) $props['columns_default'] && 'inherit' !== (string) $props['columns_default'] && 'none' !== (string) $props['columns_default']
+            ? (string) $props['columns_default']
+            : '1';
+
+        $hasExplicitResponsive = \array_key_exists('columns_sm', $props)
+            || \array_key_exists('columns_md', $props)
+            || \array_key_exists('columns_lg', $props)
+            || \array_key_exists('columns_xl', $props);
+
+        $colsSm = isset($props['columns_sm']) && \is_scalar($props['columns_sm']) && 'inherit' !== (string) $props['columns_sm'] && 'none' !== (string) $props['columns_sm']
+            ? (string) $props['columns_sm']
+            : '';
+        $colsMd = isset($props['columns_md']) && \is_scalar($props['columns_md']) && 'inherit' !== (string) $props['columns_md'] && 'none' !== (string) $props['columns_md']
+            ? (string) $props['columns_md']
+            : (!$hasExplicitResponsive ? '3' : '');
+        $colsLg = isset($props['columns_lg']) && \is_scalar($props['columns_lg']) && 'inherit' !== (string) $props['columns_lg'] && 'none' !== (string) $props['columns_lg']
+            ? (string) $props['columns_lg']
+            : '';
+        $colsXl = isset($props['columns_xl']) && \is_scalar($props['columns_xl']) && 'inherit' !== (string) $props['columns_xl'] && 'none' !== (string) $props['columns_xl']
+            ? (string) $props['columns_xl']
+            : '';
 
         if ($this->isMasonry()) {
             $defaultColClass = match ($colsDefault) {
@@ -212,29 +228,32 @@ final class Gallery
 
             $smColClass = match ($colsSm) {
                 '1' => 'sm:columns-1',
+                '2' => 'sm:columns-2',
                 '3' => 'sm:columns-3',
                 '4' => 'sm:columns-4',
                 '5' => 'sm:columns-5',
                 '6' => 'sm:columns-6',
-                default => 'sm:columns-2',
+                default => '',
             };
 
             $mdColClass = match ($colsMd) {
                 '1' => 'md:columns-1',
                 '2' => 'md:columns-2',
+                '3' => 'md:columns-3',
                 '4' => 'md:columns-4',
                 '5' => 'md:columns-5',
                 '6' => 'md:columns-6',
-                default => 'md:columns-3',
+                default => '',
             };
 
             $lgColClass = match ($colsLg) {
                 '1' => 'lg:columns-1',
                 '2' => 'lg:columns-2',
                 '3' => 'lg:columns-3',
+                '4' => 'lg:columns-4',
                 '5' => 'lg:columns-5',
                 '6' => 'lg:columns-6',
-                default => 'lg:columns-4',
+                default => '',
             };
 
             $xlColClass = match ($colsXl) {
@@ -270,29 +289,32 @@ final class Gallery
 
         $smGridClass = match ($colsSm) {
             '1' => 'sm:grid-cols-1',
+            '2' => 'sm:grid-cols-2',
             '3' => 'sm:grid-cols-3',
             '4' => 'sm:grid-cols-4',
             '5' => 'sm:grid-cols-5',
             '6' => 'sm:grid-cols-6',
-            default => 'sm:grid-cols-2',
+            default => '',
         };
 
         $mdGridClass = match ($colsMd) {
             '1' => 'md:grid-cols-1',
             '2' => 'md:grid-cols-2',
+            '3' => 'md:grid-cols-3',
             '4' => 'md:grid-cols-4',
             '5' => 'md:grid-cols-5',
             '6' => 'md:grid-cols-6',
-            default => 'md:grid-cols-3',
+            default => '',
         };
 
         $lgGridClass = match ($colsLg) {
             '1' => 'lg:grid-cols-1',
             '2' => 'lg:grid-cols-2',
             '3' => 'lg:grid-cols-3',
+            '4' => 'lg:grid-cols-4',
             '5' => 'lg:grid-cols-5',
             '6' => 'lg:grid-cols-6',
-            default => 'lg:grid-cols-4',
+            default => '',
         };
 
         $xlGridClass = match ($colsXl) {

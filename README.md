@@ -54,7 +54,7 @@ Modern CMS websites often suffer from tight coupling: hardcoded HTML in page tem
 │  trk/sulu-preline-blocks-bundle (UI Component Layer)   │
 │  - 9 out-of-the-box Preline UI 5 components            │
 │  - Accessible Twig Components & semantic markup        │
-│  - Curated default YAML prop schemas & presets         │
+│  - Curated default YAML prop schemas                   │
 │  - Preline JS lifecycle & Live Preview autoInit        │
 └───────────────────────────┬────────────────────────────┘
                             │
@@ -219,11 +219,11 @@ Sulu automatically checks the host application's `config/templates/blocks/` dire
 config/templates/blocks/card.xml  <-- Overrides vendor card.xml!
 ```
 
-### 2. Overriding Prop Schemas & Presets
-`SuluPrelineBlocksBundle` prepends its schema and preset directories to `sulu_block_suite`. The host project directories take precedence:
+### 2. Overriding Prop Schemas & Defining Presets
+`SuluPrelineBlocksBundle` provides the foundational prop schemas in `config/blocks/props/` and deliberately contains **no presets**. Presets are 100% project-driven:
 
-- **Schemas**: `config/blocks/props/card.yaml` in your project overrides the bundle's `card.yaml`.
-- **Presets**: `config/blocks/presets/card.yaml` in your project merges with bundle presets; matching IDs override bundle defaults.
+- **Schemas**: `config/blocks/props/card.yaml` in your project overrides the bundle's default `card.yaml`.
+- **Presets**: Create `config/blocks/presets/card.yaml` in your project to define brand-specific visual style presets.
 
 ### 3. Overriding Twig Components & HTML
 To override the HTML markup of any component:

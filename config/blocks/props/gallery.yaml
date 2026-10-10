@@ -16,28 +16,26 @@ tabs:
             label: "1"
           - value: "2"
             label: "2"
+          - value: "3"
+            label: "3"
+          - value: "4"
+            label: "4"
+          - value: "5"
+            label: "5"
+          - value: "6"
+            label: "6"
       columns_sm:
         type: select
         label:
-          en: "Columns (Small/Tablet)"
-          tr: "Sütun Sayısı (Tablet)"
-        default: "2"
+          en: "Columns (Small Phone - 640px)"
+          tr: "Sütun Sayısı (Küçük Ekran - 640px)"
+        default: ""
         col_span: 6
         options:
-          - value: "1"
-            label: "1"
-          - value: "2"
-            label: "2"
-          - value: "3"
-            label: "3"
-      columns_md:
-        type: select
-        label:
-          en: "Columns (Medium)"
-          tr: "Sütun Sayısı (Orta)"
-        default: "3"
-        col_span: 6
-        options:
+          - value: ""
+            label:
+              en: "Inherit (Devral)"
+              tr: "Devral (Mobilden)"
           - value: "1"
             label: "1"
           - value: "2"
@@ -46,14 +44,46 @@ tabs:
             label: "3"
           - value: "4"
             label: "4"
+          - value: "5"
+            label: "5"
+          - value: "6"
+            label: "6"
+      columns_md:
+        type: select
+        label:
+          en: "Columns (Tablet - 768px)"
+          tr: "Sütun Sayısı (Tablet / Orta - 768px)"
+        default: "3"
+        col_span: 6
+        options:
+          - value: ""
+            label:
+              en: "Inherit (Devral)"
+              tr: "Devral"
+          - value: "1"
+            label: "1"
+          - value: "2"
+            label: "2"
+          - value: "3"
+            label: "3"
+          - value: "4"
+            label: "4"
+          - value: "5"
+            label: "5"
+          - value: "6"
+            label: "6"
       columns_lg:
         type: select
         label:
-          en: "Columns (Large Desktop)"
-          tr: "Sütun Sayısı (Masaüstü)"
-        default: "4"
+          en: "Columns (Desktop - 1024px)"
+          tr: "Sütun Sayısı (Masaüstü - 1024px)"
+        default: ""
         col_span: 6
         options:
+          - value: ""
+            label:
+              en: "Inherit (Devral)"
+              tr: "Devral"
           - value: "1"
             label: "1"
           - value: "2"
@@ -69,11 +99,15 @@ tabs:
       columns_xl:
         type: select
         label:
-          en: "Columns (Extra Large Desktop)"
-          tr: "Sütun Sayısı (Geniş Ekran)"
-        default: "4"
+          en: "Columns (Large Desktop - 1280px)"
+          tr: "Sütun Sayısı (Geniş Ekran - 1280px)"
+        default: ""
         col_span: 6
         options:
+          - value: ""
+            label:
+              en: "Inherit (Devral)"
+              tr: "Devral"
           - value: "1"
             label: "1"
           - value: "2"

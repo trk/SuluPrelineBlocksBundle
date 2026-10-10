@@ -18,8 +18,40 @@ final class GridTest extends TestCase
         self::assertFalse($grid->isMasonry());
         self::assertEmpty($grid->getNormalizedItems());
         self::assertEmpty($grid->getFilterTags());
-        self::assertStringContainsString('grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6', $grid->getContainerClasses());
+        self::assertSame('grid grid-cols-1 md:grid-cols-3 gap-6', $grid->getContainerClasses());
         self::assertSame('justify-center', $grid->getFilterAlignClass());
+    }
+
+    public function testInheritLowerBreakpointWhenHigherBreakpointsAreNone(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'columns_default' => '1',
+            'columns_sm' => '',
+            'columns_md' => '2',
+            'columns_lg' => '',
+            'columns_xl' => '',
+        ];
+
+        self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $grid->getContainerClasses());
+
+        // When only md: 2 is provided, default mobile fallback is 1 and md applies for >= 768px
+        $grid2 = new Grid();
+        $grid2->props = [
+            'columns_md' => '2',
+        ];
+        self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $grid2->getContainerClasses());
+
+        // When only default: 2 is provided and responsive are inherit/empty, 2 applies everywhere
+        $grid3 = new Grid();
+        $grid3->props = [
+            'columns_default' => '2',
+            'columns_sm' => '',
+            'columns_md' => '',
+            'columns_lg' => '',
+            'columns_xl' => '',
+        ];
+        self::assertSame('grid grid-cols-2 gap-6', $grid3->getContainerClasses());
     }
 
     public function testColumnsAndGapOverrides(): void

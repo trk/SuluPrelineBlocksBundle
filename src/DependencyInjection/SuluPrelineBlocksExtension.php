@@ -52,12 +52,6 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
                         '%kernel.project_dir%/config/blocks/props',
                     ],
                 ],
-                'presets' => [
-                    'yaml_dir' => [
-                        \dirname(__DIR__, 2) . '/config/blocks/presets',
-                        '%kernel.project_dir%/config/blocks/presets',
-                    ],
-                ],
             ]);
         }
     }
