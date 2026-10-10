@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>headline</key>
+    <meta>
+        <title lang="en">Headline</title>
+        <title lang="tr">Başlık</title>
+        <title lang="ru">Заголовок</title>
+        <title lang="fr">Titre</title>
+        <title lang="es">Encabezado</title>
+        <title lang="de">Überschrift</title>
+    </meta>
+    <properties>
+        <property name="content" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Headline Text</title>
+                <title lang="tr">Başlık Metni</title>
+                <title lang="ru">Текст заголовка</title>
+                <title lang="fr">Texte du titre</title>
+                <title lang="es">Texto del encabezado</title>
+                <title lang="de">Überschriftstext</title>
+            </meta>
+        </property>
+
+        <property name="link" type="link">
+            <meta>
+                <title lang="en">Link</title>
+                <title lang="tr">Bağlantı</title>
+                <title lang="ru">Ссылка</title>
+                <title lang="fr">Lien</title>
+                <title lang="es">Enlace</title>
+                <title lang="de">Link</title>
+            </meta>
+        </property>
+
+        <property name="image" type="single_media_selection">
+            <meta>
+                <title lang="en">Image / Graphic</title>
+                <title lang="tr">Görsel / Grafik</title>
+                <title lang="ru">Изображение / Графика</title>
+                <title lang="fr">Image / Graphique</title>
+                <title lang="es">Imagen / Gráfico</title>
+                <title lang="de">Bild / Grafik</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="icon" type="single_icon_selection">
+            <meta>
+                <title lang="en">Icon</title>
+                <title lang="tr">İkon</title>
+                <title lang="ru">Иконка</title>
+                <title lang="fr">Icône</title>
+                <title lang="es">Icono</title>
+                <title lang="de">Symbol</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
+            </params>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="headline"/>
+            </params>
+        </property>
+    </properties>
+</template>

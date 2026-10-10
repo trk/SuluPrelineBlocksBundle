@@ -1,0 +1,57 @@
+headline:
+    presets:
+        hero_display:
+            title:
+                tr: "Hero Başlık (H1 / 2XL)"
+                en: "Hero Display (H1 / 2XL)"
+            description:
+                tr: "H1 seviyesinde, ekstra büyük ortalanmış başlık"
+                en: "H1 level, extra large centered display heading"
+            props:
+                tag: "h1"
+                size: "2xl"
+                title_color: "primary"
+                text_align: "center"
+                margin_bottom: "lg"
+
+        section_title:
+            title:
+                tr: "Bölüm Başlığı (H2 / XL)"
+                en: "Section Title (H2 / XL)"
+            description:
+                tr: "H2 seviyesinde, standart bölüm başlığı"
+                en: "H2 level standard section heading"
+            props:
+                tag: "h2"
+                size: "xl"
+                title_color: "default"
+                text_align: "left"
+                margin_bottom: "md"
+
+        bullet_accent:
+            title:
+                tr: "Sol Yanı Vurgu Çubuklu Başlık"
+                en: "Left Bullet Accent Heading"
+            description:
+                tr: "Başlığın solunda modern renkli dikey çubuk vurgusu"
+                en: "Vertical accent bar on the left of the heading"
+            props:
+                tag: "h2"
+                size: "lg"
+                title_decoration: "bullet"
+                text_align: "left"
+                margin_bottom: "md"
+
+        feature_subtitle:
+            title:
+                tr: "Alt Başlık (H3 / MD / Ortalı)"
+                en: "Feature Subtitle (H3 / MD / Centered)"
+            description:
+                tr: "H3 seviyesinde, ikincil renkli ortalı alt başlık"
+                en: "H3 level, secondary colored centered subtitle"
+            props:
+                tag: "h3"
+                size: "md"
+                title_color: "secondary"
+                text_align: "center"
+                margin_bottom: "sm"

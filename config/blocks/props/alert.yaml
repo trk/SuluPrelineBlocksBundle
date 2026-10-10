@@ -1,0 +1,138 @@
+tabs:
+  style:
+    title:
+      en: "Style"
+      tr: "Stil & Durum"
+    fields:
+      alert_style:
+        type: select
+        label:
+          en: "Alert Type"
+          tr: "Bildirim Türü"
+        default: "info"
+        col_span: 6
+        options:
+          - value: "info"
+            label:
+              en: "Info / Blue"
+              tr: "Bilgi / Mavi"
+          - value: "success"
+            label:
+              en: "Success / Green"
+              tr: "Başarı / Yeşil"
+          - value: "warning"
+            label:
+              en: "Warning / Yellow"
+              tr: "Uyarı / Sarı"
+          - value: "danger"
+            label:
+              en: "Danger / Red"
+              tr: "Hata / Tehlike / Kırmızı"
+          - value: "dark"
+            label:
+              en: "Neutral / Dark"
+              tr: "Nötr / Koyu"
+      alert_variant:
+        type: select
+        label:
+          en: "Visual Variant"
+          tr: "Görsel Varyant"
+        default: "soft"
+        col_span: 6
+        options:
+          - value: "soft"
+            label:
+              en: "Soft Pastel"
+              tr: "Yumuşak Pastel (Soft)"
+          - value: "solid"
+            label:
+              en: "Solid Color"
+              tr: "Doygun Dolgulu (Solid)"
+          - value: "outline"
+            label:
+              en: "Border Outline"
+              tr: "Kenarlık Vurgulu (Outline)"
+          - value: "glass"
+            label:
+              en: "Frosted Glass"
+              tr: "Buzlu Cam (Glass)"
+      dismissible:
+        type: select
+        label:
+          en: "Dismissible"
+          tr: "Kapatılabilir (X Butonu)"
+        default: "no"
+        col_span: 6
+        options:
+          - value: "no"
+            label:
+              en: "No"
+              tr: "Hayır"
+          - value: "yes"
+            label:
+              en: "Yes (Close button)"
+              tr: "Evet (Kapatma butonu)"
+      icon_display:
+        type: select
+        label:
+          en: "Icon Display"
+          tr: "İkon Gösterimi"
+        default: "auto"
+        col_span: 6
+        options:
+          - value: "auto"
+            label:
+              en: "Automatic Status Icon"
+              tr: "Türe Uygun Otomatik İkon"
+          - value: "custom"
+            label:
+              en: "Selected Icon Only"
+              tr: "Yalnızca Seçilen İkon"
+          - value: "none"
+            label:
+              en: "No Icon"
+              tr: "İkonsuz"
+      rounded:
+        type: select
+        label:
+          en: "Border Radius"
+          tr: "Köşe Yuvarlama"
+        default: "xl"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Köşesiz"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Hafif (md)"
+          - value: "xl"
+            label:
+              en: "Standard (xl)"
+              tr: "Standart (xl)"
+          - value: "2xl"
+            label:
+              en: "Large (2xl)"
+              tr: "Belirgin (2xl)"
+      title_size:
+        type: select
+        label:
+          en: "Title Size"
+          tr: "Başlık Boyutu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Standart"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük"

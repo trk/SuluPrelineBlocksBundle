@@ -1,0 +1,77 @@
+overlay:
+    presets:
+        bottom_gradient_hero:
+            title:
+                tr: "Alttan Degrade Vurgulu (Standart)"
+                en: "Bottom Gradient Story (Standard)"
+            description:
+                tr: "16:9 medya, alttan karartmalı degrade, sol üstte rozet ve büyük başlık"
+                en: "16:9 media with bottom dark gradient, badge on top-left and large heading"
+            props:
+                overlay_position: "bottom"
+                overlay_mode: "always"
+                overlay_style: "gradient-bottom"
+                media_aspect_ratio: "16-9"
+                title_size: "xl"
+                title_color: "white"
+                rounded: "2xl"
+                shadow: "lg"
+                link_overlay: "card"
+
+        hover_portfolio_card:
+            title:
+                tr: "Hover ile Açılan Portfolyo"
+                en: "Hover Reveal Portfolio"
+            description:
+                tr: "Hover sırasında aşağıdan yukarı kayarak açılan koyu cam katman ve görsel zoom"
+                en: "Dark glass overlay sliding up on hover with smooth image zoom"
+            props:
+                overlay_position: "center"
+                overlay_mode: "hover"
+                overlay_style: "dark-glass"
+                overlay_transition: "slide-up"
+                image_transition: "scale-up"
+                media_aspect_ratio: "4-3"
+                text_align: "center"
+                rounded: "2xl"
+                shadow: "md"
+                button_style: "white"
+                link_overlay: "card"
+
+        center_glass_card:
+            title:
+                tr: "Ortalı Buzlu Cam Kart"
+                en: "Centered Frosted Glass"
+            description:
+                tr: "Medya üzerinde ortalanmış şık buzlu cam kutu ve yüksek kontrast"
+                en: "Frosted dark glass centered box over background media with high contrast"
+            props:
+                overlay_position: "center"
+                overlay_mode: "always"
+                overlay_style: "dark-glass"
+                media_aspect_ratio: "16-9"
+                text_align: "center"
+                title_size: "lg"
+                title_color: "white"
+                rounded: "2xl"
+                shadow: "lg"
+                button_style: "white"
+                link_overlay: "card"
+
+        editorial_square:
+            title:
+                tr: "Kare Editöryal Katman"
+                en: "Editorial Square Overlay"
+            description:
+                tr: "1:1 kare format, tam degrade ve modern köşe yuvarlama"
+                en: "1:1 square ratio with full gradient and modern rounded corners"
+            props:
+                overlay_position: "bottom-left"
+                overlay_mode: "always"
+                overlay_style: "gradient-bottom"
+                media_aspect_ratio: "1-1"
+                rounded: "3xl"
+                title_size: "lg"
+                title_color: "white"
+                meta_badge_style: "primary_pill"
+                link_overlay: "card"

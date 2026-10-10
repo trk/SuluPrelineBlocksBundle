@@ -1,0 +1,418 @@
+tabs:
+  layout:
+    title:
+      en: "Layout"
+      tr: "Yerleşim"
+    fields:
+      media_align:
+        type: select
+        label:
+          en: "Media Position"
+          tr: "Medya Konumu"
+        default: "top"
+        col_span: 6
+        options:
+          - value: "top"
+            label:
+              en: "Top"
+              tr: "Üstte"
+          - value: "bottom"
+            label:
+              en: "Bottom"
+              tr: "Altta"
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Solda"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağda"
+          - value: "between"
+            label:
+              en: "Between Title & Content"
+              tr: "Başlık ile İçerik Arasında"
+          - value: "overlay"
+            label:
+              en: "Background Overlay"
+              tr: "Zemin (Görsel Üzeri Yazı)"
+      media_width:
+        type: select
+        label:
+          en: "Media Width (Horizontal)"
+          tr: "Yatayda Medya Genişliği"
+        default: "1-2"
+        col_span: 6
+        options:
+          - value: "1-3"
+            label: "1/3"
+          - value: "1-2"
+            label: "1/2"
+          - value: "2-5"
+            label: "2/5"
+      media_aspect_ratio:
+        type: select
+        label:
+          en: "Aspect Ratio"
+          tr: "En/Boy Oranı"
+        default: "16-9"
+        col_span: 6
+        options:
+          - value: "16-9"
+            label: "16:9"
+          - value: "4-3"
+            label: "4:3"
+          - value: "1-1"
+            label: "1:1"
+          - value: "auto"
+            label:
+              en: "Natural"
+              tr: "Doğal"
+      meta_align:
+        type: select
+        label:
+          en: "Meta Position"
+          tr: "Meta Konumu"
+        default: "above-title"
+        col_span: 6
+        options:
+          - value: "above-title"
+            label:
+              en: "Above Title"
+              tr: "Başlığın Üstünde"
+          - value: "below-title"
+            label:
+              en: "Below Title"
+              tr: "Başlığın Altında"
+          - value: "below-content"
+            label:
+              en: "Below Content"
+              tr: "İçeriğin Altında"
+      text_align:
+        type: select
+        label:
+          en: "Text Alignment"
+          tr: "Metin Hizalaması"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola Yaslı"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa Yaslı"
+
+  typography:
+    title:
+      en: "Typography"
+      tr: "Tipografi"
+    fields:
+      title_element:
+        type: select
+        label:
+          en: "Heading Element"
+          tr: "Başlık HTML Etiketi"
+        default: "h3"
+        col_span: 6
+        options:
+          - value: "h2"
+            label: "H2"
+          - value: "h3"
+            label: "H3"
+          - value: "h4"
+            label: "H4"
+          - value: "div"
+            label: "DIV"
+      title_size:
+        type: select
+        label:
+          en: "Heading Size"
+          tr: "Başlık Boyutu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük (sm)"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Standart (md)"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük (lg)"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Çok Büyük (xl)"
+      title_color:
+        type: select
+        label:
+          en: "Heading Color"
+          tr: "Başlık Rengi"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Default"
+              tr: "Varsayılan"
+          - value: "primary"
+            label:
+              en: "Primary"
+              tr: "Birincil Renk"
+          - value: "muted"
+            label:
+              en: "Muted"
+              tr: "Nötr / Gri"
+      title_decoration:
+        type: select
+        label:
+          en: "Heading Decoration"
+          tr: "Başlık Vurgusu"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Sade"
+          - value: "underline"
+            label:
+              en: "Underline"
+              tr: "Altı Çizili Vurgu"
+      meta_badge_style:
+        type: select
+        label:
+          en: "Meta Style"
+          tr: "Meta Stili"
+        default: "pill"
+        col_span: 6
+        options:
+          - value: "pill"
+            label:
+              en: "Pill Badge"
+              tr: "Rozet (Pill)"
+          - value: "primary_pill"
+            label:
+              en: "Primary Badge"
+              tr: "Renkli Rozet"
+          - value: "text"
+            label:
+              en: "Plain Text"
+              tr: "Sade Metin"
+      badge_style:
+        type: select
+        label:
+          en: "Badge Style"
+          tr: "Rozet Stili"
+        default: "glass"
+        col_span: 6
+        options:
+          - value: "glass"
+            label:
+              en: "Glass / Translucent"
+              tr: "Cam (Yarı Saydam)"
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "success"
+            label:
+              en: "Success Green"
+              tr: "Yeşil (Vurgulu)"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+      badge_position:
+        type: select
+        label:
+          en: "Badge Position"
+          tr: "Rozet Konumu"
+        default: "top-left"
+        col_span: 6
+        options:
+          - value: "top-left"
+            label:
+              en: "Top Left"
+              tr: "Sol Üst"
+          - value: "top-right"
+            label:
+              en: "Top Right"
+              tr: "Sağ Üst"
+          - value: "bottom-left"
+            label:
+              en: "Bottom Left"
+              tr: "Sol Alt"
+          - value: "bottom-right"
+            label:
+              en: "Bottom Right"
+              tr: "Sağ Alt"
+          - value: "inline"
+            label:
+              en: "Inline (Above Title)"
+              tr: "Başlık Üstü (Metin İçi)"
+      button_style:
+        type: select
+        label:
+          en: "Button Style"
+          tr: "Buton Stili"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Solid Primary"
+              tr: "Birincil Buton"
+          - value: "secondary"
+            label:
+              en: "Soft / Secondary"
+              tr: "İkincil / Yumuşak"
+          - value: "outline"
+            label:
+              en: "Outline"
+              tr: "Çerçeveli"
+          - value: "link"
+            label:
+              en: "Simple Link"
+              tr: "Sade Bağlantı"
+
+  appearance:
+    title:
+      en: "Appearance"
+      tr: "Görünüm"
+    fields:
+      variant:
+        type: select
+        label:
+          en: "Card Variant"
+          tr: "Kart Stili"
+        default: "bordered"
+        col_span: 6
+        options:
+          - value: "bordered"
+            label:
+              en: "Bordered"
+              tr: "Çizgili"
+          - value: "shadow"
+            label:
+              en: "Shadow"
+              tr: "Gölgeli"
+          - value: "flat"
+            label:
+              en: "Flat"
+              tr: "Düz"
+          - value: "interactive"
+            label:
+              en: "Interactive"
+              tr: "Etkileşimli (Hover Yükselme)"
+      bg_color:
+        type: select
+        label:
+          en: "Background Color"
+          tr: "Arka Plan Rengi"
+        default: "white"
+        col_span: 6
+        options:
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "muted"
+            label:
+              en: "Muted"
+              tr: "Açık Gri"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+          - value: "primary"
+            label:
+              en: "Primary"
+              tr: "Birincil Renk"
+          - value: "transparent"
+            label:
+              en: "Transparent"
+              tr: "Şeffaf"
+      padding:
+        type: select
+        label:
+          en: "Padding"
+          tr: "İç Boşluk"
+        default: "normal"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Boşluksuz"
+          - value: "compact"
+            label:
+              en: "Compact"
+              tr: "Dar"
+          - value: "normal"
+            label:
+              en: "Normal"
+              tr: "Standart"
+          - value: "spacious"
+            label:
+              en: "Spacious"
+              tr: "Geniş"
+      rounded:
+        type: select
+        label:
+          en: "Border Radius"
+          tr: "Köşe Yuvarlama"
+        default: "xl"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Köşesiz"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Hafif (md)"
+          - value: "xl"
+            label:
+              en: "Standard"
+              tr: "Standart (xl)"
+          - value: "2xl"
+            label:
+              en: "Large"
+              tr: "Belirgin (2xl)"
+          - value: "3xl"
+            label:
+              en: "Extra Large"
+              tr: "Geniş (3xl)"
+      link_card:
+        type: select
+        label:
+          en: "Clickable Area"
+          tr: "Tıklanabilir Alan"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "Button Only"
+              tr: "Yalnızca Buton"
+          - value: "card"
+            label:
+              en: "Entire Card"
+              tr: "Tüm Kart"
+          - value: "card_link"
+            label:
+              en: "Entire Card"
+              tr: "Tüm Kart"

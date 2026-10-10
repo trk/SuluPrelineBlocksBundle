@@ -1,0 +1,53 @@
+{% set icon_class = this.getResolvedIcon() %}
+{% set is_dismissible = this.isDismissible() %}
+{% set alert_id = this.getElementId()|default('hs-alert-' ~ random()) %}
+{% set link_url = this.getLinkUrl() %}
+{% set link_text = this.getButtonText() %}
+
+<div id="{{ alert_id }}"
+     role="alert"
+     tabindex="-1"
+     aria-labelledby="{{ alert_id }}-label"
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    {% if icon_class %}
+        <span class="shrink-0 pt-0.5">
+            <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
+        </span>
+    {% endif %}
+
+    <div class="flex-1">
+        {% if title %}
+            <h3 id="{{ alert_id }}-label" class="{{ this.getTitleSizeClasses() }} leading-tight mb-1">
+                {{ title }}
+            </h3>
+        {% endif %}
+
+        {% if content %}
+            <div class="text-sm leading-relaxed opacity-90">
+                {{ content|raw }}
+            </div>
+        {% endif %}
+
+        {% if link_url and link_text %}
+            <div class="mt-2.5">
+                <a href="{{ link_url }}" class="inline-flex items-center gap-x-1 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
+                    {{ link_text }}
+                    <i class="ti ti-arrow-right text-xs" aria-hidden="true"></i>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if is_dismissible %}
+        <button type="button"
+                class="shrink-0 ms-auto inline-flex justify-center items-center size-6 rounded-lg opacity-60 hover:opacity-100 focus:outline-hidden transition-opacity cursor-pointer"
+                data-hs-remove-element="#{{ alert_id }}"
+                aria-label="Close alert">
+            <span class="sr-only">Close</span>
+            <i class="ti ti-x text-sm" aria-hidden="true"></i>
+        </button>
+    {% endif %}
+</div>

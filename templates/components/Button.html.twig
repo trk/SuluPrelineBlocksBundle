@@ -1,0 +1,9 @@
+<a href="{{ this.getUrl() }}"
+   {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+   {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
+   {{ attributes.defaults({
+       class: this.getWrapperClasses(),
+   }) }}
+>
+    {{ content }}
+</a>

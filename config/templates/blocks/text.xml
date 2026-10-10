@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>text</key>
+    <meta>
+        <title lang="en">Text / Rich Content</title>
+        <title lang="tr">Metin / Zengin İçerik</title>
+        <title lang="ru">Текст / Форматированный текст</title>
+        <title lang="fr">Texte / Contenu enrichi</title>
+        <title lang="es">Texto / Contenido enriquecido</title>
+        <title lang="de">Text / Formatierter Inhalt</title>
+    </meta>
+    <properties>
+        <property name="content" type="text_editor" mandatory="true">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="ru">Содержимое</title>
+                <title lang="fr">Contenu</title>
+                <title lang="es">Contenido</title>
+                <title lang="de">Inhalt</title>
+            </meta>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="text"/>
+            </params>
+        </property>
+    </properties>
+</template>

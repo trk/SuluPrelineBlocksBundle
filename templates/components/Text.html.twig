@@ -1,0 +1,6 @@
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+    {{ content|raw }}
+</div>

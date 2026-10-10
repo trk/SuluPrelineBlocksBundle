@@ -1,0 +1,80 @@
+{
+    "name": "trk/sulu-preline-blocks-bundle",
+    "version": "1.0.0",
+    "description": "Preline UI component blocks and responsive templates for Sulu CMS",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "homepage": "https://github.com/trk/SuluPrelineBlocksBundle",
+    "keywords": [
+        "sulu",
+        "sulu-bundle",
+        "preline",
+        "tailwind",
+        "components",
+        "blocks"
+    ],
+    "authors": [
+        {
+            "name": "Iskender TOTOGLU",
+            "homepage": "https://github.com/trk",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/trk/SuluPrelineBlocksBundle/issues",
+        "source": "https://github.com/trk/SuluPrelineBlocksBundle"
+    },
+    "require": {
+        "php": ">=8.2",
+        "sulu/sulu": "^3.0",
+        "symfony/config": "^7.0",
+        "symfony/dependency-injection": "^7.0",
+        "symfony/framework-bundle": "^7.0",
+        "symfony/http-foundation": "^7.0",
+        "symfony/http-kernel": "^7.0",
+        "symfony/ux-twig-component": "^3.5",
+        "trk/sulu-block-suite-bundle": "^1.0",
+        "twig/twig": "^3.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^11.0 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Totoglu\\SuluPrelineBlocksBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Totoglu\\SuluPrelineBlocksBundle\\Tests\\": "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sulu-block-suite-bundle"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true
+        }
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.4.*"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse --configuration=phpstan.neon.dist",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "vendor/bin/php-cs-fixer fix"
+    }
+}

@@ -1,0 +1,142 @@
+tabs:
+  appearance:
+    title: sulu_block_suite.tabs_appearance
+    fields:
+      aspect_ratio:
+        type: select
+        label: sulu_block_suite.field_aspect_ratio
+        col_span: 6
+        options:
+          - { value: '16/9', label: sulu_block_suite.opt_16_9 }
+          - { value: '4/3', label: sulu_block_suite.opt_4_3 }
+          - { value: '1/1', label: sulu_block_suite.opt_1_1 }
+          - { value: '9/16', label: sulu_block_suite.opt_9_16 }
+          - { value: '21/9', label: sulu_block_suite.opt_21_9 }
+      rounded:
+        type: select
+        label: sulu_block_suite.field_rounded
+        col_span: 6
+        options:
+          - { value: 'none', label: sulu_block_suite.opt_none }
+          - { value: 'sm', label: sulu_block_suite.opt_sm }
+          - { value: 'md', label: sulu_block_suite.opt_md }
+          - { value: 'lg', label: sulu_block_suite.opt_lg }
+          - { value: 'xl', label: sulu_block_suite.opt_xl }
+          - { value: 'full', label: sulu_block_suite.opt_full }
+      box_shadow:
+        type: select
+        label:
+          en: "Box Shadow"
+          tr: "Gölge"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Yok"
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Orta"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Çok Büyük"
+          - value: "2xl"
+            label:
+              en: "2X Large"
+              tr: "Geniş Derin Gölge"
+      text_align:
+        type: select
+        label: sulu_block_suite.field_text_align
+        col_span: 6
+        options:
+          - { value: 'left', label: sulu_block_suite.opt_left }
+          - { value: 'center', label: sulu_block_suite.opt_center }
+          - { value: 'right', label: sulu_block_suite.opt_right }
+
+  video_settings:
+    title:
+      en: "Playback"
+      tr: "Oynatma Seçenekleri"
+    fields:
+      autoplay:
+        type: select
+        label:
+          en: "Autoplay"
+          tr: "Otomatik Oynat"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "Disabled"
+              tr: "Kapalı"
+          - value: "true"
+            label:
+              en: "Immediate (On)"
+              tr: "Hemen Başlat"
+          - value: "inview"
+            label:
+              en: "When in Viewport"
+              tr: "Ekrana Girdiğinde"
+          - value: "hover"
+            label:
+              en: "On Hover"
+              tr: "Üzerine Gelindiğinde"
+      controls:
+        type: select
+        label:
+          en: "Controls"
+          tr: "Oynatıcı Kontrolleri"
+        col_span: 6
+        options:
+          - value: "true"
+            label:
+              en: "Show Controls"
+              tr: "Kontrolleri Göster"
+          - value: "false"
+            label:
+              en: "Hide Controls"
+              tr: "Kontrolleri Gizle"
+      loop:
+        type: select
+        label:
+          en: "Loop"
+          tr: "Döngü (Sürekli Tekrar)"
+        col_span: 6
+        options:
+          - value: "false"
+            label:
+              en: "No"
+              tr: "Hayır"
+          - value: "true"
+            label:
+              en: "Yes (Loop)"
+              tr: "Evet"
+      muted:
+        type: select
+        label:
+          en: "Audio / Mute"
+          tr: "Ses Durumu"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Default (Muted if Autoplay)"
+              tr: "Varsayılan (Otomatikte Sessiz)"
+          - value: "true"
+            label:
+              en: "Muted"
+              tr: "Sessiz"
+          - value: "false"
+            label:
+              en: "Unmuted"
+              tr: "Sesli"

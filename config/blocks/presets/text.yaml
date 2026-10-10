@@ -1,0 +1,50 @@
+text:
+    presets:
+        lead_intro:
+            title:
+                tr: "Giriş Paragrafı (Lead Text)"
+                en: "Lead Intro Text"
+            description:
+                tr: "Büyük fontlu ve akıcı okuma sağlayan giriş paragrafı"
+                en: "Prominent lead paragraph with generous sizing"
+            props:
+                size: "lg"
+                text_style: "lead"
+                text_align: "left"
+                margin_bottom: "lg"
+
+        dropcap_story:
+            title:
+                tr: "Büyük Baş Harfli Makale (Drop Cap)"
+                en: "Drop Cap Story Article"
+            description:
+                tr: "İlk harfi büyük ve klasik tipografi vurgulu paragraf"
+                en: "First letter styled as a large drop cap"
+            props:
+                size: "md"
+                dropcap: "yes"
+                margin_bottom: "md"
+
+        two_columns_article:
+            title:
+                tr: "2 Sütunlu Gazete / Makale Düzeni"
+                en: "2-Column Newspaper Layout"
+            description:
+                tr: "Metni 2 sütuna bölen ve arasına çizgi çeken gazete tarzı"
+                en: "2 text columns with an elegant dividing line"
+            props:
+                column: "1-2"
+                column_divider: "yes"
+                margin_bottom: "lg"
+
+        muted_centered:
+            title:
+                tr: "Soluk & Ortalı Açıklama"
+                en: "Muted & Centered Description"
+            description:
+                tr: "Gri/soluk metin rengi, ortalanmış düzen"
+                en: "Muted gray text color with centered alignment"
+            props:
+                color: "muted"
+                text_align: "center"
+                margin_bottom: "md"

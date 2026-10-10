@@ -1,0 +1,114 @@
+tabs:
+  style:
+    title:
+      en: "Style"
+      tr: "Stil"
+    fields:
+      divider_style:
+        type: select
+        label:
+          en: "Divider Style"
+          tr: "Çizgi Stili"
+        default: "line"
+        col_span: 6
+        options:
+          - value: "line"
+            label:
+              en: "Solid Line"
+              tr: "Düz Çizgi"
+          - value: "dashed"
+            label:
+              en: "Dashed"
+              tr: "Kesikli Çizgi"
+          - value: "dotted"
+            label:
+              en: "Dotted"
+              tr: "Noktalı Çizgi"
+          - value: "small"
+            label:
+              en: "Short Accent Bar"
+              tr: "Kısa Vurgu Çizgisi"
+          - value: "icon"
+            label:
+              en: "With Center Icon"
+              tr: "Ortasında İkonlu"
+      divider_color:
+        type: select
+        label:
+          en: "Color"
+          tr: "Renk"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Neutral / Gray"
+              tr: "Standart / Gri"
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "muted"
+            label:
+              en: "Muted / Soft"
+              tr: "Açık / Yumuşak"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+      divider_thickness:
+        type: select
+        label:
+          en: "Thickness"
+          tr: "Kalınlık"
+        default: "1"
+        col_span: 6
+        options:
+          - value: "1"
+            label: "1px"
+          - value: "2"
+            label: "2px"
+          - value: "4"
+            label: "4px"
+      divider_width:
+        type: select
+        label:
+          en: "Width"
+          tr: "Genişlik"
+        default: "full"
+        col_span: 6
+        options:
+          - value: "full"
+            label:
+              en: "Full Width"
+              tr: "Tam Genişlik"
+          - value: "3-4"
+            label: "3/4"
+          - value: "1-2"
+            label: "1/2"
+          - value: "1-3"
+            label: "1/3"
+          - value: "small"
+            label:
+              en: "Compact (64px)"
+              tr: "Küçük (64px)"
+      divider_align:
+        type: select
+        label:
+          en: "Alignment"
+          tr: "Hizalama"
+        default: "center"
+        col_span: 6
+        options:
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola Yaslı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa Yaslı"

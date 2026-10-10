@@ -1,0 +1,470 @@
+tabs:
+  layout:
+    title:
+      en: "Layout"
+      tr: "Yerleşim"
+    fields:
+      overlay_position:
+        type: select
+        label:
+          en: "Content Position"
+          tr: "İçerik Konumu"
+        default: "bottom"
+        col_span: 6
+        options:
+          - value: "bottom"
+            label:
+              en: "Bottom"
+              tr: "Altta"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortada"
+          - value: "top"
+            label:
+              en: "Top"
+              tr: "Üstte"
+          - value: "bottom-left"
+            label:
+              en: "Bottom Left"
+              tr: "Sol Alt"
+          - value: "bottom-right"
+            label:
+              en: "Bottom Right"
+              tr: "Sağ Alt"
+          - value: "top-left"
+            label:
+              en: "Top Left"
+              tr: "Sol Üst"
+          - value: "top-right"
+            label:
+              en: "Top Right"
+              tr: "Sağ Üst"
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Solda"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağda"
+      overlay_mode:
+        type: select
+        label:
+          en: "Visibility Mode"
+          tr: "Görünürlük Modu"
+        default: "always"
+        col_span: 6
+        options:
+          - value: "always"
+            label:
+              en: "Always Visible"
+              tr: "Her Zaman Görünür"
+          - value: "hover"
+            label:
+              en: "Reveal on Hover"
+              tr: "Üzerine Gelince Göster"
+      media_aspect_ratio:
+        type: select
+        label:
+          en: "Aspect Ratio"
+          tr: "En/Boy Oranı"
+        default: "16-9"
+        col_span: 6
+        options:
+          - value: "16-9"
+            label: "16:9"
+          - value: "4-3"
+            label: "4:3"
+          - value: "1-1"
+            label: "1:1"
+          - value: "21-9"
+            label: "21:9"
+          - value: "auto"
+            label:
+              en: "Natural"
+              tr: "Doğal"
+      text_align:
+        type: select
+        label:
+          en: "Text Alignment"
+          tr: "Metin Hizalaması"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola Yaslı"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa Yaslı"
+      meta_align:
+        type: select
+        label:
+          en: "Meta Position"
+          tr: "Meta Konumu"
+        default: "above-title"
+        col_span: 6
+        options:
+          - value: "above-title"
+            label:
+              en: "Above Title"
+              tr: "Başlığın Üstünde"
+          - value: "below-title"
+            label:
+              en: "Below Title"
+              tr: "Başlığın Altında"
+          - value: "below-content"
+            label:
+              en: "Below Content"
+              tr: "İçeriğin Altında"
+      overlay_padding:
+        type: select
+        label:
+          en: "Padding"
+          tr: "İç Boşluk"
+        default: "normal"
+        col_span: 6
+        options:
+          - value: "compact"
+            label:
+              en: "Compact"
+              tr: "Dar"
+          - value: "normal"
+            label:
+              en: "Normal"
+              tr: "Standart"
+          - value: "spacious"
+            label:
+              en: "Spacious"
+              tr: "Geniş"
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Boşluksuz"
+
+  style:
+    title:
+      en: "Style"
+      tr: "Stil & Efektler"
+    fields:
+      overlay_style:
+        type: select
+        label:
+          en: "Overlay Style"
+          tr: "Katman Stili"
+        default: "gradient-bottom"
+        col_span: 6
+        options:
+          - value: "gradient-bottom"
+            label:
+              en: "Bottom Gradient"
+              tr: "Alttan Degrade Karartma"
+          - value: "gradient-full"
+            label:
+              en: "Full Gradient"
+              tr: "Tam Degrade Karartma"
+          - value: "dark-glass"
+            label:
+              en: "Dark Frosted Glass"
+              tr: "Koyu Buzlu Cam (Glass)"
+          - value: "light-glass"
+            label:
+              en: "Light Frosted Glass"
+              tr: "Açık Buzlu Cam (Glass)"
+          - value: "primary"
+            label:
+              en: "Primary Brand Color"
+              tr: "Birincil Vurgu Rengi"
+          - value: "none"
+            label:
+              en: "Transparent / None"
+              tr: "Şeffaf / Yok"
+      overlay_transition:
+        type: select
+        label:
+          en: "Overlay Transition"
+          tr: "Hover Geçiş Efekti"
+        default: "fade"
+        col_span: 6
+        options:
+          - value: "fade"
+            label:
+              en: "Fade"
+              tr: "Belirme (Fade)"
+          - value: "slide-up"
+            label:
+              en: "Slide Up"
+              tr: "Aşağıdan Yukarı (Slide Up)"
+          - value: "slide-down"
+            label:
+              en: "Slide Down"
+              tr: "Yukarıdan Aşağı (Slide Down)"
+          - value: "zoom"
+            label:
+              en: "Zoom In"
+              tr: "Yakınlaşma (Zoom In)"
+      image_transition:
+        type: select
+        label:
+          en: "Image Hover Effect"
+          tr: "Görsel Hover Efekti"
+        default: "scale-up"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Sabit"
+          - value: "scale-up"
+            label:
+              en: "Zoom (Scale Up)"
+              tr: "Hover Yakınlaşma (Zoom)"
+      rounded:
+        type: select
+        label:
+          en: "Border Radius"
+          tr: "Köşe Yuvarlama"
+        default: "2xl"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Köşesiz"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Hafif (md)"
+          - value: "xl"
+            label:
+              en: "Standard"
+              tr: "Standart (xl)"
+          - value: "2xl"
+            label:
+              en: "Large"
+              tr: "Belirgin (2xl)"
+          - value: "3xl"
+            label:
+              en: "Extra Large"
+              tr: "Geniş (3xl)"
+      shadow:
+        type: select
+        label:
+          en: "Shadow"
+          tr: "Gölge"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "None"
+              tr: "Yok"
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Hafif"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Orta"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Belirgin"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Geniş"
+      link_overlay:
+        type: select
+        label:
+          en: "Clickable Area"
+          tr: "Tıklanabilir Alan"
+        default: "card"
+        col_span: 6
+        options:
+          - value: "card"
+            label:
+              en: "Entire Overlay"
+              tr: "Tüm Katman / Kart"
+          - value: "none"
+            label:
+              en: "Button Only"
+              tr: "Yalnızca Buton"
+
+  typography:
+    title:
+      en: "Typography"
+      tr: "Tipografi & Buton"
+    fields:
+      title_element:
+        type: select
+        label:
+          en: "Heading Element"
+          tr: "Başlık HTML Etiketi"
+        default: "h3"
+        col_span: 6
+        options:
+          - value: "h2"
+            label: "H2"
+          - value: "h3"
+            label: "H3"
+          - value: "h4"
+            label: "H4"
+          - value: "div"
+            label: "DIV"
+      title_size:
+        type: select
+        label:
+          en: "Heading Size"
+          tr: "Başlık Boyutu"
+        default: "lg"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük (sm)"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Orta (md)"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük (lg)"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Çok Büyük (xl)"
+      title_color:
+        type: select
+        label:
+          en: "Heading Color"
+          tr: "Başlık Rengi"
+        default: "white"
+        col_span: 6
+        options:
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "light"
+            label:
+              en: "Light Gray"
+              tr: "Açık Gri"
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Renk"
+          - value: "default"
+            label:
+              en: "Default Text"
+              tr: "Varsayılan"
+      meta_badge_style:
+        type: select
+        label:
+          en: "Meta Style"
+          tr: "Meta Stili"
+        default: "primary_pill"
+        col_span: 6
+        options:
+          - value: "primary_pill"
+            label:
+              en: "Primary Badge"
+              tr: "Renkli Rozet"
+          - value: "pill"
+            label:
+              en: "Pill Badge"
+              tr: "Açık Rozet (Pill)"
+          - value: "text"
+            label:
+              en: "Plain Text"
+              tr: "Sade Metin"
+      badge_style:
+        type: select
+        label:
+          en: "Badge Style"
+          tr: "Rozet Stili"
+        default: "glass"
+        col_span: 6
+        options:
+          - value: "glass"
+            label:
+              en: "Glass / Translucent"
+              tr: "Cam (Yarı Saydam)"
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "success"
+            label:
+              en: "Success Green"
+              tr: "Yeşil (Vurgulu)"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+      badge_position:
+        type: select
+        label:
+          en: "Badge Position"
+          tr: "Rozet Konumu"
+        default: "top-left"
+        col_span: 6
+        options:
+          - value: "top-left"
+            label:
+              en: "Top Left"
+              tr: "Sol Üst"
+          - value: "top-right"
+            label:
+              en: "Top Right"
+              tr: "Sağ Üst"
+          - value: "bottom-left"
+            label:
+              en: "Bottom Left"
+              tr: "Sol Alt"
+          - value: "bottom-right"
+            label:
+              en: "Bottom Right"
+              tr: "Sağ Alt"
+          - value: "inline"
+            label:
+              en: "Inline (Above Title)"
+              tr: "Başlık Üstü (Metin İçi)"
+      button_style:
+        type: select
+        label:
+          en: "Button Style"
+          tr: "Buton Stili"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Solid Primary"
+              tr: "Birincil Buton"
+          - value: "white"
+            label:
+              en: "Solid White"
+              tr: "Beyaz Buton"
+          - value: "secondary"
+            label:
+              en: "Soft / Secondary"
+              tr: "İkincil / Yumuşak"
+          - value: "outline"
+            label:
+              en: "Outline White"
+              tr: "Beyaz Çerçeveli"
+          - value: "link"
+            label:
+              en: "Simple Link"
+              tr: "Sade Bağlantı"

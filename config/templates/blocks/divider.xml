@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>divider</key>
+    <meta>
+        <title lang="en">Divider</title>
+        <title lang="tr">Ayırıcı Çizgi</title>
+        <title lang="ru">Разделитель</title>
+        <title lang="fr">Séparateur</title>
+        <title lang="es">Separador</title>
+        <title lang="de">Trennlinie</title>
+    </meta>
+    <properties>
+        <property name="icon" type="single_icon_selection">
+            <meta>
+                <title lang="en">Center Icon</title>
+                <title lang="tr">Orta İkon</title>
+                <title lang="ru">Иконка в центре</title>
+                <title lang="fr">Icône centrale</title>
+                <title lang="es">Icono central</title>
+                <title lang="de">Mittiges Symbol</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
+            </params>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="divider"/>
+            </params>
+        </property>
+    </properties>
+</template>

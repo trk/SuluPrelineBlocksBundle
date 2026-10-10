@@ -1,0 +1,386 @@
+{% set title_color = this.getTitleColor() %}
+{% set is_img = this.isImage() %}
+{% set is_vid = this.isVideo() %}
+{% set active_img = this.getActiveImageUrl() %}
+{% set active_hover_img = this.getActiveHoverImageUrl() %}
+{% set active_vid = this.getActiveVideoUrl() %}
+{% set active_hover_vid = this.getActiveHoverVideoUrl() %}
+{% set btn_list = this.getNormalizedButtons() %}
+{% set link_url = this.getLinkUrl() %}
+{% set button_text = this.getButtonText() %}
+{% set button_classes = this.getButtonStyleClasses() %}
+{% set icon_class = this.iconClass %}
+{% set has_media = this.hasMedia() %}
+
+{% set media_align = this.getMediaAlign() %}
+{% set media_aspect = this.getMediaAspectRatioClass() %}
+{% set media_col_width = this.getMediaGridWidthClasses() %}
+{% set content_col_width = this.getContentGridWidthClasses() %}
+{% set meta_align = this.getMetaAlign() %}
+{% set title_el = this.getTitleElement() %}
+{% set title_size = this.getTitleSizeClasses() %}
+{% set title_decoration = this.getTitleDecorationClasses() %}
+{% set meta_badge_classes = this.getMetaBadgeClasses() %}
+{% set padding_classes = this.getCardPaddingClasses() %}
+{% set card_url = this.getResolvedCardUrl() %}
+
+{# Shared Media Markup Block #}
+{% set media_markup %}
+    {% if is_img and active_img %}
+        <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
+            {% if badge and this.getBadgePosition() != 'inline' %}
+                <div class="{{ this.getBadgePositionClasses() }}">
+                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                </div>
+            {% endif %}
+            <img
+                src="{{ active_img }}"
+                alt="{{ title|default('') }}"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 {% if active_hover_img %}group-hover:opacity-0{% endif %}"
+                loading="lazy"
+            />
+            {% if active_hover_img %}
+                <img
+                    src="{{ active_hover_img }}"
+                    alt="{{ title|default('') }}"
+                    class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                />
+            {% endif %}
+        </div>
+    {% elseif is_vid and active_vid %}
+        <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
+            {% if badge and this.getBadgePosition() != 'inline' %}
+                <div class="{{ this.getBadgePositionClasses() }}">
+                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                </div>
+            {% endif %}
+            <video
+                src="{{ active_vid }}"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 {% if active_hover_vid %}group-hover:opacity-0{% endif %}"
+                autoplay
+                muted
+                playsinline
+                loop
+            ></video>
+            {% if active_hover_vid %}
+                <video
+                    src="{{ active_hover_vid }}"
+                    class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105"
+                    autoplay
+                    muted
+                    playsinline
+                    loop
+                ></video>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endset %}
+
+{# Shared Actions Markup Block #}
+{% set actions_markup %}
+    {% if button_text and link_url %}
+        <div class="relative z-20 mt-4 flex flex-wrap gap-2.5">
+            <a href="{{ link_url }}" class="{{ button_classes }}">
+                {{ button_text }}
+                {% if (this.getResolvedProps()['button_style']|default('primary')) == 'link' %}
+                    <i class="ti ti-chevron-right text-xs" aria-hidden="true"></i>
+                {% endif %}
+            </a>
+        </div>
+    {% elseif btn_list is not empty %}
+        <div class="relative z-20 mt-4 flex flex-wrap gap-2.5">
+            {% for btn in btn_list %}
+                <twig:Button
+                    content="{{ btn.content|default('') }}"
+                    link="{{ btn.link|default('#') }}"
+                    linkTitle="{{ btn.link_title|default(null) }}"
+                    props="{{ btn|merge(btn.props|default({})) }}"
+                />
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endset %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    {# 1. Overlay Mode (Full Background Media with Gradient) #}
+    {% if media_align == 'overlay' and has_media %}
+        <div class="absolute inset-0 z-0">
+            {{ media_markup|raw }}
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent"></div>
+        </div>
+        <div class="relative z-10 flex flex-col justify-end min-h-[320px] p-6 text-white flex-1">
+            {% if badge and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3">
+                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                </div>
+            {% endif %}
+
+            {% if icon_class %}
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm text-white">
+                    <i class="{{ icon_class }}" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'above-title' %}
+                <div class="mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if title %}
+                <{{ title_el }} class="{{ title_size }} text-white {{ title_decoration }} leading-snug">
+                    {{ title }}
+                </{{ title_el }}>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-title' %}
+                <div class="mt-2 mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if content %}
+                <div class="text-gray-200 text-sm leading-relaxed mt-2 line-clamp-3">
+                    {{ content|raw }}
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-content' %}
+                <div class="mt-3">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {{ actions_markup|raw }}
+        </div>
+
+    {# 2. Horizontal Mode (Left or Right Media with responsive columns) #}
+    {% elseif media_align in ['left', 'right'] and has_media %}
+        <div class="{{ media_col_width }} shrink-0 relative overflow-hidden min-h-[220px] md:min-h-full {{ media_aspect }}">
+            {{ media_markup|raw }}
+        </div>
+        <div class="{{ content_col_width }} flex flex-col flex-1 justify-between {{ padding_classes }}">
+            <div>
+                {% if badge and this.getBadgePosition() == 'inline' %}
+                    <div class="mb-3">
+                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    </div>
+                {% endif %}
+
+                {% if icon_class %}
+                    <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                        <i class="{{ icon_class }}" aria-hidden="true"></i>
+                    </div>
+                {% endif %}
+
+                {% if meta and meta_align == 'above-title' %}
+                    <div class="mb-2">
+                        <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                    </div>
+                {% endif %}
+
+                {% if title %}
+                    <{{ title_el }} class="{{ title_size }} {{ title_color }} {{ title_decoration }} leading-snug">
+                        {{ title }}
+                    </{{ title_el }}>
+                {% endif %}
+
+                {% if meta and meta_align == 'below-title' %}
+                    <div class="mt-2 mb-2">
+                        <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                    </div>
+                {% endif %}
+
+                {% if content %}
+                    <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mt-2">
+                        {{ content|raw }}
+                    </div>
+                {% endif %}
+
+                {% if meta and meta_align == 'below-content' %}
+                    <div class="mt-3">
+                        <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            {{ actions_markup|raw }}
+        </div>
+
+    {# 3. Between Mode (Header -> Media in middle -> Content & Actions) #}
+    {% elseif media_align == 'between' and has_media %}
+        <div class="{{ padding_classes }} pb-3">
+            {% if badge and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3">
+                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                </div>
+            {% endif %}
+
+            {% if icon_class %}
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                    <i class="{{ icon_class }}" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'above-title' %}
+                <div class="mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if title %}
+                <{{ title_el }} class="{{ title_size }} {{ title_color }} {{ title_decoration }} leading-snug">
+                    {{ title }}
+                </{{ title_el }}>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-title' %}
+                <div class="mt-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="relative w-full overflow-hidden {{ media_aspect }}">
+            {{ media_markup|raw }}
+        </div>
+
+        <div class="{{ padding_classes }} pt-3 flex flex-col flex-1">
+            {% if content %}
+                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                    {{ content|raw }}
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-content' %}
+                <div class="mb-3">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {{ actions_markup|raw }}
+        </div>
+
+    {# 4. Bottom Mode (Content on top -> Media at bottom) #}
+    {% elseif media_align == 'bottom' and has_media %}
+        <div class="{{ padding_classes }} flex flex-col flex-1">
+            {% if badge and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3">
+                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                </div>
+            {% endif %}
+
+            {% if icon_class %}
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                    <i class="{{ icon_class }}" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'above-title' %}
+                <div class="mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if title %}
+                <{{ title_el }} class="{{ title_size }} {{ title_color }} {{ title_decoration }} leading-snug">
+                    {{ title }}
+                </{{ title_el }}>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-title' %}
+                <div class="mt-2 mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if content %}
+                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                    {{ content|raw }}
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-content' %}
+                <div class="mb-3">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {{ actions_markup|raw }}
+        </div>
+
+        <div class="relative w-full overflow-hidden {{ media_aspect }} mt-auto">
+            {{ media_markup|raw }}
+        </div>
+
+    {# 5. Standard Vertical Mode (Media on top -> Content) #}
+    {% else %}
+        {% if has_media %}
+            <div class="relative w-full overflow-hidden {{ media_aspect }}">
+                {{ media_markup|raw }}
+            </div>
+        {% endif %}
+
+        <div class="{{ padding_classes }} flex flex-col flex-1">
+            {% if badge and (not has_media or this.getBadgePosition() == 'inline') %}
+                {% if not has_media and this.getBadgePosition() in ['top-right', 'top_right'] %}
+                    <div class="absolute top-4 end-4 z-10">
+                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    </div>
+                {% else %}
+                    <div class="mb-3">
+                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if icon_class and not has_media %}
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                    <i class="{{ icon_class }}" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'above-title' %}
+                <div class="mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if title %}
+                <{{ title_el }} class="{{ title_size }} {{ title_color }} {{ title_decoration }} leading-snug">
+                    {{ title }}
+                </{{ title_el }}>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-title' %}
+                <div class="mt-2 mb-2">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {% if content %}
+                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                    {{ content|raw }}
+                </div>
+            {% endif %}
+
+            {% if meta and meta_align == 'below-content' %}
+                <div class="mb-3">
+                    <span class="{{ meta_badge_classes }}">{{ meta }}</span>
+                </div>
+            {% endif %}
+
+            {{ actions_markup|raw }}
+        </div>
+    {% endif %}
+
+    {# Stretched Link for Clickable Card #}
+    {% if card_url %}
+        <a href="{{ card_url }}" class="absolute inset-0 z-10 focus:outline-hidden" aria-label="{{ title|default('Card link') }}"></a>
+    {% endif %}
+</div>

@@ -1,0 +1,170 @@
+tabs:
+  appearance:
+    title:
+      en: "Typography & Layout"
+      tr: "Tipografi & Yerleşim"
+    fields:
+      size:
+        type: select
+        label:
+          en: "Font Size"
+          tr: "Yazı Boyutu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük (sm)"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Standart (md)"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük (lg)"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Çok Büyük (xl)"
+      text_style:
+        type: select
+        label:
+          en: "Text Style"
+          tr: "Metin Stili"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "Default"
+              tr: "Varsayılan"
+          - value: "lead"
+            label:
+              en: "Lead Paragraph"
+              tr: "Giriş Paragrafı (Lead)"
+          - value: "meta"
+            label:
+              en: "Meta / Caption"
+              tr: "Meta / Açıklama"
+          - value: "large"
+            label:
+              en: "Large Reading Text"
+              tr: "Geniş Okuma Metni"
+          - value: "small"
+            label:
+              en: "Small Note"
+              tr: "Dipnot / Küçük Metin"
+      dropcap:
+        type: select
+        label:
+          en: "Drop Cap"
+          tr: "Büyük Baş Harf (Drop Cap)"
+        default: "no"
+        col_span: 6
+        options:
+          - value: "no"
+            label:
+              en: "Disabled"
+              tr: "Kapalı"
+          - value: "yes"
+            label:
+              en: "Enabled"
+              tr: "Açık"
+      column:
+        type: select
+        label:
+          en: "Columns"
+          tr: "Metin Sütunları"
+        default: "none"
+        col_span: 6
+        options:
+          - value: "none"
+            label:
+              en: "Single Column"
+              tr: "Tek Sütun"
+          - value: "1-2"
+            label:
+              en: "2 Columns"
+              tr: "2 Sütun (1/2)"
+          - value: "1-3"
+            label:
+              en: "3 Columns"
+              tr: "3 Sütun (1/3)"
+          - value: "1-4"
+            label:
+              en: "4 Columns"
+              tr: "4 Sütun (1/4)"
+      column_divider:
+        type: select
+        label:
+          en: "Column Divider"
+          tr: "Sütun Ayracı"
+        default: "no"
+        col_span: 6
+        options:
+          - value: "no"
+            label:
+              en: "No"
+              tr: "Hayır"
+          - value: "yes"
+            label:
+              en: "Yes (Line between columns)"
+              tr: "Evet (Sütunlar Arası Çizgi)"
+      color:
+        type: select
+        label:
+          en: "Text Color"
+          tr: "Metin Rengi"
+        default: "default"
+        col_span: 6
+        options:
+          - value: "default"
+            label:
+              en: "Default"
+              tr: "Varsayılan"
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "secondary"
+            label:
+              en: "Secondary"
+              tr: "İkincil"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "muted"
+            label:
+              en: "Muted"
+              tr: "Soluk Gri"
+      text_align:
+        type: select
+        label:
+          en: "Alignment"
+          tr: "Hizalama"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola Yaslı"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa Yaslı"
+          - value: "justify"
+            label:
+              en: "Justify"
+              tr: "İki Yana Yaslı"

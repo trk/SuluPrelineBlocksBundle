@@ -1,0 +1,43 @@
+tabs:
+  appearance:
+    title: sulu_block_suite.tabs_appearance
+    fields:
+      aspect_ratio:
+        type: select
+        label: sulu_block_suite.field_aspect_ratio
+        col_span: 6
+        options:
+          - { value: 'auto', label: sulu_block_suite.opt_auto }
+          - { value: '16/9', label: sulu_block_suite.opt_16_9 }
+          - { value: '4/3', label: sulu_block_suite.opt_4_3 }
+          - { value: '1/1', label: sulu_block_suite.opt_1_1 }
+          - { value: '9/16', label: sulu_block_suite.opt_9_16 }
+          - { value: '21/9', label: sulu_block_suite.opt_21_9 }
+      rounded:
+        type: select
+        label: sulu_block_suite.field_rounded
+        col_span: 6
+        options:
+          - { value: 'none', label: sulu_block_suite.opt_none }
+          - { value: 'sm', label: sulu_block_suite.opt_sm }
+          - { value: 'md', label: sulu_block_suite.opt_md }
+          - { value: 'lg', label: sulu_block_suite.opt_lg }
+          - { value: 'xl', label: sulu_block_suite.opt_xl }
+          - { value: 'full', label: sulu_block_suite.opt_full }
+      hover_effect:
+        type: select
+        label: sulu_block_suite.field_hover_effect
+        col_span: 6
+        options:
+          - { value: 'none', label: sulu_block_suite.opt_none }
+          - { value: 'zoom', label: sulu_block_suite.opt_zoom }
+          - { value: 'shadow', label: sulu_block_suite.opt_shadow }
+          - { value: 'brightness', label: sulu_block_suite.opt_brightness }
+      text_align:
+        type: select
+        label: sulu_block_suite.field_text_align
+        col_span: 6
+        options:
+          - { value: 'left', label: sulu_block_suite.opt_left }
+          - { value: 'center', label: sulu_block_suite.opt_center }
+          - { value: 'right', label: sulu_block_suite.opt_right }

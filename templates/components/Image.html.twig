@@ -1,0 +1,26 @@
+{% set img_url = this.getImageUrl() %}
+{% set url = this.getUrl() %}
+{% set ratio = this.getAspectRatio() %}
+{% set rounded = this.getRounded() %}
+{% set caption = this.getCaption() %}
+
+{% if img_url %}
+    <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+            {{ attributes.defaults({class: this.getWrapperClasses()}) }}>
+        {% if url %}
+            <a href="{{ url }}" class="block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.02]">
+                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+            </a>
+        {% else %}
+            <div class="overflow-hidden {{ rounded }}">
+                <img src="{{ img_url }}" alt="{{ alt|default('') }}" class="w-full h-auto object-cover {{ ratio }} {{ rounded }}" loading="lazy" />
+            </div>
+        {% endif %}
+
+        {% if caption %}
+            <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-neutral-400">
+                {{ caption }}
+            </figcaption>
+        {% endif %}
+    </figure>
+{% endif %}

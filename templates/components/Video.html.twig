@@ -1,0 +1,43 @@
+{% set vid_url = this.getVideoUrl() %}
+{% set poster_url = this.getPosterUrl() %}
+{% set autoplay = this.isAutoplay() %}
+{% set autoplay_mode = this.getAutoplayMode() %}
+{% set controls = this.isControls() %}
+{% set loop = this.isLoop() %}
+{% set muted = this.isMuted() %}
+{% set url = this.getUrl() %}
+{% set icon_class = this.iconClass %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}
+     {% if autoplay_mode %}data-video-autoplay="{{ autoplay_mode }}"{% endif %}>
+    {% if vid_url %}
+        <video
+            src="{{ vid_url }}"
+            {% if poster_url %}poster="{{ poster_url }}"{% endif %}
+            {% if controls %}controls{% endif %}
+            {% if autoplay %}autoplay{% endif %}
+            {% if muted %}muted{% endif %}
+            {% if loop %}loop{% endif %}
+            playsinline
+            class="w-full h-full object-cover"
+        ></video>
+    {% elseif poster_url %}
+        <div class="relative w-full h-full">
+            <img src="{{ poster_url }}" alt="" class="w-full h-full object-cover" loading="lazy" />
+            {% if url %}
+                <a href="{{ url }}" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group">
+                    <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/90 text-blue-600 group-hover:scale-110 group-hover:bg-white transition-all shadow-xl">
+                        {% if icon_class %}
+                            <i class="{{ icon_class }} text-2xl" aria-hidden="true"></i>
+                        {% else %}
+                            <svg class="w-7 h-7 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        {% endif %}
+                    </span>
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

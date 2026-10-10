@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>overlay</key>
+    <meta>
+        <title lang="en">Overlay</title>
+        <title lang="tr">Katman (Overlay)</title>
+        <title lang="ru">Оверлей</title>
+        <title lang="fr">Superposition</title>
+        <title lang="es">Superposición</title>
+        <title lang="de">Overlay</title>
+    </meta>
+    <properties>
+        <property name="title" type="text_line">
+            <meta>
+                <title lang="en">Title</title>
+                <title lang="tr">Başlık</title>
+                <title lang="ru">Заголовок</title>
+                <title lang="fr">Titre</title>
+                <title lang="es">Título</title>
+                <title lang="de">Titel</title>
+            </meta>
+        </property>
+
+        <property name="badge" type="text_line">
+            <meta>
+                <title lang="en">Badge</title>
+                <title lang="tr">Rozet</title>
+                <title lang="ru">Бейдж</title>
+                <title lang="fr">Badge</title>
+                <title lang="es">Insignia</title>
+                <title lang="de">Abzeichen</title>
+            </meta>
+        </property>
+
+        <property name="meta" type="text_line">
+            <meta>
+                <title lang="en">Meta</title>
+                <title lang="tr">Meta</title>
+                <title lang="ru">Мета</title>
+                <title lang="fr">Méta</title>
+                <title lang="es">Meta</title>
+                <title lang="de">Meta</title>
+            </meta>
+        </property>
+
+        <property name="content" type="text_editor">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="ru">Содержимое</title>
+                <title lang="fr">Contenu</title>
+                <title lang="es">Contenido</title>
+                <title lang="de">Inhalt</title>
+            </meta>
+        </property>
+
+        <property name="image" type="single_media_selection">
+            <meta>
+                <title lang="en">Image</title>
+                <title lang="tr">Görsel</title>
+                <title lang="ru">Изображение</title>
+                <title lang="fr">Image</title>
+                <title lang="es">Imagen</title>
+                <title lang="de">Bild</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="video" type="single_media_selection">
+            <meta>
+                <title lang="en">Video</title>
+                <title lang="tr">Video</title>
+                <title lang="ru">Видео</title>
+                <title lang="fr">Vidéo</title>
+                <title lang="es">Vídeo</title>
+                <title lang="de">Video</title>
+            </meta>
+            <params>
+                <param name="types" value="video"/>
+            </params>
+        </property>
+
+        <property name="icon" type="single_icon_selection">
+            <meta>
+                <title lang="en">Icon</title>
+                <title lang="tr">İkon</title>
+                <title lang="ru">Иконка</title>
+                <title lang="fr">Icône</title>
+                <title lang="es">Icono</title>
+                <title lang="de">Symbol</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
+            </params>
+        </property>
+
+        <property name="hover_image" type="single_media_selection">
+            <meta>
+                <title lang="en">Hover Image</title>
+                <title lang="tr">Üzerine gelince değişen görsel</title>
+                <title lang="ru">Изображение при наведении</title>
+                <title lang="fr">Image au survol</title>
+                <title lang="es">Imagen al pasar el cursor</title>
+                <title lang="de">Bild bei Hover</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="hover_video" type="single_media_selection">
+            <meta>
+                <title lang="en">Hover Video</title>
+                <title lang="tr">Üzerine gelince oynatılan video</title>
+                <title lang="ru">Видео при наведении</title>
+                <title lang="fr">Vidéo au survol</title>
+                <title lang="es">Vídeo al pasar el cursor</title>
+                <title lang="de">Video bei Hover</title>
+            </meta>
+            <params>
+                <param name="types" value="video"/>
+            </params>
+        </property>
+
+        <property name="link" type="link">
+            <meta>
+                <title lang="en">Link</title>
+                <title lang="tr">Bağlantı</title>
+                <title lang="ru">Ссылка</title>
+                <title lang="fr">Lien</title>
+                <title lang="es">Enlace</title>
+                <title lang="de">Link</title>
+            </meta>
+            <params>
+                <param name="enable_anchor" value="true"/>
+                <param name="enable_target" value="true"/>
+            </params>
+        </property>
+
+        <property name="link_title" type="text_line">
+            <meta>
+                <title lang="en">Button Text</title>
+                <title lang="tr">Buton Metni</title>
+                <title lang="ru">Текст кнопки</title>
+                <title lang="fr">Texte du bouton</title>
+                <title lang="es">Texto del botón</title>
+                <title lang="de">Schaltflächentext</title>
+            </meta>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="overlay"/>
+            </params>
+        </property>
+    </properties>
+</template>

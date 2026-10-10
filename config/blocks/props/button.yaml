@@ -1,0 +1,39 @@
+tabs:
+  appearance:
+    title: sulu_block_suite.tabs_appearance
+    fields:
+      variant:
+        type: select
+        label: sulu_block_suite.field_variant
+        col_span: 6
+        options:
+          - { value: 'solid', label: sulu_block_suite.opt_solid }
+          - { value: 'outline', label: sulu_block_suite.opt_outline }
+          - { value: 'ghost', label: sulu_block_suite.opt_ghost }
+          - { value: 'link', label: sulu_block_suite.opt_link }
+      link_color:
+        type: select
+        label: sulu_block_suite.field_link_color
+        col_span: 6
+        options:
+          - { value: 'primary', label: sulu_block_suite.opt_primary }
+          - { value: 'secondary', label: sulu_block_suite.opt_secondary }
+          - { value: 'dark', label: sulu_block_suite.opt_dark }
+          - { value: 'white', label: sulu_block_suite.opt_white }
+          - { value: 'muted', label: sulu_block_suite.opt_muted }
+      size:
+        type: select
+        label: sulu_block_suite.field_size
+        col_span: 6
+        options:
+          - { value: 'sm', label: sulu_block_suite.opt_sm }
+          - { value: 'md', label: sulu_block_suite.opt_md }
+          - { value: 'lg', label: sulu_block_suite.opt_lg }
+      text_align:
+        type: select
+        label: sulu_block_suite.field_text_align
+        col_span: 6
+        options:
+          - { value: 'left', label: sulu_block_suite.opt_left }
+          - { value: 'center', label: sulu_block_suite.opt_center }
+          - { value: 'right', label: sulu_block_suite.opt_right }

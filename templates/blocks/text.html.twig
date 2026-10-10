@@ -1,0 +1,4 @@
+<twig:Text
+    content="{{ block.content|default('') }}"
+    props="{{ block|merge(block.props|default({})) }}"
+/>
