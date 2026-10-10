@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<type name="button" xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+    <meta>
+        <title lang="en">Button Item</title>
+        <title lang="tr">Buton Öğesi</title>
+        <title lang="de">Schaltflächen-Element</title>
+        <title lang="ru">Элемент кнопки</title>
+        <title lang="es">Elemento de botón</title>
+        <title lang="fr">Élément de bouton</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+
+        <property name="button_style" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Style / Variant</title>
+                <title lang="tr">Stil / Varyant</title>
+                <title lang="de">Stil / Variante</title>
+                <title lang="ru">Стиль / Вариант</title>
+                <title lang="es">Estilo / Variante</title>
+                <title lang="fr">Style / Variante</title>
+            </meta>
+            <params>
+                <param name="default_value" value="inherit"/>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Group</title>
+                            <title lang="tr">Gruptan Devral</title>
+                            <title lang="de">Aus Gruppe übernehmen</title>
+                        </meta>
+                    </param>
+                    <param name="solid">
+                        <meta>
+                            <title lang="en">Solid</title>
+                            <title lang="tr">Dolu (Solid)</title>
+                            <title lang="de">Gefüllt</title>
+                        </meta>
+                    </param>
+                    <param name="outline">
+                        <meta>
+                            <title lang="en">Outline</title>
+                            <title lang="tr">Kenarlıklı (Outline)</title>
+                            <title lang="de">Umrandung</title>
+                        </meta>
+                    </param>
+                    <param name="soft">
+                        <meta>
+                            <title lang="en">Soft</title>
+                            <title lang="tr">Yumuşak (Soft)</title>
+                            <title lang="de">Sanft</title>
+                        </meta>
+                    </param>
+                    <param name="ghost">
+                        <meta>
+                            <title lang="en">Ghost</title>
+                            <title lang="tr">Saydam (Ghost)</title>
+                            <title lang="de">Geist</title>
+                        </meta>
+                    </param>
+                    <param name="link">
+                        <meta>
+                            <title lang="en">Link</title>
+                            <title lang="tr">Bağlantı (Link)</title>
+                            <title lang="de">Link</title>
+                        </meta>
+                    </param>
+                    <param name="white">
+                        <meta>
+                            <title lang="en">White</title>
+                            <title lang="tr">Beyaz (White)</title>
+                            <title lang="de">Weiß</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="button_color" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Color</title>
+                <title lang="tr">Renk</title>
+                <title lang="de">Farbe</title>
+                <title lang="ru">Цвет</title>
+                <title lang="es">Color</title>
+                <title lang="fr">Couleur</title>
+            </meta>
+            <params>
+                <param name="default_value" value="inherit"/>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Group</title>
+                            <title lang="tr">Gruptan Devral</title>
+                            <title lang="de">Aus Gruppe übernehmen</title>
+                        </meta>
+                    </param>
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary</title>
+                            <title lang="tr">Birincil (Primary)</title>
+                            <title lang="de">Primär</title>
+                        </meta>
+                    </param>
+                    <param name="secondary">
+                        <meta>
+                            <title lang="en">Secondary</title>
+                            <title lang="tr">İkincil (Secondary)</title>
+                            <title lang="de">Sekundär</title>
+                        </meta>
+                    </param>
+                    <param name="dark">
+                        <meta>
+                            <title lang="en">Dark / Black</title>
+                            <title lang="tr">Koyu (Dark)</title>
+                            <title lang="de">Dunkel</title>
+                        </meta>
+                    </param>
+                    <param name="white">
+                        <meta>
+                            <title lang="en">White</title>
+                            <title lang="tr">Beyaz (White)</title>
+                            <title lang="de">Weiß</title>
+                        </meta>
+                    </param>
+                    <param name="muted">
+                        <meta>
+                            <title lang="en">Muted / Gray</title>
+                            <title lang="tr">Soluk (Muted)</title>
+                            <title lang="de">Gedämpft</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="icon_align" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Icon Position</title>
+                <title lang="tr">İkon Konumu</title>
+                <title lang="de">Symbol-Position</title>
+                <title lang="ru">Позиция иконки</title>
+                <title lang="es">Posición del icono</title>
+                <title lang="fr">Position de l'icône</title>
+            </meta>
+            <params>
+                <param name="default_value" value="left"/>
+                <param name="values" type="collection">
+                    <param name="left">
+                        <meta>
+                            <title lang="en">Left (Leading)</title>
+                            <title lang="tr">Sol (Başta)</title>
+                            <title lang="de">Links</title>
+                        </meta>
+                    </param>
+                    <param name="right">
+                        <meta>
+                            <title lang="en">Right (Trailing)</title>
+                            <title lang="tr">Sağ (Sonda)</title>
+                            <title lang="de">Rechts</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+    </properties>
+</type>

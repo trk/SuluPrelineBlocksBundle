@@ -9,8 +9,10 @@ tabs:
         options:
           - { value: 'solid', label: sulu_block_suite.opt_solid }
           - { value: 'outline', label: sulu_block_suite.opt_outline }
+          - { value: 'soft', label: sulu_block_suite.opt_soft }
           - { value: 'ghost', label: sulu_block_suite.opt_ghost }
           - { value: 'link', label: sulu_block_suite.opt_link }
+          - { value: 'white', label: sulu_block_suite.opt_white }
       link_color:
         type: select
         label: sulu_block_suite.field_link_color
@@ -26,9 +28,11 @@ tabs:
         label: sulu_block_suite.field_size
         col_span: 6
         options:
+          - { value: 'xs', label: sulu_block_suite.opt_xs }
           - { value: 'sm', label: sulu_block_suite.opt_sm }
           - { value: 'md', label: sulu_block_suite.opt_md }
           - { value: 'lg', label: sulu_block_suite.opt_lg }
+          - { value: 'xl', label: sulu_block_suite.opt_xl }
       text_align:
         type: select
         label: sulu_block_suite.field_text_align

@@ -1,9 +1,40 @@
-<a href="{{ this.getUrl() }}"
-   {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-   {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
-   {{ attributes.defaults({
-       class: this.getWrapperClasses(),
-   }) }}
->
-    {{ this.getTitle() }}
-</a>
+{% if this.isGroup() %}
+    <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+         {{ attributes.defaults({ class: this.getGroupWrapperClasses() }) }}>
+        {% for item in this.getNormalizedItems() %}
+            <a href="{{ item.url }}"
+               {% if item.id %}id="{{ item.id }}"{% endif %}
+               {% if item.link_title %}title="{{ item.link_title }}"{% endif %}
+               class="{{ item.classes }}"
+            >
+                {% if item.icon and item.icon_align == 'left' %}
+                    <i class="{{ item.icon }} shrink-0" aria-hidden="true"></i>
+                {% endif %}
+                {% if item.title %}
+                    <span>{{ item.title }}</span>
+                {% endif %}
+                {% if item.icon and item.icon_align == 'right' %}
+                    <i class="{{ item.icon }} shrink-0" aria-hidden="true"></i>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <a href="{{ this.getUrl() }}"
+       {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+       {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
+       {{ attributes.defaults({
+           class: this.getWrapperClasses(),
+       }) }}
+    >
+        {% if this.getResolvedIcon() and this.getIconAlign() == 'left' %}
+            <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+        {% if this.getTitle() %}
+            <span>{{ this.getTitle() }}</span>
+        {% endif %}
+        {% if this.getResolvedIcon() and this.getIconAlign() == 'right' %}
+            <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+    </a>
+{% endif %}

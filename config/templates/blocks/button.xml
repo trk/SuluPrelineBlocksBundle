@@ -5,14 +5,179 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>button</key>
     <meta>
-        <title lang="en">Button</title>
-        <title lang="tr">Buton</title>
-        <title lang="ru">Кнопка</title>
-        <title lang="fr">Bouton</title>
-        <title lang="es">Botón</title>
-        <title lang="de">Schaltfläche</title>
+        <title lang="en">Buttons / Button Group</title>
+        <title lang="tr">Butonlar / Buton Grubu</title>
+        <title lang="de">Schaltflächen / Schaltflächengruppe</title>
+        <title lang="ru">Кнопки / Группа кнопок</title>
+        <title lang="es">Botones / Grupo de botones</title>
+        <title lang="fr">Boutons / Groupe de boutons</title>
     </meta>
     <properties>
+        <block name="items" default-type="button" minOccurs="0">
+            <meta>
+                <title lang="en">Buttons</title>
+                <title lang="tr">Butonlar</title>
+                <title lang="de">Schaltflächen</title>
+                <title lang="ru">Кнопки</title>
+                <title lang="es">Botones</title>
+                <title lang="fr">Boutons</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/button.xml"/>
+            </types>
+        </block>
+
+        <property name="group_style" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Group Style</title>
+                <title lang="tr">Grup Stili</title>
+                <title lang="de">Gruppenstil</title>
+                <title lang="ru">Стиль группы</title>
+                <title lang="es">Estilo de grupo</title>
+                <title lang="fr">Style de groupe</title>
+            </meta>
+            <params>
+                <param name="default_value" value="gap"/>
+                <param name="values" type="collection">
+                    <param name="gap">
+                        <meta>
+                            <title lang="en">Separated (Gap)</title>
+                            <title lang="tr">Ayrık (Boşluklu)</title>
+                            <title lang="de">Getrennt (Abstand)</title>
+                        </meta>
+                    </param>
+                    <param name="connected">
+                        <meta>
+                            <title lang="en">Connected (Segmented)</title>
+                            <title lang="tr">Bitişik (Segmented)</title>
+                            <title lang="de">Verbunden (Segmentiert)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="orientation" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Orientation</title>
+                <title lang="tr">Yön</title>
+                <title lang="de">Ausrichtung</title>
+                <title lang="ru">Ориентация</title>
+                <title lang="es">Orientación</title>
+                <title lang="fr">Orientation</title>
+            </meta>
+            <params>
+                <param name="default_value" value="horizontal"/>
+                <param name="values" type="collection">
+                    <param name="horizontal">
+                        <meta>
+                            <title lang="en">Horizontal</title>
+                            <title lang="tr">Yatay</title>
+                            <title lang="de">Horizontal</title>
+                        </meta>
+                    </param>
+                    <param name="vertical">
+                        <meta>
+                            <title lang="en">Vertical</title>
+                            <title lang="tr">Dikey</title>
+                            <title lang="de">Vertikal</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="align" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Alignment</title>
+                <title lang="tr">Hizalama</title>
+                <title lang="de">Ausrichtung</title>
+                <title lang="ru">Выравнивание</title>
+                <title lang="es">Alineación</title>
+                <title lang="fr">Alignement</title>
+            </meta>
+            <params>
+                <param name="default_value" value="start"/>
+                <param name="values" type="collection">
+                    <param name="start">
+                        <meta>
+                            <title lang="en">Left / Start</title>
+                            <title lang="tr">Sol (Başlangıç)</title>
+                            <title lang="de">Links</title>
+                        </meta>
+                    </param>
+                    <param name="center">
+                        <meta>
+                            <title lang="en">Center</title>
+                            <title lang="tr">Orta (Merkez)</title>
+                            <title lang="de">Zentriert</title>
+                        </meta>
+                    </param>
+                    <param name="end">
+                        <meta>
+                            <title lang="en">Right / End</title>
+                            <title lang="tr">Sağ (Bitiş)</title>
+                            <title lang="de">Rechts</title>
+                        </meta>
+                    </param>
+                    <param name="justify">
+                        <meta>
+                            <title lang="en">Full Width / Justify</title>
+                            <title lang="tr">Tam Genişlik (Yay)</title>
+                            <title lang="de">Volle Breite</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="gap" type="single_select" colspan="3">
+            <meta>
+                <title lang="en">Gap Size</title>
+                <title lang="tr">Boşluk Boyutu</title>
+                <title lang="de">Abstandsgröße</title>
+                <title lang="ru">Размер зазора</title>
+                <title lang="es">Tamaño del espacio</title>
+                <title lang="fr">Taille de l'espacement</title>
+            </meta>
+            <params>
+                <param name="default_value" value="md"/>
+                <param name="values" type="collection">
+                    <param name="none">
+                        <meta>
+                            <title lang="en">None (0)</title>
+                            <title lang="tr">Yok (0)</title>
+                        </meta>
+                    </param>
+                    <param name="xs">
+                        <meta>
+                            <title lang="en">Extra Small</title>
+                            <title lang="tr">Çok Küçük (xs)</title>
+                        </meta>
+                    </param>
+                    <param name="sm">
+                        <meta>
+                            <title lang="en">Small</title>
+                            <title lang="tr">Küçük (sm)</title>
+                        </meta>
+                    </param>
+                    <param name="md">
+                        <meta>
+                            <title lang="en">Medium</title>
+                            <title lang="tr">Orta (md)</title>
+                        </meta>
+                    </param>
+                    <param name="lg">
+                        <meta>
+                            <title lang="en">Large</title>
+                            <title lang="tr">Büyük (lg)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <!-- Single button fallback fields (optional) -->
         <xi:include href="../fields/title.xml"/>
         <xi:include href="../fields/link.xml"/>
         <xi:include href="../fields/link_title.xml"/>
