@@ -389,7 +389,7 @@ final class Card
         $rounded = $this->getRoundedClasses();
         $mediaAlign = $this->getMediaAlign();
 
-        $base = 'flex overflow-hidden transition-all';
+        $base = 'w-full h-full flex overflow-hidden transition-all';
 
         $variantClasses = match ($variant) {
             'shadow' => 'shadow-md hover:shadow-lg border border-gray-100 dark:border-neutral-800',
@@ -508,7 +508,7 @@ final class Card
 
     public function getWrapperClasses(): string
     {
-        $base = 'group relative ' . $this->getCardClasses() . ' ' . $this->getTextAlign();
+        $base = 'group relative w-full h-full ' . $this->getCardClasses() . ' ' . $this->getTextAlign();
 
         return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
     }

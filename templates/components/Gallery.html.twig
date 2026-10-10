@@ -2,12 +2,11 @@
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
 {% set is_lightbox_active = this.isLightboxEnabled() %}
-{% set gallery_unique_id = 'gallery-' ~ random() %}
+{% set gallery_dom_id = custom_id ? custom_id : ('gallery-' ~ random()) %}
 
 <section
-    {% if custom_id %}id="{{ custom_id }}"{% endif %}
+    id="{{ gallery_dom_id }}"
     class="w-full {{ this.marginClass }} {{ this.customClass }}"
-    id="{{ gallery_unique_id }}"
 >
     {% if title %}
         <div class="mb-8 text-center">
@@ -36,31 +35,32 @@
         </div>
     {% endif %}
 
-    <div class="{{ this.containerClasses }} gallery-container">
+    <div class="{{ this.containerClasses }} gallery-container w-full">
         {% for item in items %}
             {% set item_tags = this.getItemTagSlugs(item) %}
             {% set image_url = this.resolveItemImageUrl(item) %}
-            {% set modal_id = gallery_unique_id ~ '-modal-' ~ loop.index %}
+            {% set modal_id = gallery_dom_id ~ '-modal-' ~ loop.index %}
             {% set item_props = this.resolveItemProps(item) %}
 
             <div
-                class="gallery-item-card transition-all duration-300 ease-in-out {% if this.isMasonry() %}break-inside-avoid mb-6{% endif %}"
+                class="gallery-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
                 data-tags="{{ item_tags }}"
             >
-                <div {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}" class="cursor-pointer"{% endif %}>
+                <div class="w-full h-full flex flex-col {% if is_lightbox_active and image_url and not item.link|default(null) %}cursor-pointer{% endif %}" {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}"{% endif %}>
                     <twig:Overlay
                         title="{{ item.title|default(null) }}"
                         meta="{{ item.meta|default(null) }}"
                         badge="{{ item.badge|default(null) }}"
                         content="{{ item.content|default(null) }}"
-                        image="{{ item.image|default(null) }}"
-                        video="{{ item.video|default(null) }}"
+                        :image="item.image|default(null)"
+                        :video="item.video|default(null)"
                         :icon="item.icon|default(null)"
-                        link="{{ item.link|default(null) }}"
+                        :link="item.link|default(null)"
                         linkTitle="{{ item.link_title|default(null) }}"
-                        hoverImage="{{ item.hover_image|default(null) }}"
-                        hoverVideo="{{ item.hover_video|default(null) }}"
-                        props="{{ item_props }}"
+                        :hoverImage="item.hover_image|default(null)"
+                        :hoverVideo="item.hover_video|default(null)"
+                        :props="item_props"
+                        class="w-full h-full flex-1"
                     />
                 </div>
             </div>
@@ -107,7 +107,7 @@
     {% if is_filter_active %}
         <script>
             (function() {
-                var scope = document.getElementById('{{ gallery_unique_id }}');
+                var scope = document.getElementById('{{ gallery_dom_id }}');
                 if (!scope) return;
                 var btns = scope.querySelectorAll('.filter-btn');
                 var items = scope.querySelectorAll('.gallery-item-card');

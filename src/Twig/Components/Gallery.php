@@ -21,15 +21,17 @@ final class Gallery
      */
     public array $props = [];
 
-    public ?string $columnsDefault = null;
-    public ?string $columns_default = null;
-    public ?string $columnsSm = null;
-    public ?string $columns_sm = null;
-    public ?string $columnsMd = null;
-    public ?string $columns_md = null;
-    public ?string $columnsLg = null;
-    public ?string $columns_lg = null;
-    public ?string $gap = null;
+    public string|int|null $columnsDefault = null;
+    public string|int|null $columns_default = null;
+    public string|int|null $columnsSm = null;
+    public string|int|null $columns_sm = null;
+    public string|int|null $columnsMd = null;
+    public string|int|null $columns_md = null;
+    public string|int|null $columnsLg = null;
+    public string|int|null $columns_lg = null;
+    public string|int|null $columnsXl = null;
+    public string|int|null $columns_xl = null;
+    public string|int|null $gap = null;
     public ?string $masonry = null;
 
     public ?string $overlayPosition = null;
@@ -70,21 +72,32 @@ final class Gallery
     public function getResolvedProps(): array
     {
         $resolved = $this->props;
+        if (isset($resolved['props']) && \is_array($resolved['props'])) {
+            $resolved = \array_merge($resolved['props'], $resolved);
+        }
 
-        if (null !== ($this->columnsDefault ?? $this->columns_default)) {
-            $resolved['columns_default'] = $this->columnsDefault ?? $this->columns_default;
+        $defaultCol = $this->columnsDefault ?? $this->columns_default;
+        if (null !== $defaultCol) {
+            $resolved['columns_default'] = (string) $defaultCol;
         }
-        if (null !== ($this->columnsSm ?? $this->columns_sm)) {
-            $resolved['columns_sm'] = $this->columnsSm ?? $this->columns_sm;
+        $smCol = $this->columnsSm ?? $this->columns_sm;
+        if (null !== $smCol) {
+            $resolved['columns_sm'] = (string) $smCol;
         }
-        if (null !== ($this->columnsMd ?? $this->columns_md)) {
-            $resolved['columns_md'] = $this->columnsMd ?? $this->columns_md;
+        $mdCol = $this->columnsMd ?? $this->columns_md;
+        if (null !== $mdCol) {
+            $resolved['columns_md'] = (string) $mdCol;
         }
-        if (null !== ($this->columnsLg ?? $this->columns_lg)) {
-            $resolved['columns_lg'] = $this->columnsLg ?? $this->columns_lg;
+        $lgCol = $this->columnsLg ?? $this->columns_lg;
+        if (null !== $lgCol) {
+            $resolved['columns_lg'] = (string) $lgCol;
+        }
+        $xlCol = $this->columnsXl ?? $this->columns_xl;
+        if (null !== $xlCol) {
+            $resolved['columns_xl'] = (string) $xlCol;
         }
         if (null !== $this->gap) {
-            $resolved['gap'] = $this->gap;
+            $resolved['gap'] = (string) $this->gap;
         }
         if (null !== $this->masonry) {
             $resolved['masonry'] = $this->masonry;
@@ -170,39 +183,53 @@ final class Gallery
     {
         $props = $this->getResolvedProps();
 
-        $gap = isset($props['gap']) && \is_string($props['gap']) ? $props['gap'] : 'md';
+        $gap = isset($props['gap']) && \is_scalar($props['gap']) ? (string) $props['gap'] : 'md';
         $gapClass = match ($gap) {
-            'collapse' => 'gap-0',
-            'sm' => 'gap-4',
-            'lg' => 'gap-8',
-            'xl' => 'gap-12',
+            'none', 'collapse', '0' => 'gap-0',
+            'xs', 'xsmall' => 'gap-2',
+            'sm', 'small' => 'gap-4',
+            'lg', 'large' => 'gap-8',
+            'xl', 'xlarge' => 'gap-12',
+            '2xl', '2xlarge' => 'gap-16',
             default => 'gap-6',
         };
 
-        if ($this->isMasonry()) {
-            $colsDefault = isset($props['columns_default']) && \is_string($props['columns_default']) ? $props['columns_default'] : '1';
-            $colsSm = isset($props['columns_sm']) && \is_string($props['columns_sm']) ? $props['columns_sm'] : '2';
-            $colsMd = isset($props['columns_md']) && \is_string($props['columns_md']) ? $props['columns_md'] : '3';
-            $colsLg = isset($props['columns_lg']) && \is_string($props['columns_lg']) ? $props['columns_lg'] : '4';
+        $colsDefault = isset($props['columns_default']) && \is_scalar($props['columns_default']) ? (string) $props['columns_default'] : '1';
+        $colsSm = isset($props['columns_sm']) && \is_scalar($props['columns_sm']) ? (string) $props['columns_sm'] : '2';
+        $colsMd = isset($props['columns_md']) && \is_scalar($props['columns_md']) ? (string) $props['columns_md'] : '3';
+        $colsLg = isset($props['columns_lg']) && \is_scalar($props['columns_lg']) ? (string) $props['columns_lg'] : '4';
+        $colsXl = isset($props['columns_xl']) && \is_scalar($props['columns_xl']) ? (string) $props['columns_xl'] : '';
 
+        if ($this->isMasonry()) {
             $defaultColClass = match ($colsDefault) {
                 '2' => 'columns-2',
+                '3' => 'columns-3',
+                '4' => 'columns-4',
+                '5' => 'columns-5',
+                '6' => 'columns-6',
                 default => 'columns-1',
             };
 
             $smColClass = match ($colsSm) {
                 '1' => 'sm:columns-1',
                 '3' => 'sm:columns-3',
+                '4' => 'sm:columns-4',
+                '5' => 'sm:columns-5',
+                '6' => 'sm:columns-6',
                 default => 'sm:columns-2',
             };
 
             $mdColClass = match ($colsMd) {
+                '1' => 'md:columns-1',
                 '2' => 'md:columns-2',
                 '4' => 'md:columns-4',
+                '5' => 'md:columns-5',
+                '6' => 'md:columns-6',
                 default => 'md:columns-3',
             };
 
             $lgColClass = match ($colsLg) {
+                '1' => 'lg:columns-1',
                 '2' => 'lg:columns-2',
                 '3' => 'lg:columns-3',
                 '5' => 'lg:columns-5',
@@ -210,32 +237,57 @@ final class Gallery
                 default => 'lg:columns-4',
             };
 
-            return \sprintf('%s %s %s %s %s', $defaultColClass, $smColClass, $mdColClass, $lgColClass, $gapClass);
-        }
+            $xlColClass = match ($colsXl) {
+                '1' => 'xl:columns-1',
+                '2' => 'xl:columns-2',
+                '3' => 'xl:columns-3',
+                '4' => 'xl:columns-4',
+                '5' => 'xl:columns-5',
+                '6' => 'xl:columns-6',
+                default => '',
+            };
 
-        $colsDefault = isset($props['columns_default']) && \is_string($props['columns_default']) ? $props['columns_default'] : '1';
-        $colsSm = isset($props['columns_sm']) && \is_string($props['columns_sm']) ? $props['columns_sm'] : '2';
-        $colsMd = isset($props['columns_md']) && \is_string($props['columns_md']) ? $props['columns_md'] : '3';
-        $colsLg = isset($props['columns_lg']) && \is_string($props['columns_lg']) ? $props['columns_lg'] : '4';
+            $classes = \array_values(\array_filter([
+                $defaultColClass,
+                $smColClass,
+                $mdColClass,
+                $lgColClass,
+                $xlColClass,
+                $gapClass,
+            ], static fn (string $c): bool => '' !== $c));
+
+            return \implode(' ', $classes);
+        }
 
         $defaultGridClass = match ($colsDefault) {
             '2' => 'grid-cols-2',
+            '3' => 'grid-cols-3',
+            '4' => 'grid-cols-4',
+            '5' => 'grid-cols-5',
+            '6' => 'grid-cols-6',
             default => 'grid-cols-1',
         };
 
         $smGridClass = match ($colsSm) {
             '1' => 'sm:grid-cols-1',
             '3' => 'sm:grid-cols-3',
+            '4' => 'sm:grid-cols-4',
+            '5' => 'sm:grid-cols-5',
+            '6' => 'sm:grid-cols-6',
             default => 'sm:grid-cols-2',
         };
 
         $mdGridClass = match ($colsMd) {
+            '1' => 'md:grid-cols-1',
             '2' => 'md:grid-cols-2',
             '4' => 'md:grid-cols-4',
+            '5' => 'md:grid-cols-5',
+            '6' => 'md:grid-cols-6',
             default => 'md:grid-cols-3',
         };
 
         $lgGridClass = match ($colsLg) {
+            '1' => 'lg:grid-cols-1',
             '2' => 'lg:grid-cols-2',
             '3' => 'lg:grid-cols-3',
             '5' => 'lg:grid-cols-5',
@@ -243,7 +295,27 @@ final class Gallery
             default => 'lg:grid-cols-4',
         };
 
-        return \sprintf('grid %s %s %s %s %s', $defaultGridClass, $smGridClass, $mdGridClass, $lgGridClass, $gapClass);
+        $xlGridClass = match ($colsXl) {
+            '1' => 'xl:grid-cols-1',
+            '2' => 'xl:grid-cols-2',
+            '3' => 'xl:grid-cols-3',
+            '4' => 'xl:grid-cols-4',
+            '5' => 'xl:grid-cols-5',
+            '6' => 'xl:grid-cols-6',
+            default => '',
+        };
+
+        $classes = \array_values(\array_filter([
+            'grid',
+            $defaultGridClass,
+            $smGridClass,
+            $mdGridClass,
+            $lgGridClass,
+            $xlGridClass,
+            $gapClass,
+        ], static fn (string $c): bool => '' !== $c));
+
+        return \implode(' ', $classes);
     }
 
     public function isFilterEnabled(): bool
@@ -340,7 +412,7 @@ final class Gallery
         $overlayMode = isset($props['overlay_mode']) && \is_string($props['overlay_mode']) ? $props['overlay_mode'] : 'cover';
 
         $overlayStyle = isset($props['overlay_style']) && \is_string($props['overlay_style']) ? $props['overlay_style'] : 'gradient';
-        if (isset($item['overlay_style']) && \is_string($item['overlay_style']) && 'inherit' !== $item['overlay_style']) {
+        if (isset($item['overlay_style']) && \is_string($item['overlay_style']) && 'inherit' !== $item['overlay_style'] && '' !== \trim($item['overlay_style'])) {
             $overlayStyle = $item['overlay_style'];
         }
 
@@ -350,7 +422,7 @@ final class Gallery
         $rounded = isset($props['rounded']) && \is_string($props['rounded']) ? $props['rounded'] : 'xl';
 
         $buttonStyle = 'primary';
-        if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style']) {
+        if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style'] && '' !== \trim($item['link_style'])) {
             $buttonStyle = $item['link_style'];
         }
 

@@ -41,6 +41,40 @@ final class GridTest extends TestCase
         self::assertStringContainsString('gap-8', $classes);
     }
 
+    public function testIntegerColumnsAndXlSupport(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'columns_default' => 3,
+            'columns_sm' => 2,
+            'columns_md' => 4,
+            'columns_lg' => 5,
+            'columns_xl' => 6,
+            'gap' => 'none',
+        ];
+
+        $classes = $grid->getContainerClasses();
+        self::assertSame('grid grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-0', $classes);
+    }
+
+    public function testNestedPropsUnpacking(): void
+    {
+        $grid = new Grid();
+        $grid->props = [
+            'props' => [
+                'columns_default' => 4,
+                'columns_sm' => 1,
+                'columns_md' => 2,
+                'columns_lg' => 3,
+                'columns_xl' => 4,
+                'gap' => '2xl',
+            ],
+        ];
+
+        $classes = $grid->getContainerClasses();
+        self::assertSame('grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16', $classes);
+    }
+
     public function testMasonryMode(): void
     {
         $grid = new Grid();
