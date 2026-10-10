@@ -48,8 +48,8 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
             $container->prependExtensionConfig('sulu_block_suite', [
                 'props' => [
                     'schema_dir' => [
-                        '%kernel.project_dir%/config/blocks/props',
                         \dirname(__DIR__, 2) . '/config/blocks/props',
+                        '%kernel.project_dir%/config/blocks/props',
                     ],
                 ],
                 'presets' => [
