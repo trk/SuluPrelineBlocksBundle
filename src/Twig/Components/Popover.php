@@ -16,6 +16,16 @@ final class Popover
 
     public mixed $image = null;
 
+    public ?string $trigger = 'click';
+
+    public ?string $markerType = 'pulse';
+
+    public ?string $marker_type = null;
+
+    public ?string $markerColor = 'primary';
+
+    public ?string $marker_color = null;
+
     /**
      * @var array<int|string, mixed>
      */
@@ -44,6 +54,27 @@ final class Popover
     public function getImageSizes(): string
     {
         return '(min-width: 1280px) 1200px, 100vw';
+    }
+
+    public function getResolvedTrigger(): string
+    {
+        $val = $this->trigger ?? 'click';
+
+        return 'hover' === $val ? 'hover' : 'click';
+    }
+
+    public function getResolvedDefaultMarkerType(): string
+    {
+        $val = $this->markerType ?? $this->marker_type ?? 'pulse';
+
+        return '' !== \trim($val) ? \trim($val) : 'pulse';
+    }
+
+    public function getResolvedDefaultMarkerColor(): string
+    {
+        $val = $this->markerColor ?? $this->marker_color ?? 'primary';
+
+        return '' !== \trim($val) ? \trim($val) : 'primary';
     }
 
     public function getHotspotClasses(): string
@@ -106,7 +137,7 @@ final class Popover
      *     link_title: string,
      *     marker_type: string,
      *     marker_color: string,
-     *     marker_icon: ?string,
+     *     icon_class: ?string,
      *     trigger: string,
      *     image_url: ?string,
      *     image_srcset: ?string,
@@ -117,6 +148,9 @@ final class Popover
     public function getNormalizedItems(): array
     {
         $normalized = [];
+        $defaultType = $this->getResolvedDefaultMarkerType();
+        $defaultColor = $this->getResolvedDefaultMarkerColor();
+        $blockTrigger = $this->getResolvedTrigger();
 
         foreach ($this->items as $item) {
             if (!\is_array($item)) {
@@ -151,21 +185,34 @@ final class Popover
             $x = \round(\max(0.0, \min(100.0, $x)), 1);
             $y = \round(\max(0.0, \min(100.0, $y)), 1);
 
-            $markerType = isset($hotspot['marker_type']) && \is_string($hotspot['marker_type']) && '' !== \trim($hotspot['marker_type'])
-                ? \trim($hotspot['marker_type'])
-                : 'pulse';
+            // Marker Type: Item override -> Hotspot data -> Block default
+            $itemType = isset($item['marker_type']) && \is_string($item['marker_type']) ? \trim($item['marker_type']) : null;
+            if (null !== $itemType && '' !== $itemType && 'inherit' !== $itemType && 'default' !== $itemType) {
+                $markerType = $itemType;
+            } elseif (isset($hotspot['marker_type']) && \is_string($hotspot['marker_type']) && '' !== \trim($hotspot['marker_type'])) {
+                $markerType = \trim($hotspot['marker_type']);
+            } else {
+                $markerType = $defaultType;
+            }
 
-            $markerColor = isset($hotspot['marker_color']) && \is_string($hotspot['marker_color']) && '' !== \trim($hotspot['marker_color'])
-                ? \trim($hotspot['marker_color'])
-                : 'primary';
+            // Marker Color: Item override -> Hotspot data -> Block default
+            $itemColor = isset($item['marker_color']) && \is_string($item['marker_color']) ? \trim($item['marker_color']) : null;
+            if (null !== $itemColor && '' !== $itemColor && 'inherit' !== $itemColor && 'default' !== $itemColor) {
+                $markerColor = $itemColor;
+            } elseif (isset($hotspot['marker_color']) && \is_string($hotspot['marker_color']) && '' !== \trim($hotspot['marker_color'])) {
+                $markerColor = \trim($hotspot['marker_color']);
+            } else {
+                $markerColor = $defaultColor;
+            }
 
-            $markerIcon = isset($hotspot['marker_icon']) && \is_string($hotspot['marker_icon']) && '' !== \trim($hotspot['marker_icon'])
-                ? \trim($hotspot['marker_icon'])
-                : null;
+            // Custom Icon: Item icon -> Hotspot icon
+            $rawIcon = $item['icon'] ?? $hotspot['marker_icon'] ?? null;
+            $iconClass = PropsResolver::resolveIcon($rawIcon);
 
+            // Trigger: Block level default (with item fallback)
             $trigger = isset($hotspot['trigger']) && \is_string($hotspot['trigger']) && '' !== \trim($hotspot['trigger'])
                 ? \trim($hotspot['trigger'])
-                : 'click';
+                : $blockTrigger;
 
             $title = \is_string($item['title'] ?? null) ? $item['title'] : '';
             $meta = \is_string($item['meta'] ?? null) ? $item['meta'] : '';
@@ -197,7 +244,7 @@ final class Popover
                 'link_title' => $linkTitle,
                 'marker_type' => $markerType,
                 'marker_color' => $markerColor,
-                'marker_icon' => $markerIcon,
+                'icon_class' => $iconClass,
                 'trigger' => $trigger,
                 'image_url' => $imageUrl,
                 'image_srcset' => $imageSrcset,

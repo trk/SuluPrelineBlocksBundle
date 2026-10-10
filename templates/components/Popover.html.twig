@@ -49,6 +49,10 @@
                                         <circle cx="12" cy="10" r="3"/>
                                     </svg>
                                 </span>
+                            {% elseif item.marker_type == 'icon' and item.icon_class %}
+                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                    <i class="{{ item.icon_class }} text-xs" aria-hidden="true"></i>
+                                </span>
                             {% else %}
                                 <span class="relative inline-flex items-center justify-center size-5 rounded-full {{ marker_colors.inner }}">
                                     <span class="size-1.5 rounded-full bg-white"></span>

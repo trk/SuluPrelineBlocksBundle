@@ -12,13 +12,124 @@
     <properties>
         <property name="hotspot" type="hotspot_picker" colspan="12">
             <meta>
-                <title lang="en">Marker Position &amp; Style</title>
-                <title lang="tr">İşaretçi Konumu ve Stili</title>
+                <title lang="en">Marker Position</title>
+                <title lang="tr">İşaretçi Konumu</title>
                 <info_text lang="en">Click on the image to place the hotspot marker</info_text>
                 <info_text lang="tr">Noktayı konumlandırmak için görsel üzerine tıklayın</info_text>
             </meta>
         </property>
 
+        <property name="marker_type" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Marker Style</title>
+                <title lang="tr">İşaretçi Stili</title>
+            </meta>
+            <params>
+                <param name="default_value" value="inherit"/>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Block</title>
+                            <title lang="tr">Blok Ayarını Kullan</title>
+                            <title lang="de">Aus Block übernehmen</title>
+                        </meta>
+                    </param>
+                    <param name="pulse">
+                        <meta>
+                            <title lang="en">Radar Pulse</title>
+                            <title lang="tr">Radar (Pulse)</title>
+                        </meta>
+                    </param>
+                    <param name="plus">
+                        <meta>
+                            <title lang="en">Plus (+)</title>
+                            <title lang="tr">Artı (+)</title>
+                        </meta>
+                    </param>
+                    <param name="number">
+                        <meta>
+                            <title lang="en">Number (1, 2, 3...)</title>
+                            <title lang="tr">Numara (1, 2, 3...)</title>
+                        </meta>
+                    </param>
+                    <param name="dot">
+                        <meta>
+                            <title lang="en">Solid Dot</title>
+                            <title lang="tr">Nokta (Dot)</title>
+                        </meta>
+                    </param>
+                    <param name="pin">
+                        <meta>
+                            <title lang="en">Map Pin</title>
+                            <title lang="tr">Harita İğnesi</title>
+                        </meta>
+                    </param>
+                    <param name="icon">
+                        <meta>
+                            <title lang="en">Custom Icon</title>
+                            <title lang="tr">Özel İkon</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="marker_color" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Marker Color</title>
+                <title lang="tr">İşaretçi Rengi</title>
+            </meta>
+            <params>
+                <param name="default_value" value="inherit"/>
+                <param name="values" type="collection">
+                    <param name="inherit">
+                        <meta>
+                            <title lang="en">Inherit from Block</title>
+                            <title lang="tr">Blok Ayarını Kullan</title>
+                            <title lang="de">Aus Block übernehmen</title>
+                        </meta>
+                    </param>
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary (Blue)</title>
+                            <title lang="tr">Birincil (Mavi)</title>
+                        </meta>
+                    </param>
+                    <param name="dark">
+                        <meta>
+                            <title lang="en">Dark Neutral</title>
+                            <title lang="tr">Koyu Gri</title>
+                        </meta>
+                    </param>
+                    <param name="light">
+                        <meta>
+                            <title lang="en">Light (White)</title>
+                            <title lang="tr">Açık / Beyaz</title>
+                        </meta>
+                    </param>
+                    <param name="accent">
+                        <meta>
+                            <title lang="en">Accent (Amber)</title>
+                            <title lang="tr">Sarı / Vurgu</title>
+                        </meta>
+                    </param>
+                    <param name="success">
+                        <meta>
+                            <title lang="en">Success (Green)</title>
+                            <title lang="tr">Yeşil</title>
+                        </meta>
+                    </param>
+                    <param name="danger">
+                        <meta>
+                            <title lang="en">Danger (Red)</title>
+                            <title lang="tr">Kırmızı</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <xi:include href="../fields/icon.xml"/>
         <xi:include href="../fields/title.xml"/>
 
         <property name="meta" type="text_line">

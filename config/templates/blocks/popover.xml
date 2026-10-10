@@ -25,6 +25,128 @@
             </params>
         </property>
 
+        <property name="trigger" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Trigger Mode</title>
+                <title lang="tr">Açılma Şekli</title>
+                <info_text lang="en">How the card popovers are revealed</info_text>
+                <info_text lang="tr">Nokta kartlarının açılma şekli</info_text>
+            </meta>
+            <params>
+                <param name="default_value" value="click"/>
+                <param name="values" type="collection">
+                    <param name="click">
+                        <meta>
+                            <title lang="en">On Click</title>
+                            <title lang="tr">Tıklama ile (Click)</title>
+                        </meta>
+                    </param>
+                    <param name="hover">
+                        <meta>
+                            <title lang="en">On Hover</title>
+                            <title lang="tr">Hover (Üzerine Gelme)</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="marker_type" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Default Marker Style</title>
+                <title lang="tr">Varsayılan İşaretçi Stili</title>
+            </meta>
+            <params>
+                <param name="default_value" value="pulse"/>
+                <param name="values" type="collection">
+                    <param name="pulse">
+                        <meta>
+                            <title lang="en">Radar Pulse</title>
+                            <title lang="tr">Radar (Pulse)</title>
+                        </meta>
+                    </param>
+                    <param name="plus">
+                        <meta>
+                            <title lang="en">Plus (+)</title>
+                            <title lang="tr">Artı (+)</title>
+                        </meta>
+                    </param>
+                    <param name="number">
+                        <meta>
+                            <title lang="en">Number (1, 2, 3...)</title>
+                            <title lang="tr">Numara (1, 2, 3...)</title>
+                        </meta>
+                    </param>
+                    <param name="dot">
+                        <meta>
+                            <title lang="en">Solid Dot</title>
+                            <title lang="tr">Nokta (Dot)</title>
+                        </meta>
+                    </param>
+                    <param name="pin">
+                        <meta>
+                            <title lang="en">Map Pin</title>
+                            <title lang="tr">Harita İğnesi</title>
+                        </meta>
+                    </param>
+                    <param name="icon">
+                        <meta>
+                            <title lang="en">Custom Icon</title>
+                            <title lang="tr">Özel İkon</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
+        <property name="marker_color" type="single_select" colspan="4">
+            <meta>
+                <title lang="en">Default Marker Color</title>
+                <title lang="tr">Varsayılan İşaretçi Rengi</title>
+            </meta>
+            <params>
+                <param name="default_value" value="primary"/>
+                <param name="values" type="collection">
+                    <param name="primary">
+                        <meta>
+                            <title lang="en">Primary (Blue)</title>
+                            <title lang="tr">Birincil (Mavi)</title>
+                        </meta>
+                    </param>
+                    <param name="dark">
+                        <meta>
+                            <title lang="en">Dark Neutral</title>
+                            <title lang="tr">Koyu Gri</title>
+                        </meta>
+                    </param>
+                    <param name="light">
+                        <meta>
+                            <title lang="en">Light (White)</title>
+                            <title lang="tr">Açık / Beyaz</title>
+                        </meta>
+                    </param>
+                    <param name="accent">
+                        <meta>
+                            <title lang="en">Accent (Amber)</title>
+                            <title lang="tr">Sarı / Vurgu</title>
+                        </meta>
+                    </param>
+                    <param name="success">
+                        <meta>
+                            <title lang="en">Success (Green)</title>
+                            <title lang="tr">Yeşil</title>
+                        </meta>
+                    </param>
+                    <param name="danger">
+                        <meta>
+                            <title lang="en">Danger (Red)</title>
+                            <title lang="tr">Kırmızı</title>
+                        </meta>
+                    </param>
+                </param>
+            </params>
+        </property>
+
         <block name="items" default-type="popover_item" minOccurs="1">
             <meta>
                 <title lang="en">Hotspot Markers</title>
