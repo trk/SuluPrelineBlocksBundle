@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>video</key>
     <meta>
@@ -12,64 +13,10 @@
         <title lang="de">Video</title>
     </meta>
     <properties>
-        <property name="video" type="single_media_selection">
-            <meta>
-                <title lang="en">Video Media</title>
-                <title lang="tr">Video Medyası</title>
-                <title lang="ru">Видеофайл из медиатеки</title>
-                <title lang="fr">Média vidéo</title>
-                <title lang="es">Archivo de vídeo</title>
-                <title lang="de">Videomedium</title>
-            </meta>
-            <params>
-                <param name="types" value="video"/>
-            </params>
-        </property>
-
-        <property name="link" type="link">
-            <meta>
-                <title lang="en">External Video Link / URL</title>
-                <title lang="tr">Harici Video Bağlantısı / URL</title>
-                <title lang="ru">Внешняя ссылка на видео / URL</title>
-                <title lang="fr">Lien vidéo externe / URL</title>
-                <title lang="es">Enlace de vídeo externo / URL</title>
-                <title lang="de">Externer Videolink / URL</title>
-                <info_text lang="en">e.g. YouTube, Vimeo or external MP4</info_text>
-                <info_text lang="tr">ör. YouTube, Vimeo veya harici MP4</info_text>
-                <info_text lang="ru">напр. YouTube, Vimeo или внешний MP4</info_text>
-                <info_text lang="fr">ex. YouTube, Vimeo ou MP4 externe</info_text>
-                <info_text lang="es">ej. YouTube, Vimeo o MP4 externo</info_text>
-                <info_text lang="de">z.B. YouTube, Vimeo oder externes MP4</info_text>
-            </meta>
-        </property>
-
-        <property name="image" type="single_media_selection">
-            <meta>
-                <title lang="en">Poster / Cover Image</title>
-                <title lang="tr">Kapak / Poster Görseli</title>
-                <title lang="ru">Обложка / Постер</title>
-                <title lang="fr">Affiche / Image de couverture</title>
-                <title lang="es">Póster / Imagen de portada</title>
-                <title lang="de">Poster- / Titelbild</title>
-            </meta>
-            <params>
-                <param name="types" value="image"/>
-            </params>
-        </property>
-
-        <property name="icon" type="single_icon_selection">
-            <meta>
-                <title lang="en">Custom Play Icon</title>
-                <title lang="tr">Özel Oynat İkonu</title>
-                <title lang="ru">Пользовательская иконка воспроизведения</title>
-                <title lang="fr">Icône de lecture personnalisée</title>
-                <title lang="es">Icono de reproducción personalizado</title>
-                <title lang="de">Benutzerdefiniertes Wiedergabesymbol</title>
-            </meta>
-            <params>
-                <param name="icon_set" value="tabler"/>
-            </params>
-        </property>
+        <xi:include href="../fields/video.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/icon.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <template xmlns="http://schemas.sulu.io/template/template"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>text</key>
     <meta>
@@ -12,16 +13,7 @@
         <title lang="de">Text / Formatierter Inhalt</title>
     </meta>
     <properties>
-        <property name="content" type="text_editor" mandatory="true">
-            <meta>
-                <title lang="en">Content</title>
-                <title lang="tr">İçerik</title>
-                <title lang="ru">Содержимое</title>
-                <title lang="fr">Contenu</title>
-                <title lang="es">Contenido</title>
-                <title lang="de">Inhalt</title>
-            </meta>
-        </property>
+        <xi:include href="../fields/content.xml"/>
 
         <property name="props" type="block_props" colspan="12">
             <params>
