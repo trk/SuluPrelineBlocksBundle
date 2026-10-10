@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<section name="media" xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Media</title>
+        <title lang="tr">Medya</title>
+        <title lang="ru">Медиа</title>
+        <title lang="fr">Médias</title>
+        <title lang="es">Medios</title>
+        <title lang="de">Medien</title>
+    </meta>
+    <properties>
+        <property name="image" type="single_media_selection"
+                  visibleCondition="(!video || video.id == null) &amp;&amp; (!icon || icon == '')">
+            <meta>
+                <title lang="en">Image</title>
+                <title lang="tr">Görsel</title>
+                <title lang="ru">Изображение</title>
+                <title lang="fr">Image</title>
+                <title lang="es">Imagen</title>
+                <title lang="de">Bild</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="hover_image" type="single_media_selection"
+                  visibleCondition="image != null &amp;&amp; image.id != null">
+            <meta>
+                <title lang="en">Hover Image</title>
+                <title lang="tr">Üzerine gelince değişen görsel</title>
+                <title lang="ru">Изображение при наведении</title>
+                <title lang="fr">Image au survol</title>
+                <title lang="es">Imagen al pasar el cursor</title>
+                <title lang="de">Bild bei Hover</title>
+            </meta>
+            <params>
+                <param name="types" value="image"/>
+            </params>
+        </property>
+
+        <property name="video" type="single_media_selection"
+                  visibleCondition="(!image || image.id == null) &amp;&amp; (!icon || icon == '')">
+            <meta>
+                <title lang="en">Video</title>
+                <title lang="tr">Video</title>
+                <title lang="ru">Видео</title>
+                <title lang="fr">Vidéo</title>
+                <title lang="es">Vídeo</title>
+                <title lang="de">Video</title>
+            </meta>
+            <params>
+                <param name="types" value="video"/>
+            </params>
+        </property>
+
+        <property name="hover_video" type="single_media_selection"
+                  visibleCondition="video != null &amp;&amp; video.id != null">
+            <meta>
+                <title lang="en">Hover Video</title>
+                <title lang="tr">Üzerine gelince oynatılan video</title>
+                <title lang="ru">Видео при наведении</title>
+                <title lang="fr">Vidéo au survol</title>
+                <title lang="es">Vídeo al pasar el cursor</title>
+                <title lang="de">Video bei Hover</title>
+            </meta>
+            <params>
+                <param name="types" value="video"/>
+            </params>
+        </property>
+
+        <property name="icon" type="single_icon_selection"
+                  visibleCondition="(!image || image.id == null) &amp;&amp; (!video || video.id == null)">
+            <meta>
+                <title lang="en">Icon</title>
+                <title lang="tr">İkon</title>
+                <title lang="ru">Иконка</title>
+                <title lang="fr">Icône</title>
+                <title lang="es">Icono</title>
+                <title lang="de">Symbol</title>
+            </meta>
+            <params>
+                <param name="icon_set" value="tabler"/>
+            </params>
+        </property>
+    </properties>
+</section>
