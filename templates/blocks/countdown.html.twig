@@ -1,0 +1,5 @@
+<twig:Countdown
+    date="{{ block.date|default(null) }}"
+    title="{{ block.title|default(null) }}"
+    props="{{ block|merge(block.props|default({})) }}"
+/>

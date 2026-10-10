@@ -1,0 +1,94 @@
+tabs:
+  style:
+    title:
+      en: "Style & Layout"
+      tr: "Stil ve Düzen"
+    fields:
+      quote_style:
+        type: select
+        label:
+          en: "Quote Style"
+          tr: "Alıntı Stili"
+        default: "bordered"
+        col_span: 6
+        options:
+          - value: "bordered"
+            label:
+              en: "Left Accent Line"
+              tr: "Sol Vurgu Çizgili"
+          - value: "large"
+            label:
+              en: "Large Quote Mark"
+              tr: "Büyük Tırnak İşaretli"
+          - value: "card"
+            label:
+              en: "Testimonial Card"
+              tr: "Yorum / Görüş Kartı"
+          - value: "plain"
+            label:
+              en: "Plain Text"
+              tr: "Sade Metin"
+      quote_size:
+        type: select
+        label:
+          en: "Font Size"
+          tr: "Yazı Boyutu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small"
+              tr: "Küçük"
+          - value: "md"
+            label:
+              en: "Medium"
+              tr: "Orta"
+          - value: "lg"
+            label:
+              en: "Large"
+              tr: "Büyük"
+          - value: "xl"
+            label:
+              en: "Extra Large"
+              tr: "Çok Büyük"
+      accent_color:
+        type: select
+        label:
+          en: "Accent Color"
+          tr: "Vurgu Rengi"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+          - value: "muted"
+            label:
+              en: "Muted Gray"
+              tr: "Açık Gri"
+      align:
+        type: select
+        label:
+          en: "Alignment"
+          tr: "Hizalama"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa"

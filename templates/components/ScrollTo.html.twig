@@ -1,0 +1,44 @@
+{% set target_href = this.getTargetHref() %}
+{% set icon_class = this.getResolvedIcon() %}
+{% set mode = this.getDisplayMode() %}
+{% set btn_classes = this.getButtonClasses() %}
+{% set icon_pos = this.getResolvedProps()['icon_position']|default('left') %}
+{% set is_top = this.isTop() %}
+{% set default_label = is_top ? 'Başa Dön' : 'Aşağı Kaydır' %}
+{% set aria_text = title|default(default_label) %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    <a href="{{ target_href }}"
+       class="{{ btn_classes }}"
+       aria-label="{{ aria_text }}"
+       data-hs-scroll
+       onclick="var el = document.querySelector('{{ target_href }}'); if(el){ el.scrollIntoView({behavior: 'smooth'}); return false; } else if('{{ target_href }}' === '#top'){ window.scrollTo({top: 0, behavior: 'smooth'}); return false; }">
+
+        {% if mode == 'totop_circle' or mode == 'floating' %}
+            {# Circle Icon Only #}
+            <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
+        {% else %}
+            {# Button with optional title & icon #}
+            {% if icon_pos == 'left' and icon_class %}
+                <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+            {% endif %}
+
+            {% if title %}
+                <span>{{ title }}</span>
+            {% else %}
+                <span class="sr-only">{{ aria_text }}</span>
+                {% if icon_pos != 'left' and icon_class %}
+                    <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+                {% endif %}
+            {% endif %}
+
+            {% if icon_pos == 'right' and icon_class and title %}
+                <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+            {% endif %}
+        {% endif %}
+    </a>
+</div>

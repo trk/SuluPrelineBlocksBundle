@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>countdown</key>
+    <meta>
+        <title lang="en">Countdown</title>
+        <title lang="tr">Geri Sayım</title>
+        <title lang="ru">Обратный отсчет</title>
+        <title lang="fr">Compte à rebours</title>
+        <title lang="es">Cuenta regresiva</title>
+        <title lang="de">Countdown</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="date" type="datetime" mandatory="true">
+            <meta>
+                <title lang="en">Target Date &amp; Time</title>
+                <title lang="tr">Hedef Tarih ve Saat</title>
+                <title lang="ru">Целевая дата и время</title>
+                <title lang="fr">Date et heure cibles</title>
+                <title lang="es">Fecha y hora objetivo</title>
+                <title lang="de">Zieldatum und -uhrzeit</title>
+            </meta>
+        </property>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="countdown"/>
+            </params>
+        </property>
+    </properties>
+</template>

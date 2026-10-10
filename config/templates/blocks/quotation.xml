@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>quotation</key>
+    <meta>
+        <title lang="en">Quotation</title>
+        <title lang="tr">Alıntı (Quotation)</title>
+        <title lang="ru">Цитата</title>
+        <title lang="fr">Citation</title>
+        <title lang="es">Cita</title>
+        <title lang="de">Zitat</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/content.xml"/>
+
+        <property name="author" type="text_line">
+            <meta>
+                <title lang="en">Author</title>
+                <title lang="tr">Yazar / Kişi</title>
+                <title lang="ru">Автор</title>
+                <title lang="fr">Auteur</title>
+                <title lang="es">Autor</title>
+                <title lang="de">Autor</title>
+            </meta>
+        </property>
+
+        <property name="author_title" type="text_line">
+            <meta>
+                <title lang="en">Title or Company</title>
+                <title lang="tr">Unvan veya Şirket</title>
+                <title lang="ru">Должность или компания</title>
+                <title lang="fr">Titre ou entreprise</title>
+                <title lang="es">Título o empresa</title>
+                <title lang="de">Titel oder Unternehmen</title>
+            </meta>
+        </property>
+
+        <xi:include href="../fields/image.xml"/>
+        <xi:include href="../fields/link.xml"/>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="quotation"/>
+            </params>
+        </property>
+    </properties>
+</template>

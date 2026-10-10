@@ -1,0 +1,114 @@
+tabs:
+  style:
+    title:
+      en: "Style & Appearance"
+      tr: "Stil ve Görünüm"
+    fields:
+      icon_style:
+        type: select
+        label:
+          en: "Icon Presentation"
+          tr: "İkon Sunumu"
+        default: "plain"
+        col_span: 6
+        options:
+          - value: "plain"
+            label:
+              en: "Plain Icon"
+              tr: "Sade İkon"
+          - value: "circle_solid"
+            label:
+              en: "Solid Circle Badge"
+              tr: "Dolu Yuvarlak Rozet"
+          - value: "circle_outline"
+            label:
+              en: "Outlined Circle"
+              tr: "Kenarlıklı Yuvarlak"
+          - value: "square_soft"
+            label:
+              en: "Soft Square Box"
+              tr: "Yumuşak Kare Kutu"
+      icon_size:
+        type: select
+        label:
+          en: "Size"
+          tr: "Boyut"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "sm"
+            label:
+              en: "Small (24px)"
+              tr: "Küçük (24px)"
+          - value: "md"
+            label:
+              en: "Medium (32px)"
+              tr: "Orta (32px)"
+          - value: "lg"
+            label:
+              en: "Large (48px)"
+              tr: "Büyük (48px)"
+          - value: "xl"
+            label:
+              en: "Extra Large (64px)"
+              tr: "Çok Büyük (64px)"
+          - value: "2xl"
+            label:
+              en: "Huge (80px)"
+              tr: "Dev (80px)"
+      icon_color:
+        type: select
+        label:
+          en: "Color"
+          tr: "Renk"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "secondary"
+            label:
+              en: "Secondary Indigo"
+              tr: "İkincil İndigo"
+          - value: "dark"
+            label:
+              en: "Dark / Black"
+              tr: "Koyu / Siyah"
+          - value: "muted"
+            label:
+              en: "Muted Gray"
+              tr: "Açık Gri"
+          - value: "success"
+            label:
+              en: "Success Green"
+              tr: "Yeşil (Başarı)"
+          - value: "danger"
+            label:
+              en: "Danger Red"
+              tr: "Kırmızı (Uyarı)"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+      align:
+        type: select
+        label:
+          en: "Alignment"
+          tr: "Hizalama"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa"

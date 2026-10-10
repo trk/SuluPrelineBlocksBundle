@@ -1,0 +1,58 @@
+{% set author_name = this.getAuthor() %}
+{% set author_title = this.getAuthorTitle() %}
+{% set avatar_url = this.getAvatarUrl() %}
+{% set author_url = this.getAuthorUrl() %}
+{% set style = this.getQuoteStyle() %}
+{% set container_classes = this.getContainerClasses() %}
+{% set text_classes = this.getQuoteTextClasses() %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    <blockquote class="w-full relative {{ container_classes }}">
+        {% if style == 'large' %}
+            {# Decorative Large Quote Mark #}
+            <div class="mb-3 text-blue-600/30 dark:text-blue-500/20" aria-hidden="true">
+                <svg class="w-10 h-10 sm:w-12 sm:h-12" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+            </div>
+        {% endif %}
+
+        <div class="{{ text_classes }}">
+            {{ content|raw }}
+        </div>
+
+        {% if this.hasAuthor() %}
+            <footer class="mt-4 sm:mt-6 flex items-center gap-x-3.5">
+                {% if avatar_url %}
+                    <img class="inline-block size-10 sm:size-12 rounded-full object-cover shadow-2xs"
+                         src="{{ avatar_url }}"
+                         alt="{{ author_name|default('Author Avatar') }}" />
+                {% endif %}
+
+                <div class="flex flex-col">
+                    {% if author_name %}
+                        <cite class="not-italic text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
+                            {% if author_url %}
+                                <a href="{{ author_url }}" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                                    {{ author_name }}
+                                </a>
+                            {% else %}
+                                {{ author_name }}
+                            {% endif %}
+                        </cite>
+                    {% endif %}
+
+                    {% if author_title %}
+                        <span class="text-xs sm:text-sm text-gray-500 dark:text-neutral-400 font-normal">
+                            {{ author_title }}
+                        </span>
+                    {% endif %}
+                </div>
+            </footer>
+        {% endif %}
+    </blockquote>
+</div>

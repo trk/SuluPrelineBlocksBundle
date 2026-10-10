@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>scroll_to</key>
+    <meta>
+        <title lang="en">Scroll To / Back to Top</title>
+        <title lang="tr">Sayfa İçi Atlama / Başa Dön</title>
+        <title lang="ru">Прокрутка к элементу / Наверх</title>
+        <title lang="fr">Défilement / Haut de page</title>
+        <title lang="es">Desplazarse a / Volver arriba</title>
+        <title lang="de">Nach oben / Zu Element scrollen</title>
+    </meta>
+    <properties>
+        <xi:include href="../fields/title.xml"/>
+
+        <property name="target_id" type="text_line">
+            <meta>
+                <title lang="en">Target Element ID</title>
+                <title lang="tr">Hedef Element ID (#buraya-git)</title>
+                <title lang="ru">ID целевого элемента</title>
+                <title lang="fr">ID de l'élément cible</title>
+                <title lang="es">ID del elemento de destino</title>
+                <title lang="de">Ziel-Element-ID</title>
+            </meta>
+        </property>
+
+        <xi:include href="../fields/icon.xml"/>
+
+        <property name="props" type="block_props" colspan="12">
+            <params>
+                <param name="component_type" value="scroll_to"/>
+            </params>
+        </property>
+    </properties>
+</template>

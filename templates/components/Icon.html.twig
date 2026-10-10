@@ -1,0 +1,22 @@
+{% set icon_class = this.getResolvedIcon() %}
+{% set url = this.getUrl() %}
+{% set container_classes = this.getContainerClasses() %}
+{% set icon_classes = this.getIconClasses() %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    {% if icon_class %}
+        {% if url %}
+            <a href="{{ url }}" class="{{ container_classes }}">
+                <i class="{{ icon_classes }}" aria-hidden="true"></i>
+            </a>
+        {% else %}
+            <span class="{{ container_classes }}">
+                <i class="{{ icon_classes }}" aria-hidden="true"></i>
+            </span>
+        {% endif %}
+    {% endif %}
+</div>

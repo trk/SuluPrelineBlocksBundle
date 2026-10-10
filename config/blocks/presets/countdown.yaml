@@ -1,0 +1,35 @@
+countdown:
+    presets:
+        standard_boxed:
+            title:
+              tr: "Kutulu Standart Sayaç"
+              en: "Standard Boxed Counter"
+            description:
+              tr: "Modern kenarlıklı ve etiketli beyaz kartlar"
+              en: "Modern bordered and labeled white cards"
+            props:
+              countdown_style: "boxed"
+              size: "md"
+              color: "default"
+              show_label: true
+              show_separator: true
+              align: "center"
+              margin_top: "md"
+              margin_bottom: "md"
+
+        minimal_large:
+            title:
+              tr: "Minimal Büyük Sayaç"
+              en: "Minimal Large Counter"
+            description:
+              tr: "Kutusuz, büyük tipografiye sahip sade sayaç"
+              en: "Cardless, prominent typography counter"
+            props:
+              countdown_style: "minimal"
+              size: "xl"
+              color: "primary"
+              show_label: true
+              show_separator: true
+              align: "center"
+              margin_top: "lg"
+              margin_bottom: "lg"

@@ -1,0 +1,144 @@
+{% set labels = this.getLabels() %}
+{% set show_label = this.isShowLabel() %}
+{% set show_sep = this.isShowSeparator() %}
+{% set card_classes = this.getCardClasses() %}
+{% set number_classes = this.getNumberClasses() %}
+{% set sep_classes = this.getSeparatorClasses() %}
+{% set label_classes = this.getLabelClasses() %}
+{% set target_date = this.getTargetIsoDate() %}
+{% set on_expire = this.getOnExpire() %}
+{% set expire_msg = this.getExpireMessage() %}
+
+<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+     {{ attributes.defaults({
+         class: this.getWrapperClasses(),
+     }) }}>
+
+    {% if title %}
+        <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-4 sm:mb-6">
+            {{ title }}
+        </h3>
+    {% endif %}
+
+    <div class="flex items-center gap-x-2 sm:gap-x-4 flex-wrap {{ this.getAlignClasses() }}"
+         data-hs-countdown="{{ target_date }}"
+         data-countdown-expire="{{ on_expire }}"
+         data-countdown-message="{{ expire_msg }}">
+
+        {# Days #}
+        <div class="{{ card_classes }}">
+            <span class="{{ number_classes }}" data-countdown-unit="days">00</span>
+            {% if show_label %}
+                <span class="{{ label_classes }}">{{ labels.days }}</span>
+            {% endif %}
+        </div>
+
+        {% if show_sep %}
+            <span class="{{ sep_classes }}" aria-hidden="true">:</span>
+        {% endif %}
+
+        {# Hours #}
+        <div class="{{ card_classes }}">
+            <span class="{{ number_classes }}" data-countdown-unit="hours">00</span>
+            {% if show_label %}
+                <span class="{{ label_classes }}">{{ labels.hours }}</span>
+            {% endif %}
+        </div>
+
+        {% if show_sep %}
+            <span class="{{ sep_classes }}" aria-hidden="true">:</span>
+        {% endif %}
+
+        {# Minutes #}
+        <div class="{{ card_classes }}">
+            <span class="{{ number_classes }}" data-countdown-unit="minutes">00</span>
+            {% if show_label %}
+                <span class="{{ label_classes }}">{{ labels.minutes }}</span>
+            {% endif %}
+        </div>
+
+        {% if show_sep %}
+            <span class="{{ sep_classes }}" aria-hidden="true">:</span>
+        {% endif %}
+
+        {# Seconds #}
+        <div class="{{ card_classes }}">
+            <span class="{{ number_classes }}" data-countdown-unit="seconds">00</span>
+            {% if show_label %}
+                <span class="{{ label_classes }}">{{ labels.seconds }}</span>
+            {% endif %}
+        </div>
+
+        {# Expired message placeholder #}
+        <div class="hidden w-full p-4 rounded-xl bg-gray-100 text-gray-800 dark:bg-neutral-800 dark:text-neutral-200 text-center font-medium"
+             data-countdown-expired-box>
+            {{ expire_msg }}
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        function initCountdowns() {
+            var elements = document.querySelectorAll('[data-hs-countdown]:not([data-countdown-initialized])');
+            elements.forEach(function(el) {
+                el.setAttribute('data-countdown-initialized', 'true');
+                var targetStr = el.getAttribute('data-hs-countdown');
+                var targetTime = new Date(targetStr).getTime();
+                var onExpire = el.getAttribute('data-countdown-expire') || 'message';
+                var expiredBox = el.querySelector('[data-countdown-expired-box]');
+
+                var daysEl = el.querySelector('[data-countdown-unit="days"]');
+                var hoursEl = el.querySelector('[data-countdown-unit="hours"]');
+                var minutesEl = el.querySelector('[data-countdown-unit="minutes"]');
+                var secondsEl = el.querySelector('[data-countdown-unit="seconds"]');
+
+                function update() {
+                    var now = new Date().getTime();
+                    var distance = targetTime - now;
+
+                    if (distance <= 0) {
+                        clearInterval(interval);
+                        if (daysEl) daysEl.textContent = '00';
+                        if (hoursEl) hoursEl.textContent = '00';
+                        if (minutesEl) minutesEl.textContent = '00';
+                        if (secondsEl) secondsEl.textContent = '00';
+
+                        if (onExpire === 'hide') {
+                            el.style.display = 'none';
+                        } else if (onExpire === 'reload') {
+                            window.location.reload();
+                        } else if (expiredBox) {
+                            expiredBox.classList.remove('hidden');
+                        }
+                        return;
+                    }
+
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    if (daysEl) daysEl.textContent = (days < 10 ? '0' : '') + days;
+                    if (hoursEl) hoursEl.textContent = (hours < 10 ? '0' : '') + hours;
+                    if (minutesEl) minutesEl.textContent = (minutes < 10 ? '0' : '') + minutes;
+                    if (secondsEl) secondsEl.textContent = (seconds < 10 ? '0' : '') + seconds;
+                }
+
+                update();
+                var interval = setInterval(update, 1000);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCountdowns);
+        } else {
+            initCountdowns();
+        }
+
+        // Live Preview & dynamic AJAX support
+        window.addEventListener('message', function(e) {
+            initCountdowns();
+        });
+    })();
+</script>

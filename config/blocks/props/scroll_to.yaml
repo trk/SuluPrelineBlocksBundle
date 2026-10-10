@@ -1,0 +1,110 @@
+tabs:
+  style:
+    title:
+      en: "Style & Placement"
+      tr: "Stil ve Konum"
+    fields:
+      display_mode:
+        type: select
+        label:
+          en: "Display Mode"
+          tr: "Görünüm Modu"
+        default: "inline_button"
+        col_span: 6
+        options:
+          - value: "inline_button"
+            label:
+              en: "Standard Button (Inline)"
+              tr: "Standart Buton (Sayfa İçi)"
+          - value: "totop_circle"
+            label:
+              en: "Classic Circle Icon Button"
+              tr: "Klasik Yuvarlak İkon Butonu"
+          - value: "floating"
+            label:
+              en: "Floating Button (Screen Bottom-Right)"
+              tr: "Sabit Yüzen Buton (Ekran Sağ-Alt)"
+      button_variant:
+        type: select
+        label:
+          en: "Button Variant"
+          tr: "Buton Türü"
+        default: "solid"
+        col_span: 6
+        options:
+          - value: "solid"
+            label:
+              en: "Solid Background"
+              tr: "Dolu Arka Plan"
+          - value: "outline"
+            label:
+              en: "Outlined"
+              tr: "Kenarlıklı"
+          - value: "soft"
+            label:
+              en: "Soft / Pastel"
+              tr: "Yumuşak Pastel"
+          - value: "ghost"
+            label:
+              en: "Ghost (Transparent)"
+              tr: "Şeffaf (Ghost)"
+      button_color:
+        type: select
+        label:
+          en: "Color"
+          tr: "Renk"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Primary Blue"
+              tr: "Birincil Mavi"
+          - value: "dark"
+            label:
+              en: "Dark / Black"
+              tr: "Koyu / Siyah"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "muted"
+            label:
+              en: "Muted Gray"
+              tr: "Açık Gri"
+      align:
+        type: select
+        label:
+          en: "Alignment (Inline Mode)"
+          tr: "Hizalama (Sayfa İçi Modunda)"
+        default: "right"
+        col_span: 6
+        options:
+          - value: "right"
+            label:
+              en: "Right"
+              tr: "Sağa"
+          - value: "center"
+            label:
+              en: "Center"
+              tr: "Ortalı"
+          - value: "left"
+            label:
+              en: "Left"
+              tr: "Sola"
+      icon_position:
+        type: select
+        label:
+          en: "Icon Position"
+          tr: "İkon Konumu"
+        default: "left"
+        col_span: 6
+        options:
+          - value: "left"
+            label:
+              en: "Left (Before Text)"
+              tr: "Solda (Metinden Önce)"
+          - value: "right"
+            label:
+              en: "Right (After Text)"
+              tr: "Sağda (Metinden Sonra)"
