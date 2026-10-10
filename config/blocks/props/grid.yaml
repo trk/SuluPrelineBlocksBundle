@@ -4,6 +4,26 @@ tabs:
       en: "Grid Layout"
       tr: "Izgara Düzeni"
     fields:
+      layout_type:
+        type: select
+        label:
+          en: "Layout Mode"
+          tr: "Düzen Modu"
+        default: "grid"
+        col_span: 12
+        options:
+          - value: "grid"
+            label:
+              en: "Standard Grid"
+              tr: "Standart Izgara"
+          - value: "masonry"
+            label:
+              en: "Masonry (Columns)"
+              tr: "Duvar Örgüsü (Masonry)"
+          - value: "card_group"
+            label:
+              en: "Card Group (Joined Cards)"
+              tr: "Kart Grubu (Birleşik Kartlar)"
       columns_default:
         type: select
         label:

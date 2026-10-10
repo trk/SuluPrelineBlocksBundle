@@ -33,6 +33,8 @@ final class Grid
     public string|int|null $columns_xl = null;
     public string|int|null $gap = null;
     public ?string $masonry = null;
+    public ?string $layoutType = null;
+    public ?string $layout_type = null;
 
     public ?bool $filter = null;
     public ?string $filterStyle = null;
@@ -94,6 +96,9 @@ final class Grid
         }
         if (null !== $this->masonry) {
             $resolved['masonry'] = $this->masonry;
+        }
+        if (null !== ($this->layoutType ?? $this->layout_type)) {
+            $resolved['layout_type'] = $this->layoutType ?? $this->layout_type;
         }
         if (null !== $this->filter) {
             $resolved['filter'] = $this->filter;
@@ -160,8 +165,22 @@ final class Grid
         return 'columns' === $masonry;
     }
 
+    public function isCardGroup(): bool
+    {
+        $props = $this->getResolvedProps();
+        $layout = isset($props['layout_type']) && \is_string($props['layout_type'])
+            ? $props['layout_type']
+            : (isset($props['card_group']) && !empty($props['card_group']) ? 'card_group' : 'grid');
+
+        return 'card_group' === $layout;
+    }
+
     public function getContainerClasses(): string
     {
+        if ($this->isCardGroup()) {
+            return 'grid border border-gray-200 dark:border-neutral-700 rounded-xl shadow-2xs divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x divide-gray-200 dark:divide-neutral-700';
+        }
+
         $props = $this->getResolvedProps();
 
         $gap = isset($props['gap']) && \is_scalar($props['gap']) ? (string) $props['gap'] : 'md';
@@ -406,7 +425,9 @@ final class Grid
 
         // Determine card variant (item panel_style override takes priority if not 'inherit' and not empty)
         $cardVariant = isset($props['card_variant']) && \is_string($props['card_variant']) ? $props['card_variant'] : 'default';
-        if (isset($item['panel_style']) && \is_string($item['panel_style']) && 'inherit' !== $item['panel_style'] && '' !== \trim($item['panel_style'])) {
+        if ($this->isCardGroup()) {
+            $cardVariant = 'group';
+        } elseif (isset($item['panel_style']) && \is_string($item['panel_style']) && 'inherit' !== $item['panel_style'] && '' !== \trim($item['panel_style'])) {
             $cardVariant = $item['panel_style'];
         }
 

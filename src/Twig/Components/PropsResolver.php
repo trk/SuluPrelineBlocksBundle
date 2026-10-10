@@ -157,6 +157,89 @@ final class PropsResolver
     /**
      * @param array<string, mixed> $props
      */
+    public static function badgeClasses(
+        array $props,
+        string $defaultStyle = 'soft',
+        string $defaultColor = 'primary',
+        string $defaultSize = 'xs',
+        string $defaultRounded = 'pill'
+    ): string {
+        $variant = isset($props['badge_style']) && \is_string($props['badge_style']) && 'inherit' !== $props['badge_style']
+            ? $props['badge_style']
+            : (isset($props['variant']) && \is_string($props['variant']) && 'inherit' !== $props['variant'] ? $props['variant'] : $defaultStyle);
+
+        $color = isset($props['badge_color']) && \is_string($props['badge_color']) && 'inherit' !== $props['badge_color']
+            ? $props['badge_color']
+            : (isset($props['color']) && \is_string($props['color']) && 'inherit' !== $props['color'] ? $props['color'] : $defaultColor);
+
+        $size = isset($props['size']) && \is_string($props['size']) && 'inherit' !== $props['size']
+            ? $props['size']
+            : $defaultSize;
+
+        $rounded = isset($props['rounded']) && \is_string($props['rounded']) && 'inherit' !== $props['rounded']
+            ? $props['rounded']
+            : $defaultRounded;
+
+        $base = 'inline-flex items-center gap-x-1.5 font-medium';
+
+        $roundedClass = match ($rounded) {
+            'rounded', 'md' => 'rounded-md',
+            'lg' => 'rounded-lg',
+            'square', 'none' => 'rounded-none',
+            default => 'rounded-full',
+        };
+
+        $sizeClasses = match ($size) {
+            'sm' => 'py-1 px-2.5 text-xs',
+            'md' => 'py-1.5 px-3 text-sm',
+            'lg' => 'py-2 px-3.5 text-sm font-semibold',
+            default => 'py-0.5 px-2 text-xs',
+        };
+
+        $variantClasses = match ($variant) {
+            'solid' => match ($color) {
+                'secondary' => 'bg-secondary-600 text-white',
+                'dark' => 'bg-gray-800 text-white dark:bg-neutral-200 dark:text-neutral-800',
+                'white' => 'bg-white text-gray-800 shadow-2xs',
+                'muted' => 'bg-gray-500 text-white',
+                'success' => 'bg-teal-500 text-white',
+                'warning' => 'bg-yellow-500 text-white',
+                'danger' => 'bg-red-500 text-white',
+                'info' => 'bg-sky-500 text-white',
+                default => 'bg-primary-600 text-white',
+            },
+            'outline' => match ($color) {
+                'secondary' => 'border border-secondary-600 text-secondary-600 dark:border-secondary-400 dark:text-secondary-400',
+                'dark' => 'border border-gray-800 text-gray-800 dark:border-neutral-200 dark:text-neutral-200',
+                'white' => 'border border-white/60 text-white',
+                'muted' => 'border border-gray-200 text-gray-600 dark:border-neutral-700 dark:text-neutral-400',
+                'success' => 'border border-teal-500 text-teal-500',
+                'warning' => 'border border-yellow-500 text-yellow-500',
+                'danger' => 'border border-red-500 text-red-500',
+                'info' => 'border border-sky-500 text-sky-500',
+                default => 'border border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400',
+            },
+            'white' => 'border border-gray-200 bg-white text-gray-800 shadow-2xs dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200',
+            'glass' => 'bg-white/80 text-gray-800 backdrop-blur-md border border-white/20 shadow-xs dark:bg-neutral-900/80 dark:text-neutral-200 dark:border-neutral-700/30',
+            default => match ($color) {
+                'secondary' => 'bg-secondary-100 text-secondary-800 dark:bg-secondary-500/20 dark:text-secondary-400',
+                'dark' => 'bg-gray-100 text-gray-800 dark:bg-white/10 dark:text-white',
+                'white' => 'bg-white/20 text-white backdrop-blur-md',
+                'muted' => 'bg-gray-100 text-gray-800 dark:bg-neutral-800 dark:text-neutral-300',
+                'success' => 'bg-teal-100 text-teal-800 dark:bg-teal-500/20 dark:text-teal-400',
+                'warning' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-400',
+                'danger' => 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-400',
+                'info' => 'bg-sky-100 text-sky-800 dark:bg-sky-500/20 dark:text-sky-400',
+                default => 'bg-primary-100 text-primary-800 dark:bg-primary-500/20 dark:text-primary-400',
+            },
+        };
+
+        return \trim(\sprintf('%s %s %s %s', $base, $roundedClass, $sizeClasses, $variantClasses));
+    }
+
+    /**
+     * @param array<string, mixed> $props
+     */
     public static function cardClasses(array $props): string
     {
         $variant = isset($props['card_variant']) && \is_string($props['card_variant'])
@@ -168,6 +251,7 @@ final class PropsResolver
         $base = 'flex rounded-xl overflow-hidden transition-all';
 
         $variantClasses = match ($variant) {
+            'group' => 'border-0 rounded-none shadow-none flex-1',
             'shadow' => 'shadow-lg border border-gray-100 dark:border-neutral-800 hover:shadow-xl',
             'flat' => 'border-0 bg-gray-50 dark:bg-neutral-800',
             'glass' => 'backdrop-blur-md bg-white/70 border border-white/20 dark:bg-neutral-900/70 dark:border-neutral-700/30 shadow-lg',

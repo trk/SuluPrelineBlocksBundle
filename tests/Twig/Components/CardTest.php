@@ -199,24 +199,103 @@ final class CardTest extends TestCase
     {
         $card = new Card();
         self::assertSame('top-left', $card->getBadgePosition());
-        self::assertSame('absolute top-3 start-3 z-10', $card->getBadgePositionClasses());
+        self::assertSame('absolute top-3 start-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card->badgePosition = 'top-right';
         self::assertSame('top-right', $card->getBadgePosition());
-        self::assertSame('absolute top-3 end-3 z-10', $card->getBadgePositionClasses());
+        self::assertSame('absolute top-3 end-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card = new Card();
         $card->badge_position = 'bottom-left';
         self::assertSame('bottom-left', $card->getBadgePosition());
-        self::assertSame('absolute bottom-3 start-3 z-10', $card->getBadgePositionClasses());
+        self::assertSame('absolute bottom-3 start-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card = new Card();
         $card->props = ['badge_position' => 'bottom-right'];
         self::assertSame('bottom-right', $card->getBadgePosition());
-        self::assertSame('absolute bottom-3 end-3 z-10', $card->getBadgePositionClasses());
+        self::assertSame('absolute bottom-3 end-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card->props = ['badge_position' => 'inline'];
         self::assertSame('inline', $card->getBadgePosition());
         self::assertSame('', $card->getBadgePositionClasses());
+    }
+
+    public function testMultipleBadgesAndButtons(): void
+    {
+        $card = new Card();
+        $card->props = [
+            'badge_style' => 'soft',
+            'badge_color' => 'primary',
+            'button_style' => 'solid',
+            'button_color' => 'primary',
+            'button_size' => 'md',
+        ];
+
+        $card->badges = [
+            [
+                'title' => 'Inherited Badge',
+                'badge_style' => 'inherit',
+                'badge_color' => 'inherit',
+            ],
+            [
+                'title' => 'Overridden Badge',
+                'badge_style' => 'solid',
+                'badge_color' => 'danger',
+                'has_dot' => true,
+            ],
+        ];
+
+        $card->buttons = [
+            [
+                'title' => 'Explore',
+                'link' => '/explore',
+                'button_style' => 'inherit',
+                'button_color' => 'inherit',
+            ],
+            [
+                'title' => 'Contact Us',
+                'link' => '/contact',
+                'button_style' => 'outline',
+                'button_color' => 'secondary',
+            ],
+        ];
+
+        self::assertTrue($card->hasBadges());
+        $badges = $card->getNormalizedBadges();
+        self::assertCount(2, $badges);
+        self::assertSame('Inherited Badge', $badges[0]['title']);
+        self::assertIsString($badges[0]['classes']);
+        self::assertStringContainsString('bg-primary-100', $badges[0]['classes']);
+        self::assertStringContainsString('text-primary-800', $badges[0]['classes']);
+
+        self::assertSame('Overridden Badge', $badges[1]['title']);
+        self::assertIsString($badges[1]['classes']);
+        self::assertStringContainsString('bg-red-500', $badges[1]['classes']);
+        self::assertTrue($badges[1]['has_dot']);
+
+        self::assertTrue($card->hasButtons());
+        $buttons = $card->getNormalizedButtons();
+        self::assertCount(2, $buttons);
+        self::assertSame('Explore', $buttons[0]['title']);
+        self::assertSame('/explore', $buttons[0]['url']);
+        self::assertIsString($buttons[0]['classes']);
+        self::assertStringContainsString('bg-primary-600', $buttons[0]['classes']);
+
+        self::assertSame('Contact Us', $buttons[1]['title']);
+        self::assertSame('/contact', $buttons[1]['url']);
+        self::assertIsString($buttons[1]['classes']);
+        self::assertStringContainsString('border-secondary-600', $buttons[1]['classes']);
+    }
+
+    public function testCardGroupVariant(): void
+    {
+        $card = new Card();
+        $card->props = ['card_variant' => 'group'];
+
+        $classes = $card->getCardClasses();
+        self::assertStringContainsString('border-0', $classes);
+        self::assertStringContainsString('rounded-none', $classes);
+        self::assertStringContainsString('shadow-none', $classes);
+        self::assertStringContainsString('flex-1', $classes);
     }
 }

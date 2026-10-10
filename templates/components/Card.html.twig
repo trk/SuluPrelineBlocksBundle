@@ -1,3 +1,23 @@
+{% macro render_badges(badges) %}
+    {% for b in badges %}
+        {% if b.is_clickable %}
+            <a href="{{ b.url }}" {% if b.link_title %}title="{{ b.link_title }}"{% endif %} class="{{ b.classes }} hover:opacity-80 transition-opacity">
+                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
+                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
+                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+            </a>
+        {% else %}
+            <span class="{{ b.classes }}">
+                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
+                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
+                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+            </span>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
 {% set title_color = this.getTitleColor() %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
@@ -5,10 +25,6 @@
 {% set active_hover_img = this.getActiveHoverImageUrl() %}
 {% set active_vid = this.getActiveVideoUrl() %}
 {% set active_hover_vid = this.getActiveHoverVideoUrl() %}
-{% set btn_list = this.getNormalizedButtons() %}
-{% set link_url = this.getLinkUrl() %}
-{% set button_text = this.getButtonText() %}
-{% set button_classes = this.getButtonStyleClasses() %}
 {% set icon_class = this.iconClass %}
 {% set has_media = this.hasMedia() %}
 
@@ -28,9 +44,9 @@
 {% set media_markup %}
     {% if is_img and active_img %}
         <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
-            {% if badge and this.getBadgePosition() != 'inline' %}
+            {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
                 <div class="{{ this.getBadgePositionClasses() }}">
-                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
             <img
@@ -50,9 +66,9 @@
         </div>
     {% elseif is_vid and active_vid %}
         <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
-            {% if badge and this.getBadgePosition() != 'inline' %}
+            {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
                 <div class="{{ this.getBadgePositionClasses() }}">
-                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
             <video
@@ -79,24 +95,23 @@
 
 {# Shared Actions Markup Block #}
 {% set actions_markup %}
-    {% if button_text and link_url %}
-        <div class="relative z-20 mt-4 flex flex-wrap gap-2.5">
-            <a href="{{ link_url }}" class="{{ button_classes }}">
-                {{ button_text }}
-                {% if (this.getResolvedProps()['button_style']|default('primary')) == 'link' %}
-                    <i class="ti ti-chevron-right text-xs" aria-hidden="true"></i>
-                {% endif %}
-            </a>
-        </div>
-    {% elseif btn_list is not empty %}
-        <div class="relative z-20 mt-4 flex flex-wrap gap-2.5">
-            {% for btn in btn_list %}
-                <twig:Button
-                    content="{{ btn.content|default('') }}"
-                    :link="btn.link|default('#')"
-                    linkTitle="{{ btn.link_title|default(null) }}"
-                    :props="btn|merge(btn.props|default({}))"
-                />
+    {% if this.hasButtons() %}
+        <div class="relative z-20 mt-4 flex flex-wrap items-center gap-2.5">
+            {% for btn in this.getNormalizedButtons() %}
+                <a href="{{ btn.url }}"
+                   {% if btn.link_title %}title="{{ btn.link_title }}"{% endif %}
+                   class="{{ btn.classes }}"
+                >
+                    {% if btn.icon and btn.icon_align == 'left' %}
+                        <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
+                    {% endif %}
+                    {% if btn.title %}
+                        <span>{{ btn.title }}</span>
+                    {% endif %}
+                    {% if btn.icon and btn.icon_align == 'right' %}
+                        <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
             {% endfor %}
         </div>
     {% endif %}
@@ -114,9 +129,9 @@
             <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent"></div>
         </div>
         <div class="relative z-10 flex flex-col justify-end min-h-[320px] p-6 text-white flex-1">
-            {% if badge and this.getBadgePosition() == 'inline' %}
-                <div class="mb-3">
-                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+            {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3 flex flex-wrap gap-1.5">
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
 
@@ -166,9 +181,9 @@
         </div>
         <div class="{{ content_col_width }} flex flex-col flex-1 justify-between {{ padding_classes }}">
             <div>
-                {% if badge and this.getBadgePosition() == 'inline' %}
-                    <div class="mb-3">
-                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
+                    <div class="mb-3 flex flex-wrap gap-1.5">
+                        {{ _self.render_badges(this.getNormalizedBadges()) }}
                     </div>
                 {% endif %}
 
@@ -215,9 +230,9 @@
     {# 3. Between Mode (Header -> Media in middle -> Content & Actions) #}
     {% elseif media_align == 'between' and has_media %}
         <div class="{{ padding_classes }} pb-3">
-            {% if badge and this.getBadgePosition() == 'inline' %}
-                <div class="mb-3">
-                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+            {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3 flex flex-wrap gap-1.5">
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
 
@@ -269,9 +284,9 @@
     {# 4. Bottom Mode (Content on top -> Media at bottom) #}
     {% elseif media_align == 'bottom' and has_media %}
         <div class="{{ padding_classes }} flex flex-col flex-1">
-            {% if badge and this.getBadgePosition() == 'inline' %}
-                <div class="mb-3">
-                    <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+            {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3 flex flex-wrap gap-1.5">
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
 
@@ -327,14 +342,14 @@
         {% endif %}
 
         <div class="{{ padding_classes }} flex flex-col flex-1">
-            {% if badge and (not has_media or this.getBadgePosition() == 'inline') %}
+            {% if this.hasBadges() and (not has_media or this.getBadgePosition() == 'inline') %}
                 {% if not has_media and this.getBadgePosition() in ['top-right', 'top_right'] %}
-                    <div class="absolute top-4 end-4 z-10">
-                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    <div class="absolute top-4 end-4 z-10 flex flex-wrap gap-1.5">
+                        {{ _self.render_badges(this.getNormalizedBadges()) }}
                     </div>
                 {% else %}
-                    <div class="mb-3">
-                        <span class="{{ this.getBadgeClasses() }}">{{ badge }}</span>
+                    <div class="mb-3 flex flex-wrap gap-1.5">
+                        {{ _self.render_badges(this.getNormalizedBadges()) }}
                     </div>
                 {% endif %}
             {% endif %}

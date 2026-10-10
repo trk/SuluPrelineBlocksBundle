@@ -222,18 +222,66 @@ tabs:
             label:
               en: "Glass / Translucent"
               tr: "Cam (Yarı Saydam)"
+          - value: "soft"
+            label:
+              en: "Soft"
+              tr: "Yumuşak (Soft)"
+          - value: "solid"
+            label:
+              en: "Solid"
+              tr: "Dolu (Solid)"
+          - value: "outline"
+            label:
+              en: "Outline"
+              tr: "Çerçeveli"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+      badge_color:
+        type: select
+        label:
+          en: "Badge Color"
+          tr: "Rozet Rengi"
+        default: "primary"
+        col_span: 6
+        options:
           - value: "primary"
             label:
-              en: "Primary Blue"
+              en: "Primary"
               tr: "Birincil Mavi"
-          - value: "success"
+          - value: "secondary"
             label:
-              en: "Success Green"
-              tr: "Yeşil (Vurgulu)"
+              en: "Secondary"
+              tr: "İkincil"
           - value: "dark"
             label:
               en: "Dark"
               tr: "Koyu"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "muted"
+            label:
+              en: "Muted"
+              tr: "Gri"
+          - value: "success"
+            label:
+              en: "Success"
+              tr: "Yeşil (Başarılı)"
+          - value: "warning"
+            label:
+              en: "Warning"
+              tr: "Sarı (Uyarı)"
+          - value: "danger"
+            label:
+              en: "Danger"
+              tr: "Kırmızı (Hata)"
+          - value: "info"
+            label:
+              en: "Info"
+              tr: "Açık Mavi (Bilgi)"
       badge_position:
         type: select
         label:
@@ -286,6 +334,72 @@ tabs:
             label:
               en: "Simple Link"
               tr: "Sade Bağlantı"
+          - value: "ghost"
+            label:
+              en: "Ghost"
+              tr: "Hayalet"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+      button_color:
+        type: select
+        label:
+          en: "Button Color"
+          tr: "Buton Rengi"
+        default: "primary"
+        col_span: 6
+        options:
+          - value: "primary"
+            label:
+              en: "Primary"
+              tr: "Birincil"
+          - value: "secondary"
+            label:
+              en: "Secondary"
+              tr: "İkincil"
+          - value: "dark"
+            label:
+              en: "Dark"
+              tr: "Koyu"
+          - value: "white"
+            label:
+              en: "White"
+              tr: "Beyaz"
+          - value: "muted"
+            label:
+              en: "Muted"
+              tr: "Nötr / Gri"
+          - value: "success"
+            label:
+              en: "Success"
+              tr: "Yeşil (Başarılı)"
+          - value: "warning"
+            label:
+              en: "Warning"
+              tr: "Sarı (Uyarı)"
+          - value: "danger"
+            label:
+              en: "Danger"
+              tr: "Kırmızı (Hata)"
+      button_size:
+        type: select
+        label:
+          en: "Button Size"
+          tr: "Buton Boyutu"
+        default: "md"
+        col_span: 6
+        options:
+          - value: "xs"
+            label: "XS"
+          - value: "sm"
+            label: "SM"
+          - value: "md"
+            label: "MD"
+          - value: "lg"
+            label: "LG"
+          - value: "xl"
+            label: "XL"
 
   appearance:
     title:
@@ -316,6 +430,10 @@ tabs:
             label:
               en: "Interactive"
               tr: "Etkileşimli (Hover Yükselme)"
+          - value: "group"
+            label:
+              en: "Card Group Item"
+              tr: "Kart Grubu Öğesi (Kenarlıksız)"
       bg_color:
         type: select
         label:

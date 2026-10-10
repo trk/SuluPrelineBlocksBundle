@@ -191,13 +191,20 @@ final class GridTest extends TestCase
         self::assertSame('center', $resolved2['text_align']);
     }
 
-    public function testCustomIdAndClass(): void
+    public function testCardGroupLayout(): void
     {
         $grid = new Grid();
-        $grid->id = 'portfolio-grid';
-        $grid->customClass = 'custom-grid-class';
+        $grid->layoutType = 'card_group';
 
-        self::assertSame('portfolio-grid', $grid->getCustomId());
-        self::assertSame('custom-grid-class', $grid->getCustomClass());
+        self::assertTrue($grid->isCardGroup());
+        $classes = $grid->getContainerClasses();
+        self::assertStringContainsString('divide-y', $classes);
+        self::assertStringContainsString('sm:flex', $classes);
+        self::assertStringContainsString('sm:divide-y-0', $classes);
+        self::assertStringContainsString('sm:divide-x', $classes);
+
+        $itemProps = $grid->resolveItemProps(['title' => 'Group Card']);
+        self::assertSame('group', $itemProps['card_variant']);
     }
 }
+

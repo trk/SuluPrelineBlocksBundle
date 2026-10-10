@@ -38,19 +38,21 @@
         {% for item in items %}
             {% set item_tags = this.getItemTagSlugs(item) %}
             <div
-                class="grid-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
+                class="grid-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% elseif this.isCardGroup() %}flex-1 flex flex-col{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
                 data-tags="{{ item_tags }}"
             >
                 <twig:Card
                     title="{{ item.title|default(null) }}"
                     meta="{{ item.meta|default(null) }}"
                     badge="{{ item.badge|default(null) }}"
+                    :badges="item.badges|default([])"
                     content="{{ item.content|default(null) }}"
                     :image="item.image|default(null)"
                     :video="item.video|default(null)"
                     :icon="item.icon|default(null)"
                     :link="item.link|default(null)"
                     linkTitle="{{ item.link_title|default(null) }}"
+                    :buttons="item.buttons|default([])"
                     :hoverImage="item.hover_image|default(null)"
                     :hoverVideo="item.hover_video|default(null)"
                     :props="this.resolveItemProps(item)"

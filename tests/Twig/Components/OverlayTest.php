@@ -186,15 +186,67 @@ final class OverlayTest extends TestCase
 
         $overlay->props = ['badge_position' => 'top-right'];
         self::assertSame('top-right', $overlay->getBadgePosition());
-        self::assertSame('absolute top-3 end-3 z-20', $overlay->getBadgePositionClasses());
+        self::assertSame('absolute top-3 end-3 z-20 flex flex-wrap gap-1.5', $overlay->getBadgePositionClasses());
 
         $overlay->props = ['badge_position' => 'bottom-left'];
         self::assertSame('bottom-left', $overlay->getBadgePosition());
-        self::assertSame('absolute bottom-3 start-3 z-20', $overlay->getBadgePositionClasses());
+        self::assertSame('absolute bottom-3 start-3 z-20 flex flex-wrap gap-1.5', $overlay->getBadgePositionClasses());
 
         $overlay->props = ['badge_position' => 'inline'];
         self::assertSame('inline', $overlay->getBadgePosition());
         self::assertSame('', $overlay->getBadgePositionClasses());
+    }
+
+    public function testMultipleBadgesAndButtons(): void
+    {
+        $overlay = new Overlay();
+        $overlay->props = [
+            'badge_style' => 'glass',
+            'badge_color' => 'primary',
+            'button_style' => 'solid',
+            'button_color' => 'white',
+            'button_size' => 'sm',
+        ];
+
+        $overlay->badges = [
+            [
+                'title' => 'Hot Deal',
+                'badge_style' => 'inherit',
+                'badge_color' => 'inherit',
+            ],
+            [
+                'title' => 'New',
+                'badge_style' => 'solid',
+                'badge_color' => 'success',
+            ],
+        ];
+
+        $overlay->buttons = [
+            [
+                'title' => 'View Overlay',
+                'link' => '/details',
+                'button_style' => 'inherit',
+                'button_color' => 'inherit',
+            ],
+        ];
+
+        self::assertTrue($overlay->hasBadges());
+        $badges = $overlay->getNormalizedBadges();
+        self::assertCount(2, $badges);
+        self::assertSame('Hot Deal', $badges[0]['title']);
+        self::assertIsString($badges[0]['classes']);
+        self::assertStringContainsString('backdrop-blur-md', $badges[0]['classes']);
+
+        self::assertSame('New', $badges[1]['title']);
+        self::assertIsString($badges[1]['classes']);
+        self::assertStringContainsString('bg-teal-500', $badges[1]['classes']);
+
+        $buttons = $overlay->getNormalizedButtons();
+        self::assertCount(1, $buttons);
+        self::assertSame('View Overlay', $buttons[0]['title']);
+        self::assertSame('/details', $buttons[0]['url']);
+        self::assertIsString($buttons[0]['classes']);
+        self::assertStringContainsString('bg-white', $buttons[0]['classes']);
     }
 
     public function testLinkAndClickableOverlay(): void

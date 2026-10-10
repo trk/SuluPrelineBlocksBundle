@@ -1,13 +1,30 @@
+{% macro render_badges(badges) %}
+    {% for b in badges %}
+        {% if b.is_clickable %}
+            <a href="{{ b.url }}" {% if b.link_title %}title="{{ b.link_title }}"{% endif %} class="{{ b.classes }} hover:opacity-80 transition-opacity">
+                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
+                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
+                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+            </a>
+        {% else %}
+            <span class="{{ b.classes }}">
+                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
+                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
+                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
+            </span>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
 {% set active_img = this.getActiveImageUrl() %}
 {% set active_hover_img = this.getActiveHoverImageUrl() %}
 {% set active_vid = this.getActiveVideoUrl() %}
 {% set active_hover_vid = this.getActiveHoverVideoUrl() %}
-{% set btn_list = this.getNormalizedButtons() %}
 {% set link_url = this.getLinkUrl() %}
-{% set button_text = this.getButtonText() %}
-{% set button_classes = this.getButtonStyleClasses() %}
 {% set icon_class = icon is defined and icon ? (icon starts with 'ti ' ? icon : 'ti ti-' ~ icon) : null %}
 
 {% set overlay_pos_classes = this.getOverlayPositionClasses() %}
@@ -21,7 +38,6 @@
 {% set title_size = this.getTitleSizeClasses() %}
 {% set title_color = this.getTitleColor() %}
 {% set meta_badge_classes = this.getMetaBadgeClasses() %}
-{% set badge_classes = this.getBadgeClasses() %}
 {% set is_clickable = this.isEntireOverlayClickable() %}
 
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
@@ -71,20 +87,20 @@
         {% endif %}
     </div>
 
-    {# 2. Floating Badge (Corner Positioned) #}
-    {% if badge and this.getBadgePosition() != 'inline' %}
+    {# 2. Floating Badges (Corner Positioned) #}
+    {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
         <div class="{{ this.getBadgePositionClasses() }}">
-            <span class="{{ badge_classes }}">{{ badge }}</span>
+            {{ _self.render_badges(this.getNormalizedBadges()) }}
         </div>
     {% endif %}
 
     {# 3. Overlay Layer & Content Container #}
     <div class="absolute inset-0 z-10 flex flex-col {{ overlay_pos_classes }} {{ overlay_style_classes }} {{ overlay_trans_classes }} {{ padding_classes }} {{ text_align }}">
         <div class="max-w-xl flex flex-col">
-            {# Inline Badge #}
-            {% if badge and this.getBadgePosition() == 'inline' %}
-                <div class="mb-3">
-                    <span class="{{ badge_classes }}">{{ badge }}</span>
+            {# Inline Badges #}
+            {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
+                <div class="mb-3 flex flex-wrap gap-1.5">
+                    {{ _self.render_badges(this.getNormalizedBadges()) }}
                 </div>
             {% endif %}
 
@@ -131,24 +147,23 @@
             {% endif %}
 
             {# Actions / Buttons #}
-            {% if button_text and link_url %}
-                <div class="relative z-20 mt-5 flex flex-wrap gap-2.5 {% if text_align == 'text-center' %}justify-center{% elseif text_align == 'text-right' %}justify-end{% endif %}">
-                    <a href="{{ link_url }}" class="{{ button_classes }}">
-                        {{ button_text }}
-                        {% if (this.getResolvedProps()['button_style']|default('primary')) == 'link' %}
-                            <i class="ti ti-chevron-right text-xs" aria-hidden="true"></i>
-                        {% endif %}
-                    </a>
-                </div>
-            {% elseif btn_list is not empty %}
-                <div class="relative z-20 mt-5 flex flex-wrap gap-2.5 {% if text_align == 'text-center' %}justify-center{% elseif text_align == 'text-right' %}justify-end{% endif %}">
-                    {% for btn in btn_list %}
-                        <twig:Button
-                            content="{{ btn.content|default('') }}"
-                            :link="btn.link|default('#')"
-                            linkTitle="{{ btn.link_title|default(null) }}"
-                            :props="btn|merge(btn.props|default({}))"
-                        />
+            {% if this.hasButtons() %}
+                <div class="relative z-20 mt-5 flex flex-wrap items-center gap-2.5 {% if text_align == 'text-center' %}justify-center{% elseif text_align == 'text-right' %}justify-end{% endif %}">
+                    {% for btn in this.getNormalizedButtons() %}
+                        <a href="{{ btn.url }}"
+                           {% if btn.link_title %}title="{{ btn.link_title }}"{% endif %}
+                           class="{{ btn.classes }}"
+                        >
+                            {% if btn.icon and btn.icon_align == 'left' %}
+                                <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
+                            {% endif %}
+                            {% if btn.title %}
+                                <span>{{ btn.title }}</span>
+                            {% endif %}
+                            {% if btn.icon and btn.icon_align == 'right' %}
+                                <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
+                            {% endif %}
+                        </a>
                     {% endfor %}
                 </div>
             {% endif %}

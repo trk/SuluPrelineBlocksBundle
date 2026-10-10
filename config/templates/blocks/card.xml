@@ -15,6 +15,21 @@
     <properties>
         <xi:include href="../fields/title.xml"/>
         <xi:include href="../fields/badge.xml"/>
+
+        <block name="badges" default-type="badge" minOccurs="0">
+            <meta>
+                <title lang="en">Badges</title>
+                <title lang="tr">Rozetler</title>
+                <title lang="de">Abzeichen</title>
+                <title lang="ru">Бейджи</title>
+                <title lang="es">Insignias</title>
+                <title lang="fr">Badges</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/badge.xml"/>
+            </types>
+        </block>
+
         <xi:include href="../fields/meta.xml"/>
         <xi:include href="../fields/content.xml"/>
         <xi:include href="../fields/image.xml"/>
@@ -24,6 +39,20 @@
         <xi:include href="../fields/hover_video.xml"/>
         <xi:include href="../fields/link.xml"/>
         <xi:include href="../fields/link_title.xml"/>
+
+        <block name="buttons" default-type="button" minOccurs="0">
+            <meta>
+                <title lang="en">Buttons</title>
+                <title lang="tr">Butonlar</title>
+                <title lang="de">Schaltflächen</title>
+                <title lang="ru">Кнопки</title>
+                <title lang="es">Botones</title>
+                <title lang="fr">Boutons</title>
+            </meta>
+            <types>
+                <xi:include href="../block-items/button.xml"/>
+            </types>
+        </block>
 
         <property name="props" type="block_props" colspan="12">
             <params>

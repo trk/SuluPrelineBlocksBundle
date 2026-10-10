@@ -1,0 +1,46 @@
+{% set url = this.getUrl() %}
+{% set icon = this.getResolvedIcon() %}
+{% set icon_align = this.getIconAlign() %}
+{% set title = this.getTitle() %}
+
+{% if this.isClickable() %}
+    <a href="{{ url }}"
+       {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+       {% if linkTitle|default(this.link_title|default(null)) %}title="{{ linkTitle|default(this.link_title|default(null)) }}"{% endif %}
+       {{ attributes.defaults({
+           class: this.getClasses() ~ ' hover:opacity-80 focus:outline-hidden transition-opacity',
+       }) }}
+    >
+        {% if this.hasDot() %}
+            <span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>
+        {% endif %}
+        {% if icon and icon_align == 'left' %}
+            <i class="{{ icon }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+        {% if title %}
+            <span>{{ title }}</span>
+        {% endif %}
+        {% if icon and icon_align == 'right' %}
+            <i class="{{ icon }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+    </a>
+{% else %}
+    <span {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+          {{ attributes.defaults({
+              class: this.getClasses(),
+          }) }}
+    >
+        {% if this.hasDot() %}
+            <span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>
+        {% endif %}
+        {% if icon and icon_align == 'left' %}
+            <i class="{{ icon }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+        {% if title %}
+            <span>{{ title }}</span>
+        {% endif %}
+        {% if icon and icon_align == 'right' %}
+            <i class="{{ icon }} shrink-0" aria-hidden="true"></i>
+        {% endif %}
+    </span>
+{% endif %}

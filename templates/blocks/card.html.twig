@@ -2,6 +2,7 @@
     title="{{ block.title|default(null) }}"
     meta="{{ block.meta|default(null) }}"
     badge="{{ block.badge|default(null) }}"
+    :badges="block.badges|default([])"
     content="{{ block.content|default(null) }}"
     :image="block.image|default(null)"
     :video="block.video|default(null)"
