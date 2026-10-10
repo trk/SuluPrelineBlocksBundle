@@ -3,14 +3,14 @@
     <meta>
         <title lang="en">Media</title>
         <title lang="tr">Medya</title>
-        <title lang="ru">Медиа</title>
-        <title lang="fr">Médias</title>
-        <title lang="es">Medios</title>
         <title lang="de">Medien</title>
+        <title lang="ru">Медиа</title>
+        <title lang="es">Medios</title>
+        <title lang="fr">Médias</title>
     </meta>
     <properties>
         <property name="image" type="single_media_selection"
-                  visibleCondition="(!video || video.id == null) &amp;&amp; (!icon || icon == '')">
+                  visibleCondition="(!(__parent.video.id != null || video.id != null)) &amp;&amp; (!((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
             <meta>
                 <title lang="en">Image</title>
                 <title lang="tr">Görsel</title>
@@ -25,7 +25,7 @@
         </property>
 
         <property name="hover_image" type="single_media_selection"
-                  visibleCondition="image != null &amp;&amp; image.id != null">
+                  visibleCondition="__parent.image.id != null || image.id != null">
             <meta>
                 <title lang="en">Hover Image</title>
                 <title lang="tr">Üzerine gelince değişen görsel</title>
@@ -40,7 +40,7 @@
         </property>
 
         <property name="video" type="single_media_selection"
-                  visibleCondition="(!image || image.id == null) &amp;&amp; (!icon || icon == '')">
+                  visibleCondition="(!(__parent.image.id != null || image.id != null)) &amp;&amp; (!((__parent.icon != null &amp;&amp; __parent.icon != '') || (icon != null &amp;&amp; icon != '')))">
             <meta>
                 <title lang="en">Video</title>
                 <title lang="tr">Video</title>
@@ -55,7 +55,7 @@
         </property>
 
         <property name="hover_video" type="single_media_selection"
-                  visibleCondition="video != null &amp;&amp; video.id != null">
+                  visibleCondition="__parent.video.id != null || video.id != null">
             <meta>
                 <title lang="en">Hover Video</title>
                 <title lang="tr">Üzerine gelince oynatılan video</title>
@@ -70,7 +70,7 @@
         </property>
 
         <property name="icon" type="single_icon_selection"
-                  visibleCondition="(!image || image.id == null) &amp;&amp; (!video || video.id == null)">
+                  visibleCondition="(!(__parent.image.id != null || image.id != null)) &amp;&amp; (!(__parent.video.id != null || video.id != null))">
             <meta>
                 <title lang="en">Icon</title>
                 <title lang="tr">İkon</title>
