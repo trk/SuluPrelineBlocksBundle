@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<property name="link_title" type="text_line"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Button Text</title>
+        <title lang="tr">Buton Metni</title>
+        <title lang="ru">Текст кнопки</title>
+        <title lang="fr">Texte du bouton</title>
+        <title lang="es">Texto del botón</title>
+        <title lang="de">Schaltflächentext</title>
+    </meta>
+</property>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<property name="image" type="single_media_selection"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Image</title>
+        <title lang="tr">Görsel</title>
+        <title lang="ru">Изображение</title>
+        <title lang="fr">Image</title>
+        <title lang="es">Imagen</title>
+        <title lang="de">Bild</title>
+    </meta>
+    <params>
+        <param name="types" value="image"/>
+    </params>
+</property>

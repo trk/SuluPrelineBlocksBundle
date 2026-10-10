@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<property name="icon" type="single_icon_selection"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Icon</title>
+        <title lang="tr">İkon</title>
+        <title lang="ru">Иконка</title>
+        <title lang="fr">Icône</title>
+        <title lang="es">Icono</title>
+        <title lang="de">Symbol</title>
+    </meta>
+    <params>
+        <param name="icon_set" value="tabler"/>
+    </params>
+</property>

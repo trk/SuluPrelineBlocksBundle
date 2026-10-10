@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<property name="link" type="link"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Link</title>
+        <title lang="tr">Bağlantı</title>
+        <title lang="ru">Ссылка</title>
+        <title lang="fr">Lien</title>
+        <title lang="es">Enlace</title>
+        <title lang="de">Link</title>
+    </meta>
+    <params>
+        <param name="enable_anchor" value="true"/>
+        <param name="enable_target" value="true"/>
+    </params>
+</property>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<property name="hover_video" type="single_media_selection"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Hover Video</title>
+        <title lang="tr">Üzerine gelince oynatılan video</title>
+        <title lang="ru">Видео при наведении</title>
+        <title lang="fr">Vidéo au survol</title>
+        <title lang="es">Vídeo al pasar el cursor</title>
+        <title lang="de">Video bei Hover</title>
+    </meta>
+    <params>
+        <param name="types" value="video"/>
+    </params>
+</property>

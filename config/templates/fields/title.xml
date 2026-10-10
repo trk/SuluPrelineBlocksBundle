@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<property name="title" type="text_line"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Title</title>
+        <title lang="tr">Başlık</title>
+        <title lang="ru">Заголовок</title>
+        <title lang="fr">Titre</title>
+        <title lang="es">Título</title>
+        <title lang="de">Titel</title>
+    </meta>
+</property>

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<property name="meta" type="text_line"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Meta</title>
+        <title lang="tr">Meta</title>
+        <title lang="ru">Мета</title>
+        <title lang="fr">Méta</title>
+        <title lang="es">Meta</title>
+        <title lang="de">Meta</title>
+    </meta>
+</property>

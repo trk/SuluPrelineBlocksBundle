@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<property name="video" type="single_media_selection"
+          xmlns="http://schemas.sulu.io/template/template">
+    <meta>
+        <title lang="en">Video</title>
+        <title lang="tr">Video</title>
+        <title lang="ru">Видео</title>
+        <title lang="fr">Vidéo</title>
+        <title lang="es">Vídeo</title>
+        <title lang="de">Video</title>
+    </meta>
+    <params>
+        <param name="types" value="video"/>
+    </params>
+</property>
