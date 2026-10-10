@@ -32,7 +32,7 @@
         "symfony/framework-bundle": "^7.0",
         "symfony/http-foundation": "^7.0",
         "symfony/http-kernel": "^7.0",
-        "symfony/ux-twig-component": "^3.5",
+        "symfony/ux-twig-component": "^2.13 || ^3.0",
         "trk/sulu-block-suite-bundle": "^1.0",
         "twig/twig": "^3.0"
     },
