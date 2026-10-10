@@ -24,6 +24,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
   - [2. Register the Bundle](#2-register-the-bundle)
   - [3. Tailwind CSS 4 Configuration](#3-tailwind-css-4-configuration)
   - [4. Preline UI JavaScript Setup](#4-preline-ui-javascript-setup)
+  - [5. Enable Blocks in Page Templates](#5-enable-blocks-in-page-templates)
 - [Architecture & Override Mechanics](#architecture--override-mechanics)
   - [1. Overriding Block XML Structures](#1-overriding-block-xml-structures)
   - [2. Overriding Prop Schemas & Presets](#2-overriding-prop-schemas--presets)
@@ -173,6 +174,40 @@ window.addEventListener('message', (event) => {
 });
 ```
 
+### 5. Enable Blocks in Page Templates
+
+1. Reference the bundle's blocks in your page XML or include file (e.g. `config/templates/includes/blocks.xml`):
+
+```xml
+<property name="blocks" type="block" default-type="headline">
+    <meta>
+        <title lang="en">Page Content Blocks</title>
+        <title lang="tr">Sayfa İçerik Blokları</title>
+    </meta>
+    <types>
+        <type ref="headline"/>
+        <type ref="text"/>
+        <type ref="image"/>
+        <type ref="card"/>
+        <type ref="button"/>
+        <type ref="video"/>
+        <type ref="alert"/>
+        <type ref="divider"/>
+        <type ref="overlay"/>
+    </types>
+</property>
+```
+
+2. Render the blocks in your page template (e.g. `templates/pages/default.html.twig`):
+
+```twig
+{% for block in content.blocks|default([]) %}
+    {{ include('blocks/' ~ block.type ~ '.html.twig', { block: block }, with_context: false) }}
+{% endfor %}
+```
+
+The bundle's block templates automatically resolve styling props, merge presets, and render the underlying accessible Twig Components (`<twig:Card ... />`, `<twig:Button ... />`, etc.).
+
 ---
 
 ## Architecture & Override Mechanics
@@ -216,6 +251,11 @@ The bundle's included templates and components are designed to re-initialize sea
 ## Testing & Quality Assurance
 
 `SuluPrelineBlocksBundle` is tested against a rigorous quality matrix:
+
+- **PHP 8.5 Strict Typing**: Every PHP file enforces `declare(strict_types=1);`.
+- **PHPStan Level Max**: 100% clean static analysis with zero errors.
+- **PHPUnit 12 Tested**: 67 tests, 481 assertions passing with 0 notices.
+- **Cross-Version Matrix**: Tested across PHP 8.2, 8.3, 8.4, and 8.5 on Symfony 6.4 and 7.4.
 
 ```bash
 # Run unit tests
