@@ -43,9 +43,7 @@
             >
                 <twig:Card
                     title="{{ item.title|default(null) }}"
-                    headline="{{ item.headline|default(null) }}"
-                    summary="{{ item.summary|default(null) }}"
-                    meta="{{ item.meta|default(item.headline|default(null)) }}"
+                    meta="{{ item.meta|default(null) }}"
                     badge="{{ item.badge|default(null) }}"
                     :elements="item.elements|default([])"
                     :badges="item.badges|default([])"

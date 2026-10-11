@@ -1,8 +1,6 @@
 <twig:Card
     title="{{ block.title|default(null) }}"
-    headline="{{ block.headline|default(null) }}"
-    summary="{{ block.summary|default(null) }}"
-    meta="{{ block.meta|default(block.headline|default(null)) }}"
+    meta="{{ block.meta|default(null) }}"
     badge="{{ block.badge|default(null) }}"
     :elements="block.elements|default([])"
     :badges="block.badges|default([])"

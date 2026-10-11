@@ -26,9 +26,7 @@
                     <div class="hs-carousel-slide shrink-0 {{ slide_width }} {{ gap_class }} h-full">
                         <twig:Overlay
                             title="{{ item.title|default(null) }}"
-                            headline="{{ item.headline|default(null) }}"
-                            summary="{{ item.summary|default(null) }}"
-                            meta="{{ item.meta|default(item.headline|default(null)) }}"
+                            meta="{{ item.meta|default(null) }}"
                             content="{{ item.summary|default(item.content|default(null)) }}"
                             image="{{ item.image|default(null) }}"
                             link="{{ item.link|default(item.url|default(null)) }}"

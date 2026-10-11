@@ -51,9 +51,7 @@
                 <div class="w-full h-full flex flex-col {% if is_lightbox_active and image_url and not item.link|default(null) %}cursor-pointer{% endif %}" {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}"{% endif %}>
                     <twig:Overlay
                         title="{{ item.title|default(null) }}"
-                        headline="{{ item.headline|default(null) }}"
-                        summary="{{ item.summary|default(null) }}"
-                        meta="{{ item.meta|default(item.headline|default(null)) }}"
+                        meta="{{ item.meta|default(null) }}"
                         badge="{{ item.badge|default(null) }}"
                         content="{{ item.summary|default(item.content|default(null)) }}"
                         :image="item.image|default(null)"

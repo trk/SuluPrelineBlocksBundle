@@ -17,8 +17,7 @@
         {% endif %}
     {% endfor %}
 {% endmacro %}
-{% set meta = this.getMeta() %}
-{% set content = this.getContent() %}
+
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
 {% set active_img = this.getActiveImageUrl() %}
