@@ -5,8 +5,10 @@
 {% set hover_vid_url = this.getHoverVideoUrl() %}
 {% set icon_class = this.getIconClass() %}
 {% set meta_text = this.getMeta() %}
-{% set lead_content = this.getContent() %}
-{% set title_text = this.getTitle() %}
+{% set heading_text = this.getHeading() %}
+{% set summary_text = this.getSummary() %}
+{% set body_content = this.getContent() %}
+{% set title_text = heading_text %}
 
 <header class="relative w-full border-b border-gray-200/80 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-xs">
     <twig:Section max_width="{{ this.getMaxWidth() }}" padding_y="{{ this.getPaddingY() }}">
@@ -26,15 +28,21 @@
                         </div>
                     {% endif %}
 
-                    {% if title_text %}
+                    {% if heading_text %}
                         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-gray-900 dark:text-white">
-                            {{ title_text }}
+                            {{ heading_text }}
                         </h1>
                     {% endif %}
 
-                    {% if lead_content %}
+                    {% if summary_text %}
+                        <p class="text-lg sm:text-xl text-gray-600 dark:text-neutral-300 font-normal leading-relaxed">
+                            {{ summary_text }}
+                        </p>
+                    {% endif %}
+
+                    {% if body_content %}
                         <div class="text-base sm:text-lg text-gray-600 dark:text-neutral-300 prose dark:prose-invert max-w-none leading-relaxed">
-                            {{ lead_content|raw }}
+                            {{ body_content|raw }}
                         </div>
                     {% endif %}
                 </div>
@@ -48,9 +56,9 @@
                         </div>
                     {% elseif img_url %}
                         <div class="group relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-neutral-800 aspect-4/3 sm:aspect-16/10 bg-gray-100 dark:bg-neutral-800">
-                            <img src="{{ img_url }}" alt="{{ title_text }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 {{ hover_img_url ? 'group-hover:opacity-0' : '' }}">
+                            <img src="{{ img_url }}" alt="{{ heading_text }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 {{ hover_img_url ? 'group-hover:opacity-0' : '' }}">
                             {% if hover_img_url %}
-                                <img src="{{ hover_img_url }}" alt="{{ title_text }}" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                <img src="{{ hover_img_url }}" alt="{{ heading_text }}" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                             {% endif %}
                         </div>
                     {% elseif icon_class %}
@@ -75,16 +83,22 @@
                         </span>
                     {% endif %}
 
-                    {% if title_text %}
+                    {% if heading_text %}
                         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {{ title_text }}
+                            {{ heading_text }}
                         </h1>
                     {% endif %}
                 </div>
 
-                {% if lead_content %}
+                {% if summary_text %}
+                    <p class="text-base sm:text-lg text-gray-600 dark:text-neutral-300 font-normal leading-relaxed">
+                        {{ summary_text }}
+                    </p>
+                {% endif %}
+
+                {% if body_content %}
                     <div class="text-sm sm:text-base text-gray-600 dark:text-neutral-400 max-w-3xl prose dark:prose-invert">
-                        {{ lead_content|raw }}
+                        {{ body_content|raw }}
                     </div>
                 {% endif %}
             </div>
@@ -104,15 +118,21 @@
                     </div>
                 {% endif %}
 
-                {% if title_text %}
+                {% if heading_text %}
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-gray-900 dark:text-white">
-                        {{ title_text }}
+                        {{ heading_text }}
                     </h1>
                 {% endif %}
 
-                {% if lead_content %}
+                {% if summary_text %}
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-neutral-300 font-normal leading-relaxed">
+                        {{ summary_text }}
+                    </p>
+                {% endif %}
+
+                {% if body_content %}
                     <div class="text-base sm:text-lg text-gray-600 dark:text-neutral-300 prose dark:prose-invert max-w-none leading-relaxed">
-                        {{ lead_content|raw }}
+                        {{ body_content|raw }}
                     </div>
                 {% endif %}
             </div>
@@ -125,9 +145,9 @@
                 </div>
             {% elseif img_url %}
                 <div class="group relative mt-8 rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-neutral-800 aspect-16/9 sm:aspect-21/9 bg-gray-100 dark:bg-neutral-800 max-w-5xl">
-                    <img src="{{ img_url }}" alt="{{ title_text }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 {{ hover_img_url ? 'group-hover:opacity-0' : '' }}">
+                    <img src="{{ img_url }}" alt="{{ heading_text }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 {{ hover_img_url ? 'group-hover:opacity-0' : '' }}">
                     {% if hover_img_url %}
-                        <img src="{{ hover_img_url }}" alt="{{ title_text }}" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                        <img src="{{ hover_img_url }}" alt="{{ heading_text }}" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     {% endif %}
                 </div>
             {% elseif icon_class %}

@@ -78,4 +78,31 @@ final class PageHeaderTest extends TestCase
         $header->show_breadcrumbs = false;
         self::assertFalse($header->isShowBreadcrumbs());
     }
+
+    public function testHeadlineOverridesTitleInHeading(): void
+    {
+        $header = new PageHeader();
+        $header->title = 'About Us';
+        $header->headline = 'Discover Our Legacy';
+
+        self::assertSame('Discover Our Legacy', $header->getHeading());
+        self::assertSame('Discover Our Legacy', $header->getTitle());
+        self::assertSame('About Us', $header->getRawTitle());
+        self::assertSame('Discover Our Legacy', $header->getHeadline());
+
+        // When headline is empty string or whitespace, falls back to title
+        $header->headline = '   ';
+        self::assertSame('About Us', $header->getHeading());
+        self::assertSame('About Us', $header->getTitle());
+        self::assertNull($header->getHeadline());
+    }
+
+    public function testSummaryResolution(): void
+    {
+        $header = new PageHeader();
+        self::assertNull($header->getSummary());
+
+        $header->summary = '  Leading industrial manufacturer since 1985.  ';
+        self::assertSame('Leading industrial manufacturer since 1985.', $header->getSummary());
+    }
 }

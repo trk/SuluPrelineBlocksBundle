@@ -10,8 +10,10 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class PageHeader
 {
     public ?string $title = '';
-    public ?string $meta = null;
+    public ?string $headline = null;
+    public ?string $summary = null;
     public ?string $content = null;
+    public ?string $meta = null;
 
     public mixed $image = null;
     public mixed $hoverImage = null;
@@ -37,9 +39,33 @@ final class PageHeader
      */
     public array $props = [];
 
+    public function getHeading(): string
+    {
+        if (null !== $this->headline && '' !== \trim($this->headline)) {
+            return \trim($this->headline);
+        }
+
+        return $this->title ?? '';
+    }
+
     public function getTitle(): string
     {
+        return $this->getHeading();
+    }
+
+    public function getRawTitle(): string
+    {
         return $this->title ?? '';
+    }
+
+    public function getHeadline(): ?string
+    {
+        return null !== $this->headline && '' !== \trim($this->headline) ? \trim($this->headline) : null;
+    }
+
+    public function getSummary(): ?string
+    {
+        return null !== $this->summary && '' !== \trim($this->summary) ? \trim($this->summary) : null;
     }
 
     public function getMeta(): ?string

@@ -51,13 +51,15 @@
                 <div class="w-full h-full flex flex-col {% if is_lightbox_active and image_url and not item.link|default(null) %}cursor-pointer{% endif %}" {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}"{% endif %}>
                     <twig:Overlay
                         title="{{ item.title|default(null) }}"
-                        meta="{{ item.meta|default(null) }}"
+                        headline="{{ item.headline|default(null) }}"
+                        summary="{{ item.summary|default(null) }}"
+                        meta="{{ item.meta|default(item.headline|default(null)) }}"
                         badge="{{ item.badge|default(null) }}"
-                        content="{{ item.content|default(null) }}"
+                        content="{{ item.summary|default(item.content|default(null)) }}"
                         :image="item.image|default(null)"
                         :video="item.video|default(null)"
                         :icon="item.icon|default(null)"
-                        :link="item.link|default(null)"
+                        :link="item.link|default(item.url|default(null))"
                         linkTitle="{{ item.link_title|default(null) }}"
                         :hoverImage="item.hover_image|default(null)"
                         :hoverVideo="item.hover_video|default(null)"
@@ -100,9 +102,10 @@
                                     {% if image_focus_style %}style="{{ image_focus_style }}"{% endif %}
                                     loading="lazy"
                                 >
-                                {% if item.content|default(null) %}
+                                {% set modal_content = item.summary|default(item.content|default(null)) %}
+                                {% if modal_content %}
                                     <div class="mt-4 text-left text-sm text-gray-700 dark:text-neutral-300">
-                                        {{ item.content|raw }}
+                                        {{ modal_content|raw }}
                                     </div>
                                 {% endif %}
                             </div>

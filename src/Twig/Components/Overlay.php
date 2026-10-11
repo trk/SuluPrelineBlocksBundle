@@ -22,6 +22,8 @@ final class Overlay
     public ?string $badgeColor = null;
     public ?string $badge_color = null;
     public ?string $meta = null;
+    public ?string $headline = null;
+    public ?string $summary = null;
     public ?string $content = null;
     public mixed $image = null;
     public mixed $video = null;
@@ -204,6 +206,28 @@ final class Overlay
         }
 
         return $resolved;
+    }
+
+    public function getMeta(): ?string
+    {
+        $meta = (null !== $this->meta && '' !== \trim($this->meta))
+            ? \trim($this->meta)
+            : (null !== $this->headline && '' !== \trim($this->headline) ? \trim($this->headline) : null);
+
+        return $meta;
+    }
+
+    public function getContent(): ?string
+    {
+        if (null !== $this->summary && '' !== \trim($this->summary)) {
+            return \trim($this->summary);
+        }
+
+        if (null !== $this->content && '' !== \trim($this->content)) {
+            return \trim($this->content);
+        }
+
+        return null;
     }
 
     public function getOverlayPosition(): string

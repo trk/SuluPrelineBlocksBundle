@@ -452,4 +452,29 @@ final class CardTest extends TestCase
         self::assertSame('object-position: 50% 25%;', $card->getImageFocusPointStyle());
         self::assertNotEmpty($card->getImageSizes());
     }
+
+    public function testHeadlineAndSummaryDuckTyping(): void
+    {
+        $card = new Card();
+        $card->headline = 'Editorial Headline';
+        $card->summary = 'Short teaser summary';
+        $card->content = '<p>Long rich text body.</p>';
+
+        // Headline serves as meta/eyebrow
+        self::assertSame('Editorial Headline', $card->getMeta());
+
+        // Summary takes precedence as card content
+        self::assertSame('Short teaser summary', $card->getContent());
+
+        // Explicit meta overrides headline
+        $card->meta = 'Explicit Tag';
+        self::assertSame('Explicit Tag', $card->getMeta());
+
+        // When summary is empty, content serves as fallback
+        $card->summary = null;
+        self::assertSame('<p>Long rich text body.</p>', $card->getContent());
+
+        $card->summary = '   ';
+        self::assertSame('<p>Long rich text body.</p>', $card->getContent());
+    }
 }

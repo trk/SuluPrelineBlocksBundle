@@ -18,6 +18,8 @@
     {% endfor %}
 {% endmacro %}
 
+{% set meta = this.getMeta() %}
+{% set content = this.getContent() %}
 {% set title_color = this.getTitleColor() %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
