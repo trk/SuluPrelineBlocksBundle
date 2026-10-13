@@ -1,110 +1,86 @@
 tabs:
-  style:
+  settings:
     title:
-      en: "Style & Placement"
-      tr: "Stil ve Konum"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       display_mode:
         type: select
         label:
-          en: "Display Mode"
-          tr: "Görünüm Modu"
-        default: "inline_button"
+          en: 'Display Mode'
+          tr: 'Görünüm Modu'
+          de: Anzeigemodus
+          ru: 'Режим отображения'
+          es: 'Modo de Visualización'
+          fr: "Mode d'Affichage"
+        default: inline_button
         col_span: 6
         options:
-          - value: "inline_button"
-            label:
-              en: "Standard Button (Inline)"
-              tr: "Standart Buton (Sayfa İçi)"
-          - value: "totop_circle"
-            label:
-              en: "Classic Circle Icon Button"
-              tr: "Klasik Yuvarlak İkon Butonu"
-          - value: "floating"
-            label:
-              en: "Floating Button (Screen Bottom-Right)"
-              tr: "Sabit Yüzen Buton (Ekran Sağ-Alt)"
+          - { value: inline_button, label: { en: 'Standard Button (Inline)', tr: 'Standart Buton (Sayfa İçi)', de: 'Standard-Button (Inline)', ru: 'Стандартная кнопка (В тексте)', es: 'Botón Estándar (En Línea)', fr: 'Bouton Standard (En Ligne)' } }
+          - { value: totop_circle, label: { en: 'Classic Circle Icon Button', tr: 'Klasik Yuvarlak İkon Butonu', de: 'Klassischer runder Icon-Button', ru: 'Классическая круглая кнопка с иконкой', es: 'Botón Circular Clásico con Icono', fr: 'Bouton Icône Circulaire Classique' } }
+          - { value: floating, label: { en: 'Floating Button (Screen Bottom-Right)', tr: 'Sabit Yüzen Buton (Ekran Sağ-Alt)', de: 'Schwebender Button (Unten rechts)', ru: 'Плавающая кнопка (Внизу справа)', es: 'Botón Flotante (Abajo a la Derecha)', fr: 'Bouton Flottant (En Bas à Droite)' } }
       button_variant:
         type: select
         label:
-          en: "Button Variant"
-          tr: "Buton Türü"
-        default: "solid"
+          en: 'Button Variant'
+          tr: 'Buton Türü'
+          de: Button-Variante
+          ru: 'Вариант кнопки'
+          es: 'Variante de Botón'
+          fr: 'Variante de Bouton'
+        default: solid
         col_span: 6
         options:
-          - value: "solid"
-            label:
-              en: "Solid Background"
-              tr: "Dolu Arka Plan"
-          - value: "outline"
-            label:
-              en: "Outlined"
-              tr: "Kenarlıklı"
-          - value: "soft"
-            label:
-              en: "Soft / Pastel"
-              tr: "Yumuşak Pastel"
-          - value: "ghost"
-            label:
-              en: "Ghost (Transparent)"
-              tr: "Şeffaf (Ghost)"
+          - { value: solid, label: { en: 'Solid Background', tr: 'Dolu Arka Plan', de: 'Gefüllter Hintergrund', ru: 'Сплошной фон', es: 'Fondo Sólido', fr: 'Fond Plein' } }
+          - { value: outline, label: { en: Outlined, tr: Kenarlıklı, de: Umrandet, ru: Контурный, es: 'Con Contorno', fr: 'Avec Contour' } }
+          - { value: soft, label: { en: 'Soft / Pastel', tr: 'Yumuşak Pastel', de: 'Sanft / Pastell', ru: 'Мягкий / Пастельный', es: 'Suave / Pastel', fr: 'Doux / Pastel' } }
+          - { value: ghost, label: { en: 'Ghost (Transparent)', tr: 'Şeffaf (Ghost)', de: 'Geist (Transparent)', ru: 'Прозрачный (Ghost)', es: 'Fantasma (Transparente)', fr: 'Fantôme (Transparent)' } }
       button_color:
         type: select
         label:
-          en: "Color"
-          tr: "Renk"
-        default: "primary"
+          en: Color
+          tr: Renk
+          de: Farbe
+          ru: Цвет
+          es: Color
+          fr: Couleur
+        default: primary
         col_span: 6
         options:
-          - value: "primary"
-            label:
-              en: "Primary Blue"
-              tr: "Birincil Mavi"
-          - value: "dark"
-            label:
-              en: "Dark / Black"
-              tr: "Koyu / Siyah"
-          - value: "white"
-            label:
-              en: "White"
-              tr: "Beyaz"
-          - value: "muted"
-            label:
-              en: "Muted Gray"
-              tr: "Açık Gri"
+          - { value: primary, label: { en: 'Primary Blue', tr: 'Birincil Mavi', de: Primärblau, ru: 'Основной синий', es: 'Azul Primario', fr: 'Bleu Primaire' } }
+          - { value: dark, label: { en: 'Dark / Black', tr: 'Koyu / Siyah', de: 'Dunkel / Schwarz', ru: 'Тёмный / Чёрный', es: 'Oscuro / Negro', fr: 'Sombre / Noir' } }
+          - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
+          - { value: muted, label: { en: 'Muted Gray', tr: 'Açık Gri', de: 'Gedämpftes Grau', ru: 'Приглушённый серый', es: 'Gris Atenuado', fr: 'Gris Atténué' } }
       align:
         type: select
         label:
-          en: "Alignment (Inline Mode)"
-          tr: "Hizalama (Sayfa İçi Modunda)"
-        default: "right"
+          en: 'Alignment (Inline Mode)'
+          tr: 'Hizalama (Sayfa İçi Modunda)'
+          de: 'Ausrichtung (Inline-Modus)'
+          ru: 'Выравнивание (Встроенный режим)'
+          es: 'Alineación (Modo en Línea)'
+          fr: 'Alignement (Mode en Ligne)'
+        default: right
         col_span: 6
         options:
-          - value: "right"
-            label:
-              en: "Right"
-              tr: "Sağa"
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "left"
-            label:
-              en: "Left"
-              tr: "Sola"
+          - { value: right, label: { en: Right, tr: Sağa, de: Rechts, ru: Справа, es: Derecha, fr: Droite } }
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: left, label: { en: Left, tr: Sola, de: Links, ru: Слева, es: Izquierda, fr: Gauche } }
       icon_position:
         type: select
         label:
-          en: "Icon Position"
-          tr: "İkon Konumu"
-        default: "left"
+          en: 'Icon Position'
+          tr: 'İkon Konumu'
+          de: Symbolposition
+          ru: 'Позиция иконки'
+          es: 'Posición del Icono'
+          fr: "Position de l'Icône"
+        default: left
         col_span: 6
         options:
-          - value: "left"
-            label:
-              en: "Left (Before Text)"
-              tr: "Solda (Metinden Önce)"
-          - value: "right"
-            label:
-              en: "Right (After Text)"
-              tr: "Sağda (Metinden Sonra)"
+          - { value: left, label: { en: 'Left (Before Text)', tr: 'Solda (Metinden Önce)', de: 'Links (Vor dem Text)', ru: 'Слева (Перед текстом)', es: 'Izquierda (Antes del Texto)', fr: 'Gauche (Avant le Texte)' } }
+          - { value: right, label: { en: 'Right (After Text)', tr: 'Sağda (Metinden Sonra)', de: 'Rechts (Nach dem Text)', ru: 'Справа (После текста)', es: 'Derecha (Después del Texto)', fr: 'Droite (Après le Texte)' } }

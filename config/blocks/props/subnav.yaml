@@ -1,0 +1,57 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      style:
+        type: select
+        label:
+          en: 'Navigation Style'
+          tr: 'Menü Stili'
+          de: Navigationsstil
+          ru: 'Стиль навигации'
+          es: 'Estilo de Navegación'
+          fr: 'Style de Navigation'
+        default: pills
+        col_span: 6
+        options:
+          - { value: pills, label: { en: Pills, tr: 'Kapsül Butonlar (Pills)', de: 'Pillen (Pills)', ru: 'Капсулы (Pills)', es: 'Píldoras (Pills)', fr: 'Pilules (Pills)' } }
+          - { value: segmented, label: { en: 'Segmented Control', tr: 'Bölümlü Kontrol (Segmented)', de: 'Segmentierte Steuerung', ru: 'Сегментированный переключатель', es: 'Control Segmentado', fr: 'Contrôle Segmenté' } }
+          - { value: underline, label: { en: 'Underline Tabs', tr: 'Alt Çizgili Sekmeler', de: 'Unterstrichene Tabs', ru: 'Подчёркнутые вкладки', es: 'Pestañas Subrayadas', fr: 'Onglets Soulignés' } }
+          - { value: divider, label: { en: 'Divided Links', tr: 'Çizgi Ayırıcılı Linkler', de: 'Getrennte Links', ru: 'Ссылки с разделителями', es: 'Enlaces Divididos', fr: 'Liens Séparés' } }
+      alignment:
+        type: select
+        label:
+          en: Alignment
+          tr: Hizalama
+          de: Ausrichtung
+          ru: Выравнивание
+          es: Alineación
+          fr: Alignement
+        default: start
+        col_span: 6
+        options:
+          - { value: start, label: { en: 'Left / Start', tr: Sola, de: 'Links / Start', ru: 'Слева / В начале', es: 'Izquierda / Inicio', fr: 'Gauche / Début' } }
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: end, label: { en: 'Right / End', tr: Sağa, de: 'Rechts / Ende', ru: 'Справа / В конце', es: 'Derecha / Fin', fr: 'Droite / Fin' } }
+          - { value: between, label: { en: 'Space Between', tr: 'İki Yana Yasla', de: 'Raum dazwischen', ru: 'Равномерно по краям', es: 'Espacio Entre Elementos', fr: 'Espacement Entre' } }
+      size:
+        type: select
+        label:
+          en: 'Item Size'
+          tr: 'Öğe Boyutu'
+          de: Elementgröße
+          ru: 'Размер элемента'
+          es: 'Tamaño del Elemento'
+          fr: "Taille de l'Élément"
+        default: md
+        col_span: 6
+        options:
+          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }

@@ -1,0 +1,32 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      card:
+        type: checkbox
+        label:
+          en: 'Wrap in Card Container'
+          tr: 'Kart Konteyneri İçine Al'
+          de: 'In Karten-Container einschließen'
+          ru: 'Обернуть в карточку'
+          es: 'Envolver en Contenedor de Tarjeta'
+          fr: 'Envelopper dans une Carte'
+        default: false
+        col_span: 6
+      raw_output:
+        type: checkbox
+        label:
+          en: 'Render Without Wrapper Div'
+          tr: 'Sarmalayıcı Div Olmadan Çıktıla'
+          de: 'Ohne umschließendes Div rendern'
+          ru: 'Рендерить без контейнера div'
+          es: 'Renderizar sin Div Contenedor'
+          fr: 'Rendre sans Div Conteneur'
+        default: false
+        col_span: 6

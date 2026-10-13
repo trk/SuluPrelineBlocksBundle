@@ -1,0 +1,83 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      style:
+        type: select
+        label:
+          en: 'Button Style'
+          tr: 'Buton Stili'
+          de: Button-Stil
+          ru: 'Стиль кнопки'
+          es: 'Estilo de Botón'
+          fr: 'Style de Bouton'
+        default: icon_only
+        col_span: 6
+        options:
+          - { value: icon_only, label: { en: 'Minimal Icon', tr: 'Sade İkon', de: 'Minimales Symbol', ru: 'Минималистичная иконка', es: 'Icono Minimalista', fr: 'Icône Minimale' } }
+          - { value: bordered, label: { en: 'Bordered Surface', tr: Kenarlıklı, de: 'Umrandete Fläche', ru: 'Поверхность с рамкой', es: 'Superficie con Borde', fr: 'Surface Bordée' } }
+          - { value: buttons, label: { en: 'Filled Soft Button', tr: 'Dolgulu Buton', de: 'Gefüllter sanfter Button', ru: 'Мягкая кнопка с заливкой', es: 'Botón Suave Relleno', fr: 'Bouton Doux Rempli' } }
+          - { value: pills, label: { en: 'Primary Accent Pill', tr: 'Vurgu Renkli Rozet', de: 'Primäre Akzent-Pille', ru: 'Акцентная капсула', es: 'Píldora de Acento Primario', fr: 'Pilule Accent Primaire' } }
+      size:
+        type: select
+        label:
+          en: 'Icon Size'
+          tr: 'İkon Boyutu'
+          de: Symbolgröße
+          ru: 'Размер иконки'
+          es: 'Tamaño de Icono'
+          fr: "Taille de l'Icône"
+        default: md
+        col_span: 6
+        options:
+          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+      shape:
+        type: select
+        label:
+          en: 'Button Shape'
+          tr: 'Buton Şekli'
+          de: Button-Form
+          ru: 'Форма кнопки'
+          es: 'Forma del Botón'
+          fr: 'Forme du Bouton'
+        default: rounded
+        col_span: 6
+        options:
+          - { value: rounded, label: { en: Rounded, tr: 'Yuvarlatılmış Köşe', de: Abgerundet, ru: Скруглённая, es: Redondeado, fr: Arrondi } }
+          - { value: circle, label: { en: Circle, tr: 'Tam Daire', de: Kreis, ru: Круг, es: Círculo, fr: Cercle } }
+          - { value: square, label: { en: Square, tr: 'Keskin Köşe (Kare)', de: Quadrat, ru: Квадрат, es: Cuadrado, fr: Carré } }
+      alignment:
+        type: select
+        label:
+          en: Alignment
+          tr: Hizalama
+          de: Ausrichtung
+          ru: Выравнивание
+          es: Alineación
+          fr: Alignement
+        default: start
+        col_span: 6
+        options:
+          - { value: start, label: { en: 'Left / Start', tr: Sola, de: 'Links / Start', ru: 'Слева / В начале', es: 'Izquierda / Inicio', fr: 'Gauche / Début' } }
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: end, label: { en: 'Right / End', tr: Sağa, de: 'Rechts / Ende', ru: 'Справа / В конце', es: 'Derecha / Fin', fr: 'Droite / Fin' } }
+          - { value: between, label: { en: 'Space Between', tr: 'İki Yana Yasla', de: 'Raum dazwischen', ru: 'Равномерно по краям', es: 'Espacio Entre Elementos', fr: 'Espacement Entre' } }
+      open_new_tab:
+        type: checkbox
+        label:
+          en: 'Open Links in New Tab'
+          tr: 'Bağlantıları Yeni Sekmede Aç'
+          de: 'Links in neuem Tab öffnen'
+          ru: 'Открывать ссылки в новой вкладке'
+          es: 'Abrir Enlaces en Nueva Pestaña'
+          fr: 'Ouvrir les Liens dans un Nouvel Onglet'
+        default: true
+        col_span: 6

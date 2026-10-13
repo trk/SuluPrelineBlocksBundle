@@ -1,128 +1,94 @@
 tabs:
-  layout:
+  settings:
     title:
-      en: "Accordion Layout"
-      tr: "Akordeon Düzeni"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       style:
         type: select
         label:
-          en: "Style"
-          tr: "Görsel Stil"
-        default: "default"
+          en: Style
+          tr: 'Görsel Stil'
+          de: Stil
+          ru: Стиль
+          es: Estilo
+          fr: Style
+        default: default
         col_span: 6
         options:
-          - value: "default"
-            label:
-              en: "Default (Dividers)"
-              tr: "Varsayılan (Çizgili)"
-          - value: "bordered"
-            label:
-              en: "Bordered Cards"
-              tr: "Çerçeveli Kartlar"
-          - value: "soft"
-            label:
-              en: "Soft Background"
-              tr: "Yumuşak Dolgulu"
+          - { value: default, label: { en: 'Default (Dividers)', tr: 'Varsayılan (Çizgili)', de: 'Standard (Trennlinien)', ru: 'По умолчанию (С разделителями)', es: 'Predeterminado (Con Divisores)', fr: 'Par Défaut (Avec Séparateurs)' } }
+          - { value: bordered, label: { en: 'Bordered Cards', tr: 'Çerçeveli Kartlar', de: 'Umrandete Karten', ru: 'Карточки с рамкой', es: 'Tarjetas con Borde', fr: 'Cartes Bordées' } }
+          - { value: soft, label: { en: 'Soft Background', tr: 'Yumuşak Dolgulu', de: 'Sanfter Hintergrund', ru: 'Мягкий фон', es: 'Fondo Suave', fr: 'Fond Doux' } }
       icon_style:
         type: select
         label:
-          en: "Icon Indicator"
-          tr: "Açma/Kapama İkonu"
-        default: "chevron"
+          en: 'Icon Indicator'
+          tr: 'Açma/Kapama İkonu'
+          de: Symbol-Indikator
+          ru: 'Индикатор иконки'
+          es: 'Indicador de Icono'
+          fr: "Indicateur d'Icône"
+        default: chevron
         col_span: 6
         options:
-          - value: "chevron"
-            label:
-              en: "Chevron (Arrow)"
-              tr: "Ok (Chevron)"
-          - value: "plus"
-            label:
-              en: "Plus / Minus"
-              tr: "Artı / Eksi (+/-)"
-          - value: "none"
-            label:
-              en: "None"
-              tr: "Yok"
+          - { value: chevron, label: { en: 'Chevron (Arrow)', tr: 'Ok (Chevron)', de: 'Chevron (Pfeil)', ru: 'Шеврон (Стрелка)', es: 'Chevron (Flecha)', fr: 'Chevron (Flèche)' } }
+          - { value: plus, label: { en: 'Plus / Minus', tr: 'Artı / Eksi (+/-)', de: 'Plus / Minus', ru: 'Плюс / Минус', es: 'Más / Menos', fr: 'Plus / Moins' } }
+          - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
       multiple:
         type: checkbox
         label:
-          en: "Allow Multiple Open"
-          tr: "Aynı Anda Çoklu Açılma"
+          en: 'Allow Multiple Open'
+          tr: 'Aynı Anda Çoklu Açılma'
+          de: 'Mehrere gleichzeitig öffnen'
+          ru: 'Разрешить открытие нескольких'
+          es: 'Permitir Múltiples Abiertos'
+          fr: 'Autoriser Plusieurs Ouverts'
         default: false
         col_span: 6
       collapsible:
         type: checkbox
         label:
-          en: "Start All Collapsed"
-          tr: "Tümü Kapalı Başlasın"
+          en: 'Start All Collapsed'
+          tr: 'Tümü Kapalı Başlasın'
+          de: 'Alle eingeklappt starten'
+          ru: 'Начинать со всех свёрнутых'
+          es: 'Iniciar Todos Contraídos'
+          fr: 'Tout Réduire au Démarrage'
         default: true
         col_span: 6
       title_size:
         type: select
         label:
-          en: "Title Size"
-          tr: "Başlık Boyutu"
-        default: "base"
+          en: 'Title Size'
+          tr: 'Başlık Boyutu'
+          de: Titelgröße
+          ru: 'Размер заголовка'
+          es: 'Tamaño del Título'
+          fr: 'Taille du Titre'
+        default: base
         col_span: 6
         options:
-          - value: "sm"
-            label: "Small"
-          - value: "base"
-            label: "Base"
-          - value: "lg"
-            label: "Large"
-          - value: "xl"
-            label: "Extra Large"
+          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: base, label: { en: Base, tr: 'Standart (Base)', de: 'Standard (Base)', ru: 'Базовый (Base)', es: 'Base (Estándar)', fr: 'Base (Standard)' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
       image_align:
         type: select
         label:
-          en: "Image Position"
-          tr: "Görsel Konumu"
-        default: "top"
+          en: 'Image Position'
+          tr: 'Görsel Konumu'
+          de: Bildposition
+          ru: 'Позиция изображения'
+          es: 'Posición de la Imagen'
+          fr: "Position de l'Image"
+        default: top
         col_span: 6
         options:
-          - value: "top"
-            label: "Top"
-          - value: "bottom"
-            label: "Bottom"
-          - value: "left"
-            label: "Left"
-          - value: "right"
-            label: "Right"
-      margin_top:
-        type: select
-        label:
-          en: "Margin Top"
-          tr: "Üst Boşluk"
-        default: "none"
-        col_span: 6
-        options:
-          - value: "none"
-            label: "None"
-          - value: "sm"
-            label: "Small"
-          - value: "md"
-            label: "Medium"
-          - value: "lg"
-            label: "Large"
-          - value: "xl"
-            label: "Extra Large"
-      margin_bottom:
-        type: select
-        label:
-          en: "Margin Bottom"
-          tr: "Alt Boşluk"
-        default: "none"
-        col_span: 6
-        options:
-          - value: "none"
-            label: "None"
-          - value: "sm"
-            label: "Small"
-          - value: "md"
-            label: "Medium"
-          - value: "lg"
-            label: "Large"
-          - value: "xl"
-            label: "Extra Large"
+          - { value: top, label: { en: Top, tr: Üstte, de: Oben, ru: Сверху, es: Arriba, fr: Haut } }
+          - { value: bottom, label: { en: Bottom, tr: Altta, de: Unten, ru: Снизу, es: Abajo, fr: Bas } }
+          - { value: left, label: { en: Left, tr: Solda, de: Links, ru: Слева, es: Izquierda, fr: Gauche } }
+          - { value: right, label: { en: Right, tr: Sağda, de: Rechts, ru: Справа, es: Derecha, fr: Droite } }

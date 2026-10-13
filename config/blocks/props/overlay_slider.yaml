@@ -1,0 +1,104 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      columns:
+        type: select
+        label:
+          en: 'Visible Slides (Desktop)'
+          tr: 'Görünür Slayt Sayısı (Masaüstü)'
+          de: 'Sichtbare Folien (Desktop)'
+          ru: 'Видимые слайды (ПК)'
+          es: 'Diapositivas Visibles (Escritorio)'
+          fr: 'Diapositives Visibles (Bureau)'
+        default: '3'
+        col_span: 6
+        options:
+          - { value: '1', label: { en: '1 Slide', tr: '1 Slayt', de: '1 Folie', ru: '1 слайд', es: '1 Diapositiva', fr: '1 Diapositive' } }
+          - { value: '2', label: { en: '2 Slides', tr: '2 Slayt', de: '2 Folien', ru: '2 слайда', es: '2 Diapositivas', fr: '2 Diapositives' } }
+          - { value: '3', label: { en: '3 Slides', tr: '3 Slayt', de: '3 Folien', ru: '3 слайда', es: '3 Diapositivas', fr: '3 Diapositives' } }
+          - { value: '4', label: { en: '4 Slides', tr: '4 Slayt', de: '4 Folien', ru: '4 слайда', es: '4 Diapositivas', fr: '4 Diapositives' } }
+      gap:
+        type: select
+        label:
+          en: 'Slide Gap'
+          tr: 'Slaytlar Arası Boşluk'
+          de: Folienabstand
+          ru: 'Отступ между слайдами'
+          es: 'Espaciado entre Diapositivas'
+          fr: 'Espacement des Diapositives'
+        default: md
+        col_span: 6
+        options:
+          - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
+          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+      arrows:
+        type: select
+        label:
+          en: 'Navigation Arrows'
+          tr: 'Gezinti Okları'
+          de: Navigationspfeile
+          ru: 'Стрелки навигации'
+          es: 'Flechas de Navegación'
+          fr: 'Flèches de Navigation'
+        default: inside
+        col_span: 6
+        options:
+          - { value: inside, label: { en: Inside, tr: İçeride, de: Innen, ru: Внутри, es: Dentro, fr: "À l'Intérieur" } }
+          - { value: outside, label: { en: Outside, tr: Dışarıda, de: Außen, ru: Снаружи, es: Fuera, fr: "À l'Extérieur" } }
+          - { value: none, label: { en: Hidden, tr: Gizli, de: Ausgeblendet, ru: Скрыто, es: Oculto, fr: Masqué } }
+      dots:
+        type: select
+        label:
+          en: 'Pagination Dots'
+          tr: 'Sayfalama Noktaları'
+          de: Seitenpunkte
+          ru: 'Точки пагинации'
+          es: 'Puntos de Paginación'
+          fr: 'Points de Pagination'
+        default: bottom
+        col_span: 6
+        options:
+          - { value: bottom, label: { en: Bottom, tr: Altta, de: Unten, ru: Снизу, es: Abajo, fr: Bas } }
+          - { value: none, label: { en: Hidden, tr: Gizli, de: Ausgeblendet, ru: Скрыто, es: Oculto, fr: Masqué } }
+      autoplay:
+        type: checkbox
+        label:
+          en: Autoplay
+          tr: 'Otomatik Oynat'
+          de: 'Automatische Wiedergabe'
+          ru: Автовоспроизведение
+          es: 'Reproducción Automática'
+          fr: 'Lecture Automatique'
+        default: false
+        col_span: 4
+      loop:
+        type: checkbox
+        label:
+          en: 'Infinite Loop'
+          tr: 'Sonsuz Döngü'
+          de: Endlosschleife
+          ru: 'Бесконечный цикл'
+          es: 'Bucle Infinito'
+          fr: 'Boucle Infinie'
+        default: true
+        col_span: 4
+      interval:
+        type: number
+        label:
+          en: 'Autoplay Interval (ms)'
+          tr: 'Geçiş Süresi (ms)'
+          de: 'Autoplay-Intervall (ms)'
+          ru: 'Интервал автопрокрутки (мс)'
+          es: 'Intervalo de Reproducción (ms)'
+          fr: 'Intervalle de Lecture Auto (ms)'
+        default: 4000
+        col_span: 4

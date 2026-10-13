@@ -1,0 +1,89 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      max_width:
+        type: select
+        label:
+          en: 'Container Max Width'
+          tr: 'Konteyner Azami Genişliği'
+          de: 'Maximale Container-Breite'
+          ru: 'Максимальная ширина контейнера'
+          es: 'Ancho Máximo del Contenedor'
+          fr: 'Largeur Maximale du Contenedor'
+        default: 85rem
+        col_span: 6
+        options:
+          - { value: 85rem, label: { en: 'Preline Standard (85rem / 1360px)', tr: 'Preline Standart (85rem / 1360px)', de: 'Preline Standard (85rem / 1360px)', ru: 'Стандарт Preline (85rem / 1360px)', es: 'Estándar Preline (85rem / 1360px)', fr: 'Standard Preline (85rem / 1360px)' } }
+          - { value: 7xl, label: { en: 'Extra Large (7xl / 1280px)', tr: 'Geniş (7xl / 1280px)', de: 'Extra Groß (7xl / 1280px)', ru: 'Очень большой (7xl / 1280px)', es: 'Extra Grande (7xl / 1280px)', fr: 'Très Grand (7xl / 1280px)' } }
+          - { value: 5xl, label: { en: 'Medium (5xl / 1024px)', tr: 'Orta (5xl / 1024px)', de: 'Mittel (5xl / 1024px)', ru: 'Средний (5xl / 1024px)', es: 'Mediano (5xl / 1024px)', fr: 'Moyen (5xl / 1024px)' } }
+          - { value: 3xl, label: { en: 'Narrow / Prose (3xl / 768px)', tr: 'Dar (3xl / 768px)', de: 'Schmal / Text (3xl / 768px)', ru: 'Узкий / Текст (3xl / 768px)', es: 'Estrecho / Texto (3xl / 768px)', fr: 'Étroit / Texte (3xl / 768px)' } }
+          - { value: full, label: { en: 'Full Width (100%)', tr: 'Tam Genişlik (%100)', de: 'Volle Breite (100%)', ru: 'Во всю ширину (100%)', es: 'Ancho Completo (100%)', fr: 'Pleine Largeur (100%)' } }
+      padding_y:
+        type: select
+        label:
+          en: 'Vertical Padding'
+          tr: 'Dikey İç Boşluk (Padding Y)'
+          de: 'Vertikaler Innenabstand'
+          ru: 'Вертикальный внутренний отступ'
+          es: 'Relleno Vertical'
+          fr: 'Marge Intérieure Verticale'
+        default: default
+        col_span: 6
+        options:
+          - { value: default, label: { en: 'Default (py-10 sm:py-14)', tr: 'Standart (py-10 sm:py-14)', de: 'Standard (py-10 sm:py-14)', ru: 'По умолчанию (py-10 sm:py-14)', es: 'Predeterminado (py-10 sm:py-14)', fr: 'Par Défaut (py-10 sm:py-14)' } }
+          - { value: none, label: { en: 'None (py-0)', tr: 'Yok (py-0)', de: 'Keine (py-0)', ru: 'Нет (py-0)', es: 'Ninguno (py-0)', fr: 'Aucun (py-0)' } }
+          - { value: xs, label: { en: 'Extra Small (py-4 sm:py-6)', tr: 'Çok Küçük (xs)', de: 'Extra Klein (py-4 sm:py-6)', ru: 'Очень малый (xs)', es: 'Extra Pequeño (xs)', fr: 'Très Petit (xs)' } }
+          - { value: sm, label: { en: 'Small (py-6 sm:py-8)', tr: 'Küçük (sm)', de: 'Klein (py-6 sm:py-8)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: lg, label: { en: 'Large (py-14 sm:py-20)', tr: 'Büyük (lg)', de: 'Groß (py-14 sm:py-20)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large (py-20 sm:py-28)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (py-20 sm:py-28)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+      padding_x:
+        type: select
+        label:
+          en: 'Horizontal Padding'
+          tr: 'Yatay İç Boşluk (Padding X)'
+          de: 'Horizontaler Innenabstand'
+          ru: 'Горизонтальный внутренний отступ'
+          es: 'Relleno Horizontal'
+          fr: 'Marge Intérieure Horizontale'
+        default: default
+        col_span: 6
+        options:
+          - { value: default, label: { en: 'Default (px-4 sm:px-6 lg:px-8)', tr: Standart, de: 'Standard (px-4 sm:px-6 lg:px-8)', ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: none, label: { en: 'None (Edge-to-Edge)', tr: 'Yok (Kenara Sıfır)', de: 'Keine (Randlos)', ru: 'Нет (От края до края)', es: 'Ninguno (Borde a Borde)', fr: 'Aucun (Bord à Bord)' } }
+      bg_style:
+        type: select
+        label:
+          en: 'Background Style'
+          tr: 'Arka Plan Stili'
+          de: Hintergrund-Stil
+          ru: 'Стиль фона'
+          es: 'Estilo de Fondo'
+          fr: 'Style de Fond'
+        default: transparent
+        col_span: 6
+        options:
+          - { value: transparent, label: { en: Transparent, tr: Şeffaf, de: Transparent, ru: Прозрачный, es: Transparente, fr: Transparent } }
+          - { value: default, label: { en: 'Surface (White / Dark Neutral)', tr: 'Yüzey (Beyaz / Koyu Nötr)', de: 'Oberfläche (Weiß / Dunkel)', ru: 'Поверхность (Белый / Тёмный)', es: 'Superficie (Blanco / Oscuro)', fr: 'Surface (Blanc / Sombre)' } }
+          - { value: muted, label: { en: 'Muted (Gray 50 / Dark Neutral 800)', tr: 'Mat (Açık Gri / Koyu Gri)', de: 'Gedämpft (Hellgrau / Dunkelgrau)', ru: 'Приглушённый (Светло-серый / Тёмно-серый)', es: 'Atenuado (Gris Claro / Oscuro)', fr: 'Atténué (Gris Clair / Sombre)' } }
+          - { value: subtle, label: { en: 'Subtle Background', tr: 'Hafif Arka Plan', de: 'Dezenter Hintergrund', ru: 'Лёгкий фон', es: 'Fondo Sutil', fr: 'Fond Subtil' } }
+          - { value: primary, label: { en: 'Primary Brand Theme', tr: 'Birincil Vurgu Rengi', de: 'Primäres Markenthema', ru: 'Основная тема бренда', es: 'Tema de Marca Primario', fr: 'Thème de Marque Primaire' } }
+          - { value: secondary, label: { en: 'Secondary Brand Theme', tr: 'İkincil Vurgu Rengi', de: 'Sekundäres Markenthema', ru: 'Вторичная тема бренда', es: 'Tema de Marca Secundario', fr: 'Thème de Marque Secondaire' } }
+          - { value: dark, label: { en: 'Dark Inverted', tr: 'Koyu / Siyah', de: 'Dunkel Invertiert', ru: 'Тёмный инвертированный', es: 'Oscuro Invertido', fr: 'Sombre Inversé' } }
+      has_border:
+        type: checkbox
+        label:
+          en: 'Top & Bottom Borders'
+          tr: 'Üst ve Alt Kenarlıklar'
+          de: ' Rahmen oben & unten'
+          ru: 'Верхняя и нижняя границы'
+          es: 'Bordes Superior e Inferior'
+          fr: 'Bordures Haut et Bas'
+        default: false
+        col_span: 6

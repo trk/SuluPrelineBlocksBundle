@@ -1,0 +1,62 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      style:
+        type: select
+        label:
+          en: 'Row Style'
+          tr: 'Satır Stili'
+          de: Zeilenstil
+          ru: 'Стиль строки'
+          es: 'Estilo de Fila'
+          fr: 'Style de Ligne'
+        default: default
+        col_span: 6
+        options:
+          - { value: default, label: { en: 'Clean (Default)', tr: 'Sade (Varsayılan)', de: 'Schlicht (Standard)', ru: 'Чистый (По умолчанию)', es: 'Limpio (Predeterminado)', fr: 'Épuré (Par Défaut)' } }
+          - { value: striped, label: { en: 'Striped & Hoverable', tr: 'Şeritli ve Vurgulu', de: 'Gestreift & Hover-Effekt', ru: 'Полосатые с подсветкой', es: 'Rayado y con Efecto Hover', fr: 'Rayé et Survolable' } }
+          - { value: hover, label: { en: 'Hoverable Rows', tr: 'Üzerine Gelince Vurgulu', de: 'Zeilen mit Hover-Effekt', ru: 'Подсветка строк при наведении', es: 'Filas con Efecto Hover', fr: 'Lignes Survolables' } }
+      size:
+        type: select
+        label:
+          en: 'Cell Density'
+          tr: 'Hücre Boyutu / Yoğunluğu'
+          de: Zellendichte
+          ru: 'Плотность ячеек'
+          es: 'Densidad de Celdas'
+          fr: 'Densité des Cellules'
+        default: md
+        col_span: 6
+        options:
+          - { value: sm, label: { en: 'Compact (sm)', tr: 'Dar (sm)', de: 'Kompakt (sm)', ru: 'Компактный (sm)', es: 'Compacto (sm)', fr: 'Compact (sm)' } }
+          - { value: md, label: { en: 'Standard (md)', tr: 'Standart (md)', de: 'Standard (md)', ru: 'Стандартный (md)', es: 'Estándar (md)', fr: 'Standard (md)' } }
+          - { value: lg, label: { en: 'Spacious (lg)', tr: 'Geniş (lg)', de: 'Geräumig (lg)', ru: 'Просторный (lg)', es: 'Espacioso (lg)', fr: 'Spacieux (lg)' } }
+      bordered:
+        type: checkbox
+        label:
+          en: 'Outer Card Border'
+          tr: 'Dış Çerçeve'
+          de: 'Äußerer Kartenrahmen'
+          ru: 'Внешняя рамка карточки'
+          es: 'Borde Exterior de Tarjeta'
+          fr: 'Bordure Extérieure'
+        default: false
+        col_span: 6
+      sticky_header:
+        type: checkbox
+        label:
+          en: 'Sticky Table Header'
+          tr: 'Sabit Tablo Başlığı (Sticky)'
+          de: 'Fixierter Tabellenkopf (Sticky)'
+          ru: 'Закреплённая шапка таблицы (Sticky)'
+          es: 'Encabezado de Tabla Fijo (Sticky)'
+          fr: 'En-tête de Tableau Épinglé (Sticky)'
+        default: false
+        col_span: 6

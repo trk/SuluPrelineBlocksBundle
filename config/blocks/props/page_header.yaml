@@ -1,0 +1,52 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      header_layout:
+        type: select
+        label:
+          en: 'Layout Style'
+          tr: 'Düzen Stili'
+          de: Layout-Stil
+          ru: 'Стиль макета'
+          es: 'Estilo de Diseño'
+          fr: 'Style de Disposition'
+        default: standard
+        col_span: 6
+        options:
+          - { value: standard, label: { en: 'Standard (Stacked)', tr: 'Standart (Dikey Sıralı)', de: 'Standard (Gestapelt)', ru: 'Стандартный (Вертикально)', es: 'Estándar (Apilado)', fr: 'Standard (Empilé)' } }
+          - { value: split, label: { en: 'Split (2 Columns Hero)', tr: 'İki Sütunlu (Yan Yana Hero)', de: 'Geteilt (2-Spalten-Hero)', ru: 'Разделённый (2 колонки Hero)', es: 'Dividido (Hero de 2 Columnas)', fr: 'Divisé (Héro 2 Colonnes)' } }
+          - { value: minimal, label: { en: 'Minimal (Compact Title & Meta)', tr: 'Minimal (Kompakt Başlık & Meta)', de: 'Minimal (Kompakter Titel & Meta)', ru: 'Минималистичный (Компактный заголовок)', es: 'Minimalista (Título y Meta Compactos)', fr: 'Minimal (Titre et Méta Compacts)' } }
+      show_breadcrumbs:
+        type: checkbox
+        label:
+          en: 'Show Breadcrumbs'
+          tr: 'Sayfa Yolunu (Breadcrumb) Göster'
+          de: 'Brotkrümelnavigation anzeigen'
+          ru: 'Показать хлебные крошки'
+          es: 'Mostrar Migas de Pan'
+          fr: "Afficher le Fil d'Ariane"
+        default: true
+        col_span: 6
+      padding_y:
+        type: select
+        label:
+          en: 'Vertical Padding'
+          tr: 'Dikey İç Boşluk'
+          de: 'Vertikaler Innenabstand'
+          ru: 'Вертикальный внутренний отступ'
+          es: 'Relleno Vertical'
+          fr: 'Marge Intérieure Verticale'
+        default: default
+        col_span: 6
+        options:
+          - { value: default, label: { en: Default, tr: Standart, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large (xl)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }

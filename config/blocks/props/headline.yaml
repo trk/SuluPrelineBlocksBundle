@@ -1,148 +1,94 @@
 tabs:
-  appearance:
+  settings:
     title:
-      en: "Typography & Decoration"
-      tr: "Tipografi & Vurgu"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       tag:
         type: select
         label:
-          en: "HTML Element"
-          tr: "HTML Başlık Etiketi"
-        default: "h2"
+          en: 'HTML Element'
+          tr: 'HTML Başlık Etiketi'
+          de: HTML-Element
+          ru: HTML-элемент
+          es: 'Elemento HTML'
+          fr: 'Élément HTML'
+        default: h2
         col_span: 6
         options:
-          - value: "h1"
-            label: "H1"
-          - value: "h2"
-            label: "H2"
-          - value: "h3"
-            label: "H3"
-          - value: "h4"
-            label: "H4"
-          - value: "h5"
-            label: "H5"
-          - value: "h6"
-            label: "H6"
-          - value: "div"
-            label: "DIV"
+          - { value: h1, label: { en: H1, tr: H1, de: H1, ru: H1, es: H1, fr: H1 } }
+          - { value: h2, label: { en: H2, tr: H2, de: H2, ru: H2, es: H2, fr: H2 } }
+          - { value: h3, label: { en: H3, tr: H3, de: H3, ru: H3, es: H3, fr: H3 } }
+          - { value: h4, label: { en: H4, tr: H4, de: H4, ru: H4, es: H4, fr: H4 } }
+          - { value: h5, label: { en: H5, tr: H5, de: H5, ru: H5, es: H5, fr: H5 } }
+          - { value: h6, label: { en: H6, tr: H6, de: H6, ru: H6, es: H6, fr: H6 } }
+          - { value: div, label: { en: DIV, tr: DIV, de: DIV, ru: DIV, es: DIV, fr: DIV } }
       size:
         type: select
         label:
-          en: "Visual Size"
-          tr: "Görsel Boyut"
-        default: "lg"
+          en: 'Visual Size'
+          tr: 'Görsel Boyut'
+          de: 'Visuelle Größe'
+          ru: 'Визуальный размер'
+          es: 'Tamaño Visual'
+          fr: 'Taille Visuelle'
+        default: lg
         col_span: 6
         options:
-          - value: "sm"
-            label:
-              en: "Small (sm)"
-              tr: "Küçük (sm)"
-          - value: "md"
-            label:
-              en: "Medium (md)"
-              tr: "Standart (md)"
-          - value: "lg"
-            label:
-              en: "Large (lg)"
-              tr: "Büyük (lg)"
-          - value: "xl"
-            label:
-              en: "Extra Large (xl)"
-              tr: "Çok Büyük (xl)"
-          - value: "2xl"
-            label:
-              en: "Hero Display (2xl)"
-              tr: "Dev Manşet (2xl)"
+          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large (xl)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: 2xl, label: { en: 'Hero Display (2xl)', tr: 'Dev Manşet (2xl)', de: 'Hero-Anzeige (2xl)', ru: 'Крупный баннер (2xl)', es: 'Titular Hero (2xl)', fr: 'Affichage Héro (2xl)' } }
       title_color:
         type: select
         label:
-          en: "Heading Color"
-          tr: "Başlık Rengi"
-        default: "default"
+          en: 'Heading Color'
+          tr: 'Başlık Rengi'
+          de: Überschriftfarbe
+          ru: 'Цвет заголовка'
+          es: 'Color de Encabezado'
+          fr: "Couleur de l'En-tête"
+        default: default
         col_span: 6
         options:
-          - value: "default"
-            label:
-              en: "Default Text"
-              tr: "Varsayılan Metin"
-          - value: "primary"
-            label:
-              en: "Primary Blue"
-              tr: "Birincil Mavi"
-          - value: "secondary"
-            label:
-              en: "Secondary"
-              tr: "İkincil"
-          - value: "dark"
-            label:
-              en: "Dark"
-              tr: "Koyu"
-          - value: "white"
-            label:
-              en: "White"
-              tr: "Beyaz"
-          - value: "muted"
-            label:
-              en: "Muted"
-              tr: "Soluk Gri"
+          - { value: default, label: { en: 'Default Text', tr: 'Varsayılan Metin', de: Standardtext, ru: 'Текст по умолчанию', es: 'Texto Predeterminado', fr: 'Texte par Défaut' } }
+          - { value: primary, label: { en: 'Primary Blue', tr: 'Birincil Mavi', de: Primärblau, ru: 'Основной синий', es: 'Azul Primario', fr: 'Bleu Primaire' } }
+          - { value: secondary, label: { en: Secondary, tr: İkincil, de: Sekundär, ru: Вторичный, es: Secundario, fr: Secondaire } }
+          - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
+          - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
+          - { value: muted, label: { en: Muted, tr: 'Soluk Gri', de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
       title_decoration:
         type: select
         label:
-          en: "Decoration"
-          tr: "Başlık Vurgusu"
-        default: "none"
+          en: Decoration
+          tr: 'Başlık Vurgusu'
+          de: Dekoration
+          ru: Оформление
+          es: Decoración
+          fr: Décoration
+        default: none
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "None"
-              tr: "Sade"
-          - value: "divider"
-            label:
-              en: "Underline Accent"
-              tr: "Altı Çizili Vurgu"
-          - value: "bullet"
-            label:
-              en: "Left Bullet Bar"
-              tr: "Sol Yan Çubuk"
-          - value: "line"
-            label:
-              en: "Centered Horizontal Lines"
-              tr: "İki Yanı Çizgili (Ortalı)"
+          - { value: none, label: { en: None, tr: Sade, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
+          - { value: divider, label: { en: 'Underline Accent', tr: 'Altı Çizili Vurgu', de: 'Unterstrichener Akzent', ru: 'Акцентное подчёркивание', es: 'Subrayado de Acento', fr: 'Soulignement Accentué' } }
+          - { value: bullet, label: { en: 'Left Bullet Bar', tr: 'Sol Yan Çubuk', de: 'Linker Akzentbalken', ru: 'Левая боковая полоса', es: 'Barra Lateral Izquierda', fr: 'Barre Latérale Gauche' } }
+          - { value: line, label: { en: 'Centered Horizontal Lines', tr: 'İki Yanı Çizgili (Ortalı)', de: 'Zentrierte horizontale Linien', ru: 'Горизонтальные линии по бокам', es: 'Líneas Horizontales Centradas', fr: 'Lignes Horizontales Centrées' } }
       title_text_stroke:
         type: select
         label:
-          en: "Text Stroke"
-          tr: "İçi Boş Kontur (Outline)"
-        default: "no"
+          en: 'Text Stroke'
+          tr: 'İçi Boş Kontur (Outline)'
+          de: 'Textkontur (Outline)'
+          ru: 'Контур текста (Outline)'
+          es: 'Trazo de Texto (Contorno)'
+          fr: 'Contour de Texte (Outline)'
+        default: 'no'
         col_span: 6
         options:
-          - value: "no"
-            label:
-              en: "Solid Text"
-              tr: "Dolu Metin"
-          - value: "yes"
-            label:
-              en: "Outline Text"
-              tr: "İçi Boş Konturlu Metin"
-      text_align:
-        type: select
-        label:
-          en: "Alignment"
-          tr: "Hizalama"
-        default: "left"
-        col_span: 6
-        options:
-          - value: "left"
-            label:
-              en: "Left"
-              tr: "Sola Yaslı"
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "right"
-            label:
-              en: "Right"
-              tr: "Sağa Yaslı"
+          - { value: 'no', label: { en: 'Solid Text', tr: 'Dolu Metin', de: 'Gefüllter Text', ru: 'Сплошной текст', es: 'Texto Sólido', fr: 'Texte Plein' } }
+          - { value: 'yes', label: { en: 'Outline Text', tr: 'İçi Boş Konturlu Metin', de: Konturtext, ru: 'Контурный текст', es: 'Texto con Contorno', fr: 'Texte avec Contour' } }

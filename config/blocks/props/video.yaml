@@ -1,142 +1,103 @@
 tabs:
-  appearance:
-    title: sulu_block_suite.tabs_appearance
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       aspect_ratio:
         type: select
         label: sulu_block_suite.field_aspect_ratio
         col_span: 6
         options:
-          - { value: '16/9', label: sulu_block_suite.opt_16_9 }
-          - { value: '4/3', label: sulu_block_suite.opt_4_3 }
-          - { value: '1/1', label: sulu_block_suite.opt_1_1 }
-          - { value: '9/16', label: sulu_block_suite.opt_9_16 }
-          - { value: '21/9', label: sulu_block_suite.opt_21_9 }
+          - { value: 16/9, label: sulu_block_suite.opt_16_9 }
+          - { value: 4/3, label: sulu_block_suite.opt_4_3 }
+          - { value: 1/1, label: sulu_block_suite.opt_1_1 }
+          - { value: 9/16, label: sulu_block_suite.opt_9_16 }
+          - { value: 21/9, label: sulu_block_suite.opt_21_9 }
       rounded:
         type: select
         label: sulu_block_suite.field_rounded
         col_span: 6
         options:
-          - { value: 'none', label: sulu_block_suite.opt_none }
-          - { value: 'sm', label: sulu_block_suite.opt_sm }
-          - { value: 'md', label: sulu_block_suite.opt_md }
-          - { value: 'lg', label: sulu_block_suite.opt_lg }
-          - { value: 'xl', label: sulu_block_suite.opt_xl }
-          - { value: 'full', label: sulu_block_suite.opt_full }
+          - { value: none, label: sulu_block_suite.opt_none }
+          - { value: sm, label: sulu_block_suite.opt_sm }
+          - { value: md, label: sulu_block_suite.opt_md }
+          - { value: lg, label: sulu_block_suite.opt_lg }
+          - { value: xl, label: sulu_block_suite.opt_xl }
+          - { value: full, label: sulu_block_suite.opt_full }
       box_shadow:
         type: select
         label:
-          en: "Box Shadow"
-          tr: "Gölge"
+          en: 'Box Shadow'
+          tr: Gölge
+          de: Box-Schatten
+          ru: 'Тень блока'
+          es: 'Sombra de Caja'
+          fr: 'Ombre Portée'
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "None"
-              tr: "Yok"
-          - value: "sm"
-            label:
-              en: "Small"
-              tr: "Küçük"
-          - value: "md"
-            label:
-              en: "Medium"
-              tr: "Orta"
-          - value: "lg"
-            label:
-              en: "Large"
-              tr: "Büyük"
-          - value: "xl"
-            label:
-              en: "Extra Large"
-              tr: "Çok Büyük"
-          - value: "2xl"
-            label:
-              en: "2X Large"
-              tr: "Geniş Derin Gölge"
-      text_align:
-        type: select
-        label: sulu_block_suite.field_text_align
-        col_span: 6
-        options:
-          - { value: 'left', label: sulu_block_suite.opt_left }
-          - { value: 'center', label: sulu_block_suite.opt_center }
-          - { value: 'right', label: sulu_block_suite.opt_right }
-
-  video_settings:
-    title:
-      en: "Playback"
-      tr: "Oynatma Seçenekleri"
-    fields:
+          - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: 2xl, label: { en: '2X Large', tr: 'Geniş Derin Gölge', de: '2X Groß (2xl)', ru: '2X Большой (2xl)', es: '2X Grande (2xl)', fr: '2X Grand (2xl)' } }
       autoplay:
         type: select
         label:
-          en: "Autoplay"
-          tr: "Otomatik Oynat"
+          en: Autoplay
+          tr: 'Otomatik Oynat'
+          de: 'Automatische Wiedergabe'
+          ru: Автовоспроизведение
+          es: 'Reproducción Automática'
+          fr: 'Lecture Automatique'
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "Disabled"
-              tr: "Kapalı"
-          - value: "true"
-            label:
-              en: "Immediate (On)"
-              tr: "Hemen Başlat"
-          - value: "inview"
-            label:
-              en: "When in Viewport"
-              tr: "Ekrana Girdiğinde"
-          - value: "hover"
-            label:
-              en: "On Hover"
-              tr: "Üzerine Gelindiğinde"
+          - { value: none, label: { en: Disabled, tr: Kapalı, de: Deaktiviert, ru: Отключено, es: Desactivado, fr: Désactivé } }
+          - { value: 'true', label: { en: 'Immediate (On)', tr: 'Hemen Başlat', de: 'Sofort (Ein)', ru: 'Сразу (Вкл)', es: 'Inmediato (Activado)', fr: 'Immédiat (Activé)' } }
+          - { value: inview, label: { en: 'When in Viewport', tr: 'Ekrana Girdiğinde', de: 'Im sichtbaren Bereich', ru: 'При появлении на экране', es: 'Al Entrar en Pantalla', fr: "À l'Apparition à l'Écran" } }
+          - { value: hover, label: { en: 'On Hover', tr: 'Üzerine Gelindiğinde', de: 'Bei Hover', ru: 'При наведении', es: 'Al Pasar el Cursor', fr: 'Au Survol' } }
       controls:
         type: select
         label:
-          en: "Controls"
-          tr: "Oynatıcı Kontrolleri"
+          en: Controls
+          tr: 'Oynatıcı Kontrolleri'
+          de: Steuerelemente
+          ru: 'Элементы управления'
+          es: Controles
+          fr: Contrôles
         col_span: 6
         options:
-          - value: "true"
-            label:
-              en: "Show Controls"
-              tr: "Kontrolleri Göster"
-          - value: "false"
-            label:
-              en: "Hide Controls"
-              tr: "Kontrolleri Gizle"
+          - { value: 'true', label: { en: 'Show Controls', tr: 'Kontrolleri Göster', de: 'Steuerelemente anzeigen', ru: 'Показать управление', es: 'Mostrar Controles', fr: 'Afficher les Contrôles' } }
+          - { value: 'false', label: { en: 'Hide Controls', tr: 'Kontrolleri Gizle', de: 'Steuerelemente ausblenden', ru: 'Скрыть управление', es: 'Ocultar Controles', fr: 'Masquer les Contrôles' } }
       loop:
         type: select
         label:
-          en: "Loop"
-          tr: "Döngü (Sürekli Tekrar)"
+          en: Loop
+          tr: 'Döngü (Sürekli Tekrar)'
+          de: 'Schleife (Wiederholen)'
+          ru: 'Зациклить (Повтор)'
+          es: 'Bucle (Repetir)'
+          fr: 'Boucle (Répéter)'
         col_span: 6
         options:
-          - value: "false"
-            label:
-              en: "No"
-              tr: "Hayır"
-          - value: "true"
-            label:
-              en: "Yes (Loop)"
-              tr: "Evet"
+          - { value: 'false', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
+          - { value: 'true', label: { en: 'Yes (Loop)', tr: Evet, de: 'Ja (Schleife)', ru: 'Да (Повторять)', es: 'Sí (En Bucle)', fr: 'Oui (En Boucle)' } }
       muted:
         type: select
         label:
-          en: "Audio / Mute"
-          tr: "Ses Durumu"
+          en: 'Audio / Mute'
+          tr: 'Ses Durumu'
+          de: 'Audio / Stumm'
+          ru: 'Звук / Без звука'
+          es: 'Audio / Silencio'
+          fr: 'Audio / Muet'
         col_span: 6
         options:
-          - value: "default"
-            label:
-              en: "Default (Muted if Autoplay)"
-              tr: "Varsayılan (Otomatikte Sessiz)"
-          - value: "true"
-            label:
-              en: "Muted"
-              tr: "Sessiz"
-          - value: "false"
-            label:
-              en: "Unmuted"
-              tr: "Sesli"
+          - { value: default, label: { en: 'Default (Muted if Autoplay)', tr: 'Varsayılan (Otomatikte Sessiz)', de: 'Standard (Stumm bei Autoplay)', ru: 'По умолчанию (Без звука при автозапуске)', es: 'Predeterminado (Silenciado en Autoplay)', fr: 'Par Défaut (Muet si Lecture Auto)' } }
+          - { value: 'true', label: { en: Muted, tr: Sessiz, de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
+          - { value: 'false', label: { en: Unmuted, tr: Sesli, de: 'Ton aktiv', ru: 'Со звуком', es: 'Con Sonido', fr: 'Avec Son' } }

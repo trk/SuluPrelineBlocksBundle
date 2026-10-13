@@ -1,0 +1,21 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      card:
+        type: checkbox
+        label:
+          en: 'Wrap in Card Container'
+          tr: 'Kart Konteyneri İçine Al'
+          de: 'In Karten-Container einschließen'
+          ru: 'Обернуть в карточку'
+          es: 'Envolver en Contenedor de Tarjeta'
+          fr: 'Envelopper dans une Carte'
+        default: false
+        col_span: 6

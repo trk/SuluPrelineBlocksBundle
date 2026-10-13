@@ -1,379 +1,258 @@
 tabs:
-  layout:
+  settings:
     title:
-      en: "Gallery Layout"
-      tr: "Galeri Düzeni"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       columns_default:
         type: select
         label:
-          en: "Columns (Mobile)"
-          tr: "Mobil (< 768px)"
-        default: "1"
+          en: 'Columns (Mobile)'
+          tr: 'Mobil (< 768px)'
+          de: 'Spalten (Mobil)'
+          ru: 'Колонки (Мобильные)'
+          es: 'Columnas (Móvil)'
+          fr: 'Colonnes (Mobile)'
+        default: '1'
         col_span: 4
         options:
-          - value: "1"
-            label: "1"
-          - value: "2"
-            label: "2"
-          - value: "3"
-            label: "3"
-          - value: "4"
-            label: "4"
-          - value: "5"
-            label: "5"
-          - value: "6"
-            label: "6"
+          - { value: '1', label: { en: '1', tr: '1', de: '1', ru: '1', es: '1', fr: '1' } }
+          - { value: '2', label: { en: '2', tr: '2', de: '2', ru: '2', es: '2', fr: '2' } }
+          - { value: '3', label: { en: '3', tr: '3', de: '3', ru: '3', es: '3', fr: '3' } }
+          - { value: '4', label: { en: '4', tr: '4', de: '4', ru: '4', es: '4', fr: '4' } }
+          - { value: '5', label: { en: '5', tr: '5', de: '5', ru: '5', es: '5', fr: '5' } }
+          - { value: '6', label: { en: '6', tr: '6', de: '6', ru: '6', es: '6', fr: '6' } }
       columns_md:
         type: select
         label:
-          en: "Columns (Tablet)"
-          tr: "Tablet (>= 768px)"
-        default: "3"
+          en: 'Columns (Tablet)'
+          tr: 'Tablet (>= 768px)'
+          de: 'Spalten (Tablet)'
+          ru: 'Колонки (Планшет)'
+          es: 'Columnas (Tablet)'
+          fr: 'Colonnes (Tablette)'
+        default: '3'
         col_span: 4
         options:
-          - value: ""
-            label:
-              en: "Inherit (Devral)"
-              tr: "Devral"
-          - value: "1"
-            label: "1"
-          - value: "2"
-            label: "2"
-          - value: "3"
-            label: "3"
-          - value: "4"
-            label: "4"
-          - value: "5"
-            label: "5"
-          - value: "6"
-            label: "6"
+          - { value: '', label: { en: 'Inherit (Devral)', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
+          - { value: '1', label: { en: '1', tr: '1', de: '1', ru: '1', es: '1', fr: '1' } }
+          - { value: '2', label: { en: '2', tr: '2', de: '2', ru: '2', es: '2', fr: '2' } }
+          - { value: '3', label: { en: '3', tr: '3', de: '3', ru: '3', es: '3', fr: '3' } }
+          - { value: '4', label: { en: '4', tr: '4', de: '4', ru: '4', es: '4', fr: '4' } }
+          - { value: '5', label: { en: '5', tr: '5', de: '5', ru: '5', es: '5', fr: '5' } }
+          - { value: '6', label: { en: '6', tr: '6', de: '6', ru: '6', es: '6', fr: '6' } }
       columns_lg:
         type: select
         label:
-          en: "Columns (Desktop)"
-          tr: "Masaüstü (>= 1024px)"
-        default: ""
+          en: 'Columns (Desktop)'
+          tr: 'Masaüstü (>= 1024px)'
+          de: 'Spalten (Desktop)'
+          ru: 'Колонки (ПК)'
+          es: 'Columnas (Escritorio)'
+          fr: 'Colonnes (Bureau)'
+        default: ''
         col_span: 4
         options:
-          - value: ""
-            label:
-              en: "Inherit (Devral)"
-              tr: "Devral"
-          - value: "1"
-            label: "1"
-          - value: "2"
-            label: "2"
-          - value: "3"
-            label: "3"
-          - value: "4"
-            label: "4"
-          - value: "5"
-            label: "5"
-          - value: "6"
-            label: "6"
+          - { value: '', label: { en: 'Inherit (Devral)', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
+          - { value: '1', label: { en: '1', tr: '1', de: '1', ru: '1', es: '1', fr: '1' } }
+          - { value: '2', label: { en: '2', tr: '2', de: '2', ru: '2', es: '2', fr: '2' } }
+          - { value: '3', label: { en: '3', tr: '3', de: '3', ru: '3', es: '3', fr: '3' } }
+          - { value: '4', label: { en: '4', tr: '4', de: '4', ru: '4', es: '4', fr: '4' } }
+          - { value: '5', label: { en: '5', tr: '5', de: '5', ru: '5', es: '5', fr: '5' } }
+          - { value: '6', label: { en: '6', tr: '6', de: '6', ru: '6', es: '6', fr: '6' } }
       gap:
         type: select
         label:
-          en: "Gallery Gap"
-          tr: "Galeri Boşluğu"
-        default: "md"
+          en: 'Gallery Gap'
+          tr: 'Galeri Boşluğu'
+          de: Galerie-Abstand
+          ru: 'Отступ галереи'
+          es: 'Espaciado de Galería'
+          fr: 'Espacement de la Galerie'
+        default: md
         col_span: 6
         options:
-          - value: "collapse"
-            label:
-              en: "None (Collapse)"
-              tr: "Yok (Bitişik)"
-          - value: "sm"
-            label:
-              en: "Small (1rem / 16px)"
-              tr: "Küçük (1rem / 16px)"
-          - value: "md"
-            label:
-              en: "Medium (1.5rem / 24px)"
-              tr: "Orta (1.5rem / 24px)"
-          - value: "lg"
-            label:
-              en: "Large (2rem / 32px)"
-              tr: "Büyük (2rem / 32px)"
-          - value: "xl"
-            label:
-              en: "Extra Large (3rem / 48px)"
-              tr: "Çok Büyük (3rem / 48px)"
+          - { value: collapse, label: { en: 'None (Collapse)', tr: 'Yok (Bitişik)', de: 'Keine (Ohne Abstand)', ru: 'Нет (Без отступов)', es: 'Ninguno (Sin Espacio)', fr: 'Aucun (Sans Espace)' } }
+          - { value: sm, label: { en: 'Small (1rem / 16px)', tr: 'Küçük (1rem / 16px)', de: 'Klein (1rem / 16px)', ru: 'Малый (1rem / 16px)', es: 'Pequeño (1rem / 16px)', fr: 'Petit (1rem / 16px)' } }
+          - { value: md, label: { en: 'Medium (1.5rem / 24px)', tr: 'Orta (1.5rem / 24px)', de: 'Mittel (1.5rem / 24px)', ru: 'Средний (1.5rem / 24px)', es: 'Mediano (1.5rem / 24px)', fr: 'Moyen (1.5rem / 24px)' } }
+          - { value: lg, label: { en: 'Large (2rem / 32px)', tr: 'Büyük (2rem / 32px)', de: 'Groß (2rem / 32px)', ru: 'Большой (2rem / 32px)', es: 'Grande (2rem / 32px)', fr: 'Grand (2rem / 32px)' } }
+          - { value: xl, label: { en: 'Extra Large (3rem / 48px)', tr: 'Çok Büyük (3rem / 48px)', de: 'Extra Groß (3rem / 48px)', ru: 'Очень большой (3rem / 48px)', es: 'Extra Grande (3rem / 48px)', fr: 'Très Grand (3rem / 48px)' } }
       masonry:
         type: select
         label:
-          en: "Masonry Layout"
-          tr: "Duvar (Masonry) Düzeni"
-        default: "none"
+          en: 'Masonry Layout'
+          tr: 'Duvar (Masonry) Düzeni'
+          de: Masonry-Layout
+          ru: 'Каменная кладка (Masonry)'
+          es: 'Diseño Mosaico (Masonry)'
+          fr: 'Disposition Maçonnerie (Masonry)'
+        default: none
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "Disabled (Standard Grid)"
-              tr: "Kapalı (Standart Izgara)"
-          - value: "columns"
-            label:
-              en: "Columns Masonry"
-              tr: "Sütun Tabanlı Duvar"
-  overlay_defaults:
-    title:
-      en: "Overlay Defaults"
-      tr: "Varsayılan Katman Ayarları"
-    fields:
+          - { value: none, label: { en: 'Disabled (Standard Grid)', tr: 'Kapalı (Standart Izgara)', de: 'Deaktiviert (Standard-Raster)', ru: 'Отключено (Стандартная сетка)', es: 'Desactivado (Cuadrícula Estándar)', fr: 'Désactivé (Grille Standard)' } }
+          - { value: columns, label: { en: 'Columns Masonry', tr: 'Sütun Tabanlı Duvar', de: Spalten-Masonry, ru: 'Колоночная кладка', es: 'Mosaico por Columnas', fr: 'Maçonnerie en Colonnes' } }
       overlay_position:
         type: select
         label:
-          en: "Overlay Content Position"
-          tr: "Katman Konumu"
-        default: "bottom"
+          en: 'Overlay Content Position'
+          tr: 'Katman Konumu'
+          de: Overlay-Inhaltsposition
+          ru: 'Позиция наложения'
+          es: 'Posición del Contenido Superpuesto'
+          fr: 'Position du Contenu Superposé'
+        default: bottom
         col_span: 6
         options:
-          - value: "bottom"
-            label:
-              en: "Bottom"
-              tr: "Alt"
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "top"
-            label:
-              en: "Top"
-              tr: "Üst"
-          - value: "cover"
-            label:
-              en: "Full Cover"
-              tr: "Tüm Yüzey (Cover)"
+          - { value: bottom, label: { en: Bottom, tr: Alt, de: Unten, ru: Снизу, es: Abajo, fr: Bas } }
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: top, label: { en: Top, tr: Üst, de: Oben, ru: Сверху, es: Arriba, fr: Haut } }
+          - { value: cover, label: { en: 'Full Cover', tr: 'Tüm Yüzey (Cover)', de: 'Vollflächig (Cover)', ru: 'Полное покрытие (Cover)', es: 'Cobertura Completa (Cover)', fr: 'Couverture Complète (Cover)' } }
       overlay_style:
         type: select
         label:
-          en: "Overlay Style"
-          tr: "Katman Stili"
-        default: "gradient"
+          en: 'Overlay Style'
+          tr: 'Katman Stili'
+          de: Overlay-Stil
+          ru: 'Стиль наложения'
+          es: 'Estilo de Superposición'
+          fr: 'Style de Superposition'
+        default: gradient
         col_span: 6
         options:
-          - value: "gradient"
-            label:
-              en: "Dark Gradient"
-              tr: "Koyu Degrade"
-          - value: "dark"
-            label:
-              en: "Dark Backdrop"
-              tr: "Koyu Zemin"
-          - value: "light"
-            label:
-              en: "Light Backdrop"
-              tr: "Açık Zemin"
-          - value: "primary"
-            label:
-              en: "Primary Tint"
-              tr: "Birincil Renk (Primary)"
+          - { value: gradient, label: { en: 'Dark Gradient', tr: 'Koyu Degrade', de: 'Dunkler Verlauf', ru: 'Тёмный градиент', es: 'Degradado Oscuro', fr: 'Dégradé Sombre' } }
+          - { value: dark, label: { en: 'Dark Backdrop', tr: 'Koyu Zemin', de: 'Dunkler Hintergrund', ru: 'Тёмный фон', es: 'Fondo Oscuro', fr: 'Arrière-plan Sombre' } }
+          - { value: light, label: { en: 'Light Backdrop', tr: 'Açık Zemin', de: 'Heller Hintergrund', ru: 'Светлый фон', es: 'Fondo Claro', fr: 'Arrière-plan Clair' } }
+          - { value: primary, label: { en: 'Primary Tint', tr: 'Birincil Renk (Primary)', de: 'Primäre Tönung', ru: 'Основной оттенок', es: 'Tinte Primario', fr: 'Teinte Primaire' } }
       overlay_transition:
         type: select
         label:
-          en: "Overlay Transition"
-          tr: "Katman Geçiş Animasyonu"
-        default: "fade"
+          en: 'Overlay Transition'
+          tr: 'Katman Geçiş Animasyonu'
+          de: Overlay-Übergang
+          ru: 'Переход наложения'
+          es: 'Transición de Superposición'
+          fr: 'Transition de Superposition'
+        default: fade
         col_span: 6
         options:
-          - value: "fade"
-            label:
-              en: "Fade"
-              tr: "Belirme (Fade)"
-          - value: "slide_top"
-            label:
-              en: "Slide from Top"
-              tr: "Yukarıdan Kayma"
-          - value: "slide_bottom"
-            label:
-              en: "Slide from Bottom"
-              tr: "Aşağıdan Kayma"
-          - value: "zoom_in"
-            label:
-              en: "Zoom In"
-              tr: "Yakınlaşma (Zoom In)"
+          - { value: fade, label: { en: Fade, tr: 'Belirme (Fade)', de: 'Einblenden (Fade)', ru: 'Плавное появление (Fade)', es: 'Desvanecer (Fade)', fr: 'Fondu (Fade)' } }
+          - { value: slide_top, label: { en: 'Slide from Top', tr: 'Yukarıdan Kayma', de: 'Von oben gleiten', ru: 'Скольжение сверху', es: 'Deslizar desde Arriba', fr: 'Glisser depuis le Haut' } }
+          - { value: slide_bottom, label: { en: 'Slide from Bottom', tr: 'Aşağıdan Kayma', de: 'Von unten gleiten', ru: 'Скольжение снизу', es: 'Deslizar desde Abajo', fr: 'Glisser depuis le Bas' } }
+          - { value: zoom_in, label: { en: 'Zoom In', tr: 'Yakınlaşma (Zoom In)', de: 'Heranzoomen (Zoom In)', ru: 'Увеличение (Zoom In)', es: 'Acercar (Zoom In)', fr: 'Zoom Avant' } }
       image_transition:
         type: select
         label:
-          en: "Image Hover Effect"
-          tr: "Görsel Üzerine Gelme Etkisi"
-        default: "zoom"
+          en: 'Image Hover Effect'
+          tr: 'Görsel Üzerine Gelme Etkisi'
+          de: Bild-Hover-Effekt
+          ru: 'Эффект при наведении на фото'
+          es: 'Efecto Hover de Imagen'
+          fr: "Effet de Survol d'Image"
+        default: zoom
         col_span: 6
         options:
-          - value: "zoom"
-            label:
-              en: "Zoom In (Scale)"
-              tr: "Yakınlaş (Scale)"
-          - value: "none"
-            label:
-              en: "None"
-              tr: "Yok"
+          - { value: zoom, label: { en: 'Zoom In (Scale)', tr: 'Yakınlaş (Scale)', de: 'Vergrößern (Scale)', ru: 'Масштабирование (Scale)', es: 'Escalar (Zoom In)', fr: 'Agrandir (Scale)' } }
+          - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
       media_aspect_ratio:
         type: select
         label:
-          en: "Media Aspect Ratio"
-          tr: "Görsel En-Boy Oranı"
-        default: "4/3"
+          en: 'Media Aspect Ratio'
+          tr: 'Görsel En-Boy Oranı'
+          de: Medien-Seitenverhältnis
+          ru: 'Соотношение сторон медиа'
+          es: 'Relación de Aspecto Multimedia'
+          fr: 'Format du Média'
+        default: 4/3
         col_span: 6
         options:
-          - value: "1/1"
-            label: "Square (1:1)"
-          - value: "4/3"
-            label: "Standard (4:3)"
-          - value: "16/9"
-            label: "Widescreen (16:9)"
-          - value: "21/9"
-            label: "Ultrawide (21:9)"
-          - value: "auto"
-            label: "Natural (Auto)"
+          - { value: 1/1, label: { en: 'Square (1:1)', tr: 'Kare (1:1)', de: 'Quadrat (1:1)', ru: 'Квадрат (1:1)', es: 'Cuadrado (1:1)', fr: 'Carré (1:1)' } }
+          - { value: 4/3, label: { en: 'Standard (4:3)', tr: 'Standart (4:3)', de: 'Standard (4:3)', ru: 'Стандартный (4:3)', es: 'Estándar (4:3)', fr: 'Standard (4:3)' } }
+          - { value: 16/9, label: { en: 'Widescreen (16:9)', tr: 'Geniş Ekran (16:9)', de: 'Breitbild (16:9)', ru: 'Широкоэкранный (16:9)', es: 'Panorámico (16:9)', fr: 'Écran Large (16:9)' } }
+          - { value: 21/9, label: { en: 'Ultrawide (21:9)', tr: 'Ultra Geniş (21:9)', de: 'Ultrabreit (21:9)', ru: 'Ультраширокий (21:9)', es: 'Ultra Panorámico (21:9)', fr: 'Ultra Large (21:9)' } }
+          - { value: auto, label: { en: 'Natural (Auto)', tr: 'Doğal (Otomatik)', de: 'Natürlich (Auto)', ru: 'Естественный (Авто)', es: 'Natural (Auto)', fr: 'Naturel (Auto)' } }
       rounded:
         type: select
         label:
-          en: "Corner Rounding"
-          tr: "Köşe Yuvarlama"
-        default: "xl"
+          en: 'Corner Rounding'
+          tr: 'Köşe Yuvarlama'
+          de: Eckenabrundung
+          ru: 'Скругление углов'
+          es: 'Redondeo de Esquinas'
+          fr: 'Arrondi des Coins'
+        default: xl
         col_span: 6
         options:
-          - value: "none"
-            label: "None"
-          - value: "sm"
-            label: "Small"
-          - value: "md"
-            label: "Medium"
-          - value: "lg"
-            label: "Large"
-          - value: "xl"
-            label: "Extra Large (Rounded-xl)"
-          - value: "2xl"
-            label: "2XL"
-          - value: "3xl"
-            label: "3XL"
-  lightbox:
-    title:
-      en: "Lightbox & Zoom"
-      tr: "Büyük Görsel (Lightbox)"
-    fields:
+          - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
+          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: 'Orta (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large (Rounded-xl)', tr: 'Çok Büyük (Rounded-xl)', de: 'Extra Groß (Rounded-xl)', ru: 'Очень большой (Rounded-xl)', es: 'Extra Grande (Rounded-xl)', fr: 'Très Grand (Rounded-xl)' } }
+          - { value: 2xl, label: { en: 2XL, tr: 2XL, de: 2XL, ru: 2XL, es: 2XL, fr: 2XL } }
+          - { value: 3xl, label: { en: 3XL, tr: 3XL, de: 3XL, ru: 3XL, es: 3XL, fr: 3XL } }
       lightbox:
         type: checkbox
         label:
-          en: "Enable Modal Lightbox"
-          tr: "Büyük Görsel Penceresini Etkinleştir"
+          en: 'Enable Modal Lightbox'
+          tr: 'Büyük Görsel Penceresini Etkinleştir'
+          de: 'Modal-Lightbox aktivieren'
+          ru: 'Включить лайтбокс'
+          es: 'Activar Lightbox Modal'
+          fr: 'Activer la Lightbox Modale'
         default: true
         col_span: 12
-  filter:
-    title:
-      en: "Filter Navigation"
-      tr: "Kategori Filtresi"
-    fields:
       filter:
         type: checkbox
         label:
-          en: "Enable Filter"
-          tr: "Filtreyi Etkinleştir"
+          en: 'Enable Filter'
+          tr: 'Filtreyi Etkinleştir'
+          de: 'Filter aktivieren'
+          ru: 'Включить фильтр'
+          es: 'Activar Filtro'
+          fr: 'Activer le Filtre'
         default: false
         col_span: 6
       filter_style:
         type: select
         label:
-          en: "Filter Style"
-          tr: "Filtre Stili"
-        default: "pills"
+          en: 'Filter Style'
+          tr: 'Filtre Stili'
+          de: Filter-Stil
+          ru: 'Стиль фильтра'
+          es: 'Estilo de Filtro'
+          fr: 'Style de Filtre'
+        default: pills
         col_span: 6
         options:
-          - value: "pills"
-            label:
-              en: "Pills (Preline Soft)"
-              tr: "Kapsül Butonlar"
-          - value: "tabs"
-            label:
-              en: "Underline Tabs"
-              tr: "Alt Çizgili Sekmeler"
-          - value: "buttons"
-            label:
-              en: "Outline Buttons"
-              tr: "Çizgili Butonlar"
+          - { value: pills, label: { en: 'Pills (Preline Soft)', tr: 'Kapsül Butonlar', de: 'Pillen (Sanft)', ru: 'Капсулы (Мягкие)', es: 'Píldoras (Suaves)', fr: 'Pilules (Douces)' } }
+          - { value: tabs, label: { en: 'Underline Tabs', tr: 'Alt Çizgili Sekmeler', de: 'Unterstrichene Tabs', ru: 'Подчёркнутые вкладки', es: 'Pestañas Subrayadas', fr: 'Onglets Soulignés' } }
+          - { value: buttons, label: { en: 'Outline Buttons', tr: 'Çizgili Butonlar', de: 'Umrandete Buttons', ru: 'Контурные кнопки', es: 'Botones con Contorno', fr: 'Boutons avec Contour' } }
       filter_align:
         type: select
         label:
-          en: "Filter Alignment"
-          tr: "Filtre Hizalaması"
-        default: "center"
+          en: 'Filter Alignment'
+          tr: 'Filtre Hizalaması'
+          de: Filter-Ausrichtung
+          ru: 'Выравнивание фильтра'
+          es: 'Alineación del Filtro'
+          fr: 'Alignement du Filtre'
+        default: center
         col_span: 6
         options:
-          - value: "left"
-            label:
-              en: "Left"
-              tr: "Sola"
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "right"
-            label:
-              en: "Right"
-              tr: "Sağa"
+          - { value: left, label: { en: Left, tr: Sola, de: Links, ru: Слева, es: Izquierda, fr: Gauche } }
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: right, label: { en: Right, tr: Sağa, de: Rechts, ru: Справа, es: Derecha, fr: Droite } }
       filter_all_label:
         type: text_line
         label:
-          en: "All Items Button Label"
-          tr: "Tümü Butonu Etiketi"
-        default: "All"
-        col_span: 6
-  spacing:
-    title:
-      en: "Spacing & Advanced"
-      tr: "Boşluklar ve Gelişmiş"
-    fields:
-      margin_top:
-        type: select
-        label:
-          en: "Margin Top"
-          tr: "Üst Boşluk"
-        default: "default"
-        col_span: 6
-        options:
-          - value: "none"
-            label: "None"
-          - value: "xs"
-            label: "XS"
-          - value: "sm"
-            label: "SM"
-          - value: "default"
-            label: "Default"
-          - value: "lg"
-            label: "LG"
-          - value: "xl"
-            label: "XL"
-      margin_bottom:
-        type: select
-        label:
-          en: "Margin Bottom"
-          tr: "Alt Boşluk"
-        default: "default"
-        col_span: 6
-        options:
-          - value: "none"
-            label: "None"
-          - value: "xs"
-            label: "XS"
-          - value: "sm"
-            label: "SM"
-          - value: "default"
-            label: "Default"
-          - value: "lg"
-            label: "LG"
-          - value: "xl"
-            label: "XL"
-      id:
-        type: text_line
-        label:
-          en: "HTML ID Attribute"
-          tr: "HTML ID Özelliği"
-        col_span: 6
-      custom_class:
-        type: text_line
-        label:
-          en: "Custom CSS Classes"
-          tr: "Özel CSS Sınıfları"
+          en: 'All Items Button Label'
+          tr: 'Tümü Butonu Etiketi'
+          de: 'Beschriftung für „Alle Elemente“'
+          ru: 'Текст кнопки «Все элементы»'
+          es: 'Etiqueta del Botón Todos'
+          fr: 'Libellé du Bouton Tout'
+        default: All
         col_span: 6

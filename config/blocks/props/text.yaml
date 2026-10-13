@@ -1,170 +1,105 @@
 tabs:
-  appearance:
+  settings:
     title:
-      en: "Typography & Layout"
-      tr: "Tipografi & Yerleşim"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       size:
         type: select
         label:
-          en: "Font Size"
-          tr: "Yazı Boyutu"
-        default: "md"
+          en: 'Font Size'
+          tr: 'Yazı Boyutu'
+          de: Schriftgröße
+          ru: 'Размер шрифта'
+          es: 'Tamaño de Fuente'
+          fr: 'Taille de Police'
+        default: md
         col_span: 6
         options:
-          - value: "sm"
-            label:
-              en: "Small"
-              tr: "Küçük (sm)"
-          - value: "md"
-            label:
-              en: "Medium"
-              tr: "Standart (md)"
-          - value: "lg"
-            label:
-              en: "Large"
-              tr: "Büyük (lg)"
-          - value: "xl"
-            label:
-              en: "Extra Large"
-              tr: "Çok Büyük (xl)"
+          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
       text_style:
         type: select
         label:
-          en: "Text Style"
-          tr: "Metin Stili"
-        default: "none"
+          en: 'Text Style'
+          tr: 'Metin Stili'
+          de: Textstil
+          ru: 'Стиль текста'
+          es: 'Estilo de Texto'
+          fr: 'Style de Texte'
+        default: none
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "Default"
-              tr: "Varsayılan"
-          - value: "lead"
-            label:
-              en: "Lead Paragraph"
-              tr: "Giriş Paragrafı (Lead)"
-          - value: "meta"
-            label:
-              en: "Meta / Caption"
-              tr: "Meta / Açıklama"
-          - value: "large"
-            label:
-              en: "Large Reading Text"
-              tr: "Geniş Okuma Metni"
-          - value: "small"
-            label:
-              en: "Small Note"
-              tr: "Dipnot / Küçük Metin"
+          - { value: none, label: { en: Default, tr: Varsayılan, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: lead, label: { en: 'Lead Paragraph', tr: 'Giriş Paragrafı (Lead)', de: 'Einleitungsabsatz (Lead)', ru: 'Вводный абзац (Lead)', es: 'Párrafo Destacado (Lead)', fr: 'Paragraphe d’Introduction (Lead)' } }
+          - { value: meta, label: { en: 'Meta / Caption', tr: 'Meta / Açıklama', de: 'Meta / Bildunterschrift', ru: 'Мета / Подпись', es: 'Meta / Leyenda', fr: 'Méta / Légende' } }
+          - { value: large, label: { en: 'Large Reading Text', tr: 'Geniş Okuma Metni', de: 'Großer Lesetext', ru: 'Крупный текст для чтения', es: 'Texto de Lectura Grande', fr: 'Grand Texte de Lecture' } }
+          - { value: small, label: { en: 'Small Note', tr: 'Dipnot / Küçük Metin', de: 'Kleine Notiz', ru: 'Мелкая заметка', es: 'Nota Pequeña', fr: 'Petite Note' } }
       dropcap:
         type: select
         label:
-          en: "Drop Cap"
-          tr: "Büyük Baş Harf (Drop Cap)"
-        default: "no"
+          en: 'Drop Cap'
+          tr: 'Büyük Baş Harf (Drop Cap)'
+          de: 'Initiale (Drop Cap)'
+          ru: 'Буквица (Drop Cap)'
+          es: 'Letra Capital (Drop Cap)'
+          fr: 'Lettrine (Drop Cap)'
+        default: 'no'
         col_span: 6
         options:
-          - value: "no"
-            label:
-              en: "Disabled"
-              tr: "Kapalı"
-          - value: "yes"
-            label:
-              en: "Enabled"
-              tr: "Açık"
+          - { value: 'no', label: { en: Disabled, tr: Kapalı, de: Deaktiviert, ru: Отключено, es: Desactivado, fr: Désactivé } }
+          - { value: 'yes', label: { en: Enabled, tr: Açık, de: Aktiviert, ru: Включено, es: Activado, fr: Activé } }
       column:
         type: select
         label:
-          en: "Columns"
-          tr: "Metin Sütunları"
-        default: "none"
+          en: Columns
+          tr: 'Metin Sütunları'
+          de: Spalten
+          ru: Колонки
+          es: Columnas
+          fr: Colonnes
+        default: none
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "Single Column"
-              tr: "Tek Sütun"
-          - value: "1-2"
-            label:
-              en: "2 Columns"
-              tr: "2 Sütun (1/2)"
-          - value: "1-3"
-            label:
-              en: "3 Columns"
-              tr: "3 Sütun (1/3)"
-          - value: "1-4"
-            label:
-              en: "4 Columns"
-              tr: "4 Sütun (1/4)"
+          - { value: none, label: { en: 'Single Column', tr: 'Tek Sütun', de: 'Einzelne Spalte', ru: 'Одна колонка', es: 'Columna Única', fr: 'Colonne Unique' } }
+          - { value: 1-2, label: { en: '2 Columns', tr: '2 Sütun (1/2)', de: '2 Spalten', ru: '2 колонки', es: '2 Columnas', fr: '2 Colonnes' } }
+          - { value: 1-3, label: { en: '3 Columns', tr: '3 Sütun (1/3)', de: '3 Spalten', ru: '3 колонки', es: '3 Columnas', fr: '3 Colonnes' } }
+          - { value: 1-4, label: { en: '4 Columns', tr: '4 Sütun (1/4)', de: '4 Spalten', ru: '4 колонки', es: '4 Columnas', fr: '4 Colonnes' } }
       column_divider:
         type: select
         label:
-          en: "Column Divider"
-          tr: "Sütun Ayracı"
-        default: "no"
+          en: 'Column Divider'
+          tr: 'Sütun Ayracı'
+          de: Spaltentrennlinie
+          ru: 'Разделитель колонок'
+          es: 'Divisor de Columnas'
+          fr: 'Séparateur de Colonnes'
+        default: 'no'
         col_span: 6
         options:
-          - value: "no"
-            label:
-              en: "No"
-              tr: "Hayır"
-          - value: "yes"
-            label:
-              en: "Yes (Line between columns)"
-              tr: "Evet (Sütunlar Arası Çizgi)"
+          - { value: 'no', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
+          - { value: 'yes', label: { en: 'Yes (Line between columns)', tr: 'Evet (Sütunlar Arası Çizgi)', de: 'Ja (Linie zwischen Spalten)', ru: 'Да (Линия между колонками)', es: 'Sí (Línea entre columnas)', fr: 'Oui (Ligne entre les colonnes)' } }
       color:
         type: select
         label:
-          en: "Text Color"
-          tr: "Metin Rengi"
-        default: "default"
+          en: 'Text Color'
+          tr: 'Metin Rengi'
+          de: Textfarbe
+          ru: 'Цвет текста'
+          es: 'Color de Texto'
+          fr: 'Couleur du Texte'
+        default: default
         col_span: 6
         options:
-          - value: "default"
-            label:
-              en: "Default"
-              tr: "Varsayılan"
-          - value: "primary"
-            label:
-              en: "Primary Blue"
-              tr: "Birincil Mavi"
-          - value: "secondary"
-            label:
-              en: "Secondary"
-              tr: "İkincil"
-          - value: "dark"
-            label:
-              en: "Dark"
-              tr: "Koyu"
-          - value: "white"
-            label:
-              en: "White"
-              tr: "Beyaz"
-          - value: "muted"
-            label:
-              en: "Muted"
-              tr: "Soluk Gri"
-      text_align:
-        type: select
-        label:
-          en: "Alignment"
-          tr: "Hizalama"
-        default: "left"
-        col_span: 6
-        options:
-          - value: "left"
-            label:
-              en: "Left"
-              tr: "Sola Yaslı"
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "right"
-            label:
-              en: "Right"
-              tr: "Sağa Yaslı"
-          - value: "justify"
-            label:
-              en: "Justify"
-              tr: "İki Yana Yaslı"
+          - { value: default, label: { en: Default, tr: Varsayılan, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: primary, label: { en: 'Primary Blue', tr: 'Birincil Mavi', de: Primärblau, ru: 'Основной синий', es: 'Azul Primario', fr: 'Bleu Primaire' } }
+          - { value: secondary, label: { en: Secondary, tr: İkincil, de: Sekundär, ru: Вторичный, es: Secundario, fr: Secondaire } }
+          - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
+          - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
+          - { value: muted, label: { en: Muted, tr: 'Soluk Gri', de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }

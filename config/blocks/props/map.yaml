@@ -1,0 +1,38 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      aspect_ratio:
+        type: select
+        label:
+          en: 'Map Aspect Ratio'
+          tr: 'Harita En/Boy Oranı'
+          de: Karten-Seitenverhältnis
+          ru: 'Соотношение сторон карты'
+          es: 'Relación de Aspecto del Mapa'
+          fr: 'Format de la Carte'
+        default: 16/9
+        col_span: 6
+        options:
+          - { value: 16/9, label: { en: '16:9 (Widescreen)', tr: '16:9 (Geniş Ekran)', de: '16:9 (Breitbild)', ru: '16:9 (Широкоэкранный)', es: '16:9 (Panorámico)', fr: '16:9 (Écran Large)' } }
+          - { value: 21/9, label: { en: '21:9 (Ultrawide)', tr: '21:9 (Ultra Geniş)', de: '21:9 (Ultrabreit)', ru: '21:9 (Ультраширокий)', es: '21:9 (Ultra Panorámico)', fr: '21:9 (Ultra Large)' } }
+          - { value: 4/3, label: { en: '4:3 (Standard)', tr: '4:3 (Standart)', de: '4:3 (Standard)', ru: '4:3 (Стандартный)', es: '4:3 (Estándar)', fr: '4:3 (Standard)' } }
+          - { value: 1/1, label: { en: '1:1 (Square)', tr: '1:1 (Kare)', de: '1:1 (Quadrat)', ru: '1:1 (Квадрат)', es: '1:1 (Cuadrado)', fr: '1:1 (Carré)' } }
+          - { value: auto, label: { en: 'Fixed Height (500px)', tr: 'Sabit Yükseklik (500px)', de: 'Feste Höhe (500px)', ru: 'Фиксированная высота (500px)', es: 'Altura Fija (500px)', fr: 'Hauteur Fixe (500px)' } }
+      zoom:
+        type: number
+        label:
+          en: 'Default Zoom Level (1-20)'
+          tr: 'Yakınlaştırma Düzeyi (1-20)'
+          de: 'Standard-Zoomstufe (1-20)'
+          ru: 'Масштаб по умолчанию (1-20)'
+          es: 'Nivel de Zoom Predeterminado (1-20)'
+          fr: 'Niveau de Zoom par Défaut (1-20)'
+        default: 14
+        col_span: 6

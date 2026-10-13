@@ -1,0 +1,56 @@
+tabs:
+  settings:
+    title:
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
+    fields:
+      language:
+        type: select
+        label:
+          en: 'Programming Language'
+          tr: 'Programlama Dili'
+          de: Programmiersprache
+          ru: 'Язык программирования'
+          es: 'Lenguaje de Programación'
+          fr: 'Langage de Programmation'
+        default: plaintext
+        col_span: 12
+        options:
+          - { value: plaintext, label: { en: 'Plain Text', tr: 'Sade Metin', de: Klartext, ru: 'Обычный текст', es: 'Texto Plano', fr: 'Texte Brut' } }
+          - { value: php, label: { en: PHP, tr: PHP, de: PHP, ru: PHP, es: PHP, fr: PHP } }
+          - { value: javascript, label: { en: JavaScript, tr: JavaScript, de: JavaScript, ru: JavaScript, es: JavaScript, fr: JavaScript } }
+          - { value: typescript, label: { en: TypeScript, tr: TypeScript, de: TypeScript, ru: TypeScript, es: TypeScript, fr: TypeScript } }
+          - { value: html, label: { en: 'HTML / Twig', tr: 'HTML / Twig', de: 'HTML / Twig', ru: 'HTML / Twig', es: 'HTML / Twig', fr: 'HTML / Twig' } }
+          - { value: css, label: { en: CSS, tr: CSS, de: CSS, ru: CSS, es: CSS, fr: CSS } }
+          - { value: bash, label: { en: 'Bash / Shell', tr: 'Bash / Shell', de: 'Bash / Shell', ru: 'Bash / Shell', es: 'Bash / Shell', fr: 'Bash / Shell' } }
+          - { value: json, label: { en: JSON, tr: JSON, de: JSON, ru: JSON, es: JSON, fr: JSON } }
+          - { value: yaml, label: { en: YAML, tr: YAML, de: YAML, ru: YAML, es: YAML, fr: YAML } }
+          - { value: sql, label: { en: SQL, tr: SQL, de: SQL, ru: SQL, es: SQL, fr: SQL } }
+          - { value: python, label: { en: Python, tr: Python, de: Python, ru: Python, es: Python, fr: Python } }
+          - { value: markdown, label: { en: Markdown, tr: Markdown, de: Markdown, ru: Markdown, es: Markdown, fr: Markdown } }
+      show_copy:
+        type: checkbox
+        label:
+          en: 'Show Copy-to-Clipboard Button'
+          tr: 'Panoya Kopyala Butonunu Göster'
+          de: 'In-Zwischenablage-kopieren-Schaltfläche anzeigen'
+          ru: 'Показать кнопку копирования в буфер'
+          es: 'Mostrar Botón Copiar al Portapapeles'
+          fr: 'Afficher le Bouton Copier dans le Presse-papiers'
+        default: true
+        col_span: 6
+      show_line_numbers:
+        type: checkbox
+        label:
+          en: 'Show Line Numbers'
+          tr: 'Satır Numaralarını Göster'
+          de: 'Zeilennummern anzeigen'
+          ru: 'Показать номера строк'
+          es: 'Mostrar Números de Línea'
+          fr: 'Afficher les Numéros de Ligne'
+        default: false
+        col_span: 6

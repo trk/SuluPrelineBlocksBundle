@@ -1,138 +1,103 @@
 tabs:
-  style:
+  settings:
     title:
-      en: "Style"
-      tr: "Stil & Durum"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       alert_style:
         type: select
         label:
-          en: "Alert Type"
-          tr: "Bildirim Türü"
-        default: "info"
+          en: 'Alert Type'
+          tr: 'Bildirim Türü'
+          de: Hinweis-Typ
+          ru: 'Тип уведомления'
+          es: 'Tipo de Alerta'
+          fr: "Type d'Alerte"
+        default: info
         col_span: 6
         options:
-          - value: "info"
-            label:
-              en: "Info / Blue"
-              tr: "Bilgi / Mavi"
-          - value: "success"
-            label:
-              en: "Success / Green"
-              tr: "Başarı / Yeşil"
-          - value: "warning"
-            label:
-              en: "Warning / Yellow"
-              tr: "Uyarı / Sarı"
-          - value: "danger"
-            label:
-              en: "Danger / Red"
-              tr: "Hata / Tehlike / Kırmızı"
-          - value: "dark"
-            label:
-              en: "Neutral / Dark"
-              tr: "Nötr / Koyu"
+          - { value: info, label: { en: 'Info / Blue', tr: 'Bilgi / Mavi', de: 'Info / Blau', ru: 'Инфо / Синий', es: 'Info / Azul', fr: 'Info / Bleu' } }
+          - { value: success, label: { en: 'Success / Green', tr: 'Başarı / Yeşil', de: 'Erfolg / Grün', ru: 'Успех / Зелёный', es: 'Éxito / Verde', fr: 'Succès / Vert' } }
+          - { value: warning, label: { en: 'Warning / Yellow', tr: 'Uyarı / Sarı', de: 'Warnung / Gelb', ru: 'Предупреждение / Жёлтый', es: 'Advertencia / Amarillo', fr: 'Avertissement / Jaune' } }
+          - { value: danger, label: { en: 'Danger / Red', tr: 'Hata / Tehlike / Kırmızı', de: 'Gefahr / Rot', ru: 'Опасность / Красный', es: 'Peligro / Rojo', fr: 'Danger / Rouge' } }
+          - { value: dark, label: { en: 'Neutral / Dark', tr: 'Nötr / Koyu', de: 'Neutral / Dunkel', ru: 'Нейтральный / Тёмный', es: 'Neutro / Oscuro', fr: 'Neutre / Sombre' } }
       alert_variant:
         type: select
         label:
-          en: "Visual Variant"
-          tr: "Görsel Varyant"
-        default: "soft"
+          en: 'Visual Variant'
+          tr: 'Görsel Varyant'
+          de: 'Visuelle Variante'
+          ru: 'Визуальный вариант'
+          es: 'Variante Visual'
+          fr: 'Variante Visuelle'
+        default: soft
         col_span: 6
         options:
-          - value: "soft"
-            label:
-              en: "Soft Pastel"
-              tr: "Yumuşak Pastel (Soft)"
-          - value: "solid"
-            label:
-              en: "Solid Color"
-              tr: "Doygun Dolgulu (Solid)"
-          - value: "outline"
-            label:
-              en: "Border Outline"
-              tr: "Kenarlık Vurgulu (Outline)"
-          - value: "glass"
-            label:
-              en: "Frosted Glass"
-              tr: "Buzlu Cam (Glass)"
+          - { value: soft, label: { en: 'Soft Pastel', tr: 'Yumuşak Pastel (Soft)', de: 'Sanftes Pastell', ru: 'Мягкий пастельный', es: 'Pastel Suave', fr: 'Pastel Doux' } }
+          - { value: solid, label: { en: 'Solid Color', tr: 'Doygun Dolgulu (Solid)', de: Vollfarbe, ru: 'Сплошной цвет', es: 'Color Sólido', fr: 'Couleur Pleine' } }
+          - { value: outline, label: { en: 'Border Outline', tr: 'Kenarlık Vurgulu (Outline)', de: Rahmenlinie, ru: 'Контурная рамка', es: 'Contorno de Borde', fr: 'Contour Bordé' } }
+          - { value: glass, label: { en: 'Frosted Glass', tr: 'Buzlu Cam (Glass)', de: Milchglas, ru: 'Матовое стекло', es: 'Cristal Esmerilado', fr: 'Verre Dépoli' } }
       dismissible:
         type: select
         label:
-          en: "Dismissible"
-          tr: "Kapatılabilir (X Butonu)"
-        default: "no"
+          en: Dismissible
+          tr: 'Kapatılabilir (X Butonu)'
+          de: Schließbar
+          ru: Закрываемый
+          es: Descartable
+          fr: Fermable
+        default: 'no'
         col_span: 6
         options:
-          - value: "no"
-            label:
-              en: "No"
-              tr: "Hayır"
-          - value: "yes"
-            label:
-              en: "Yes (Close button)"
-              tr: "Evet (Kapatma butonu)"
+          - { value: 'no', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
+          - { value: 'yes', label: { en: 'Yes (Close button)', tr: 'Evet (Kapatma butonu)', de: 'Ja (Schließen-Button)', ru: 'Да (Кнопка закрытия)', es: 'Sí (Botón cerrar)', fr: 'Oui (Bouton fermer)' } }
       icon_display:
         type: select
         label:
-          en: "Icon Display"
-          tr: "İkon Gösterimi"
-        default: "auto"
+          en: 'Icon Display'
+          tr: 'İkon Gösterimi'
+          de: Symbolanzeige
+          ru: 'Отображение иконки'
+          es: 'Visualización de Icono'
+          fr: "Affichage de l'Icône"
+        default: auto
         col_span: 6
         options:
-          - value: "auto"
-            label:
-              en: "Automatic Status Icon"
-              tr: "Türe Uygun Otomatik İkon"
-          - value: "custom"
-            label:
-              en: "Selected Icon Only"
-              tr: "Yalnızca Seçilen İkon"
-          - value: "none"
-            label:
-              en: "No Icon"
-              tr: "İkonsuz"
+          - { value: auto, label: { en: 'Automatic Status Icon', tr: 'Türe Uygun Otomatik İkon', de: 'Automatisches Statussymbol', ru: 'Автоматическая иконка статуса', es: 'Icono de Estado Automático', fr: 'Icône de Statut Automatique' } }
+          - { value: custom, label: { en: 'Selected Icon Only', tr: 'Yalnızca Seçilen İkon', de: 'Nur ausgewähltes Symbol', ru: 'Только выбранная иконка', es: 'Solo Icono Seleccionado', fr: 'Icône Sélectionnée Uniquement' } }
+          - { value: none, label: { en: 'No Icon', tr: İkonsuz, de: 'Kein Symbol', ru: 'Без иконки', es: 'Sin Icono', fr: 'Sans Icône' } }
       rounded:
         type: select
         label:
-          en: "Border Radius"
-          tr: "Köşe Yuvarlama"
-        default: "xl"
+          en: 'Border Radius'
+          tr: 'Köşe Yuvarlama'
+          de: Eckenradius
+          ru: 'Скругление углов'
+          es: 'Radio de Borde'
+          fr: 'Rayon de Bordure'
+        default: xl
         col_span: 6
         options:
-          - value: "none"
-            label:
-              en: "None"
-              tr: "Köşesiz"
-          - value: "md"
-            label:
-              en: "Medium"
-              tr: "Hafif (md)"
-          - value: "xl"
-            label:
-              en: "Standard (xl)"
-              tr: "Standart (xl)"
-          - value: "2xl"
-            label:
-              en: "Large (2xl)"
-              tr: "Belirgin (2xl)"
+          - { value: none, label: { en: None, tr: Köşesiz, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
+          - { value: md, label: { en: Medium, tr: 'Hafif (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: xl, label: { en: 'Standard (xl)', tr: 'Standart (xl)', de: 'Standard (xl)', ru: 'Стандартный (xl)', es: 'Estándar (xl)', fr: 'Standard (xl)' } }
+          - { value: 2xl, label: { en: 'Large (2xl)', tr: 'Belirgin (2xl)', de: 'Groß (2xl)', ru: 'Большой (2xl)', es: 'Grande (2xl)', fr: 'Grand (2xl)' } }
       title_size:
         type: select
         label:
-          en: "Title Size"
-          tr: "Başlık Boyutu"
-        default: "md"
+          en: 'Title Size'
+          tr: 'Başlık Boyutu'
+          de: Titelgröße
+          ru: 'Размер заголовка'
+          es: 'Tamaño del Título'
+          fr: 'Taille du Titre'
+        default: md
         col_span: 6
         options:
-          - value: "sm"
-            label:
-              en: "Small"
-              tr: "Küçük"
-          - value: "md"
-            label:
-              en: "Medium"
-              tr: "Standart"
-          - value: "lg"
-            label:
-              en: "Large"
-              tr: "Büyük"
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: Standart, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }

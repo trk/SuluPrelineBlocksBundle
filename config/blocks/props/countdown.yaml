@@ -1,135 +1,120 @@
 tabs:
-  style:
+  settings:
     title:
-      en: "Style & Behavior"
-      tr: "Stil ve Davranış"
+      en: Settings
+      tr: Ayarlar
+      de: Einstellungen
+      ru: Настройки
+      es: Ajustes
+      fr: Paramètres
     fields:
       countdown_style:
         type: select
         label:
-          en: "Card Style"
-          tr: "Kart Stili"
-        default: "boxed"
+          en: 'Card Style'
+          tr: 'Kart Stili'
+          de: Kartenstil
+          ru: 'Стиль карточки'
+          es: 'Estilo de Tarjeta'
+          fr: 'Style de Carte'
+        default: boxed
         col_span: 6
         options:
-          - value: "boxed"
-            label:
-              en: "Boxed Cards"
-              tr: "Kutulu Kartlar"
-          - value: "minimal"
-            label:
-              en: "Minimal (No Card)"
-              tr: "Minimal (Kutusuz)"
-          - value: "pill"
-            label:
-              en: "Soft Pill"
-              tr: "Yumuşak Kapsül"
+          - { value: boxed, label: { en: 'Boxed Cards', tr: 'Kutulu Kartlar', de: Box-Karten, ru: 'Карточки в блоках', es: 'Tarjetas en Caja', fr: 'Cartes Encadrées' } }
+          - { value: minimal, label: { en: 'Minimal (No Card)', tr: 'Minimal (Kutusuz)', de: 'Minimal (Ohne Karte)', ru: 'Минималистичный (Без карточки)', es: 'Minimalista (Sin Tarjeta)', fr: 'Minimal (Sans Carte)' } }
+          - { value: pill, label: { en: 'Soft Pill', tr: 'Yumuşak Kapsül', de: 'Sanfte Pille', ru: 'Мягкая капсула', es: 'Píldora Suave', fr: 'Pilule Douce' } }
       size:
         type: select
         label:
-          en: "Size"
-          tr: "Boyut"
-        default: "md"
+          en: Size
+          tr: Boyut
+          de: Größe
+          ru: Размер
+          es: Tamaño
+          fr: Taille
+        default: md
         col_span: 6
         options:
-          - value: "sm"
-            label:
-              en: "Small"
-              tr: "Küçük"
-          - value: "md"
-            label:
-              en: "Medium"
-              tr: "Orta"
-          - value: "lg"
-            label:
-              en: "Large"
-              tr: "Büyük"
-          - value: "xl"
-            label:
-              en: "Extra Large"
-              tr: "Çok Büyük"
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
+          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
       color:
         type: select
         label:
-          en: "Number Color"
-          tr: "Rakam Rengi"
-        default: "default"
+          en: 'Number Color'
+          tr: 'Rakam Rengi'
+          de: Zahlenfarbe
+          ru: 'Цвет цифр'
+          es: 'Color de Números'
+          fr: 'Couleur des Chiffres'
+        default: default
         col_span: 6
         options:
-          - value: "default"
-            label:
-              en: "Default"
-              tr: "Varsayılan"
-          - value: "primary"
-            label:
-              en: "Primary Blue"
-              tr: "Birincil Mavi"
-          - value: "white"
-            label:
-              en: "White"
-              tr: "Beyaz"
-          - value: "dark"
-            label:
-              en: "Dark"
-              tr: "Koyu"
+          - { value: default, label: { en: Default, tr: Varsayılan, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: primary, label: { en: 'Primary Blue', tr: 'Birincil Mavi', de: Primärblau, ru: 'Основной синий', es: 'Azul Primario', fr: 'Bleu Primaire' } }
+          - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
+          - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
       align:
         type: select
         label:
-          en: "Alignment"
-          tr: "Hizalama"
-        default: "center"
+          en: Alignment
+          tr: Hizalama
+          de: Ausrichtung
+          ru: Выравнивание
+          es: Alineación
+          fr: Alignement
+        default: center
         col_span: 6
         options:
-          - value: "center"
-            label:
-              en: "Center"
-              tr: "Ortalı"
-          - value: "left"
-            label:
-              en: "Left"
-              tr: "Sola"
-          - value: "right"
-            label:
-              en: "Right"
-              tr: "Sağa"
+          - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
+          - { value: left, label: { en: Left, tr: Sola, de: Links, ru: Слева, es: Izquierda, fr: Gauche } }
+          - { value: right, label: { en: Right, tr: Sağa, de: Rechts, ru: Справа, es: Derecha, fr: Droite } }
       show_label:
         type: checkbox
         label:
-          en: "Show Labels (Days, Hours, ...)"
-          tr: "Etiketleri Göster (Gün, Saat, ...)"
+          en: 'Show Labels (Days, Hours, ...)'
+          tr: 'Etiketleri Göster (Gün, Saat, ...)'
+          de: 'Beschriftungen anzeigen (Tage, Stunden, ...)'
+          ru: 'Показать подписи (Дни, Часы, ...)'
+          es: 'Mostrar Etiquetas (Días, Horas, ...)'
+          fr: 'Afficher les Libellés (Jours, Heures, ...)'
         default: true
         col_span: 6
       show_separator:
         type: checkbox
         label:
-          en: "Show Separators (:)"
-          tr: "Ayraçları Göster (:)"
+          en: 'Show Separators (:)'
+          tr: 'Ayraçları Göster (:)'
+          de: 'Trennzeichen anzeigen (:)'
+          ru: 'Показать разделители (:)'
+          es: 'Mostrar Separadores (:)'
+          fr: 'Afficher les Séparateurs (:)'
         default: true
         col_span: 6
       on_expire:
         type: select
         label:
-          en: "On Expire Action"
-          tr: "Süre Dolduğunda"
-        default: "message"
+          en: 'On Expire Action'
+          tr: 'Süre Dolduğunda'
+          de: 'Aktion bei Ablauf'
+          ru: 'Действие по истечении'
+          es: 'Acción al Expirar'
+          fr: "Action à l'Expiration"
+        default: message
         col_span: 6
         options:
-          - value: "message"
-            label:
-              en: "Show Message"
-              tr: "Mesaj Göster"
-          - value: "hide"
-            label:
-              en: "Hide Countdown"
-              tr: "Geri Sayımı Gizle"
-          - value: "reload"
-            label:
-              en: "Reload Page"
-              tr: "Sayfayı Yenile"
+          - { value: message, label: { en: 'Show Message', tr: 'Mesaj Göster', de: 'Nachricht anzeigen', ru: 'Показать сообщение', es: 'Mostrar Mensaje', fr: 'Afficher un Message' } }
+          - { value: hide, label: { en: 'Hide Countdown', tr: 'Geri Sayımı Gizle', de: 'Countdown ausblenden', ru: 'Скрыть таймер', es: 'Ocultar Cuenta Regresiva', fr: 'Masquer le Compte à Rebours' } }
+          - { value: reload, label: { en: 'Reload Page', tr: 'Sayfayı Yenile', de: 'Seite neu laden', ru: 'Перезагрузить страницу', es: 'Recargar Página', fr: 'Recharger la Page' } }
       expire_message:
         type: text_line
         label:
-          en: "Expired Message"
-          tr: "Süre Doldu Mesajı"
-        default: "Süre doldu!"
+          en: 'Expired Message'
+          tr: 'Süre Doldu Mesajı'
+          de: Ablaufnachricht
+          ru: 'Сообщение об окончании'
+          es: 'Mensaje de Expiración'
+          fr: "Message d'Expiration"
+        default: 'Süre doldu!'
         col_span: 6
