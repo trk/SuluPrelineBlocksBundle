@@ -23,40 +23,86 @@ final class ElementTransform
         $classes = [];
 
         if ('' !== $extraBase) {
-            $classes[] = $extraBase;
+            foreach (\explode(' ', \trim($extraBase)) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $margin = self::margin($props);
         if ('' !== $margin) {
-            $classes[] = $margin;
+            foreach (\explode(' ', $margin) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $maxWidth = self::maxWidth($props);
         if ('' !== $maxWidth) {
-            $classes[] = $maxWidth;
+            foreach (\explode(' ', $maxWidth) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $blockAlign = self::blockAlign($props);
         if ('' !== $blockAlign) {
-            $classes[] = $blockAlign;
+            foreach (\explode(' ', $blockAlign) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $textAlign = self::textAlign($props);
         if ('' !== $textAlign) {
-            $classes[] = $textAlign;
+            foreach (\explode(' ', $textAlign) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
+        }
+
+        $position = self::position($props);
+        if ('' !== $position) {
+            foreach (\explode(' ', $position) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $visibility = self::visibility($props);
         if ('' !== $visibility) {
-            $classes[] = $visibility;
+            foreach (\explode(' ', $visibility) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
+        }
+
+        $animation = self::animation($props);
+        if ('' !== $animation) {
+            foreach (\explode(' ', $animation) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
         $custom = self::customClass($props);
         if ('' !== $custom) {
-            $classes[] = $custom;
+            foreach (\explode(' ', $custom) as $c) {
+                if ('' !== $c) {
+                    $classes[] = $c;
+                }
+            }
         }
 
-        return \trim(\implode(' ', \array_filter($classes)));
+        return \trim(\implode(' ', \array_unique(\array_filter($classes))));
     }
 
     /**
@@ -171,6 +217,25 @@ final class ElementTransform
     }
 
     /**
+     * Resolve positioning classes.
+     *
+     * @param array<string, mixed> $props
+     */
+    public static function position(array $props): string
+    {
+        $pos = isset($props['position']) && \is_string($props['position']) ? $props['position'] : null;
+        if (null === $pos || '' === $pos || 'static' === $pos) {
+            return '';
+        }
+
+        return match ($pos) {
+            'relative' => 'relative',
+            'sticky' => 'sticky top-6 z-10',
+            default => '',
+        };
+    }
+
+    /**
      * Resolve responsive visibility classes.
      *
      * @param array<string, mixed> $props
@@ -189,6 +254,27 @@ final class ElementTransform
             'visible_sm', 's' => 'block sm:hidden',
             'visible_md', 'm' => 'block md:hidden',
             'visible_lg', 'l' => 'block lg:hidden',
+            default => '',
+        };
+    }
+
+    /**
+     * Resolve entrance animation utility classes.
+     *
+     * @param array<string, mixed> $props
+     */
+    public static function animation(array $props): string
+    {
+        $anim = isset($props['animation']) && \is_string($props['animation']) ? $props['animation'] : null;
+        if (null === $anim || '' === $anim || 'none' === $anim) {
+            return '';
+        }
+
+        return match ($anim) {
+            'fade' => 'transition-opacity duration-500 ease-out',
+            'slide-up' => 'transition-all duration-500 ease-out translate-y-0',
+            'slide-down' => 'transition-all duration-500 ease-out -translate-y-0',
+            'zoom-in' => 'transition-transform duration-500 ease-out scale-100',
             default => '',
         };
     }

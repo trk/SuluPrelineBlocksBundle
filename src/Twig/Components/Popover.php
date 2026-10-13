@@ -60,21 +60,24 @@ final class Popover
 
     public function getResolvedTrigger(): string
     {
-        $val = $this->trigger ?? 'click';
+        $propTrigger = isset($this->props['trigger']) && \is_string($this->props['trigger']) ? $this->props['trigger'] : null;
+        $val = ('click' !== $this->trigger && null !== $this->trigger) ? $this->trigger : ($propTrigger ?? $this->trigger ?? 'click');
 
         return 'hover' === $val ? 'hover' : 'click';
     }
 
     public function getResolvedDefaultMarkerType(): string
     {
-        $val = $this->markerType ?? $this->marker_type ?? 'pulse';
+        $propType = isset($this->props['marker_type']) && \is_string($this->props['marker_type']) ? $this->props['marker_type'] : null;
+        $val = $this->marker_type ?? (('pulse' !== $this->markerType && null !== $this->markerType) ? $this->markerType : ($propType ?? 'pulse'));
 
         return '' !== \trim($val) ? \trim($val) : 'pulse';
     }
 
     public function getResolvedDefaultMarkerColor(): string
     {
-        $val = $this->markerColor ?? $this->marker_color ?? 'primary';
+        $propColor = isset($this->props['marker_color']) && \is_string($this->props['marker_color']) ? $this->props['marker_color'] : null;
+        $val = $this->marker_color ?? (('primary' !== $this->markerColor && null !== $this->markerColor) ? $this->markerColor : ($propColor ?? 'primary'));
 
         return '' !== \trim($val) ? \trim($val) : 'primary';
     }

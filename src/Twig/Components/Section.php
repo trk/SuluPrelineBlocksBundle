@@ -7,30 +7,16 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 /**
- * Preline UI 5 / Tailwind CSS 4 accessible Section / Container component.
+ * Preline UI 5 / Tailwind CSS 4 pure layout Section / Container component.
  */
 #[AsTwigComponent('Section', template: '@SuluPrelineBlocks/components/Section.html.twig')]
 final class Section
 {
-    public ?string $title = null;
-    public ?string $subtitle = null;
-    public string $title_align = 'center';
     public string $max_width = '85rem';
     public string $padding_y = 'default';
     public string $padding_x = 'default';
     public string $bg_style = 'transparent';
-
-    public mixed $bg_image = null;
-
     public bool $has_border = false;
-    public string $row_layout = 'halves';
-    public string $gap = 'md';
-    public ?string $content = null;
-
-    /**
-     * @var list<array<string, mixed>>|array<string|int, mixed>
-     */
-    public array $items = [];
 
     /**
      * @var list<array<string, mixed>>|array<string|int, mixed>
@@ -42,6 +28,44 @@ final class Section
      */
     public array $props = [];
 
+    private function resolveStringProp(string $key, string $current, string $default): string
+    {
+        if ($current !== $default) {
+            return $current;
+        }
+
+        $val = $this->props[$key] ?? null;
+
+        return \is_string($val) && '' !== $val ? $val : $current;
+    }
+
+    private function resolveBoolProp(string $key, bool $current, bool $default = false): bool
+    {
+        if ($current !== $default) {
+            return $current;
+        }
+
+        if (\array_key_exists($key, $this->props)) {
+            $val = $this->props[$key];
+            if (\is_bool($val)) {
+                return $val;
+            }
+            if (\is_string($val)) {
+                return \in_array(\strtolower($val), ['true', '1', 'yes'], true);
+            }
+            if (\is_int($val)) {
+                return 1 === $val;
+            }
+        }
+
+        return $current;
+    }
+
+    public function getElementId(): ?string
+    {
+        return ElementTransform::resolveId($this->props);
+    }
+
     public function getSectionClasses(): string
     {
         $classes = [
@@ -50,7 +74,9 @@ final class Section
             'overflow-hidden',
         ];
 
-        $classes[] = match ($this->bg_style) {
+        $bgStyle = $this->resolveStringProp('bg_style', $this->bg_style, 'transparent');
+
+        $classes[] = match ($bgStyle) {
             'default' => 'bg-white dark:bg-neutral-900 text-gray-800 dark:text-neutral-200',
             'muted' => 'bg-gray-50 dark:bg-neutral-800 text-gray-800 dark:text-neutral-200',
             'subtle' => 'bg-gray-100/70 dark:bg-neutral-800/60 text-gray-800 dark:text-neutral-200',
@@ -60,11 +86,26 @@ final class Section
             default => 'bg-transparent',
         };
 
-        if ($this->has_border) {
+        if ($this->resolveBoolProp('has_border', $this->has_border, false)) {
             $classes[] = 'border-t border-b border-gray-200 dark:border-neutral-700';
         }
 
-        return \implode(' ', $classes);
+        $extra = [
+            ElementTransform::margin($this->props),
+            ElementTransform::position($this->props),
+            ElementTransform::textAlign($this->props),
+            ElementTransform::visibility($this->props),
+            ElementTransform::animation($this->props),
+            ElementTransform::customClass($this->props),
+        ];
+
+        foreach ($extra as $item) {
+            if ('' !== $item) {
+                $classes[] = $item;
+            }
+        }
+
+        return \implode(' ', \array_filter($classes));
     }
 
     public function getContainerClasses(): string
@@ -74,20 +115,24 @@ final class Section
             'w-full',
         ];
 
-        $classes[] = match ($this->max_width) {
-            '7xl' => 'max-w-7xl',
-            '5xl' => 'max-w-5xl',
-            '3xl' => 'max-w-3xl',
-            'full' => 'max-w-full',
+        $maxWidth = $this->resolveStringProp('max_width', $this->max_width, '85rem');
+        $classes[] = match ($maxWidth) {
+            '7xl', 'xlarge' => 'max-w-7xl',
+            '5xl', 'large' => 'max-w-5xl',
+            '3xl', 'medium' => 'max-w-3xl',
+            'small' => 'max-w-xl',
+            'full', '2xlarge' => 'max-w-full',
             default => 'max-w-[85rem]',
         };
 
-        $classes[] = match ($this->padding_x) {
+        $paddingX = $this->resolveStringProp('padding_x', $this->padding_x, 'default');
+        $classes[] = match ($paddingX) {
             'none' => 'px-0',
             default => 'px-4 sm:px-6 lg:px-8',
         };
 
-        $classes[] = match ($this->padding_y) {
+        $paddingY = $this->resolveStringProp('padding_y', $this->padding_y, 'default');
+        $classes[] = match ($paddingY) {
             'none' => 'py-0',
             'xs' => 'py-4 sm:py-6',
             'sm' => 'py-6 sm:py-8',
@@ -97,51 +142,6 @@ final class Section
         };
 
         return \implode(' ', $classes);
-    }
-
-    public function getHeaderAlignmentClasses(): string
-    {
-        return match ($this->title_align) {
-            'start' => 'text-start',
-            'end' => 'text-end',
-            default => 'text-center mx-auto',
-        };
-    }
-
-    public function getBgImageUrl(): ?string
-    {
-        return PropsResolver::resolveImageUrl($this->bg_image);
-    }
-
-    public function getBgImageSrcSet(): ?string
-    {
-        return PropsResolver::resolveSrcSet($this->bg_image);
-    }
-
-    public function getBgImageFocusPointStyle(): ?string
-    {
-        return PropsResolver::resolveFocusPointStyle($this->bg_image);
-    }
-
-    public function hasHeader(): bool
-    {
-        return (null !== $this->title && '' !== \trim($this->title))
-            || (null !== $this->subtitle && '' !== \trim($this->subtitle));
-    }
-
-    public function hasContent(): bool
-    {
-        return null !== $this->content && '' !== \trim($this->content);
-    }
-
-    public function hasItems(): bool
-    {
-        return !empty($this->items);
-    }
-
-    public function isGridEnabled(): bool
-    {
-        return 'none' !== $this->row_layout && $this->hasItems();
     }
 
     public function hasRows(): bool
@@ -163,6 +163,10 @@ final class Section
         foreach ($raw as $item) {
             if (\is_array($item)) {
                 /** @var array<string, mixed> $item */
+                $rowProps = \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::extractProps($item);
+                if ([] !== $rowProps) {
+                    $item = \array_merge($item, $rowProps);
+                }
                 $list[] = $item;
             }
         }

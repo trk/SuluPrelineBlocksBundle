@@ -1,34 +1,12 @@
 {# Preline UI 5 / Tailwind CSS 4 Grid Row Component #}
-<div {{ attributes.defaults({ class: 'w-full my-4' }) }}>
-    {% if this.title %}
-        <div class="mb-4">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-neutral-200">
-                {{ this.title }}
-            </h3>
-        </div>
-    {% endif %}
-
+<div {{ attributes.defaults({class: 'w-full my-4', id: this.elementId}) }}>
     <div class="{{ this.rowClasses }}">
         {% if this.hasColumns %}
             {% for col in this.normalizedColumns %}
                 <twig:Column
-                    title="{{ col.title|default(null) }}"
-                    subtitle="{{ col.subtitle|default(col.meta|default(null)) }}"
-                    content="{{ col.content|default(null) }}"
-                    :image="col.image|default(null)"
-                    :link="col.link|default(null)"
-                    link_title="{{ col.link_title|default(null) }}"
-                    col_span="{{ col.col_span|default('auto') }}"
-                    style="{{ col.style|default('none') }}"
-                    padding="{{ col.padding|default('none') }}"
-                    vertical_align="{{ col.vertical_align|default('top') }}"
-                    text_align="{{ col.text_align|default('start') }}"
-                    :is_sticky="col.is_sticky|default(false)"
-                    order="{{ col.order|default('default') }}"
                     :blocks="col.blocks|default([])"
                     :props="col"
                 />
-
             {% endfor %}
         {% endif %}
 

@@ -1,6 +1,9 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Html
     title="{{ block.title|default(null) }}"
     content="{{ block.content|default(null) }}"
     :raw_output="block.raw_output|default(false)"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

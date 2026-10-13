@@ -1,81 +1,12 @@
 {# Preline UI 5 / Tailwind CSS 4 Section Container Component #}
-<section {{ attributes.defaults({ class: this.sectionClasses }) }}>
-    {% if this.bgImageUrl %}
-        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <img
-                src="{{ this.bgImageUrl }}"
-                {% if this.getBgImageSrcSet() %}srcset="{{ this.getBgImageSrcSet() }}" sizes="100vw"{% endif %}
-                alt=""
-                class="w-full h-full object-cover"
-                {% if this.getBgImageFocusPointStyle() %}style="{{ this.getBgImageFocusPointStyle() }}"{% endif %}
-                loading="lazy"
-            >
-            <div class="absolute inset-0 bg-neutral-950/40"></div>
-        </div>
-    {% endif %}
-
+<section {{ attributes.defaults({class: this.sectionClasses, id: this.elementId}) }}>
     <div class="{{ this.containerClasses }} relative z-10">
-        {% if this.hasHeader %}
-            <div class="max-w-3xl mb-10 lg:mb-14 {{ this.headerAlignmentClasses }}">
-                {% if this.subtitle %}
-                    <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400 mb-2">
-                        {{ this.subtitle }}
-                    </p>
-                {% endif %}
-
-                {% if this.title %}
-                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight text-gray-900 dark:text-white">
-                        {{ this.title }}
-                    </h2>
-                {% endif %}
-            </div>
-        {% endif %}
-
-        {% if this.hasContent %}
-            <div class="max-w-3xl mb-8 {{ this.headerAlignmentClasses }} text-base text-gray-600 dark:text-neutral-300 leading-relaxed prose dark:prose-invert">
-                {{ this.content|raw }}
-            </div>
-        {% endif %}
-
         {% if this.hasRows %}
             <div class="space-y-8">
                 {% for row in this.normalizedRows %}
                     <twig:Row
-                        title="{{ row.title|default(null) }}"
-                        layout="{{ row.layout|default('halves') }}"
-                        gap="{{ row.gap|default('md') }}"
-                        align_items="{{ row.align_items|default('stretch') }}"
-                        :has_divider="row.has_divider|default(false)"
                         :columns="row.columns|default([])"
                         :props="row"
-                    />
-                {% endfor %}
-            </div>
-        {% elseif this.isGridEnabled %}
-
-            <twig:Row
-                layout="{{ this.row_layout }}"
-                gap="{{ this.gap }}"
-                :columns="this.items"
-            />
-        {% elseif this.hasItems %}
-            <div class="space-y-6">
-                {% for col in this.items %}
-                    <twig:Column
-                        title="{{ col.title|default(null) }}"
-                        subtitle="{{ col.subtitle|default(col.meta|default(null)) }}"
-                        content="{{ col.content|default(null) }}"
-                        :image="col.image|default(null)"
-                        :link="col.link|default(null)"
-                        link_title="{{ col.link_title|default(null) }}"
-                        col_span="{{ col.col_span|default('auto') }}"
-                        style="{{ col.style|default('none') }}"
-                        padding="{{ col.padding|default('none') }}"
-                        vertical_align="{{ col.vertical_align|default('top') }}"
-                        text_align="{{ col.text_align|default('start') }}"
-                        :is_sticky="col.is_sticky|default(false)"
-                        order="{{ col.order|default('default') }}"
-                        :props="col"
                     />
                 {% endfor %}
             </div>

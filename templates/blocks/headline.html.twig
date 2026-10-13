@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Headline
     title="{{ block.title|default(block.content|default('')) }}"
     :link="block.link|default(null)"
@@ -5,3 +7,4 @@
     :icon="block.icon|default(null)"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

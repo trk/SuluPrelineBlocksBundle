@@ -271,36 +271,7 @@ final class PropsResolver
      */
     public static function resolveUrl(mixed $link): string
     {
-        if (\is_string($link)) {
-            return $link;
-        }
-
-        if (\is_array($link)) {
-            if (isset($link['url']) && \is_string($link['url'])) {
-                $url = $link['url'];
-                if (isset($link['anchor']) && \is_string($link['anchor']) && '' !== $link['anchor']) {
-                    $url .= '#' . \ltrim($link['anchor'], '#');
-                }
-
-                return $url;
-            }
-
-            if (isset($link['href']) && \is_string($link['href'])) {
-                return $link['href'];
-            }
-        }
-
-        if (\is_object($link)) {
-            if (\method_exists($link, 'getUrl')) {
-                /** @var mixed $url */
-                $url = $link->getUrl();
-                if (\is_string($url) && '' !== $url) {
-                    return $url;
-                }
-            }
-        }
-
-        return '#';
+        return \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::resolveUrl($link);
     }
 
     /**
@@ -308,85 +279,12 @@ final class PropsResolver
      */
     public static function resolveImageUrl(mixed $media): ?string
     {
-        if (null === $media) {
-            return null;
-        }
-
-        if (\is_string($media)) {
-            return $media;
-        }
-
-        if (\is_array($media)) {
-            if (isset($media['url']) && \is_string($media['url'])) {
-                return $media['url'];
-            }
-            if (isset($media['formats']) && \is_array($media['formats'])) {
-                $first = \reset($media['formats']);
-                if (\is_string($first)) {
-                    return $first;
-                }
-            }
-            if (isset($media['id']) && (\is_int($media['id']) || \is_string($media['id']))) {
-                return (string) $media['id'];
-            }
-        }
-
-        if (\is_object($media)) {
-            if (\method_exists($media, 'getUrl')) {
-                /** @var mixed $url */
-                $url = $media->getUrl();
-                if (\is_string($url) && '' !== $url) {
-                    return $url;
-                }
-            }
-
-            if (\method_exists($media, 'getFormats')) {
-                /** @var mixed $formats */
-                $formats = $media->getFormats();
-                if (\is_array($formats) && [] !== $formats) {
-                    $first = \reset($formats);
-                    if (\is_string($first) && '' !== $first) {
-                        return $first;
-                    }
-                }
-            }
-        }
-
-        return null;
+        return \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::resolveImageUrl($media);
     }
 
     public static function resolveIcon(mixed $icon): ?string
     {
-        if (null === $icon || '' === $icon) {
-            return null;
-        }
-
-        $raw = null;
-        if (\is_string($icon)) {
-            $raw = \trim($icon);
-        } elseif (\is_array($icon)) {
-            $candidate = $icon['name'] ?? $icon['icon'] ?? $icon['id'] ?? null;
-            if (\is_string($candidate)) {
-                $raw = \trim($candidate);
-            }
-        } elseif (\is_object($icon)) {
-            if (\method_exists($icon, 'getName')) {
-                /** @var mixed $name */
-                $name = $icon->getName();
-                if (\is_string($name)) {
-                    $raw = \trim($name);
-                }
-            } elseif (\method_exists($icon, 'getIcon')) {
-                /** @var mixed $name */
-                $name = $icon->getIcon();
-                if (\is_string($name)) {
-                    $raw = \trim($name);
-                }
-            } elseif (\method_exists($icon, '__toString')) {
-                $raw = \trim((string) $icon);
-            }
-        }
-
+        $raw = \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::resolveIcon($icon);
         if (null === $raw || '' === $raw) {
             return null;
         }
@@ -411,64 +309,7 @@ final class PropsResolver
      */
     public static function resolveSrcSet(mixed $media): ?string
     {
-        if (null === $media || (!\is_array($media) && !\is_object($media))) {
-            return null;
-        }
-
-        /** @var array<string, mixed> $formats */
-        $formats = [];
-        if (\is_array($media) && isset($media['formats']) && \is_array($media['formats'])) {
-            $formats = $media['formats'];
-        } elseif (\is_object($media) && \method_exists($media, 'getFormats')) {
-            /** @var mixed $extracted */
-            $extracted = $media->getFormats();
-            if (\is_array($extracted)) {
-                $formats = $extracted;
-            }
-        }
-
-        if ([] === $formats) {
-            return null;
-        }
-
-        /** @var array<string, int> $standardWidths */
-        $standardWidths = [
-            'col-sm' => 400,
-            'col-md' => 640,
-            'col-lg' => 960,
-            'col-xl' => 1280,
-            'col-2xl' => 1600,
-        ];
-
-        /** @var array<int, string> $sources */
-        $sources = [];
-
-        foreach ($formats as $formatKey => $formatUrl) {
-            if (!\is_string($formatKey) || !\is_string($formatUrl) || '' === \trim($formatUrl)) {
-                continue;
-            }
-
-            $width = $standardWidths[$formatKey] ?? null;
-
-            if (null === $width) {
-                // Match patterns like sulu-400x400, 400x, 640w
-                if (1 === \preg_match('/(?:^|[^\d])(\d+)(?:x\d*|w)?$/', $formatKey, $matches)) {
-                    $width = (int) $matches[1];
-                }
-            }
-
-            if (null !== $width && $width > 0) {
-                $sources[$width] = \sprintf('%s %dw', $formatUrl, $width);
-            }
-        }
-
-        if ([] === $sources) {
-            return null;
-        }
-
-        \ksort($sources);
-
-        return \implode(', ', $sources);
+        return \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::resolveSrcSet($media);
     }
 
     /**
@@ -476,44 +317,7 @@ final class PropsResolver
      */
     public static function resolveFocusPointStyle(mixed $media): ?string
     {
-        if (null === $media) {
-            return null;
-        }
-
-        $x = null;
-        $y = null;
-
-        if (\is_array($media)) {
-            $point = $media['focusPoint'] ?? ($media['focalPoint'] ?? null);
-            if (\is_array($point)) {
-                $x = $point['x'] ?? null;
-                $y = $point['y'] ?? null;
-            }
-        } elseif (\is_object($media)) {
-            if (\method_exists($media, 'getFocusPoint')) {
-                /** @var mixed $point */
-                $point = $media->getFocusPoint();
-                if (\is_array($point)) {
-                    $x = $point['x'] ?? null;
-                    $y = $point['y'] ?? null;
-                } elseif (\is_object($point)) {
-                    if (\method_exists($point, 'getX') && \method_exists($point, 'getY')) {
-                        /** @var mixed $xVal */
-                        $xVal = $point->getX();
-                        /** @var mixed $yVal */
-                        $yVal = $point->getY();
-                        $x = $xVal;
-                        $y = $yVal;
-                    }
-                }
-            }
-        }
-
-        if (null !== $x && null !== $y && \is_numeric($x) && \is_numeric($y)) {
-            return \sprintf('object-position: %s%% %s%%;', $x, $y);
-        }
-
-        return null;
+        return \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::resolveFocusPointStyle($media);
     }
 
     /**

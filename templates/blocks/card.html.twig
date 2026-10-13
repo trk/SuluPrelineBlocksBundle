@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Card
     title="{{ block.title|default(null) }}"
     meta="{{ block.meta|default(null) }}"
@@ -15,3 +17,4 @@
     :hoverVideo="block.hover_video|default(null)"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

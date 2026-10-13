@@ -1,6 +1,6 @@
 {% if this.isGroup() %}
     <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-         {{ attributes.defaults({ class: this.getGroupWrapperClasses() }) }}>
+         {{ attributes.defaults({class: this.getGroupWrapperClasses()}) }}>
         {% for item in this.getNormalizedItems() %}
             <a href="{{ item.url }}"
                {% if item.id %}id="{{ item.id }}"{% endif %}

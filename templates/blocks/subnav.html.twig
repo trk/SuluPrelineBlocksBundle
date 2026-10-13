@@ -1,5 +1,8 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Subnav
     title="{{ block.title|default(null) }}"
     :items="block.items|default([])"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

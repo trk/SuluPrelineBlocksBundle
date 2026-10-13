@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Quotation
     content="{{ block.content|default('') }}"
     author="{{ block.author|default(null) }}"
@@ -6,3 +8,4 @@
     :link="block.link|default(null)"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

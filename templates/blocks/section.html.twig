@@ -1,18 +1,7 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Section
-    title="{{ block.title|default(null) }}"
-    subtitle="{{ block.subtitle|default(null) }}"
-    title_align="{{ block.title_align|default('center') }}"
-    max_width="{{ block.max_width|default('85rem') }}"
-    padding_y="{{ block.padding_y|default('default') }}"
-    padding_x="{{ block.padding_x|default('default') }}"
-    bg_style="{{ block.bg_style|default('transparent') }}"
-    :bg_image="block.bg_image|default(null)"
-    :has_border="block.has_border|default(false)"
-    row_layout="{{ block.row_layout|default('halves') }}"
-    gap="{{ block.gap|default('md') }}"
-    content="{{ block.content|default(null) }}"
     :rows="block.rows|default([])"
-    :items="block.items|default([])"
-    :props="block|merge(block.props|default({}))"
+    :props="block|merge(block._props|default({}))"
 />
-
+{% endif %}

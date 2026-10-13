@@ -1,0 +1,16 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
+<twig:PageHeader
+    title="{{ block.override_title|default(page.title|default('')) }}"
+    headline="{{ block.override_headline|default(page.headline|default('')) }}"
+    summary="{{ block.override_summary|default(page.summary|default('')) }}"
+    content="{{ block.override_content|default(page.content|default('')) }}"
+    meta="{{ block.override_meta|default(page.meta|default('')) }}"
+    :image="page.image|default(null)"
+    :show_breadcrumbs="block.show_breadcrumbs|default(true)"
+    layout="{{ block.header_layout|default(block.layout|default('standard')) }}"
+    max_width="{{ block.max_width|default('85rem') }}"
+    padding_y="{{ block.padding_y|default('default') }}"
+    :props="block|merge(block._props|default({}))"
+/>
+{% endif %}

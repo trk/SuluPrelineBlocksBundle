@@ -13,7 +13,6 @@ final class RowTest extends TestCase
     {
         $row = new Row();
 
-        self::assertNull($row->title);
         self::assertSame('halves', $row->layout);
         self::assertSame('md', $row->gap);
         self::assertSame('stretch', $row->align_items);
@@ -27,34 +26,37 @@ final class RowTest extends TestCase
         self::assertStringContainsString('grid w-full grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-stretch', $row->getRowClasses());
     }
 
-    public function testLayoutsAndGaps(): void
+    public function testLayoutsAndGapsFromProps(): void
     {
         $row = new Row();
+        $row->props = [
+            'layout' => 'thirds',
+            'gap' => 'lg',
+            'align_items' => 'center',
+            'has_divider' => true,
+            'id' => 'row-1',
+        ];
 
-        $row->layout = 'thirds';
-        $row->gap = 'lg';
-        $row->align_items = 'center';
-        $row->has_divider = true;
-
+        self::assertSame('row-1', $row->getElementId());
         self::assertSame('grid-cols-1 md:grid-cols-3', $row->getLayoutClasses());
         self::assertSame('gap-8 sm:gap-12', $row->getGapClasses());
         self::assertSame('items-center', $row->getAlignItemsClasses());
         self::assertStringContainsString('divide-gray-200', $row->getDividerClasses());
 
-        $row->layout = 'quarters';
+        $row->props['layout'] = 'quarters';
         self::assertSame('grid-cols-1 sm:grid-cols-2 lg:grid-cols-4', $row->getLayoutClasses());
 
-        $row->layout = '12-col';
+        $row->props['layout'] = '12-col';
         self::assertSame('grid-cols-1 md:grid-cols-12', $row->getLayoutClasses());
     }
 
     public function testNormalizedColumns(): void
     {
         $row = new Row();
-        $row->layout = 'thirds-2-1';
+        $row->props = ['layout' => 'thirds-2-1'];
         $row->columns = [
-            ['title' => 'Main Column', 'col_span' => 'auto'],
-            ['title' => 'Sidebar Column', 'col_span' => 'auto'],
+            ['props' => ['col_span' => 'auto'], 'blocks' => [['type' => 'headline']]],
+            ['props' => ['col_span' => 'auto'], 'blocks' => [['type' => 'text']]],
         ];
 
         self::assertTrue($row->hasColumns());

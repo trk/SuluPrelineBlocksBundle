@@ -13,11 +13,6 @@ final class ColumnTest extends TestCase
     {
         $col = new Column();
 
-        self::assertNull($col->title);
-        self::assertNull($col->subtitle);
-        self::assertNull($col->content);
-        self::assertNull($col->image);
-        self::assertNull($col->link);
         self::assertSame('auto', $col->col_span);
         self::assertSame('none', $col->style);
         self::assertSame('none', $col->padding);
@@ -35,17 +30,21 @@ final class ColumnTest extends TestCase
         self::assertStringContainsString('flex flex-col w-full', $col->getColumnClasses());
     }
 
-    public function testSpansAndStyles(): void
+    public function testSpansAndStylesFromProps(): void
     {
         $col = new Column();
-        $col->col_span = '6';
-        $col->style = 'card';
-        $col->padding = 'md';
-        $col->vertical_align = 'center';
-        $col->text_align = 'center';
-        $col->is_sticky = true;
-        $col->order = 'first';
+        $col->props = [
+            'col_span' => '6',
+            'style' => 'card',
+            'padding' => 'md',
+            'vertical_align' => 'center',
+            'text_align' => 'center',
+            'is_sticky' => true,
+            'order' => 'first',
+            'id' => 'col-main',
+        ];
 
+        self::assertSame('col-main', $col->getElementId());
         self::assertSame('col-span-12 md:col-span-6', $col->getColSpanClasses());
         self::assertStringContainsString('border border-gray-200', $col->getStyleClasses());
         self::assertSame('p-6 sm:p-8', $col->getPaddingClasses());
@@ -58,20 +57,6 @@ final class ColumnTest extends TestCase
         self::assertStringContainsString('col-span-12 md:col-span-6', $classes);
         self::assertStringContainsString('p-6 sm:p-8', $classes);
         self::assertStringContainsString('sticky top-20 self-start', $classes);
-    }
-
-    public function testUrlsAndSubtitle(): void
-    {
-        $col = new Column();
-        $col->meta = 'Eyebrow Text';
-        $col->image = ['url' => '/media/sample.jpg'];
-        $col->link = '/learn-more';
-        $col->content = '<p>Content</p>';
-
-        self::assertSame('Eyebrow Text', $col->getSubtitle());
-        self::assertSame('/media/sample.jpg', $col->getImageUrl());
-        self::assertSame('/learn-more', $col->getLinkUrl());
-        self::assertTrue($col->hasContent());
     }
 
     public function testBlocksSupport(): void

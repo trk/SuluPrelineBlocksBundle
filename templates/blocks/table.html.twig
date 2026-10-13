@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Table
     title="{{ block.title|default(null) }}"
     header_title="{{ block.header_title|default(null) }}"
@@ -8,3 +10,4 @@
     :items="block.items|default([])"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

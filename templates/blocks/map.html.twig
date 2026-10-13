@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Map
     title="{{ block.title|default(null) }}"
     location_query="{{ block.location_query|default(null) }}"
@@ -6,3 +8,4 @@
     :items="block.items|default([])"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

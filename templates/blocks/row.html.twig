@@ -1,9 +1,0 @@
-<twig:Row
-    title="{{ block.title|default(null) }}"
-    layout="{{ block.layout|default('halves') }}"
-    gap="{{ block.gap|default('md') }}"
-    align_items="{{ block.align_items|default('stretch') }}"
-    :has_divider="block.has_divider|default(false)"
-    :columns="block.columns|default(block.items|default([]))"
-    :props="block|merge(block.props|default({}))"
-/>

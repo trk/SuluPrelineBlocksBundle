@@ -1,5 +1,8 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Countdown
     date="{{ block.date|default(null) }}"
     title="{{ block.title|default(null) }}"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

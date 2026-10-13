@@ -1,40 +1,49 @@
-{# Preline UI 5 / Tailwind CSS 4 Auto-Sectioning Block Renderer #}
-{% set section_buffer = [] %}
+{# Preline UI 5 / Tailwind CSS 4 Auto-Sectioning Block Renderer with Dynamic Content Hydration #}
+{% set rendered_blocks = blocks|default([])|hydrate_blocks(_context) %}
+{% set should_wrap_loose = wrap_loose_blocks is defined ? wrap_loose_blocks : true %}
 
-{% for block_item in blocks|default([]) %}
-    {% if block_item.type == 'section' %}
-        {% if section_buffer|length > 0 %}
-            <twig:Section max_width="85rem" padding_y="default">
-                <twig:Row layout="12-col" gap="md">
-                    <twig:Column col_span="12">
-                        <div class="w-full space-y-8">
-                            {% for buffered in section_buffer %}
-                                {{ include(['blocks/' ~ buffered.type ~ '.html.twig', '@SuluPrelineBlocks/blocks/' ~ buffered.type ~ '.html.twig'], { block: buffered }, with_context: false, ignore_missing: true) }}
-                            {% endfor %}
-                        </div>
-                    </twig:Column>
-                </twig:Row>
-            </twig:Section>
-            {% set section_buffer = [] %}
+{% if not should_wrap_loose %}
+    {% for block_item in rendered_blocks %}
+        {{ sulu_block_render(block_item, _context) }}
+    {% endfor %}
+{% else %}
+    {% set section_buffer = [] %}
+    {% set top_level_types = ['section', 'page_header', 'breadcrumbs', 'main_content'] %}
+
+    {% for block_item in rendered_blocks %}
+        {% if block_item.type|default('') in top_level_types %}
+            {% if section_buffer|length > 0 %}
+                <twig:Section max_width="85rem" padding_y="default">
+                    <twig:Row layout="12-col" gap="md">
+                        <twig:Column col_span="12">
+                            <div class="w-full space-y-8">
+                                {% for buffered in section_buffer %}
+                                    {{ sulu_block_render(buffered, _context) }}
+                                {% endfor %}
+                            </div>
+                        </twig:Column>
+                    </twig:Row>
+                </twig:Section>
+                {% set section_buffer = [] %}
+            {% endif %}
+
+            {{ sulu_block_render(block_item, _context) }}
+        {% else %}
+            {% set section_buffer = section_buffer|merge([block_item]) %}
         {% endif %}
+    {% endfor %}
 
-        {{ include('@SuluPrelineBlocks/blocks/section.html.twig', { block: block_item }, with_context: false) }}
-    {% else %}
-        {% set section_buffer = section_buffer|merge([block_item]) %}
+    {% if section_buffer|length > 0 %}
+        <twig:Section max_width="85rem" padding_y="default">
+            <twig:Row layout="12-col" gap="md">
+                <twig:Column col_span="12">
+                    <div class="w-full space-y-8">
+                        {% for buffered in section_buffer %}
+                            {{ sulu_block_render(buffered, _context) }}
+                        {% endfor %}
+                    </div>
+                </twig:Column>
+            </twig:Row>
+        </twig:Section>
     {% endif %}
-{% endfor %}
-
-{% if section_buffer|length > 0 %}
-    <twig:Section max_width="85rem" padding_y="default">
-        <twig:Row layout="12-col" gap="md">
-            <twig:Column col_span="12">
-                <div class="w-full space-y-8">
-                    {% for buffered in section_buffer %}
-                        {{ include(['blocks/' ~ buffered.type ~ '.html.twig', '@SuluPrelineBlocks/blocks/' ~ buffered.type ~ '.html.twig'], { block: buffered }, with_context: false, ignore_missing: true) }}
-                    {% endfor %}
-
-                </div>
-            </twig:Column>
-        </twig:Row>
-    </twig:Section>
 {% endif %}

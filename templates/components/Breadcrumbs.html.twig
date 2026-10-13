@@ -5,7 +5,7 @@
     {% for c in sulu_crumbs %}
         {% set breadcrumb_items = breadcrumb_items|merge([{
             title: c.title|default(''),
-            url: c.url|default(null)
+            url: c.url|default(null),
         }]) %}
     {% endfor %}
 {% endif %}

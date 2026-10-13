@@ -1,6 +1,9 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Popover
     title="{{ block.title|default(null) }}"
     :image="block.image|default(null)"
     :items="block.items|default([])"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

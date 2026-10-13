@@ -1,3 +1,5 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Alert
     title="{{ block.title|default(null) }}"
     content="{{ block.content|default('') }}"
@@ -7,3 +9,4 @@
     linkTitle="{{ block.link_title|default(null) }}"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}

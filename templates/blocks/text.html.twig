@@ -1,4 +1,7 @@
+{% set block = block|block_transform(_context) %}
+{% if block %}
 <twig:Text
     content="{{ block.content|default('') }}"
     :props="block|merge(block.props|default({}))"
 />
+{% endif %}
