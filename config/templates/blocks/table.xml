@@ -1,73 +1,83 @@
-<?xml version="1.0" ?>
-<template xmlns="http://schemas.sulu.io/template/template"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:xi="http://www.w3.org/2001/XInclude"
-          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
-    <key>table</key>
-    <meta>
-        <title lang="en">Data Table</title>
-        <title lang="tr">Veri Tablosu</title>
-        <title lang="de">Datentabelle</title>
-        <title lang="ru">Таблица данных</title>
-        <title lang="es">Tabla de datos</title>
-        <title lang="fr">Tableau de données</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="header_title" type="text_line">
-            <meta>
-                <title lang="en">Title Column Header</title>
-                <title lang="tr">Başlık Sütun Başlığı</title>
-            </meta>
-        </property>
-
-        <property name="header_meta" type="text_line">
-            <meta>
-                <title lang="en">Meta/Subtext Column Header</title>
-                <title lang="tr">Alt Başlık Sütun Başlığı</title>
-            </meta>
-        </property>
-
-        <property name="header_content" type="text_line">
-            <meta>
-                <title lang="en">Description Column Header</title>
-                <title lang="tr">Açıklama Sütun Başlığı</title>
-            </meta>
-        </property>
-
-        <property name="header_badge" type="text_line">
-            <meta>
-                <title lang="en">Badge/Status Column Header</title>
-                <title lang="tr">Rozet/Durum Sütun Başlığı</title>
-            </meta>
-        </property>
-
-        <property name="header_link" type="text_line">
-            <meta>
-                <title lang="en">Action/Link Column Header</title>
-                <title lang="tr">Eylem/Bağlantı Sütun Başlığı</title>
-            </meta>
-        </property>
-
-        <block name="items" default-type="table_item" minOccurs="1">
-            <meta>
-                <title lang="en">Table Rows</title>
-                <title lang="tr">Tablo Satırları</title>
-                <title lang="de">Tabellenzeilen</title>
-                <title lang="ru">Строки таблицы</title>
-                <title lang="es">Filas de tabla</title>
-                <title lang="fr">Lignes de tableau</title>
-            </meta>
-            <types>
-                <xi:include href="../block-items/table_item.xml"/>
-            </types>
-        </block>
-
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="table"/>
-            </params>
-        </property>
-    </properties>
+<?xml version="1.0"?>
+<template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+  <key>table</key>
+  <meta>
+    <title lang="en">Data Table</title>
+    <title lang="tr">Veri Tablosu</title>
+    <title lang="de">Datentabelle</title>
+    <title lang="ru">&#x422;&#x430;&#x431;&#x43B;&#x438;&#x446;&#x430; &#x434;&#x430;&#x43D;&#x43D;&#x44B;&#x445;</title>
+    <title lang="es">Tabla de datos</title>
+    <title lang="fr">Tableau de donn&#xE9;es</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <property name="header_title" type="text_line">
+      <meta>
+        <title lang="en">Title Column Header</title>
+        <title lang="tr">Ba&#x15F;l&#x131;k S&#xFC;tun Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Spalten&#xFC;berschrift Titel</title>
+        <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438; &#x43D;&#x430;&#x437;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
+        <title lang="es">Encabezado de Columna de T&#xED;tulo</title>
+        <title lang="fr">En-t&#xEA;te de Colonne Titre</title>
+      </meta>
+    </property>
+    <property name="header_meta" type="text_line">
+      <meta>
+        <title lang="en">Meta/Subtext Column Header</title>
+        <title lang="tr">Alt Ba&#x15F;l&#x131;k S&#xFC;tun Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Spalten&#xFC;berschrift Meta/Untertext</title>
+        <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438; &#x43C;&#x435;&#x442;&#x430;/&#x43F;&#x43E;&#x434;&#x437;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43A;&#x430;</title>
+        <title lang="es">Encabezado de Columna Meta/Subtexto</title>
+        <title lang="fr">En-t&#xEA;te de Colonne M&#xE9;ta/Sous-texte</title>
+      </meta>
+    </property>
+    <property name="header_content" type="text_line">
+      <meta>
+        <title lang="en">Description Column Header</title>
+        <title lang="tr">A&#xE7;&#x131;klama S&#xFC;tun Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Spalten&#xFC;berschrift Beschreibung</title>
+        <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438; &#x43E;&#x43F;&#x438;&#x441;&#x430;&#x43D;&#x438;&#x44F;</title>
+        <title lang="es">Encabezado de Columna de Descripci&#xF3;n</title>
+        <title lang="fr">En-t&#xEA;te de Colonne Description</title>
+      </meta>
+    </property>
+    <property name="header_badge" type="text_line">
+      <meta>
+        <title lang="en">Badge/Status Column Header</title>
+        <title lang="tr">Rozet/Durum S&#xFC;tun Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Spalten&#xFC;berschrift Badge/Status</title>
+        <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438; &#x437;&#x43D;&#x430;&#x447;&#x43A;&#x430;/&#x441;&#x442;&#x430;&#x442;&#x443;&#x441;&#x430;</title>
+        <title lang="es">Encabezado de Columna de Insignia/Estado</title>
+        <title lang="fr">En-t&#xEA;te de Colonne Badge/Statut</title>
+      </meta>
+    </property>
+    <property name="header_link" type="text_line">
+      <meta>
+        <title lang="en">Action/Link Column Header</title>
+        <title lang="tr">Eylem/Ba&#x11F;lant&#x131; S&#xFC;tun Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Spalten&#xFC;berschrift Aktion/Link</title>
+        <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438; &#x434;&#x435;&#x439;&#x441;&#x442;&#x432;&#x438;&#x44F;/&#x441;&#x441;&#x44B;&#x43B;&#x43A;&#x438;</title>
+        <title lang="es">Encabezado de Columna de Acci&#xF3;n/Enlace</title>
+        <title lang="fr">En-t&#xEA;te de Colonne Action/Lien</title>
+      </meta>
+    </property>
+    <block name="items" default-type="table_item" minOccurs="1">
+      <meta>
+        <title lang="en">Table Rows</title>
+        <title lang="tr">Tablo Sat&#x131;rlar&#x131;</title>
+        <title lang="de">Tabellenzeilen</title>
+        <title lang="ru">&#x421;&#x442;&#x440;&#x43E;&#x43A;&#x438; &#x442;&#x430;&#x431;&#x43B;&#x438;&#x446;&#x44B;</title>
+        <title lang="es">Filas de tabla</title>
+        <title lang="fr">Lignes de tableau</title>
+      </meta>
+      <types>
+        <xi:include href="../block-items/table_item.xml"/>
+      </types>
+    </block>
+    <property name="props" type="block_props" colspan="12">
+      <params>
+        <param name="component_type" value="table"/>
+      </params>
+    </property>
+  </properties>
 </template>

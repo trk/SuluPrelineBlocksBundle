@@ -1,45 +1,55 @@
-<?xml version="1.0" ?>
-<template xmlns="http://schemas.sulu.io/template/template"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:xi="http://www.w3.org/2001/XInclude"
-          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
-    <key>html</key>
-    <meta>
-        <title lang="en">Custom HTML / Embed</title>
-        <title lang="tr">Özel HTML / Gömülü Kod</title>
-        <title lang="de">Benutzerdefiniertes HTML / Embed</title>
-        <title lang="ru">Пользовательский HTML</title>
-        <title lang="es">HTML personalizado</title>
-        <title lang="fr">HTML personnalisé</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="content" type="text_area" mandatory="true">
-            <meta>
-                <title lang="en">HTML / Embed Code</title>
-                <title lang="tr">HTML / Gömülü Kod</title>
-                <info_text lang="en">Raw HTML, embed widgets, or external scripts. Note: Raw output should be trusted.</info_text>
-                <info_text lang="tr">Ham HTML, gömülü widget'lar veya harici komut dosyaları.</info_text>
-            </meta>
-        </property>
-
-        <property name="raw_output" type="checkbox">
-            <meta>
-                <title lang="en">Render without wrapper</title>
-                <title lang="tr">Sarmalayıcı olmadan doğrudan oluştur</title>
-                <info_text lang="en">If checked, outputs HTML directly without any surrounding container div.</info_text>
-                <info_text lang="tr">İşaretlenirse, herhangi bir sarmalayıcı div olmadan doğrudan HTML çıktısı verir.</info_text>
-            </meta>
-            <params>
-                <param name="default_value" value="false"/>
-            </params>
-        </property>
-
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="html"/>
-            </params>
-        </property>
-    </properties>
+<?xml version="1.0"?>
+<template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+  <key>html</key>
+  <meta>
+    <title lang="en">Custom HTML / Embed</title>
+    <title lang="tr">&#xD6;zel HTML / G&#xF6;m&#xFC;l&#xFC; Kod</title>
+    <title lang="de">Benutzerdefiniertes HTML / Embed</title>
+    <title lang="ru">&#x41F;&#x43E;&#x43B;&#x44C;&#x437;&#x43E;&#x432;&#x430;&#x442;&#x435;&#x43B;&#x44C;&#x441;&#x43A;&#x438;&#x439; HTML</title>
+    <title lang="es">HTML personalizado</title>
+    <title lang="fr">HTML personnalis&#xE9;</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <property name="content" type="text_area" mandatory="true">
+      <meta>
+        <title lang="en">HTML / Embed Code</title>
+        <title lang="tr">HTML / G&#xF6;m&#xFC;l&#xFC; Kod</title>
+        <info_text lang="en">Raw HTML, embed widgets, or external scripts. Note: Raw output should be trusted.</info_text>
+        <info_text lang="tr">Ham HTML, g&#xF6;m&#xFC;l&#xFC; widget'lar veya harici komut dosyalar&#x131;.</info_text>
+        <title lang="de">HTML / Einbettungscode</title>
+        <title lang="ru">HTML / &#x41A;&#x43E;&#x434; &#x432;&#x441;&#x442;&#x440;&#x430;&#x438;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
+        <title lang="es">C&#xF3;digo HTML / Incrustado</title>
+        <title lang="fr">Code HTML / Int&#xE9;gr&#xE9;</title>
+        <info_text lang="de">Rohes HTML, eingebettete Widgets oder externe Skripte. Hinweis: Nur vertrauensw&#xFC;rdigen Code verwenden.</info_text>
+        <info_text lang="ru">&#x427;&#x438;&#x441;&#x442;&#x44B;&#x439; HTML, &#x432;&#x441;&#x442;&#x440;&#x430;&#x438;&#x432;&#x430;&#x435;&#x43C;&#x44B;&#x435; &#x432;&#x438;&#x434;&#x436;&#x435;&#x442;&#x44B; &#x438;&#x43B;&#x438; &#x432;&#x43D;&#x435;&#x448;&#x43D;&#x438;&#x435; &#x441;&#x43A;&#x440;&#x438;&#x43F;&#x442;&#x44B;. &#x418;&#x441;&#x43F;&#x43E;&#x43B;&#x44C;&#x437;&#x443;&#x439;&#x442;&#x435; &#x442;&#x43E;&#x43B;&#x44C;&#x43A;&#x43E; &#x434;&#x43E;&#x432;&#x435;&#x440;&#x435;&#x43D;&#x43D;&#x44B;&#x439; &#x43A;&#x43E;&#x434;.</info_text>
+        <info_text lang="es">HTML puro, widgets incrustados o scripts externos. Nota: Use solo c&#xF3;digo de confianza.</info_text>
+        <info_text lang="fr">HTML brut, widgets int&#xE9;gr&#xE9;s ou scripts externes. Note : Utilisez uniquement du code fiable.</info_text>
+      </meta>
+    </property>
+    <property name="raw_output" type="checkbox">
+      <meta>
+        <title lang="en">Render without wrapper</title>
+        <title lang="tr">Sarmalay&#x131;c&#x131; olmadan do&#x11F;rudan olu&#x15F;tur</title>
+        <info_text lang="en">If checked, outputs HTML directly without any surrounding container div.</info_text>
+        <info_text lang="tr">&#x130;&#x15F;aretlenirse, herhangi bir sarmalay&#x131;c&#x131; div olmadan do&#x11F;rudan HTML &#xE7;&#x131;kt&#x131;s&#x131; verir.</info_text>
+        <title lang="de">Ohne Wrapper rendern</title>
+        <title lang="ru">&#x420;&#x435;&#x43D;&#x434;&#x435;&#x440;&#x438;&#x442;&#x44C; &#x431;&#x435;&#x437; &#x43E;&#x431;&#x451;&#x440;&#x442;&#x43A;&#x438;</title>
+        <title lang="es">Renderizar sin contenedor</title>
+        <title lang="fr">Rendre sans conteneur</title>
+        <info_text lang="de">Wenn aktiviert, wird HTML direkt ohne umschlie&#xDF;endes Container-Div ausgegeben.</info_text>
+        <info_text lang="ru">&#x415;&#x441;&#x43B;&#x438; &#x432;&#x43A;&#x43B;&#x44E;&#x447;&#x435;&#x43D;&#x43E;, &#x432;&#x44B;&#x432;&#x43E;&#x434;&#x438;&#x442; HTML &#x43D;&#x430;&#x43F;&#x440;&#x44F;&#x43C;&#x443;&#x44E; &#x431;&#x435;&#x437; &#x43E;&#x43A;&#x440;&#x443;&#x436;&#x430;&#x44E;&#x449;&#x435;&#x433;&#x43E; &#x43A;&#x43E;&#x43D;&#x442;&#x435;&#x439;&#x43D;&#x435;&#x440;&#x430; div.</info_text>
+        <info_text lang="es">Si se marca, genera el HTML directamente sin ning&#xFA;n div contenedor.</info_text>
+        <info_text lang="fr">Si coch&#xE9;, affiche le HTML directement sans div conteneur englobant.</info_text>
+      </meta>
+      <params>
+        <param name="default_value" value="false"/>
+      </params>
+    </property>
+    <property name="props" type="block_props" colspan="12">
+      <params>
+        <param name="component_type" value="html"/>
+      </params>
+    </property>
+  </properties>
 </template>

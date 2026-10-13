@@ -1,290 +1,375 @@
-<?xml version="1.0" ?>
-<type name="badge" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Badge Item</title>
-        <title lang="tr">Rozet Öğesi</title>
-        <title lang="de">Abzeichen-Element</title>
-        <title lang="ru">Элемент бейджа</title>
-        <title lang="es">Elemento de insignia</title>
-        <title lang="fr">Élément de badge</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
-        <xi:include href="../fields/icon.xml"/>
-
-        <property name="badge_style" type="single_select" colspan="4">
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="badge">
+  <meta>
+    <title lang="en">Badge Item</title>
+    <title lang="tr">Rozet &#xD6;&#x11F;esi</title>
+    <title lang="de">Abzeichen-Element</title>
+    <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x431;&#x435;&#x439;&#x434;&#x436;&#x430;</title>
+    <title lang="es">Elemento de insignia</title>
+    <title lang="fr">&#xC9;l&#xE9;ment de badge</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/link_title.xml"/>
+    <xi:include href="../fields/icon.xml"/>
+    <property name="badge_style" type="single_select" colspan="4">
+      <meta>
+        <title lang="en">Style / Variant</title>
+        <title lang="tr">Stil / Varyant</title>
+        <title lang="de">Stil / Variante</title>
+        <title lang="ru">&#x421;&#x442;&#x438;&#x43B;&#x44C; / &#x412;&#x430;&#x440;&#x438;&#x430;&#x43D;&#x442;</title>
+        <title lang="es">Estilo / Variante</title>
+        <title lang="fr">Style / Variante</title>
+      </meta>
+      <params>
+        <param name="default_value" value="inherit"/>
+        <param name="values" type="collection">
+          <param name="inherit">
             <meta>
-                <title lang="en">Style / Variant</title>
-                <title lang="tr">Stil / Varyant</title>
-                <title lang="de">Stil / Variante</title>
-                <title lang="ru">Стиль / Вариант</title>
-                <title lang="es">Estilo / Variante</title>
-                <title lang="fr">Style / Variante</title>
+              <title lang="en">Inherit from Card / Parent</title>
+              <title lang="tr">&#xDC;st &#xD6;&#x11F;eden Devral</title>
+              <title lang="de">Von &#xFC;bergeordnetem Element &#xFC;bernehmen</title>
+              <title lang="ru">&#x41D;&#x430;&#x441;&#x43B;&#x435;&#x434;&#x43E;&#x432;&#x430;&#x442;&#x44C; &#x43E;&#x442; &#x440;&#x43E;&#x434;&#x438;&#x442;&#x435;&#x43B;&#x44F;</title>
+              <title lang="es">Heredar del Elemento Padre</title>
+              <title lang="fr">H&#xE9;riter du Parent</title>
             </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit from Card / Parent</title>
-                            <title lang="tr">Üst Öğeden Devral</title>
-                            <title lang="de">Von übergeordnetem Element übernehmen</title>
-                        </meta>
-                    </param>
-                    <param name="soft">
-                        <meta>
-                            <title lang="en">Soft (Subtle)</title>
-                            <title lang="tr">Yumuşak (Soft)</title>
-                            <title lang="de">Sanft</title>
-                        </meta>
-                    </param>
-                    <param name="solid">
-                        <meta>
-                            <title lang="en">Solid</title>
-                            <title lang="tr">Dolu (Solid)</title>
-                            <title lang="de">Gefüllt</title>
-                        </meta>
-                    </param>
-                    <param name="outline">
-                        <meta>
-                            <title lang="en">Outline</title>
-                            <title lang="tr">Kenarlıklı (Outline)</title>
-                            <title lang="de">Umrandung</title>
-                        </meta>
-                    </param>
-                    <param name="white">
-                        <meta>
-                            <title lang="en">White</title>
-                            <title lang="tr">Beyaz (White)</title>
-                            <title lang="de">Weiß</title>
-                        </meta>
-                    </param>
-                    <param name="glass">
-                        <meta>
-                            <title lang="en">Glass (Backdrop Blur)</title>
-                            <title lang="tr">Buzlu Cam (Glass)</title>
-                            <title lang="de">Glas</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <property name="badge_color" type="single_select" colspan="4">
+          </param>
+          <param name="soft">
             <meta>
-                <title lang="en">Color</title>
-                <title lang="tr">Renk</title>
-                <title lang="de">Farbe</title>
-                <title lang="ru">Цвет</title>
-                <title lang="es">Color</title>
-                <title lang="fr">Couleur</title>
+              <title lang="en">Soft (Subtle)</title>
+              <title lang="tr">Yumu&#x15F;ak (Soft)</title>
+              <title lang="de">Sanft</title>
+              <title lang="ru">&#x41C;&#x44F;&#x433;&#x43A;&#x438;&#x439; (&#x41D;&#x435;&#x436;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">Suave (Sutil)</title>
+              <title lang="fr">Doux (Subtil)</title>
             </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit</title>
-                            <title lang="tr">Devral</title>
-                            <title lang="de">Übernehmen</title>
-                        </meta>
-                    </param>
-                    <param name="primary">
-                        <meta>
-                            <title lang="en">Primary</title>
-                            <title lang="tr">Birincil (Primary)</title>
-                            <title lang="de">Primär</title>
-                        </meta>
-                    </param>
-                    <param name="secondary">
-                        <meta>
-                            <title lang="en">Secondary</title>
-                            <title lang="tr">İkincil (Secondary)</title>
-                            <title lang="de">Sekundär</title>
-                        </meta>
-                    </param>
-                    <param name="dark">
-                        <meta>
-                            <title lang="en">Dark / Neutral</title>
-                            <title lang="tr">Koyu (Dark)</title>
-                            <title lang="de">Dunkel</title>
-                        </meta>
-                    </param>
-                    <param name="white">
-                        <meta>
-                            <title lang="en">White</title>
-                            <title lang="tr">Beyaz</title>
-                            <title lang="de">Weiß</title>
-                        </meta>
-                    </param>
-                    <param name="muted">
-                        <meta>
-                            <title lang="en">Muted / Gray</title>
-                            <title lang="tr">Gri (Muted)</title>
-                            <title lang="de">Gedämpft</title>
-                        </meta>
-                    </param>
-                    <param name="success">
-                        <meta>
-                            <title lang="en">Success (Teal / Green)</title>
-                            <title lang="tr">Başarılı (Yeşil / Teal)</title>
-                            <title lang="de">Erfolg</title>
-                        </meta>
-                    </param>
-                    <param name="warning">
-                        <meta>
-                            <title lang="en">Warning (Yellow)</title>
-                            <title lang="tr">Uyarı (Sarı)</title>
-                            <title lang="de">Warnung</title>
-                        </meta>
-                    </param>
-                    <param name="danger">
-                        <meta>
-                            <title lang="en">Danger (Red)</title>
-                            <title lang="tr">Tehlike (Kırmızı)</title>
-                            <title lang="de">Gefahr</title>
-                        </meta>
-                    </param>
-                    <param name="info">
-                        <meta>
-                            <title lang="en">Info (Blue / Cyan)</title>
-                            <title lang="tr">Bilgi (Mavi / Cyan)</title>
-                            <title lang="de">Info</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <property name="size" type="single_select" colspan="4">
+          </param>
+          <param name="solid">
             <meta>
-                <title lang="en">Size</title>
-                <title lang="tr">Boyut</title>
-                <title lang="de">Größe</title>
-                <title lang="ru">Размер</title>
-                <title lang="es">Tamaño</title>
-                <title lang="fr">Taille</title>
+              <title lang="en">Solid</title>
+              <title lang="tr">Dolu (Solid)</title>
+              <title lang="de">Gef&#xFC;llt</title>
+              <title lang="ru">&#x421;&#x43F;&#x43B;&#x43E;&#x448;&#x43D;&#x43E;&#x439; (Solid)</title>
+              <title lang="es">S&#xF3;lido</title>
+              <title lang="fr">Plein (Solid)</title>
             </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit (Default xs)</title>
-                            <title lang="tr">Devral (Varsayılan xs)</title>
-                        </meta>
-                    </param>
-                    <param name="xs">
-                        <meta>
-                            <title lang="en">XS (Extra Small)</title>
-                            <title lang="tr">Çok Küçük (xs)</title>
-                        </meta>
-                    </param>
-                    <param name="sm">
-                        <meta>
-                            <title lang="en">SM (Small)</title>
-                            <title lang="tr">Küçük (sm)</title>
-                        </meta>
-                    </param>
-                    <param name="md">
-                        <meta>
-                            <title lang="en">MD (Medium)</title>
-                            <title lang="tr">Orta (md)</title>
-                        </meta>
-                    </param>
-                    <param name="lg">
-                        <meta>
-                            <title lang="en">LG (Large)</title>
-                            <title lang="tr">Büyük (lg)</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <property name="rounded" type="single_select" colspan="4">
+          </param>
+          <param name="outline">
             <meta>
-                <title lang="en">Shape / Radius</title>
-                <title lang="tr">Şekil / Köşe Yuvarlaklığı</title>
-                <title lang="de">Form / Radius</title>
-                <title lang="ru">Форма / Скругление</title>
-                <title lang="es">Forma / Radio</title>
-                <title lang="fr">Forme / Rayon</title>
+              <title lang="en">Outline</title>
+              <title lang="tr">Kenarl&#x131;kl&#x131; (Outline)</title>
+              <title lang="de">Umrandung</title>
+              <title lang="ru">&#x41A;&#x43E;&#x43D;&#x442;&#x443;&#x440;&#x43D;&#x44B;&#x439; (Outline)</title>
+              <title lang="es">Contorno (Outline)</title>
+              <title lang="fr">Contour (Outline)</title>
             </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit (Default Pill)</title>
-                            <title lang="tr">Devral (Varsayılan Yuvarlak)</title>
-                        </meta>
-                    </param>
-                    <param name="pill">
-                        <meta>
-                            <title lang="en">Pill (Fully Rounded)</title>
-                            <title lang="tr">Hap (Tam Yuvarlak)</title>
-                        </meta>
-                    </param>
-                    <param name="rounded">
-                        <meta>
-                            <title lang="en">Rounded (Slightly Rounded)</title>
-                            <title lang="tr">Hafif Yuvarlak (md)</title>
-                        </meta>
-                    </param>
-                    <param name="square">
-                        <meta>
-                            <title lang="en">Square (Sharp)</title>
-                            <title lang="tr">Köşeli (Düz)</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <property name="icon_align" type="single_select" colspan="4">
+          </param>
+          <param name="white">
             <meta>
-                <title lang="en">Icon Position</title>
-                <title lang="tr">İkon Konumu</title>
-                <title lang="de">Symbolposition</title>
-                <title lang="ru">Позиция иконки</title>
-                <title lang="es">Posición del icono</title>
-                <title lang="fr">Position de l'icône</title>
+              <title lang="en">White</title>
+              <title lang="tr">Beyaz (White)</title>
+              <title lang="de">Wei&#xDF;</title>
+              <title lang="ru">&#x411;&#x435;&#x43B;&#x44B;&#x439;</title>
+              <title lang="es">Blanco</title>
+              <title lang="fr">Blanc</title>
             </meta>
-            <params>
-                <param name="default_value" value="left"/>
-                <param name="values" type="collection">
-                    <param name="left">
-                        <meta>
-                            <title lang="en">Left (Leading)</title>
-                            <title lang="tr">Sol</title>
-                        </meta>
-                    </param>
-                    <param name="right">
-                        <meta>
-                            <title lang="en">Right (Trailing)</title>
-                            <title lang="tr">Sağ</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <property name="has_dot" type="checkbox" colspan="4">
+          </param>
+          <param name="glass">
             <meta>
-                <title lang="en">Display Status Dot</title>
-                <title lang="tr">Durum Noktası Göster</title>
-                <title lang="de">Statuspunkt anzeigen</title>
-                <title lang="ru">Показывать точку статуса</title>
-                <title lang="es">Mostrar punto de estado</title>
-                <title lang="fr">Afficher le point de statut</title>
+              <title lang="en">Glass (Backdrop Blur)</title>
+              <title lang="tr">Buzlu Cam (Glass)</title>
+              <title lang="de">Glas</title>
+              <title lang="ru">&#x421;&#x442;&#x435;&#x43A;&#x43B;&#x43E; (&#x420;&#x430;&#x437;&#x43C;&#x44B;&#x442;&#x438;&#x435;)</title>
+              <title lang="es">Cristal (Desenfoque)</title>
+              <title lang="fr">Verre D&#xE9;poli (Blur)</title>
             </meta>
-            <params>
-                <param name="default_value" value="false"/>
-            </params>
-        </property>
-    </properties>
+          </param>
+        </param>
+      </params>
+    </property>
+    <property name="badge_color" type="single_select" colspan="4">
+      <meta>
+        <title lang="en">Color</title>
+        <title lang="tr">Renk</title>
+        <title lang="de">Farbe</title>
+        <title lang="ru">&#x426;&#x432;&#x435;&#x442;</title>
+        <title lang="es">Color</title>
+        <title lang="fr">Couleur</title>
+      </meta>
+      <params>
+        <param name="default_value" value="inherit"/>
+        <param name="values" type="collection">
+          <param name="inherit">
+            <meta>
+              <title lang="en">Inherit</title>
+              <title lang="tr">Devral</title>
+              <title lang="de">&#xDC;bernehmen</title>
+              <title lang="ru">&#x41D;&#x430;&#x441;&#x43B;&#x435;&#x434;&#x43E;&#x432;&#x430;&#x442;&#x44C;</title>
+              <title lang="es">Heredar</title>
+              <title lang="fr">H&#xE9;riter</title>
+            </meta>
+          </param>
+          <param name="primary">
+            <meta>
+              <title lang="en">Primary</title>
+              <title lang="tr">Birincil (Primary)</title>
+              <title lang="de">Prim&#xE4;r</title>
+              <title lang="ru">&#x41E;&#x441;&#x43D;&#x43E;&#x432;&#x43D;&#x43E;&#x439;</title>
+              <title lang="es">Primario</title>
+              <title lang="fr">Primaire</title>
+            </meta>
+          </param>
+          <param name="secondary">
+            <meta>
+              <title lang="en">Secondary</title>
+              <title lang="tr">&#x130;kincil (Secondary)</title>
+              <title lang="de">Sekund&#xE4;r</title>
+              <title lang="ru">&#x412;&#x442;&#x43E;&#x440;&#x438;&#x447;&#x43D;&#x44B;&#x439;</title>
+              <title lang="es">Secundario</title>
+              <title lang="fr">Secondaire</title>
+            </meta>
+          </param>
+          <param name="dark">
+            <meta>
+              <title lang="en">Dark / Neutral</title>
+              <title lang="tr">Koyu (Dark)</title>
+              <title lang="de">Dunkel</title>
+              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; / &#x41D;&#x435;&#x439;&#x442;&#x440;&#x430;&#x43B;&#x44C;&#x43D;&#x44B;&#x439;</title>
+              <title lang="es">Oscuro / Neutro</title>
+              <title lang="fr">Sombre / Neutre</title>
+            </meta>
+          </param>
+          <param name="white">
+            <meta>
+              <title lang="en">White</title>
+              <title lang="tr">Beyaz</title>
+              <title lang="de">Wei&#xDF;</title>
+              <title lang="ru">&#x411;&#x435;&#x43B;&#x44B;&#x439;</title>
+              <title lang="es">Blanco</title>
+              <title lang="fr">Blanc</title>
+            </meta>
+          </param>
+          <param name="muted">
+            <meta>
+              <title lang="en">Muted / Gray</title>
+              <title lang="tr">Gri (Muted)</title>
+              <title lang="de">Ged&#xE4;mpft</title>
+              <title lang="ru">&#x41F;&#x440;&#x438;&#x433;&#x43B;&#x443;&#x448;&#x451;&#x43D;&#x43D;&#x44B;&#x439; / &#x421;&#x435;&#x440;&#x44B;&#x439;</title>
+              <title lang="es">Atenuado / Gris</title>
+              <title lang="fr">Att&#xE9;nu&#xE9; / Gris</title>
+            </meta>
+          </param>
+          <param name="success">
+            <meta>
+              <title lang="en">Success (Teal / Green)</title>
+              <title lang="tr">Ba&#x15F;ar&#x131;l&#x131; (Ye&#x15F;il / Teal)</title>
+              <title lang="de">Erfolg</title>
+              <title lang="ru">&#x423;&#x441;&#x43F;&#x435;&#x445; (&#x417;&#x435;&#x43B;&#x451;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">&#xC9;xito (Verde)</title>
+              <title lang="fr">Succ&#xE8;s (Vert)</title>
+            </meta>
+          </param>
+          <param name="warning">
+            <meta>
+              <title lang="en">Warning (Yellow)</title>
+              <title lang="tr">Uyar&#x131; (Sar&#x131;)</title>
+              <title lang="de">Warnung</title>
+              <title lang="ru">&#x41F;&#x440;&#x435;&#x434;&#x443;&#x43F;&#x440;&#x435;&#x436;&#x434;&#x435;&#x43D;&#x438;&#x435; (&#x416;&#x451;&#x43B;&#x442;&#x44B;&#x439;)</title>
+              <title lang="es">Advertencia (Amarillo)</title>
+              <title lang="fr">Avertissement (Jaune)</title>
+            </meta>
+          </param>
+          <param name="danger">
+            <meta>
+              <title lang="en">Danger (Red)</title>
+              <title lang="tr">Tehlike (K&#x131;rm&#x131;z&#x131;)</title>
+              <title lang="de">Gefahr</title>
+              <title lang="ru">&#x41E;&#x43F;&#x430;&#x441;&#x43D;&#x43E;&#x441;&#x442;&#x44C; (&#x41A;&#x440;&#x430;&#x441;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">Peligro (Rojo)</title>
+              <title lang="fr">Danger (Rouge)</title>
+            </meta>
+          </param>
+          <param name="info">
+            <meta>
+              <title lang="en">Info (Blue / Cyan)</title>
+              <title lang="tr">Bilgi (Mavi / Cyan)</title>
+              <title lang="de">Info</title>
+              <title lang="ru">&#x418;&#x43D;&#x444;&#x43E; (&#x421;&#x438;&#x43D;&#x438;&#x439; / &#x413;&#x43E;&#x43B;&#x443;&#x431;&#x43E;&#x439;)</title>
+              <title lang="es">Info (Azul / Cian)</title>
+              <title lang="fr">Info (Bleu / Cyan)</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <property name="size" type="single_select" colspan="4">
+      <meta>
+        <title lang="en">Size</title>
+        <title lang="tr">Boyut</title>
+        <title lang="de">Gr&#xF6;&#xDF;e</title>
+        <title lang="ru">&#x420;&#x430;&#x437;&#x43C;&#x435;&#x440;</title>
+        <title lang="es">Tama&#xF1;o</title>
+        <title lang="fr">Taille</title>
+      </meta>
+      <params>
+        <param name="default_value" value="inherit"/>
+        <param name="values" type="collection">
+          <param name="inherit">
+            <meta>
+              <title lang="en">Inherit (Default xs)</title>
+              <title lang="tr">Devral (Varsay&#x131;lan xs)</title>
+              <title lang="de">&#xDC;bernehmen (Standard xs)</title>
+              <title lang="ru">&#x41D;&#x430;&#x441;&#x43B;&#x435;&#x434;&#x43E;&#x432;&#x430;&#x442;&#x44C; (&#x43F;&#x43E; &#x443;&#x43C;&#x43E;&#x43B;&#x447;. xs)</title>
+              <title lang="es">Heredar (Predeterminado xs)</title>
+              <title lang="fr">H&#xE9;riter (Par d&#xE9;faut xs)</title>
+            </meta>
+          </param>
+          <param name="xs">
+            <meta>
+              <title lang="en">XS (Extra Small)</title>
+              <title lang="tr">&#xC7;ok K&#xFC;&#xE7;&#xFC;k (xs)</title>
+              <title lang="de">XS (Extra Klein)</title>
+              <title lang="ru">XS (&#x41E;&#x447;&#x435;&#x43D;&#x44C; &#x43C;&#x430;&#x43B;&#x44B;&#x439;)</title>
+              <title lang="es">XS (Extra Peque&#xF1;o)</title>
+              <title lang="fr">XS (Tr&#xE8;s Petit)</title>
+            </meta>
+          </param>
+          <param name="sm">
+            <meta>
+              <title lang="en">SM (Small)</title>
+              <title lang="tr">K&#xFC;&#xE7;&#xFC;k (sm)</title>
+              <title lang="de">SM (Klein)</title>
+              <title lang="ru">SM (&#x41C;&#x430;&#x43B;&#x44B;&#x439;)</title>
+              <title lang="es">SM (Peque&#xF1;o)</title>
+              <title lang="fr">SM (Petit)</title>
+            </meta>
+          </param>
+          <param name="md">
+            <meta>
+              <title lang="en">MD (Medium)</title>
+              <title lang="tr">Orta (md)</title>
+              <title lang="de">MD (Mittel)</title>
+              <title lang="ru">MD (&#x421;&#x440;&#x435;&#x434;&#x43D;&#x438;&#x439;)</title>
+              <title lang="es">MD (Mediano)</title>
+              <title lang="fr">MD (Moyen)</title>
+            </meta>
+          </param>
+          <param name="lg">
+            <meta>
+              <title lang="en">LG (Large)</title>
+              <title lang="tr">B&#xFC;y&#xFC;k (lg)</title>
+              <title lang="de">LG (Gro&#xDF;)</title>
+              <title lang="ru">LG (&#x411;&#x43E;&#x43B;&#x44C;&#x448;&#x43E;&#x439;)</title>
+              <title lang="es">LG (Grande)</title>
+              <title lang="fr">LG (Grand)</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <property name="rounded" type="single_select" colspan="4">
+      <meta>
+        <title lang="en">Shape / Radius</title>
+        <title lang="tr">&#x15E;ekil / K&#xF6;&#x15F;e Yuvarlakl&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Form / Radius</title>
+        <title lang="ru">&#x424;&#x43E;&#x440;&#x43C;&#x430; / &#x421;&#x43A;&#x440;&#x443;&#x433;&#x43B;&#x435;&#x43D;&#x438;&#x435;</title>
+        <title lang="es">Forma / Radio</title>
+        <title lang="fr">Forme / Rayon</title>
+      </meta>
+      <params>
+        <param name="default_value" value="inherit"/>
+        <param name="values" type="collection">
+          <param name="inherit">
+            <meta>
+              <title lang="en">Inherit (Default Pill)</title>
+              <title lang="tr">Devral (Varsay&#x131;lan Yuvarlak)</title>
+              <title lang="de">&#xDC;bernehmen (Standard Pill)</title>
+              <title lang="ru">&#x41D;&#x430;&#x441;&#x43B;&#x435;&#x434;&#x43E;&#x432;&#x430;&#x442;&#x44C; (&#x43F;&#x43E; &#x443;&#x43C;&#x43E;&#x43B;&#x447;. &#x43A;&#x430;&#x43F;&#x441;&#x443;&#x43B;&#x430;)</title>
+              <title lang="es">Heredar (P&#xED;ldora Predeterminada)</title>
+              <title lang="fr">H&#xE9;riter (Pilule par d&#xE9;faut)</title>
+            </meta>
+          </param>
+          <param name="pill">
+            <meta>
+              <title lang="en">Pill (Fully Rounded)</title>
+              <title lang="tr">Hap (Tam Yuvarlak)</title>
+              <title lang="de">Pille (Voll abgerundet)</title>
+              <title lang="ru">&#x41A;&#x430;&#x43F;&#x441;&#x443;&#x43B;&#x430; (&#x41F;&#x43E;&#x43B;&#x43D;&#x43E;&#x441;&#x442;&#x44C;&#x44E; &#x441;&#x43A;&#x440;&#x443;&#x433;&#x43B;&#x451;&#x43D;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">P&#xED;ldora (Totalmente Redondeado)</title>
+              <title lang="fr">Pilule (Arrondi Complet)</title>
+            </meta>
+          </param>
+          <param name="rounded">
+            <meta>
+              <title lang="en">Rounded (Slightly Rounded)</title>
+              <title lang="tr">Hafif Yuvarlak (md)</title>
+              <title lang="de">Abgerundet (Leicht)</title>
+              <title lang="ru">&#x421;&#x43A;&#x440;&#x443;&#x433;&#x43B;&#x451;&#x43D;&#x43D;&#x44B;&#x439; (&#x421;&#x43B;&#x435;&#x433;&#x43A;&#x430;)</title>
+              <title lang="es">Redondeado (Ligeramente)</title>
+              <title lang="fr">Arrondi (L&#xE9;g&#xE8;rement)</title>
+            </meta>
+          </param>
+          <param name="square">
+            <meta>
+              <title lang="en">Square (Sharp)</title>
+              <title lang="tr">K&#xF6;&#x15F;eli (D&#xFC;z)</title>
+              <title lang="de">Eckig (Scharf)</title>
+              <title lang="ru">&#x41A;&#x432;&#x430;&#x434;&#x440;&#x430;&#x442;&#x43D;&#x44B;&#x439; (&#x41E;&#x441;&#x442;&#x440;&#x44B;&#x435; &#x443;&#x433;&#x43B;&#x44B;)</title>
+              <title lang="es">Cuadrado (Esquinas Rectas)</title>
+              <title lang="fr">Carr&#xE9; (Angles Vifs)</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <property name="icon_align" type="single_select" colspan="4">
+      <meta>
+        <title lang="en">Icon Position</title>
+        <title lang="tr">&#x130;kon Konumu</title>
+        <title lang="de">Symbolposition</title>
+        <title lang="ru">&#x41F;&#x43E;&#x437;&#x438;&#x446;&#x438;&#x44F; &#x438;&#x43A;&#x43E;&#x43D;&#x43A;&#x438;</title>
+        <title lang="es">Posici&#xF3;n del icono</title>
+        <title lang="fr">Position de l'ic&#xF4;ne</title>
+      </meta>
+      <params>
+        <param name="default_value" value="left"/>
+        <param name="values" type="collection">
+          <param name="left">
+            <meta>
+              <title lang="en">Left (Leading)</title>
+              <title lang="tr">Sol</title>
+              <title lang="de">Links (Anfang)</title>
+              <title lang="ru">&#x421;&#x43B;&#x435;&#x432;&#x430; (&#x412; &#x43D;&#x430;&#x447;&#x430;&#x43B;&#x435;)</title>
+              <title lang="es">Izquierda (Inicio)</title>
+              <title lang="fr">Gauche (D&#xE9;but)</title>
+            </meta>
+          </param>
+          <param name="right">
+            <meta>
+              <title lang="en">Right (Trailing)</title>
+              <title lang="tr">Sa&#x11F;</title>
+              <title lang="de">Rechts (Ende)</title>
+              <title lang="ru">&#x421;&#x43F;&#x440;&#x430;&#x432;&#x430; (&#x412; &#x43A;&#x43E;&#x43D;&#x446;&#x435;)</title>
+              <title lang="es">Derecha (Final)</title>
+              <title lang="fr">Droite (Fin)</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <property name="has_dot" type="checkbox" colspan="4">
+      <meta>
+        <title lang="en">Display Status Dot</title>
+        <title lang="tr">Durum Noktas&#x131; G&#xF6;ster</title>
+        <title lang="de">Statuspunkt anzeigen</title>
+        <title lang="ru">&#x41F;&#x43E;&#x43A;&#x430;&#x437;&#x44B;&#x432;&#x430;&#x442;&#x44C; &#x442;&#x43E;&#x447;&#x43A;&#x443; &#x441;&#x442;&#x430;&#x442;&#x443;&#x441;&#x430;</title>
+        <title lang="es">Mostrar punto de estado</title>
+        <title lang="fr">Afficher le point de statut</title>
+      </meta>
+      <params>
+        <param name="default_value" value="false"/>
+      </params>
+    </property>
+  </properties>
 </type>

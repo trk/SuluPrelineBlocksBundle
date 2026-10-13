@@ -1,28 +1,35 @@
-<?xml version="1.0" ?>
-<type name="map_item" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Map Location</title>
-        <title lang="tr">Harita Konumu</title>
-        <title lang="de">Kartenstandort</title>
-        <title lang="ru">Точка на карте</title>
-        <title lang="es">Ubicación en el mapa</title>
-        <title lang="fr">Emplacement sur la carte</title>
-    </meta>
-    <properties>
-        <property name="location" type="text_line" mandatory="true">
-            <meta>
-                <title lang="en">Address or Coordinates</title>
-                <title lang="tr">Adres veya Koordinat</title>
-                <info_text lang="en">e.g. 'Levent, Istanbul' or '41.0822, 29.0118'</info_text>
-                <info_text lang="tr">Örn: 'Levent, İstanbul' veya '41.0822, 29.0118'</info_text>
-            </meta>
-        </property>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/meta.xml"/>
-        <xi:include href="../fields/content.xml"/>
-        <xi:include href="../fields/image.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
-    </properties>
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="map_item">
+  <meta>
+    <title lang="en">Map Location</title>
+    <title lang="tr">Harita Konumu</title>
+    <title lang="de">Kartenstandort</title>
+    <title lang="ru">&#x422;&#x43E;&#x447;&#x43A;&#x430; &#x43D;&#x430; &#x43A;&#x430;&#x440;&#x442;&#x435;</title>
+    <title lang="es">Ubicaci&#xF3;n en el mapa</title>
+    <title lang="fr">Emplacement sur la carte</title>
+  </meta>
+  <properties>
+    <property name="location" type="text_line" mandatory="true">
+      <meta>
+        <title lang="en">Address or Coordinates</title>
+        <title lang="tr">Adres veya Koordinat</title>
+        <info_text lang="en">e.g. 'Levent, Istanbul' or '41.0822, 29.0118'</info_text>
+        <info_text lang="tr">&#xD6;rn: 'Levent, &#x130;stanbul' veya '41.0822, 29.0118'</info_text>
+        <title lang="de">Adresse oder Koordinaten</title>
+        <title lang="ru">&#x410;&#x434;&#x440;&#x435;&#x441; &#x438;&#x43B;&#x438; &#x43A;&#x43E;&#x43E;&#x440;&#x434;&#x438;&#x43D;&#x430;&#x442;&#x44B;</title>
+        <title lang="es">Direcci&#xF3;n o Coordenadas</title>
+        <title lang="fr">Adresse ou Coordonn&#xE9;es</title>
+        <info_text lang="de">z. B. 'Levent, Istanbul' oder '41.0822, 29.0118'</info_text>
+        <info_text lang="ru">&#x43D;&#x430;&#x43F;&#x440;., 'Levent, Istanbul' &#x438;&#x43B;&#x438; '41.0822, 29.0118'</info_text>
+        <info_text lang="es">ej. 'Levent, Istanbul' o '41.0822, 29.0118'</info_text>
+        <info_text lang="fr">ex. 'Levent, Istanbul' ou '41.0822, 29.0118'</info_text>
+      </meta>
+    </property>
+    <xi:include href="../fields/title.xml"/>
+    <xi:include href="../fields/meta.xml"/>
+    <xi:include href="../fields/content.xml"/>
+    <xi:include href="../fields/image.xml"/>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/link_title.xml"/>
+  </properties>
 </type>

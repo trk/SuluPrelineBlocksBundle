@@ -1,34 +1,33 @@
-<?xml version="1.0" ?>
-<template xmlns="http://schemas.sulu.io/template/template"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:xi="http://www.w3.org/2001/XInclude"
-          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
-    <key>nav</key>
-    <meta>
-        <title lang="en">Sidebar / Vertical Nav</title>
-        <title lang="tr">Dikey Menü (Kenar Çubuğu)</title>
-        <title lang="de">Vertikale Navigation</title>
-        <title lang="ru">Вертикальное меню</title>
-        <title lang="es">Navegación vertical</title>
-        <title lang="fr">Navigation verticale</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="nav_item" minOccurs="1">
-            <meta>
-                <title lang="en">Navigation Items</title>
-                <title lang="tr">Menü Öğeleri</title>
-            </meta>
-            <types>
-                <xi:include href="../block-items/nav_item.xml"/>
-            </types>
-        </block>
-
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="nav"/>
-            </params>
-        </property>
-    </properties>
+<?xml version="1.0"?>
+<template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+  <key>nav</key>
+  <meta>
+    <title lang="en">Sidebar / Vertical Nav</title>
+    <title lang="tr">Dikey Men&#xFC; (Kenar &#xC7;ubu&#x11F;u)</title>
+    <title lang="de">Vertikale Navigation</title>
+    <title lang="ru">&#x412;&#x435;&#x440;&#x442;&#x438;&#x43A;&#x430;&#x43B;&#x44C;&#x43D;&#x43E;&#x435; &#x43C;&#x435;&#x43D;&#x44E;</title>
+    <title lang="es">Navegaci&#xF3;n vertical</title>
+    <title lang="fr">Navigation verticale</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <block name="items" default-type="nav_item" minOccurs="1">
+      <meta>
+        <title lang="en">Navigation Items</title>
+        <title lang="tr">Men&#xFC; &#xD6;&#x11F;eleri</title>
+        <title lang="de">Navigationselemente</title>
+        <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442;&#x44B; &#x43D;&#x430;&#x432;&#x438;&#x433;&#x430;&#x446;&#x438;&#x438;</title>
+        <title lang="es">Elementos de Navegaci&#xF3;n</title>
+        <title lang="fr">&#xC9;l&#xE9;ments de Navigation</title>
+      </meta>
+      <types>
+        <xi:include href="../block-items/nav_item.xml"/>
+      </types>
+    </block>
+    <property name="props" type="block_props" colspan="12">
+      <params>
+        <param name="component_type" value="nav"/>
+      </params>
+    </property>
+  </properties>
 </template>

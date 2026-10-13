@@ -1,64 +1,84 @@
-<?xml version="1.0" ?>
-<type name="slideshow_item" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Slide Item</title>
-        <title lang="tr">Slayt Maddesi</title>
-        <title lang="de">Folienelement</title>
-        <title lang="ru">Элемент слайда</title>
-        <title lang="es">Elemento de diapositiva</title>
-        <title lang="fr">Élément de diapositive</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/meta.xml"/>
-        <xi:include href="../fields/content.xml"/>
-        <xi:include href="../fields/image.xml"/>
-
-        <property name="overlay_style" type="single_select" colspan="6">
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="slideshow_item">
+  <meta>
+    <title lang="en">Slide Item</title>
+    <title lang="tr">Slayt Maddesi</title>
+    <title lang="de">Folienelement</title>
+    <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x441;&#x43B;&#x430;&#x439;&#x434;&#x430;</title>
+    <title lang="es">Elemento de diapositiva</title>
+    <title lang="fr">&#xC9;l&#xE9;ment de diapositive</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <xi:include href="../fields/meta.xml"/>
+    <xi:include href="../fields/content.xml"/>
+    <xi:include href="../fields/image.xml"/>
+    <property name="overlay_style" type="single_select" colspan="6">
+      <meta>
+        <title lang="en">Overlay Filter</title>
+        <title lang="tr">Karartma / Filtre</title>
+        <title lang="de">&#xDC;berlagerungsfilter</title>
+        <title lang="ru">&#x424;&#x438;&#x43B;&#x44C;&#x442;&#x440; &#x43D;&#x430;&#x43B;&#x43E;&#x436;&#x435;&#x43D;&#x438;&#x44F;</title>
+        <title lang="es">Filtro de Superposici&#xF3;n</title>
+        <title lang="fr">Filtre de Superposition</title>
+      </meta>
+      <params>
+        <param name="values" type="collection">
+          <param name="dark_medium">
             <meta>
-                <title lang="en">Overlay Filter</title>
-                <title lang="tr">Karartma / Filtre</title>
-                <title lang="de">Überlagerungsfilter</title>
+              <title lang="en">Dark Medium (50%)</title>
+              <title lang="tr">Karanl&#x131;k Orta (%50)</title>
+              <title lang="de">Dunkel Mittel (50%)</title>
+              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x441;&#x440;&#x435;&#x434;&#x43D;&#x438;&#x439; (50%)</title>
+              <title lang="es">Oscuro Medio (50%)</title>
+              <title lang="fr">Sombre Moyen (50%)</title>
             </meta>
-            <params>
-                <param name="values" type="collection">
-                    <param name="dark_medium">
-                        <meta>
-                            <title lang="en">Dark Medium (50%)</title>
-                            <title lang="tr">Karanlık Orta (%50)</title>
-                        </meta>
-                    </param>
-                    <param name="dark_soft">
-                        <meta>
-                            <title lang="en">Dark Soft (30%)</title>
-                            <title lang="tr">Karanlık Hafif (%30)</title>
-                        </meta>
-                    </param>
-                    <param name="dark_strong">
-                        <meta>
-                            <title lang="en">Dark Strong (70%)</title>
-                            <title lang="tr">Karanlık Yoğun (%70)</title>
-                        </meta>
-                    </param>
-                    <param name="gradient">
-                        <meta>
-                            <title lang="en">Bottom Gradient</title>
-                            <title lang="tr">Alttan Gradyan</title>
-                        </meta>
-                    </param>
-                    <param name="none">
-                        <meta>
-                            <title lang="en">None</title>
-                            <title lang="tr">Yok</title>
-                        </meta>
-                    </param>
-                </param>
-                <param name="default_value" value="dark_medium"/>
-            </params>
-        </property>
-
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
-    </properties>
+          </param>
+          <param name="dark_soft">
+            <meta>
+              <title lang="en">Dark Soft (30%)</title>
+              <title lang="tr">Karanl&#x131;k Hafif (%30)</title>
+              <title lang="de">Dunkel Sanft (30%)</title>
+              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x43C;&#x44F;&#x433;&#x43A;&#x438;&#x439; (30%)</title>
+              <title lang="es">Oscuro Suave (30%)</title>
+              <title lang="fr">Sombre Doux (30%)</title>
+            </meta>
+          </param>
+          <param name="dark_strong">
+            <meta>
+              <title lang="en">Dark Strong (70%)</title>
+              <title lang="tr">Karanl&#x131;k Yo&#x11F;un (%70)</title>
+              <title lang="de">Dunkel Stark (70%)</title>
+              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x441;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; (70%)</title>
+              <title lang="es">Oscuro Intenso (70%)</title>
+              <title lang="fr">Sombre Intense (70%)</title>
+            </meta>
+          </param>
+          <param name="gradient">
+            <meta>
+              <title lang="en">Bottom Gradient</title>
+              <title lang="tr">Alttan Gradyan</title>
+              <title lang="de">Verlauf von unten</title>
+              <title lang="ru">&#x413;&#x440;&#x430;&#x434;&#x438;&#x435;&#x43D;&#x442; &#x441;&#x43D;&#x438;&#x437;&#x443;</title>
+              <title lang="es">Degradado Inferior</title>
+              <title lang="fr">D&#xE9;grad&#xE9; Inf&#xE9;rieur</title>
+            </meta>
+          </param>
+          <param name="none">
+            <meta>
+              <title lang="en">None</title>
+              <title lang="tr">Yok</title>
+              <title lang="de">Keine</title>
+              <title lang="ru">&#x41D;&#x435;&#x442;</title>
+              <title lang="es">Ninguno</title>
+              <title lang="fr">Aucun</title>
+            </meta>
+          </param>
+        </param>
+        <param name="default_value" value="dark_medium"/>
+      </params>
+    </property>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/link_title.xml"/>
+  </properties>
 </type>

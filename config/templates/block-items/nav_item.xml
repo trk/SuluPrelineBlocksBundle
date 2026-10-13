@@ -1,48 +1,76 @@
-<?xml version="1.0" ?>
-<type name="nav_item" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Navigation Item</title>
-        <title lang="tr">Menü Öğesi</title>
-        <title lang="de">Navigationselement</title>
-        <title lang="ru">Элемент меню</title>
-        <title lang="es">Elemento de navegación</title>
-        <title lang="fr">Élément de navigation</title>
-    </meta>
-    <properties>
-        <property name="item_type" type="single_select">
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="nav_item">
+  <meta>
+    <title lang="en">Navigation Item</title>
+    <title lang="tr">Men&#xFC; &#xD6;&#x11F;esi</title>
+    <title lang="de">Navigationselement</title>
+    <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x43C;&#x435;&#x43D;&#x44E;</title>
+    <title lang="es">Elemento de navegaci&#xF3;n</title>
+    <title lang="fr">&#xC9;l&#xE9;ment de navigation</title>
+  </meta>
+  <properties>
+    <property name="item_type" type="single_select">
+      <meta>
+        <title lang="en">Type</title>
+        <title lang="tr">T&#xFC;r</title>
+        <title lang="de">Typ</title>
+        <title lang="ru">&#x422;&#x438;&#x43F;</title>
+        <title lang="es">Tipo</title>
+        <title lang="fr">Type</title>
+      </meta>
+      <params>
+        <param name="default_value" value="link"/>
+        <param name="values" type="collection">
+          <param name="link">
             <meta>
-                <title lang="en">Type</title>
-                <title lang="tr">Tür</title>
+              <title lang="en">Link</title>
+              <title lang="tr">Ba&#x11F;lant&#x131;</title>
+              <title lang="de">Link</title>
+              <title lang="ru">&#x421;&#x441;&#x44B;&#x43B;&#x43A;&#x430;</title>
+              <title lang="es">Enlace</title>
+              <title lang="fr">Lien</title>
             </meta>
-            <params>
-                <param name="default_value" value="link"/>
-                <param name="values" type="collection">
-                    <param name="link">
-                        <meta><title lang="en">Link</title><title lang="tr">Bağlantı</title></meta>
-                    </param>
-                    <param name="header">
-                        <meta><title lang="en">Section Header</title><title lang="tr">Bölüm Başlığı</title></meta>
-                    </param>
-                    <param name="divider">
-                        <meta><title lang="en">Divider Line</title><title lang="tr">Ayırıcı Çizgi</title></meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/meta.xml"/>
-        <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/badge.xml"/>
-        <property name="is_active" type="checkbox">
+          </param>
+          <param name="header">
             <meta>
-                <title lang="en">Is Active</title>
-                <title lang="tr">Aktif mi</title>
+              <title lang="en">Section Header</title>
+              <title lang="tr">B&#xF6;l&#xFC;m Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+              <title lang="de">Abschnitts&#xFC;berschrift</title>
+              <title lang="ru">&#x417;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x440;&#x430;&#x437;&#x434;&#x435;&#x43B;&#x430;</title>
+              <title lang="es">Encabezado de Secci&#xF3;n</title>
+              <title lang="fr">En-t&#xEA;te de Section</title>
             </meta>
-            <params>
-                <param name="default_value" value="false"/>
-            </params>
-        </property>
-    </properties>
+          </param>
+          <param name="divider">
+            <meta>
+              <title lang="en">Divider Line</title>
+              <title lang="tr">Ay&#x131;r&#x131;c&#x131; &#xC7;izgi</title>
+              <title lang="de">Trennlinie</title>
+              <title lang="ru">&#x420;&#x430;&#x437;&#x434;&#x435;&#x43B;&#x438;&#x442;&#x435;&#x43B;&#x44C;&#x43D;&#x430;&#x44F; &#x43B;&#x438;&#x43D;&#x438;&#x44F;</title>
+              <title lang="es">L&#xED;nea Divisoria</title>
+              <title lang="fr">Ligne de S&#xE9;paration</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <xi:include href="../fields/title.xml"/>
+    <xi:include href="../fields/meta.xml"/>
+    <xi:include href="../fields/icon.xml"/>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/badge.xml"/>
+    <property name="is_active" type="checkbox">
+      <meta>
+        <title lang="en">Is Active</title>
+        <title lang="tr">Aktif mi</title>
+        <title lang="de">Ist aktiv</title>
+        <title lang="ru">&#x410;&#x43A;&#x442;&#x438;&#x432;&#x43D;&#x44B;&#x439;</title>
+        <title lang="es">Est&#xE1; Activo</title>
+        <title lang="fr">Est Actif</title>
+      </meta>
+      <params>
+        <param name="default_value" value="false"/>
+      </params>
+    </property>
+  </properties>
 </type>

@@ -1,31 +1,33 @@
-<?xml version="1.0" ?>
-<type name="subnav_item" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Subnav Item</title>
-        <title lang="tr">Alt Menü Maddesi</title>
-        <title lang="de">Unternavigationselement</title>
-        <title lang="ru">Элемент поднавигации</title>
-        <title lang="es">Elemento de subnavegación</title>
-        <title lang="fr">Élément de sous-navigation</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/badge.xml"/>
-
-        <property name="is_active" type="checkbox" colspan="6">
-            <meta>
-                <title lang="en">Active / Selected</title>
-                <title lang="tr">Aktif / Seçili</title>
-                <title lang="de">Aktiv / Ausgewählt</title>
-                <title lang="ru">Активный / Выбранный</title>
-                <title lang="es">Activo / Seleccionado</title>
-                <title lang="fr">Actif / Sélectionné</title>
-                <info_text lang="en">Marks this item as the currently active link</info_text>
-                <info_text lang="tr">Bu maddenin seçili/aktif görünmesini sağlar</info_text>
-            </meta>
-        </property>
-    </properties>
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="subnav_item">
+  <meta>
+    <title lang="en">Subnav Item</title>
+    <title lang="tr">Alt Men&#xFC; Maddesi</title>
+    <title lang="de">Unternavigationselement</title>
+    <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x43F;&#x43E;&#x434;&#x43D;&#x430;&#x432;&#x438;&#x433;&#x430;&#x446;&#x438;&#x438;</title>
+    <title lang="es">Elemento de subnavegaci&#xF3;n</title>
+    <title lang="fr">&#xC9;l&#xE9;ment de sous-navigation</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/icon.xml"/>
+    <xi:include href="../fields/badge.xml"/>
+    <property name="is_active" type="checkbox" colspan="6">
+      <meta>
+        <title lang="en">Active / Selected</title>
+        <title lang="tr">Aktif / Se&#xE7;ili</title>
+        <title lang="de">Aktiv / Ausgew&#xE4;hlt</title>
+        <title lang="ru">&#x410;&#x43A;&#x442;&#x438;&#x432;&#x43D;&#x44B;&#x439; / &#x412;&#x44B;&#x431;&#x440;&#x430;&#x43D;&#x43D;&#x44B;&#x439;</title>
+        <title lang="es">Activo / Seleccionado</title>
+        <title lang="fr">Actif / S&#xE9;lectionn&#xE9;</title>
+        <info_text lang="en">Marks this item as the currently active link</info_text>
+        <info_text lang="tr">Bu maddenin se&#xE7;ili/aktif g&#xF6;r&#xFC;nmesini sa&#x11F;lar</info_text>
+        <info_text lang="de">Markiert dieses Element als aktuell aktiven Link</info_text>
+        <info_text lang="ru">&#x41E;&#x442;&#x43C;&#x435;&#x447;&#x430;&#x435;&#x442; &#x44D;&#x442;&#x43E;&#x442; &#x44D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x43A;&#x430;&#x43A; &#x430;&#x43A;&#x442;&#x438;&#x432;&#x43D;&#x443;&#x44E; &#x441;&#x441;&#x44B;&#x43B;&#x43A;&#x443;</info_text>
+        <info_text lang="es">Marca este elemento como el enlace activo actual</info_text>
+        <info_text lang="fr">Marque cet &#xE9;l&#xE9;ment comme le lien actuellement actif</info_text>
+      </meta>
+    </property>
+  </properties>
 </type>

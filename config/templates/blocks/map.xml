@@ -1,83 +1,130 @@
-<?xml version="1.0" ?>
-<template xmlns="http://schemas.sulu.io/template/template"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:xi="http://www.w3.org/2001/XInclude"
-          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
-    <key>map</key>
-    <meta>
-        <title lang="en">Map</title>
-        <title lang="tr">Harita</title>
-        <title lang="de">Karte</title>
-        <title lang="ru">Карта</title>
-        <title lang="es">Mapa</title>
-        <title lang="fr">Carte</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="location_query" type="text_line">
+<?xml version="1.0"?>
+<template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+  <key>map</key>
+  <meta>
+    <title lang="en">Map</title>
+    <title lang="tr">Harita</title>
+    <title lang="de">Karte</title>
+    <title lang="ru">&#x41A;&#x430;&#x440;&#x442;&#x430;</title>
+    <title lang="es">Mapa</title>
+    <title lang="fr">Carte</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <property name="location_query" type="text_line">
+      <meta>
+        <title lang="en">Location or Address</title>
+        <title lang="tr">Konum veya Adres</title>
+        <info_text lang="en">Enter an address or coordinates (e.g. 'Istanbul, Turkey' or '41.0082, 28.9784')</info_text>
+        <info_text lang="tr">Bir adres veya koordinat girin (&#xF6;rn: '&#x130;stanbul, T&#xFC;rkiye' veya '41.0082, 28.9784')</info_text>
+        <title lang="de">Ort oder Adresse</title>
+        <title lang="ru">&#x41C;&#x435;&#x441;&#x442;&#x43E;&#x43F;&#x43E;&#x43B;&#x43E;&#x436;&#x435;&#x43D;&#x438;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441;</title>
+        <title lang="es">Ubicaci&#xF3;n o Direcci&#xF3;n</title>
+        <title lang="fr">Lieu ou Adresse</title>
+        <info_text lang="de">Adresse oder Koordinaten eingeben (z. B. 'Istanbul, Turkey' oder '41.0082, 28.9784')</info_text>
+        <info_text lang="ru">&#x412;&#x432;&#x435;&#x434;&#x438;&#x442;&#x435; &#x430;&#x434;&#x440;&#x435;&#x441; &#x438;&#x43B;&#x438; &#x43A;&#x43E;&#x43E;&#x440;&#x434;&#x438;&#x43D;&#x430;&#x442;&#x44B; (&#x43D;&#x430;&#x43F;&#x440;&#x438;&#x43C;&#x435;&#x440;, 'Istanbul, Turkey' &#x438;&#x43B;&#x438; '41.0082, 28.9784')</info_text>
+        <info_text lang="es">Introduzca una direcci&#xF3;n o coordenadas (ej. 'Istanbul, Turkey' o '41.0082, 28.9784')</info_text>
+        <info_text lang="fr">Saisissez une adresse ou des coordonn&#xE9;es (ex. 'Istanbul, Turkey' ou '41.0082, 28.9784')</info_text>
+      </meta>
+    </property>
+    <property name="zoom" type="number">
+      <meta>
+        <title lang="en">Zoom Level</title>
+        <title lang="tr">Yak&#x131;nla&#x15F;t&#x131;rma D&#xFC;zeyi</title>
+        <title lang="de">Zoomstufe</title>
+        <title lang="ru">&#x423;&#x440;&#x43E;&#x432;&#x435;&#x43D;&#x44C; &#x43C;&#x430;&#x441;&#x448;&#x442;&#x430;&#x431;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
+        <title lang="es">Nivel de Zoom</title>
+        <title lang="fr">Niveau de Zoom</title>
+      </meta>
+      <params>
+        <param name="min" value="1"/>
+        <param name="max" value="20"/>
+        <param name="step" value="1"/>
+        <param name="default_value" value="14"/>
+      </params>
+    </property>
+    <property name="aspect_ratio" type="single_select">
+      <meta>
+        <title lang="en">Aspect Ratio</title>
+        <title lang="tr">En/Boy Oran&#x131;</title>
+        <title lang="de">Seitenverh&#xE4;ltnis</title>
+        <title lang="ru">&#x421;&#x43E;&#x43E;&#x442;&#x43D;&#x43E;&#x448;&#x435;&#x43D;&#x438;&#x435; &#x441;&#x442;&#x43E;&#x440;&#x43E;&#x43D;</title>
+        <title lang="es">Relaci&#xF3;n de Aspecto</title>
+        <title lang="fr">Rapport d'Aspect</title>
+      </meta>
+      <params>
+        <param name="default_value" value="16/9"/>
+        <param name="values" type="collection">
+          <param name="16/9">
             <meta>
-                <title lang="en">Location or Address</title>
-                <title lang="tr">Konum veya Adres</title>
-                <info_text lang="en">Enter an address or coordinates (e.g. 'Istanbul, Turkey' or '41.0082, 28.9784')</info_text>
-                <info_text lang="tr">Bir adres veya koordinat girin (örn: 'İstanbul, Türkiye' veya '41.0082, 28.9784')</info_text>
+              <title lang="en">16:9 (Widescreen)</title>
+              <title lang="tr">16:9 (Geni&#x15F;)</title>
+              <title lang="de">16:9 (Breitbild)</title>
+              <title lang="ru">16:9 (&#x428;&#x438;&#x440;&#x43E;&#x43A;&#x43E;&#x44D;&#x43A;&#x440;&#x430;&#x43D;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">16:9 (Panor&#xE1;mico)</title>
+              <title lang="fr">16:9 (&#xC9;cran Large)</title>
             </meta>
-        </property>
-
-        <property name="zoom" type="number">
+          </param>
+          <param name="4/3">
             <meta>
-                <title lang="en">Zoom Level</title>
-                <title lang="tr">Yakınlaştırma Düzeyi</title>
+              <title lang="en">4:3 (Standard)</title>
+              <title lang="tr">4:3 (Standart)</title>
+              <title lang="de">4:3 (Standard)</title>
+              <title lang="ru">4:3 (&#x421;&#x442;&#x430;&#x43D;&#x434;&#x430;&#x440;&#x442;&#x43D;&#x44B;&#x439;)</title>
+              <title lang="es">4:3 (Est&#xE1;ndar)</title>
+              <title lang="fr">4:3 (Standard)</title>
             </meta>
-            <params>
-                <param name="min" value="1"/>
-                <param name="max" value="20"/>
-                <param name="step" value="1"/>
-                <param name="default_value" value="14"/>
-            </params>
-        </property>
-
-        <property name="aspect_ratio" type="single_select">
+          </param>
+          <param name="21/9">
             <meta>
-                <title lang="en">Aspect Ratio</title>
-                <title lang="tr">En/Boy Oranı</title>
+              <title lang="en">21:9 (Ultrawide)</title>
+              <title lang="tr">21:9 (Ultra Geni&#x15F;)</title>
+              <title lang="de">21:9 (Ultrabreit)</title>
+              <title lang="ru">21:9 (&#x423;&#x43B;&#x44C;&#x442;&#x440;&#x430;&#x448;&#x438;&#x440;&#x43E;&#x43A;&#x438;&#x439;)</title>
+              <title lang="es">21:9 (Ultra Panor&#xE1;mico)</title>
+              <title lang="fr">21:9 (Ultra Large)</title>
             </meta>
-            <params>
-                <param name="default_value" value="16/9"/>
-                <param name="values" type="collection">
-                    <param name="16/9">
-                        <meta><title lang="en">16:9 (Widescreen)</title><title lang="tr">16:9 (Geniş)</title></meta>
-                    </param>
-                    <param name="4/3">
-                        <meta><title lang="en">4:3 (Standard)</title><title lang="tr">4:3 (Standart)</title></meta>
-                    </param>
-                    <param name="21/9">
-                        <meta><title lang="en">21:9 (Ultrawide)</title><title lang="tr">21:9 (Ultra Geniş)</title></meta>
-                    </param>
-                    <param name="1/1">
-                        <meta><title lang="en">1:1 (Square)</title><title lang="tr">1:1 (Kare)</title></meta>
-                    </param>
-                    <param name="auto">
-                        <meta><title lang="en">Auto / Fixed Height</title><title lang="tr">Otomatik / Sabit Yükseklik</title></meta>
-                    </param>
-                </param>
-            </params>
-        </property>
-
-        <block name="items" default-type="map_item">
+          </param>
+          <param name="1/1">
             <meta>
-                <title lang="en">Additional Location Pins</title>
-                <title lang="tr">Ek Konum Noktaları</title>
+              <title lang="en">1:1 (Square)</title>
+              <title lang="tr">1:1 (Kare)</title>
+              <title lang="de">1:1 (Quadrat)</title>
+              <title lang="ru">1:1 (&#x41A;&#x432;&#x430;&#x434;&#x440;&#x430;&#x442;)</title>
+              <title lang="es">1:1 (Cuadrado)</title>
+              <title lang="fr">1:1 (Carr&#xE9;)</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/map_item.xml"/>
-            </types>
-        </block>
-
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="map"/>
-            </params>
-        </property>
-    </properties>
+          </param>
+          <param name="auto">
+            <meta>
+              <title lang="en">Auto / Fixed Height</title>
+              <title lang="tr">Otomatik / Sabit Y&#xFC;kseklik</title>
+              <title lang="de">Auto / Feste H&#xF6;he</title>
+              <title lang="ru">&#x410;&#x432;&#x442;&#x43E; / &#x424;&#x438;&#x43A;&#x441;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x43D;&#x430;&#x44F; &#x432;&#x44B;&#x441;&#x43E;&#x442;&#x430;</title>
+              <title lang="es">Auto / Altura Fija</title>
+              <title lang="fr">Auto / Hauteur Fixe</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
+    <block name="items" default-type="map_item">
+      <meta>
+        <title lang="en">Additional Location Pins</title>
+        <title lang="tr">Ek Konum Noktalar&#x131;</title>
+        <title lang="de">Zus&#xE4;tzliche Standort-Pins</title>
+        <title lang="ru">&#x414;&#x43E;&#x43F;&#x43E;&#x43B;&#x43D;&#x438;&#x442;&#x435;&#x43B;&#x44C;&#x43D;&#x44B;&#x435; &#x43C;&#x435;&#x442;&#x43A;&#x438; &#x43D;&#x430; &#x43A;&#x430;&#x440;&#x442;&#x435;</title>
+        <title lang="es">Marcadores de Ubicaci&#xF3;n Adicionales</title>
+        <title lang="fr">Marqueurs de Lieu Suppl&#xE9;mentaires</title>
+      </meta>
+      <types>
+        <xi:include href="../block-items/map_item.xml"/>
+      </types>
+    </block>
+    <property name="props" type="block_props" colspan="12">
+      <params>
+        <param name="component_type" value="map"/>
+      </params>
+    </property>
+  </properties>
 </template>

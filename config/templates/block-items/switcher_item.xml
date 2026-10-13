@@ -1,32 +1,36 @@
-<?xml version="1.0" ?>
-<type name="switcher_item" xmlns="http://schemas.sulu.io/template/template"
-      xmlns:xi="http://www.w3.org/2001/XInclude">
-    <meta>
-        <title lang="en">Switcher Tab Item</title>
-        <title lang="tr">Sekme Maddesi</title>
-        <title lang="de">Registerkartenelement</title>
-        <title lang="ru">Элемент вкладки</title>
-        <title lang="es">Elemento de pestaña</title>
-        <title lang="fr">Élément d'onglet</title>
-    </meta>
-    <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="nav_title" type="text_line" colspan="6">
-            <meta>
-                <title lang="en">Tab Button Label</title>
-                <title lang="tr">Sekme Buton Başlığı</title>
-                <title lang="de">Tab-Schaltflächenbeschriftung</title>
-                <info_text lang="en">Optional override label for the tab button. If empty, the Title above is used.</info_text>
-                <info_text lang="tr">Sekme butonunda görünecek özel metin. Boş bırakılırsa yukarıdaki Başlık kullanılır.</info_text>
-            </meta>
-        </property>
-
-        <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/badge.xml"/>
-        <xi:include href="../fields/image.xml"/>
-        <xi:include href="../fields/content.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
-    </properties>
+<?xml version="1.0"?>
+<type xmlns="http://schemas.sulu.io/template/template" xmlns:xi="http://www.w3.org/2001/XInclude" name="switcher_item">
+  <meta>
+    <title lang="en">Switcher Tab Item</title>
+    <title lang="tr">Sekme Maddesi</title>
+    <title lang="de">Registerkartenelement</title>
+    <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442; &#x432;&#x43A;&#x43B;&#x430;&#x434;&#x43A;&#x438;</title>
+    <title lang="es">Elemento de pesta&#xF1;a</title>
+    <title lang="fr">&#xC9;l&#xE9;ment d'onglet</title>
+  </meta>
+  <properties>
+    <xi:include href="../fields/title.xml"/>
+    <property name="nav_title" type="text_line" colspan="6">
+      <meta>
+        <title lang="en">Tab Button Label</title>
+        <title lang="tr">Sekme Buton Ba&#x15F;l&#x131;&#x11F;&#x131;</title>
+        <title lang="de">Tab-Schaltfl&#xE4;chenbeschriftung</title>
+        <info_text lang="en">Optional override label for the tab button. If empty, the Title above is used.</info_text>
+        <info_text lang="tr">Sekme butonunda g&#xF6;r&#xFC;necek &#xF6;zel metin. Bo&#x15F; b&#x131;rak&#x131;l&#x131;rsa yukar&#x131;daki Ba&#x15F;l&#x131;k kullan&#x131;l&#x131;r.</info_text>
+        <title lang="ru">&#x422;&#x435;&#x43A;&#x441;&#x442; &#x43A;&#x43D;&#x43E;&#x43F;&#x43A;&#x438; &#x432;&#x43A;&#x43B;&#x430;&#x434;&#x43A;&#x438;</title>
+        <title lang="es">Etiqueta del Bot&#xF3;n de Pesta&#xF1;a</title>
+        <title lang="fr">Libell&#xE9; du Bouton d'Onglet</title>
+        <info_text lang="de">Optionale Beschriftung f&#xFC;r die Tab-Schaltfl&#xE4;che. Wenn leer, wird der obige Titel verwendet.</info_text>
+        <info_text lang="ru">&#x41D;&#x435;&#x43E;&#x431;&#x44F;&#x437;&#x430;&#x442;&#x435;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; &#x442;&#x435;&#x43A;&#x441;&#x442; &#x434;&#x43B;&#x44F; &#x43A;&#x43D;&#x43E;&#x43F;&#x43A;&#x438; &#x432;&#x43A;&#x43B;&#x430;&#x434;&#x43A;&#x438;. &#x415;&#x441;&#x43B;&#x438; &#x43F;&#x443;&#x441;&#x442;&#x43E;, &#x438;&#x441;&#x43F;&#x43E;&#x43B;&#x44C;&#x437;&#x443;&#x435;&#x442;&#x441;&#x44F; &#x437;&#x430;&#x433;&#x43E;&#x43B;&#x43E;&#x432;&#x43E;&#x43A; &#x432;&#x44B;&#x448;&#x435;.</info_text>
+        <info_text lang="es">Etiqueta opcional para el bot&#xF3;n de pesta&#xF1;a. Si est&#xE1; vac&#xED;o, se usa el T&#xED;tulo anterior.</info_text>
+        <info_text lang="fr">Libell&#xE9; optionnel pour le bouton d&#x2019;onglet. Si vide, le Titre ci-dessus est utilis&#xE9;.</info_text>
+      </meta>
+    </property>
+    <xi:include href="../fields/icon.xml"/>
+    <xi:include href="../fields/badge.xml"/>
+    <xi:include href="../fields/image.xml"/>
+    <xi:include href="../fields/content.xml"/>
+    <xi:include href="../fields/link.xml"/>
+    <xi:include href="../fields/link_title.xml"/>
+  </properties>
 </type>
