@@ -2,9 +2,10 @@
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.customAttributes|merge({class: this.columnClasses, id: this.elementId})) }}>
     {% if this.hasBlocks %}
+        {% set render_context = this.context is not empty ? this.context : _context %}
         <div class="w-full space-y-6">
-            {% for item in this.normalizedBlocks|hydrate_blocks(_context) %}
-                {{ sulu_block_render(item, _context) }}
+            {% for item in this.normalizedBlocks|hydrate_blocks(render_context) %}
+                {{ sulu_block_render(item, render_context) }}
             {% endfor %}
         </div>
     {% endif %}

@@ -3,5 +3,6 @@
 <twig:Section
     :rows="block.rows|default([])"
     :props="block|merge(block._props|default({}))"
+    :context="_context"
 />
 {% endif %}

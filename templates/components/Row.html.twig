@@ -7,6 +7,7 @@
                 <twig:Column
                     :blocks="col.blocks|default([])"
                     :props="col"
+                    :context="this.context"
                 />
             {% endfor %}
         {% endif %}

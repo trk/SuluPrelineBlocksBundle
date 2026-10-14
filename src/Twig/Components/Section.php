@@ -28,6 +28,11 @@ final class Section
      */
     public array $props = [];
 
+    /**
+     * @var array<string, mixed>
+     */
+    public array $context = [];
+
     private function resolveStringProp(string $key, string $current, string $default): string
     {
         if ($current !== $default) {

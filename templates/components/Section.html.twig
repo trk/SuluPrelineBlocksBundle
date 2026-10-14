@@ -8,6 +8,7 @@
                     <twig:Row
                         :columns="row.columns|default([])"
                         :props="row"
+                        :context="this.context"
                     />
                 {% endfor %}
             </div>
