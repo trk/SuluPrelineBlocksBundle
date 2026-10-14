@@ -85,4 +85,23 @@ final class ElementTransformTest extends TestCase
         $this->assertStringContainsString('hidden sm:block', $result);
         $this->assertStringContainsString('shadow-2xl', $result);
     }
+
+    public function testCustomAttributesAndScopedCss(): void
+    {
+        $props = [
+            'id' => 'feature-card',
+            'attributes' => "data-hs-overlay=\"#modal-1\"\naria-controls=\"panel-1\"\nonclick=\"evil()\"",
+            'css' => '.el-element { background: #111; }',
+        ];
+
+        $attrs = ElementTransform::resolveCustomAttributes($props);
+        $this->assertSame('#modal-1', $attrs['data-hs-overlay'] ?? null);
+        $this->assertSame('panel-1', $attrs['aria-controls'] ?? null);
+        $this->assertArrayNotHasKey('onclick', $attrs);
+
+        $scopedCss = ElementTransform::resolveScopedCss($props);
+        $this->assertSame('#feature-card { background: #111; }', $scopedCss);
+    }
 }
+
+

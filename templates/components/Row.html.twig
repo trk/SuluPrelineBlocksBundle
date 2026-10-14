@@ -1,5 +1,6 @@
 {# Preline UI 5 / Tailwind CSS 4 Grid Row Component #}
-<div {{ attributes.defaults({class: 'w-full my-4', id: this.elementId}) }}>
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<div {{ attributes.defaults(this.customAttributes|merge({class: 'w-full my-4', id: this.elementId})) }}>
     <div class="{{ this.rowClasses }}">
         {% if this.hasColumns %}
             {% for col in this.normalizedColumns %}

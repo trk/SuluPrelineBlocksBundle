@@ -65,6 +65,19 @@ final class Row
         return ElementTransform::resolveId($this->props);
     }
 
+    /**
+     * @return array<string, string|bool>
+     */
+    public function getCustomAttributes(): array
+    {
+        return ElementTransform::resolveCustomAttributes($this->props);
+    }
+
+    public function getScopedCss(): ?string
+    {
+        return ElementTransform::resolveScopedCss($this->props);
+    }
+
     public function getResolvedLayout(): string
     {
         return $this->resolveStringProp('layout', $this->layout, 'halves');

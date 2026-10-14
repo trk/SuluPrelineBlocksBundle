@@ -1,5 +1,6 @@
 {# Preline UI 5 / Tailwind CSS 4 Section Container Component #}
-<section {{ attributes.defaults({class: this.sectionClasses, id: this.elementId}) }}>
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<section {{ attributes.defaults(this.customAttributes|merge({class: this.sectionClasses, id: this.elementId})) }}>
     <div class="{{ this.containerClasses }} relative z-10">
         {% if this.hasRows %}
             <div class="space-y-8">

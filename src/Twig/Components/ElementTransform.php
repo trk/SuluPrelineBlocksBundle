@@ -298,7 +298,7 @@ final class ElementTransform
     }
 
     /**
-     * Resolve an HTML id attribute if provided.
+     * Resolve an HTML id attribute if provided, or auto-generate a stable id when custom CSS is defined.
      *
      * @param array<string, mixed> $props
      */
@@ -308,6 +308,65 @@ final class ElementTransform
             return \trim($props['id']);
         }
 
+        if (isset($props['_id']) && \is_string($props['_id']) && '' !== \trim($props['_id'])) {
+            return \trim($props['_id']);
+        }
+
+        if (isset($props['css']) && \is_string($props['css']) && '' !== \trim($props['css'])) {
+            return 'el-' . \substr(\md5(\serialize($props)), 0, 8);
+        }
+
         return null;
+    }
+
+    /**
+     * Resolve custom HTML attributes (key=value lines) from props.
+     *
+     * @param array<string, mixed> $props
+     *
+     * @return array<string, string|bool>
+     */
+    public static function resolveCustomAttributes(array $props): array
+    {
+        if (isset($props['_attributes']) && \is_array($props['_attributes'])) {
+            /** @var array<string, string|bool> $attrs */
+            $attrs = $props['_attributes'];
+            unset($attrs['id'], $attrs['class']);
+
+            return $attrs;
+        }
+
+        $raw = $props['attributes'] ?? null;
+        if (!\is_string($raw) || '' === \trim($raw)) {
+            return [];
+        }
+
+        return \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer::parseAttributes($raw);
+    }
+
+    /**
+     * Resolve scoped CSS rules for the element when custom CSS is defined.
+     *
+     * @param array<string, mixed> $props
+     */
+    public static function resolveScopedCss(array $props): ?string
+    {
+        if (isset($props['_scoped_css']) && \is_string($props['_scoped_css']) && '' !== \trim($props['_scoped_css'])) {
+            return \trim($props['_scoped_css']);
+        }
+
+        $rawCss = $props['css'] ?? null;
+        if (!\is_string($rawCss) || '' === \trim($rawCss)) {
+            return null;
+        }
+
+        $elementId = self::resolveId($props);
+        if (null === $elementId || '' === $elementId) {
+            return null;
+        }
+
+        $scoped = \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer::scopeCss($rawCss, '#' . $elementId);
+
+        return '' !== $scoped ? $scoped : null;
     }
 }
