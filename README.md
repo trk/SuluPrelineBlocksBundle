@@ -17,7 +17,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 - [Overview & Philosophy](#overview--philosophy)
 - [Key Features](#key-features)
-- [Included Blocks & Block Items (45 XML Definitions)](#included-blocks--block-items-45-xml-definitions)
+- [Included Blocks & Block Items (50 Block XMLs + 12 Field Fragments)](#included-blocks--block-items-50-block-xmls--12-field-fragments)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Architecture & Override Mechanics](#architecture--override-mechanics)
@@ -30,10 +30,10 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Overview & Philosophy
 
-`SuluPrelineBlocksBundle` provides a complete library of **31 top-level Sulu CMS blocks and 14 nested block-items** alongside **Symfony UX Twig Components** built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
+`SuluPrelineBlocksBundle` provides a complete library of **33 top-level Sulu CMS blocks, 17 nested block-items, and 12 reusable field fragments** alongside **Symfony UX Twig Components** built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
 
-1. **100% Native Sulu XML Block Definitions (`config/templates/blocks/*.xml` & `config/templates/block-items/*.xml`)**: Every block defines its editorial fields in `<section name="content">` and its visual/layout options directly in `<section name="settings">` using native Sulu field types (`single_select`, `checkbox`, `text_line`, `color`, `number`). No external YAML prop schemas are needed.
-2. **Compile-Time Shared Tab Inheritance**: Through `trk/sulu-block-suite-bundle`, every block automatically compiles with inline `Content`, `Settings`, `General`, `Dynamic Content`, and `Advanced` tabs in Sulu Admin (`FormMetadata`), with all non-content fields automatically namespaced under `props/*`.
+1. **100% Native Sulu XML Block Definitions (`config/templates/blocks/*.xml`, `config/templates/block-items/*.xml` & `config/templates/fields/*.xml`)**: Every block defines its editorial fields in `<section name="content">` and its visual/layout options directly in `<section name="settings">` using native Sulu field types (`single_select`, `checkbox`, `text_line`, `color`, `number`). No external YAML prop schemas are needed.
+2. **Compile-Time Shared Tab Inheritance**: Through `trk/sulu-block-suite-bundle`, every block automatically compiles with inline `Content`, `Settings`, `General`, `Dynamic Content` (for data-driven blocks), and `Advanced` tabs in Sulu Admin (`FormMetadata`), with all non-content fields automatically namespaced under `props/*`.
 3. **Zero Bundled Opinionated Presets**: Presets belong strictly to the host project (`config/blocks/presets/*.yaml`) or CMS editors (`block_preset` snippets managed via the `Advanced` tab).
 4. **Decoupled Symfony UX Twig Components (`src/Twig/Components/` & `templates/components/`)**: Type-safe PHP component classes and accessible Preline UI 5 templates. Sulu block templates (`templates/blocks/*.html.twig`) act purely as thin data adapters forwarding block properties and `props` to Twig Components.
 
@@ -41,7 +41,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Key Features
 
-- **31 Top-Level Blocks & 14 Block Items**:
+- **33 Top-Level Blocks, 17 Block Items & 12 Field Fragments**:
   - Layout containers (`section`, `row_item`, `column_item`)
   - Typography & content (`headline`, `text`, `page_header`, `quotation`, `code`, `html`, `divider`)
   - Cards & collections (`card`, `grid`, `list`, `description_list`, `table`)
@@ -53,9 +53,9 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ---
 
-## Included Blocks & Block Items (45 XML Definitions)
+## Included Blocks & Block Items (50 Block XMLs + 12 Field Fragments)
 
-| Category | Top-Level Blocks | Nested Block Items |
+| Category | Top-Level Blocks (33) | Nested Block Items (17) |
 | --- | --- | --- |
 | **Layout Containers** | `section` | `row_item`, `column_item` |
 | **Typography & Content** | `headline`, `text`, `page_header`, `quotation`, `code`, `html`, `divider` | — |
