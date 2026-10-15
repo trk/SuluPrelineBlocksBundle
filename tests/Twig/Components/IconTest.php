@@ -49,7 +49,7 @@ final class IconTest extends TestCase
         self::assertSame('circle_solid', $icon->getIconStyle());
         self::assertSame('lg', $icon->getIconSize());
         self::assertStringContainsString('rounded-full', $icon->getContainerClasses());
-        self::assertStringContainsString('bg-primary-600', $icon->getContainerClasses());
+        self::assertStringContainsString('bg-primary', $icon->getContainerClasses());
         self::assertStringContainsString('w-16 h-16', $icon->getContainerClasses());
         self::assertStringContainsString('justify-center', $icon->getAlignClasses());
     }

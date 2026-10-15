@@ -38,7 +38,7 @@ final class HtmlBlockTest extends TestCase
         $html = new HtmlBlock();
         $html->props = ['card' => true];
 
-        self::assertStringContainsString('border border-gray-200', $html->getWrapperClasses());
-        self::assertStringContainsString('dark:bg-neutral-900', $html->getWrapperClasses());
+        self::assertStringContainsString('border border-card-line', $html->getWrapperClasses());
+        self::assertStringContainsString('bg-card', $html->getWrapperClasses());
     }
 }

@@ -49,8 +49,8 @@ final class BadgeTest extends TestCase
 
         self::assertTrue($badge->hasDot());
         $classes = $badge->getClasses();
-        self::assertStringContainsString('bg-red-500', $classes);
-        self::assertStringContainsString('text-white', $classes);
+        self::assertStringContainsString('bg-destructive', $classes);
+        self::assertStringContainsString('text-destructive-foreground', $classes);
         self::assertStringContainsString('py-2 px-3', $classes);
         self::assertStringContainsString('rounded-md', $classes);
 

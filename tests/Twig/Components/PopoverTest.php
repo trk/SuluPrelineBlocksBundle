@@ -131,13 +131,13 @@ final class PopoverTest extends TestCase
         $popover = new Popover();
 
         $primary = $popover->getMarkerColorClasses('primary');
-        self::assertStringContainsString('bg-primary-600', $primary['inner']);
+        self::assertStringContainsString('bg-primary', $primary['inner']);
 
         $dark = $popover->getMarkerColorClasses('dark');
-        self::assertStringContainsString('bg-gray-900', $dark['inner']);
+        self::assertStringContainsString('bg-inverse', $dark['inner']);
 
         $light = $popover->getMarkerColorClasses('light');
-        self::assertStringContainsString('bg-white', $light['inner']);
+        self::assertStringContainsString('bg-layer', $light['inner']);
 
         $accent = $popover->getMarkerColorClasses('accent');
         self::assertStringContainsString('bg-amber-500', $accent['inner']);
@@ -146,6 +146,6 @@ final class PopoverTest extends TestCase
         self::assertStringContainsString('bg-emerald-600', $success['inner']);
 
         $danger = $popover->getMarkerColorClasses('danger');
-        self::assertStringContainsString('bg-rose-600', $danger['inner']);
+        self::assertStringContainsString('bg-destructive', $danger['inner']);
     }
 }

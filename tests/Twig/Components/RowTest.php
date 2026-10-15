@@ -41,7 +41,7 @@ final class RowTest extends TestCase
         self::assertSame('grid-cols-1 md:grid-cols-3', $row->getLayoutClasses());
         self::assertSame('gap-8 sm:gap-12', $row->getGapClasses());
         self::assertSame('items-center', $row->getAlignItemsClasses());
-        self::assertStringContainsString('divide-gray-200', $row->getDividerClasses());
+        self::assertStringContainsString('divide-border', $row->getDividerClasses());
 
         $row->props['layout'] = 'quarters';
         self::assertSame('grid-cols-1 sm:grid-cols-2 lg:grid-cols-4', $row->getLayoutClasses());

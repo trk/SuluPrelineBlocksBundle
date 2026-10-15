@@ -44,7 +44,7 @@ final class AlertTest extends TestCase
         $alert->props = ['alert_style' => 'danger', 'alert_variant' => 'glass'];
         self::assertSame('danger', $alert->getAlertStyle());
         self::assertSame('glass', $alert->getAlertVariant());
-        self::assertStringContainsString('backdrop-blur-md bg-red-500/10', $alert->getAlertClasses());
+        self::assertStringContainsString('backdrop-blur-md bg-destructive/10', $alert->getAlertClasses());
         self::assertSame('ti ti-alert-circle', $alert->getResolvedIcon());
 
         $alert->props = ['alert_style' => 'dark', 'alert_variant' => 'soft'];

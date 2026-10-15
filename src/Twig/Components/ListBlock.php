@@ -144,9 +144,9 @@ final class ListBlock
         $color = $props['marker_color'] ?? 'primary';
 
         return match ($color) {
-            'secondary' => 'text-secondary-600 dark:text-secondary-400',
-            'muted', 'neutral' => 'text-gray-400 dark:text-neutral-500',
-            default => 'text-primary-600 dark:text-primary-500',
+            'secondary' => 'text-secondary',
+            'muted', 'neutral' => 'text-muted-foreground',
+            default => 'text-primary',
         };
     }
 
@@ -207,7 +207,7 @@ final class ListBlock
             $classes[] = 'flex flex-wrap items-center';
             $classes[] = $this->getSpacingClasses();
             if ('divider' === $style) {
-                $classes[] = 'divide-x divide-gray-200 dark:divide-neutral-700';
+                $classes[] = 'divide-x divide-border';
             }
         } else {
             $columns = $props['columns'] ?? '1';
@@ -224,7 +224,7 @@ final class ListBlock
             }
 
             if ('divider' === $style) {
-                $classes[] = 'divide-y divide-gray-200 dark:divide-neutral-700';
+                $classes[] = 'divide-y divide-border';
             }
 
             if ('disc' === $marker) {
@@ -252,10 +252,10 @@ final class ListBlock
             default => 'text-sm sm:text-base',
         };
 
-        $classes[] = 'text-gray-800 dark:text-neutral-200';
+        $classes[] = 'text-foreground';
 
         if ('striped' === $style) {
-            $classes[] = 'p-3 rounded-lg odd:bg-transparent even:bg-gray-50 dark:even:bg-neutral-800/60';
+            $classes[] = 'p-3 rounded-lg odd:bg-transparent even:bg-background-1';
         } elseif ('divider' === $style && !$isHoriz) {
             $classes[] = 'pt-2.5 pb-2.5 first:pt-0 last:pb-0';
         } elseif ('divider' === $style && $isHoriz) {

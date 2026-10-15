@@ -270,12 +270,12 @@ final class Overlay
         $style = $props['overlay_style'] ?? 'gradient-bottom';
 
         return match ($style) {
-            'gradient-full', 'gradient_full' => 'bg-gray-950/60 backdrop-brightness-75',
-            'dark-glass', 'dark_glass' => 'backdrop-blur-md bg-gray-950/60 border border-white/10 shadow-lg',
-            'light-glass', 'light_glass' => 'backdrop-blur-md bg-white/80 border border-white/40 shadow-lg text-gray-900',
-            'primary' => 'bg-primary-600/80 backdrop-blur-xs',
+            'gradient-full', 'gradient_full' => 'bg-black/60 backdrop-brightness-75',
+            'dark-glass', 'dark_glass' => 'backdrop-blur-md bg-black/60 border border-white/10 shadow-lg',
+            'light-glass', 'light_glass' => 'backdrop-blur-md bg-layer/80 border border-layer-line/40 shadow-lg text-layer-foreground',
+            'primary' => 'bg-primary/80 backdrop-blur-xs',
             'none', 'transparent' => 'bg-transparent',
-            default => 'bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent',
+            default => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
         };
     }
 
@@ -418,10 +418,10 @@ final class Overlay
         $style = $props['badge_style'] ?? 'glass';
 
         return match ($style) {
-            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary-600 text-white shadow-xs',
+            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary text-primary-foreground shadow-xs',
             'success' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-emerald-600 text-white shadow-xs',
-            'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-gray-900 text-white shadow-xs dark:bg-white dark:text-gray-900',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-white/90 text-gray-800 backdrop-blur-md shadow-xs dark:bg-neutral-900/90 dark:text-neutral-200',
+            'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-inverse text-foreground-inverse shadow-xs',
+            default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-layer/90 text-layer-foreground backdrop-blur-md shadow-xs',
         };
     }
 
@@ -478,14 +478,14 @@ final class Overlay
 
         if ('light-glass' === ($props['overlay_style'] ?? '')) {
             return match ($color) {
-                'primary' => 'text-primary-600',
-                'white' => 'text-gray-900',
-                default => 'text-gray-900',
+                'primary' => 'text-primary',
+                'white' => 'text-layer-foreground',
+                default => 'text-layer-foreground',
             };
         }
 
         return match ($color) {
-            'light' => 'text-gray-200',
+            'light' => 'text-white/80',
             'primary' => 'text-primary-400',
             'default' => 'text-white',
             default => 'text-white',
@@ -500,7 +500,7 @@ final class Overlay
         return match ($style) {
             'pill' => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-white/20 backdrop-blur-sm text-white rounded-full',
             'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary-300',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary-500/80 backdrop-blur-sm text-white rounded-full',
+            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary/80 backdrop-blur-sm text-primary-foreground rounded-full',
         };
     }
 
@@ -510,11 +510,11 @@ final class Overlay
         $style = $props['button_style'] ?? 'primary';
 
         return match ($style) {
-            'white' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-white text-gray-900 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-white shadow-sm transition-all',
+            'white' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden focus:ring-2 focus:ring-layer-focus shadow-sm transition-all',
             'secondary' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:outline-hidden focus:ring-2 focus:ring-white/50 transition-all',
-            'outline' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/60 text-white hover:bg-white hover:text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-white transition-all',
+            'outline' => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-white/60 text-white hover:bg-layer hover:text-layer-foreground focus:outline-hidden focus:ring-2 focus:ring-white transition-all',
             'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-white hover:text-primary-300 transition-colors',
-            default => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 shadow-sm transition-all',
+            default => 'py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary shadow-sm transition-all',
         };
     }
 

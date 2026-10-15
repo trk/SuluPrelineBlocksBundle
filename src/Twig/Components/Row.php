@@ -131,7 +131,7 @@ final class Row
     public function getDividerClasses(): string
     {
         return $this->resolveBoolProp('has_divider', $this->has_divider, false)
-            ? 'divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-neutral-700'
+            ? 'divide-y md:divide-y-0 md:divide-x divide-border'
             : '';
     }
 

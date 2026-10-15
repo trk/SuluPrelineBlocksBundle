@@ -20,10 +20,10 @@ final class DescriptionListTest extends TestCase
         self::assertSame('md', $dl->getSize());
         self::assertSame('sm:w-1/3', $dl->getTermWidthClasses());
         self::assertSame('sm:w-2/3', $dl->getDescWidthClasses());
-        self::assertSame('divide-y divide-gray-200 dark:divide-neutral-700', $dl->getListClasses());
+        self::assertSame('divide-y divide-border', $dl->getListClasses());
         self::assertStringContainsString('sm:flex sm:items-baseline gap-x-4', $dl->getItemRowClasses());
         self::assertStringContainsString('font-semibold', $dl->getTermClasses());
-        self::assertStringContainsString('sm:w-2/3 text-sm text-gray-600', $dl->getDescClasses());
+        self::assertStringContainsString('sm:w-2/3 text-sm text-muted-foreground-2', $dl->getDescClasses());
         self::assertSame('', $dl->getMarginClass());
         self::assertNull($dl->getCustomId());
         self::assertSame('', $dl->getCustomClass());
@@ -46,8 +46,8 @@ final class DescriptionListTest extends TestCase
         self::assertSame('striped', $dl->getLayout());
         self::assertSame('sm:w-1/4', $dl->getTermWidthClasses());
         self::assertSame('sm:w-3/4', $dl->getDescWidthClasses());
-        self::assertStringContainsString('even:bg-gray-50', $dl->getItemRowClasses());
-        self::assertStringContainsString('text-primary-600', $dl->getTermClasses());
+        self::assertStringContainsString('even:bg-background-1', $dl->getItemRowClasses());
+        self::assertStringContainsString('text-primary', $dl->getTermClasses());
         self::assertSame('mt-8 mb-12', $dl->getMarginClass());
         self::assertSame('specs-list', $dl->getCustomId());
         self::assertSame('my-specs', $dl->getCustomClass());
@@ -65,7 +65,7 @@ final class DescriptionListTest extends TestCase
         self::assertSame('space-y-4', $dlStacked->getListClasses());
         self::assertStringContainsString('flex flex-col gap-y-1', $dlStacked->getItemRowClasses());
         self::assertStringContainsString('w-full', $dlStacked->getTermClasses());
-        self::assertStringContainsString('text-gray-500', $dlStacked->getTermClasses());
+        self::assertStringContainsString('text-muted-foreground-1', $dlStacked->getTermClasses());
         self::assertStringContainsString('w-full', $dlStacked->getDescClasses());
 
         $dlBordered = new DescriptionList();

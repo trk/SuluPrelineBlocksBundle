@@ -10,7 +10,7 @@
 >
     {% if title %}
         <div class="mb-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-neutral-200">{{ title }}</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
         </div>
     {% endif %}
 
@@ -19,7 +19,7 @@
             <button
                 type="button"
                 data-filter="*"
-                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden disabled:opacity-50 transition"
+                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden disabled:opacity-50 transition"
             >
                 {{ this.resolvedProps.filter_all_label|default('All') }}
             </button>
@@ -27,7 +27,7 @@
                 <button
                     type="button"
                     data-filter="{{ slug }}"
-                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 shadow-2xs hover:bg-gray-50 focus:outline-hidden disabled:opacity-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 transition"
+                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden disabled:opacity-50 transition"
                 >
                     {{ label }}
                 </button>
@@ -76,14 +76,14 @@
                     aria-labelledby="{{ modal_id }}-label"
                 >
                     <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-4xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
-                        <div class="w-full flex flex-col bg-white border border-gray-200 shadow-xl rounded-2xl pointer-events-auto dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-neutral-700/70 overflow-hidden">
-                            <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-800">
-                                <h3 id="{{ modal_id }}-label" class="font-bold text-gray-800 dark:text-white">
+                        <div class="w-full flex flex-col bg-overlay border border-overlay-line shadow-xl rounded-2xl pointer-events-auto overflow-hidden">
+                            <div class="flex justify-between items-center py-3 px-4 border-b border-overlay-divider bg-overlay-header">
+                                <h3 id="{{ modal_id }}-label" class="font-bold text-foreground">
                                     {{ item.title|default('') }}
                                 </h3>
                                 <button
                                     type="button"
-                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden disabled:opacity-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-400"
+                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden disabled:opacity-50"
                                     aria-label="Close"
                                     data-hs-overlay="#{{ modal_id }}"
                                 >
@@ -102,7 +102,7 @@
                                 >
                                 {% set modal_content = item.summary|default(item.content|default(null)) %}
                                 {% if modal_content %}
-                                    <div class="mt-4 text-left text-sm text-gray-700 dark:text-neutral-300">
+                                    <div class="mt-4 text-left text-sm text-muted-foreground-2">
                                         {{ modal_content|raw }}
                                     </div>
                                 {% endif %}
@@ -127,12 +127,12 @@
                         var filter = this.getAttribute('data-filter');
 
                         btns.forEach(function(b) {
-                            b.classList.remove('bg-primary-600', 'text-white', 'hover:bg-primary-700', 'active');
-                            b.classList.add('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
+                            b.classList.remove('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
+                            b.classList.add('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
                         });
 
-                        this.classList.remove('bg-white', 'text-gray-700', 'border-gray-200', 'dark:bg-neutral-800', 'dark:border-neutral-700', 'dark:text-neutral-300');
-                        this.classList.add('bg-primary-600', 'text-white', 'hover:bg-primary-700', 'active');
+                        this.classList.remove('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
+                        this.classList.add('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
 
                         items.forEach(function(item) {
                             var tags = (item.getAttribute('data-tags') || '').split(' ');

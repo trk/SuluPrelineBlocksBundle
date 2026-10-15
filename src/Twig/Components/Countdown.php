@@ -179,10 +179,10 @@ final class Countdown
         };
 
         $colorClasses = match ($color) {
-            'primary' => 'text-primary-600 dark:text-primary-400',
+            'primary' => 'text-primary',
             'white' => 'text-white',
-            'dark' => 'text-gray-900 dark:text-white',
-            default => 'text-gray-900 dark:text-white',
+            'dark' => 'text-foreground',
+            default => 'text-foreground',
         };
 
         return \sprintf('%s %s tabular-nums tracking-tight', $sizeClasses, $colorClasses);
@@ -196,10 +196,10 @@ final class Countdown
         }
 
         if ('pill' === $style) {
-            return 'flex flex-col items-center justify-center py-3 px-4 sm:px-6 rounded-2xl bg-gray-100 dark:bg-neutral-800 min-w-[75px] sm:min-w-[95px] shadow-2xs';
+            return 'flex flex-col items-center justify-center py-3 px-4 sm:px-6 rounded-2xl bg-surface min-w-[75px] sm:min-w-[95px] shadow-2xs';
         }
 
-        return 'flex flex-col items-center justify-center p-3 sm:p-5 rounded-xl border border-gray-200 bg-white shadow-xs dark:bg-neutral-800 dark:border-neutral-700 min-w-[80px] sm:min-w-[100px]';
+        return 'flex flex-col items-center justify-center p-3 sm:p-5 rounded-xl border border-card-line bg-card shadow-xs min-w-[80px] sm:min-w-[100px]';
     }
 
     public function getSeparatorClasses(): string
@@ -218,8 +218,8 @@ final class Countdown
         $colorClasses = match ($color) {
             'primary' => 'text-primary-400 dark:text-primary-500',
             'white' => 'text-white/60',
-            'dark' => 'text-gray-400 dark:text-neutral-500',
-            default => 'text-gray-400 dark:text-neutral-500',
+            'dark' => 'text-muted-foreground',
+            default => 'text-muted-foreground',
         };
 
         return \sprintf('flex items-center %s %s px-1 select-none self-center', $sizeClasses, $colorClasses);
@@ -227,7 +227,7 @@ final class Countdown
 
     public function getLabelClasses(): string
     {
-        return 'mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-neutral-400';
+        return 'mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider text-muted-foreground-1';
     }
 
     public function getOnExpire(): string

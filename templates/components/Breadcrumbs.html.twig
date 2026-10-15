@@ -15,13 +15,13 @@
         <ol class="flex items-center whitespace-nowrap {{ this.getAlignClasses() }}">
             {% if this.isShowHome() and (breadcrumb_items|first).url != this.getHomeUrl() %}
                 <li class="inline-flex items-center">
-                    <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-hidden focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-400 dark:focus:text-blue-400" href="{{ this.getHomeUrl() }}">
+                    <a class="flex items-center text-sm text-muted-foreground-1 hover:text-primary focus:outline-hidden focus:text-primary" href="{{ this.getHomeUrl() }}">
                         <svg class="shrink-0 size-4 me-1.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                         </svg>
                         {{ this.getHomeTitle() }}
                     </a>
-                    <svg class="shrink-0 size-3.5 text-gray-400 dark:text-neutral-600 mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                    <svg class="shrink-0 size-3.5 text-muted-foreground mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
                 </li>
@@ -30,21 +30,21 @@
             {% for item in breadcrumb_items %}
                 <li class="inline-flex items-center">
                     {% if loop.last %}
-                        <span class="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-neutral-200" aria-current="page">
+                        <span class="inline-flex items-center text-sm font-semibold text-foreground truncate" aria-current="page">
                             {{ item.title }}
                         </span>
                     {% elseif item.url %}
-                        <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-hidden focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-400 dark:focus:text-blue-400" href="{{ item.url }}">
+                        <a class="flex items-center text-sm text-muted-foreground-1 hover:text-primary focus:outline-hidden focus:text-primary" href="{{ item.url }}">
                             {{ item.title }}
                         </a>
-                        <svg class="shrink-0 size-3.5 text-gray-400 dark:text-neutral-600 mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <svg class="shrink-0 size-3.5 text-muted-foreground mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                         </svg>
                     {% else %}
-                        <span class="text-sm text-gray-500 dark:text-neutral-400">
+                        <span class="text-sm text-muted-foreground-1">
                             {{ item.title }}
                         </span>
-                        <svg class="shrink-0 size-3.5 text-gray-400 dark:text-neutral-600 mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <svg class="shrink-0 size-3.5 text-muted-foreground mx-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                         </svg>
                     {% endif %}

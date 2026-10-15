@@ -42,7 +42,7 @@ final class SocialTest extends TestCase
         self::assertFalse($social->isOpenNewTab());
         self::assertStringContainsString('size-11', $social->getItemClasses());
         self::assertStringContainsString('rounded-full', $social->getItemClasses());
-        self::assertStringContainsString('hover:bg-primary-600', $social->getItemClasses());
+        self::assertStringContainsString('hover:bg-primary', $social->getItemClasses());
     }
 
     public function testNormalizedItems(): void

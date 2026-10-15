@@ -95,17 +95,17 @@ final class Section
         $bgStyle = $this->resolveStringProp('bg_style', $this->bg_style, 'transparent');
 
         $classes[] = match ($bgStyle) {
-            'default' => 'bg-white dark:bg-neutral-900 text-gray-800 dark:text-neutral-200',
-            'muted' => 'bg-gray-50 dark:bg-neutral-800 text-gray-800 dark:text-neutral-200',
-            'subtle' => 'bg-gray-100/70 dark:bg-neutral-800/60 text-gray-800 dark:text-neutral-200',
-            'primary' => 'bg-primary-600 text-white dark:bg-primary-950/40 dark:text-neutral-100',
-            'secondary' => 'bg-secondary-600 text-white dark:bg-secondary-950/40 dark:text-neutral-100',
-            'dark' => 'bg-neutral-900 text-white dark:bg-neutral-950',
+            'default' => 'bg-background text-foreground',
+            'muted' => 'bg-background-1 text-foreground',
+            'subtle' => 'bg-surface/70 text-foreground',
+            'primary' => 'bg-primary text-primary-foreground dark:bg-primary-950/40 dark:text-foreground',
+            'secondary' => 'bg-secondary text-secondary-foreground dark:bg-secondary-950/40 dark:text-foreground',
+            'dark' => 'bg-inverse text-foreground-inverse',
             default => 'bg-transparent',
         };
 
         if ($this->resolveBoolProp('has_border', $this->has_border, false)) {
-            $classes[] = 'border-t border-b border-gray-200 dark:border-neutral-700';
+            $classes[] = 'border-t border-b border-border';
         }
 
         $extra = [

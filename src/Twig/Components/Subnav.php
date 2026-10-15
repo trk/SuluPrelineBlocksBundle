@@ -145,11 +145,11 @@ final class Subnav
         };
 
         if ('segmented' === $style) {
-            $classes[] = 'p-1.5 bg-gray-100 rounded-xl dark:bg-neutral-800 gap-1';
+            $classes[] = 'p-1.5 bg-surface rounded-xl gap-1';
         } elseif ('underline' === $style) {
-            $classes[] = 'gap-x-6 border-b border-gray-200 dark:border-neutral-700';
+            $classes[] = 'gap-x-6 border-b border-border';
         } elseif ('divider' === $style) {
-            $classes[] = 'gap-x-4 divide-x divide-gray-200 dark:divide-neutral-700';
+            $classes[] = 'gap-x-4 divide-x divide-border';
         } else {
             // pills
             $classes[] = 'gap-2';
@@ -173,30 +173,30 @@ final class Subnav
         if ('pills' === $style) {
             $classes[] = 'rounded-lg';
             if ($isActive) {
-                $classes[] = 'bg-primary-600 text-white shadow-2xs dark:bg-primary-500';
+                $classes[] = 'bg-primary text-primary-foreground shadow-2xs';
             } else {
-                $classes[] = 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-800';
+                $classes[] = 'text-muted-foreground-2 hover:text-foreground hover:bg-muted';
             }
         } elseif ('segmented' === $style) {
             $classes[] = 'rounded-lg';
             if ($isActive) {
-                $classes[] = 'bg-white text-gray-900 shadow-2xs font-semibold dark:bg-neutral-700 dark:text-white';
+                $classes[] = 'bg-layer text-layer-foreground shadow-2xs font-semibold';
             } else {
-                $classes[] = 'text-gray-600 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-white';
+                $classes[] = 'text-muted-foreground-2 hover:text-foreground';
             }
         } elseif ('underline' === $style) {
             $classes[] = 'border-b-2 -mb-px px-1';
             if ($isActive) {
-                $classes[] = 'border-primary-600 text-primary-600 font-semibold dark:border-primary-500 dark:text-primary-400';
+                $classes[] = 'border-primary text-primary font-semibold';
             } else {
-                $classes[] = 'border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300 dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:border-neutral-600';
+                $classes[] = 'border-transparent text-muted-foreground-1 hover:text-foreground hover:border-line-3';
             }
         } elseif ('divider' === $style) {
             $classes[] = 'first:ps-0 ps-4';
             if ($isActive) {
-                $classes[] = 'text-primary-600 font-semibold dark:text-primary-400';
+                $classes[] = 'text-primary font-semibold';
             } else {
-                $classes[] = 'text-gray-600 hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400';
+                $classes[] = 'text-muted-foreground-2 hover:text-primary';
             }
         }
 

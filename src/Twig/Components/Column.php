@@ -110,9 +110,9 @@ final class Column
         $style = $this->resolveStringProp('style', $this->style, 'none');
 
         return match ($style) {
-            'card' => 'bg-white border border-gray-200 rounded-2xl shadow-xs dark:bg-neutral-900 dark:border-neutral-700',
-            'muted' => 'bg-gray-50 rounded-2xl dark:bg-neutral-800/80',
-            'subtle' => 'bg-gray-100/70 rounded-2xl dark:bg-neutral-800/50',
+            'card' => 'bg-card border border-card-line rounded-2xl shadow-xs',
+            'muted' => 'bg-background-1 rounded-2xl',
+            'subtle' => 'bg-surface/70 rounded-2xl',
             'primary_subtle' => 'bg-primary-50/60 border border-primary-100 rounded-2xl dark:bg-primary-950/20 dark:border-primary-900/30',
             default => '',
         };

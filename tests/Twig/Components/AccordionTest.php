@@ -21,7 +21,7 @@ final class AccordionTest extends TestCase
         self::assertTrue($accordion->isCollapsible());
         self::assertSame('text-base font-semibold', $accordion->getTitleSizeClasses());
         self::assertSame('top', $accordion->getImageAlign());
-        self::assertSame('divide-y divide-gray-200 dark:divide-neutral-700', $accordion->getContainerClasses());
+        self::assertSame('divide-y divide-border', $accordion->getContainerClasses());
         self::assertSame('hs-accordion pt-4 pb-3', $accordion->getItemClasses());
         self::assertSame('pt-2 pb-1', $accordion->getContentWrapperClasses());
         self::assertStringContainsString('hs-accordion-toggle', $accordion->getToggleClasses());
@@ -74,7 +74,7 @@ final class AccordionTest extends TestCase
         self::assertSame('none', $accordion->getIconStyle());
         self::assertSame('text-xl font-bold', $accordion->getTitleSizeClasses());
         self::assertSame('right', $accordion->getImageAlign());
-        self::assertStringContainsString('bg-gray-100', $accordion->getItemClasses());
+        self::assertStringContainsString('bg-surface', $accordion->getItemClasses());
 
         $accordionSm = new Accordion();
         $accordionSm->titleSize = 'sm';

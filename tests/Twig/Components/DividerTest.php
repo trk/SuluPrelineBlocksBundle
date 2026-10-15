@@ -16,7 +16,7 @@ final class DividerTest extends TestCase
         self::assertNull($divider->icon);
         self::assertNull($divider->getResolvedIcon());
         self::assertSame('line', $divider->getDividerStyle());
-        self::assertStringContainsString('border-gray-200', $divider->getDividerColorClasses());
+        self::assertStringContainsString('border-border', $divider->getDividerColorClasses());
         self::assertStringContainsString('border-t', $divider->getDividerThicknessClasses());
         self::assertSame('w-full', $divider->getDividerWidthClasses());
         self::assertStringContainsString('justify-center', $divider->getDividerAlignClasses());
@@ -51,13 +51,13 @@ final class DividerTest extends TestCase
         $divider = new Divider();
 
         $divider->props = ['divider_color' => 'primary'];
-        self::assertStringContainsString('border-primary-600', $divider->getDividerColorClasses());
+        self::assertStringContainsString('border-primary', $divider->getDividerColorClasses());
 
         $divider->props = ['divider_color' => 'dark'];
-        self::assertStringContainsString('border-gray-900', $divider->getDividerColorClasses());
+        self::assertStringContainsString('border-line-8', $divider->getDividerColorClasses());
 
         $divider->props = ['divider_color' => 'muted'];
-        self::assertStringContainsString('border-gray-100', $divider->getDividerColorClasses());
+        self::assertStringContainsString('border-line-1', $divider->getDividerColorClasses());
     }
 
     public function testWidthAndAlignment(): void
@@ -117,7 +117,7 @@ final class DividerTest extends TestCase
 
         $dividerPrimary = new Divider();
         $dividerPrimary->props = ['divider_color' => 'primary'];
-        self::assertStringContainsString('text-primary-600', $dividerPrimary->getIconBadgeColorClasses());
+        self::assertStringContainsString('text-primary', $dividerPrimary->getIconBadgeColorClasses());
     }
 
     public function testWrapperClassesAndId(): void

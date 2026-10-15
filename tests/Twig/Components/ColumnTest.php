@@ -46,7 +46,7 @@ final class ColumnTest extends TestCase
 
         self::assertSame('col-main', $col->getElementId());
         self::assertSame('col-span-12 md:col-span-6', $col->getColSpanClasses());
-        self::assertStringContainsString('border border-gray-200', $col->getStyleClasses());
+        self::assertStringContainsString('border border-card-line', $col->getStyleClasses());
         self::assertSame('p-6 sm:p-8', $col->getPaddingClasses());
         self::assertSame('justify-center', $col->getVerticalAlignClasses());
         self::assertSame('text-center', $col->getTextAlignClasses());

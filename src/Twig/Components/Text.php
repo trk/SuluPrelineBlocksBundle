@@ -126,7 +126,7 @@ final class Text
     public function getDropcapClasses(): string
     {
         return $this->isDropcap()
-            ? 'first-letter:float-left first-letter:text-5xl first-letter:font-bold first-letter:me-3 first-letter:leading-none first-letter:text-gray-900 dark:first-letter:text-white'
+            ? 'first-letter:float-left first-letter:text-5xl first-letter:font-bold first-letter:me-3 first-letter:leading-none first-letter:text-foreground'
             : '';
     }
 
@@ -156,7 +156,7 @@ final class Text
             return '';
         }
 
-        return '[column-rule:1px_solid_rgb(229_231_235)] dark:[column-rule:1px_solid_rgb(64_64_64)]';
+        return '[column-rule:1px_solid_var(--border)]';
     }
 
     public function getTextStyleClasses(): string
@@ -165,10 +165,10 @@ final class Text
         $style = $props['text_style'] ?? 'none';
 
         return match ($style) {
-            'lead' => 'text-xl sm:text-2xl text-gray-700 dark:text-neutral-300 font-normal leading-relaxed',
-            'meta' => 'text-xs uppercase tracking-wider text-gray-500 dark:text-neutral-400 font-medium',
-            'large' => 'text-lg sm:text-xl text-gray-800 dark:text-neutral-200 leading-relaxed',
-            'small' => 'text-sm text-gray-600 dark:text-neutral-400 leading-normal',
+            'lead' => 'text-xl sm:text-2xl text-muted-foreground-2 font-normal leading-relaxed',
+            'meta' => 'text-xs uppercase tracking-wider text-muted-foreground-1 font-medium',
+            'large' => 'text-lg sm:text-xl text-foreground leading-relaxed',
+            'small' => 'text-sm text-muted-foreground-2 leading-normal',
             default => '',
         };
     }

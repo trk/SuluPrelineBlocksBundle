@@ -21,7 +21,7 @@ final class ButtonTest extends TestCase
         self::assertNull($button->link_title);
         self::assertSame('#', $button->getUrl());
         self::assertNull($button->getLinkTitle());
-        self::assertStringContainsString('bg-primary-600', $button->getClasses());
+        self::assertStringContainsString('bg-primary', $button->getClasses());
     }
 
     public function testTitleAndContentResolution(): void
@@ -77,7 +77,7 @@ final class ButtonTest extends TestCase
 
         $classes = $button->getClasses();
         self::assertStringContainsString('border', $classes);
-        self::assertStringContainsString('border-secondary-600', $classes);
+        self::assertStringContainsString('border-secondary-line', $classes);
         self::assertStringContainsString('text-base', $classes);
     }
 
@@ -140,14 +140,14 @@ final class ButtonTest extends TestCase
         self::assertSame('https://example.com/start', $normalized[0]['url']);
         self::assertSame('ti ti-arrow-right', $normalized[0]['icon']);
         self::assertSame('right', $normalized[0]['icon_align']);
-        self::assertStringContainsString('bg-primary-600', $normalized[0]['classes']);
+        self::assertStringContainsString('bg-primary', $normalized[0]['classes']);
 
         self::assertSame('Learn More', $normalized[1]['title']);
         self::assertSame('https://example.com/docs', $normalized[1]['url']);
         self::assertSame('ti ti-book', $normalized[1]['icon']);
         self::assertSame('left', $normalized[1]['icon_align']);
         self::assertStringContainsString('border', $normalized[1]['classes']);
-        self::assertStringContainsString('text-gray-900', $normalized[1]['classes']);
+        self::assertStringContainsString('text-foreground', $normalized[1]['classes']);
     }
 
     public function testButtonGroupConnectedSegmented(): void
@@ -210,7 +210,7 @@ final class ButtonTest extends TestCase
         $buttonWhite = new Button();
         $buttonWhite->props = ['variant' => 'white', 'size' => 'xl'];
         $whiteClasses = $buttonWhite->getClasses();
-        self::assertStringContainsString('bg-white text-gray-800', $whiteClasses);
+        self::assertStringContainsString('bg-layer text-layer-foreground', $whiteClasses);
         self::assertStringContainsString('py-4 px-6', $whiteClasses);
     }
 }

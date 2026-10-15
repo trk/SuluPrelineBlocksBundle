@@ -41,7 +41,7 @@ final class SectionTest extends TestCase
         ];
 
         self::assertSame('features-section', $sec->getElementId());
-        self::assertStringContainsString('bg-gray-50', $sec->getSectionClasses());
+        self::assertStringContainsString('bg-background-1', $sec->getSectionClasses());
         self::assertStringContainsString('border-t border-b', $sec->getSectionClasses());
         self::assertStringContainsString('my-custom-sec', $sec->getSectionClasses());
         self::assertStringContainsString('max-w-7xl', $sec->getContainerClasses());

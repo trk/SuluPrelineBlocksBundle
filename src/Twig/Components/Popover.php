@@ -98,14 +98,14 @@ final class Popover
     {
         return match ($color) {
             'dark' => [
-                'button' => 'text-white focus:ring-gray-800/30',
-                'inner' => 'bg-gray-900 text-white dark:bg-white dark:text-gray-900',
-                'ping' => 'bg-gray-800/60 dark:bg-white/60',
+                'button' => 'text-foreground-inverse focus:ring-line-8/30',
+                'inner' => 'bg-inverse text-foreground-inverse',
+                'ping' => 'bg-inverse/60',
             ],
             'light' => [
-                'button' => 'text-gray-900 focus:ring-white/40',
-                'inner' => 'bg-white text-gray-900 border border-gray-200',
-                'ping' => 'bg-white/80',
+                'button' => 'text-layer-foreground focus:ring-white/40',
+                'inner' => 'bg-layer text-layer-foreground border border-layer-line',
+                'ping' => 'bg-layer/80',
             ],
             'accent' => [
                 'button' => 'text-white focus:ring-amber-500/30',
@@ -118,13 +118,13 @@ final class Popover
                 'ping' => 'bg-emerald-400/75',
             ],
             'danger' => [
-                'button' => 'text-white focus:ring-rose-500/30',
-                'inner' => 'bg-rose-600 text-white',
-                'ping' => 'bg-rose-400/75',
+                'button' => 'text-destructive-foreground focus:ring-destructive/30',
+                'inner' => 'bg-destructive text-destructive-foreground',
+                'ping' => 'bg-destructive/75',
             ],
             default => [
-                'button' => 'text-white focus:ring-primary-500/30',
-                'inner' => 'bg-primary-600 text-white',
+                'button' => 'text-primary-foreground focus:ring-primary/30',
+                'inner' => 'bg-primary text-primary-foreground',
                 'ping' => 'bg-primary-400/75',
             ],
         };

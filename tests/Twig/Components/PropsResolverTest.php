@@ -21,26 +21,26 @@ final class PropsResolverTest extends TestCase
 
     public function testTitleColor(): void
     {
-        self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor(['title_color' => 'default']));
+        self::assertSame('text-foreground', PropsResolver::titleColor(['title_color' => 'default']));
         self::assertSame('text-white', PropsResolver::titleColor(['title_color' => 'white']));
-        self::assertSame('text-primary-600 dark:text-primary-400', PropsResolver::titleColor(['title_color' => 'primary']));
-        self::assertSame('text-secondary-600 dark:text-secondary-400', PropsResolver::titleColor(['title_color' => 'secondary']));
-        self::assertSame('text-gray-500 dark:text-neutral-400', PropsResolver::titleColor(['title_color' => 'muted']));
-        self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor(['title_color' => 'unknown']));
-        self::assertSame('text-gray-900 dark:text-white', PropsResolver::titleColor([]));
+        self::assertSame('text-primary', PropsResolver::titleColor(['title_color' => 'primary']));
+        self::assertSame('text-secondary', PropsResolver::titleColor(['title_color' => 'secondary']));
+        self::assertSame('text-muted-foreground-1', PropsResolver::titleColor(['title_color' => 'muted']));
+        self::assertSame('text-foreground', PropsResolver::titleColor(['title_color' => 'unknown']));
+        self::assertSame('text-foreground', PropsResolver::titleColor([]));
     }
 
     public function testLinkColor(): void
     {
-        self::assertSame('text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300', PropsResolver::linkColor(['link_color' => 'primary']));
-        self::assertSame('text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-neutral-300', PropsResolver::linkColor(['link_color' => 'dark']));
-        self::assertSame('text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300', PropsResolver::linkColor([]));
+        self::assertSame('text-primary hover:text-primary-hover', PropsResolver::linkColor(['link_color' => 'primary']));
+        self::assertSame('text-foreground hover:text-muted-foreground-2', PropsResolver::linkColor(['link_color' => 'dark']));
+        self::assertSame('text-primary hover:text-primary-hover', PropsResolver::linkColor([]));
     }
 
     public function testBgColor(): void
     {
-        self::assertSame('bg-white dark:bg-neutral-900', PropsResolver::bgColor(['bg_color' => 'white']));
-        self::assertSame('bg-gray-50 dark:bg-neutral-800', PropsResolver::bgColor(['bg_color' => 'muted']));
+        self::assertSame('bg-card', PropsResolver::bgColor(['bg_color' => 'white']));
+        self::assertSame('bg-surface', PropsResolver::bgColor(['bg_color' => 'muted']));
         self::assertSame('bg-transparent', PropsResolver::bgColor(['bg_color' => 'transparent']));
         self::assertSame('bg-transparent', PropsResolver::bgColor(['bg_color' => 'unknown']));
         self::assertSame('bg-transparent', PropsResolver::bgColor([]));
@@ -48,31 +48,31 @@ final class PropsResolverTest extends TestCase
 
     public function testTextColor(): void
     {
-        self::assertSame('text-gray-500 dark:text-neutral-400', PropsResolver::textColor(['text_color' => 'muted']));
+        self::assertSame('text-muted-foreground-1', PropsResolver::textColor(['text_color' => 'muted']));
         self::assertSame('text-white', PropsResolver::textColor(['text_color' => 'white']));
-        self::assertSame('text-primary-600 dark:text-primary-400', PropsResolver::textColor(['text_color' => 'primary']));
-        self::assertSame('text-gray-700 dark:text-neutral-300', PropsResolver::textColor(['text_color' => 'default']));
-        self::assertSame('text-gray-700 dark:text-neutral-300', PropsResolver::textColor([]));
+        self::assertSame('text-primary', PropsResolver::textColor(['text_color' => 'primary']));
+        self::assertSame('text-muted-foreground-2', PropsResolver::textColor(['text_color' => 'default']));
+        self::assertSame('text-muted-foreground-2', PropsResolver::textColor([]));
     }
 
     public function testButtonClasses(): void
     {
         $primaryClasses = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'primary']);
-        self::assertStringContainsString('bg-primary-600', $primaryClasses);
+        self::assertStringContainsString('bg-primary', $primaryClasses);
         self::assertStringContainsString('text-sm', $primaryClasses);
 
         $secondarySolid = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'secondary']);
-        self::assertStringContainsString('bg-secondary-600', $secondarySolid);
+        self::assertStringContainsString('bg-secondary', $secondarySolid);
 
         $darkSolid = PropsResolver::buttonClasses(['variant' => 'solid', 'size' => 'md', 'link_color' => 'dark']);
-        self::assertStringContainsString('bg-gray-900', $darkSolid);
+        self::assertStringContainsString('bg-inverse', $darkSolid);
 
         $outlineClasses = PropsResolver::buttonClasses(['variant' => 'outline', 'size' => 'lg', 'link_color' => 'secondary']);
-        self::assertStringContainsString('border-secondary-600', $outlineClasses);
+        self::assertStringContainsString('border-secondary-line', $outlineClasses);
         self::assertStringContainsString('text-base', $outlineClasses);
 
         $ghostClasses = PropsResolver::buttonClasses(['variant' => 'ghost', 'size' => 'sm', 'link_color' => 'dark']);
-        self::assertStringContainsString('text-gray-900', $ghostClasses);
+        self::assertStringContainsString('text-foreground', $ghostClasses);
         self::assertStringContainsString('text-xs', $ghostClasses);
     }
 
@@ -80,7 +80,7 @@ final class PropsResolverTest extends TestCase
     {
         $bordered = PropsResolver::cardClasses(['card_variant' => 'bordered', 'bg_color' => 'white']);
         self::assertStringContainsString('border', $bordered);
-        self::assertStringContainsString('bg-white', $bordered);
+        self::assertStringContainsString('bg-card', $bordered);
 
         $glass = PropsResolver::cardClasses(['card_variant' => 'glass', 'bg_color' => 'transparent']);
         self::assertStringContainsString('backdrop-blur', $glass);

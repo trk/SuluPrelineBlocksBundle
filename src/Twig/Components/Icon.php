@@ -158,13 +158,13 @@ final class Icon
 
         if ('plain' === $style) {
             $textColor = match ($color) {
-                'secondary' => 'text-secondary-600 dark:text-secondary-400',
-                'dark' => 'text-gray-900 dark:text-white',
-                'muted' => 'text-gray-400 dark:text-neutral-500',
+                'secondary' => 'text-secondary',
+                'dark' => 'text-foreground',
+                'muted' => 'text-muted-foreground',
                 'success' => 'text-emerald-600 dark:text-emerald-400',
-                'danger' => 'text-red-600 dark:text-red-400',
+                'danger' => 'text-destructive',
                 'white' => 'text-white',
-                default => 'text-primary-600 dark:text-primary-400',
+                default => 'text-primary',
             };
 
             $hover = $this->hasLink() ? 'hover:opacity-80 transition-opacity' : '';
@@ -174,13 +174,13 @@ final class Icon
 
         if ('circle_solid' === $style) {
             $bg = match ($color) {
-                'secondary' => 'bg-secondary-600 text-white hover:bg-secondary-700',
-                'dark' => 'bg-gray-900 text-white hover:bg-black dark:bg-white dark:text-gray-900',
-                'muted' => 'bg-gray-100 text-gray-700 dark:bg-neutral-800 dark:text-neutral-300 hover:bg-gray-200',
+                'secondary' => 'bg-secondary text-secondary-foreground hover:bg-secondary-hover',
+                'dark' => 'bg-inverse text-foreground-inverse hover:opacity-90',
+                'muted' => 'bg-surface text-surface-foreground hover:bg-surface-hover',
                 'success' => 'bg-emerald-600 text-white hover:bg-emerald-700',
-                'danger' => 'bg-red-600 text-white hover:bg-red-700',
-                'white' => 'bg-white text-gray-900 hover:bg-gray-100 shadow-sm',
-                default => 'bg-primary-600 text-white hover:bg-primary-700',
+                'danger' => 'bg-destructive text-destructive-foreground hover:bg-destructive-hover',
+                'white' => 'bg-layer text-layer-foreground hover:bg-layer-hover shadow-sm',
+                default => 'bg-primary text-primary-foreground hover:bg-primary-hover',
             };
 
             return \sprintf('inline-flex items-center justify-center rounded-full shadow-xs transition-colors %s %s', $dimensionClass, $bg);
@@ -188,13 +188,13 @@ final class Icon
 
         if ('circle_outline' === $style) {
             $border = match ($color) {
-                'secondary' => 'border-secondary-600 text-secondary-600 hover:bg-secondary-50 dark:hover:bg-secondary-950/30',
-                'dark' => 'border-gray-900 text-gray-900 hover:bg-gray-100 dark:border-white dark:text-white',
-                'muted' => 'border-gray-300 text-gray-500 hover:bg-gray-50 dark:border-neutral-700 dark:text-neutral-400',
+                'secondary' => 'border-secondary-line text-secondary hover:bg-secondary-50 dark:hover:bg-secondary-950/30',
+                'dark' => 'border-line-8 text-foreground hover:bg-muted',
+                'muted' => 'border-border text-muted-foreground-1 hover:bg-muted',
                 'success' => 'border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30',
-                'danger' => 'border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30',
+                'danger' => 'border-destructive text-destructive hover:bg-red-50 dark:hover:bg-red-950/30',
                 'white' => 'border-white text-white hover:bg-white/10',
-                default => 'border-primary-600 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-950/30',
+                default => 'border-primary-line text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30',
             };
 
             return \sprintf('inline-flex items-center justify-center rounded-full border transition-colors %s %s', $dimensionClass, $border);
@@ -202,13 +202,13 @@ final class Icon
 
         // square_soft
         $soft = match ($color) {
-            'secondary' => 'bg-secondary-50 text-secondary-600 dark:bg-secondary-950/40 dark:text-secondary-400',
-            'dark' => 'bg-gray-100 text-gray-900 dark:bg-neutral-800 dark:text-white',
-            'muted' => 'bg-gray-50 text-gray-500 dark:bg-neutral-800/60 dark:text-neutral-400',
+            'secondary' => 'bg-secondary-50 text-secondary dark:bg-secondary-950/40',
+            'dark' => 'bg-surface text-surface-foreground',
+            'muted' => 'bg-muted text-muted-foreground-1',
             'success' => 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400',
-            'danger' => 'bg-red-50 text-red-600 dark:bg-red-950/40 dark:text-red-400',
+            'danger' => 'bg-red-50 text-destructive dark:bg-red-950/40',
             'white' => 'bg-white/20 text-white backdrop-blur-xs',
-            default => 'bg-primary-50 text-primary-600 dark:bg-primary-950/40 dark:text-primary-400',
+            default => 'bg-primary-50 text-primary dark:bg-primary-950/40',
         };
 
         $hover = $this->hasLink() ? 'hover:scale-105 transition-transform' : '';

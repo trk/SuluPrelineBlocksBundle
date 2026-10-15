@@ -145,10 +145,10 @@ final class Quotation
         };
 
         if ('large' === $style) {
-            return 'text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-gray-900 dark:text-white leading-relaxed';
+            return 'text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-foreground leading-relaxed';
         }
 
-        return \sprintf('%s text-gray-800 dark:text-neutral-200 leading-relaxed italic', $sizeClasses);
+        return \sprintf('%s text-foreground leading-relaxed italic', $sizeClasses);
     }
 
     public function getBorderAccentClasses(): string
@@ -157,10 +157,10 @@ final class Quotation
         $color = $props['accent_color'] ?? 'primary';
 
         return match ($color) {
-            'secondary' => 'border-s-4 border-secondary-600 dark:border-secondary-500 ps-4 sm:ps-6',
-            'dark' => 'border-s-4 border-gray-900 dark:border-white ps-4 sm:ps-6',
-            'muted' => 'border-s-4 border-gray-300 dark:border-neutral-700 ps-4 sm:ps-6',
-            default => 'border-s-4 border-primary-600 dark:border-primary-500 ps-4 sm:ps-6',
+            'secondary' => 'border-s-4 border-secondary ps-4 sm:ps-6',
+            'dark' => 'border-s-4 border-line-8 ps-4 sm:ps-6',
+            'muted' => 'border-s-4 border-line-3 ps-4 sm:ps-6',
+            default => 'border-s-4 border-primary ps-4 sm:ps-6',
         };
     }
 
@@ -168,7 +168,7 @@ final class Quotation
     {
         $style = $this->getQuoteStyle();
         if ('card' === $style) {
-            return 'p-6 sm:p-8 rounded-2xl bg-gray-50 border border-gray-200/80 shadow-2xs dark:bg-neutral-800/60 dark:border-neutral-700';
+            return 'p-6 sm:p-8 rounded-2xl bg-card border border-card-line shadow-2xs';
         }
 
         if ('bordered' === $style) {

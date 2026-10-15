@@ -30,7 +30,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('h1', $headline->getTag());
         self::assertSame('hero-title', $headline->getElementId());
         self::assertSame('text-center', $headline->getTextAlign());
-        self::assertSame('text-primary-600 dark:text-primary-400', $headline->getTitleColor());
+        self::assertSame('text-primary', $headline->getTitleColor());
 
         $classes = $headline->getWrapperClasses();
         self::assertStringContainsString('text-3xl', $classes);
@@ -48,11 +48,11 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('h2', $headline->getTag());
         self::assertNull($headline->getElementId());
         self::assertSame('text-left', $headline->getTextAlign());
-        self::assertSame('text-gray-900 dark:text-white', $headline->getTitleColor());
+        self::assertSame('text-foreground', $headline->getTitleColor());
 
         $classes = $headline->getWrapperClasses();
         self::assertStringContainsString('text-2xl', $classes);
-        self::assertStringContainsString('text-gray-900', $classes);
+        self::assertStringContainsString('text-foreground', $classes);
 
         $headline->image = [
             'url' => 'https://cdn.example.com/icon.png',
@@ -99,7 +99,7 @@ final class ComponentSuiteTest extends TestCase
 
         self::assertSame('bio-text', $text->getElementId());
         self::assertSame('text-lg', $text->getFontSize());
-        self::assertSame('text-gray-500 dark:text-neutral-400', $text->getTextColor());
+        self::assertSame('text-muted-foreground-1', $text->getTextColor());
         self::assertSame('text-justify', $text->getTextAlign());
 
         $classes = $text->getWrapperClasses();
@@ -276,7 +276,7 @@ final class ComponentSuiteTest extends TestCase
         ];
 
         self::assertSame('text-xl', $text->getFontSize());
-        self::assertSame('text-primary-600 dark:text-primary-400', $text->getTextColor());
+        self::assertSame('text-primary', $text->getTextColor());
     }
 
     public function testTextAdvancedFeatures(): void
@@ -363,7 +363,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('https://example.com/article', $card->getLinkUrl());
         self::assertSame('Read More', $card->getButtonText());
         self::assertSame('https://example.com/article', $card->getResolvedCardUrl());
-        self::assertStringContainsString('border-primary-600 text-primary-600', $card->getButtonStyleClasses());
+        self::assertStringContainsString('border-primary-line text-primary', $card->getButtonStyleClasses());
 
         // Legacy cardLink compatibility test
         $legacyCard = new Card();

@@ -1,7 +1,7 @@
 {% set items = this.normalizedItems %}
 <div {{ attributes.defaults({class: 'w-full my-6'}) }}>
     {% if this.title %}
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ this.title }}</h3>
+        <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
     {% endif %}
 
     <div class="{{ this.wrapperClasses }}">
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
             {% endif %}
-            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+            <tbody class="divide-y divide-table-line">
                 {% for item in items %}
                     <tr class="{{ this.getRowClasses(loop.index0) }}">
                         {% if this.header_title or item.title or item.image_url %}
@@ -36,19 +36,19 @@
                                     {% if item.image_url %}
                                         <img class="size-8 rounded-full object-cover shrink-0" src="{{ item.image_url }}" alt="{{ item.title }}" {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %} loading="lazy">
                                     {% endif %}
-                                    <span class="text-gray-900 dark:text-white font-semibold">{{ item.title }}</span>
+                                    <span class="text-foreground font-semibold">{{ item.title }}</span>
                                 </div>
                             </td>
                         {% endif %}
 
                         {% if this.header_meta or item.meta %}
-                            <td class="{{ this.tdClasses }} text-gray-500 dark:text-neutral-400">
+                            <td class="{{ this.tdClasses }} text-muted-foreground-1">
                                 {{ item.meta }}
                             </td>
                         {% endif %}
 
                         {% if this.header_content or item.content %}
-                            <td class="{{ this.tdClasses }} text-gray-600 dark:text-neutral-300">
+                            <td class="{{ this.tdClasses }} text-muted-foreground-2">
                                 {{ item.content|nl2br }}
                             </td>
                         {% endif %}
@@ -66,7 +66,7 @@
                         {% if this.header_link or item.link %}
                             <td class="{{ this.tdClasses }} text-end font-medium">
                                 {% if item.link %}
-                                    <a class="inline-flex items-center gap-x-1 text-sm text-primary-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-primary-500" href="{{ item.link }}">
+                                    <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-hidden focus:underline font-medium" href="{{ item.link }}">
                                         {{ item.link_title }}
                                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                                     </a>

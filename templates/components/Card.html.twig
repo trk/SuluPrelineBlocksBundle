@@ -50,7 +50,7 @@
 {# Shared Media Markup Block #}
 {% set media_markup %}
     {% if is_img and active_img %}
-        <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
+        <div class="relative w-full h-full overflow-hidden bg-surface">
             {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
                 <div class="{{ this.getBadgePositionClasses() }}">
                     {{ _self.render_badges(this.getNormalizedBadges()) }}
@@ -76,7 +76,7 @@
             {% endif %}
         </div>
     {% elseif is_vid and active_vid %}
-        <div class="relative w-full h-full overflow-hidden bg-gray-100 dark:bg-neutral-800">
+        <div class="relative w-full h-full overflow-hidden bg-surface">
             {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
                 <div class="{{ this.getBadgePositionClasses() }}">
                     {{ _self.render_badges(this.getNormalizedBadges()) }}
@@ -137,7 +137,7 @@
     {% if media_align == 'overlay' and has_media %}
         <div class="absolute inset-0 z-0">
             {{ media_markup|raw }}
-            <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         </div>
         <div class="relative z-10 flex flex-col justify-end min-h-[320px] p-6 text-white flex-1">
             {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
@@ -171,7 +171,7 @@
             {% endif %}
 
             {% if content %}
-                <div class="text-gray-200 text-sm leading-relaxed mt-2 line-clamp-3">
+                <div class="text-white/80 text-sm leading-relaxed mt-2 line-clamp-3">
                     {{ content|raw }}
                 </div>
             {% endif %}
@@ -199,7 +199,7 @@
                 {% endif %}
 
                 {% if icon_class %}
-                    <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950/40 dark:text-primary-400">
+                    <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary dark:bg-primary-950/40">
                         <i class="{{ icon_class }}" aria-hidden="true"></i>
                     </div>
                 {% endif %}
@@ -223,7 +223,7 @@
                 {% endif %}
 
                 {% if content %}
-                    <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mt-2">
+                    <div class="text-muted-foreground-2 text-sm leading-relaxed mt-2">
                         {{ content|raw }}
                     </div>
                 {% endif %}
@@ -248,7 +248,7 @@
             {% endif %}
 
             {% if icon_class %}
-                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950/40 dark:text-primary-400">
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary dark:bg-primary-950/40">
                     <i class="{{ icon_class }}" aria-hidden="true"></i>
                 </div>
             {% endif %}
@@ -278,7 +278,7 @@
 
         <div class="{{ padding_classes }} pt-3 flex flex-col flex-1">
             {% if content %}
-                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                <div class="text-muted-foreground-2 text-sm leading-relaxed mb-4 flex-1">
                     {{ content|raw }}
                 </div>
             {% endif %}
@@ -302,7 +302,7 @@
             {% endif %}
 
             {% if icon_class %}
-                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950/40 dark:text-primary-400">
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary dark:bg-primary-950/40">
                     <i class="{{ icon_class }}" aria-hidden="true"></i>
                 </div>
             {% endif %}
@@ -326,7 +326,7 @@
             {% endif %}
 
             {% if content %}
-                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                <div class="text-muted-foreground-2 text-sm leading-relaxed mb-4 flex-1">
                     {{ content|raw }}
                 </div>
             {% endif %}
@@ -366,7 +366,7 @@
             {% endif %}
 
             {% if icon_class and not has_media %}
-                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary-600 dark:bg-primary-950/40 dark:text-primary-400">
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 text-primary dark:bg-primary-950/40">
                     <i class="{{ icon_class }}" aria-hidden="true"></i>
                 </div>
             {% endif %}
@@ -390,7 +390,7 @@
             {% endif %}
 
             {% if content %}
-                <div class="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4 flex-1">
+                <div class="text-muted-foreground-2 text-sm leading-relaxed mb-4 flex-1">
                     {{ content|raw }}
                 </div>
             {% endif %}

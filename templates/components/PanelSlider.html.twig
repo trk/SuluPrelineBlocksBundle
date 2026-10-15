@@ -10,7 +10,7 @@
 >
     {% if title %}
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h3 class="text-2xl font-bold tracking-tight text-foreground">
                 {{ title }}
             </h3>
         </div>
@@ -43,7 +43,7 @@
         {% if arrows != 'none' %}
             <button
                 type="button"
-                class="hs-carousel-prev hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-11 h-11 my-auto text-gray-800 bg-white/80 backdrop-blur-xs hover:bg-white rounded-full shadow-md z-10 focus:outline-hidden dark:bg-neutral-800/80 dark:text-white dark:hover:bg-neutral-800 transition-all {% if arrows == 'outside' %}-start-4{% else %}start-2{% endif %}"
+                class="hs-carousel-prev hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden transition-all {% if arrows == 'outside' %}-start-4{% else %}start-2{% endif %}"
                 aria-label="Previous"
             >
                 <span class="text-2xl" aria-hidden="true">
@@ -53,7 +53,7 @@
             </button>
             <button
                 type="button"
-                class="hs-carousel-next hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-11 h-11 my-auto text-gray-800 bg-white/80 backdrop-blur-xs hover:bg-white rounded-full shadow-md z-10 focus:outline-hidden dark:bg-neutral-800/80 dark:text-white dark:hover:bg-neutral-800 transition-all {% if arrows == 'outside' %}-end-4{% else %}end-2{% endif %}"
+                class="hs-carousel-next hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden transition-all {% if arrows == 'outside' %}-end-4{% else %}end-2{% endif %}"
                 aria-label="Next"
             >
                 <span class="text-2xl" aria-hidden="true">
@@ -66,7 +66,7 @@
         {% if dots != 'none' %}
             <div class="hs-carousel-pagination flex justify-center items-center gap-x-2 {% if dots == 'inside' %}absolute bottom-3 start-0 end-0 z-10{% else %}mt-4{% endif %}">
                 {% for item in normalized_items %}
-                    <span class="hs-carousel-active:bg-primary-600 hs-carousel-active:border-primary-600 size-2.5 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 transition-colors"></span>
+                    <span class="hs-carousel-active:bg-primary hs-carousel-active:border-primary size-2.5 border border-line-4 rounded-full cursor-pointer transition-colors"></span>
                 {% endfor %}
             </div>
         {% endif %}

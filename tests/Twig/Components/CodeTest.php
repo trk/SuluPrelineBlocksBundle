@@ -20,8 +20,8 @@ final class CodeTest extends TestCase
         self::assertFalse($code->show_line_numbers);
         self::assertSame('Code', $code->getLanguageLabel());
         self::assertStringStartsWith('hs-code-', $code->getId());
-        self::assertStringContainsString('rounded-2xl bg-neutral-900', $code->getContainerClasses());
-        self::assertStringContainsString('bg-neutral-950/60', $code->getHeaderClasses());
+        self::assertStringContainsString('rounded-2xl bg-card', $code->getContainerClasses());
+        self::assertStringContainsString('bg-card-header', $code->getHeaderClasses());
         self::assertStringContainsString('overflow-x-auto text-sm', $code->getPreClasses());
     }
 

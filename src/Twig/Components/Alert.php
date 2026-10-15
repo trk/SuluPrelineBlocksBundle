@@ -122,9 +122,9 @@ final class Alert
         $variant = $this->getAlertVariant();
 
         return match ("{$style}_{$variant}") {
-            'info_solid' => 'bg-primary-600 text-white shadow-xs',
-            'info_outline' => 'border-2 border-primary-500 text-primary-700 bg-transparent dark:text-primary-400',
-            'info_glass' => 'backdrop-blur-md bg-primary-500/10 border border-primary-500/30 text-primary-900 dark:text-primary-200',
+            'info_solid' => 'bg-primary text-primary-foreground shadow-xs',
+            'info_outline' => 'border-2 border-primary-line text-primary bg-transparent',
+            'info_glass' => 'backdrop-blur-md bg-primary/10 border border-primary/30 text-primary-900 dark:text-primary-200',
 
             'success_solid' => 'bg-emerald-600 text-white shadow-xs',
             'success_outline' => 'border-2 border-emerald-500 text-emerald-700 bg-transparent dark:text-emerald-400',
@@ -134,18 +134,18 @@ final class Alert
             'warning_outline' => 'border-2 border-amber-500 text-amber-700 bg-transparent dark:text-amber-400',
             'warning_glass' => 'backdrop-blur-md bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200',
 
-            'danger_solid' => 'bg-red-600 text-white shadow-xs',
-            'danger_outline' => 'border-2 border-red-500 text-red-700 bg-transparent dark:text-red-400',
-            'danger_glass' => 'backdrop-blur-md bg-red-500/10 border border-red-500/30 text-red-900 dark:text-red-200',
+            'danger_solid' => 'bg-destructive text-destructive-foreground shadow-xs',
+            'danger_outline' => 'border-2 border-destructive text-destructive bg-transparent',
+            'danger_glass' => 'backdrop-blur-md bg-destructive/10 border border-destructive/30 text-red-900 dark:text-red-200',
 
-            'dark_solid' => 'bg-gray-900 text-white shadow-xs dark:bg-white dark:text-gray-900',
-            'dark_outline' => 'border-2 border-gray-400 text-gray-800 bg-transparent dark:border-neutral-600 dark:text-neutral-200',
-            'dark_glass' => 'backdrop-blur-md bg-white/70 border border-gray-200 text-gray-900 dark:bg-neutral-900/70 dark:border-neutral-700 dark:text-white',
+            'dark_solid' => 'bg-inverse text-foreground-inverse shadow-xs',
+            'dark_outline' => 'border-2 border-line-4 text-foreground bg-transparent',
+            'dark_glass' => 'backdrop-blur-md bg-card/70 border border-card-line text-foreground',
 
             'success_soft' => 'bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-300',
             'warning_soft' => 'bg-amber-50 border border-amber-200 text-amber-800 dark:bg-amber-950/40 dark:border-amber-800 dark:text-amber-300',
             'danger_soft' => 'bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/40 dark:border-red-800 dark:text-red-300',
-            'dark_soft' => 'bg-gray-100 border border-gray-200 text-gray-800 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200',
+            'dark_soft' => 'bg-surface border border-surface-line text-surface-foreground',
             default => 'bg-primary-50 border border-primary-200 text-primary-800 dark:bg-primary-950/40 dark:border-primary-800 dark:text-primary-300',
         };
     }

@@ -167,9 +167,9 @@ final class DescriptionList
         $divider = $this->isDivider();
 
         return match ($layout) {
-            'bordered' => 'border border-gray-200 rounded-xl overflow-hidden divide-y divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700',
-            'striped' => 'divide-y divide-gray-200 dark:divide-neutral-700 border-t border-b border-gray-200 dark:border-neutral-700',
-            default => $divider ? 'divide-y divide-gray-200 dark:divide-neutral-700' : 'space-y-4',
+            'bordered' => 'border border-card-line rounded-xl overflow-hidden divide-y divide-card-divider',
+            'striped' => 'divide-y divide-border border-t border-b border-border',
+            default => $divider ? 'divide-y divide-border' : 'space-y-4',
         };
     }
 
@@ -186,8 +186,8 @@ final class DescriptionList
 
         return match ($layout) {
             'horizontal' => \sprintf('%s sm:flex sm:items-baseline gap-x-4', $padding),
-            'striped' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 even:bg-gray-50 dark:even:bg-neutral-800/50', $padding),
-            'bordered' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 bg-white dark:bg-neutral-900', $padding),
+            'striped' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 even:bg-background-1', $padding),
+            'bordered' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 bg-card', $padding),
             default => \sprintf('%s flex flex-col gap-y-1', $padding),
         };
     }
@@ -200,10 +200,10 @@ final class DescriptionList
         $termWidth = 'stacked' === $layout ? 'w-full' : $this->getTermWidthClasses();
 
         $font = match ($style) {
-            'medium' => 'font-medium text-gray-800 dark:text-neutral-200',
-            'muted' => 'font-normal text-gray-500 dark:text-neutral-400',
-            'primary' => 'font-semibold text-primary-600 dark:text-primary-500',
-            default => 'font-semibold text-gray-900 dark:text-white',
+            'medium' => 'font-medium text-foreground',
+            'muted' => 'font-normal text-muted-foreground-1',
+            'primary' => 'font-semibold text-primary',
+            default => 'font-semibold text-foreground',
         };
 
         return \trim(\sprintf('%s %s shrink-0 inline-flex items-center gap-x-2 text-sm', $termWidth, $font));
@@ -214,7 +214,7 @@ final class DescriptionList
         $layout = $this->getLayout();
         $descWidth = 'stacked' === $layout ? 'w-full' : $this->getDescWidthClasses();
 
-        return \trim(\sprintf('%s text-sm text-gray-600 dark:text-neutral-400', $descWidth));
+        return \trim(\sprintf('%s text-sm text-muted-foreground-2', $descWidth));
     }
 
     public function getMarginClass(): string

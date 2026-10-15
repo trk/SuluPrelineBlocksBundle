@@ -54,7 +54,7 @@
      }) }}>
 
     {# 1. Media Layer (Background Image / Video) #}
-    <div class="absolute inset-0 z-0 overflow-hidden bg-gray-950">
+    <div class="absolute inset-0 z-0 overflow-hidden bg-inverse">
         {% if is_img and active_img %}
             <img
                 src="{{ active_img }}"
@@ -95,7 +95,7 @@
             {% endif %}
         {% else %}
             {# Fallback gradient canvas if no media selected #}
-            <div class="w-full h-full bg-linear-to-br from-gray-900 via-neutral-900 to-gray-950"></div>
+            <div class="w-full h-full bg-linear-to-br from-primary-950 via-inverse to-primary-900"></div>
         {% endif %}
     </div>
 
@@ -146,7 +146,7 @@
 
             {# Description / Content #}
             {% if content %}
-                <div class="text-gray-200 text-sm sm:text-base leading-relaxed mt-2 line-clamp-4">
+                <div class="text-white/85 text-sm sm:text-base leading-relaxed mt-2 line-clamp-4">
                     {{ content|raw }}
                 </div>
             {% endif %}

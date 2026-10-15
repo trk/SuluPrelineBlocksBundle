@@ -26,8 +26,8 @@ final class TableTest extends TestCase
         self::assertFalse($table->isHover());
         self::assertFalse($table->hasHeader());
         self::assertSame('overflow-x-auto w-full', $table->getWrapperClasses());
-        self::assertSame('min-w-full divide-y divide-gray-200 dark:divide-neutral-700 text-start', $table->getTableClasses());
-        self::assertSame('bg-gray-50 dark:bg-neutral-800', $table->getTheadClasses());
+        self::assertSame('min-w-full divide-y divide-table-line text-start', $table->getTableClasses());
+        self::assertSame('bg-background-1', $table->getTheadClasses());
     }
 
     public function testHeaderPresence(): void
@@ -52,12 +52,12 @@ final class TableTest extends TestCase
         self::assertSame('lg', $table->getSize());
         self::assertTrue($table->isStickyHeader());
         self::assertTrue($table->isHover());
-        self::assertStringContainsString('border border-gray-200', $table->getWrapperClasses());
+        self::assertStringContainsString('border border-table-line', $table->getWrapperClasses());
         self::assertStringContainsString('sticky top-0 z-10', $table->getTheadClasses());
         self::assertStringContainsString('px-6 py-4 text-base', $table->getThClasses());
         self::assertStringContainsString('px-6 py-4 text-base', $table->getTdClasses());
-        self::assertStringContainsString('bg-white', $table->getRowClasses(0));
-        self::assertStringContainsString('bg-gray-50/70', $table->getRowClasses(1));
+        self::assertStringContainsString('bg-card', $table->getRowClasses(0));
+        self::assertStringContainsString('bg-background-1', $table->getRowClasses(1));
     }
 
     public function testNormalizedItems(): void

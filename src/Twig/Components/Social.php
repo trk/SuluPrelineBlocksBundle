@@ -103,10 +103,10 @@ final class Social
         // Style
         $style = $this->getStyle();
         $classes[] = match ($style) {
-            'bordered' => 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-primary-600 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-primary-400 shadow-2xs',
-            'buttons' => 'bg-gray-100 text-gray-700 hover:bg-primary-600 hover:text-white dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-primary-600 dark:hover:text-white shadow-2xs',
-            'pills' => 'border border-transparent bg-primary-50 text-primary-600 hover:bg-primary-100 dark:bg-primary-950/40 dark:text-primary-400 dark:hover:bg-primary-900/40',
-            default => 'text-gray-500 hover:bg-gray-100 hover:text-primary-600 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-primary-400',
+            'bordered' => 'border border-layer-line bg-layer text-layer-foreground hover:bg-layer-hover hover:text-primary shadow-2xs',
+            'buttons' => 'bg-surface text-surface-foreground hover:bg-primary hover:text-primary-foreground shadow-2xs',
+            'pills' => 'border border-transparent bg-primary-50 text-primary hover:bg-primary-100 dark:bg-primary-950/40 dark:hover:bg-primary-900/40',
+            default => 'text-muted-foreground-1 hover:bg-muted hover:text-primary',
         };
 
         return \implode(' ', $classes);

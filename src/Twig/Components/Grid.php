@@ -178,7 +178,7 @@ final class Grid
     public function getContainerClasses(): string
     {
         if ($this->isCardGroup()) {
-            return 'grid border border-gray-200 dark:border-neutral-700 rounded-xl shadow-2xs divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x divide-gray-200 dark:divide-neutral-700';
+            return 'grid border border-card-line bg-card rounded-xl shadow-2xs divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x divide-card-divider';
         }
 
         $props = $this->getResolvedProps();

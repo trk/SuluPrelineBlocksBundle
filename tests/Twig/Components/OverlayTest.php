@@ -174,13 +174,13 @@ final class OverlayTest extends TestCase
         self::assertStringContainsString('bg-gradient-to-t', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'dark-glass'];
-        self::assertStringContainsString('backdrop-blur-md bg-gray-950/60', $overlay->getOverlayStyle());
+        self::assertStringContainsString('backdrop-blur-md bg-black/60', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'light-glass'];
-        self::assertStringContainsString('bg-white/80', $overlay->getOverlayStyle());
+        self::assertStringContainsString('bg-layer/80', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'primary'];
-        self::assertStringContainsString('bg-primary-600/80', $overlay->getOverlayStyle());
+        self::assertStringContainsString('bg-primary/80', $overlay->getOverlayStyle());
 
         $overlay->props = ['overlay_style' => 'none'];
         self::assertSame('bg-transparent', $overlay->getOverlayStyle());
@@ -245,7 +245,7 @@ final class OverlayTest extends TestCase
         self::assertStringContainsString('backdrop-blur-md', $overlay->getBadgeClasses());
 
         $overlay->props = ['badge_style' => 'primary'];
-        self::assertStringContainsString('bg-primary-600', $overlay->getBadgeClasses());
+        self::assertStringContainsString('bg-primary', $overlay->getBadgeClasses());
 
         $overlay->props = ['badge_position' => 'top-right'];
         self::assertSame('top-right', $overlay->getBadgePosition());
@@ -309,7 +309,7 @@ final class OverlayTest extends TestCase
         self::assertSame('View Overlay', $buttons[0]['title']);
         self::assertSame('/details', $buttons[0]['url']);
         self::assertIsString($buttons[0]['classes']);
-        self::assertStringContainsString('bg-white', $buttons[0]['classes']);
+        self::assertStringContainsString('bg-layer', $buttons[0]['classes']);
     }
 
     public function testLinkAndClickableOverlay(): void
@@ -425,7 +425,7 @@ final class OverlayTest extends TestCase
         self::assertSame('Overlay Action 1', $buttons[0]['title']);
         self::assertSame('/overlay-1', $buttons[0]['url']);
         self::assertIsString($buttons[0]['classes']);
-        self::assertStringContainsString('bg-white', $buttons[0]['classes']);
+        self::assertStringContainsString('bg-layer', $buttons[0]['classes']);
         self::assertSame('Overlay Action 2', $buttons[1]['title']);
         self::assertSame('/overlay-2', $buttons[1]['url']);
 

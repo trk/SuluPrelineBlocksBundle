@@ -62,16 +62,16 @@ final class Code
 
     public function getContainerClasses(): string
     {
-        return 'relative w-full rounded-2xl bg-neutral-900 border border-neutral-800 shadow-xl overflow-hidden my-4';
+        return 'relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4';
     }
 
     public function getHeaderClasses(): string
     {
-        return 'flex items-center justify-between px-4 py-2.5 bg-neutral-950/60 border-b border-neutral-800 text-xs font-mono text-neutral-400';
+        return 'flex items-center justify-between px-4 py-2.5 bg-card-header border-b border-card-line text-xs font-mono text-muted-foreground-1';
     }
 
     public function getPreClasses(): string
     {
-        return 'p-4 overflow-x-auto text-sm font-mono leading-relaxed text-neutral-100 bg-neutral-900';
+        return 'p-4 overflow-x-auto text-sm font-mono leading-relaxed text-foreground bg-card';
     }
 }

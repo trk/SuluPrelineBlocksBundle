@@ -91,11 +91,9 @@ final class Map
             'rounded-2xl',
             'overflow-hidden',
             'border',
-            'border-gray-200',
+            'border-card-line',
             'shadow-xs',
-            'dark:border-neutral-700',
-            'bg-gray-100',
-            'dark:bg-neutral-800',
+            'bg-surface',
         ];
 
         return \implode(' ', $classes);

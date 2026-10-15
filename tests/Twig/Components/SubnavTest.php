@@ -20,8 +20,8 @@ final class SubnavTest extends TestCase
         self::assertSame('md', $subnav->getSize());
         self::assertStringContainsString('justify-start', $subnav->getNavClasses());
         self::assertStringContainsString('gap-2', $subnav->getNavClasses());
-        self::assertStringContainsString('bg-primary-600 text-white', $subnav->getItemClasses(true));
-        self::assertStringContainsString('text-gray-600 hover:text-gray-900', $subnav->getItemClasses(false));
+        self::assertStringContainsString('bg-primary text-primary-foreground', $subnav->getItemClasses(true));
+        self::assertStringContainsString('text-muted-foreground-2 hover:text-foreground', $subnav->getItemClasses(false));
         self::assertSame('', $subnav->getMarginClass());
         self::assertNull($subnav->getCustomId());
         self::assertSame('', $subnav->getCustomClass());
@@ -44,8 +44,8 @@ final class SubnavTest extends TestCase
         self::assertSame('center', $subnav->getAlignment());
         self::assertSame('lg', $subnav->getSize());
         self::assertStringContainsString('justify-center', $subnav->getNavClasses());
-        self::assertStringContainsString('bg-gray-100 rounded-xl', $subnav->getNavClasses());
-        self::assertStringContainsString('bg-white text-gray-900', $subnav->getItemClasses(true));
+        self::assertStringContainsString('bg-surface rounded-xl', $subnav->getNavClasses());
+        self::assertStringContainsString('bg-layer text-layer-foreground', $subnav->getItemClasses(true));
         self::assertSame('mt-8 mb-12', $subnav->getMarginClass());
         self::assertSame('tab-nav', $subnav->getCustomId());
         self::assertSame('my-subnav', $subnav->getCustomClass());
@@ -53,8 +53,8 @@ final class SubnavTest extends TestCase
         $subnavUnderline = new Subnav();
         $subnavUnderline->style = 'underline';
         self::assertSame('underline', $subnavUnderline->getStyle());
-        self::assertStringContainsString('border-b border-gray-200', $subnavUnderline->getNavClasses());
-        self::assertStringContainsString('border-primary-600 text-primary-600', $subnavUnderline->getItemClasses(true));
+        self::assertStringContainsString('border-b border-border', $subnavUnderline->getNavClasses());
+        self::assertStringContainsString('border-primary text-primary', $subnavUnderline->getItemClasses(true));
     }
 
     public function testItemNormalization(): void

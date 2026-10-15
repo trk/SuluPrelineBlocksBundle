@@ -75,7 +75,7 @@ final class Table
 
         $resolvedProps = $this->resolveProps();
         if (!empty($resolvedProps['bordered'])) {
-            $classes[] = 'border border-gray-200 rounded-xl dark:border-neutral-700 shadow-xs';
+            $classes[] = 'border border-table-line rounded-xl shadow-xs';
         }
 
         return \implode(' ', $classes);
@@ -83,14 +83,14 @@ final class Table
 
     public function getTableClasses(): string
     {
-        $classes = ['min-w-full', 'divide-y', 'divide-gray-200', 'dark:divide-neutral-700', 'text-start'];
+        $classes = ['min-w-full', 'divide-y', 'divide-table-line', 'text-start'];
 
         return \implode(' ', $classes);
     }
 
     public function getTheadClasses(): string
     {
-        $classes = ['bg-gray-50', 'dark:bg-neutral-800'];
+        $classes = ['bg-background-1'];
 
         if ($this->isStickyHeader()) {
             $classes[] = 'sticky top-0 z-10';
@@ -112,14 +112,14 @@ final class Table
     {
         $padding = $this->getCellPaddingClasses();
 
-        return $padding . ' font-semibold text-gray-700 dark:text-neutral-300 uppercase tracking-wider text-start';
+        return $padding . ' font-semibold text-muted-foreground-2 uppercase tracking-wider text-start';
     }
 
     public function getTdClasses(): string
     {
         $padding = $this->getCellPaddingClasses();
 
-        return $padding . ' text-gray-800 dark:text-neutral-200 align-middle';
+        return $padding . ' text-foreground align-middle';
     }
 
     public function getRowClasses(int $index): string
@@ -130,14 +130,14 @@ final class Table
 
         if ('striped' === $style) {
             $classes[] = 0 === $index % 2
-                ? 'bg-white dark:bg-neutral-900'
-                : 'bg-gray-50/70 dark:bg-neutral-800/50';
+                ? 'bg-card'
+                : 'bg-background-1';
         } else {
-            $classes[] = 'bg-white dark:bg-neutral-900';
+            $classes[] = 'bg-card';
         }
 
         if ($this->isHover()) {
-            $classes[] = 'hover:bg-primary-50/50 dark:hover:bg-neutral-800/80';
+            $classes[] = 'hover:bg-muted-hover';
         }
 
         return \implode(' ', $classes);

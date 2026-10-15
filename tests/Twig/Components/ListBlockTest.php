@@ -17,7 +17,7 @@ final class ListBlockTest extends TestCase
         self::assertEmpty($list->getNormalizedItems());
         self::assertSame('vertical', $list->getListType());
         self::assertSame('none', $list->getMarker());
-        self::assertSame('text-primary-600 dark:text-primary-500', $list->getMarkerColor());
+        self::assertSame('text-primary', $list->getMarkerColor());
         self::assertSame('default', $list->getStyle());
         self::assertSame('md', $list->getSize());
         self::assertSame('space-y-2.5', $list->getSpacingClasses());
@@ -45,11 +45,11 @@ final class ListBlockTest extends TestCase
         ];
 
         self::assertSame('checkmark', $list->getMarker());
-        self::assertSame('text-secondary-600 dark:text-secondary-400', $list->getMarkerColor());
+        self::assertSame('text-secondary', $list->getMarkerColor());
         self::assertSame('striped', $list->getStyle());
         self::assertSame('lg', $list->getSize());
         self::assertStringContainsString('grid sm:grid-cols-2', $list->getListClasses());
-        self::assertStringContainsString('odd:bg-transparent even:bg-gray-50', $list->getItemClasses());
+        self::assertStringContainsString('odd:bg-transparent even:bg-background-1', $list->getItemClasses());
         self::assertSame('mt-8 mb-16', $list->getMarginClass());
         self::assertSame('features-list', $list->getCustomId());
         self::assertSame('my-custom-list', $list->getCustomClass());

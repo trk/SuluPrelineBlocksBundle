@@ -55,7 +55,7 @@ final class ScrollToTest extends TestCase
         ];
         self::assertSame('totop_circle', $scrollCircle->getDisplayMode());
         self::assertStringContainsString('rounded-full', $scrollCircle->getButtonClasses());
-        self::assertStringContainsString('bg-gray-900', $scrollCircle->getButtonClasses());
+        self::assertStringContainsString('bg-inverse', $scrollCircle->getButtonClasses());
 
         $scrollFloating = new ScrollTo();
         $scrollFloating->props = ['display_mode' => 'floating'];

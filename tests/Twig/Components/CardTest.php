@@ -115,7 +115,7 @@ final class CardTest extends TestCase
         self::assertStringContainsString('backdrop-blur', $card->getCardClasses());
         self::assertStringContainsString('md:flex-row', $card->getCardClasses());
         self::assertSame('text-center', $card->getTextAlign());
-        self::assertSame('text-primary-600 dark:text-primary-400', $card->getTitleColor());
+        self::assertSame('text-primary', $card->getTitleColor());
     }
 
     public function testMutualExclusivityImageOnly(): void
@@ -223,13 +223,13 @@ final class CardTest extends TestCase
         self::assertStringContainsString('backdrop-blur-md', $card->getBadgeClasses());
 
         $card->props = ['badge_style' => 'primary'];
-        self::assertStringContainsString('bg-primary-600', $card->getBadgeClasses());
+        self::assertStringContainsString('bg-primary', $card->getBadgeClasses());
 
         $card->props = ['badge_style' => 'success'];
         self::assertStringContainsString('bg-emerald-600', $card->getBadgeClasses());
 
         $card->props = ['badge_style' => 'dark'];
-        self::assertStringContainsString('bg-gray-900', $card->getBadgeClasses());
+        self::assertStringContainsString('bg-inverse', $card->getBadgeClasses());
     }
 
     public function testBadgePositions(): void
@@ -307,7 +307,7 @@ final class CardTest extends TestCase
 
         self::assertSame('Overridden Badge', $badges[1]['title']);
         self::assertIsString($badges[1]['classes']);
-        self::assertStringContainsString('bg-red-500', $badges[1]['classes']);
+        self::assertStringContainsString('bg-destructive', $badges[1]['classes']);
         self::assertTrue($badges[1]['has_dot']);
 
         self::assertTrue($card->hasButtons());
@@ -316,12 +316,12 @@ final class CardTest extends TestCase
         self::assertSame('Explore', $buttons[0]['title']);
         self::assertSame('/explore', $buttons[0]['url']);
         self::assertIsString($buttons[0]['classes']);
-        self::assertStringContainsString('bg-primary-600', $buttons[0]['classes']);
+        self::assertStringContainsString('bg-primary', $buttons[0]['classes']);
 
         self::assertSame('Contact Us', $buttons[1]['title']);
         self::assertSame('/contact', $buttons[1]['url']);
         self::assertIsString($buttons[1]['classes']);
-        self::assertStringContainsString('border-secondary-600', $buttons[1]['classes']);
+        self::assertStringContainsString('border-secondary-line', $buttons[1]['classes']);
     }
 
     public function testCardGroupVariant(): void
@@ -380,10 +380,10 @@ final class CardTest extends TestCase
         self::assertCount(2, $badges);
         self::assertSame('Top Badge', $badges[0]['title']);
         self::assertIsString($badges[0]['classes']);
-        self::assertStringContainsString('bg-primary-600', $badges[0]['classes']);
+        self::assertStringContainsString('bg-primary', $badges[0]['classes']);
         self::assertSame('Second Badge', $badges[1]['title']);
         self::assertIsString($badges[1]['classes']);
-        self::assertStringContainsString('border-red-500', $badges[1]['classes']);
+        self::assertStringContainsString('border-destructive', $badges[1]['classes']);
 
         self::assertTrue($card->hasButtons());
         $buttons = $card->getNormalizedButtons();
@@ -391,7 +391,7 @@ final class CardTest extends TestCase
         self::assertSame('First Action', $buttons[0]['title']);
         self::assertSame('/action-1', $buttons[0]['url']);
         self::assertIsString($buttons[0]['classes']);
-        self::assertStringContainsString('bg-secondary-600', $buttons[0]['classes']);
+        self::assertStringContainsString('bg-secondary', $buttons[0]['classes']);
         self::assertSame('Second Action', $buttons[1]['title']);
         self::assertSame('/action-2', $buttons[1]['url']);
 

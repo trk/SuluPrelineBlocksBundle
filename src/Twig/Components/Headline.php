@@ -120,9 +120,9 @@ final class Headline
         $decoration = $props['title_decoration'] ?? 'none';
 
         return match ($decoration) {
-            'divider' => 'border-b-2 border-primary-600 dark:border-primary-500 pb-2 inline-block',
-            'bullet' => "flex items-center gap-3 before:content-[''] before:w-1.5 before:h-6 before:bg-primary-600 before:rounded-full",
-            'line' => "flex items-center gap-4 before:content-[''] before:flex-1 before:h-px before:bg-gray-200 dark:before:bg-neutral-700 after:content-[''] after:flex-1 after:h-px after:bg-gray-200 dark:after:bg-neutral-700",
+            'divider' => 'border-b-2 border-primary pb-2 inline-block',
+            'bullet' => "flex items-center gap-3 before:content-[''] before:w-1.5 before:h-6 before:bg-primary before:rounded-full",
+            'line' => "flex items-center gap-4 before:content-[''] before:flex-1 before:h-px before:bg-border after:content-[''] after:flex-1 after:h-px after:bg-border",
             default => '',
         };
     }

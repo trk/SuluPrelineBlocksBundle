@@ -355,8 +355,8 @@ final class Card
 
         return match ($style) {
             'primary_pill' => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary-100 text-primary-800 rounded-full dark:bg-primary-950/40 dark:text-primary-300',
-            'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-gray-100 text-gray-800 rounded-full dark:bg-neutral-800 dark:text-neutral-300',
+            'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary',
+            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-surface text-surface-foreground rounded-full',
         };
     }
 
@@ -366,10 +366,10 @@ final class Card
         $style = $props['badge_style'] ?? 'glass';
 
         return match ($style) {
-            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary-600 text-white shadow-xs',
+            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary text-primary-foreground shadow-xs',
             'success' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-emerald-600 text-white shadow-xs',
-            'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-gray-900 text-white shadow-xs dark:bg-white dark:text-gray-900',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-white/90 text-gray-800 backdrop-blur-md shadow-xs dark:bg-neutral-900/90 dark:text-neutral-200',
+            'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-inverse text-foreground-inverse shadow-xs',
+            default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-layer/90 text-layer-foreground backdrop-blur-md shadow-xs',
         };
     }
 
@@ -489,10 +489,10 @@ final class Card
         $style = $this->buttonStyle ?? ($this->button_style ?? ($props['button_style'] ?? 'primary'));
 
         return match ($style) {
-            'secondary' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700',
-            'outline' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-primary-600 text-primary-600 hover:bg-primary-50 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-950/30 transition-colors focus:outline-hidden',
-            'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary-600 hover:underline focus:outline-hidden dark:text-primary-400',
-            default => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-primary-600 text-white hover:bg-primary-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500',
+            'secondary' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus',
+            'outline' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-primary-line text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30 transition-colors focus:outline-hidden',
+            'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary hover:underline focus:outline-hidden',
+            default => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary',
         };
     }
 
@@ -539,11 +539,11 @@ final class Card
         }
 
         $variantClasses = match ($variant) {
-            'shadow' => 'shadow-md hover:shadow-lg border border-gray-100 dark:border-neutral-800',
+            'shadow' => 'shadow-md hover:shadow-lg border border-card-line',
             'flat' => 'border-0',
-            'interactive' => 'border border-gray-200 dark:border-neutral-700 shadow-2xs hover:-translate-y-1 hover:shadow-lg transition-all duration-300',
-            'glass' => 'backdrop-blur-md bg-white/70 border border-white/20 dark:bg-neutral-900/70 dark:border-neutral-700/30 shadow-lg',
-            default => 'border border-gray-200 shadow-2xs dark:border-neutral-700',
+            'interactive' => 'border border-card-line shadow-2xs hover:-translate-y-1 hover:shadow-lg transition-all duration-300',
+            'glass' => 'backdrop-blur-md bg-card/70 border border-card-line/40 shadow-lg',
+            default => 'border border-card-line shadow-2xs',
         };
 
         if ('overlay' === $mediaAlign) {

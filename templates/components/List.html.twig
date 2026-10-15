@@ -9,7 +9,7 @@
     class="w-full {{ this.marginClass }} {{ this.customClass }}"
 >
     {% if title %}
-        <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+        <h3 class="text-xl font-bold tracking-tight text-foreground mb-4">
             {{ title }}
         </h3>
     {% endif %}
@@ -46,7 +46,7 @@
 
                     <div class="grow">
                         {% if link_href %}
-                            <a href="{{ link_href }}" class="font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            <a href="{{ link_href }}" class="font-medium hover:text-primary transition-colors">
                                 {{ item.title|default('') }}
                             </a>
                         {% else %}
@@ -54,7 +54,7 @@
                         {% endif %}
 
                         {% if item.content|default(null) %}
-                            <div class="text-xs text-gray-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
+                            <div class="text-xs text-muted-foreground-1 mt-0.5 leading-relaxed">
                                 {{ item.content|raw }}
                             </div>
                         {% endif %}

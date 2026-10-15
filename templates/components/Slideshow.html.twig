@@ -10,7 +10,7 @@
 >
     {% if title %}
         <div class="mb-6">
-            <h3 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h3 class="text-2xl font-bold tracking-tight text-foreground">
                 {{ title }}
             </h3>
         </div>
@@ -20,7 +20,7 @@
         data-hs-carousel='{{ this.carouselConfigJson|raw }}'
         class="relative w-full"
     >
-        <div class="hs-carousel relative overflow-hidden w-full {{ height_class }} rounded-2xl bg-neutral-900">
+        <div class="hs-carousel relative overflow-hidden w-full {{ height_class }} rounded-2xl bg-inverse">
             <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                 {% for item in normalized_items %}
                     {% set img_url = item.image_url|default(null) %}
@@ -77,7 +77,7 @@
                             {% endif %}
 
                             {% if item.content|default(null) %}
-                                <div class="text-sm sm:text-base md:text-lg text-neutral-200 leading-relaxed max-w-2xl mb-6">
+                                <div class="text-sm sm:text-base md:text-lg text-white/85 leading-relaxed max-w-2xl mb-6">
                                     {{ item.content|raw }}
                                 </div>
                             {% endif %}
@@ -86,7 +86,7 @@
                                 <div>
                                     <a
                                         href="{{ link_href }}"
-                                        class="inline-flex items-center gap-x-2 py-3 px-6 rounded-xl font-semibold text-sm bg-primary-600 text-white hover:bg-primary-700 shadow-md shadow-primary-500/20 active:scale-95 transition-all focus:outline-hidden"
+                                        class="inline-flex items-center gap-x-2 py-3 px-6 rounded-xl font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary-hover shadow-md shadow-primary/20 active:scale-95 transition-all focus:outline-hidden"
                                     >
                                         <span>{{ item.link_title|default('Discover more'|trans({}, 'sulu_website')) }}</span>
                                         <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>

@@ -24,8 +24,8 @@ final class NavTest extends TestCase
         $nav = new Nav();
         $nav->props = ['card' => true];
 
-        self::assertStringContainsString('border border-gray-200', $nav->getNavClasses());
-        self::assertStringContainsString('dark:bg-neutral-900', $nav->getNavClasses());
+        self::assertStringContainsString('border border-card-line', $nav->getNavClasses());
+        self::assertStringContainsString('bg-card', $nav->getNavClasses());
     }
 
     public function testNormalizedItems(): void

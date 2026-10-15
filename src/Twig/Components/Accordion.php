@@ -185,7 +185,7 @@ final class Accordion
         return match ($style) {
             'bordered' => 'space-y-3',
             'soft' => 'space-y-3',
-            default => 'divide-y divide-gray-200 dark:divide-neutral-700',
+            default => 'divide-y divide-border',
         };
     }
 
@@ -194,15 +194,15 @@ final class Accordion
         $style = $this->getStyle();
 
         return match ($style) {
-            'bordered' => 'hs-accordion border border-gray-200 rounded-xl p-4 dark:border-neutral-700 dark:bg-neutral-900',
-            'soft' => 'hs-accordion bg-gray-100 rounded-xl p-4 dark:bg-neutral-800',
+            'bordered' => 'hs-accordion border border-card-line bg-card rounded-xl p-4',
+            'soft' => 'hs-accordion bg-surface rounded-xl p-4',
             default => 'hs-accordion pt-4 pb-3',
         };
     }
 
     public function getToggleClasses(): string
     {
-        return 'hs-accordion-toggle hs-accordion-active:text-primary-600 dark:hs-accordion-active:text-primary-500 inline-flex items-center justify-between gap-x-3 w-full text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-200 dark:hover:text-neutral-400 focus:outline-hidden';
+        return 'hs-accordion-toggle hs-accordion-active:text-primary inline-flex items-center justify-between gap-x-3 w-full text-start text-foreground hover:text-muted-foreground-1 rounded-lg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden';
     }
 
     public function getContentWrapperClasses(): string
