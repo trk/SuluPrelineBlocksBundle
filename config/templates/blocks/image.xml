@@ -13,13 +13,141 @@
         <title lang="de">Bild</title>
     </meta>
     <properties>
-        <xi:include href="../fields/image.xml"/>
-        <xi:include href="../fields/link.xml"/>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+                <xi:include href="../fields/image.xml"/>
+                <xi:include href="../fields/link.xml"/>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="image"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="aspect_ratio" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">sulu_block_suite.field_aspect_ratio</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="auto">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_auto</title>
+                                </meta>
+                            </param>
+                            <param name="16/9">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_16_9</title>
+                                </meta>
+                            </param>
+                            <param name="4/3">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_4_3</title>
+                                </meta>
+                            </param>
+                            <param name="1/1">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_1_1</title>
+                                </meta>
+                            </param>
+                            <param name="9/16">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_9_16</title>
+                                </meta>
+                            </param>
+                            <param name="21/9">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_21_9</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="rounded" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">sulu_block_suite.field_rounded</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_none</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_sm</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_md</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_lg</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_xl</title>
+                                </meta>
+                            </param>
+                            <param name="full">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_full</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="hover_effect" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">sulu_block_suite.field_hover_effect</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_none</title>
+                                </meta>
+                            </param>
+                            <param name="zoom">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_zoom</title>
+                                </meta>
+                            </param>
+                            <param name="shadow">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_shadow</title>
+                                </meta>
+                            </param>
+                            <param name="brightness">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_brightness</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

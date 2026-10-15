@@ -13,13 +13,285 @@
         <title lang="de">Symbol</title>
     </meta>
     <properties>
-        <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/link.xml"/>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+                <xi:include href="../fields/icon.xml"/>
+                <xi:include href="../fields/link.xml"/>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="icon"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="icon_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Icon Presentation</title>
+                        <title lang="tr">İkon Sunumu</title>
+                        <title lang="de">Symbol-Darstellung</title>
+                        <title lang="ru">Представление иконки</title>
+                        <title lang="es">Presentación del Icono</title>
+                        <title lang="fr">Présentation de l&apos;Icône</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="plain"/>
+                        <param name="values" type="collection">
+                            <param name="plain">
+                                <meta>
+                                    <title lang="en">Plain Icon</title>
+                                    <title lang="tr">Sade İkon</title>
+                                    <title lang="de">Einfaches Symbol</title>
+                                    <title lang="ru">Простая иконка</title>
+                                    <title lang="es">Icono Simple</title>
+                                    <title lang="fr">Icône Simple</title>
+                                </meta>
+                            </param>
+                            <param name="circle_solid">
+                                <meta>
+                                    <title lang="en">Solid Circle Badge</title>
+                                    <title lang="tr">Dolu Yuvarlak Rozet</title>
+                                    <title lang="de">Gefüllter Kreis-Badge</title>
+                                    <title lang="ru">Сплошной круглый значок</title>
+                                    <title lang="es">Insignia Circular Sólida</title>
+                                    <title lang="fr">Badge Circulaire Plein</title>
+                                </meta>
+                            </param>
+                            <param name="circle_outline">
+                                <meta>
+                                    <title lang="en">Outlined Circle</title>
+                                    <title lang="tr">Kenarlıklı Yuvarlak</title>
+                                    <title lang="de">Umrandeter Kreis</title>
+                                    <title lang="ru">Контурный круг</title>
+                                    <title lang="es">Círculo con Contorno</title>
+                                    <title lang="fr">Cercle avec Contour</title>
+                                </meta>
+                            </param>
+                            <param name="square_soft">
+                                <meta>
+                                    <title lang="en">Soft Square Box</title>
+                                    <title lang="tr">Yumuşak Kare Kutu</title>
+                                    <title lang="de">Sanfte quadratische Box</title>
+                                    <title lang="ru">Мягкий квадратный блок</title>
+                                    <title lang="es">Caja Cuadrada Suave</title>
+                                    <title lang="fr">Boîte Carrée Douce</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="icon_size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Size</title>
+                        <title lang="tr">Boyut</title>
+                        <title lang="de">Größe</title>
+                        <title lang="ru">Размер</title>
+                        <title lang="es">Tamaño</title>
+                        <title lang="fr">Taille</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                            <param name="2xl">
+                                <meta>
+                                    <title lang="en">Huge</title>
+                                    <title lang="tr">Dev</title>
+                                    <title lang="de">Riesig</title>
+                                    <title lang="ru">Огромный</title>
+                                    <title lang="es">Enorme</title>
+                                    <title lang="fr">immense</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="icon_color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Color</title>
+                        <title lang="tr">Renk</title>
+                        <title lang="de">Farbe</title>
+                        <title lang="ru">Цвет</title>
+                        <title lang="es">Color</title>
+                        <title lang="fr">Couleur</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="primary"/>
+                        <param name="values" type="collection">
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Blue</title>
+                                    <title lang="tr">Birincil Mavi</title>
+                                    <title lang="de">Primärblau</title>
+                                    <title lang="ru">Основной синий</title>
+                                    <title lang="es">Azul Primario</title>
+                                    <title lang="fr">Bleu Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="secondary">
+                                <meta>
+                                    <title lang="en">Secondary Indigo</title>
+                                    <title lang="tr">İkincil İndigo</title>
+                                    <title lang="de">Sekundär Indigo</title>
+                                    <title lang="ru">Вторичный индиго</title>
+                                    <title lang="es">Índigo Secundario</title>
+                                    <title lang="fr">Indigo Secondaire</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark / Black</title>
+                                    <title lang="tr">Koyu / Siyah</title>
+                                    <title lang="de">Dunkel / Schwarz</title>
+                                    <title lang="ru">Тёмный / Чёрный</title>
+                                    <title lang="es">Oscuro / Negro</title>
+                                    <title lang="fr">Sombre / Noir</title>
+                                </meta>
+                            </param>
+                            <param name="muted">
+                                <meta>
+                                    <title lang="en">Muted Gray</title>
+                                    <title lang="tr">Açık Gri</title>
+                                    <title lang="de">Gedämpftes Grau</title>
+                                    <title lang="ru">Приглушённый серый</title>
+                                    <title lang="es">Gris Atenuado</title>
+                                    <title lang="fr">Gris Atténué</title>
+                                </meta>
+                            </param>
+                            <param name="success">
+                                <meta>
+                                    <title lang="en">Success Green</title>
+                                    <title lang="tr">Yeşil</title>
+                                    <title lang="de">Erfolgsgrün</title>
+                                    <title lang="ru">Зелёный</title>
+                                    <title lang="es">Verde Éxito</title>
+                                    <title lang="fr">Vert Succès</title>
+                                </meta>
+                            </param>
+                            <param name="danger">
+                                <meta>
+                                    <title lang="en">Danger Red</title>
+                                    <title lang="tr">Kırmızı</title>
+                                    <title lang="de">Gefahrenrot</title>
+                                    <title lang="ru">Красный</title>
+                                    <title lang="es">Rojo Peligro</title>
+                                    <title lang="fr">Rouge Danger</title>
+                                </meta>
+                            </param>
+                            <param name="white">
+                                <meta>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="left"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

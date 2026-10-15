@@ -13,37 +13,259 @@
         <title lang="de">Zitat</title>
     </meta>
     <properties>
-        <xi:include href="../fields/content.xml"/>
-
-        <property name="author" type="text_line">
+        <section name="content">
             <meta>
-                <title lang="en">Author</title>
-                <title lang="tr">Yazar / Kişi</title>
-                <title lang="ru">Автор</title>
-                <title lang="fr">Auteur</title>
-                <title lang="es">Autor</title>
-                <title lang="de">Autor</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-        </property>
+            <properties>
+                <xi:include href="../fields/content.xml"/>
 
-        <property name="author_title" type="text_line">
+                <property name="author" type="text_line">
+                    <meta>
+                        <title lang="en">Author</title>
+                        <title lang="tr">Yazar / Kişi</title>
+                        <title lang="ru">Автор</title>
+                        <title lang="fr">Auteur</title>
+                        <title lang="es">Autor</title>
+                        <title lang="de">Autor</title>
+                    </meta>
+                </property>
+
+                <property name="author_title" type="text_line">
+                    <meta>
+                        <title lang="en">Title or Company</title>
+                        <title lang="tr">Unvan veya Şirket</title>
+                        <title lang="ru">Должность или компания</title>
+                        <title lang="fr">Titre ou entreprise</title>
+                        <title lang="es">Título o empresa</title>
+                        <title lang="de">Titel oder Unternehmen</title>
+                    </meta>
+                </property>
+
+                <xi:include href="../fields/image.xml"/>
+                <xi:include href="../fields/link.xml"/>
+            </properties>
+        </section>
+
+        <section name="settings">
             <meta>
-                <title lang="en">Title or Company</title>
-                <title lang="tr">Unvan veya Şirket</title>
-                <title lang="ru">Должность или компания</title>
-                <title lang="fr">Titre ou entreprise</title>
-                <title lang="es">Título o empresa</title>
-                <title lang="de">Titel oder Unternehmen</title>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
             </meta>
-        </property>
+            <properties>
+                <property name="quote_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Quote Style</title>
+                        <title lang="tr">Alıntı Stili</title>
+                        <title lang="de">Zitat-Stil</title>
+                        <title lang="ru">Стиль цитаты</title>
+                        <title lang="es">Estilo de Cita</title>
+                        <title lang="fr">Style de Citation</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="bordered"/>
+                        <param name="values" type="collection">
+                            <param name="bordered">
+                                <meta>
+                                    <title lang="en">Left Accent Line</title>
+                                    <title lang="tr">Sol Vurgu Çizgili</title>
+                                    <title lang="de">Linke Akzentlinie</title>
+                                    <title lang="ru">Акцентная линия слева</title>
+                                    <title lang="es">Línea de Acento Izquierda</title>
+                                    <title lang="fr">Ligne d&apos;Accent à Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="large">
+                                <meta>
+                                    <title lang="en">Large Quote Mark</title>
+                                    <title lang="tr">Büyük Tırnak İşaretli</title>
+                                    <title lang="de">Großes Anführungszeichen</title>
+                                    <title lang="ru">Крупные кавычки</title>
+                                    <title lang="es">Comillas Grandes</title>
+                                    <title lang="fr">Grands Guillemets</title>
+                                </meta>
+                            </param>
+                            <param name="card">
+                                <meta>
+                                    <title lang="en">Testimonial Card</title>
+                                    <title lang="tr">Yorum / Görüş Kartı</title>
+                                    <title lang="de">Referenz-Karte</title>
+                                    <title lang="ru">Карточка отзыва</title>
+                                    <title lang="es">Tarjeta de Testimonio</title>
+                                    <title lang="fr">Carte de Témoignage</title>
+                                </meta>
+                            </param>
+                            <param name="plain">
+                                <meta>
+                                    <title lang="en">Plain Text</title>
+                                    <title lang="tr">Sade Metin</title>
+                                    <title lang="de">Klartext</title>
+                                    <title lang="ru">Обычный текст</title>
+                                    <title lang="es">Texto Plano</title>
+                                    <title lang="fr">Texte Brut</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <xi:include href="../fields/image.xml"/>
-        <xi:include href="../fields/link.xml"/>
+                <property name="quote_size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Font Size</title>
+                        <title lang="tr">Yazı Boyutu</title>
+                        <title lang="de">Schriftgröße</title>
+                        <title lang="ru">Размер шрифта</title>
+                        <title lang="es">Tamaño de Fuente</title>
+                        <title lang="fr">Taille de Police</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="quotation"/>
-            </params>
-        </property>
+                <property name="accent_color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Accent Color</title>
+                        <title lang="tr">Vurgu Rengi</title>
+                        <title lang="de">Akzentfarbe</title>
+                        <title lang="ru">Акцентный цвет</title>
+                        <title lang="es">Color de Acento</title>
+                        <title lang="fr">Couleur d&apos;Accent</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="primary"/>
+                        <param name="values" type="collection">
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Blue</title>
+                                    <title lang="tr">Birincil Mavi</title>
+                                    <title lang="de">Primärblau</title>
+                                    <title lang="ru">Основной синий</title>
+                                    <title lang="es">Azul Primario</title>
+                                    <title lang="fr">Bleu Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark</title>
+                                    <title lang="tr">Koyu</title>
+                                    <title lang="de">Dunkel</title>
+                                    <title lang="ru">Тёмный</title>
+                                    <title lang="es">Oscuro</title>
+                                    <title lang="fr">Sombre</title>
+                                </meta>
+                            </param>
+                            <param name="muted">
+                                <meta>
+                                    <title lang="en">Muted Gray</title>
+                                    <title lang="tr">Açık Gri</title>
+                                    <title lang="de">Gedämpftes Grau</title>
+                                    <title lang="ru">Приглушённый серый</title>
+                                    <title lang="es">Gris Atenuado</title>
+                                    <title lang="fr">Gris Atténué</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="left"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

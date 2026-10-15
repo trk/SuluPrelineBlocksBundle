@@ -13,26 +13,280 @@
         <title lang="fr">Curseur de superposition</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="overlay" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Slider Overlays</title>
-                <title lang="tr">Kaydırıcı Katmanları</title>
-                <title lang="de">Schieberegler-Overlays</title>
-                <title lang="ru">Оверлеи слайдера</title>
-                <title lang="es">Superposiciones deslizantes</title>
-                <title lang="fr">Superpositions de curseur</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/overlay.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="overlay_slider"/>
-            </params>
-        </property>
+                <block name="items" default-type="overlay" minOccurs="1">
+                    <meta>
+                        <title lang="en">Slider Overlays</title>
+                        <title lang="tr">Kaydırıcı Katmanları</title>
+                        <title lang="de">Schieberegler-Overlays</title>
+                        <title lang="ru">Оверлеи слайдера</title>
+                        <title lang="es">Superposiciones deslizantes</title>
+                        <title lang="fr">Superpositions de curseur</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/overlay.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="columns" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Visible Slides</title>
+                        <title lang="tr">Görünür Slayt Sayısı</title>
+                        <title lang="de">Sichtbare Folien</title>
+                        <title lang="ru">Видимые слайды</title>
+                        <title lang="es">Diapositivas Visibles</title>
+                        <title lang="fr">Diapositives Visibles</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="3"/>
+                        <param name="values" type="collection">
+                            <param name="1">
+                                <meta>
+                                    <title lang="en">1 Slide</title>
+                                    <title lang="tr">1 Slayt</title>
+                                    <title lang="de">1 Folie</title>
+                                    <title lang="ru">1 слайд</title>
+                                    <title lang="es">1 Diapositiva</title>
+                                    <title lang="fr">1 Diapositive</title>
+                                </meta>
+                            </param>
+                            <param name="2">
+                                <meta>
+                                    <title lang="en">2 Slides</title>
+                                    <title lang="tr">2 Slayt</title>
+                                    <title lang="de">2 Folien</title>
+                                    <title lang="ru">2 слайда</title>
+                                    <title lang="es">2 Diapositivas</title>
+                                    <title lang="fr">2 Diapositives</title>
+                                </meta>
+                            </param>
+                            <param name="3">
+                                <meta>
+                                    <title lang="en">3 Slides</title>
+                                    <title lang="tr">3 Slayt</title>
+                                    <title lang="de">3 Folien</title>
+                                    <title lang="ru">3 слайда</title>
+                                    <title lang="es">3 Diapositivas</title>
+                                    <title lang="fr">3 Diapositives</title>
+                                </meta>
+                            </param>
+                            <param name="4">
+                                <meta>
+                                    <title lang="en">4 Slides</title>
+                                    <title lang="tr">4 Slayt</title>
+                                    <title lang="de">4 Folien</title>
+                                    <title lang="ru">4 слайда</title>
+                                    <title lang="es">4 Diapositivas</title>
+                                    <title lang="fr">4 Diapositives</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="gap" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Slide Gap</title>
+                        <title lang="tr">Slaytlar Arası Boşluk</title>
+                        <title lang="de">Folienabstand</title>
+                        <title lang="ru">Отступ между слайдами</title>
+                        <title lang="es">Espaciado entre Diapositivas</title>
+                        <title lang="fr">Espacement des Diapositives</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="arrows" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Navigation Arrows</title>
+                        <title lang="tr">Gezinti Okları</title>
+                        <title lang="de">Navigationspfeile</title>
+                        <title lang="ru">Стрелки навигации</title>
+                        <title lang="es">Flechas de Navegación</title>
+                        <title lang="fr">Flèches de Navigation</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="inside"/>
+                        <param name="values" type="collection">
+                            <param name="inside">
+                                <meta>
+                                    <title lang="en">Inside</title>
+                                    <title lang="tr">İçeride</title>
+                                    <title lang="de">Innen</title>
+                                    <title lang="ru">Внутри</title>
+                                    <title lang="es">Dentro</title>
+                                    <title lang="fr">À l&apos;Intérieur</title>
+                                </meta>
+                            </param>
+                            <param name="outside">
+                                <meta>
+                                    <title lang="en">Outside</title>
+                                    <title lang="tr">Dışarıda</title>
+                                    <title lang="de">Außen</title>
+                                    <title lang="ru">Снаружи</title>
+                                    <title lang="es">Fuera</title>
+                                    <title lang="fr">À l&apos;Extérieur</title>
+                                </meta>
+                            </param>
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Hidden</title>
+                                    <title lang="tr">Gizli</title>
+                                    <title lang="de">Ausgeblendet</title>
+                                    <title lang="ru">Скрыто</title>
+                                    <title lang="es">Oculto</title>
+                                    <title lang="fr">Masqué</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="dots" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Pagination Dots</title>
+                        <title lang="tr">Sayfalama Noktaları</title>
+                        <title lang="de">Seitenpunkte</title>
+                        <title lang="ru">Точки пагинации</title>
+                        <title lang="es">Puntos de Paginación</title>
+                        <title lang="fr">Points de Pagination</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="bottom"/>
+                        <param name="values" type="collection">
+                            <param name="bottom">
+                                <meta>
+                                    <title lang="en">Bottom</title>
+                                    <title lang="tr">Altta</title>
+                                    <title lang="de">Unten</title>
+                                    <title lang="ru">Снизу</title>
+                                    <title lang="es">Abajo</title>
+                                    <title lang="fr">Bas</title>
+                                </meta>
+                            </param>
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Hidden</title>
+                                    <title lang="tr">Gizli</title>
+                                    <title lang="de">Ausgeblendet</title>
+                                    <title lang="ru">Скрыто</title>
+                                    <title lang="es">Oculto</title>
+                                    <title lang="fr">Masqué</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="autoplay" type="checkbox" colspan="4">
+                    <meta>
+                        <title lang="en">Autoplay</title>
+                        <title lang="tr">Otomatik Oynat</title>
+                        <title lang="de">Automatische Wiedergabe</title>
+                        <title lang="ru">Автовоспроизведение</title>
+                        <title lang="es">Reproducción Automática</title>
+                        <title lang="fr">Lecture Automatique</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+
+                <property name="loop" type="checkbox" colspan="4">
+                    <meta>
+                        <title lang="en">Infinite Loop</title>
+                        <title lang="tr">Sonsuz Döngü</title>
+                        <title lang="de">Endlosschleife</title>
+                        <title lang="ru">Бесконечный цикл</title>
+                        <title lang="es">Bucle Infinito</title>
+                        <title lang="fr">Boucle Infinie</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="interval" type="number" colspan="4">
+                    <meta>
+                        <title lang="en">Autoplay Interval</title>
+                        <title lang="tr">Geçiş Süresi</title>
+                        <title lang="de">Autoplay-Intervall</title>
+                        <title lang="ru">Интервал автопрокрутки</title>
+                        <title lang="es">Intervalo de Reproducción</title>
+                        <title lang="fr">Intervalle de Lecture Auto</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="4000"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

@@ -12,70 +12,170 @@
         <title lang="fr">Fil d'Ariane</title>
     </meta>
     <properties>
-        <property name="show_home" type="checkbox" colspan="6">
+        <section name="content">
             <meta>
-                <title lang="en">Include Home Link</title>
-                <title lang="tr">Ana Sayfa Bağlantısını Ekle</title>
-                <title lang="de">Startseiten-Link einbinden</title>
-                <title lang="ru">Включить ссылку на главную</title>
-                <title lang="es">Incluir Enlace de Inicio</title>
-                <title lang="fr">Inclure le Lien d'Accueil</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <params>
-                <param name="default_value" value="true"/>
-            </params>
-        </property>
+            <properties>
+                <property name="show_home" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Include Home Link</title>
+                        <title lang="tr">Ana Sayfa Bağlantısını Ekle</title>
+                        <title lang="de">Startseiten-Link einbinden</title>
+                        <title lang="ru">Включить ссылку на главную</title>
+                        <title lang="es">Incluir Enlace de Inicio</title>
+                        <title lang="fr">Inclure le Lien d'Accueil</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
 
-        <property name="align" type="single_select" colspan="6">
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="left"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortala</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
+
+        <section name="settings">
             <meta>
-                <title lang="en">Alignment</title>
-                <title lang="tr">Hizalama</title>
-                <title lang="de">Ausrichtung</title>
-                <title lang="ru">Выравнивание</title>
-                <title lang="es">Alineación</title>
-                <title lang="fr">Alignement</title>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
             </meta>
-            <params>
-                <param name="default_value" value="left"/>
-                <param name="values" type="collection">
-                    <param name="left">
-                        <meta>
-                            <title lang="en">Left</title>
-                            <title lang="tr">Sola</title>
-                            <title lang="de">Links</title>
-                            <title lang="ru">Слева</title>
-                            <title lang="es">Izquierda</title>
-                            <title lang="fr">Gauche</title>
-                        </meta>
-                    </param>
-                    <param name="center">
-                        <meta>
-                            <title lang="en">Center</title>
-                            <title lang="tr">Ortala</title>
-                            <title lang="de">Zentriert</title>
-                            <title lang="ru">По центру</title>
-                            <title lang="es">Centro</title>
-                            <title lang="fr">Centre</title>
-                        </meta>
-                    </param>
-                    <param name="right">
-                        <meta>
-                            <title lang="en">Right</title>
-                            <title lang="tr">Sağa</title>
-                            <title lang="de">Rechts</title>
-                            <title lang="ru">Справа</title>
-                            <title lang="es">Derecha</title>
-                            <title lang="fr">Droite</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
+            <properties>
+                <property name="show_home" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Include Home Link</title>
+                        <title lang="tr">Ana Sayfa Bağlantısını Göster</title>
+                        <title lang="de">Startseiten-Link einbinden</title>
+                        <title lang="ru">Включить ссылку на главную</title>
+                        <title lang="es">Incluir Enlace de Inicio</title>
+                        <title lang="fr">Inclure le Lien d&apos;Accueil</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="breadcrumbs"/>
-            </params>
-        </property>
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="left"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola Yaslı</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa Yaslı</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="home_title" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Custom Home Label</title>
+                        <title lang="tr">Özel Ana Sayfa Etiketi</title>
+                        <title lang="de">Benutzerdefinierte Startseiten-Beschriftung</title>
+                        <title lang="ru">Свой текст главной страницы</title>
+                        <title lang="es">Etiqueta de Inicio Personalizada</title>
+                        <title lang="fr">Libellé d&apos;Accueil Personnalisé</title>
+                    </meta>
+                </property>
+
+                <property name="home_url" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Custom Home URL</title>
+                        <title lang="tr">Özel Ana Sayfa Bağlantısı</title>
+                        <title lang="de">Benutzerdefinierte Startseiten-URL</title>
+                        <title lang="ru">Свой URL главной страницы</title>
+                        <title lang="es">URL de Inicio Personalizada</title>
+                        <title lang="fr">URL d&apos;Accueil Personnalisée</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

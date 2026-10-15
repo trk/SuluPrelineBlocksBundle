@@ -10,247 +10,272 @@
         <title lang="fr">Marqueur interactif</title>
     </meta>
     <properties>
-        <property name="hotspot" type="hotspot_picker" colspan="12">
+        <section name="content">
             <meta>
-                <title lang="en">Marker Position</title>
-                <title lang="tr">İşaretçi Konumu</title>
-                <title lang="de">Markierungsposition</title>
-                <title lang="ru">Позиция маркера</title>
-                <title lang="es">Posición del marcador</title>
-                <title lang="fr">Position du marqueur</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-        </property>
+            <properties>
+                <property name="hotspot" type="hotspot_picker" colspan="12">
+                    <meta>
+                        <title lang="en">Marker Position</title>
+                        <title lang="tr">İşaretçi Konumu</title>
+                        <title lang="de">Markierungsposition</title>
+                        <title lang="ru">Позиция маркера</title>
+                        <title lang="es">Posición del marcador</title>
+                        <title lang="fr">Position du marqueur</title>
+                    </meta>
+                </property>
 
-        <property name="marker_type" type="single_select" colspan="6">
+                <xi:include href="../fields/title.xml"/>
+
+                <property name="meta" type="text_line">
+                    <meta>
+                        <title lang="en">Subtitle / Meta</title>
+                        <title lang="tr">Alt Başlık / Meta Bilgisi</title>
+                        <title lang="de">Untertitel / Meta</title>
+                        <title lang="ru">Подзаголовок / Мета</title>
+                        <title lang="es">Subtítulo / Meta</title>
+                        <title lang="fr">Sous-titre / Méta</title>
+                    </meta>
+                </property>
+
+                <xi:include href="../fields/content.xml"/>
+
+                <property name="image" type="single_media_selection">
+                    <meta>
+                        <title lang="en">Card Media / Image</title>
+                        <title lang="tr">Kart Görseli</title>
+                        <title lang="de">Kartenbild</title>
+                        <title lang="ru">Изображение карточки</title>
+                        <title lang="es">Imagen de la tarjeta</title>
+                        <title lang="fr">Image de la carte</title>
+                    </meta>
+                    <params>
+                        <param name="types" value="image"/>
+                    </params>
+                </property>
+
+                <property name="video" type="single_media_selection">
+                    <meta>
+                        <title lang="en">Card Video</title>
+                        <title lang="tr">Kart Videosu</title>
+                        <title lang="de">Kartenvideo</title>
+                        <title lang="ru">Видео карточки</title>
+                        <title lang="es">Video de la tarjeta</title>
+                        <title lang="fr">Vidéo de la carte</title>
+                    </meta>
+                    <params>
+                        <param name="types" value="video"/>
+                    </params>
+                </property>
+
+                <xi:include href="../fields/badge.xml"/>
+                <xi:include href="../fields/link.xml"/>
+                <xi:include href="../fields/link_title.xml"/>
+            </properties>
+        </section>
+
+        <section name="settings">
             <meta>
-                <title lang="en">Marker Style</title>
-                <title lang="tr">İşaretçi Stili</title>
-                <title lang="de">Markierungsstil</title>
-                <title lang="ru">Стиль маркера</title>
-                <title lang="es">Estilo del marcador</title>
-                <title lang="fr">Style du marqueur</title>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
             </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit from Block</title>
-                            <title lang="tr">Blok Ayarını Kullan</title>
-                            <title lang="de">Aus Block übernehmen</title>
-                            <title lang="ru">Из настроек блока</title>
-                            <title lang="es">Heredar del bloque</title>
-                            <title lang="fr">Hériter du bloc</title>
-                        </meta>
-                    </param>
-                    <param name="pulse">
-                        <meta>
-                            <title lang="en">Radar Pulse</title>
-                            <title lang="tr">Radar</title>
-                            <title lang="de">Radar-Impuls</title>
-                            <title lang="ru">Пульсирующий радар</title>
-                            <title lang="es">Pulso de radar</title>
-                            <title lang="fr">Pulsation radar</title>
-                        </meta>
-                    </param>
-                    <param name="plus">
-                        <meta>
-                            <title lang="en">Plus</title>
-                            <title lang="tr">Artı</title>
-                            <title lang="de">Plus</title>
-                            <title lang="ru">Плюс</title>
-                            <title lang="es">Más</title>
-                            <title lang="fr">Plus</title>
-                        </meta>
-                    </param>
-                    <param name="number">
-                        <meta>
-                            <title lang="en">Number</title>
-                            <title lang="tr">Numara</title>
-                            <title lang="de">Nummer</title>
-                            <title lang="ru">Номер</title>
-                            <title lang="es">Número</title>
-                            <title lang="fr">Numéro</title>
-                        </meta>
-                    </param>
-                    <param name="dot">
-                        <meta>
-                            <title lang="en">Solid Dot</title>
-                            <title lang="tr">Nokta</title>
-                            <title lang="de">Punkt</title>
-                            <title lang="ru">Точка</title>
-                            <title lang="es">Punto</title>
-                            <title lang="fr">Point</title>
-                        </meta>
-                    </param>
-                    <param name="pin">
-                        <meta>
-                            <title lang="en">Map Pin</title>
-                            <title lang="tr">Harita İğnesi</title>
-                            <title lang="de">Kartenstecknadel</title>
-                            <title lang="ru">Булавка на карте</title>
-                            <title lang="es">Pin de mapa</title>
-                            <title lang="fr">Épingle de carte</title>
-                        </meta>
-                    </param>
-                    <param name="icon">
-                        <meta>
-                            <title lang="en">Custom Icon</title>
-                            <title lang="tr">Özel İkon</title>
-                            <title lang="de">Eigenes Symbol</title>
-                            <title lang="ru">Пользовательская иконка</title>
-                            <title lang="es">Icono personalizado</title>
-                            <title lang="fr">Icône personnalisée</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
+            <properties>
+                <property name="marker_type" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Marker Style</title>
+                        <title lang="tr">İşaretçi Stili</title>
+                        <title lang="de">Markierungsstil</title>
+                        <title lang="ru">Стиль маркера</title>
+                        <title lang="es">Estilo del marcador</title>
+                        <title lang="fr">Style du marqueur</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="inherit"/>
+                        <param name="values" type="collection">
+                            <param name="inherit">
+                                <meta>
+                                    <title lang="en">Inherit from Block</title>
+                                    <title lang="tr">Blok Ayarını Kullan</title>
+                                    <title lang="de">Aus Block übernehmen</title>
+                                    <title lang="ru">Из настроек блока</title>
+                                    <title lang="es">Heredar del bloque</title>
+                                    <title lang="fr">Hériter du bloc</title>
+                                </meta>
+                            </param>
+                            <param name="pulse">
+                                <meta>
+                                    <title lang="en">Radar Pulse</title>
+                                    <title lang="tr">Radar</title>
+                                    <title lang="de">Radar-Impuls</title>
+                                    <title lang="ru">Пульсирующий радар</title>
+                                    <title lang="es">Pulso de radar</title>
+                                    <title lang="fr">Pulsation radar</title>
+                                </meta>
+                            </param>
+                            <param name="plus">
+                                <meta>
+                                    <title lang="en">Plus</title>
+                                    <title lang="tr">Artı</title>
+                                    <title lang="de">Plus</title>
+                                    <title lang="ru">Плюс</title>
+                                    <title lang="es">Más</title>
+                                    <title lang="fr">Plus</title>
+                                </meta>
+                            </param>
+                            <param name="number">
+                                <meta>
+                                    <title lang="en">Number</title>
+                                    <title lang="tr">Numara</title>
+                                    <title lang="de">Nummer</title>
+                                    <title lang="ru">Номер</title>
+                                    <title lang="es">Número</title>
+                                    <title lang="fr">Numéro</title>
+                                </meta>
+                            </param>
+                            <param name="dot">
+                                <meta>
+                                    <title lang="en">Solid Dot</title>
+                                    <title lang="tr">Nokta</title>
+                                    <title lang="de">Punkt</title>
+                                    <title lang="ru">Точка</title>
+                                    <title lang="es">Punto</title>
+                                    <title lang="fr">Point</title>
+                                </meta>
+                            </param>
+                            <param name="pin">
+                                <meta>
+                                    <title lang="en">Map Pin</title>
+                                    <title lang="tr">Harita İğnesi</title>
+                                    <title lang="de">Kartenstecknadel</title>
+                                    <title lang="ru">Булавка на карте</title>
+                                    <title lang="es">Pin de mapa</title>
+                                    <title lang="fr">Épingle de carte</title>
+                                </meta>
+                            </param>
+                            <param name="icon">
+                                <meta>
+                                    <title lang="en">Custom Icon</title>
+                                    <title lang="tr">Özel İkon</title>
+                                    <title lang="de">Eigenes Symbol</title>
+                                    <title lang="ru">Пользовательская иконка</title>
+                                    <title lang="es">Icono personalizado</title>
+                                    <title lang="fr">Icône personnalisée</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <property name="marker_color" type="single_select" colspan="6">
-            <meta>
-                <title lang="en">Marker Color</title>
-                <title lang="tr">İşaretçi Rengi</title>
-                <title lang="de">Markierungsfarbe</title>
-                <title lang="ru">Цвет маркера</title>
-                <title lang="es">Color del marcador</title>
-                <title lang="fr">Couleur du marqueur</title>
-            </meta>
-            <params>
-                <param name="default_value" value="inherit"/>
-                <param name="values" type="collection">
-                    <param name="inherit">
-                        <meta>
-                            <title lang="en">Inherit from Block</title>
-                            <title lang="tr">Blok Ayarını Kullan</title>
-                            <title lang="de">Aus Block übernehmen</title>
-                            <title lang="ru">Из настроек блока</title>
-                            <title lang="es">Heredar del bloque</title>
-                            <title lang="fr">Hériter du bloc</title>
-                        </meta>
-                    </param>
-                    <param name="primary">
-                        <meta>
-                            <title lang="en">Primary</title>
-                            <title lang="tr">Birincil</title>
-                            <title lang="de">Primär</title>
-                            <title lang="ru">Основной</title>
-                            <title lang="es">Primario</title>
-                            <title lang="fr">Primaire</title>
-                        </meta>
-                    </param>
-                    <param name="dark">
-                        <meta>
-                            <title lang="en">Dark Neutral</title>
-                            <title lang="tr">Koyu Gri</title>
-                            <title lang="de">Dunkelgrau</title>
-                            <title lang="ru">Тёмно-серый</title>
-                            <title lang="es">Gris oscuro</title>
-                            <title lang="fr">Gris foncé</title>
-                        </meta>
-                    </param>
-                    <param name="light">
-                        <meta>
-                            <title lang="en">Light</title>
-                            <title lang="tr">Açık / Beyaz</title>
-                            <title lang="de">Hell / Weiß</title>
-                            <title lang="ru">Светлый / Белый</title>
-                            <title lang="es">Claro / Blanco</title>
-                            <title lang="fr">Clair / Blanc</title>
-                        </meta>
-                    </param>
-                    <param name="accent">
-                        <meta>
-                            <title lang="en">Accent</title>
-                            <title lang="tr">Sarı / Vurgu</title>
-                            <title lang="de">Akzent</title>
-                            <title lang="ru">Акцент</title>
-                            <title lang="es">Acento</title>
-                            <title lang="fr">Accent</title>
-                        </meta>
-                    </param>
-                    <param name="success">
-                        <meta>
-                            <title lang="en">Success</title>
-                            <title lang="tr">Yeşil</title>
-                            <title lang="de">Erfolg</title>
-                            <title lang="ru">Успех</title>
-                            <title lang="es">Éxito</title>
-                            <title lang="fr">Succès</title>
-                        </meta>
-                    </param>
-                    <param name="danger">
-                        <meta>
-                            <title lang="en">Danger</title>
-                            <title lang="tr">Kırmızı</title>
-                            <title lang="de">Gefahr</title>
-                            <title lang="ru">Опасность</title>
-                            <title lang="es">Peligro</title>
-                            <title lang="fr">Danger</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
+                <property name="marker_color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Marker Color</title>
+                        <title lang="tr">İşaretçi Rengi</title>
+                        <title lang="de">Markierungsfarbe</title>
+                        <title lang="ru">Цвет маркера</title>
+                        <title lang="es">Color del marcador</title>
+                        <title lang="fr">Couleur du marqueur</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="inherit"/>
+                        <param name="values" type="collection">
+                            <param name="inherit">
+                                <meta>
+                                    <title lang="en">Inherit from Block</title>
+                                    <title lang="tr">Blok Ayarını Kullan</title>
+                                    <title lang="de">Aus Block übernehmen</title>
+                                    <title lang="ru">Из настроек блока</title>
+                                    <title lang="es">Heredar del bloque</title>
+                                    <title lang="fr">Hériter du bloc</title>
+                                </meta>
+                            </param>
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary</title>
+                                    <title lang="tr">Birincil</title>
+                                    <title lang="de">Primär</title>
+                                    <title lang="ru">Основной</title>
+                                    <title lang="es">Primario</title>
+                                    <title lang="fr">Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark Neutral</title>
+                                    <title lang="tr">Koyu Gri</title>
+                                    <title lang="de">Dunkelgrau</title>
+                                    <title lang="ru">Тёмно-серый</title>
+                                    <title lang="es">Gris oscuro</title>
+                                    <title lang="fr">Gris foncé</title>
+                                </meta>
+                            </param>
+                            <param name="light">
+                                <meta>
+                                    <title lang="en">Light</title>
+                                    <title lang="tr">Açık / Beyaz</title>
+                                    <title lang="de">Hell / Weiß</title>
+                                    <title lang="ru">Светлый / Белый</title>
+                                    <title lang="es">Claro / Blanco</title>
+                                    <title lang="fr">Clair / Blanc</title>
+                                </meta>
+                            </param>
+                            <param name="accent">
+                                <meta>
+                                    <title lang="en">Accent</title>
+                                    <title lang="tr">Sarı / Vurgu</title>
+                                    <title lang="de">Akzent</title>
+                                    <title lang="ru">Акцент</title>
+                                    <title lang="es">Acento</title>
+                                    <title lang="fr">Accent</title>
+                                </meta>
+                            </param>
+                            <param name="success">
+                                <meta>
+                                    <title lang="en">Success</title>
+                                    <title lang="tr">Yeşil</title>
+                                    <title lang="de">Erfolg</title>
+                                    <title lang="ru">Успех</title>
+                                    <title lang="es">Éxito</title>
+                                    <title lang="fr">Succès</title>
+                                </meta>
+                            </param>
+                            <param name="danger">
+                                <meta>
+                                    <title lang="en">Danger</title>
+                                    <title lang="tr">Kırmızı</title>
+                                    <title lang="de">Gefahr</title>
+                                    <title lang="ru">Опасность</title>
+                                    <title lang="es">Peligro</title>
+                                    <title lang="fr">Danger</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <property name="icon" type="single_icon_selection" colspan="12" visibleCondition="marker_type == 'icon'">
-            <meta>
-                <title lang="en">Custom Marker Icon</title>
-                <title lang="tr">Özel İşaretçi İkonu</title>
-                <title lang="de">Eigenes Markierungssymbol</title>
-                <title lang="ru">Пользовательская иконка</title>
-                <title lang="es">Icono personalizado</title>
-                <title lang="fr">Icône personnalisée</title>
-            </meta>
-            <params>
-                <param name="icon_set" value="tabler"/>
-            </params>
-        </property>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="meta" type="text_line">
-            <meta>
-                <title lang="en">Subtitle / Meta</title>
-                <title lang="tr">Alt Başlık / Meta Bilgisi</title>
-                <title lang="de">Untertitel / Meta</title>
-                <title lang="ru">Подзаголовок / Мета</title>
-                <title lang="es">Subtítulo / Meta</title>
-                <title lang="fr">Sous-titre / Méta</title>
-            </meta>
-        </property>
-
-        <xi:include href="../fields/content.xml"/>
-
-        <property name="image" type="single_media_selection">
-            <meta>
-                <title lang="en">Card Media / Image</title>
-                <title lang="tr">Kart Görseli</title>
-                <title lang="de">Kartenbild</title>
-                <title lang="ru">Изображение карточки</title>
-                <title lang="es">Imagen de la tarjeta</title>
-                <title lang="fr">Image de la carte</title>
-            </meta>
-            <params>
-                <param name="types" value="image"/>
-            </params>
-        </property>
-
-        <property name="video" type="single_media_selection">
-            <meta>
-                <title lang="en">Card Video</title>
-                <title lang="tr">Kart Videosu</title>
-                <title lang="de">Kartenvideo</title>
-                <title lang="ru">Видео карточки</title>
-                <title lang="es">Video de la tarjeta</title>
-                <title lang="fr">Vidéo de la carte</title>
-            </meta>
-            <params>
-                <param name="types" value="video"/>
-            </params>
-        </property>
-
-        <xi:include href="../fields/badge.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
+                <property name="icon" type="single_icon_selection" colspan="12" visibleCondition="marker_type == 'icon'">
+                    <meta>
+                        <title lang="en">Custom Marker Icon</title>
+                        <title lang="tr">Özel İşaretçi İkonu</title>
+                        <title lang="de">Eigenes Markierungssymbol</title>
+                        <title lang="ru">Пользовательская иконка</title>
+                        <title lang="es">Icono personalizado</title>
+                        <title lang="fr">Icône personnalisée</title>
+                    </meta>
+                    <params>
+                        <param name="icon_set" value="tabler"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </type>

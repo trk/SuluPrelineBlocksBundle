@@ -9,34 +9,417 @@
     <title lang="fr">Colonne</title>
   </meta>
   <properties>
-    <block name="blocks" default-type="default" minOccurs="0">
-      <meta>
-        <title lang="en">Column Blocks</title>
-        <title lang="tr">S&#xFC;tun &#x130;&#xE7;i Bloklar</title>
-        <title lang="de">Spaltenbl&#xF6;cke</title>
-        <title lang="ru">&#x411;&#x43B;&#x43E;&#x43A;&#x438; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438;</title>
-        <title lang="es">Bloques de columna</title>
-        <title lang="fr">Blocs de colonne</title>
-      </meta>
-      <tag name="sulu_block_suite.auto_blocks" default="text" exclude="main_content,section,row,column,page_header,breadcrumbs"/>
-      <types>
-        <type name="default">
-          <meta>
-            <title lang="en">Default</title>
-            <title lang="tr">Varsay&#x131;lan</title>
-            <title lang="de">Standard</title>
-            <title lang="ru">&#x41F;&#x43E; &#x443;&#x43C;&#x43E;&#x43B;&#x447;&#x430;&#x43D;&#x438;&#x44E;</title>
-            <title lang="es">Predeterminado</title>
-            <title lang="fr">Par D&#xE9;faut</title>
-          </meta>
-          <properties/>
-        </type>
-      </types>
-    </block>
-    <property name="props" type="block_props" colspan="12">
-      <params>
-        <param name="component_type" value="column"/>
-      </params>
-    </property>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+            <block name="blocks" default-type="default" minOccurs="0">
+              <meta>
+                <title lang="en">Column Blocks</title>
+                <title lang="tr">S&#xFC;tun &#x130;&#xE7;i Bloklar</title>
+                <title lang="de">Spaltenbl&#xF6;cke</title>
+                <title lang="ru">&#x411;&#x43B;&#x43E;&#x43A;&#x438; &#x43A;&#x43E;&#x43B;&#x43E;&#x43D;&#x43A;&#x438;</title>
+                <title lang="es">Bloques de columna</title>
+                <title lang="fr">Blocs de colonne</title>
+              </meta>
+              <tag name="sulu_block_suite.auto_blocks" default="text" exclude="main_content,section,row,column,page_header,breadcrumbs"/>
+              <types>
+                <type name="default">
+                  <meta>
+                    <title lang="en">Default</title>
+                    <title lang="tr">Varsay&#x131;lan</title>
+                    <title lang="de">Standard</title>
+                    <title lang="ru">&#x41F;&#x43E; &#x443;&#x43C;&#x43E;&#x43B;&#x447;&#x430;&#x43D;&#x438;&#x44E;</title>
+                    <title lang="es">Predeterminado</title>
+                    <title lang="fr">Par D&#xE9;faut</title>
+                  </meta>
+                  <properties/>
+                </type>
+              </types>
+            </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="col_span" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Column Width</title>
+                        <title lang="tr">Sütun Genişliği</title>
+                        <title lang="de">Spaltenbreite</title>
+                        <title lang="ru">Ширина колонки</title>
+                        <title lang="es">Ancho de Columna</title>
+                        <title lang="fr">Largeur de Colonne</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="auto"/>
+                        <param name="values" type="collection">
+                            <param name="auto">
+                                <meta>
+                                    <title lang="en">Auto</title>
+                                    <title lang="tr">Otomatik</title>
+                                    <title lang="de">Auto</title>
+                                    <title lang="ru">Авто</title>
+                                    <title lang="es">Auto</title>
+                                    <title lang="fr">Auto</title>
+                                </meta>
+                            </param>
+                            <param name="12">
+                                <meta>
+                                    <title lang="en">12/12 - Full Width</title>
+                                    <title lang="tr">12/12 - Tam Genişlik</title>
+                                    <title lang="de">12/12 - Volle Breite</title>
+                                    <title lang="ru">12/12 - Во всю ширину</title>
+                                    <title lang="es">12/12 - Ancho Completo</title>
+                                    <title lang="fr">12/12 - Pleine Largeur</title>
+                                </meta>
+                            </param>
+                            <param name="10">
+                                <meta>
+                                    <title lang="en">10/12 - Five Sixths</title>
+                                    <title lang="tr">10/12 - Altıda Beş</title>
+                                    <title lang="de">10/12 - Fünf Sechstel</title>
+                                    <title lang="ru">10/12 - Пять шестых</title>
+                                    <title lang="es">10/12 - Cinco Sextos</title>
+                                    <title lang="fr">10/12 - Cinq Sixièmes</title>
+                                </meta>
+                            </param>
+                            <param name="9">
+                                <meta>
+                                    <title lang="en">9/12 - Three Quarters</title>
+                                    <title lang="tr">9/12 - Dörtte Üç</title>
+                                    <title lang="de">9/12 - Drei Viertel</title>
+                                    <title lang="ru">9/12 - Три четверти</title>
+                                    <title lang="es">9/12 - Tres Cuartos</title>
+                                    <title lang="fr">9/12 - Trois Quarts</title>
+                                </meta>
+                            </param>
+                            <param name="8">
+                                <meta>
+                                    <title lang="en">8/12 - Two Thirds</title>
+                                    <title lang="tr">8/12 - Üçte İki</title>
+                                    <title lang="de">8/12 - Zwei Drittel</title>
+                                    <title lang="ru">8/12 - Две трети</title>
+                                    <title lang="es">8/12 - Dos Tercios</title>
+                                    <title lang="fr">8/12 - Deux Tiers</title>
+                                </meta>
+                            </param>
+                            <param name="7">
+                                <meta>
+                                    <title lang="en">7/12 - Seven Twelfths</title>
+                                    <title lang="tr">7/12 - On İkide Yedi</title>
+                                    <title lang="de">7/12 - Sieben Zwölftel</title>
+                                    <title lang="ru">7/12 - Семь двенадцатых</title>
+                                    <title lang="es">7/12 - Siete Doceavos</title>
+                                    <title lang="fr">7/12 - Sept Douzièmes</title>
+                                </meta>
+                            </param>
+                            <param name="6">
+                                <meta>
+                                    <title lang="en">6/12 - Half</title>
+                                    <title lang="tr">6/12 - Yarım</title>
+                                    <title lang="de">6/12 - Hälfte</title>
+                                    <title lang="ru">6/12 - Половина</title>
+                                    <title lang="es">6/12 - Mitad</title>
+                                    <title lang="fr">6/12 - Moitié</title>
+                                </meta>
+                            </param>
+                            <param name="5">
+                                <meta>
+                                    <title lang="en">5/12 - Five Twelfths</title>
+                                    <title lang="tr">5/12 - On İkide Beş</title>
+                                    <title lang="de">5/12 - Fünf Zwölftel</title>
+                                    <title lang="ru">5/12 - Пять двенадцатых</title>
+                                    <title lang="es">5/12 - Cinco Doceavos</title>
+                                    <title lang="fr">5/12 - Cinq Douzièmes</title>
+                                </meta>
+                            </param>
+                            <param name="4">
+                                <meta>
+                                    <title lang="en">4/12 - One Third</title>
+                                    <title lang="tr">4/12 - Üçte Bir</title>
+                                    <title lang="de">4/12 - Ein Drittel</title>
+                                    <title lang="ru">4/12 - Одна треть</title>
+                                    <title lang="es">4/12 - Un Tercio</title>
+                                    <title lang="fr">4/12 - Un Tiers</title>
+                                </meta>
+                            </param>
+                            <param name="3">
+                                <meta>
+                                    <title lang="en">3/12 - One Quarter</title>
+                                    <title lang="tr">3/12 - Çeyrek</title>
+                                    <title lang="de">3/12 - Ein Viertel</title>
+                                    <title lang="ru">3/12 - Одна четверть</title>
+                                    <title lang="es">3/12 - Un Cuarto</title>
+                                    <title lang="fr">3/12 - Un Quart</title>
+                                </meta>
+                            </param>
+                            <param name="2">
+                                <meta>
+                                    <title lang="en">2/12 - One Sixth</title>
+                                    <title lang="tr">2/12 - Altıda Bir</title>
+                                    <title lang="de">2/12 - Ein Sechstel</title>
+                                    <title lang="ru">2/12 - Одна шестая</title>
+                                    <title lang="es">2/12 - Un Sexto</title>
+                                    <title lang="fr">2/12 - Un Sixième</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="vertical_align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Vertical Alignment</title>
+                        <title lang="tr">Dikey Hizalama</title>
+                        <title lang="de">Vertikale Ausrichtung</title>
+                        <title lang="ru">Вертикальное выравнивание</title>
+                        <title lang="es">Alineación Vertical</title>
+                        <title lang="fr">Alignement Vertical</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="top"/>
+                        <param name="values" type="collection">
+                            <param name="top">
+                                <meta>
+                                    <title lang="en">Top</title>
+                                    <title lang="tr">Üst</title>
+                                    <title lang="de">Oben</title>
+                                    <title lang="ru">Сверху</title>
+                                    <title lang="es">Arriba</title>
+                                    <title lang="fr">Haut</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="bottom">
+                                <meta>
+                                    <title lang="en">Bottom</title>
+                                    <title lang="tr">Alt</title>
+                                    <title lang="de">Unten</title>
+                                    <title lang="ru">Снизу</title>
+                                    <title lang="es">Abajo</title>
+                                    <title lang="fr">Bas</title>
+                                </meta>
+                            </param>
+                            <param name="between">
+                                <meta>
+                                    <title lang="en">Space Between</title>
+                                    <title lang="tr">İki Yana Yasla</title>
+                                    <title lang="de">Raum dazwischen</title>
+                                    <title lang="ru">Равномерно по краям</title>
+                                    <title lang="es">Espacio Entre Elementos</title>
+                                    <title lang="fr">Espacement Entre</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="order" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Responsive Order</title>
+                        <title lang="tr">Duyarlı Sıralama</title>
+                        <title lang="de">Responsive Reihenfolge</title>
+                        <title lang="ru">Адаптивный порядок</title>
+                        <title lang="es">Orden Responsivo</title>
+                        <title lang="fr">Ordre Responsive</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="default"/>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default Order</title>
+                                    <title lang="tr">Varsayılan Sıra</title>
+                                    <title lang="de">Standardreihenfolge</title>
+                                    <title lang="ru">Порядок по умолчанию</title>
+                                    <title lang="es">Orden Predeterminado</title>
+                                    <title lang="fr">Ordre par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="first">
+                                <meta>
+                                    <title lang="en">First on Mobile, Natural on Desktop</title>
+                                    <title lang="tr">Mobilde İlk, Masaüstünde Normal</title>
+                                    <title lang="de">Mobil zuerst, Desktop normal</title>
+                                    <title lang="ru">Первый на мобильных, обычный на ПК</title>
+                                    <title lang="es">Primero en Móvil, Normal en Escritorio</title>
+                                    <title lang="fr">Premier sur Mobile, Normal sur Bureau</title>
+                                </meta>
+                            </param>
+                            <param name="last">
+                                <meta>
+                                    <title lang="en">Last on Mobile, Natural on Desktop</title>
+                                    <title lang="tr">Mobilde Son, Masaüstünde Normal</title>
+                                    <title lang="de">Mobil zuletzt, Desktop normal</title>
+                                    <title lang="ru">Последний на мобильных, обычный на ПК</title>
+                                    <title lang="es">Último en Móvil, Normal en Escritorio</title>
+                                    <title lang="fr">Dernier sur Mobile, Normal sur Bureau</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="is_sticky" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Sticky on Scroll</title>
+                        <title lang="tr">Kaydırmada Sabitle</title>
+                        <title lang="de">Beim Scrollen fixieren</title>
+                        <title lang="ru">Закрепить при прокрутке</title>
+                        <title lang="es">Fijar al Desplazar</title>
+                        <title lang="fr">Épingler au Défilement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+
+                <property name="style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Card / Box Style</title>
+                        <title lang="tr">Kart / Kutu Stili</title>
+                        <title lang="de">Karten- / Box-Stil</title>
+                        <title lang="ru">Стиль карточки / блока</title>
+                        <title lang="es">Estilo de Tarjeta / Caja</title>
+                        <title lang="fr">Style de Carte / Boîte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="none"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="card">
+                                <meta>
+                                    <title lang="en">Card</title>
+                                    <title lang="tr">Kart</title>
+                                    <title lang="de">Karte</title>
+                                    <title lang="ru">Карточка</title>
+                                    <title lang="es">Tarjeta</title>
+                                    <title lang="fr">Carte</title>
+                                </meta>
+                            </param>
+                            <param name="muted">
+                                <meta>
+                                    <title lang="en">Muted</title>
+                                    <title lang="tr">Mat</title>
+                                    <title lang="de">Gedämpft</title>
+                                    <title lang="ru">Приглушённый</title>
+                                    <title lang="es">Atenuado</title>
+                                    <title lang="fr">Atténué</title>
+                                </meta>
+                            </param>
+                            <param name="subtle">
+                                <meta>
+                                    <title lang="en">Subtle Background</title>
+                                    <title lang="tr">Hafif Zemin</title>
+                                    <title lang="de">Dezenter Hintergrund</title>
+                                    <title lang="ru">Лёгкий фон</title>
+                                    <title lang="es">Fondo Sutil</title>
+                                    <title lang="fr">Fond Subtil</title>
+                                </meta>
+                            </param>
+                            <param name="primary_subtle">
+                                <meta>
+                                    <title lang="en">Primary Accent Subtle</title>
+                                    <title lang="tr">Vurgu Rengi Hafif</title>
+                                    <title lang="de">Primärer Akzent</title>
+                                    <title lang="ru">Мягкий основной акцент</title>
+                                    <title lang="es">Acento Primario Sutil</title>
+                                    <title lang="fr">Accent Primaire Subtil</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="padding" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Inner Padding</title>
+                        <title lang="tr">İç Boşluk</title>
+                        <title lang="de">Innenabstand</title>
+                        <title lang="ru">Внутренний отступ</title>
+                        <title lang="es">Relleno Interior</title>
+                        <title lang="fr">Marge Intérieure</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="none"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
   </properties>
 </type>
