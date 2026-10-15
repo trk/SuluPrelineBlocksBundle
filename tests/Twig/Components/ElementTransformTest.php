@@ -103,5 +103,3 @@ final class ElementTransformTest extends TestCase
         $this->assertSame('#feature-card { background: #111; }', $scopedCss);
     }
 }
-
-
