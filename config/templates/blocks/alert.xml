@@ -13,16 +13,340 @@
         <title lang="de">Hinweis / Benachrichtigung</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-        <xi:include href="../fields/content.xml"/>
-        <xi:include href="../fields/icon.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/link_title.xml"/>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
+                <xi:include href="../fields/content.xml"/>
+                <xi:include href="../fields/icon.xml"/>
+                <xi:include href="../fields/link.xml"/>
+                <xi:include href="../fields/link_title.xml"/>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="alert"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="alert_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alert Type</title>
+                        <title lang="tr">Bildirim Türü</title>
+                        <title lang="de">Hinweis-Typ</title>
+                        <title lang="ru">Тип уведомления</title>
+                        <title lang="es">Tipo de Alerta</title>
+                        <title lang="fr">Type d&apos;Alerte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="info"/>
+                        <param name="values" type="collection">
+                            <param name="info">
+                                <meta>
+                                    <title lang="en">Info / Blue</title>
+                                    <title lang="tr">Bilgi / Mavi</title>
+                                    <title lang="de">Info / Blau</title>
+                                    <title lang="ru">Инфо / Синий</title>
+                                    <title lang="es">Info / Azul</title>
+                                    <title lang="fr">Info / Bleu</title>
+                                </meta>
+                            </param>
+                            <param name="success">
+                                <meta>
+                                    <title lang="en">Success / Green</title>
+                                    <title lang="tr">Başarı / Yeşil</title>
+                                    <title lang="de">Erfolg / Grün</title>
+                                    <title lang="ru">Успех / Зелёный</title>
+                                    <title lang="es">Éxito / Verde</title>
+                                    <title lang="fr">Succès / Vert</title>
+                                </meta>
+                            </param>
+                            <param name="warning">
+                                <meta>
+                                    <title lang="en">Warning / Yellow</title>
+                                    <title lang="tr">Uyarı / Sarı</title>
+                                    <title lang="de">Warnung / Gelb</title>
+                                    <title lang="ru">Предупреждение / Жёлтый</title>
+                                    <title lang="es">Advertencia / Amarillo</title>
+                                    <title lang="fr">Avertissement / Jaune</title>
+                                </meta>
+                            </param>
+                            <param name="danger">
+                                <meta>
+                                    <title lang="en">Danger / Red</title>
+                                    <title lang="tr">Hata / Tehlike / Kırmızı</title>
+                                    <title lang="de">Gefahr / Rot</title>
+                                    <title lang="ru">Опасность / Красный</title>
+                                    <title lang="es">Peligro / Rojo</title>
+                                    <title lang="fr">Danger / Rouge</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Neutral / Dark</title>
+                                    <title lang="tr">Nötr / Koyu</title>
+                                    <title lang="de">Neutral / Dunkel</title>
+                                    <title lang="ru">Нейтральный / Тёмный</title>
+                                    <title lang="es">Neutro / Oscuro</title>
+                                    <title lang="fr">Neutre / Sombre</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="alert_variant" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Visual Variant</title>
+                        <title lang="tr">Görsel Varyant</title>
+                        <title lang="de">Visuelle Variante</title>
+                        <title lang="ru">Визуальный вариант</title>
+                        <title lang="es">Variante Visual</title>
+                        <title lang="fr">Variante Visuelle</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="soft"/>
+                        <param name="values" type="collection">
+                            <param name="soft">
+                                <meta>
+                                    <title lang="en">Soft Pastel</title>
+                                    <title lang="tr">Yumuşak Pastel</title>
+                                    <title lang="de">Sanftes Pastell</title>
+                                    <title lang="ru">Мягкий пастельный</title>
+                                    <title lang="es">Pastel Suave</title>
+                                    <title lang="fr">Pastel Doux</title>
+                                </meta>
+                            </param>
+                            <param name="solid">
+                                <meta>
+                                    <title lang="en">Solid Color</title>
+                                    <title lang="tr">Doygun Dolgulu</title>
+                                    <title lang="de">Vollfarbe</title>
+                                    <title lang="ru">Сплошной цвет</title>
+                                    <title lang="es">Color Sólido</title>
+                                    <title lang="fr">Couleur Pleine</title>
+                                </meta>
+                            </param>
+                            <param name="outline">
+                                <meta>
+                                    <title lang="en">Border Outline</title>
+                                    <title lang="tr">Kenarlık Vurgulu</title>
+                                    <title lang="de">Rahmenlinie</title>
+                                    <title lang="ru">Контурная рамка</title>
+                                    <title lang="es">Contorno de Borde</title>
+                                    <title lang="fr">Contour Bordé</title>
+                                </meta>
+                            </param>
+                            <param name="glass">
+                                <meta>
+                                    <title lang="en">Frosted Glass</title>
+                                    <title lang="tr">Buzlu Cam</title>
+                                    <title lang="de">Milchglas</title>
+                                    <title lang="ru">Матовое стекло</title>
+                                    <title lang="es">Cristal Esmerilado</title>
+                                    <title lang="fr">Verre Dépoli</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="dismissible" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Dismissible</title>
+                        <title lang="tr">Kapatılabilir</title>
+                        <title lang="de">Schließbar</title>
+                        <title lang="ru">Закрываемый</title>
+                        <title lang="es">Descartable</title>
+                        <title lang="fr">Fermable</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="no"/>
+                        <param name="values" type="collection">
+                            <param name="no">
+                                <meta>
+                                    <title lang="en">No</title>
+                                    <title lang="tr">Hayır</title>
+                                    <title lang="de">Nein</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">No</title>
+                                    <title lang="fr">Non</title>
+                                </meta>
+                            </param>
+                            <param name="yes">
+                                <meta>
+                                    <title lang="en">Yes</title>
+                                    <title lang="tr">Evet</title>
+                                    <title lang="de">Ja</title>
+                                    <title lang="ru">Да</title>
+                                    <title lang="es">Sí</title>
+                                    <title lang="fr">Oui</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="icon_display" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Icon Display</title>
+                        <title lang="tr">İkon Gösterimi</title>
+                        <title lang="de">Symbolanzeige</title>
+                        <title lang="ru">Отображение иконки</title>
+                        <title lang="es">Visualización de Icono</title>
+                        <title lang="fr">Affichage de l&apos;Icône</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="auto"/>
+                        <param name="values" type="collection">
+                            <param name="auto">
+                                <meta>
+                                    <title lang="en">Automatic Status Icon</title>
+                                    <title lang="tr">Türe Uygun Otomatik İkon</title>
+                                    <title lang="de">Automatisches Statussymbol</title>
+                                    <title lang="ru">Автоматическая иконка статуса</title>
+                                    <title lang="es">Icono de Estado Automático</title>
+                                    <title lang="fr">Icône de Statut Automatique</title>
+                                </meta>
+                            </param>
+                            <param name="custom">
+                                <meta>
+                                    <title lang="en">Selected Icon Only</title>
+                                    <title lang="tr">Yalnızca Seçilen İkon</title>
+                                    <title lang="de">Nur ausgewähltes Symbol</title>
+                                    <title lang="ru">Только выбранная иконка</title>
+                                    <title lang="es">Solo Icono Seleccionado</title>
+                                    <title lang="fr">Icône Sélectionnée Uniquement</title>
+                                </meta>
+                            </param>
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">No Icon</title>
+                                    <title lang="tr">İkonsuz</title>
+                                    <title lang="de">Kein Symbol</title>
+                                    <title lang="ru">Без иконки</title>
+                                    <title lang="es">Sin Icono</title>
+                                    <title lang="fr">Sans Icône</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="rounded" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Border Radius</title>
+                        <title lang="tr">Köşe Yuvarlama</title>
+                        <title lang="de">Eckenradius</title>
+                        <title lang="ru">Скругление углов</title>
+                        <title lang="es">Radio de Borde</title>
+                        <title lang="fr">Rayon de Bordure</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="xl"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Köşesiz</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Hafif</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Standard</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">Стандартный</title>
+                                    <title lang="es">Estándar</title>
+                                    <title lang="fr">Standard</title>
+                                </meta>
+                            </param>
+                            <param name="2xl">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Belirgin</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="title_size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Title Size</title>
+                        <title lang="tr">Başlık Boyutu</title>
+                        <title lang="de">Titelgröße</title>
+                        <title lang="ru">Размер заголовка</title>
+                        <title lang="es">Tamaño del Título</title>
+                        <title lang="fr">Taille du Titre</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

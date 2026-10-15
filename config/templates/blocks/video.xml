@@ -13,15 +13,353 @@
         <title lang="de">Video</title>
     </meta>
     <properties>
-        <xi:include href="../fields/video.xml"/>
-        <xi:include href="../fields/link.xml"/>
-        <xi:include href="../fields/image.xml"/>
-        <xi:include href="../fields/icon.xml"/>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+                <xi:include href="../fields/video.xml"/>
+                <xi:include href="../fields/link.xml"/>
+                <xi:include href="../fields/image.xml"/>
+                <xi:include href="../fields/icon.xml"/>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="video"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="aspect_ratio" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">sulu_block_suite.field_aspect_ratio</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="16/9">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_16_9</title>
+                                </meta>
+                            </param>
+                            <param name="4/3">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_4_3</title>
+                                </meta>
+                            </param>
+                            <param name="1/1">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_1_1</title>
+                                </meta>
+                            </param>
+                            <param name="9/16">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_9_16</title>
+                                </meta>
+                            </param>
+                            <param name="21/9">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_21_9</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="rounded" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">sulu_block_suite.field_rounded</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_none</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_sm</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_md</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_lg</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_xl</title>
+                                </meta>
+                            </param>
+                            <param name="full">
+                                <meta>
+                                    <title lang="en">sulu_block_suite.opt_full</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="box_shadow" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Box Shadow</title>
+                        <title lang="tr">Gölge</title>
+                        <title lang="de">Box-Schatten</title>
+                        <title lang="ru">Тень блока</title>
+                        <title lang="es">Sombra de Caja</title>
+                        <title lang="fr">Ombre Portée</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                            <param name="2xl">
+                                <meta>
+                                    <title lang="en">2X Large</title>
+                                    <title lang="tr">Geniş Derin Gölge</title>
+                                    <title lang="de">2X Groß</title>
+                                    <title lang="ru">2X Большой</title>
+                                    <title lang="es">2X Grande</title>
+                                    <title lang="fr">2X Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="autoplay" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Autoplay</title>
+                        <title lang="tr">Otomatik Oynat</title>
+                        <title lang="de">Automatische Wiedergabe</title>
+                        <title lang="ru">Автовоспроизведение</title>
+                        <title lang="es">Reproducción Automática</title>
+                        <title lang="fr">Lecture Automatique</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Disabled</title>
+                                    <title lang="tr">Kapalı</title>
+                                    <title lang="de">Deaktiviert</title>
+                                    <title lang="ru">Отключено</title>
+                                    <title lang="es">Desactivado</title>
+                                    <title lang="fr">Désactivé</title>
+                                </meta>
+                            </param>
+                            <param name="true">
+                                <meta>
+                                    <title lang="en">Immediate</title>
+                                    <title lang="tr">Hemen Başlat</title>
+                                    <title lang="de">Sofort</title>
+                                    <title lang="ru">Сразу</title>
+                                    <title lang="es">Inmediato</title>
+                                    <title lang="fr">Immédiat</title>
+                                </meta>
+                            </param>
+                            <param name="inview">
+                                <meta>
+                                    <title lang="en">When in Viewport</title>
+                                    <title lang="tr">Ekrana Girdiğinde</title>
+                                    <title lang="de">Im sichtbaren Bereich</title>
+                                    <title lang="ru">При появлении на экране</title>
+                                    <title lang="es">Al Entrar en Pantalla</title>
+                                    <title lang="fr">À l&apos;Apparition à l&apos;Écran</title>
+                                </meta>
+                            </param>
+                            <param name="hover">
+                                <meta>
+                                    <title lang="en">On Hover</title>
+                                    <title lang="tr">Üzerine Gelindiğinde</title>
+                                    <title lang="de">Bei Hover</title>
+                                    <title lang="ru">При наведении</title>
+                                    <title lang="es">Al Pasar el Cursor</title>
+                                    <title lang="fr">Au Survol</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="controls" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Controls</title>
+                        <title lang="tr">Oynatıcı Kontrolleri</title>
+                        <title lang="de">Steuerelemente</title>
+                        <title lang="ru">Элементы управления</title>
+                        <title lang="es">Controles</title>
+                        <title lang="fr">Contrôles</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="true">
+                                <meta>
+                                    <title lang="en">Show Controls</title>
+                                    <title lang="tr">Kontrolleri Göster</title>
+                                    <title lang="de">Steuerelemente anzeigen</title>
+                                    <title lang="ru">Показать управление</title>
+                                    <title lang="es">Mostrar Controles</title>
+                                    <title lang="fr">Afficher les Contrôles</title>
+                                </meta>
+                            </param>
+                            <param name="false">
+                                <meta>
+                                    <title lang="en">Hide Controls</title>
+                                    <title lang="tr">Kontrolleri Gizle</title>
+                                    <title lang="de">Steuerelemente ausblenden</title>
+                                    <title lang="ru">Скрыть управление</title>
+                                    <title lang="es">Ocultar Controles</title>
+                                    <title lang="fr">Masquer les Contrôles</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="loop" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Loop</title>
+                        <title lang="tr">Döngü</title>
+                        <title lang="de">Schleife</title>
+                        <title lang="ru">Зациклить</title>
+                        <title lang="es">Bucle</title>
+                        <title lang="fr">Boucle</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="false">
+                                <meta>
+                                    <title lang="en">No</title>
+                                    <title lang="tr">Hayır</title>
+                                    <title lang="de">Nein</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">No</title>
+                                    <title lang="fr">Non</title>
+                                </meta>
+                            </param>
+                            <param name="true">
+                                <meta>
+                                    <title lang="en">Yes</title>
+                                    <title lang="tr">Evet</title>
+                                    <title lang="de">Ja</title>
+                                    <title lang="ru">Да</title>
+                                    <title lang="es">Sí</title>
+                                    <title lang="fr">Oui</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="muted" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Audio / Mute</title>
+                        <title lang="tr">Ses Durumu</title>
+                        <title lang="de">Audio / Stumm</title>
+                        <title lang="ru">Звук / Без звука</title>
+                        <title lang="es">Audio / Silencio</title>
+                        <title lang="fr">Audio / Muet</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Varsayılan</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="true">
+                                <meta>
+                                    <title lang="en">Muted</title>
+                                    <title lang="tr">Sessiz</title>
+                                    <title lang="de">Gedämpft</title>
+                                    <title lang="ru">Приглушённый</title>
+                                    <title lang="es">Atenuado</title>
+                                    <title lang="fr">Atténué</title>
+                                </meta>
+                            </param>
+                            <param name="false">
+                                <meta>
+                                    <title lang="en">Unmuted</title>
+                                    <title lang="tr">Sesli</title>
+                                    <title lang="de">Ton aktiv</title>
+                                    <title lang="ru">Со звуком</title>
+                                    <title lang="es">Con Sonido</title>
+                                    <title lang="fr">Avec Son</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

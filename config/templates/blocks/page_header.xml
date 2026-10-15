@@ -11,156 +11,291 @@
         <title lang="es">Encabezado de Página / Hero</title>
         <title lang="fr">En-tête de Page / Hero</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
-        <property name="header_layout" type="single_select" colspan="6">
+        <section name="content">
             <meta>
-                <title lang="en">Layout Style</title>
-                <title lang="tr">Düzen Stili</title>
-                <title lang="de">Layoutstil</title>
-                <title lang="ru">Стиль макета</title>
-                <title lang="es">Estilo de Diseño</title>
-                <title lang="fr">Style de Disposition</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <params>
-                <param name="default_value" value="standard"/>
-                <param name="values" type="collection">
-                    <param name="standard">
-                        <meta>
-                            <title lang="en">Standard</title>
-                            <title lang="tr">Standart</title>
-                            <title lang="de">Standard</title>
-                            <title lang="ru">Стандартный</title>
-                            <title lang="es">Estándar</title>
-                            <title lang="fr">Standard</title>
-                        </meta>
-                    </param>
-                    <param name="split">
-                        <meta>
-                            <title lang="en">Split</title>
-                            <title lang="tr">İki Sütunlu</title>
-                            <title lang="de">Geteilt</title>
-                            <title lang="ru">Разделённый</title>
-                            <title lang="es">Dividido</title>
-                            <title lang="fr">Divisé</title>
-                        </meta>
-                    </param>
-                    <param name="minimal">
-                        <meta>
-                            <title lang="en">Minimal</title>
-                            <title lang="tr">Minimal</title>
-                            <title lang="de">Minimal</title>
-                            <title lang="ru">Минималистичный</title>
-                            <title lang="es">Mínimo</title>
-                            <title lang="fr">Minimal</title>
-                        </meta>
-                    </param>
-                </param>
-            </params>
-        </property>
+            <properties>
+                <property name="header_layout" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Layout Style</title>
+                        <title lang="tr">Düzen Stili</title>
+                        <title lang="de">Layoutstil</title>
+                        <title lang="ru">Стиль макета</title>
+                        <title lang="es">Estilo de Diseño</title>
+                        <title lang="fr">Style de Disposition</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="standard"/>
+                        <param name="values" type="collection">
+                            <param name="standard">
+                                <meta>
+                                    <title lang="en">Standard</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">Стандартный</title>
+                                    <title lang="es">Estándar</title>
+                                    <title lang="fr">Standard</title>
+                                </meta>
+                            </param>
+                            <param name="split">
+                                <meta>
+                                    <title lang="en">Split</title>
+                                    <title lang="tr">İki Sütunlu</title>
+                                    <title lang="de">Geteilt</title>
+                                    <title lang="ru">Разделённый</title>
+                                    <title lang="es">Dividido</title>
+                                    <title lang="fr">Divisé</title>
+                                </meta>
+                            </param>
+                            <param name="minimal">
+                                <meta>
+                                    <title lang="en">Minimal</title>
+                                    <title lang="tr">Minimal</title>
+                                    <title lang="de">Minimal</title>
+                                    <title lang="ru">Минималистичный</title>
+                                    <title lang="es">Mínimo</title>
+                                    <title lang="fr">Minimal</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <property name="show_breadcrumbs" type="checkbox" colspan="6">
+                <property name="show_breadcrumbs" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Show Breadcrumbs</title>
+                        <title lang="tr">Sayfa Yolunu Göster</title>
+                        <title lang="de">Brotkrümelnavigation anzeigen</title>
+                        <title lang="ru">Показывать навигационную цепочку</title>
+                        <title lang="es">Mostrar Migas de Pan</title>
+                        <title lang="fr">Afficher le Fil d'Ariane</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="override_title" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Custom Title</title>
+                        <title lang="tr">Özel Başlık</title>
+                        <title lang="de">Benutzerdefinierter Titel</title>
+                        <title lang="ru">Свой заголовок</title>
+                        <title lang="es">Título Personalizado</title>
+                        <title lang="fr">Titre Personnalisé</title>
+                        <info_text lang="en">Leave empty to use current page title</info_text>
+                        <info_text lang="tr">Mevcut sayfa başlığını kullanmak için boş bırakın</info_text>
+                        <info_text lang="de">Leer lassen, um den aktuellen Seitentitel zu verwenden</info_text>
+                        <info_text lang="ru">Оставьте пустым для использования заголовка страницы</info_text>
+                        <info_text lang="es">Dejar vacío para usar el título de la página actual</info_text>
+                        <info_text lang="fr">Laissez vide pour utiliser le titre de la page actuelle</info_text>
+                    </meta>
+                </property>
+
+                <property name="override_headline" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Custom Headline</title>
+                        <title lang="tr">Özel Başlık / Manşet</title>
+                        <title lang="de">Benutzerdefinierter Anzeigetitel</title>
+                        <title lang="ru">Свой заголовок / Маншет</title>
+                        <title lang="es">Titular Personalizado</title>
+                        <title lang="fr">Titre Personnalisé</title>
+                        <info_text lang="en">Leave empty to use current page headline</info_text>
+                        <info_text lang="tr">Mevcut sayfa manşetini kullanmak için boş bırakın</info_text>
+                        <info_text lang="de">Leer lassen, um die aktuelle Seitenschlagzeile zu verwenden</info_text>
+                        <info_text lang="ru">Оставьте пустым для использования заголовка страницы</info_text>
+                        <info_text lang="es">Dejar vacío para usar el titular de la página actual</info_text>
+                        <info_text lang="fr">Laissez vide pour utiliser le titre de la page actuelle</info_text>
+                    </meta>
+                </property>
+
+                <property name="override_summary" type="text_area" colspan="12">
+                    <meta>
+                        <title lang="en">Custom Summary / Teaser</title>
+                        <title lang="tr">Özel Özet / Spot</title>
+                        <title lang="de">Benutzerdefinierte Zusammenfassung</title>
+                        <title lang="ru">Своё краткое описание</title>
+                        <title lang="es">Resumen Personalizado</title>
+                        <title lang="fr">Résumé Personnalisé</title>
+                        <info_text lang="en">Leave empty to use current page summary</info_text>
+                        <info_text lang="tr">Mevcut sayfa özetini kullanmak için boş bırakın</info_text>
+                        <info_text lang="de">Leer lassen, um den aktuellen Seitenteaser zu verwenden</info_text>
+                        <info_text lang="ru">Оставьте пустым для использования описания страницы</info_text>
+                        <info_text lang="es">Dejar vacío para usar el resumen de la página actual</info_text>
+                        <info_text lang="fr">Laissez vide pour utiliser le résumé de la page actuelle</info_text>
+                    </meta>
+                </property>
+
+                <property name="override_meta" type="text_line" colspan="12">
+                    <meta>
+                        <title lang="en">Custom Meta Tag / Eyebrow</title>
+                        <title lang="tr">Özel Meta Etiket / Rozet</title>
+                        <title lang="de">Benutzerdefiniertes Meta-Tag</title>
+                        <title lang="ru">Свой мета-тег</title>
+                        <title lang="es">Etiqueta Meta Personalizada</title>
+                        <title lang="fr">Balise Méta Personnalisée</title>
+                        <info_text lang="en">Optional badge/eyebrow above or below the title</info_text>
+                        <info_text lang="tr">Başlığın üstünde veya altında isteğe bağlı rozet/etiket</info_text>
+                        <info_text lang="de">Optionales Badge über oder unter dem Titel</info_text>
+                        <info_text lang="ru">Необязательный бейдж над или под заголовком</info_text>
+                        <info_text lang="es">Insignia opcional encima o debajo del título</info_text>
+                        <info_text lang="fr">Badge optionnel au-dessus ou au-dessous du titre</info_text>
+                    </meta>
+                </property>
+
+                <property name="override_content" type="text_editor" colspan="12">
+                    <meta>
+                        <title lang="en">Custom Content</title>
+                        <title lang="tr">Özel Açıklama / İçerik</title>
+                        <title lang="de">Benutzerdefinierter Inhalt</title>
+                        <title lang="ru">Свой контент</title>
+                        <title lang="es">Contenido Personalizado</title>
+                        <title lang="fr">Contenu Personnalisé</title>
+                        <info_text lang="en">Leave empty to use current page summary content</info_text>
+                        <info_text lang="tr">Mevcut sayfa özetini kullanmak için boş bırakın</info_text>
+                        <info_text lang="de">Leer lassen, um den aktuellen Seiteninhalt zu verwenden</info_text>
+                        <info_text lang="ru">Оставьте пустым для использования содержания страницы</info_text>
+                        <info_text lang="es">Dejar vacío para usar el contenido de la página actual</info_text>
+                        <info_text lang="fr">Laissez vide pour utiliser le contenu de la page actuelle</info_text>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+
+        <section name="settings">
             <meta>
-                <title lang="en">Show Breadcrumbs</title>
-                <title lang="tr">Sayfa Yolunu Göster</title>
-                <title lang="de">Brotkrümelnavigation anzeigen</title>
-                <title lang="ru">Показывать навигационную цепочку</title>
-                <title lang="es">Mostrar Migas de Pan</title>
-                <title lang="fr">Afficher le Fil d'Ariane</title>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
             </meta>
-            <params>
-                <param name="default_value" value="true"/>
-            </params>
-        </property>
+            <properties>
+                <property name="header_layout" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Layout Style</title>
+                        <title lang="tr">Düzen Stili</title>
+                        <title lang="de">Layout-Stil</title>
+                        <title lang="ru">Стиль макета</title>
+                        <title lang="es">Estilo de Diseño</title>
+                        <title lang="fr">Style de Disposition</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="standard"/>
+                        <param name="values" type="collection">
+                            <param name="standard">
+                                <meta>
+                                    <title lang="en">Standard</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">Стандартный</title>
+                                    <title lang="es">Estándar</title>
+                                    <title lang="fr">Standard</title>
+                                </meta>
+                            </param>
+                            <param name="split">
+                                <meta>
+                                    <title lang="en">Split</title>
+                                    <title lang="tr">İki Sütunlu</title>
+                                    <title lang="de">Geteilt</title>
+                                    <title lang="ru">Разделённый</title>
+                                    <title lang="es">Dividido</title>
+                                    <title lang="fr">Divisé</title>
+                                </meta>
+                            </param>
+                            <param name="minimal">
+                                <meta>
+                                    <title lang="en">Minimal</title>
+                                    <title lang="tr">Minimal</title>
+                                    <title lang="de">Minimal</title>
+                                    <title lang="ru">Минималистичный</title>
+                                    <title lang="es">Minimalista</title>
+                                    <title lang="fr">Minimal</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
 
-        <property name="override_title" type="text_line" colspan="6">
-            <meta>
-                <title lang="en">Custom Title</title>
-                <title lang="tr">Özel Başlık</title>
-                <title lang="de">Benutzerdefinierter Titel</title>
-                <title lang="ru">Свой заголовок</title>
-                <title lang="es">Título Personalizado</title>
-                <title lang="fr">Titre Personnalisé</title>
-                <info_text lang="en">Leave empty to use current page title</info_text>
-                <info_text lang="tr">Mevcut sayfa başlığını kullanmak için boş bırakın</info_text>
-                <info_text lang="de">Leer lassen, um den aktuellen Seitentitel zu verwenden</info_text>
-                <info_text lang="ru">Оставьте пустым для использования заголовка страницы</info_text>
-                <info_text lang="es">Dejar vacío para usar el título de la página actual</info_text>
-                <info_text lang="fr">Laissez vide pour utiliser le titre de la page actuelle</info_text>
-            </meta>
-        </property>
+                <property name="show_breadcrumbs" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Show Breadcrumbs</title>
+                        <title lang="tr">Sayfa Yolunu Göster</title>
+                        <title lang="de">Brotkrümelnavigation anzeigen</title>
+                        <title lang="ru">Показать хлебные крошки</title>
+                        <title lang="es">Mostrar Migas de Pan</title>
+                        <title lang="fr">Afficher le Fil d&apos;Ariane</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
 
-        <property name="override_headline" type="text_line" colspan="6">
-            <meta>
-                <title lang="en">Custom Headline</title>
-                <title lang="tr">Özel Başlık / Manşet</title>
-                <title lang="de">Benutzerdefinierter Anzeigetitel</title>
-                <title lang="ru">Свой заголовок / Маншет</title>
-                <title lang="es">Titular Personalizado</title>
-                <title lang="fr">Titre Personnalisé</title>
-                <info_text lang="en">Leave empty to use current page headline</info_text>
-                <info_text lang="tr">Mevcut sayfa manşetini kullanmak için boş bırakın</info_text>
-                <info_text lang="de">Leer lassen, um die aktuelle Seitenschlagzeile zu verwenden</info_text>
-                <info_text lang="ru">Оставьте пустым для использования заголовка страницы</info_text>
-                <info_text lang="es">Dejar vacío para usar el titular de la página actual</info_text>
-                <info_text lang="fr">Laissez vide pour utiliser le titre de la page actuelle</info_text>
-            </meta>
-        </property>
-
-        <property name="override_summary" type="text_area" colspan="12">
-            <meta>
-                <title lang="en">Custom Summary / Teaser</title>
-                <title lang="tr">Özel Özet / Spot</title>
-                <title lang="de">Benutzerdefinierte Zusammenfassung</title>
-                <title lang="ru">Своё краткое описание</title>
-                <title lang="es">Resumen Personalizado</title>
-                <title lang="fr">Résumé Personnalisé</title>
-                <info_text lang="en">Leave empty to use current page summary</info_text>
-                <info_text lang="tr">Mevcut sayfa özetini kullanmak için boş bırakın</info_text>
-                <info_text lang="de">Leer lassen, um den aktuellen Seitenteaser zu verwenden</info_text>
-                <info_text lang="ru">Оставьте пустым для использования описания страницы</info_text>
-                <info_text lang="es">Dejar vacío para usar el resumen de la página actual</info_text>
-                <info_text lang="fr">Laissez vide pour utiliser le résumé de la page actuelle</info_text>
-            </meta>
-        </property>
-
-        <property name="override_meta" type="text_line" colspan="12">
-            <meta>
-                <title lang="en">Custom Meta Tag / Eyebrow</title>
-                <title lang="tr">Özel Meta Etiket / Rozet</title>
-                <title lang="de">Benutzerdefiniertes Meta-Tag</title>
-                <title lang="ru">Свой мета-тег</title>
-                <title lang="es">Etiqueta Meta Personalizada</title>
-                <title lang="fr">Balise Méta Personnalisée</title>
-                <info_text lang="en">Optional badge/eyebrow above or below the title</info_text>
-                <info_text lang="tr">Başlığın üstünde veya altında isteğe bağlı rozet/etiket</info_text>
-                <info_text lang="de">Optionales Badge über oder unter dem Titel</info_text>
-                <info_text lang="ru">Необязательный бейдж над или под заголовком</info_text>
-                <info_text lang="es">Insignia opcional encima o debajo del título</info_text>
-                <info_text lang="fr">Badge optionnel au-dessus ou au-dessous du titre</info_text>
-            </meta>
-        </property>
-
-        <property name="override_content" type="text_editor" colspan="12">
-            <meta>
-                <title lang="en">Custom Content</title>
-                <title lang="tr">Özel Açıklama / İçerik</title>
-                <title lang="de">Benutzerdefinierter Inhalt</title>
-                <title lang="ru">Свой контент</title>
-                <title lang="es">Contenido Personalizado</title>
-                <title lang="fr">Contenu Personnalisé</title>
-                <info_text lang="en">Leave empty to use current page summary content</info_text>
-                <info_text lang="tr">Mevcut sayfa özetini kullanmak için boş bırakın</info_text>
-                <info_text lang="de">Leer lassen, um den aktuellen Seiteninhalt zu verwenden</info_text>
-                <info_text lang="ru">Оставьте пустым для использования содержания страницы</info_text>
-                <info_text lang="es">Dejar vacío para usar el contenido de la página actual</info_text>
-                <info_text lang="fr">Laissez vide pour utiliser le contenu de la page actuelle</info_text>
-            </meta>
-        </property>
-
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="page_header"/>
-            </params>
-        </property>
+                <property name="padding_y" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Vertical Padding</title>
+                        <title lang="tr">Dikey İç Boşluk</title>
+                        <title lang="de">Vertikaler Innenabstand</title>
+                        <title lang="ru">Вертикальный внутренний отступ</title>
+                        <title lang="es">Relleno Vertical</title>
+                        <title lang="fr">Marge Intérieure Verticale</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="default"/>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

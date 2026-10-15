@@ -12,26 +12,285 @@
         <title lang="es">Desplazarse a / Volver arriba</title>
         <title lang="de">Nach oben / Zu Element scrollen</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="target_id" type="text_line">
+        <section name="content">
             <meta>
-                <title lang="en">Target Element ID</title>
-                <title lang="tr">Hedef Element ID</title>
-                <title lang="ru">ID целевого элемента</title>
-                <title lang="fr">ID de l'élément cible</title>
-                <title lang="es">ID del elemento de destino</title>
-                <title lang="de">Ziel-Element-ID</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-        </property>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <xi:include href="../fields/icon.xml"/>
+                <property name="target_id" type="text_line">
+                    <meta>
+                        <title lang="en">Target Element ID</title>
+                        <title lang="tr">Hedef Element ID</title>
+                        <title lang="ru">ID целевого элемента</title>
+                        <title lang="fr">ID de l'élément cible</title>
+                        <title lang="es">ID del elemento de destino</title>
+                        <title lang="de">Ziel-Element-ID</title>
+                    </meta>
+                </property>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="scroll_to"/>
-            </params>
-        </property>
+                <xi:include href="../fields/icon.xml"/>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="display_mode" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Display Mode</title>
+                        <title lang="tr">Görünüm Modu</title>
+                        <title lang="de">Anzeigemodus</title>
+                        <title lang="ru">Режим отображения</title>
+                        <title lang="es">Modo de Visualización</title>
+                        <title lang="fr">Mode d&apos;Affichage</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="inline_button"/>
+                        <param name="values" type="collection">
+                            <param name="inline_button">
+                                <meta>
+                                    <title lang="en">Standard Button</title>
+                                    <title lang="tr">Standart Buton</title>
+                                    <title lang="de">Standard-Button</title>
+                                    <title lang="ru">Стандартная кнопка</title>
+                                    <title lang="es">Botón Estándar</title>
+                                    <title lang="fr">Bouton Standard</title>
+                                </meta>
+                            </param>
+                            <param name="totop_circle">
+                                <meta>
+                                    <title lang="en">Classic Circle Icon Button</title>
+                                    <title lang="tr">Klasik Yuvarlak İkon Butonu</title>
+                                    <title lang="de">Klassischer runder Icon-Button</title>
+                                    <title lang="ru">Классическая круглая кнопка с иконкой</title>
+                                    <title lang="es">Botón Circular Clásico con Icono</title>
+                                    <title lang="fr">Bouton Icône Circulaire Classique</title>
+                                </meta>
+                            </param>
+                            <param name="floating">
+                                <meta>
+                                    <title lang="en">Floating Button</title>
+                                    <title lang="tr">Sabit Yüzen Buton</title>
+                                    <title lang="de">Schwebender Button</title>
+                                    <title lang="ru">Плавающая кнопка</title>
+                                    <title lang="es">Botón Flotante</title>
+                                    <title lang="fr">Bouton Flottant</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="button_variant" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Button Variant</title>
+                        <title lang="tr">Buton Türü</title>
+                        <title lang="de">Button-Variante</title>
+                        <title lang="ru">Вариант кнопки</title>
+                        <title lang="es">Variante de Botón</title>
+                        <title lang="fr">Variante de Bouton</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="solid"/>
+                        <param name="values" type="collection">
+                            <param name="solid">
+                                <meta>
+                                    <title lang="en">Solid Background</title>
+                                    <title lang="tr">Dolu Arka Plan</title>
+                                    <title lang="de">Gefüllter Hintergrund</title>
+                                    <title lang="ru">Сплошной фон</title>
+                                    <title lang="es">Fondo Sólido</title>
+                                    <title lang="fr">Fond Plein</title>
+                                </meta>
+                            </param>
+                            <param name="outline">
+                                <meta>
+                                    <title lang="en">Outlined</title>
+                                    <title lang="tr">Kenarlıklı</title>
+                                    <title lang="de">Umrandet</title>
+                                    <title lang="ru">Контурный</title>
+                                    <title lang="es">Con Contorno</title>
+                                    <title lang="fr">Avec Contour</title>
+                                </meta>
+                            </param>
+                            <param name="soft">
+                                <meta>
+                                    <title lang="en">Soft / Pastel</title>
+                                    <title lang="tr">Yumuşak Pastel</title>
+                                    <title lang="de">Sanft / Pastell</title>
+                                    <title lang="ru">Мягкий / Пастельный</title>
+                                    <title lang="es">Suave / Pastel</title>
+                                    <title lang="fr">Doux / Pastel</title>
+                                </meta>
+                            </param>
+                            <param name="ghost">
+                                <meta>
+                                    <title lang="en">Ghost</title>
+                                    <title lang="tr">Şeffaf</title>
+                                    <title lang="de">Geist</title>
+                                    <title lang="ru">Прозрачный</title>
+                                    <title lang="es">Fantasma</title>
+                                    <title lang="fr">Fantôme</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="button_color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Color</title>
+                        <title lang="tr">Renk</title>
+                        <title lang="de">Farbe</title>
+                        <title lang="ru">Цвет</title>
+                        <title lang="es">Color</title>
+                        <title lang="fr">Couleur</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="primary"/>
+                        <param name="values" type="collection">
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Blue</title>
+                                    <title lang="tr">Birincil Mavi</title>
+                                    <title lang="de">Primärblau</title>
+                                    <title lang="ru">Основной синий</title>
+                                    <title lang="es">Azul Primario</title>
+                                    <title lang="fr">Bleu Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark / Black</title>
+                                    <title lang="tr">Koyu / Siyah</title>
+                                    <title lang="de">Dunkel / Schwarz</title>
+                                    <title lang="ru">Тёмный / Чёрный</title>
+                                    <title lang="es">Oscuro / Negro</title>
+                                    <title lang="fr">Sombre / Noir</title>
+                                </meta>
+                            </param>
+                            <param name="white">
+                                <meta>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
+                                </meta>
+                            </param>
+                            <param name="muted">
+                                <meta>
+                                    <title lang="en">Muted Gray</title>
+                                    <title lang="tr">Açık Gri</title>
+                                    <title lang="de">Gedämpftes Grau</title>
+                                    <title lang="ru">Приглушённый серый</title>
+                                    <title lang="es">Gris Atenuado</title>
+                                    <title lang="fr">Gris Atténué</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="right"/>
+                        <param name="values" type="collection">
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="icon_position" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Icon Position</title>
+                        <title lang="tr">İkon Konumu</title>
+                        <title lang="de">Symbolposition</title>
+                        <title lang="ru">Позиция иконки</title>
+                        <title lang="es">Posición del Icono</title>
+                        <title lang="fr">Position de l&apos;Icône</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="left"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Solda</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağda</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

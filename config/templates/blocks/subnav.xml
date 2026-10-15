@@ -13,26 +13,202 @@
         <title lang="fr">Sous-navigation</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="subnav_item" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Subnav Items</title>
-                <title lang="tr">Alt Menü Maddeleri</title>
-                <title lang="de">Unternavigationselemente</title>
-                <title lang="ru">Элементы поднавигации</title>
-                <title lang="es">Elementos de subnavegación</title>
-                <title lang="fr">Éléments de sous-navigation</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/subnav_item.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="subnav"/>
-            </params>
-        </property>
+                <block name="items" default-type="subnav_item" minOccurs="1">
+                    <meta>
+                        <title lang="en">Subnav Items</title>
+                        <title lang="tr">Alt Menü Maddeleri</title>
+                        <title lang="de">Unternavigationselemente</title>
+                        <title lang="ru">Элементы поднавигации</title>
+                        <title lang="es">Elementos de subnavegación</title>
+                        <title lang="fr">Éléments de sous-navigation</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/subnav_item.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Navigation Style</title>
+                        <title lang="tr">Menü Stili</title>
+                        <title lang="de">Navigationsstil</title>
+                        <title lang="ru">Стиль навигации</title>
+                        <title lang="es">Estilo de Navegación</title>
+                        <title lang="fr">Style de Navigation</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="pills"/>
+                        <param name="values" type="collection">
+                            <param name="pills">
+                                <meta>
+                                    <title lang="en">Pills</title>
+                                    <title lang="tr">Kapsül Butonlar</title>
+                                    <title lang="de">Pillen</title>
+                                    <title lang="ru">Капсулы</title>
+                                    <title lang="es">Píldoras</title>
+                                    <title lang="fr">Pilules</title>
+                                </meta>
+                            </param>
+                            <param name="segmented">
+                                <meta>
+                                    <title lang="en">Segmented Control</title>
+                                    <title lang="tr">Bölümlü Kontrol</title>
+                                    <title lang="de">Segmentierte Steuerung</title>
+                                    <title lang="ru">Сегментированный переключатель</title>
+                                    <title lang="es">Control Segmentado</title>
+                                    <title lang="fr">Contrôle Segmenté</title>
+                                </meta>
+                            </param>
+                            <param name="underline">
+                                <meta>
+                                    <title lang="en">Underline Tabs</title>
+                                    <title lang="tr">Alt Çizgili Sekmeler</title>
+                                    <title lang="de">Unterstrichene Tabs</title>
+                                    <title lang="ru">Подчёркнутые вкладки</title>
+                                    <title lang="es">Pestañas Subrayadas</title>
+                                    <title lang="fr">Onglets Soulignés</title>
+                                </meta>
+                            </param>
+                            <param name="divider">
+                                <meta>
+                                    <title lang="en">Divided Links</title>
+                                    <title lang="tr">Çizgi Ayırıcılı Linkler</title>
+                                    <title lang="de">Getrennte Links</title>
+                                    <title lang="ru">Ссылки с разделителями</title>
+                                    <title lang="es">Enlaces Divididos</title>
+                                    <title lang="fr">Liens Séparés</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="alignment" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="start"/>
+                        <param name="values" type="collection">
+                            <param name="start">
+                                <meta>
+                                    <title lang="en">Left / Start</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links / Start</title>
+                                    <title lang="ru">Слева / В начале</title>
+                                    <title lang="es">Izquierda / Inicio</title>
+                                    <title lang="fr">Gauche / Début</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="end">
+                                <meta>
+                                    <title lang="en">Right / End</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts / Ende</title>
+                                    <title lang="ru">Справа / В конце</title>
+                                    <title lang="es">Derecha / Fin</title>
+                                    <title lang="fr">Droite / Fin</title>
+                                </meta>
+                            </param>
+                            <param name="between">
+                                <meta>
+                                    <title lang="en">Space Between</title>
+                                    <title lang="tr">İki Yana Yasla</title>
+                                    <title lang="de">Raum dazwischen</title>
+                                    <title lang="ru">Равномерно по краям</title>
+                                    <title lang="es">Espacio Entre Elementos</title>
+                                    <title lang="fr">Espacement Entre</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Item Size</title>
+                        <title lang="tr">Öğe Boyutu</title>
+                        <title lang="de">Elementgröße</title>
+                        <title lang="ru">Размер элемента</title>
+                        <title lang="es">Tamaño del Elemento</title>
+                        <title lang="fr">Taille de l&apos;Élément</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

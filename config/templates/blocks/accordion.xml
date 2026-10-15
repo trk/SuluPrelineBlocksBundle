@@ -13,26 +13,276 @@
         <title lang="fr">Accordéon</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="accordion_item" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Accordion Items</title>
-                <title lang="tr">Akordeon Maddeleri</title>
-                <title lang="de">Akkordeon-Elemente</title>
-                <title lang="ru">Элементы аккордеона</title>
-                <title lang="es">Elementos de Acordeón</title>
-                <title lang="fr">Éléments d'Accordéon</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/accordion_item.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="accordion"/>
-            </params>
-        </property>
+                <block name="items" default-type="accordion_item" minOccurs="1">
+                    <meta>
+                        <title lang="en">Accordion Items</title>
+                        <title lang="tr">Akordeon Maddeleri</title>
+                        <title lang="de">Akkordeon-Elemente</title>
+                        <title lang="ru">Элементы аккордеона</title>
+                        <title lang="es">Elementos de Acordeón</title>
+                        <title lang="fr">Éléments d'Accordéon</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/accordion_item.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Style</title>
+                        <title lang="tr">Görsel Stil</title>
+                        <title lang="de">Stil</title>
+                        <title lang="ru">Стиль</title>
+                        <title lang="es">Estilo</title>
+                        <title lang="fr">Style</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="default"/>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Varsayılan</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="bordered">
+                                <meta>
+                                    <title lang="en">Bordered Cards</title>
+                                    <title lang="tr">Çerçeveli Kartlar</title>
+                                    <title lang="de">Umrandete Karten</title>
+                                    <title lang="ru">Карточки с рамкой</title>
+                                    <title lang="es">Tarjetas con Borde</title>
+                                    <title lang="fr">Cartes Bordées</title>
+                                </meta>
+                            </param>
+                            <param name="soft">
+                                <meta>
+                                    <title lang="en">Soft Background</title>
+                                    <title lang="tr">Yumuşak Dolgulu</title>
+                                    <title lang="de">Sanfter Hintergrund</title>
+                                    <title lang="ru">Мягкий фон</title>
+                                    <title lang="es">Fondo Suave</title>
+                                    <title lang="fr">Fond Doux</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="icon_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Icon Indicator</title>
+                        <title lang="tr">Açma/Kapama İkonu</title>
+                        <title lang="de">Symbol-Indikator</title>
+                        <title lang="ru">Индикатор иконки</title>
+                        <title lang="es">Indicador de Icono</title>
+                        <title lang="fr">Indicateur d&apos;Icône</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="chevron"/>
+                        <param name="values" type="collection">
+                            <param name="chevron">
+                                <meta>
+                                    <title lang="en">Chevron</title>
+                                    <title lang="tr">Ok</title>
+                                    <title lang="de">Chevron</title>
+                                    <title lang="ru">Шеврон</title>
+                                    <title lang="es">Chevron</title>
+                                    <title lang="fr">Chevron</title>
+                                </meta>
+                            </param>
+                            <param name="plus">
+                                <meta>
+                                    <title lang="en">Plus / Minus</title>
+                                    <title lang="tr">Artı / Eksi</title>
+                                    <title lang="de">Plus / Minus</title>
+                                    <title lang="ru">Плюс / Минус</title>
+                                    <title lang="es">Más / Menos</title>
+                                    <title lang="fr">Plus / Moins</title>
+                                </meta>
+                            </param>
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="multiple" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Allow Multiple Open</title>
+                        <title lang="tr">Aynı Anda Çoklu Açılma</title>
+                        <title lang="de">Mehrere gleichzeitig öffnen</title>
+                        <title lang="ru">Разрешить открытие нескольких</title>
+                        <title lang="es">Permitir Múltiples Abiertos</title>
+                        <title lang="fr">Autoriser Plusieurs Ouverts</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+
+                <property name="collapsible" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Start All Collapsed</title>
+                        <title lang="tr">Tümü Kapalı Başlasın</title>
+                        <title lang="de">Alle eingeklappt starten</title>
+                        <title lang="ru">Начинать со всех свёрнутых</title>
+                        <title lang="es">Iniciar Todos Contraídos</title>
+                        <title lang="fr">Tout Réduire au Démarrage</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="title_size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Title Size</title>
+                        <title lang="tr">Başlık Boyutu</title>
+                        <title lang="de">Titelgröße</title>
+                        <title lang="ru">Размер заголовка</title>
+                        <title lang="es">Tamaño del Título</title>
+                        <title lang="fr">Taille du Titre</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="base"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="base">
+                                <meta>
+                                    <title lang="en">Base</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">Базовый</title>
+                                    <title lang="es">Base</title>
+                                    <title lang="fr">Base</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="image_align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Image Position</title>
+                        <title lang="tr">Görsel Konumu</title>
+                        <title lang="de">Bildposition</title>
+                        <title lang="ru">Позиция изображения</title>
+                        <title lang="es">Posición de la Imagen</title>
+                        <title lang="fr">Position de l&apos;Image</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="top"/>
+                        <param name="values" type="collection">
+                            <param name="top">
+                                <meta>
+                                    <title lang="en">Top</title>
+                                    <title lang="tr">Üstte</title>
+                                    <title lang="de">Oben</title>
+                                    <title lang="ru">Сверху</title>
+                                    <title lang="es">Arriba</title>
+                                    <title lang="fr">Haut</title>
+                                </meta>
+                            </param>
+                            <param name="bottom">
+                                <meta>
+                                    <title lang="en">Bottom</title>
+                                    <title lang="tr">Altta</title>
+                                    <title lang="de">Unten</title>
+                                    <title lang="ru">Снизу</title>
+                                    <title lang="es">Abajo</title>
+                                    <title lang="fr">Bas</title>
+                                </meta>
+                            </param>
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Solda</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağda</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

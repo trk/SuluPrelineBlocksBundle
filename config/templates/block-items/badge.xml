@@ -9,11 +9,33 @@
     <title lang="fr">&#xC9;l&#xE9;ment de badge</title>
   </meta>
   <properties>
-    <xi:include href="../fields/title.xml"/>
-    <xi:include href="../fields/link.xml"/>
-    <xi:include href="../fields/link_title.xml"/>
-    <xi:include href="../fields/icon.xml"/>
-    <property name="badge_style" type="single_select" colspan="4">
+    <section name="content">
+      <meta>
+        <title lang="en">Content</title>
+        <title lang="tr">&#x130;&#xE7;erik</title>
+        <title lang="de">Inhalt</title>
+        <title lang="ru">&#x41A;&#x43E;&#x43D;&#x442;&#x435;&#x43D;&#x442;</title>
+        <title lang="es">Contenido</title>
+        <title lang="fr">Contenu</title>
+      </meta>
+      <properties>
+        <xi:include href="../fields/title.xml"/>
+        <xi:include href="../fields/link.xml"/>
+        <xi:include href="../fields/link_title.xml"/>
+        <xi:include href="../fields/icon.xml"/>
+      </properties>
+    </section>
+    <section name="settings">
+      <meta>
+        <title lang="en">Settings</title>
+        <title lang="tr">Ayarlar</title>
+        <title lang="de">Einstellungen</title>
+        <title lang="ru">&#x41D;&#x430;&#x441;&#x442;&#x440;&#x43E;&#x439;&#x43A;&#x438;</title>
+        <title lang="es">Ajustes</title>
+        <title lang="fr">Param&#xE8;tres</title>
+      </meta>
+      <properties>
+        <property name="badge_style" type="single_select" colspan="4">
       <meta>
         <title lang="en">Style / Variant</title>
         <title lang="tr">Stil / Varyant</title>
@@ -371,5 +393,7 @@
         <param name="default_value" value="false"/>
       </params>
     </property>
+      </properties>
+    </section>
   </properties>
 </type>

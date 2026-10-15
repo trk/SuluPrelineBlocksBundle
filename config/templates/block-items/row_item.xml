@@ -10,24 +10,304 @@
         <title lang="fr">Ligne</title>
     </meta>
     <properties>
-        <block name="columns" default-type="column_item" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Columns</title>
-                <title lang="tr">Sütunlar</title>
-                <title lang="de">Spalten</title>
-                <title lang="ru">Колонки</title>
-                <title lang="es">Columnas</title>
-                <title lang="fr">Colonnes</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="column_item.xml"/>
-            </types>
-        </block>
+            <properties>
+                <block name="columns" default-type="column_item" minOccurs="1">
+                    <meta>
+                        <title lang="en">Columns</title>
+                        <title lang="tr">Sütunlar</title>
+                        <title lang="de">Spalten</title>
+                        <title lang="ru">Колонки</title>
+                        <title lang="es">Columnas</title>
+                        <title lang="fr">Colonnes</title>
+                    </meta>
+                    <types>
+                        <xi:include href="column_item.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="row"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="layout" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Grid Columns Layout</title>
+                        <title lang="tr">Izgara Sütun Düzeni</title>
+                        <title lang="de">Raster-Spaltenlayout</title>
+                        <title lang="ru">Схема колонок сетки</title>
+                        <title lang="es">Diseño de Columnas de Cuadrícula</title>
+                        <title lang="fr">Disposition des Colonnes de Grille</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="halves"/>
+                        <param name="values" type="collection">
+                            <param name="12-col">
+                                <meta>
+                                    <title lang="en">12-Column Flexible Grid</title>
+                                    <title lang="tr">12 Sütunlu Esnek Izgara</title>
+                                    <title lang="de">Flexibles 12-Spalten-Raster</title>
+                                    <title lang="ru">Гибкая 12-колоночная сетка</title>
+                                    <title lang="es">Cuadrícula Flexible de 12 Columnas</title>
+                                    <title lang="fr">Grille Flexible 12 Colonnes</title>
+                                </meta>
+                            </param>
+                            <param name="halves">
+                                <meta>
+                                    <title lang="en">2 Columns - Halves</title>
+                                    <title lang="tr">2 Sütun - Yarı Yarıya</title>
+                                    <title lang="de">2 Spalten - Hälften</title>
+                                    <title lang="ru">2 колонки - Пополам</title>
+                                    <title lang="es">2 Columnas - Mitades</title>
+                                    <title lang="fr">2 Colonnes - Moitiés</title>
+                                </meta>
+                            </param>
+                            <param name="thirds">
+                                <meta>
+                                    <title lang="en">3 Columns - Thirds</title>
+                                    <title lang="tr">3 Sütun - Üçte Bir</title>
+                                    <title lang="de">3 Spalten - Drittel</title>
+                                    <title lang="ru">3 колонки - По трети</title>
+                                    <title lang="es">3 Columnas - Tercios</title>
+                                    <title lang="fr">3 Colonnes - Tiers</title>
+                                </meta>
+                            </param>
+                            <param name="quarters">
+                                <meta>
+                                    <title lang="en">4 Columns - Quarters</title>
+                                    <title lang="tr">4 Sütun - Dörtte Bir</title>
+                                    <title lang="de">4 Spalten - Viertel</title>
+                                    <title lang="ru">4 колонки - По четверти</title>
+                                    <title lang="es">4 Columnas - Cuartos</title>
+                                    <title lang="fr">4 Colonnes - Quarts</title>
+                                </meta>
+                            </param>
+                            <param name="sixths">
+                                <meta>
+                                    <title lang="en">6 Columns - Sixths</title>
+                                    <title lang="tr">6 Sütun - Altıda Bir</title>
+                                    <title lang="de">6 Spalten - Sechstel</title>
+                                    <title lang="ru">6 колонок - По одной шестой</title>
+                                    <title lang="es">6 Columnas - Sextos</title>
+                                    <title lang="fr">6 Colonnes - Sixièmes</title>
+                                </meta>
+                            </param>
+                            <param name="thirds-2-1">
+                                <meta>
+                                    <title lang="en">Thirds 2-1</title>
+                                    <title lang="tr">Üçte İki - Üçte Bir</title>
+                                    <title lang="de">Drittel 2-1</title>
+                                    <title lang="ru">Две трети и треть</title>
+                                    <title lang="es">Tercios 2-1</title>
+                                    <title lang="fr">Tiers 2-1</title>
+                                </meta>
+                            </param>
+                            <param name="thirds-1-2">
+                                <meta>
+                                    <title lang="en">Thirds 1-2</title>
+                                    <title lang="tr">Üçte Bir - Üçte İki</title>
+                                    <title lang="de">Drittel 1-2</title>
+                                    <title lang="ru">Треть и две трети</title>
+                                    <title lang="es">Tercios 1-2</title>
+                                    <title lang="fr">Tiers 1-2</title>
+                                </meta>
+                            </param>
+                            <param name="quarters-3-1">
+                                <meta>
+                                    <title lang="en">Quarters 3-1</title>
+                                    <title lang="tr">Dörtte Üç - Dörtte Bir</title>
+                                    <title lang="de">Viertel 3-1</title>
+                                    <title lang="ru">Три четверти и четверть</title>
+                                    <title lang="es">Cuartos 3-1</title>
+                                    <title lang="fr">Quarts 3-1</title>
+                                </meta>
+                            </param>
+                            <param name="quarters-1-3">
+                                <meta>
+                                    <title lang="en">Quarters 1-3</title>
+                                    <title lang="tr">Dörtte Bir - Dörtte Üç</title>
+                                    <title lang="de">Viertel 1-3</title>
+                                    <title lang="ru">Четверть и три четверти</title>
+                                    <title lang="es">Cuartos 1-3</title>
+                                    <title lang="fr">Quarts 1-3</title>
+                                </meta>
+                            </param>
+                            <param name="auto">
+                                <meta>
+                                    <title lang="en">Auto Columns</title>
+                                    <title lang="tr">Otomatik Sütunlar</title>
+                                    <title lang="de">Automatische Spalten</title>
+                                    <title lang="ru">Автоматические колонки</title>
+                                    <title lang="es">Columnas Automáticas</title>
+                                    <title lang="fr">Colonnes Automatiques</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="gap" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Grid Gap</title>
+                        <title lang="tr">Sütunlar Arası Boşluk</title>
+                        <title lang="de">Rasterabstand</title>
+                        <title lang="ru">Отступ сетки</title>
+                        <title lang="es">Espaciado de Cuadrícula</title>
+                        <title lang="fr">Espacement de Grille</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="xs">
+                                <meta>
+                                    <title lang="en">Extra Small</title>
+                                    <title lang="tr">Çok Küçük</title>
+                                    <title lang="de">Extra Klein</title>
+                                    <title lang="ru">Очень малый</title>
+                                    <title lang="es">Extra Pequeño</title>
+                                    <title lang="fr">Très Petit</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium / Default</title>
+                                    <title lang="tr">Orta / Standart</title>
+                                    <title lang="de">Mittel / Standard</title>
+                                    <title lang="ru">Средний / По умолчанию</title>
+                                    <title lang="es">Mediano / Predeterminado</title>
+                                    <title lang="fr">Moyen / Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="align_items" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Vertical Item Alignment</title>
+                        <title lang="tr">Dikey Hizalama</title>
+                        <title lang="de">Vertikale Elementausrichtung</title>
+                        <title lang="ru">Вертикальное выравнивание элементов</title>
+                        <title lang="es">Alineación Vertical de Elementos</title>
+                        <title lang="fr">Alignement Vertical des Éléments</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="stretch"/>
+                        <param name="values" type="collection">
+                            <param name="stretch">
+                                <meta>
+                                    <title lang="en">Stretch</title>
+                                    <title lang="tr">Uzat</title>
+                                    <title lang="de">Strecken</title>
+                                    <title lang="ru">Растянуть</title>
+                                    <title lang="es">Estirar</title>
+                                    <title lang="fr">Étirer</title>
+                                </meta>
+                            </param>
+                            <param name="start">
+                                <meta>
+                                    <title lang="en">Top / Start</title>
+                                    <title lang="tr">Üste Hizala</title>
+                                    <title lang="de">Oben / Start</title>
+                                    <title lang="ru">По верхнему краю</title>
+                                    <title lang="es">Arriba / Inicio</title>
+                                    <title lang="fr">Haut / Début</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortala</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="end">
+                                <meta>
+                                    <title lang="en">Bottom / End</title>
+                                    <title lang="tr">Alta Hizala</title>
+                                    <title lang="de">Unten / Ende</title>
+                                    <title lang="ru">По нижнему краю</title>
+                                    <title lang="es">Abajo / Fin</title>
+                                    <title lang="fr">Bas / Fin</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="has_divider" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Column Dividers</title>
+                        <title lang="tr">Sütunlar Arası Ayırıcı Çizgi</title>
+                        <title lang="de">Spaltentrennlinien</title>
+                        <title lang="ru">Разделители колонок</title>
+                        <title lang="es">Divisores de Columna</title>
+                        <title lang="fr">Séparateurs de Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </type>

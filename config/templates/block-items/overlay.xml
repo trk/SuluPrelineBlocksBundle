@@ -10,46 +10,68 @@
         <title lang="fr">Élément de Superposition</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <xi:include href="../fields/meta.xml"/>
-        <xi:include href="../fields/content.xml"/>
-
-        <xi:include href="../includes/media.xml"/>
-
-        <block name="elements" default-type="button" minOccurs="0">
+        <section name="content">
             <meta>
-                <title lang="en">Elements</title>
-                <title lang="tr">Öğeler</title>
-                <title lang="de">Elemente</title>
-                <title lang="ru">Элементы</title>
-                <title lang="es">Elementos</title>
-                <title lang="fr">Éléments</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/button.xml"/>
-                <xi:include href="../block-items/badge.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="tags" type="text_line" colspan="6">
+                <xi:include href="../fields/meta.xml"/>
+                <xi:include href="../fields/content.xml"/>
+
+                <xi:include href="../includes/media.xml"/>
+
+                <block name="elements" default-type="button" minOccurs="0">
+                    <meta>
+                        <title lang="en">Elements</title>
+                        <title lang="tr">Öğeler</title>
+                        <title lang="de">Elemente</title>
+                        <title lang="ru">Элементы</title>
+                        <title lang="es">Elementos</title>
+                        <title lang="fr">Éléments</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/button.xml"/>
+                        <xi:include href="../block-items/badge.xml"/>
+                    </types>
+                </block>
+
+                <property name="tags" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Filter Tags</title>
+                        <title lang="tr">Filtre Etiketleri</title>
+                        <title lang="de">Filter-Tags</title>
+                        <title lang="ru">Теги фильтра</title>
+                        <title lang="es">Etiquetas de Filtro</title>
+                        <title lang="fr">Balises de Filtre</title>
+                        <info_text lang="en">Comma-separated tags for category filtering</info_text>
+                        <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler</info_text>
+                        <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung</info_text>
+                        <info_text lang="ru">Разделенные запятыми теги для фильтрации</info_text>
+                        <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías</info_text>
+                        <info_text lang="fr">Balises séparées par des virgules pour le filtrage</info_text>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+
+        <section name="settings">
             <meta>
-                <title lang="en">Filter Tags</title>
-                <title lang="tr">Filtre Etiketleri</title>
-                <title lang="de">Filter-Tags</title>
-                <title lang="ru">Теги фильтра</title>
-                <title lang="es">Etiquetas de Filtro</title>
-                <title lang="fr">Balises de Filtre</title>
-                <info_text lang="en">Comma-separated tags for category filtering</info_text>
-                <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler</info_text>
-                <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung</info_text>
-                <info_text lang="ru">Разделенные запятыми теги для фильтрации</info_text>
-                <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías</info_text>
-                <info_text lang="fr">Balises séparées par des virgules pour le filtrage</info_text>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
             </meta>
-        </property>
-
-        <property name="overlay_style" type="single_select" colspan="3">
+            <properties>
+                <property name="overlay_style" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Overlay Style Override</title>
                 <title lang="tr">Katman Stili</title>
@@ -114,7 +136,7 @@
             </params>
         </property>
 
-        <property name="link_style" type="single_select" colspan="3">
+        <property name="link_style" type="single_select" colspan="6">
             <meta>
                 <title lang="en">Button Style</title>
                 <title lang="tr">Buton Stili</title>
@@ -188,5 +210,7 @@
                 </param>
             </params>
         </property>
+            </properties>
+        </section>
     </properties>
 </type>

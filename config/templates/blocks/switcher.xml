@@ -13,26 +13,212 @@
         <title lang="fr">Sélecteur</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="switcher_item" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Tabs</title>
-                <title lang="tr">Sekmeler</title>
-                <title lang="de">Registerkarten</title>
-                <title lang="ru">Вкладки</title>
-                <title lang="es">Pestañas</title>
-                <title lang="fr">Onglets</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/switcher_item.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="switcher"/>
-            </params>
-        </property>
+                <block name="items" default-type="switcher_item" minOccurs="1">
+                    <meta>
+                        <title lang="en">Tabs</title>
+                        <title lang="tr">Sekmeler</title>
+                        <title lang="de">Registerkarten</title>
+                        <title lang="ru">Вкладки</title>
+                        <title lang="es">Pestañas</title>
+                        <title lang="fr">Onglets</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/switcher_item.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="nav_position" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Tab Bar Position</title>
+                        <title lang="tr">Sekme Çubuğu Konumu</title>
+                        <title lang="de">Tab-Leisten-Position</title>
+                        <title lang="ru">Позиция панели вкладок</title>
+                        <title lang="es">Posición de Barra de Pestañas</title>
+                        <title lang="fr">Position de la Barre d&apos;Onglets</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="top"/>
+                        <param name="values" type="collection">
+                            <param name="top">
+                                <meta>
+                                    <title lang="en">Top</title>
+                                    <title lang="tr">Üstte</title>
+                                    <title lang="de">Oben</title>
+                                    <title lang="ru">Сверху</title>
+                                    <title lang="es">Arriba</title>
+                                    <title lang="fr">Haut</title>
+                                </meta>
+                            </param>
+                            <param name="bottom">
+                                <meta>
+                                    <title lang="en">Bottom</title>
+                                    <title lang="tr">Altta</title>
+                                    <title lang="de">Unten</title>
+                                    <title lang="ru">Снизу</title>
+                                    <title lang="es">Abajo</title>
+                                    <title lang="fr">Bas</title>
+                                </meta>
+                            </param>
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Solda</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağda</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="nav_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Tab Style</title>
+                        <title lang="tr">Sekme Stili</title>
+                        <title lang="de">Tab-Stil</title>
+                        <title lang="ru">Стиль вкладок</title>
+                        <title lang="es">Estilo de Pestaña</title>
+                        <title lang="fr">Style d&apos;Onglet</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="pills"/>
+                        <param name="values" type="collection">
+                            <param name="pills">
+                                <meta>
+                                    <title lang="en">Pills</title>
+                                    <title lang="tr">Kapsül Butonlar</title>
+                                    <title lang="de">Pillen</title>
+                                    <title lang="ru">Капсулы</title>
+                                    <title lang="es">Píldoras</title>
+                                    <title lang="fr">Pilules</title>
+                                </meta>
+                            </param>
+                            <param name="segmented">
+                                <meta>
+                                    <title lang="en">Segmented Control</title>
+                                    <title lang="tr">Bölümlü Kontrol</title>
+                                    <title lang="de">Segmentierte Steuerung</title>
+                                    <title lang="ru">Сегментированный переключатель</title>
+                                    <title lang="es">Control Segmentado</title>
+                                    <title lang="fr">Contrôle Segmenté</title>
+                                </meta>
+                            </param>
+                            <param name="underline">
+                                <meta>
+                                    <title lang="en">Underline</title>
+                                    <title lang="tr">Alt Çizgili</title>
+                                    <title lang="de">Unterstrichen</title>
+                                    <title lang="ru">Подчёркивание</title>
+                                    <title lang="es">Subrayado</title>
+                                    <title lang="fr">Souligné</title>
+                                </meta>
+                            </param>
+                            <param name="bordered">
+                                <meta>
+                                    <title lang="en">Bordered</title>
+                                    <title lang="tr">Kenarlıklı</title>
+                                    <title lang="de">Umrandet</title>
+                                    <title lang="ru">С рамкой</title>
+                                    <title lang="es">Con Borde</title>
+                                    <title lang="fr">Bordé</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="alignment" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Tab Alignment</title>
+                        <title lang="tr">Sekme Hizalaması</title>
+                        <title lang="de">Tab-Ausrichtung</title>
+                        <title lang="ru">Выравнивание вкладок</title>
+                        <title lang="es">Alineación de Pestañas</title>
+                        <title lang="fr">Alignement des Onglets</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="start"/>
+                        <param name="values" type="collection">
+                            <param name="start">
+                                <meta>
+                                    <title lang="en">Left / Start</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links / Start</title>
+                                    <title lang="ru">Слева / В начале</title>
+                                    <title lang="es">Izquierda / Inicio</title>
+                                    <title lang="fr">Gauche / Début</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="end">
+                                <meta>
+                                    <title lang="en">Right / End</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts / Ende</title>
+                                    <title lang="ru">Справа / В конце</title>
+                                    <title lang="es">Derecha / Fin</title>
+                                    <title lang="fr">Droite / Fin</title>
+                                </meta>
+                            </param>
+                            <param name="full">
+                                <meta>
+                                    <title lang="en">Full Width</title>
+                                    <title lang="tr">Tam Genişlik</title>
+                                    <title lang="de">Volle Breite</title>
+                                    <title lang="ru">Во всю ширину</title>
+                                    <title lang="es">Ancho Completo</title>
+                                    <title lang="fr">Pleine Largeur</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

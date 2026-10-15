@@ -13,26 +13,883 @@
         <title lang="fr">Galerie</title>
     </meta>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="overlay" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Gallery Items</title>
-                <title lang="tr">Galeri Öğeleri</title>
-                <title lang="de">Galerie-Elemente</title>
-                <title lang="ru">Элементы галереи</title>
-                <title lang="es">Elementos de Galería</title>
-                <title lang="fr">Éléments de Galerie</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/overlay.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="gallery"/>
-            </params>
-        </property>
+                <block name="items" default-type="overlay" minOccurs="1">
+                    <meta>
+                        <title lang="en">Gallery Items</title>
+                        <title lang="tr">Galeri Öğeleri</title>
+                        <title lang="de">Galerie-Elemente</title>
+                        <title lang="ru">Элементы галереи</title>
+                        <title lang="es">Elementos de Galería</title>
+                        <title lang="fr">Éléments de Galerie</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/overlay.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="columns_default" type="single_select" colspan="4">
+                    <meta>
+                        <title lang="en">Columns</title>
+                        <title lang="tr">Mobil</title>
+                        <title lang="de">Spalten</title>
+                        <title lang="ru">Колонки</title>
+                        <title lang="es">Columnas</title>
+                        <title lang="fr">Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="1"/>
+                        <param name="values" type="collection">
+                            <param name="1">
+                                <meta>
+                                    <title lang="en">1</title>
+                                    <title lang="tr">1</title>
+                                    <title lang="de">1</title>
+                                    <title lang="ru">1</title>
+                                    <title lang="es">1</title>
+                                    <title lang="fr">1</title>
+                                </meta>
+                            </param>
+                            <param name="2">
+                                <meta>
+                                    <title lang="en">2</title>
+                                    <title lang="tr">2</title>
+                                    <title lang="de">2</title>
+                                    <title lang="ru">2</title>
+                                    <title lang="es">2</title>
+                                    <title lang="fr">2</title>
+                                </meta>
+                            </param>
+                            <param name="3">
+                                <meta>
+                                    <title lang="en">3</title>
+                                    <title lang="tr">3</title>
+                                    <title lang="de">3</title>
+                                    <title lang="ru">3</title>
+                                    <title lang="es">3</title>
+                                    <title lang="fr">3</title>
+                                </meta>
+                            </param>
+                            <param name="4">
+                                <meta>
+                                    <title lang="en">4</title>
+                                    <title lang="tr">4</title>
+                                    <title lang="de">4</title>
+                                    <title lang="ru">4</title>
+                                    <title lang="es">4</title>
+                                    <title lang="fr">4</title>
+                                </meta>
+                            </param>
+                            <param name="5">
+                                <meta>
+                                    <title lang="en">5</title>
+                                    <title lang="tr">5</title>
+                                    <title lang="de">5</title>
+                                    <title lang="ru">5</title>
+                                    <title lang="es">5</title>
+                                    <title lang="fr">5</title>
+                                </meta>
+                            </param>
+                            <param name="6">
+                                <meta>
+                                    <title lang="en">6</title>
+                                    <title lang="tr">6</title>
+                                    <title lang="de">6</title>
+                                    <title lang="ru">6</title>
+                                    <title lang="es">6</title>
+                                    <title lang="fr">6</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="columns_md" type="single_select" colspan="4">
+                    <meta>
+                        <title lang="en">Columns</title>
+                        <title lang="tr">Tablet</title>
+                        <title lang="de">Spalten</title>
+                        <title lang="ru">Колонки</title>
+                        <title lang="es">Columnas</title>
+                        <title lang="fr">Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="3"/>
+                        <param name="values" type="collection">
+                            <param name="">
+                                <meta>
+                                    <title lang="en">Inherit</title>
+                                    <title lang="tr">Devral</title>
+                                    <title lang="de">Übernehmen</title>
+                                    <title lang="ru">Наследовать</title>
+                                    <title lang="es">Heredar</title>
+                                    <title lang="fr">Hériter</title>
+                                </meta>
+                            </param>
+                            <param name="1">
+                                <meta>
+                                    <title lang="en">1</title>
+                                    <title lang="tr">1</title>
+                                    <title lang="de">1</title>
+                                    <title lang="ru">1</title>
+                                    <title lang="es">1</title>
+                                    <title lang="fr">1</title>
+                                </meta>
+                            </param>
+                            <param name="2">
+                                <meta>
+                                    <title lang="en">2</title>
+                                    <title lang="tr">2</title>
+                                    <title lang="de">2</title>
+                                    <title lang="ru">2</title>
+                                    <title lang="es">2</title>
+                                    <title lang="fr">2</title>
+                                </meta>
+                            </param>
+                            <param name="3">
+                                <meta>
+                                    <title lang="en">3</title>
+                                    <title lang="tr">3</title>
+                                    <title lang="de">3</title>
+                                    <title lang="ru">3</title>
+                                    <title lang="es">3</title>
+                                    <title lang="fr">3</title>
+                                </meta>
+                            </param>
+                            <param name="4">
+                                <meta>
+                                    <title lang="en">4</title>
+                                    <title lang="tr">4</title>
+                                    <title lang="de">4</title>
+                                    <title lang="ru">4</title>
+                                    <title lang="es">4</title>
+                                    <title lang="fr">4</title>
+                                </meta>
+                            </param>
+                            <param name="5">
+                                <meta>
+                                    <title lang="en">5</title>
+                                    <title lang="tr">5</title>
+                                    <title lang="de">5</title>
+                                    <title lang="ru">5</title>
+                                    <title lang="es">5</title>
+                                    <title lang="fr">5</title>
+                                </meta>
+                            </param>
+                            <param name="6">
+                                <meta>
+                                    <title lang="en">6</title>
+                                    <title lang="tr">6</title>
+                                    <title lang="de">6</title>
+                                    <title lang="ru">6</title>
+                                    <title lang="es">6</title>
+                                    <title lang="fr">6</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="columns_lg" type="single_select" colspan="4">
+                    <meta>
+                        <title lang="en">Columns</title>
+                        <title lang="tr">Masaüstü</title>
+                        <title lang="de">Spalten</title>
+                        <title lang="ru">Колонки</title>
+                        <title lang="es">Columnas</title>
+                        <title lang="fr">Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="values" type="collection">
+                            <param name="">
+                                <meta>
+                                    <title lang="en">Inherit</title>
+                                    <title lang="tr">Devral</title>
+                                    <title lang="de">Übernehmen</title>
+                                    <title lang="ru">Наследовать</title>
+                                    <title lang="es">Heredar</title>
+                                    <title lang="fr">Hériter</title>
+                                </meta>
+                            </param>
+                            <param name="1">
+                                <meta>
+                                    <title lang="en">1</title>
+                                    <title lang="tr">1</title>
+                                    <title lang="de">1</title>
+                                    <title lang="ru">1</title>
+                                    <title lang="es">1</title>
+                                    <title lang="fr">1</title>
+                                </meta>
+                            </param>
+                            <param name="2">
+                                <meta>
+                                    <title lang="en">2</title>
+                                    <title lang="tr">2</title>
+                                    <title lang="de">2</title>
+                                    <title lang="ru">2</title>
+                                    <title lang="es">2</title>
+                                    <title lang="fr">2</title>
+                                </meta>
+                            </param>
+                            <param name="3">
+                                <meta>
+                                    <title lang="en">3</title>
+                                    <title lang="tr">3</title>
+                                    <title lang="de">3</title>
+                                    <title lang="ru">3</title>
+                                    <title lang="es">3</title>
+                                    <title lang="fr">3</title>
+                                </meta>
+                            </param>
+                            <param name="4">
+                                <meta>
+                                    <title lang="en">4</title>
+                                    <title lang="tr">4</title>
+                                    <title lang="de">4</title>
+                                    <title lang="ru">4</title>
+                                    <title lang="es">4</title>
+                                    <title lang="fr">4</title>
+                                </meta>
+                            </param>
+                            <param name="5">
+                                <meta>
+                                    <title lang="en">5</title>
+                                    <title lang="tr">5</title>
+                                    <title lang="de">5</title>
+                                    <title lang="ru">5</title>
+                                    <title lang="es">5</title>
+                                    <title lang="fr">5</title>
+                                </meta>
+                            </param>
+                            <param name="6">
+                                <meta>
+                                    <title lang="en">6</title>
+                                    <title lang="tr">6</title>
+                                    <title lang="de">6</title>
+                                    <title lang="ru">6</title>
+                                    <title lang="es">6</title>
+                                    <title lang="fr">6</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="gap" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Gallery Gap</title>
+                        <title lang="tr">Galeri Boşluğu</title>
+                        <title lang="de">Galerie-Abstand</title>
+                        <title lang="ru">Отступ галереи</title>
+                        <title lang="es">Espaciado de Galería</title>
+                        <title lang="fr">Espacement de la Galerie</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="collapse">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="masonry" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Masonry Layout</title>
+                        <title lang="tr">Duvar Düzeni</title>
+                        <title lang="de">Masonry-Layout</title>
+                        <title lang="ru">Каменная кладка</title>
+                        <title lang="es">Diseño Mosaico</title>
+                        <title lang="fr">Disposition Maçonnerie</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="none"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Disabled</title>
+                                    <title lang="tr">Kapalı</title>
+                                    <title lang="de">Deaktiviert</title>
+                                    <title lang="ru">Отключено</title>
+                                    <title lang="es">Desactivado</title>
+                                    <title lang="fr">Désactivé</title>
+                                </meta>
+                            </param>
+                            <param name="columns">
+                                <meta>
+                                    <title lang="en">Columns Masonry</title>
+                                    <title lang="tr">Sütun Tabanlı Duvar</title>
+                                    <title lang="de">Spalten-Masonry</title>
+                                    <title lang="ru">Колоночная кладка</title>
+                                    <title lang="es">Mosaico por Columnas</title>
+                                    <title lang="fr">Maçonnerie en Colonnes</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="overlay_position" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Overlay Content Position</title>
+                        <title lang="tr">Katman Konumu</title>
+                        <title lang="de">Overlay-Inhaltsposition</title>
+                        <title lang="ru">Позиция наложения</title>
+                        <title lang="es">Posición del Contenido Superpuesto</title>
+                        <title lang="fr">Position du Contenu Superposé</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="bottom"/>
+                        <param name="values" type="collection">
+                            <param name="bottom">
+                                <meta>
+                                    <title lang="en">Bottom</title>
+                                    <title lang="tr">Alt</title>
+                                    <title lang="de">Unten</title>
+                                    <title lang="ru">Снизу</title>
+                                    <title lang="es">Abajo</title>
+                                    <title lang="fr">Bas</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="top">
+                                <meta>
+                                    <title lang="en">Top</title>
+                                    <title lang="tr">Üst</title>
+                                    <title lang="de">Oben</title>
+                                    <title lang="ru">Сверху</title>
+                                    <title lang="es">Arriba</title>
+                                    <title lang="fr">Haut</title>
+                                </meta>
+                            </param>
+                            <param name="cover">
+                                <meta>
+                                    <title lang="en">Full Cover</title>
+                                    <title lang="tr">Tüm Yüzey</title>
+                                    <title lang="de">Vollflächig</title>
+                                    <title lang="ru">Полное покрытие</title>
+                                    <title lang="es">Cobertura Completa</title>
+                                    <title lang="fr">Couverture Complète</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="overlay_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Overlay Style</title>
+                        <title lang="tr">Katman Stili</title>
+                        <title lang="de">Overlay-Stil</title>
+                        <title lang="ru">Стиль наложения</title>
+                        <title lang="es">Estilo de Superposición</title>
+                        <title lang="fr">Style de Superposition</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="gradient"/>
+                        <param name="values" type="collection">
+                            <param name="gradient">
+                                <meta>
+                                    <title lang="en">Dark Gradient</title>
+                                    <title lang="tr">Koyu Degrade</title>
+                                    <title lang="de">Dunkler Verlauf</title>
+                                    <title lang="ru">Тёмный градиент</title>
+                                    <title lang="es">Degradado Oscuro</title>
+                                    <title lang="fr">Dégradé Sombre</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark Backdrop</title>
+                                    <title lang="tr">Koyu Zemin</title>
+                                    <title lang="de">Dunkler Hintergrund</title>
+                                    <title lang="ru">Тёмный фон</title>
+                                    <title lang="es">Fondo Oscuro</title>
+                                    <title lang="fr">Arrière-plan Sombre</title>
+                                </meta>
+                            </param>
+                            <param name="light">
+                                <meta>
+                                    <title lang="en">Light Backdrop</title>
+                                    <title lang="tr">Açık Zemin</title>
+                                    <title lang="de">Heller Hintergrund</title>
+                                    <title lang="ru">Светлый фон</title>
+                                    <title lang="es">Fondo Claro</title>
+                                    <title lang="fr">Arrière-plan Clair</title>
+                                </meta>
+                            </param>
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Tint</title>
+                                    <title lang="tr">Birincil Renk</title>
+                                    <title lang="de">Primäre Tönung</title>
+                                    <title lang="ru">Основной оттенок</title>
+                                    <title lang="es">Tinte Primario</title>
+                                    <title lang="fr">Teinte Primaire</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="overlay_transition" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Overlay Transition</title>
+                        <title lang="tr">Katman Geçiş Animasyonu</title>
+                        <title lang="de">Overlay-Übergang</title>
+                        <title lang="ru">Переход наложения</title>
+                        <title lang="es">Transición de Superposición</title>
+                        <title lang="fr">Transition de Superposition</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="fade"/>
+                        <param name="values" type="collection">
+                            <param name="fade">
+                                <meta>
+                                    <title lang="en">Fade</title>
+                                    <title lang="tr">Belirme</title>
+                                    <title lang="de">Einblenden</title>
+                                    <title lang="ru">Плавное появление</title>
+                                    <title lang="es">Desvanecer</title>
+                                    <title lang="fr">Fondu</title>
+                                </meta>
+                            </param>
+                            <param name="slide_top">
+                                <meta>
+                                    <title lang="en">Slide from Top</title>
+                                    <title lang="tr">Yukarıdan Kayma</title>
+                                    <title lang="de">Von oben gleiten</title>
+                                    <title lang="ru">Скольжение сверху</title>
+                                    <title lang="es">Deslizar desde Arriba</title>
+                                    <title lang="fr">Glisser depuis le Haut</title>
+                                </meta>
+                            </param>
+                            <param name="slide_bottom">
+                                <meta>
+                                    <title lang="en">Slide from Bottom</title>
+                                    <title lang="tr">Aşağıdan Kayma</title>
+                                    <title lang="de">Von unten gleiten</title>
+                                    <title lang="ru">Скольжение снизу</title>
+                                    <title lang="es">Deslizar desde Abajo</title>
+                                    <title lang="fr">Glisser depuis le Bas</title>
+                                </meta>
+                            </param>
+                            <param name="zoom_in">
+                                <meta>
+                                    <title lang="en">Zoom In</title>
+                                    <title lang="tr">Yakınlaşma</title>
+                                    <title lang="de">Heranzoomen</title>
+                                    <title lang="ru">Увеличение</title>
+                                    <title lang="es">Acercar</title>
+                                    <title lang="fr">Zoom Avant</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="image_transition" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Image Hover Effect</title>
+                        <title lang="tr">Görsel Üzerine Gelme Etkisi</title>
+                        <title lang="de">Bild-Hover-Effekt</title>
+                        <title lang="ru">Эффект при наведении на фото</title>
+                        <title lang="es">Efecto Hover de Imagen</title>
+                        <title lang="fr">Effet de Survol d&apos;Image</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="zoom"/>
+                        <param name="values" type="collection">
+                            <param name="zoom">
+                                <meta>
+                                    <title lang="en">Zoom In</title>
+                                    <title lang="tr">Yakınlaş</title>
+                                    <title lang="de">Vergrößern</title>
+                                    <title lang="ru">Масштабирование</title>
+                                    <title lang="es">Escalar</title>
+                                    <title lang="fr">Agrandir</title>
+                                </meta>
+                            </param>
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="media_aspect_ratio" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Media Aspect Ratio</title>
+                        <title lang="tr">Görsel En-Boy Oranı</title>
+                        <title lang="de">Medien-Seitenverhältnis</title>
+                        <title lang="ru">Соотношение сторон медиа</title>
+                        <title lang="es">Relación de Aspecto Multimedia</title>
+                        <title lang="fr">Format du Média</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="4/3"/>
+                        <param name="values" type="collection">
+                            <param name="1/1">
+                                <meta>
+                                    <title lang="en">Square</title>
+                                    <title lang="tr">Kare</title>
+                                    <title lang="de">Quadrat</title>
+                                    <title lang="ru">Квадрат</title>
+                                    <title lang="es">Cuadrado</title>
+                                    <title lang="fr">Carré</title>
+                                </meta>
+                            </param>
+                            <param name="4/3">
+                                <meta>
+                                    <title lang="en">Standard</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">Стандартный</title>
+                                    <title lang="es">Estándar</title>
+                                    <title lang="fr">Standard</title>
+                                </meta>
+                            </param>
+                            <param name="16/9">
+                                <meta>
+                                    <title lang="en">Widescreen</title>
+                                    <title lang="tr">Geniş Ekran</title>
+                                    <title lang="de">Breitbild</title>
+                                    <title lang="ru">Широкоэкранный</title>
+                                    <title lang="es">Panorámico</title>
+                                    <title lang="fr">Écran Large</title>
+                                </meta>
+                            </param>
+                            <param name="21/9">
+                                <meta>
+                                    <title lang="en">Ultrawide</title>
+                                    <title lang="tr">Ultra Geniş</title>
+                                    <title lang="de">Ultrabreit</title>
+                                    <title lang="ru">Ультраширокий</title>
+                                    <title lang="es">Ultra Panorámico</title>
+                                    <title lang="fr">Ultra Large</title>
+                                </meta>
+                            </param>
+                            <param name="auto">
+                                <meta>
+                                    <title lang="en">Natural</title>
+                                    <title lang="tr">Doğal</title>
+                                    <title lang="de">Natürlich</title>
+                                    <title lang="ru">Естественный</title>
+                                    <title lang="es">Natural</title>
+                                    <title lang="fr">Naturel</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="rounded" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Corner Rounding</title>
+                        <title lang="tr">Köşe Yuvarlama</title>
+                        <title lang="de">Eckenabrundung</title>
+                        <title lang="ru">Скругление углов</title>
+                        <title lang="es">Redondeo de Esquinas</title>
+                        <title lang="fr">Arrondi des Coins</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="xl"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">None</title>
+                                    <title lang="tr">Yok</title>
+                                    <title lang="de">Keine</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">Ninguno</title>
+                                    <title lang="fr">Aucun</title>
+                                </meta>
+                            </param>
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                            <param name="2xl">
+                                <meta>
+                                    <title lang="en">2XL</title>
+                                    <title lang="tr">2XL</title>
+                                    <title lang="de">2XL</title>
+                                    <title lang="ru">2XL</title>
+                                    <title lang="es">2XL</title>
+                                    <title lang="fr">2XL</title>
+                                </meta>
+                            </param>
+                            <param name="3xl">
+                                <meta>
+                                    <title lang="en">3XL</title>
+                                    <title lang="tr">3XL</title>
+                                    <title lang="de">3XL</title>
+                                    <title lang="ru">3XL</title>
+                                    <title lang="es">3XL</title>
+                                    <title lang="fr">3XL</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="lightbox" type="checkbox" colspan="12">
+                    <meta>
+                        <title lang="en">Enable Modal Lightbox</title>
+                        <title lang="tr">Büyük Görsel Penceresini Etkinleştir</title>
+                        <title lang="de">Modal-Lightbox aktivieren</title>
+                        <title lang="ru">Включить лайтбокс</title>
+                        <title lang="es">Activar Lightbox Modal</title>
+                        <title lang="fr">Activer la Lightbox Modale</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="filter" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Enable Filter</title>
+                        <title lang="tr">Filtreyi Etkinleştir</title>
+                        <title lang="de">Filter aktivieren</title>
+                        <title lang="ru">Включить фильтр</title>
+                        <title lang="es">Activar Filtro</title>
+                        <title lang="fr">Activer le Filtre</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+
+                <property name="filter_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Filter Style</title>
+                        <title lang="tr">Filtre Stili</title>
+                        <title lang="de">Filter-Stil</title>
+                        <title lang="ru">Стиль фильтра</title>
+                        <title lang="es">Estilo de Filtro</title>
+                        <title lang="fr">Style de Filtre</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="pills"/>
+                        <param name="values" type="collection">
+                            <param name="pills">
+                                <meta>
+                                    <title lang="en">Pills</title>
+                                    <title lang="tr">Kapsül Butonlar</title>
+                                    <title lang="de">Pillen</title>
+                                    <title lang="ru">Капсулы</title>
+                                    <title lang="es">Píldoras</title>
+                                    <title lang="fr">Pilules</title>
+                                </meta>
+                            </param>
+                            <param name="tabs">
+                                <meta>
+                                    <title lang="en">Underline Tabs</title>
+                                    <title lang="tr">Alt Çizgili Sekmeler</title>
+                                    <title lang="de">Unterstrichene Tabs</title>
+                                    <title lang="ru">Подчёркнутые вкладки</title>
+                                    <title lang="es">Pestañas Subrayadas</title>
+                                    <title lang="fr">Onglets Soulignés</title>
+                                </meta>
+                            </param>
+                            <param name="buttons">
+                                <meta>
+                                    <title lang="en">Outline Buttons</title>
+                                    <title lang="tr">Çizgili Butonlar</title>
+                                    <title lang="de">Umrandete Buttons</title>
+                                    <title lang="ru">Контурные кнопки</title>
+                                    <title lang="es">Botones con Contorno</title>
+                                    <title lang="fr">Boutons avec Contour</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="filter_align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Filter Alignment</title>
+                        <title lang="tr">Filtre Hizalaması</title>
+                        <title lang="de">Filter-Ausrichtung</title>
+                        <title lang="ru">Выравнивание фильтра</title>
+                        <title lang="es">Alineación del Filtro</title>
+                        <title lang="fr">Alignement du Filtre</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="center"/>
+                        <param name="values" type="collection">
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="filter_all_label" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">All Items Button Label</title>
+                        <title lang="tr">Tümü Butonu Etiketi</title>
+                        <title lang="de">Beschriftung für „Alle Elemente“</title>
+                        <title lang="ru">Текст кнопки «Все элементы»</title>
+                        <title lang="es">Etiqueta del Botón Todos</title>
+                        <title lang="fr">Libellé du Bouton Tout</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="All"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

@@ -45,21 +45,12 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
         }
 
         if ($container->hasExtension('sulu_block_suite')) {
-            $blockSuiteRoot = \dirname((string) (new \ReflectionClass(\Totoglu\SuluBlockSuiteBundle\SuluBlockSuiteBundle::class))->getFileName(), 2);
-
             $container->prependExtensionConfig('sulu_block_suite', [
                 'rendering' => [
                     'template_namespaces' => [
                         'blocks',
                         '@SuluPrelineBlocks/blocks',
                         '@SuluBlockSuite/blocks',
-                    ],
-                ],
-                'props' => [
-                    'schema_dir' => [
-                        $blockSuiteRoot . '/config/blocks/props',
-                        \dirname(__DIR__, 2) . '/config/blocks/props',
-                        '%kernel.project_dir%/config/blocks/props',
                     ],
                 ],
                 'layout' => [

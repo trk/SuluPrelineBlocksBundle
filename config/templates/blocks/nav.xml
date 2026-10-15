@@ -10,24 +10,57 @@
     <title lang="fr">Navigation verticale</title>
   </meta>
   <properties>
-    <xi:include href="../fields/title.xml"/>
-    <block name="items" default-type="nav_item" minOccurs="1">
-      <meta>
-        <title lang="en">Navigation Items</title>
-        <title lang="tr">Men&#xFC; &#xD6;&#x11F;eleri</title>
-        <title lang="de">Navigationselemente</title>
-        <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442;&#x44B; &#x43D;&#x430;&#x432;&#x438;&#x433;&#x430;&#x446;&#x438;&#x438;</title>
-        <title lang="es">Elementos de Navegaci&#xF3;n</title>
-        <title lang="fr">&#xC9;l&#xE9;ments de Navigation</title>
-      </meta>
-      <types>
-        <xi:include href="../block-items/nav_item.xml"/>
-      </types>
-    </block>
-    <property name="props" type="block_props" colspan="12">
-      <params>
-        <param name="component_type" value="nav"/>
-      </params>
-    </property>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+            <xi:include href="../fields/title.xml"/>
+            <block name="items" default-type="nav_item" minOccurs="1">
+              <meta>
+                <title lang="en">Navigation Items</title>
+                <title lang="tr">Men&#xFC; &#xD6;&#x11F;eleri</title>
+                <title lang="de">Navigationselemente</title>
+                <title lang="ru">&#x42D;&#x43B;&#x435;&#x43C;&#x435;&#x43D;&#x442;&#x44B; &#x43D;&#x430;&#x432;&#x438;&#x433;&#x430;&#x446;&#x438;&#x438;</title>
+                <title lang="es">Elementos de Navegaci&#xF3;n</title>
+                <title lang="fr">&#xC9;l&#xE9;ments de Navigation</title>
+              </meta>
+              <types>
+                <xi:include href="../block-items/nav_item.xml"/>
+              </types>
+            </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="card" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Wrap in Card Container</title>
+                        <title lang="tr">Kart Konteyneri İçine Al</title>
+                        <title lang="de">In Karten-Container einschließen</title>
+                        <title lang="ru">Обернуть в карточку</title>
+                        <title lang="es">Envolver en Contenedor de Tarjeta</title>
+                        <title lang="fr">Envelopper dans une Carte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="false"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
   </properties>
 </template>

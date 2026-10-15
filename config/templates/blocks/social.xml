@@ -12,27 +12,264 @@
         <title lang="es">Redes sociales</title>
         <title lang="fr">Réseaux sociaux</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <block name="items" default-type="social_item" minOccurs="1">
+        <section name="content">
             <meta>
-                <title lang="en">Social Links</title>
-                <title lang="tr">Sosyal Medya Bağlantıları</title>
-                <title lang="de">Social-Media-Links</title>
-                <title lang="ru">Ссылки на соцсети</title>
-                <title lang="es">Enlaces de redes sociales</title>
-                <title lang="fr">Liens de réseaux sociaux</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-            <types>
-                <xi:include href="../block-items/social_item.xml"/>
-            </types>
-        </block>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="social"/>
-            </params>
-        </property>
+                <block name="items" default-type="social_item" minOccurs="1">
+                    <meta>
+                        <title lang="en">Social Links</title>
+                        <title lang="tr">Sosyal Medya Bağlantıları</title>
+                        <title lang="de">Social-Media-Links</title>
+                        <title lang="ru">Ссылки на соцсети</title>
+                        <title lang="es">Enlaces de redes sociales</title>
+                        <title lang="fr">Liens de réseaux sociaux</title>
+                    </meta>
+                    <types>
+                        <xi:include href="../block-items/social_item.xml"/>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Button Style</title>
+                        <title lang="tr">Buton Stili</title>
+                        <title lang="de">Button-Stil</title>
+                        <title lang="ru">Стиль кнопки</title>
+                        <title lang="es">Estilo de Botón</title>
+                        <title lang="fr">Style de Bouton</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="icon_only"/>
+                        <param name="values" type="collection">
+                            <param name="icon_only">
+                                <meta>
+                                    <title lang="en">Minimal Icon</title>
+                                    <title lang="tr">Sade İkon</title>
+                                    <title lang="de">Minimales Symbol</title>
+                                    <title lang="ru">Минималистичная иконка</title>
+                                    <title lang="es">Icono Minimalista</title>
+                                    <title lang="fr">Icône Minimale</title>
+                                </meta>
+                            </param>
+                            <param name="bordered">
+                                <meta>
+                                    <title lang="en">Bordered Surface</title>
+                                    <title lang="tr">Kenarlıklı</title>
+                                    <title lang="de">Umrandete Fläche</title>
+                                    <title lang="ru">Поверхность с рамкой</title>
+                                    <title lang="es">Superficie con Borde</title>
+                                    <title lang="fr">Surface Bordée</title>
+                                </meta>
+                            </param>
+                            <param name="buttons">
+                                <meta>
+                                    <title lang="en">Filled Soft Button</title>
+                                    <title lang="tr">Dolgulu Buton</title>
+                                    <title lang="de">Gefüllter sanfter Button</title>
+                                    <title lang="ru">Мягкая кнопка с заливкой</title>
+                                    <title lang="es">Botón Suave Relleno</title>
+                                    <title lang="fr">Bouton Doux Rempli</title>
+                                </meta>
+                            </param>
+                            <param name="pills">
+                                <meta>
+                                    <title lang="en">Primary Accent Pill</title>
+                                    <title lang="tr">Vurgu Renkli Rozet</title>
+                                    <title lang="de">Primäre Akzent-Pille</title>
+                                    <title lang="ru">Акцентная капсула</title>
+                                    <title lang="es">Píldora de Acento Primario</title>
+                                    <title lang="fr">Pilule Accent Primaire</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Icon Size</title>
+                        <title lang="tr">İkon Boyutu</title>
+                        <title lang="de">Symbolgröße</title>
+                        <title lang="ru">Размер иконки</title>
+                        <title lang="es">Tamaño de Icono</title>
+                        <title lang="fr">Taille de l&apos;Icône</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="shape" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Button Shape</title>
+                        <title lang="tr">Buton Şekli</title>
+                        <title lang="de">Button-Form</title>
+                        <title lang="ru">Форма кнопки</title>
+                        <title lang="es">Forma del Botón</title>
+                        <title lang="fr">Forme du Bouton</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="rounded"/>
+                        <param name="values" type="collection">
+                            <param name="rounded">
+                                <meta>
+                                    <title lang="en">Rounded</title>
+                                    <title lang="tr">Yuvarlatılmış Köşe</title>
+                                    <title lang="de">Abgerundet</title>
+                                    <title lang="ru">Скруглённая</title>
+                                    <title lang="es">Redondeado</title>
+                                    <title lang="fr">Arrondi</title>
+                                </meta>
+                            </param>
+                            <param name="circle">
+                                <meta>
+                                    <title lang="en">Circle</title>
+                                    <title lang="tr">Tam Daire</title>
+                                    <title lang="de">Kreis</title>
+                                    <title lang="ru">Круг</title>
+                                    <title lang="es">Círculo</title>
+                                    <title lang="fr">Cercle</title>
+                                </meta>
+                            </param>
+                            <param name="square">
+                                <meta>
+                                    <title lang="en">Square</title>
+                                    <title lang="tr">Keskin Köşe</title>
+                                    <title lang="de">Quadrat</title>
+                                    <title lang="ru">Квадрат</title>
+                                    <title lang="es">Cuadrado</title>
+                                    <title lang="fr">Carré</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="alignment" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="start"/>
+                        <param name="values" type="collection">
+                            <param name="start">
+                                <meta>
+                                    <title lang="en">Left / Start</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links / Start</title>
+                                    <title lang="ru">Слева / В начале</title>
+                                    <title lang="es">Izquierda / Inicio</title>
+                                    <title lang="fr">Gauche / Début</title>
+                                </meta>
+                            </param>
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="end">
+                                <meta>
+                                    <title lang="en">Right / End</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts / Ende</title>
+                                    <title lang="ru">Справа / В конце</title>
+                                    <title lang="es">Derecha / Fin</title>
+                                    <title lang="fr">Droite / Fin</title>
+                                </meta>
+                            </param>
+                            <param name="between">
+                                <meta>
+                                    <title lang="en">Space Between</title>
+                                    <title lang="tr">İki Yana Yasla</title>
+                                    <title lang="de">Raum dazwischen</title>
+                                    <title lang="ru">Равномерно по краям</title>
+                                    <title lang="es">Espacio Entre Elementos</title>
+                                    <title lang="fr">Espacement Entre</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="open_new_tab" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Open Links in New Tab</title>
+                        <title lang="tr">Bağlantıları Yeni Sekmede Aç</title>
+                        <title lang="de">Links in neuem Tab öffnen</title>
+                        <title lang="ru">Открывать ссылки в новой вкладке</title>
+                        <title lang="es">Abrir Enlaces en Nueva Pestaña</title>
+                        <title lang="fr">Ouvrir les Liens dans un Nouvel Onglet</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

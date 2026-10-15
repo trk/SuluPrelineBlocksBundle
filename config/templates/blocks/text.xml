@@ -13,12 +13,356 @@
         <title lang="de">Text / Formatierter Inhalt</title>
     </meta>
     <properties>
-        <xi:include href="../fields/content.xml"/>
+        <section name="content">
+            <meta>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
+            </meta>
+            <properties>
+                <xi:include href="../fields/content.xml"/>
+            </properties>
+        </section>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="text"/>
-            </params>
-        </property>
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Font Size</title>
+                        <title lang="tr">Yazı Boyutu</title>
+                        <title lang="de">Schriftgröße</title>
+                        <title lang="ru">Размер шрифта</title>
+                        <title lang="es">Tamaño de Fuente</title>
+                        <title lang="fr">Taille de Police</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="text_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Text Style</title>
+                        <title lang="tr">Metin Stili</title>
+                        <title lang="de">Textstil</title>
+                        <title lang="ru">Стиль текста</title>
+                        <title lang="es">Estilo de Texto</title>
+                        <title lang="fr">Style de Texte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="none"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Varsayılan</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="lead">
+                                <meta>
+                                    <title lang="en">Lead Paragraph</title>
+                                    <title lang="tr">Giriş Paragrafı</title>
+                                    <title lang="de">Einleitungsabsatz</title>
+                                    <title lang="ru">Вводный абзац</title>
+                                    <title lang="es">Párrafo Destacado</title>
+                                    <title lang="fr">Paragraphe d’Introduction</title>
+                                </meta>
+                            </param>
+                            <param name="meta">
+                                <meta>
+                                    <title lang="en">Meta / Caption</title>
+                                    <title lang="tr">Meta / Açıklama</title>
+                                    <title lang="de">Meta / Bildunterschrift</title>
+                                    <title lang="ru">Мета / Подпись</title>
+                                    <title lang="es">Meta / Leyenda</title>
+                                    <title lang="fr">Méta / Légende</title>
+                                </meta>
+                            </param>
+                            <param name="large">
+                                <meta>
+                                    <title lang="en">Large Reading Text</title>
+                                    <title lang="tr">Geniş Okuma Metni</title>
+                                    <title lang="de">Großer Lesetext</title>
+                                    <title lang="ru">Крупный текст для чтения</title>
+                                    <title lang="es">Texto de Lectura Grande</title>
+                                    <title lang="fr">Grand Texte de Lecture</title>
+                                </meta>
+                            </param>
+                            <param name="small">
+                                <meta>
+                                    <title lang="en">Small Note</title>
+                                    <title lang="tr">Dipnot / Küçük Metin</title>
+                                    <title lang="de">Kleine Notiz</title>
+                                    <title lang="ru">Мелкая заметка</title>
+                                    <title lang="es">Nota Pequeña</title>
+                                    <title lang="fr">Petite Note</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="dropcap" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Drop Cap</title>
+                        <title lang="tr">Büyük Baş Harf</title>
+                        <title lang="de">Initiale</title>
+                        <title lang="ru">Буквица</title>
+                        <title lang="es">Letra Capital</title>
+                        <title lang="fr">Lettrine</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="no"/>
+                        <param name="values" type="collection">
+                            <param name="no">
+                                <meta>
+                                    <title lang="en">Disabled</title>
+                                    <title lang="tr">Kapalı</title>
+                                    <title lang="de">Deaktiviert</title>
+                                    <title lang="ru">Отключено</title>
+                                    <title lang="es">Desactivado</title>
+                                    <title lang="fr">Désactivé</title>
+                                </meta>
+                            </param>
+                            <param name="yes">
+                                <meta>
+                                    <title lang="en">Enabled</title>
+                                    <title lang="tr">Açık</title>
+                                    <title lang="de">Aktiviert</title>
+                                    <title lang="ru">Включено</title>
+                                    <title lang="es">Activado</title>
+                                    <title lang="fr">Activé</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="column" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Columns</title>
+                        <title lang="tr">Metin Sütunları</title>
+                        <title lang="de">Spalten</title>
+                        <title lang="ru">Колонки</title>
+                        <title lang="es">Columnas</title>
+                        <title lang="fr">Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="none"/>
+                        <param name="values" type="collection">
+                            <param name="none">
+                                <meta>
+                                    <title lang="en">Single Column</title>
+                                    <title lang="tr">Tek Sütun</title>
+                                    <title lang="de">Einzelne Spalte</title>
+                                    <title lang="ru">Одна колонка</title>
+                                    <title lang="es">Columna Única</title>
+                                    <title lang="fr">Colonne Unique</title>
+                                </meta>
+                            </param>
+                            <param name="1-2">
+                                <meta>
+                                    <title lang="en">2 Columns</title>
+                                    <title lang="tr">2 Sütun</title>
+                                    <title lang="de">2 Spalten</title>
+                                    <title lang="ru">2 колонки</title>
+                                    <title lang="es">2 Columnas</title>
+                                    <title lang="fr">2 Colonnes</title>
+                                </meta>
+                            </param>
+                            <param name="1-3">
+                                <meta>
+                                    <title lang="en">3 Columns</title>
+                                    <title lang="tr">3 Sütun</title>
+                                    <title lang="de">3 Spalten</title>
+                                    <title lang="ru">3 колонки</title>
+                                    <title lang="es">3 Columnas</title>
+                                    <title lang="fr">3 Colonnes</title>
+                                </meta>
+                            </param>
+                            <param name="1-4">
+                                <meta>
+                                    <title lang="en">4 Columns</title>
+                                    <title lang="tr">4 Sütun</title>
+                                    <title lang="de">4 Spalten</title>
+                                    <title lang="ru">4 колонки</title>
+                                    <title lang="es">4 Columnas</title>
+                                    <title lang="fr">4 Colonnes</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="column_divider" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Column Divider</title>
+                        <title lang="tr">Sütun Ayracı</title>
+                        <title lang="de">Spaltentrennlinie</title>
+                        <title lang="ru">Разделитель колонок</title>
+                        <title lang="es">Divisor de Columnas</title>
+                        <title lang="fr">Séparateur de Colonnes</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="no"/>
+                        <param name="values" type="collection">
+                            <param name="no">
+                                <meta>
+                                    <title lang="en">No</title>
+                                    <title lang="tr">Hayır</title>
+                                    <title lang="de">Nein</title>
+                                    <title lang="ru">Нет</title>
+                                    <title lang="es">No</title>
+                                    <title lang="fr">Non</title>
+                                </meta>
+                            </param>
+                            <param name="yes">
+                                <meta>
+                                    <title lang="en">Yes</title>
+                                    <title lang="tr">Evet</title>
+                                    <title lang="de">Ja</title>
+                                    <title lang="ru">Да</title>
+                                    <title lang="es">Sí</title>
+                                    <title lang="fr">Oui</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Text Color</title>
+                        <title lang="tr">Metin Rengi</title>
+                        <title lang="de">Textfarbe</title>
+                        <title lang="ru">Цвет текста</title>
+                        <title lang="es">Color de Texto</title>
+                        <title lang="fr">Couleur du Texte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="default"/>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Varsayılan</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Blue</title>
+                                    <title lang="tr">Birincil Mavi</title>
+                                    <title lang="de">Primärblau</title>
+                                    <title lang="ru">Основной синий</title>
+                                    <title lang="es">Azul Primario</title>
+                                    <title lang="fr">Bleu Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="secondary">
+                                <meta>
+                                    <title lang="en">Secondary</title>
+                                    <title lang="tr">İkincil</title>
+                                    <title lang="de">Sekundär</title>
+                                    <title lang="ru">Вторичный</title>
+                                    <title lang="es">Secundario</title>
+                                    <title lang="fr">Secondaire</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark</title>
+                                    <title lang="tr">Koyu</title>
+                                    <title lang="de">Dunkel</title>
+                                    <title lang="ru">Тёмный</title>
+                                    <title lang="es">Oscuro</title>
+                                    <title lang="fr">Sombre</title>
+                                </meta>
+                            </param>
+                            <param name="white">
+                                <meta>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
+                                </meta>
+                            </param>
+                            <param name="muted">
+                                <meta>
+                                    <title lang="en">Muted</title>
+                                    <title lang="tr">Soluk Gri</title>
+                                    <title lang="de">Gedämpft</title>
+                                    <title lang="ru">Приглушённый</title>
+                                    <title lang="es">Atenuado</title>
+                                    <title lang="fr">Atténué</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>

@@ -12,24 +12,335 @@
         <title lang="es">Cuenta regresiva</title>
         <title lang="de">Countdown</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
-        <xi:include href="../fields/title.xml"/>
-
-        <property name="date" type="datetime" mandatory="true">
+        <section name="content">
             <meta>
-                <title lang="en">Target Date &amp; Time</title>
-                <title lang="tr">Hedef Tarih ve Saat</title>
-                <title lang="ru">Целевая дата и время</title>
-                <title lang="fr">Date et heure cibles</title>
-                <title lang="es">Fecha y hora objetivo</title>
-                <title lang="de">Zieldatum und -uhrzeit</title>
+                <title lang="en">Content</title>
+                <title lang="tr">İçerik</title>
+                <title lang="de">Inhalt</title>
+                <title lang="ru">Контент</title>
+                <title lang="es">Contenido</title>
+                <title lang="fr">Contenu</title>
             </meta>
-        </property>
+            <properties>
+                <xi:include href="../fields/title.xml"/>
 
-        <property name="props" type="block_props" colspan="12">
-            <params>
-                <param name="component_type" value="countdown"/>
-            </params>
-        </property>
+                <property name="date" type="datetime" mandatory="true">
+                    <meta>
+                        <title lang="en">Target Date &amp; Time</title>
+                        <title lang="tr">Hedef Tarih ve Saat</title>
+                        <title lang="ru">Целевая дата и время</title>
+                        <title lang="fr">Date et heure cibles</title>
+                        <title lang="es">Fecha y hora objetivo</title>
+                        <title lang="de">Zieldatum und -uhrzeit</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+
+        <section name="settings">
+            <meta>
+                <title lang="en">Settings</title>
+                <title lang="tr">Ayarlar</title>
+                <title lang="de">Einstellungen</title>
+                <title lang="ru">Настройки</title>
+                <title lang="es">Ajustes</title>
+                <title lang="fr">Paramètres</title>
+            </meta>
+            <properties>
+                <property name="countdown_style" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Card Style</title>
+                        <title lang="tr">Kart Stili</title>
+                        <title lang="de">Kartenstil</title>
+                        <title lang="ru">Стиль карточки</title>
+                        <title lang="es">Estilo de Tarjeta</title>
+                        <title lang="fr">Style de Carte</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="boxed"/>
+                        <param name="values" type="collection">
+                            <param name="boxed">
+                                <meta>
+                                    <title lang="en">Boxed Cards</title>
+                                    <title lang="tr">Kutulu Kartlar</title>
+                                    <title lang="de">Box-Karten</title>
+                                    <title lang="ru">Карточки в блоках</title>
+                                    <title lang="es">Tarjetas en Caja</title>
+                                    <title lang="fr">Cartes Encadrées</title>
+                                </meta>
+                            </param>
+                            <param name="minimal">
+                                <meta>
+                                    <title lang="en">Minimal</title>
+                                    <title lang="tr">Minimal</title>
+                                    <title lang="de">Minimal</title>
+                                    <title lang="ru">Минималистичный</title>
+                                    <title lang="es">Minimalista</title>
+                                    <title lang="fr">Minimal</title>
+                                </meta>
+                            </param>
+                            <param name="pill">
+                                <meta>
+                                    <title lang="en">Soft Pill</title>
+                                    <title lang="tr">Yumuşak Kapsül</title>
+                                    <title lang="de">Sanfte Pille</title>
+                                    <title lang="ru">Мягкая капсула</title>
+                                    <title lang="es">Píldora Suave</title>
+                                    <title lang="fr">Pilule Douce</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="size" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Size</title>
+                        <title lang="tr">Boyut</title>
+                        <title lang="de">Größe</title>
+                        <title lang="ru">Размер</title>
+                        <title lang="es">Tamaño</title>
+                        <title lang="fr">Taille</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="md"/>
+                        <param name="values" type="collection">
+                            <param name="sm">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
+                                </meta>
+                            </param>
+                            <param name="md">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
+                                </meta>
+                            </param>
+                            <param name="lg">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
+                                </meta>
+                            </param>
+                            <param name="xl">
+                                <meta>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="color" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Number Color</title>
+                        <title lang="tr">Rakam Rengi</title>
+                        <title lang="de">Zahlenfarbe</title>
+                        <title lang="ru">Цвет цифр</title>
+                        <title lang="es">Color de Números</title>
+                        <title lang="fr">Couleur des Chiffres</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="default"/>
+                        <param name="values" type="collection">
+                            <param name="default">
+                                <meta>
+                                    <title lang="en">Default</title>
+                                    <title lang="tr">Varsayılan</title>
+                                    <title lang="de">Standard</title>
+                                    <title lang="ru">По умолчанию</title>
+                                    <title lang="es">Predeterminado</title>
+                                    <title lang="fr">Par Défaut</title>
+                                </meta>
+                            </param>
+                            <param name="primary">
+                                <meta>
+                                    <title lang="en">Primary Blue</title>
+                                    <title lang="tr">Birincil Mavi</title>
+                                    <title lang="de">Primärblau</title>
+                                    <title lang="ru">Основной синий</title>
+                                    <title lang="es">Azul Primario</title>
+                                    <title lang="fr">Bleu Primaire</title>
+                                </meta>
+                            </param>
+                            <param name="white">
+                                <meta>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
+                                </meta>
+                            </param>
+                            <param name="dark">
+                                <meta>
+                                    <title lang="en">Dark</title>
+                                    <title lang="tr">Koyu</title>
+                                    <title lang="de">Dunkel</title>
+                                    <title lang="ru">Тёмный</title>
+                                    <title lang="es">Oscuro</title>
+                                    <title lang="fr">Sombre</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="align" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Alignment</title>
+                        <title lang="tr">Hizalama</title>
+                        <title lang="de">Ausrichtung</title>
+                        <title lang="ru">Выравнивание</title>
+                        <title lang="es">Alineación</title>
+                        <title lang="fr">Alignement</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="center"/>
+                        <param name="values" type="collection">
+                            <param name="center">
+                                <meta>
+                                    <title lang="en">Center</title>
+                                    <title lang="tr">Ortalı</title>
+                                    <title lang="de">Zentriert</title>
+                                    <title lang="ru">По центру</title>
+                                    <title lang="es">Centro</title>
+                                    <title lang="fr">Centre</title>
+                                </meta>
+                            </param>
+                            <param name="left">
+                                <meta>
+                                    <title lang="en">Left</title>
+                                    <title lang="tr">Sola</title>
+                                    <title lang="de">Links</title>
+                                    <title lang="ru">Слева</title>
+                                    <title lang="es">Izquierda</title>
+                                    <title lang="fr">Gauche</title>
+                                </meta>
+                            </param>
+                            <param name="right">
+                                <meta>
+                                    <title lang="en">Right</title>
+                                    <title lang="tr">Sağa</title>
+                                    <title lang="de">Rechts</title>
+                                    <title lang="ru">Справа</title>
+                                    <title lang="es">Derecha</title>
+                                    <title lang="fr">Droite</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="show_label" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Show Labels</title>
+                        <title lang="tr">Etiketleri Göster</title>
+                        <title lang="de">Beschriftungen anzeigen</title>
+                        <title lang="ru">Показать подписи</title>
+                        <title lang="es">Mostrar Etiquetas</title>
+                        <title lang="fr">Afficher les Libellés</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="show_separator" type="checkbox" colspan="6">
+                    <meta>
+                        <title lang="en">Show Separators</title>
+                        <title lang="tr">Ayraçları Göster</title>
+                        <title lang="de">Trennzeichen anzeigen</title>
+                        <title lang="ru">Показать разделители</title>
+                        <title lang="es">Mostrar Separadores</title>
+                        <title lang="fr">Afficher les Séparateurs</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="true"/>
+                    </params>
+                </property>
+
+                <property name="on_expire" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">On Expire Action</title>
+                        <title lang="tr">Süre Dolduğunda</title>
+                        <title lang="de">Aktion bei Ablauf</title>
+                        <title lang="ru">Действие по истечении</title>
+                        <title lang="es">Acción al Expirar</title>
+                        <title lang="fr">Action à l&apos;Expiration</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="message"/>
+                        <param name="values" type="collection">
+                            <param name="message">
+                                <meta>
+                                    <title lang="en">Show Message</title>
+                                    <title lang="tr">Mesaj Göster</title>
+                                    <title lang="de">Nachricht anzeigen</title>
+                                    <title lang="ru">Показать сообщение</title>
+                                    <title lang="es">Mostrar Mensaje</title>
+                                    <title lang="fr">Afficher un Message</title>
+                                </meta>
+                            </param>
+                            <param name="hide">
+                                <meta>
+                                    <title lang="en">Hide Countdown</title>
+                                    <title lang="tr">Geri Sayımı Gizle</title>
+                                    <title lang="de">Countdown ausblenden</title>
+                                    <title lang="ru">Скрыть таймер</title>
+                                    <title lang="es">Ocultar Cuenta Regresiva</title>
+                                    <title lang="fr">Masquer le Compte à Rebours</title>
+                                </meta>
+                            </param>
+                            <param name="reload">
+                                <meta>
+                                    <title lang="en">Reload Page</title>
+                                    <title lang="tr">Sayfayı Yenile</title>
+                                    <title lang="de">Seite neu laden</title>
+                                    <title lang="ru">Перезагрузить страницу</title>
+                                    <title lang="es">Recargar Página</title>
+                                    <title lang="fr">Recharger la Page</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
+                <property name="expire_message" type="text_line" colspan="6">
+                    <meta>
+                        <title lang="en">Expired Message</title>
+                        <title lang="tr">Süre Doldu Mesajı</title>
+                        <title lang="de">Ablaufnachricht</title>
+                        <title lang="ru">Сообщение об окончании</title>
+                        <title lang="es">Mensaje de Expiración</title>
+                        <title lang="fr">Message d&apos;Expiration</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="Süre doldu!"/>
+                    </params>
+                </property>
+            </properties>
+        </section>
     </properties>
 </template>
