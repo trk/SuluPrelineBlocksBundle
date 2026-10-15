@@ -19,7 +19,7 @@ final class XmlSchemaValidationTest extends TestCase
 
         $bundleRoot = \dirname(__DIR__, 2);
         $templateXmlFiles = \glob($bundleRoot . '/config/templates/blocks/*.xml') ?: [];
-        $this->assertCount(33, $templateXmlFiles);
+        $this->assertCount(32, $templateXmlFiles);
 
         foreach ($templateXmlFiles as $xmlFile) {
             $dom = new \DOMDocument();

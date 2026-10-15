@@ -17,7 +17,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 - [Overview & Philosophy](#overview--philosophy)
 - [Key Features](#key-features)
-- [Included Blocks & Block Items (50 Block XMLs + 12 Field Fragments)](#included-blocks--block-items-50-block-xmls--12-field-fragments)
+- [Included Blocks & Block Items (49 Block XMLs + 12 Field Fragments)](#included-blocks--block-items-49-block-xmls--12-field-fragments)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Architecture & Override Mechanics](#architecture--override-mechanics)
@@ -30,7 +30,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Overview & Philosophy
 
-`SuluPrelineBlocksBundle` provides a complete library of **33 top-level Sulu CMS blocks, 17 nested block-items, and 12 reusable field fragments** alongside **Symfony UX Twig Components** built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
+`SuluPrelineBlocksBundle` provides a complete library of **32 top-level Sulu CMS blocks, 17 nested block-items, and 12 reusable field fragments** alongside **Symfony UX Twig Components** built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
 
 1. **100% Native Sulu XML Block Definitions (`config/templates/blocks/*.xml`, `config/templates/block-items/*.xml` & `config/templates/fields/*.xml`)**: Every block defines its editorial fields in `<section name="content">` and its visual/layout options directly in `<section name="settings">` using native Sulu field types (`single_select`, `checkbox`, `text_line`, `color`, `number`). No external YAML prop schemas are needed.
 2. **Compile-Time Shared Tab Inheritance**: Through `trk/sulu-block-suite-bundle`, every block automatically compiles with inline `Content`, `Settings`, `General`, `Dynamic Content` (for data-driven blocks), and `Advanced` tabs in Sulu Admin (`FormMetadata`), with all non-content fields automatically namespaced under `props/*`.
@@ -41,9 +41,9 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Key Features
 
-- **33 Top-Level Blocks, 17 Block Items & 12 Field Fragments**:
+- **32 Top-Level Blocks, 17 Block Items & 12 Field Fragments**:
   - Layout containers (`section`, `row_item`, `column_item`)
-  - Typography & content (`headline`, `text`, `page_header`, `quotation`, `code`, `html`, `divider`)
+  - Typography & content (`headline`, `text`, `quotation`, `code`, `html`, `divider`)
   - Cards & collections (`card`, `grid`, `list`, `description_list`, `table`)
   - Media & sliders (`image`, `video`, `gallery`, `slideshow`, `overlay`, `overlay_slider`, `panel_slider`)
   - Interactive & navigation (`accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `social`, `icon`, `countdown`, `map`, `scroll_to`)
@@ -53,12 +53,12 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ---
 
-## Included Blocks & Block Items (50 Block XMLs + 12 Field Fragments)
+## Included Blocks & Block Items (49 Block XMLs + 12 Field Fragments)
 
-| Category | Top-Level Blocks (33) | Nested Block Items (17) |
+| Category | Top-Level Blocks (32) | Nested Block Items (17) |
 | --- | --- | --- |
 | **Layout Containers** | `section` | `row_item`, `column_item` |
-| **Typography & Content** | `headline`, `text`, `page_header`, `quotation`, `code`, `html`, `divider` | — |
+| **Typography & Content** | `headline`, `text`, `quotation`, `code`, `html`, `divider` | — |
 | **Cards & Collections** | `card`, `grid`, `list`, `description_list`, `table` | `card`, `list_item`, `description_list_item`, `table_item` |
 | **Media & Sliders** | `image`, `video`, `gallery`, `slideshow`, `overlay`, `overlay_slider`, `panel_slider` | `slideshow_item`, `overlay` |
 | **Interactive & Navigation** | `accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `social`, `icon`, `countdown`, `map`, `scroll_to` | `accordion_item`, `switcher_item`, `popover_item`, `button`, `badge`, `nav_item`, `subnav_item`, `social_item`, `map_item` |

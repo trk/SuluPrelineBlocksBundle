@@ -10,7 +10,7 @@ use Twig\Environment;
 /**
  * Preline UI 5 block collection renderer that automatically groups consecutive
  * non-section blocks into a responsive `<twig:Section>` container while rendering
- * top-level layout blocks (`section`, `page_header`, `breadcrumbs`, `main_content`) directly.
+ * top-level layout blocks (`section`, `breadcrumbs`) directly.
  */
 final class PrelineBlockCollectionRenderer implements BlockCollectionRendererInterface
 {

@@ -9,7 +9,7 @@
     {% endfor %}
 {% else %}
     {% set section_buffer = [] %}
-    {% set top_level_types = ['section', 'page_header', 'breadcrumbs', 'main_content'] %}
+    {% set top_level_types = ['section', 'breadcrumbs'] %}
 
     {% for block_item in rendered_blocks %}
         {% if block_item.type|default('') in top_level_types %}

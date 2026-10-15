@@ -28,7 +28,7 @@
                 <title lang="es">Bloques de columna</title>
                 <title lang="fr">Blocs de colonne</title>
               </meta>
-              <tag name="sulu_block_suite.auto_blocks" default="text" exclude="main_content,section,row,column,page_header,breadcrumbs"/>
+              <tag name="sulu_block_suite.auto_blocks" default="text" exclude="section,row,column,breadcrumbs"/>
               <types>
                 <type name="default">
                   <meta>
