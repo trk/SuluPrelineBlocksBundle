@@ -9,6 +9,7 @@
     <title lang="es">HTML personalizado</title>
     <title lang="fr">HTML personnalis&#xE9;</title>
   </meta>
+  <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
   <properties>
         <section name="content">
             <meta>

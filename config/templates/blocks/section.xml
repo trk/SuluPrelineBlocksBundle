@@ -12,6 +12,7 @@
         <title lang="es">Sección</title>
         <title lang="fr">Section</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>

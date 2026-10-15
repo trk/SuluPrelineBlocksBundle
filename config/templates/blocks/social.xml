@@ -12,6 +12,7 @@
         <title lang="es">Redes sociales</title>
         <title lang="fr">Réseaux sociaux</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>
