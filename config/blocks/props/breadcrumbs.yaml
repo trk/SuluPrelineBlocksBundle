@@ -1,3 +1,9 @@
+multiple: true
+default_item_type: breadcrumb_item
+dynamic_fields:
+  - { name: title, label: 'Item Title', type: string }
+  - { name: url, label: 'Item URL', type: link }
+
 tabs:
   settings:
     title:
