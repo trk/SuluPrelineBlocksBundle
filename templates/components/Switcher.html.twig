@@ -36,7 +36,7 @@
                             {% endif %}
                             <span class="truncate">{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-auto py-0.5 px-2 text-2xs font-semibold rounded-full bg-surface text-surface-foreground">
+                                <span class="ms-auto py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
                                     {{ item.badge }}
                                 </span>
                             {% endif %}
@@ -136,7 +136,7 @@
                             {% endif %}
                             <span>{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-1.5 py-0.5 px-2 text-2xs font-semibold rounded-full bg-surface text-surface-foreground">
+                                <span class="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
                                     {{ item.badge }}
                                 </span>
                             {% endif %}
@@ -232,7 +232,7 @@
                             {% endif %}
                             <span>{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-1.5 py-0.5 px-2 text-2xs font-semibold rounded-full bg-surface text-surface-foreground">
+                                <span class="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
                                     {{ item.badge }}
                                 </span>
                             {% endif %}

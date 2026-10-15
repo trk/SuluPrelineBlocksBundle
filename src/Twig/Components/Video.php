@@ -97,6 +97,31 @@ final class Video
         return PropsResolver::resolveFocusPointStyle($this->image);
     }
 
+    public function getPosterAlt(): string
+    {
+        if (\is_array($this->image)) {
+            $alt = $this->image['description'] ?? ($this->image['title'] ?? null);
+            if (\is_string($alt) && '' !== \trim($alt)) {
+                return \trim($alt);
+            }
+        } elseif (\is_object($this->image)) {
+            if (\method_exists($this->image, 'getDescription')) {
+                $desc = $this->image->getDescription();
+                if (\is_string($desc) && '' !== \trim($desc)) {
+                    return \trim($desc);
+                }
+            }
+            if (\method_exists($this->image, 'getTitle')) {
+                $title = $this->image->getTitle();
+                if (\is_string($title) && '' !== \trim($title)) {
+                    return \trim($title);
+                }
+            }
+        }
+
+        return '';
+    }
+
     public function getUrl(): ?string
     {
         if (null === $this->link || '' === $this->link) {

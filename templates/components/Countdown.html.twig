@@ -94,6 +94,11 @@
                 var secondsEl = el.querySelector('[data-countdown-unit="seconds"]');
 
                 function update() {
+                    if (!document.body.contains(el)) {
+                        clearInterval(interval);
+                        return;
+                    }
+
                     var now = new Date().getTime();
                     var distance = targetTime - now;
 
@@ -136,9 +141,11 @@
             initCountdowns();
         }
 
-        // Live Preview & dynamic AJAX support
-        window.addEventListener('message', function(e) {
-            initCountdowns();
-        });
+        if (!window.__suluCountdownMessageBound) {
+            window.__suluCountdownMessageBound = true;
+            window.addEventListener('message', function() {
+                initCountdowns();
+            });
+        }
     })();
 </script>

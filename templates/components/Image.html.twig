@@ -11,16 +11,18 @@
 {% set ratio = this.getAspectRatio() %}
 {% set rounded = this.getRounded() %}
 {% set caption = this.getCaption() %}
+{% set resolved_alt = this.getAlt() %}
+{% set resolved_hover_alt = this.getHoverAlt() %}
 
 {% if img_url %}
     <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
             {{ attributes.defaults({class: this.getWrapperClasses()}) }}>
         {% if url %}
-            <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
+            <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
                 <img
                     src="{{ img_url }}"
                     {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                    alt="{{ alt|default('') }}"
+                    alt="{{ resolved_alt }}"
                     class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
                     {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
                     loading="lazy"
@@ -29,7 +31,7 @@
                     <img
                         src="{{ hover_img_url }}"
                         {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                        alt="{{ alt|default('') }}"
+                        alt="{{ resolved_hover_alt }}"
                         class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
                         loading="lazy"
@@ -41,7 +43,7 @@
                 <img
                     src="{{ img_url }}"
                     {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                    alt="{{ alt|default('') }}"
+                    alt="{{ resolved_alt }}"
                     class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
                     {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
                     loading="lazy"
@@ -50,7 +52,7 @@
                     <img
                         src="{{ hover_img_url }}"
                         {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                        alt="{{ alt|default('') }}"
+                        alt="{{ resolved_hover_alt }}"
                         class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
                         loading="lazy"

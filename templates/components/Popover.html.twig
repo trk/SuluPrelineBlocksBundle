@@ -1,5 +1,6 @@
 {% set items = this.normalizedItems %}
 {% set img_url = this.imageUrl %}
+{% set popover_uid = this.customId|default('hs-hotspot-' ~ random(100000, 999999)) %}
 <div {{ attributes.defaults({class: 'relative w-full my-6'}) }}>
     {% if this.title %}
         <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
@@ -26,7 +27,7 @@
 
                 <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">
                     <div class="hs-dropdown hotspot-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:absolute] [--adaptive:none]">
-                        <button id="hs-hotspot-item-{{ loop.index }}"
+                        <button id="{{ popover_uid }}-item-{{ loop.index }}"
                                 type="button"
                                 class="hs-dropdown-toggle relative group flex items-center justify-center size-8 rounded-full transition-all duration-200 hover:scale-115 focus:outline-hidden focus:ring-4 {{ marker_colors.button }}"
                                 aria-haspopup="menu"
@@ -69,7 +70,7 @@
                         <div class="hs-dropdown-menu hotspot-menu transition-[opacity,transform] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 w-72 sm:w-80 md:w-88 max-w-[calc(100vw-2.5rem)] shrink-0 bg-popover rounded-2xl shadow-2xl border border-popover-line overflow-hidden {{ y_placement }} {{ x_placement }}"
                              role="menu"
                              aria-orientation="vertical"
-                             aria-labelledby="hs-hotspot-item-{{ loop.index }}">
+                             aria-labelledby="{{ popover_uid }}-item-{{ loop.index }}">
 
                             {% if item.video_url %}
                                 <div class="relative w-full aspect-video bg-black overflow-hidden">

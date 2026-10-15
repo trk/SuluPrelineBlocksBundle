@@ -11,7 +11,7 @@
 <div id="{{ alert_id }}"
      role="alert"
      tabindex="-1"
-     aria-labelledby="{{ alert_id }}-label"
+     {% if alert_title %}aria-labelledby="{{ alert_id }}-label"{% endif %}
      {{ attributes.defaults({
          class: this.getWrapperClasses(),
      }) }}>
@@ -50,7 +50,7 @@
 
     {% if is_dismissible %}
         <button type="button"
-                class="shrink-0 ms-auto inline-flex justify-center items-center size-6 rounded-lg opacity-60 hover:opacity-100 focus:outline-hidden transition-opacity cursor-pointer"
+                class="shrink-0 ms-auto inline-flex justify-center items-center size-6 rounded-lg opacity-60 hover:opacity-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-opacity cursor-pointer"
                 data-hs-remove-element="#{{ alert_id }}"
                 aria-label="Close alert">
             <span class="sr-only">Close</span>

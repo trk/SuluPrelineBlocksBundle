@@ -43,6 +43,7 @@
                         <title lang="en">sulu_block_suite.field_aspect_ratio</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="auto"/>
                         <param name="values" type="collection">
                             <param name="auto">
                                 <meta>
@@ -83,6 +84,7 @@
                         <title lang="en">sulu_block_suite.field_rounded</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="lg"/>
                         <param name="values" type="collection">
                             <param name="none">
                                 <meta>
@@ -123,6 +125,7 @@
                         <title lang="en">sulu_block_suite.field_hover_effect</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="none"/>
                         <param name="values" type="collection">
                             <param name="none">
                                 <meta>

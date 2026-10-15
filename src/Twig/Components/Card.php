@@ -822,7 +822,7 @@ final class Card
     public function getNormalizedButtons(): array
     {
         $props = $this->getResolvedProps();
-        $defaultStyle = isset($props['button_style']) && \is_string($props['button_style']) ? $props['button_style'] : 'primary';
+        $defaultStyle = isset($props['button_style']) && \is_string($props['button_style']) ? $props['button_style'] : 'solid';
         $defaultColor = isset($props['button_color']) && \is_string($props['button_color']) ? $props['button_color'] : 'primary';
         $defaultSize = isset($props['button_size']) && \is_string($props['button_size']) ? $props['button_size'] : 'sm';
 
@@ -847,16 +847,21 @@ final class Card
 
         if ([] !== $buttonItems) {
             foreach ($buttonItems as $item) {
-                $itemStyle = isset($item['button_style']) && \is_string($item['button_style']) && 'inherit' !== $item['button_style'] && '' !== \trim($item['button_style'])
-                    ? $item['button_style']
+                $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
+
+                $rawStyle = $item['button_style'] ?? ($item['variant'] ?? ($itemProps['button_style'] ?? ($itemProps['variant'] ?? null)));
+                $itemStyle = \is_string($rawStyle) && 'inherit' !== $rawStyle && '' !== \trim($rawStyle)
+                    ? $rawStyle
                     : $defaultStyle;
 
-                $itemColor = isset($item['button_color']) && \is_string($item['button_color']) && 'inherit' !== $item['button_color'] && '' !== \trim($item['button_color'])
-                    ? $item['button_color']
+                $rawColor = $item['button_color'] ?? ($item['link_color'] ?? ($itemProps['button_color'] ?? ($itemProps['link_color'] ?? null)));
+                $itemColor = \is_string($rawColor) && 'inherit' !== $rawColor && '' !== \trim($rawColor)
+                    ? $rawColor
                     : $defaultColor;
 
-                $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
-                    ? $item['size']
+                $rawSize = $item['size'] ?? ($itemProps['size'] ?? null);
+                $itemSize = \is_string($rawSize) && 'inherit' !== $rawSize && '' !== \trim($rawSize)
+                    ? $rawSize
                     : $defaultSize;
 
                 $title = '';

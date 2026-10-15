@@ -45,6 +45,7 @@
                         <title lang="en">sulu_block_suite.field_aspect_ratio</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="16/9"/>
                         <param name="values" type="collection">
                             <param name="16/9">
                                 <meta>
@@ -80,6 +81,7 @@
                         <title lang="en">sulu_block_suite.field_rounded</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="xl"/>
                         <param name="values" type="collection">
                             <param name="none">
                                 <meta>
@@ -125,6 +127,7 @@
                         <title lang="fr">Ombre Portée</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="none"/>
                         <param name="values" type="collection">
                             <param name="none">
                                 <meta>
@@ -200,6 +203,7 @@
                         <title lang="fr">Lecture Automatique</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="none"/>
                         <param name="values" type="collection">
                             <param name="none">
                                 <meta>
@@ -255,6 +259,7 @@
                         <title lang="fr">Contrôles</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="true"/>
                         <param name="values" type="collection">
                             <param name="true">
                                 <meta>
@@ -290,6 +295,7 @@
                         <title lang="fr">Boucle</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="false"/>
                         <param name="values" type="collection">
                             <param name="false">
                                 <meta>
@@ -325,6 +331,7 @@
                         <title lang="fr">Audio / Muet</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="default"/>
                         <param name="values" type="collection">
                             <param name="default">
                                 <meta>

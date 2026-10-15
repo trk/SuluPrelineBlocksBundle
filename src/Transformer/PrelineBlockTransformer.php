@@ -69,7 +69,7 @@ final class PrelineBlockTransformer implements BlockTransformerInterface
         }
 
         // 6. Pre-compute Column classes if this is a column block
-        if ('column' === $type) {
+        if (\in_array($type, ['column', 'column_item'], true)) {
             $block['column_classes'] = $this->computeColumnClasses($props, $block);
         }
 

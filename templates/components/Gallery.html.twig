@@ -19,7 +19,7 @@
             <button
                 type="button"
                 data-filter="*"
-                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden disabled:opacity-50 transition"
+                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition"
             >
                 {{ this.resolvedProps.filter_all_label|default('All') }}
             </button>
@@ -27,7 +27,7 @@
                 <button
                     type="button"
                     data-filter="{{ slug }}"
-                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden disabled:opacity-50 transition"
+                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition"
                 >
                     {{ label }}
                 </button>
@@ -83,7 +83,7 @@
                                 </h3>
                                 <button
                                     type="button"
-                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden disabled:opacity-50"
+                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
                                     aria-label="Close"
                                     data-hs-overlay="#{{ modal_id }}"
                                 >

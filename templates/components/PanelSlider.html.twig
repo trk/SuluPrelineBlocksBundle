@@ -43,7 +43,7 @@
         {% if arrows != 'none' %}
             <button
                 type="button"
-                class="hs-carousel-prev hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden transition-all {% if arrows == 'outside' %}-start-4{% else %}start-2{% endif %}"
+                class="hs-carousel-prev hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-all {% if arrows == 'outside' %}-start-4{% else %}start-2{% endif %}"
                 aria-label="Previous"
             >
                 <span class="text-2xl" aria-hidden="true">
@@ -53,7 +53,7 @@
             </button>
             <button
                 type="button"
-                class="hs-carousel-next hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden transition-all {% if arrows == 'outside' %}-end-4{% else %}end-2{% endif %}"
+                class="hs-carousel-next hs-carousel-disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-11 h-11 my-auto text-layer-foreground bg-layer/80 backdrop-blur-xs hover:bg-layer rounded-full shadow-md z-10 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-all {% if arrows == 'outside' %}-end-4{% else %}end-2{% endif %}"
                 aria-label="Next"
             >
                 <span class="text-2xl" aria-hidden="true">

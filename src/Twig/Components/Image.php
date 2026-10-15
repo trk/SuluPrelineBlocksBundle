@@ -211,6 +211,53 @@ final class Image
             : null;
     }
 
+    public function getAlt(): string
+    {
+        if (null !== $this->alt && '' !== \trim($this->alt)) {
+            return \trim($this->alt);
+        }
+
+        $props = $this->getResolvedProps();
+        if (isset($props['alt']) && \is_string($props['alt']) && '' !== \trim($props['alt'])) {
+            return \trim($props['alt']);
+        }
+
+        return $this->extractMediaAlt($this->image ?? ($props['image'] ?? null)) ?? ($this->getCaption() ?? '');
+    }
+
+    public function getHoverAlt(): string
+    {
+        $props = $this->getResolvedProps();
+
+        return $this->extractMediaAlt($this->hoverImage ?? $this->hover_image ?? ($props['hover_image'] ?? null))
+            ?? $this->getAlt();
+    }
+
+    private function extractMediaAlt(mixed $media): ?string
+    {
+        if (\is_array($media)) {
+            $alt = $media['description'] ?? ($media['title'] ?? null);
+            if (\is_string($alt) && '' !== \trim($alt)) {
+                return \trim($alt);
+            }
+        } elseif (\is_object($media)) {
+            if (\method_exists($media, 'getDescription')) {
+                $desc = $media->getDescription();
+                if (\is_string($desc) && '' !== \trim($desc)) {
+                    return \trim($desc);
+                }
+            }
+            if (\method_exists($media, 'getTitle')) {
+                $title = $media->getTitle();
+                if (\is_string($title) && '' !== \trim($title)) {
+                    return \trim($title);
+                }
+            }
+        }
+
+        return null;
+    }
+
     public function getWrapperClasses(): string
     {
         $props = $this->getResolvedProps();

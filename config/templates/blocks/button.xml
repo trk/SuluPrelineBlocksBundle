@@ -245,6 +245,7 @@
                         <title lang="en">sulu_block_suite.field_variant</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="solid"/>
                         <param name="values" type="collection">
                             <param name="solid">
                                 <meta>
@@ -285,6 +286,7 @@
                         <title lang="en">sulu_block_suite.field_link_color</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="primary"/>
                         <param name="values" type="collection">
                             <param name="primary">
                                 <meta>
@@ -320,6 +322,7 @@
                         <title lang="en">sulu_block_suite.field_size</title>
                     </meta>
                     <params>
+                        <param name="default_value" value="md"/>
                         <param name="values" type="collection">
                             <param name="xs">
                                 <meta>
