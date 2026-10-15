@@ -22,8 +22,8 @@ tabs:
         options:
           - { value: top, label: { en: Top, tr: Üstte, de: Oben, ru: Сверху, es: Arriba, fr: Haut } }
           - { value: bottom, label: { en: Bottom, tr: Altta, de: Unten, ru: Снизу, es: Abajo, fr: Bas } }
-          - { value: left, label: { en: 'Left (Vertical Tabs)', tr: 'Solda (Dikey Sekmeler)', de: 'Links (Vertikale Tabs)', ru: 'Слева (Вертикальные вкладки)', es: 'Izquierda (Pestañas Verticales)', fr: 'Gauche (Onglets Verticaux)' } }
-          - { value: right, label: { en: 'Right (Vertical Tabs)', tr: 'Sağda (Dikey Sekmeler)', de: 'Rechts (Vertikale Tabs)', ru: 'Справа (Вертикальные вкладки)', es: 'Derecha (Pestañas Verticales)', fr: 'Droite (Onglets Verticaux)' } }
+          - { value: left, label: { en: 'Left', tr: 'Solda', de: 'Links', ru: 'Слева', es: 'Izquierda', fr: 'Gauche' } }
+          - { value: right, label: { en: 'Right', tr: 'Sağda', de: 'Rechts', ru: 'Справа', es: 'Derecha', fr: 'Droite' } }
       nav_style:
         type: select
         label:
@@ -36,23 +36,23 @@ tabs:
         default: pills
         col_span: 6
         options:
-          - { value: pills, label: { en: Pills, tr: 'Kapsül Butonlar (Pills)', de: 'Pillen (Pills)', ru: 'Капсулы (Pills)', es: 'Píldoras (Pills)', fr: 'Pilules (Pills)' } }
-          - { value: segmented, label: { en: 'Segmented Control', tr: 'Bölümlü Kontrol (Segmented)', de: 'Segmentierte Steuerung', ru: 'Сегментированный переключатель', es: 'Control Segmentado', fr: 'Contrôle Segmenté' } }
+          - { value: pills, label: { en: Pills, tr: 'Kapsül Butonlar', de: 'Pillen', ru: 'Капсулы', es: 'Píldoras', fr: 'Pilules' } }
+          - { value: segmented, label: { en: 'Segmented Control', tr: 'Bölümlü Kontrol', de: 'Segmentierte Steuerung', ru: 'Сегментированный переключатель', es: 'Control Segmentado', fr: 'Contrôle Segmenté' } }
           - { value: underline, label: { en: Underline, tr: 'Alt Çizgili', de: Unterstrichen, ru: Подчёркивание, es: Subrayado, fr: Souligné } }
           - { value: bordered, label: { en: Bordered, tr: Kenarlıklı, de: Umrandet, ru: 'С рамкой', es: 'Con Borde', fr: Bordé } }
       alignment:
         type: select
         label:
-          en: 'Tab Alignment (Horizontal)'
-          tr: 'Sekme Hizalaması (Yatay)'
-          de: 'Tab-Ausrichtung (Horizontal)'
-          ru: 'Выравнивание вкладок (Горизонтально)'
-          es: 'Alineación de Pestañas (Horizontal)'
-          fr: 'Alignement des Onglets (Horizontal)'
+          en: 'Tab Alignment'
+          tr: 'Sekme Hizalaması'
+          de: 'Tab-Ausrichtung'
+          ru: 'Выравнивание вкладок'
+          es: 'Alineación de Pestañas'
+          fr: 'Alignement des Onglets'
         default: start
         col_span: 6
         options:
           - { value: start, label: { en: 'Left / Start', tr: Sola, de: 'Links / Start', ru: 'Слева / В начале', es: 'Izquierda / Inicio', fr: 'Gauche / Début' } }
           - { value: center, label: { en: Center, tr: Ortalı, de: Zentriert, ru: 'По центру', es: Centro, fr: Centre } }
           - { value: end, label: { en: 'Right / End', tr: Sağa, de: 'Rechts / Ende', ru: 'Справа / В конце', es: 'Derecha / Fin', fr: 'Droite / Fin' } }
-          - { value: full, label: { en: 'Full Width (Equal Tabs)', tr: 'Tam Genişlik (Eşit Sekmeler)', de: 'Volle Breite (Gleiche Tabs)', ru: 'Во всю ширину (Равные вкладки)', es: 'Ancho Completo (Pestañas Iguales)', fr: 'Pleine Largeur (Onglets Égaux)' } }
+          - { value: full, label: { en: 'Full Width', tr: 'Tam Genişlik', de: 'Volle Breite', ru: 'Во всю ширину', es: 'Ancho Completo', fr: 'Pleine Largeur' } }

@@ -41,11 +41,11 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
-          - { value: 2xl, label: { en: '2X Large', tr: 'Geniş Derin Gölge', de: '2X Groß (2xl)', ru: '2X Большой (2xl)', es: '2X Grande (2xl)', fr: '2X Grand (2xl)' } }
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
+          - { value: 2xl, label: { en: '2X Large', tr: 'Geniş Derin Gölge', de: '2X Groß', ru: '2X Большой', es: '2X Grande', fr: '2X Grand' } }
       autoplay:
         type: select
         label:
@@ -58,7 +58,7 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: Disabled, tr: Kapalı, de: Deaktiviert, ru: Отключено, es: Desactivado, fr: Désactivé } }
-          - { value: 'true', label: { en: 'Immediate (On)', tr: 'Hemen Başlat', de: 'Sofort (Ein)', ru: 'Сразу (Вкл)', es: 'Inmediato (Activado)', fr: 'Immédiat (Activé)' } }
+          - { value: 'true', label: { en: 'Immediate', tr: 'Hemen Başlat', de: 'Sofort', ru: 'Сразу', es: 'Inmediato', fr: 'Immédiat' } }
           - { value: inview, label: { en: 'When in Viewport', tr: 'Ekrana Girdiğinde', de: 'Im sichtbaren Bereich', ru: 'При появлении на экране', es: 'Al Entrar en Pantalla', fr: "À l'Apparition à l'Écran" } }
           - { value: hover, label: { en: 'On Hover', tr: 'Üzerine Gelindiğinde', de: 'Bei Hover', ru: 'При наведении', es: 'Al Pasar el Cursor', fr: 'Au Survol' } }
       controls:
@@ -78,15 +78,15 @@ tabs:
         type: select
         label:
           en: Loop
-          tr: 'Döngü (Sürekli Tekrar)'
-          de: 'Schleife (Wiederholen)'
-          ru: 'Зациклить (Повтор)'
-          es: 'Bucle (Repetir)'
-          fr: 'Boucle (Répéter)'
+          tr: 'Döngü'
+          de: 'Schleife'
+          ru: 'Зациклить'
+          es: 'Bucle'
+          fr: 'Boucle'
         col_span: 6
         options:
           - { value: 'false', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
-          - { value: 'true', label: { en: 'Yes (Loop)', tr: Evet, de: 'Ja (Schleife)', ru: 'Да (Повторять)', es: 'Sí (En Bucle)', fr: 'Oui (En Boucle)' } }
+          - { value: 'true', label: { en: 'Yes', tr: Evet, de: 'Ja', ru: 'Да', es: 'Sí', fr: 'Oui' } }
       muted:
         type: select
         label:
@@ -98,6 +98,6 @@ tabs:
           fr: 'Audio / Muet'
         col_span: 6
         options:
-          - { value: default, label: { en: 'Default (Muted if Autoplay)', tr: 'Varsayılan (Otomatikte Sessiz)', de: 'Standard (Stumm bei Autoplay)', ru: 'По умолчанию (Без звука при автозапуске)', es: 'Predeterminado (Silenciado en Autoplay)', fr: 'Par Défaut (Muet si Lecture Auto)' } }
+          - { value: default, label: { en: 'Default', tr: 'Varsayılan', de: 'Standard', ru: 'По умолчанию', es: 'Predeterminado', fr: 'Par Défaut' } }
           - { value: 'true', label: { en: Muted, tr: Sessiz, de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
           - { value: 'false', label: { en: Unmuted, tr: Sesli, de: 'Ton aktiv', ru: 'Со звуком', es: 'Con Sonido', fr: 'Avec Son' } }

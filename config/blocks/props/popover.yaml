@@ -20,8 +20,8 @@ tabs:
         default: click
         col_span: 6
         options:
-          - { value: click, label: { en: 'On Click', tr: 'Tıklama ile (Click)', de: 'Bei Klick', ru: 'По клику', es: 'Al Hacer Clic', fr: 'Au Clic' } }
-          - { value: hover, label: { en: 'On Hover', tr: 'Üzerine Gelince (Hover)', de: 'Bei Hover', ru: 'При наведении', es: 'Al Pasar el Cursor', fr: 'Au Survol' } }
+          - { value: click, label: { en: 'On Click', tr: 'Tıklama ile', de: 'Bei Klick', ru: 'По клику', es: 'Al Hacer Clic', fr: 'Au Clic' } }
+          - { value: hover, label: { en: 'On Hover', tr: 'Üzerine Gelince', de: 'Bei Hover', ru: 'При наведении', es: 'Al Pasar el Cursor', fr: 'Au Survol' } }
       marker_type:
         type: select
         label:
@@ -34,9 +34,9 @@ tabs:
         default: pulse
         col_span: 6
         options:
-          - { value: pulse, label: { en: 'Radar Pulse', tr: 'Radar (Pulse)', de: Radar-Impuls, ru: 'Пульсирующий радар', es: 'Pulso de Radar', fr: 'Impulsion Radar' } }
-          - { value: plus, label: { en: 'Plus (+)', tr: 'Artı (+)', de: 'Plus (+)', ru: 'Плюс (+)', es: 'Más (+)', fr: 'Plus (+)' } }
-          - { value: number, label: { en: 'Numbered (1, 2, 3)', tr: 'Numaralı (1, 2, 3)', de: 'Nummeriert (1, 2, 3)', ru: 'Нумерованный (1, 2, 3)', es: 'Numerado (1, 2, 3)', fr: 'Numéroté (1, 2, 3)' } }
+          - { value: pulse, label: { en: 'Radar Pulse', tr: 'Radar', de: Radar-Impuls, ru: 'Пульсирующий радар', es: 'Pulso de Radar', fr: 'Impulsion Radar' } }
+          - { value: plus, label: { en: 'Plus', tr: 'Artı', de: 'Plus', ru: 'Плюс', es: 'Más', fr: 'Plus' } }
+          - { value: number, label: { en: 'Numbered', tr: 'Numaralı', de: 'Nummeriert', ru: 'Нумерованный', es: 'Numerado', fr: 'Numéroté' } }
           - { value: dot, label: { en: 'Solid Dot', tr: 'Dolu Nokta', de: 'Gefüllter Punkt', ru: 'Сплошная точка', es: 'Punto Sólido', fr: 'Point Plein' } }
           - { value: pin, label: { en: 'Map Pin', tr: 'Harita İğnesi', de: Karten-Pin, ru: 'Булавка карты', es: 'Pin de Mapa', fr: 'Épingle de Carte' } }
           - { value: icon, label: { en: 'Custom Icon', tr: 'Özel İkon', de: 'Benutzerdefiniertes Symbol', ru: 'Своя иконка', es: 'Icono Personalizado', fr: 'Icône Personnalisée' } }
@@ -52,9 +52,9 @@ tabs:
         default: primary
         col_span: 6
         options:
-          - { value: primary, label: { en: 'Primary (Blue)', tr: 'Birincil (Mavi)', de: 'Primär (Blau)', ru: 'Основной (Синий)', es: 'Primario (Azul)', fr: 'Primaire (Bleu)' } }
+          - { value: primary, label: { en: 'Primary', tr: 'Birincil', de: 'Primär', ru: 'Основной', es: 'Primario', fr: 'Primaire' } }
           - { value: dark, label: { en: 'Dark Neutral', tr: 'Koyu Gri', de: 'Dunkel Neutral', ru: Тёмно-нейтральный, es: 'Neutro Oscuro', fr: 'Neutre Sombre' } }
-          - { value: light, label: { en: 'Light (White)', tr: 'Açık / Beyaz', de: 'Hell (Weiß)', ru: 'Светлый (Белый)', es: 'Claro (Blanco)', fr: 'Clair (Blanc)' } }
-          - { value: accent, label: { en: 'Accent (Amber)', tr: 'Vurgu (Kehribar)', de: 'Akzent (Bernstein)', ru: 'Акцент (Янтарный)', es: 'Acento (Ámbar)', fr: 'Accent (Ambre)' } }
-          - { value: success, label: { en: 'Success (Green)', tr: 'Yeşil (Başarılı)', de: 'Erfolg (Grün)', ru: 'Успех (Зелёный)', es: 'Éxito (Verde)', fr: 'Succès (Vert)' } }
-          - { value: danger, label: { en: 'Danger (Red)', tr: 'Kırmızı (Tehlike)', de: 'Gefahr (Rot)', ru: 'Опасность (Красный)', es: 'Peligro (Rojo)', fr: 'Danger (Rouge)' } }
+          - { value: light, label: { en: 'Light', tr: 'Açık / Beyaz', de: 'Hell', ru: 'Светлый', es: 'Claro', fr: 'Clair' } }
+          - { value: accent, label: { en: 'Accent', tr: 'Vurgu', de: 'Akzent', ru: 'Акцент', es: 'Acento', fr: 'Accent' } }
+          - { value: success, label: { en: 'Success', tr: 'Yeşil', de: 'Erfolg', ru: 'Успех', es: 'Éxito', fr: 'Succès' } }
+          - { value: danger, label: { en: 'Danger', tr: 'Kırmızı', de: 'Gefahr', ru: 'Опасность', es: 'Peligro', fr: 'Danger' } }

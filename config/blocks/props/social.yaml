@@ -36,9 +36,9 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
       shape:
         type: select
         label:
@@ -53,7 +53,7 @@ tabs:
         options:
           - { value: rounded, label: { en: Rounded, tr: 'Yuvarlatılmış Köşe', de: Abgerundet, ru: Скруглённая, es: Redondeado, fr: Arrondi } }
           - { value: circle, label: { en: Circle, tr: 'Tam Daire', de: Kreis, ru: Круг, es: Círculo, fr: Cercle } }
-          - { value: square, label: { en: Square, tr: 'Keskin Köşe (Kare)', de: Quadrat, ru: Квадрат, es: Cuadrado, fr: Carré } }
+          - { value: square, label: { en: Square, tr: 'Keskin Köşe', de: Quadrat, ru: Квадрат, es: Cuadrado, fr: Carré } }
       alignment:
         type: select
         label:

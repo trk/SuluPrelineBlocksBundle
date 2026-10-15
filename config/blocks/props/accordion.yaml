@@ -20,7 +20,7 @@ tabs:
         default: default
         col_span: 6
         options:
-          - { value: default, label: { en: 'Default (Dividers)', tr: 'Varsayılan (Çizgili)', de: 'Standard (Trennlinien)', ru: 'По умолчанию (С разделителями)', es: 'Predeterminado (Con Divisores)', fr: 'Par Défaut (Avec Séparateurs)' } }
+          - { value: default, label: { en: 'Default', tr: 'Varsayılan', de: 'Standard', ru: 'По умолчанию', es: 'Predeterminado', fr: 'Par Défaut' } }
           - { value: bordered, label: { en: 'Bordered Cards', tr: 'Çerçeveli Kartlar', de: 'Umrandete Karten', ru: 'Карточки с рамкой', es: 'Tarjetas con Borde', fr: 'Cartes Bordées' } }
           - { value: soft, label: { en: 'Soft Background', tr: 'Yumuşak Dolgulu', de: 'Sanfter Hintergrund', ru: 'Мягкий фон', es: 'Fondo Suave', fr: 'Fond Doux' } }
       icon_style:
@@ -35,8 +35,8 @@ tabs:
         default: chevron
         col_span: 6
         options:
-          - { value: chevron, label: { en: 'Chevron (Arrow)', tr: 'Ok (Chevron)', de: 'Chevron (Pfeil)', ru: 'Шеврон (Стрелка)', es: 'Chevron (Flecha)', fr: 'Chevron (Flèche)' } }
-          - { value: plus, label: { en: 'Plus / Minus', tr: 'Artı / Eksi (+/-)', de: 'Plus / Minus', ru: 'Плюс / Минус', es: 'Más / Menos', fr: 'Plus / Moins' } }
+          - { value: chevron, label: { en: 'Chevron', tr: 'Ok', de: 'Chevron', ru: 'Шеврон', es: 'Chevron', fr: 'Chevron' } }
+          - { value: plus, label: { en: 'Plus / Minus', tr: 'Artı / Eksi', de: 'Plus / Minus', ru: 'Плюс / Минус', es: 'Más / Menos', fr: 'Plus / Moins' } }
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
       multiple:
         type: checkbox
@@ -72,10 +72,10 @@ tabs:
         default: base
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: base, label: { en: Base, tr: 'Standart (Base)', de: 'Standard (Base)', ru: 'Базовый (Base)', es: 'Base (Estándar)', fr: 'Base (Standard)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: base, label: { en: Base, tr: 'Standart', de: 'Standard', ru: 'Базовый', es: 'Base', fr: 'Base' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       image_align:
         type: select
         label:

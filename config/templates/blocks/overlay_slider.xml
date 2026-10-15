@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>overlay_slider</key>
     <meta>
-        <title lang="en">Overlay Slider (Overlays Carousel)</title>
-        <title lang="tr">Katman Kaydırıcı (Overlay Karuseli)</title>
-        <title lang="de">Overlay-Schieberegler (Overlay-Karussell)</title>
-        <title lang="ru">Слайдер оверлеев (Карусель оверлеев)</title>
-        <title lang="es">Control deslizante de superposición (Carrusel de superposiciones)</title>
-        <title lang="fr">Curseur de superposition (Carrousel de superpositions)</title>
+        <title lang="en">Overlay Slider</title>
+        <title lang="tr">Katman Kaydırıcı</title>
+        <title lang="de">Overlay-Schieberegler</title>
+        <title lang="ru">Слайдер оверлеев</title>
+        <title lang="es">Control deslizante de superposición</title>
+        <title lang="fr">Curseur de superposition</title>
     </meta>
     <properties>
         <xi:include href="../fields/title.xml"/>

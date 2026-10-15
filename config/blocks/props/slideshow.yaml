@@ -20,10 +20,10 @@ tabs:
         default: medium
         col_span: 6
         options:
-          - { value: small, label: { en: 'Small (300px - 380px)', tr: 'Küçük (300px - 380px)', de: 'Klein (300px - 380px)', ru: 'Малая (300px - 380px)', es: 'Pequeña (300px - 380px)', fr: 'Petite (300px - 380px)' } }
-          - { value: medium, label: { en: 'Medium (420px - 500px)', tr: 'Standart (420px - 500px)', de: 'Mittel (420px - 500px)', ru: 'Средняя (420px - 500px)', es: 'Mediana (420px - 500px)', fr: 'Moyenne (420px - 500px)' } }
-          - { value: large, label: { en: 'Large (550px - 650px)', tr: 'Büyük (550px - 650px)', de: 'Groß (550px - 650px)', ru: 'Большая (550px - 650px)', es: 'Grande (550px - 650px)', fr: 'Grande (550px - 650px)' } }
-          - { value: full, label: { en: 'Full Viewport (100vh)', tr: 'Tam Ekran (100vh)', de: 'Vollbild (100vh)', ru: 'Во весь экран (100vh)', es: 'Pantalla Completa (100vh)', fr: 'Plein Écran (100vh)' } }
+          - { value: small, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малая', es: 'Pequeña', fr: 'Petite' } }
+          - { value: medium, label: { en: 'Medium', tr: 'Standart', de: 'Mittel', ru: 'Средняя', es: 'Mediana', fr: 'Moyenne' } }
+          - { value: large, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большая', es: 'Grande', fr: 'Grande' } }
+          - { value: full, label: { en: 'Full Viewport', tr: 'Tam Ekran', de: 'Vollbild', ru: 'Во весь экран', es: 'Pantalla Completa', fr: 'Plein Écran' } }
       content_align:
         type: select
         label:
@@ -66,7 +66,7 @@ tabs:
         default: dots
         col_span: 6
         options:
-          - { value: dots, label: { en: 'Pagination Dots', tr: 'Noktalar (Dots)', de: Seitenpunkte, ru: 'Точки пагинации', es: 'Puntos de Paginación', fr: 'Points de Pagination' } }
+          - { value: dots, label: { en: 'Pagination Dots', tr: 'Noktalar', de: Seitenpunkte, ru: 'Точки пагинации', es: 'Puntos de Paginación', fr: 'Points de Pagination' } }
           - { value: none, label: { en: Hidden, tr: Gizli, de: Ausgeblendet, ru: Скрыто, es: Oculto, fr: Masqué } }
       autoplay:
         type: checkbox
@@ -93,11 +93,11 @@ tabs:
       interval:
         type: number
         label:
-          en: 'Autoplay Interval (ms)'
-          tr: 'Geçiş Süresi (ms)'
-          de: 'Autoplay-Intervall (ms)'
-          ru: 'Интервал автопрокрутки (мс)'
-          es: 'Intervalo de Reproducción (ms)'
-          fr: 'Intervalle de Lecture Auto (ms)'
+          en: 'Autoplay Interval'
+          tr: 'Geçiş Süresi'
+          de: 'Autoplay-Intervall'
+          ru: 'Интервал автопрокрутки'
+          es: 'Intervalo de Reproducción'
+          fr: 'Intervalle de Lecture Auto'
         default: 5000
         col_span: 4

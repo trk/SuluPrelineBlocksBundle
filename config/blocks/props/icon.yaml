@@ -36,11 +36,11 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Small (24px)', tr: 'Küçük (24px)', de: 'Klein (24px)', ru: 'Малый (24px)', es: 'Pequeño (24px)', fr: 'Petit (24px)' } }
-          - { value: md, label: { en: 'Medium (32px)', tr: 'Orta (32px)', de: 'Mittel (32px)', ru: 'Средний (32px)', es: 'Mediano (32px)', fr: 'Moyen (32px)' } }
-          - { value: lg, label: { en: 'Large (48px)', tr: 'Büyük (48px)', de: 'Groß (48px)', ru: 'Большой (48px)', es: 'Grande (48px)', fr: 'Grand (48px)' } }
-          - { value: xl, label: { en: 'Extra Large (64px)', tr: 'Çok Büyük (64px)', de: 'Extra Groß (64px)', ru: 'Очень большой (64px)', es: 'Extra Grande (64px)', fr: 'Très Grand (64px)' } }
-          - { value: 2xl, label: { en: 'Huge (80px)', tr: 'Dev (80px)', de: 'Riesig (80px)', ru: 'Огромный (80px)', es: 'Enorme (80px)', fr: 'immense (80px)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
+          - { value: 2xl, label: { en: 'Huge', tr: 'Dev', de: 'Riesig', ru: 'Огромный', es: 'Enorme', fr: 'immense' } }
       icon_color:
         type: select
         label:
@@ -57,8 +57,8 @@ tabs:
           - { value: secondary, label: { en: 'Secondary Indigo', tr: 'İkincil İndigo', de: 'Sekundär Indigo', ru: 'Вторичный индиго', es: 'Índigo Secundario', fr: 'Indigo Secondaire' } }
           - { value: dark, label: { en: 'Dark / Black', tr: 'Koyu / Siyah', de: 'Dunkel / Schwarz', ru: 'Тёмный / Чёрный', es: 'Oscuro / Negro', fr: 'Sombre / Noir' } }
           - { value: muted, label: { en: 'Muted Gray', tr: 'Açık Gri', de: 'Gedämpftes Grau', ru: 'Приглушённый серый', es: 'Gris Atenuado', fr: 'Gris Atténué' } }
-          - { value: success, label: { en: 'Success Green', tr: 'Yeşil (Başarı)', de: Erfolgsgrün, ru: 'Зелёный (Успех)', es: 'Verde Éxito', fr: 'Vert Succès' } }
-          - { value: danger, label: { en: 'Danger Red', tr: 'Kırmızı (Uyarı)', de: Gefahrenrot, ru: 'Красный (Опасность)', es: 'Rojo Peligro', fr: 'Rouge Danger' } }
+          - { value: success, label: { en: 'Success Green', tr: 'Yeşil', de: Erfolgsgrün, ru: 'Зелёный', es: 'Verde Éxito', fr: 'Vert Succès' } }
+          - { value: danger, label: { en: 'Danger Red', tr: 'Kırmızı', de: Gefahrenrot, ru: 'Красный', es: 'Rojo Peligro', fr: 'Rouge Danger' } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
       align:
         type: select

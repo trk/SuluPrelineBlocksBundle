@@ -21,17 +21,17 @@ tabs:
         col_span: 12
         options:
           - { value: grid, label: { en: 'Standard Grid', tr: 'Standart Izgara', de: Standard-Raster, ru: 'Стандартная сетка', es: 'Cuadrícula Estándar', fr: 'Grille Standard' } }
-          - { value: masonry, label: { en: 'Masonry (Columns)', tr: 'Duvar Örgüsü (Masonry)', de: 'Masonry (Spalten)', ru: 'Кладка (Колонки)', es: 'Mosaico (Columnas)', fr: 'Maçonnerie (Colonnes)' } }
-          - { value: card_group, label: { en: 'Card Group (Joined Cards)', tr: 'Kart Grubu (Birleşik Kartlar)', de: 'Kartengruppe (Verbunden)', ru: 'Группа карточек (Слитная)', es: 'Grupo de Tarjetas (Unidas)', fr: 'Groupe de Cartes (Jointes)' } }
+          - { value: masonry, label: { en: 'Masonry', tr: 'Duvar Örgüsü', de: 'Masonry', ru: 'Кладка', es: 'Mosaico', fr: 'Maçonnerie' } }
+          - { value: card_group, label: { en: 'Card Group', tr: 'Kart Grubu', de: 'Kartengruppe', ru: 'Группа карточек', es: 'Grupo de Tarjetas', fr: 'Groupe de Cartes' } }
       columns_default:
         type: select
         label:
-          en: 'Columns (Mobile)'
-          tr: 'Mobil (< 768px)'
-          de: 'Spalten (Mobil)'
-          ru: 'Колонки (Мобильные)'
-          es: 'Columnas (Móvil)'
-          fr: 'Colonnes (Mobile)'
+          en: 'Columns'
+          tr: 'Mobil'
+          de: 'Spalten'
+          ru: 'Колонки'
+          es: 'Columnas'
+          fr: 'Colonnes'
         default: '1'
         col_span: 4
         options:
@@ -44,16 +44,16 @@ tabs:
       columns_md:
         type: select
         label:
-          en: 'Columns (Tablet)'
-          tr: 'Tablet (>= 768px)'
-          de: 'Spalten (Tablet)'
-          ru: 'Колонки (Планшет)'
-          es: 'Columnas (Tablet)'
-          fr: 'Colonnes (Tablette)'
+          en: 'Columns'
+          tr: 'Tablet'
+          de: 'Spalten'
+          ru: 'Колонки'
+          es: 'Columnas'
+          fr: 'Colonnes'
         default: '3'
         col_span: 4
         options:
-          - { value: '', label: { en: 'Inherit (Devral)', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
+          - { value: '', label: { en: 'Inherit', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
           - { value: '1', label: { en: '1', tr: '1', de: '1', ru: '1', es: '1', fr: '1' } }
           - { value: '2', label: { en: '2', tr: '2', de: '2', ru: '2', es: '2', fr: '2' } }
           - { value: '3', label: { en: '3', tr: '3', de: '3', ru: '3', es: '3', fr: '3' } }
@@ -63,16 +63,16 @@ tabs:
       columns_lg:
         type: select
         label:
-          en: 'Columns (Desktop)'
-          tr: 'Masaüstü (>= 1024px)'
-          de: 'Spalten (Desktop)'
-          ru: 'Колонки (ПК)'
-          es: 'Columnas (Escritorio)'
-          fr: 'Colonnes (Bureau)'
+          en: 'Columns'
+          tr: 'Masaüstü'
+          de: 'Spalten'
+          ru: 'Колонки'
+          es: 'Columnas'
+          fr: 'Colonnes'
         default: ''
         col_span: 4
         options:
-          - { value: '', label: { en: 'Inherit (Devral)', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
+          - { value: '', label: { en: 'Inherit', tr: Devral, de: Übernehmen, ru: Наследовать, es: Heredar, fr: Hériter } }
           - { value: '1', label: { en: '1', tr: '1', de: '1', ru: '1', es: '1', fr: '1' } }
           - { value: '2', label: { en: '2', tr: '2', de: '2', ru: '2', es: '2', fr: '2' } }
           - { value: '3', label: { en: '3', tr: '3', de: '3', ru: '3', es: '3', fr: '3' } }
@@ -84,31 +84,31 @@ tabs:
         label:
           en: 'Grid Gap'
           tr: 'Izgara Boşluğu'
-          de: 'Rasterabstand (Gap)'
-          ru: 'Отступ сетки (Gap)'
-          es: 'Espaciado de Cuadrícula (Gap)'
-          fr: 'Espacement de Grille (Gap)'
+          de: 'Rasterabstand'
+          ru: 'Отступ сетки'
+          es: 'Espaciado de Cuadrícula'
+          fr: 'Espacement de Grille'
         default: md
         col_span: 6
         options:
-          - { value: collapse, label: { en: 'None (Collapse)', tr: 'Yok (Bitişik)', de: 'Keine (Ohne Abstand)', ru: 'Нет (Без отступов)', es: 'Ninguno (Sin Espacio)', fr: 'Aucun (Sans Espace)' } }
-          - { value: sm, label: { en: 'Small (1rem / 16px)', tr: 'Küçük (1rem / 16px)', de: 'Klein (1rem / 16px)', ru: 'Малый (1rem / 16px)', es: 'Pequeño (1rem / 16px)', fr: 'Petit (1rem / 16px)' } }
-          - { value: md, label: { en: 'Medium (1.5rem / 24px)', tr: 'Orta (1.5rem / 24px)', de: 'Mittel (1.5rem / 24px)', ru: 'Средний (1.5rem / 24px)', es: 'Mediano (1.5rem / 24px)', fr: 'Moyen (1.5rem / 24px)' } }
-          - { value: lg, label: { en: 'Large (2rem / 32px)', tr: 'Büyük (2rem / 32px)', de: 'Groß (2rem / 32px)', ru: 'Большой (2rem / 32px)', es: 'Grande (2rem / 32px)', fr: 'Grand (2rem / 32px)' } }
-          - { value: xl, label: { en: 'Extra Large (3rem / 48px)', tr: 'Çok Büyük (3rem / 48px)', de: 'Extra Groß (3rem / 48px)', ru: 'Очень большой (3rem / 48px)', es: 'Extra Grande (3rem / 48px)', fr: 'Très Grand (3rem / 48px)' } }
+          - { value: collapse, label: { en: 'None', tr: 'Yok', de: 'Keine', ru: 'Нет', es: 'Ninguno', fr: 'Aucun' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       masonry:
         type: select
         label:
           en: 'Masonry Layout'
-          tr: 'Duvar (Masonry) Düzeni'
+          tr: 'Duvar Düzeni'
           de: Masonry-Layout
-          ru: 'Каменная кладка (Masonry)'
-          es: 'Diseño Mosaico (Masonry)'
-          fr: 'Disposition Maçonnerie (Masonry)'
+          ru: 'Каменная кладка'
+          es: 'Diseño Mosaico'
+          fr: 'Disposition Maçonnerie'
         default: none
         col_span: 6
         options:
-          - { value: none, label: { en: 'Disabled (Standard Grid)', tr: 'Kapalı (Standart Izgara)', de: 'Deaktiviert (Standard-Raster)', ru: 'Отключено (Стандартная сетка)', es: 'Desactivado (Cuadrícula Estándar)', fr: 'Désactivé (Grille Standard)' } }
+          - { value: none, label: { en: 'Disabled', tr: 'Kapalı', de: 'Deaktiviert', ru: 'Отключено', es: 'Desactivado', fr: 'Désactivé' } }
           - { value: columns, label: { en: 'Columns Masonry', tr: 'Sütun Tabanlı Duvar', de: Spalten-Masonry, ru: 'Колоночная кладка', es: 'Mosaico por Columnas', fr: 'Maçonnerie en Colonnes' } }
       card_variant:
         type: select
@@ -124,8 +124,8 @@ tabs:
         options:
           - { value: default, label: { en: Default, tr: Varsayılan, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
           - { value: bordered, label: { en: Bordered, tr: Kenarlıklı, de: Umrandet, ru: 'С рамкой', es: 'Con Borde', fr: Bordé } }
-          - { value: flat, label: { en: 'Flat (Clean)', tr: 'Düz (Sade)', de: 'Flach (Schlicht)', ru: 'Плоский (Чистый)', es: 'Plano (Limpio)', fr: 'Plat (Épuré)' } }
-          - { value: raised, label: { en: 'Raised (Shadow)', tr: 'Gölgeli (Raised)', de: 'Erhöht (Schatten)', ru: 'Приподнятый (С тенью)', es: 'Elevado (Con Sombra)', fr: 'Surélevé (Ombré)' } }
+          - { value: flat, label: { en: 'Flat', tr: 'Düz', de: 'Flach', ru: 'Плоский', es: 'Plano', fr: 'Plat' } }
+          - { value: raised, label: { en: 'Raised', tr: 'Gölgeli', de: 'Erhöht', ru: 'Приподнятый', es: 'Elevado', fr: 'Surélevé' } }
       media_align:
         type: select
         label:
@@ -182,7 +182,7 @@ tabs:
         default: pills
         col_span: 6
         options:
-          - { value: pills, label: { en: 'Pills (Preline Soft)', tr: 'Kapsül Butonlar', de: 'Pillen (Sanft)', ru: 'Капсулы (Мягкие)', es: 'Píldoras (Suaves)', fr: 'Pilules (Douces)' } }
+          - { value: pills, label: { en: 'Pills', tr: 'Kapsül Butonlar', de: 'Pillen', ru: 'Капсулы', es: 'Píldoras', fr: 'Pilules' } }
           - { value: tabs, label: { en: 'Underline Tabs', tr: 'Alt Çizgili Sekmeler', de: 'Unterstrichene Tabs', ru: 'Подчёркнутые вкладки', es: 'Pestañas Subrayadas', fr: 'Onglets Soulignés' } }
           - { value: buttons, label: { en: 'Outline Buttons', tr: 'Çizgili Butonlar', de: 'Umrandete Buttons', ru: 'Контурные кнопки', es: 'Botones con Contorno', fr: 'Boutons avec Contour' } }
       filter_align:

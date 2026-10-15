@@ -20,10 +20,10 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       text_style:
         type: select
         label:
@@ -37,7 +37,7 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: Default, tr: Varsayılan, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
-          - { value: lead, label: { en: 'Lead Paragraph', tr: 'Giriş Paragrafı (Lead)', de: 'Einleitungsabsatz (Lead)', ru: 'Вводный абзац (Lead)', es: 'Párrafo Destacado (Lead)', fr: 'Paragraphe d’Introduction (Lead)' } }
+          - { value: lead, label: { en: 'Lead Paragraph', tr: 'Giriş Paragrafı', de: 'Einleitungsabsatz', ru: 'Вводный абзац', es: 'Párrafo Destacado', fr: 'Paragraphe d’Introduction' } }
           - { value: meta, label: { en: 'Meta / Caption', tr: 'Meta / Açıklama', de: 'Meta / Bildunterschrift', ru: 'Мета / Подпись', es: 'Meta / Leyenda', fr: 'Méta / Légende' } }
           - { value: large, label: { en: 'Large Reading Text', tr: 'Geniş Okuma Metni', de: 'Großer Lesetext', ru: 'Крупный текст для чтения', es: 'Texto de Lectura Grande', fr: 'Grand Texte de Lecture' } }
           - { value: small, label: { en: 'Small Note', tr: 'Dipnot / Küçük Metin', de: 'Kleine Notiz', ru: 'Мелкая заметка', es: 'Nota Pequeña', fr: 'Petite Note' } }
@@ -45,11 +45,11 @@ tabs:
         type: select
         label:
           en: 'Drop Cap'
-          tr: 'Büyük Baş Harf (Drop Cap)'
-          de: 'Initiale (Drop Cap)'
-          ru: 'Буквица (Drop Cap)'
-          es: 'Letra Capital (Drop Cap)'
-          fr: 'Lettrine (Drop Cap)'
+          tr: 'Büyük Baş Harf'
+          de: 'Initiale'
+          ru: 'Буквица'
+          es: 'Letra Capital'
+          fr: 'Lettrine'
         default: 'no'
         col_span: 6
         options:
@@ -68,9 +68,9 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: 'Single Column', tr: 'Tek Sütun', de: 'Einzelne Spalte', ru: 'Одна колонка', es: 'Columna Única', fr: 'Colonne Unique' } }
-          - { value: 1-2, label: { en: '2 Columns', tr: '2 Sütun (1/2)', de: '2 Spalten', ru: '2 колонки', es: '2 Columnas', fr: '2 Colonnes' } }
-          - { value: 1-3, label: { en: '3 Columns', tr: '3 Sütun (1/3)', de: '3 Spalten', ru: '3 колонки', es: '3 Columnas', fr: '3 Colonnes' } }
-          - { value: 1-4, label: { en: '4 Columns', tr: '4 Sütun (1/4)', de: '4 Spalten', ru: '4 колонки', es: '4 Columnas', fr: '4 Colonnes' } }
+          - { value: 1-2, label: { en: '2 Columns', tr: '2 Sütun', de: '2 Spalten', ru: '2 колонки', es: '2 Columnas', fr: '2 Colonnes' } }
+          - { value: 1-3, label: { en: '3 Columns', tr: '3 Sütun', de: '3 Spalten', ru: '3 колонки', es: '3 Columnas', fr: '3 Colonnes' } }
+          - { value: 1-4, label: { en: '4 Columns', tr: '4 Sütun', de: '4 Spalten', ru: '4 колонки', es: '4 Columnas', fr: '4 Colonnes' } }
       column_divider:
         type: select
         label:
@@ -84,7 +84,7 @@ tabs:
         col_span: 6
         options:
           - { value: 'no', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
-          - { value: 'yes', label: { en: 'Yes (Line between columns)', tr: 'Evet (Sütunlar Arası Çizgi)', de: 'Ja (Linie zwischen Spalten)', ru: 'Да (Линия между колонками)', es: 'Sí (Línea entre columnas)', fr: 'Oui (Ligne entre les colonnes)' } }
+          - { value: 'yes', label: { en: 'Yes', tr: 'Evet', de: 'Ja', ru: 'Да', es: 'Sí', fr: 'Oui' } }
       color:
         type: select
         label:

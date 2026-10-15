@@ -3,7 +3,7 @@
       xmlns:xi="http://www.w3.org/2001/XInclude">
     <meta>
         <title lang="en">Hotspot Marker</title>
-        <title lang="tr">İnteraktif Nokta (Hotspot)</title>
+        <title lang="tr">İnteraktif Nokta</title>
         <title lang="de">Hotspot-Markierung</title>
         <title lang="ru">Точка на изображении</title>
         <title lang="es">Marcador interactivo</title>
@@ -46,7 +46,7 @@
                     <param name="pulse">
                         <meta>
                             <title lang="en">Radar Pulse</title>
-                            <title lang="tr">Radar (Pulse)</title>
+                            <title lang="tr">Radar</title>
                             <title lang="de">Radar-Impuls</title>
                             <title lang="ru">Пульсирующий радар</title>
                             <title lang="es">Pulso de radar</title>
@@ -55,32 +55,32 @@
                     </param>
                     <param name="plus">
                         <meta>
-                            <title lang="en">Plus (+)</title>
-                            <title lang="tr">Artı (+)</title>
-                            <title lang="de">Plus (+)</title>
-                            <title lang="ru">Плюс (+)</title>
-                            <title lang="es">Más (+)</title>
-                            <title lang="fr">Plus (+)</title>
+                            <title lang="en">Plus</title>
+                            <title lang="tr">Artı</title>
+                            <title lang="de">Plus</title>
+                            <title lang="ru">Плюс</title>
+                            <title lang="es">Más</title>
+                            <title lang="fr">Plus</title>
                         </meta>
                     </param>
                     <param name="number">
                         <meta>
-                            <title lang="en">Number (1, 2, 3...)</title>
-                            <title lang="tr">Numara (1, 2, 3...)</title>
-                            <title lang="de">Nummer (1, 2, 3...)</title>
-                            <title lang="ru">Номер (1, 2, 3...)</title>
-                            <title lang="es">Número (1, 2, 3...)</title>
-                            <title lang="fr">Numéro (1, 2, 3...)</title>
+                            <title lang="en">Number</title>
+                            <title lang="tr">Numara</title>
+                            <title lang="de">Nummer</title>
+                            <title lang="ru">Номер</title>
+                            <title lang="es">Número</title>
+                            <title lang="fr">Numéro</title>
                         </meta>
                     </param>
                     <param name="dot">
                         <meta>
                             <title lang="en">Solid Dot</title>
-                            <title lang="tr">Nokta (Dot)</title>
-                            <title lang="de">Punkt (Dot)</title>
-                            <title lang="ru">Точка (Dot)</title>
-                            <title lang="es">Punto (Dot)</title>
-                            <title lang="fr">Point (Dot)</title>
+                            <title lang="tr">Nokta</title>
+                            <title lang="de">Punkt</title>
+                            <title lang="ru">Точка</title>
+                            <title lang="es">Punto</title>
+                            <title lang="fr">Point</title>
                         </meta>
                     </param>
                     <param name="pin">
@@ -131,12 +131,12 @@
                     </param>
                     <param name="primary">
                         <meta>
-                            <title lang="en">Primary (Blue)</title>
-                            <title lang="tr">Birincil (Mavi)</title>
-                            <title lang="de">Primär (Blau)</title>
-                            <title lang="ru">Основной (Синий)</title>
-                            <title lang="es">Primario (Azul)</title>
-                            <title lang="fr">Primaire (Bleu)</title>
+                            <title lang="en">Primary</title>
+                            <title lang="tr">Birincil</title>
+                            <title lang="de">Primär</title>
+                            <title lang="ru">Основной</title>
+                            <title lang="es">Primario</title>
+                            <title lang="fr">Primaire</title>
                         </meta>
                     </param>
                     <param name="dark">
@@ -151,7 +151,7 @@
                     </param>
                     <param name="light">
                         <meta>
-                            <title lang="en">Light (White)</title>
+                            <title lang="en">Light</title>
                             <title lang="tr">Açık / Beyaz</title>
                             <title lang="de">Hell / Weiß</title>
                             <title lang="ru">Светлый / Белый</title>
@@ -161,32 +161,32 @@
                     </param>
                     <param name="accent">
                         <meta>
-                            <title lang="en">Accent (Amber)</title>
+                            <title lang="en">Accent</title>
                             <title lang="tr">Sarı / Vurgu</title>
-                            <title lang="de">Akzent (Bernstein)</title>
-                            <title lang="ru">Акцент (Янтарный)</title>
-                            <title lang="es">Acento (Ámbar)</title>
-                            <title lang="fr">Accent (Ambre)</title>
+                            <title lang="de">Akzent</title>
+                            <title lang="ru">Акцент</title>
+                            <title lang="es">Acento</title>
+                            <title lang="fr">Accent</title>
                         </meta>
                     </param>
                     <param name="success">
                         <meta>
-                            <title lang="en">Success (Green)</title>
+                            <title lang="en">Success</title>
                             <title lang="tr">Yeşil</title>
-                            <title lang="de">Erfolg (Grün)</title>
-                            <title lang="ru">Успех (Зелёный)</title>
-                            <title lang="es">Éxito (Verde)</title>
-                            <title lang="fr">Succès (Vert)</title>
+                            <title lang="de">Erfolg</title>
+                            <title lang="ru">Успех</title>
+                            <title lang="es">Éxito</title>
+                            <title lang="fr">Succès</title>
                         </meta>
                     </param>
                     <param name="danger">
                         <meta>
-                            <title lang="en">Danger (Red)</title>
+                            <title lang="en">Danger</title>
                             <title lang="tr">Kırmızı</title>
-                            <title lang="de">Gefahr (Rot)</title>
-                            <title lang="ru">Опасность (Красный)</title>
-                            <title lang="es">Peligro (Rojo)</title>
-                            <title lang="fr">Danger (Rouge)</title>
+                            <title lang="de">Gefahr</title>
+                            <title lang="ru">Опасность</title>
+                            <title lang="es">Peligro</title>
+                            <title lang="fr">Danger</title>
                         </meta>
                     </param>
                 </param>
@@ -210,12 +210,12 @@
 
         <property name="meta" type="text_line">
             <meta>
-                <title lang="en">Subtitle / Meta (e.g. Price, Category)</title>
-                <title lang="tr">Alt Başlık / Meta Bilgisi (Örn: Fiyat, Kategori)</title>
-                <title lang="de">Untertitel / Meta (z. B. Preis, Kategorie)</title>
-                <title lang="ru">Подзаголовок / Мета (напр. Цена, Категория)</title>
-                <title lang="es">Subtítulo / Meta (p. ej. Precio, Categoría)</title>
-                <title lang="fr">Sous-titre / Méta (ex. Prix, Catégorie)</title>
+                <title lang="en">Subtitle / Meta</title>
+                <title lang="tr">Alt Başlık / Meta Bilgisi</title>
+                <title lang="de">Untertitel / Meta</title>
+                <title lang="ru">Подзаголовок / Мета</title>
+                <title lang="es">Subtítulo / Meta</title>
+                <title lang="fr">Sous-titre / Méta</title>
             </meta>
         </property>
 

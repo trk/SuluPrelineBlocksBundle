@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>slideshow</key>
     <meta>
-        <title lang="en">Slideshow (Hero Carousel)</title>
-        <title lang="tr">Slayt Gösterisi (Hero Karusel)</title>
-        <title lang="de">Diashow (Hero-Karussell)</title>
-        <title lang="ru">Слайд-шоу (Главная карусель)</title>
-        <title lang="es">Presentación de diapositivas (Carrusel de héroe)</title>
-        <title lang="fr">Diaporama (Carrousel héroïque)</title>
+        <title lang="en">Slideshow</title>
+        <title lang="tr">Slayt Gösterisi</title>
+        <title lang="de">Diashow</title>
+        <title lang="ru">Слайд-шоу</title>
+        <title lang="es">Presentación de diapositivas</title>
+        <title lang="fr">Diaporama</title>
     </meta>
     <properties>
         <xi:include href="../fields/title.xml"/>

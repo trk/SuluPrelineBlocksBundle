@@ -11,12 +11,12 @@ tabs:
       columns:
         type: select
         label:
-          en: 'Visible Slides (Desktop)'
-          tr: 'Görünür Slayt Sayısı (Masaüstü)'
-          de: 'Sichtbare Folien (Desktop)'
-          ru: 'Видимые слайды (ПК)'
-          es: 'Diapositivas Visibles (Escritorio)'
-          fr: 'Diapositives Visibles (Bureau)'
+          en: 'Visible Slides'
+          tr: 'Görünür Slayt Sayısı'
+          de: 'Sichtbare Folien'
+          ru: 'Видимые слайды'
+          es: 'Diapositivas Visibles'
+          fr: 'Diapositives Visibles'
         default: '3'
         col_span: 6
         options:
@@ -37,9 +37,9 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
       arrows:
         type: select
         label:
@@ -94,11 +94,11 @@ tabs:
       interval:
         type: number
         label:
-          en: 'Autoplay Interval (ms)'
-          tr: 'Geçiş Süresi (ms)'
-          de: 'Autoplay-Intervall (ms)'
-          ru: 'Интервал автопрокрутки (мс)'
-          es: 'Intervalo de Reproducción (ms)'
-          fr: 'Intervalle de Lecture Auto (ms)'
+          en: 'Autoplay Interval'
+          tr: 'Geçiş Süresi'
+          de: 'Autoplay-Intervall'
+          ru: 'Интервал автопрокрутки'
+          es: 'Intervalo de Reproducción'
+          fr: 'Intervalle de Lecture Auto'
         default: 4000
         col_span: 4

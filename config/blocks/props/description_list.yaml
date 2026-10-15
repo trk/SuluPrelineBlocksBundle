@@ -20,25 +20,25 @@ tabs:
         default: horizontal
         col_span: 6
         options:
-          - { value: horizontal, label: { en: 'Horizontal (2 Columns Key-Value)', tr: 'Yatay (2 Kolonlu Terim-Açıklama)', de: 'Horizontal (2 Spalten Schlüssel-Wert)', ru: 'Горизонтально (2 колонки ключ-значение)', es: 'Horizontal (2 Columnas Clave-Valor)', fr: 'Horizontal (2 Colonnes Clé-Valeur)' } }
-          - { value: stacked, label: { en: 'Stacked (Vertical)', tr: 'Dikey (Alt Alta)', de: 'Gestapelt (Vertikal)', ru: 'Вертикально (Стопкой)', es: 'Apilado (Vertical)', fr: 'Empilé (Vertical)' } }
-          - { value: striped, label: { en: 'Striped Rows (Zebra)', tr: 'Zebra Çizgili Satırlar', de: 'Gestreifte Zeilen (Zebra)', ru: 'Чередующиеся строки (Зебра)', es: 'Filas Rayadas (Cebra)', fr: 'Lignes Rayées (Zèbre)' } }
+          - { value: horizontal, label: { en: 'Horizontal', tr: 'Yatay', de: 'Horizontal', ru: 'Горизонтально', es: 'Horizontal', fr: 'Horizontal' } }
+          - { value: stacked, label: { en: 'Stacked', tr: 'Dikey', de: 'Gestapelt', ru: 'Вертикально', es: 'Apilado', fr: 'Empilé' } }
+          - { value: striped, label: { en: 'Striped Rows', tr: 'Zebra Çizgili Satırlar', de: 'Gestreifte Zeilen', ru: 'Чередующиеся строки', es: 'Filas Rayadas', fr: 'Lignes Rayées' } }
           - { value: bordered, label: { en: 'Bordered Cards', tr: 'Çerçeveli Kartlar', de: 'Umrandete Karten', ru: 'Карточки с рамкой', es: 'Tarjetas con Borde', fr: 'Cartes Bordées' } }
       term_width:
         type: select
         label:
-          en: 'Term Width (Horizontal)'
-          tr: 'Başlık Genişliği (Yatayda)'
-          de: 'Begriffsbreite (Horizontal)'
-          ru: 'Ширина термина (Горизонтально)'
-          es: 'Ancho del Término (Horizontal)'
-          fr: 'Largeur du Terme (Horizontal)'
+          en: 'Term Width'
+          tr: 'Başlık Genişliği'
+          de: 'Begriffsbreite'
+          ru: 'Ширина термина'
+          es: 'Ancho del Término'
+          fr: 'Largeur du Terme'
         default: 1-3
         col_span: 6
         options:
-          - { value: 1-4, label: { en: '25% (1/4)', tr: '%25 (1/4)', de: '25% (1/4)', ru: '25% (1/4)', es: '25% (1/4)', fr: '25% (1/4)' } }
-          - { value: 1-3, label: { en: '33% (1/3)', tr: '%33 (1/3)', de: '33% (1/3)', ru: '33% (1/3)', es: '33% (1/3)', fr: '33% (1/3)' } }
-          - { value: 1-2, label: { en: '50% (1/2)', tr: '%50 (1/2)', de: '50% (1/2)', ru: '50% (1/2)', es: '50% (1/2)', fr: '50% (1/2)' } }
+          - { value: 1-4, label: { en: '25%', tr: '%25', de: '25%', ru: '25%', es: '25%', fr: '25%' } }
+          - { value: 1-3, label: { en: '33%', tr: '%33', de: '33%', ru: '33%', es: '33%', fr: '33%' } }
+          - { value: 1-2, label: { en: '50%', tr: '%50', de: '50%', ru: '50%', es: '50%', fr: '50%' } }
           - { value: auto, label: { en: Auto, tr: Otomatik, de: Auto, ru: Авто, es: Auto, fr: Auto } }
       divider:
         type: checkbox
@@ -63,9 +63,9 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: 'Orta (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
       term_style:
         type: select
         label:
@@ -78,7 +78,7 @@ tabs:
         default: bold
         col_span: 6
         options:
-          - { value: bold, label: { en: Bold, tr: 'Kalın (Bold)', de: 'Fett (Bold)', ru: 'Жирный (Bold)', es: 'Negrita (Bold)', fr: 'Gras (Bold)' } }
-          - { value: medium, label: { en: Medium, tr: 'Orta (Medium)', de: 'Mittel (Medium)', ru: 'Средний (Medium)', es: 'Medio (Medium)', fr: 'Moyen (Medium)' } }
-          - { value: muted, label: { en: 'Muted (Gray)', tr: 'Gri / Soluk (Muted)', de: 'Gedämpft (Grau)', ru: 'Приглушённый (Серый)', es: 'Atenuado (Gris)', fr: 'Atténué (Gris)' } }
-          - { value: primary, label: { en: 'Primary (Accent)', tr: 'Birincil (Vurgulu)', de: 'Primär (Akzent)', ru: 'Основной (Акцент)', es: 'Primario (Acento)', fr: 'Primaire (Accent)' } }
+          - { value: bold, label: { en: Bold, tr: 'Kalın', de: 'Fett', ru: 'Жирный', es: 'Negrita', fr: 'Gras' } }
+          - { value: medium, label: { en: Medium, tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Medio', fr: 'Moyen' } }
+          - { value: muted, label: { en: 'Muted', tr: 'Gri / Soluk', de: 'Gedämpft', ru: 'Приглушённый', es: 'Atenuado', fr: 'Atténué' } }
+          - { value: primary, label: { en: 'Primary', tr: 'Birincil', de: 'Primär', ru: 'Основной', es: 'Primario', fr: 'Primaire' } }

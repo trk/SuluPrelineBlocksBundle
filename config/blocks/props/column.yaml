@@ -11,26 +11,26 @@ tabs:
       col_span:
         type: select
         label:
-          en: 'Column Width (Grid Span)'
+          en: 'Column Width'
           tr: 'Sütun Genişliği'
-          de: 'Spaltenbreite (Raster)'
-          ru: 'Ширина колонки (Сетка)'
-          es: 'Ancho de Columna (Cuadrícula)'
-          fr: 'Largeur de Colonne (Grille)'
+          de: 'Spaltenbreite'
+          ru: 'Ширина колонки'
+          es: 'Ancho de Columna'
+          fr: 'Largeur de Colonne'
         default: auto
         col_span: 6
         options:
-          - { value: auto, label: { en: 'Auto (Inherit from Row)', tr: 'Otomatik (Satırdan Al)', de: 'Auto (Von Zeile übernehmen)', ru: 'Авто (Из строки)', es: 'Auto (Heredar de Fila)', fr: 'Auto (Hériter de la Ligne)' } }
-          - { value: '12', label: { en: '12/12 - Full Width (100%)', tr: '12/12 - Tam Genişlik (%100)', de: '12/12 - Volle Breite (100%)', ru: '12/12 - Во всю ширину (100%)', es: '12/12 - Ancho Completo (100%)', fr: '12/12 - Pleine Largeur (100%)' } }
-          - { value: '10', label: { en: '10/12 - Five Sixths (83.3%)', tr: '10/12 - Altıda Beş (%83.3)', de: '10/12 - Fünf Sechstel (83.3%)', ru: '10/12 - Пять шестых (83.3%)', es: '10/12 - Cinco Sextos (83.3%)', fr: '10/12 - Cinq Sixièmes (83.3%)' } }
-          - { value: '9', label: { en: '9/12 - Three Quarters (75%)', tr: '9/12 - Dörtte Üç (%75)', de: '9/12 - Drei Viertel (75%)', ru: '9/12 - Три четверти (75%)', es: '9/12 - Tres Cuartos (75%)', fr: '9/12 - Trois Quarts (75%)' } }
-          - { value: '8', label: { en: '8/12 - Two Thirds (66.6%)', tr: '8/12 - Üçte İki (%66.6)', de: '8/12 - Zwei Drittel (66.6%)', ru: '8/12 - Две трети (66.6%)', es: '8/12 - Dos Tercios (66.6%)', fr: '8/12 - Deux Tiers (66.6%)' } }
-          - { value: '7', label: { en: '7/12 - Seven Twelfths (58.3%)', tr: '7/12 - On İkide Yedi (%58.3)', de: '7/12 - Sieben Zwölftel (58.3%)', ru: '7/12 - Семь двенадцатых (58.3%)', es: '7/12 - Siete Doceavos (58.3%)', fr: '7/12 - Sept Douzièmes (58.3%)' } }
-          - { value: '6', label: { en: '6/12 - Half (50%)', tr: '6/12 - Yarım (%50)', de: '6/12 - Hälfte (50%)', ru: '6/12 - Половина (50%)', es: '6/12 - Mitad (50%)', fr: '6/12 - Moitié (50%)' } }
-          - { value: '5', label: { en: '5/12 - Five Twelfths (41.6%)', tr: '5/12 - On İkide Beş (%41.6)', de: '5/12 - Fünf Zwölftel (41.6%)', ru: '5/12 - Пять двенадцатых (41.6%)', es: '5/12 - Cinco Doceavos (41.6%)', fr: '5/12 - Cinq Douzièmes (41.6%)' } }
-          - { value: '4', label: { en: '4/12 - One Third (33.3%)', tr: '4/12 - Üçte Bir (%33.3)', de: '4/12 - Ein Drittel (33.3%)', ru: '4/12 - Одна треть (33.3%)', es: '4/12 - Un Tercio (33.3%)', fr: '4/12 - Un Tiers (33.3%)' } }
-          - { value: '3', label: { en: '3/12 - One Quarter (25%)', tr: '3/12 - Çeyrek (%25)', de: '3/12 - Ein Viertel (25%)', ru: '3/12 - Одна четверть (25%)', es: '3/12 - Un Cuarto (25%)', fr: '3/12 - Un Quart (25%)' } }
-          - { value: '2', label: { en: '2/12 - One Sixth (16.6%)', tr: '2/12 - Altıda Bir (%16.6)', de: '2/12 - Ein Sechstel (16.6%)', ru: '2/12 - Одна шестая (16.6%)', es: '2/12 - Un Sexto (16.6%)', fr: '2/12 - Un Sixième (16.6%)' } }
+          - { value: auto, label: { en: 'Auto', tr: 'Otomatik', de: 'Auto', ru: 'Авто', es: 'Auto', fr: 'Auto' } }
+          - { value: '12', label: { en: '12/12 - Full Width', tr: '12/12 - Tam Genişlik', de: '12/12 - Volle Breite', ru: '12/12 - Во всю ширину', es: '12/12 - Ancho Completo', fr: '12/12 - Pleine Largeur' } }
+          - { value: '10', label: { en: '10/12 - Five Sixths', tr: '10/12 - Altıda Beş', de: '10/12 - Fünf Sechstel', ru: '10/12 - Пять шестых', es: '10/12 - Cinco Sextos', fr: '10/12 - Cinq Sixièmes' } }
+          - { value: '9', label: { en: '9/12 - Three Quarters', tr: '9/12 - Dörtte Üç', de: '9/12 - Drei Viertel', ru: '9/12 - Три четверти', es: '9/12 - Tres Cuartos', fr: '9/12 - Trois Quarts' } }
+          - { value: '8', label: { en: '8/12 - Two Thirds', tr: '8/12 - Üçte İki', de: '8/12 - Zwei Drittel', ru: '8/12 - Две трети', es: '8/12 - Dos Tercios', fr: '8/12 - Deux Tiers' } }
+          - { value: '7', label: { en: '7/12 - Seven Twelfths', tr: '7/12 - On İkide Yedi', de: '7/12 - Sieben Zwölftel', ru: '7/12 - Семь двенадцатых', es: '7/12 - Siete Doceavos', fr: '7/12 - Sept Douzièmes' } }
+          - { value: '6', label: { en: '6/12 - Half', tr: '6/12 - Yarım', de: '6/12 - Hälfte', ru: '6/12 - Половина', es: '6/12 - Mitad', fr: '6/12 - Moitié' } }
+          - { value: '5', label: { en: '5/12 - Five Twelfths', tr: '5/12 - On İkide Beş', de: '5/12 - Fünf Zwölftel', ru: '5/12 - Пять двенадцатых', es: '5/12 - Cinco Doceavos', fr: '5/12 - Cinq Douzièmes' } }
+          - { value: '4', label: { en: '4/12 - One Third', tr: '4/12 - Üçte Bir', de: '4/12 - Ein Drittel', ru: '4/12 - Одна треть', es: '4/12 - Un Tercio', fr: '4/12 - Un Tiers' } }
+          - { value: '3', label: { en: '3/12 - One Quarter', tr: '3/12 - Çeyrek', de: '3/12 - Ein Viertel', ru: '3/12 - Одна четверть', es: '3/12 - Un Cuarto', fr: '3/12 - Un Quart' } }
+          - { value: '2', label: { en: '2/12 - One Sixth', tr: '2/12 - Altıda Bir', de: '2/12 - Ein Sechstel', ru: '2/12 - Одна шестая', es: '2/12 - Un Sexto', fr: '2/12 - Un Sixième' } }
       vertical_align:
         type: select
         label:
@@ -66,11 +66,11 @@ tabs:
         type: checkbox
         label:
           en: 'Sticky on Scroll'
-          tr: 'Kaydırmada Sabitle (Sticky)'
-          de: 'Beim Scrollen fixieren (Sticky)'
-          ru: 'Закрепить при прокрутке (Sticky)'
-          es: 'Fijar al Desplazar (Sticky)'
-          fr: 'Épingler au Défilement (Sticky)'
+          tr: 'Kaydırmada Sabitle'
+          de: 'Beim Scrollen fixieren'
+          ru: 'Закрепить при прокрутке'
+          es: 'Fijar al Desplazar'
+          fr: 'Épingler au Défilement'
         default: false
         col_span: 6
       style:
@@ -85,24 +85,24 @@ tabs:
         default: none
         col_span: 6
         options:
-          - { value: none, label: { en: 'None (Transparent)', tr: 'Yok (Şeffaf)', de: 'Keine (Transparent)', ru: 'Нет (Прозрачный)', es: 'Ninguno (Transparente)', fr: 'Aucun (Transparent)' } }
-          - { value: card, label: { en: 'Card (Surface + Border + Shadow)', tr: 'Kart (Zemin + Kenarlık + Gölge)', de: 'Karte (Oberfläche + Rahmen + Schatten)', ru: 'Карточка (Фон + Рамка + Тень)', es: 'Tarjeta (Superficie + Borde + Sombra)', fr: 'Carte (Surface + Bordure + Ombre)' } }
-          - { value: muted, label: { en: 'Muted (Gray Surface)', tr: 'Mat (Gri Zemin)', de: 'Gedämpft (Graue Fläche)', ru: 'Приглушённый (Серый фон)', es: 'Atenuado (Superficie Gris)', fr: 'Atténué (Surface Grise)' } }
+          - { value: none, label: { en: 'None', tr: 'Yok', de: 'Keine', ru: 'Нет', es: 'Ninguno', fr: 'Aucun' } }
+          - { value: card, label: { en: 'Card', tr: 'Kart', de: 'Karte', ru: 'Карточка', es: 'Tarjeta', fr: 'Carte' } }
+          - { value: muted, label: { en: 'Muted', tr: 'Mat', de: 'Gedämpft', ru: 'Приглушённый', es: 'Atenuado', fr: 'Atténué' } }
           - { value: subtle, label: { en: 'Subtle Background', tr: 'Hafif Zemin', de: 'Dezenter Hintergrund', ru: 'Лёгкий фон', es: 'Fondo Sutil', fr: 'Fond Subtil' } }
-          - { value: primary_subtle, label: { en: 'Primary Accent Subtle', tr: 'Vurgu Rengi Hafif', de: 'Primärer Akzent (Dezent)', ru: 'Мягкий основной акцент', es: 'Acento Primario Sutil', fr: 'Accent Primaire Subtil' } }
+          - { value: primary_subtle, label: { en: 'Primary Accent Subtle', tr: 'Vurgu Rengi Hafif', de: 'Primärer Akzent', ru: 'Мягкий основной акцент', es: 'Acento Primario Sutil', fr: 'Accent Primaire Subtil' } }
       padding:
         type: select
         label:
           en: 'Inner Padding'
-          tr: 'İç Boşluk (Padding)'
-          de: 'Innenabstand (Padding)'
-          ru: 'Внутренний отступ (Padding)'
-          es: 'Relleno Interior (Padding)'
-          fr: 'Marge Intérieure (Padding)'
+          tr: 'İç Boşluk'
+          de: 'Innenabstand'
+          ru: 'Внутренний отступ'
+          es: 'Relleno Interior'
+          fr: 'Marge Intérieure'
         default: none
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: sm, label: { en: 'Small (p-4)', tr: 'Küçük (p-4)', de: 'Klein (p-4)', ru: 'Малый (p-4)', es: 'Pequeño (p-4)', fr: 'Petit (p-4)' } }
-          - { value: md, label: { en: 'Medium (p-6 sm:p-8)', tr: 'Orta (p-6 sm:p-8)', de: 'Mittel (p-6 sm:p-8)', ru: 'Средний (p-6 sm:p-8)', es: 'Mediano (p-6 sm:p-8)', fr: 'Moyen (p-6 sm:p-8)' } }
-          - { value: lg, label: { en: 'Large (p-8 sm:p-10)', tr: 'Büyük (p-8 sm:p-10)', de: 'Groß (p-8 sm:p-10)', ru: 'Большой (p-8 sm:p-10)', es: 'Grande (p-8 sm:p-10)', fr: 'Grand (p-8 sm:p-10)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }

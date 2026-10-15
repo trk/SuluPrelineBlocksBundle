@@ -25,12 +25,12 @@ tabs:
       columns:
         type: select
         label:
-          en: 'Columns (Vertical Mode)'
-          tr: 'Sütun Sayısı (Dikey Mod)'
-          de: 'Spalten (Vertikaler Modus)'
-          ru: 'Колонки (Вертикальный режим)'
-          es: 'Columnas (Modo Vertical)'
-          fr: 'Colonnes (Mode Vertical)'
+          en: 'Columns'
+          tr: 'Sütun Sayısı'
+          de: 'Spalten'
+          ru: 'Колонки'
+          es: 'Columnas'
+          fr: 'Colonnes'
         default: '1'
         col_span: 6
         options:
@@ -49,9 +49,9 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Compact (sm)', tr: 'Dar (sm)', de: 'Kompakt (sm)', ru: 'Компактный (sm)', es: 'Compacto (sm)', fr: 'Compact (sm)' } }
-          - { value: md, label: { en: 'Normal (md)', tr: 'Standart (md)', de: 'Normal (md)', ru: 'Обычный (md)', es: 'Normal (md)', fr: 'Normal (md)' } }
-          - { value: lg, label: { en: 'Spacious (lg)', tr: 'Geniş (lg)', de: 'Geräumig (lg)', ru: 'Просторный (lg)', es: 'Espacioso (lg)', fr: 'Spacieux (lg)' } }
+          - { value: sm, label: { en: 'Compact', tr: 'Dar', de: 'Kompakt', ru: 'Компактный', es: 'Compacto', fr: 'Compact' } }
+          - { value: md, label: { en: 'Normal', tr: 'Standart', de: 'Normal', ru: 'Обычный', es: 'Normal', fr: 'Normal' } }
+          - { value: lg, label: { en: 'Spacious', tr: 'Geniş', de: 'Geräumig', ru: 'Просторный', es: 'Espacioso', fr: 'Spacieux' } }
       size:
         type: select
         label:
@@ -64,9 +64,9 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
       marker:
         type: select
         label:
@@ -80,11 +80,11 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: checkmark, label: { en: 'Checkmark Icon', tr: 'Onay İkonu (Check)', de: Häkchen-Symbol, ru: 'Иконка галочки', es: 'Icono de Verificación', fr: 'Icône Coche' } }
+          - { value: checkmark, label: { en: 'Checkmark Icon', tr: 'Onay İkonu', de: Häkchen-Symbol, ru: 'Иконка галочки', es: 'Icono de Verificación', fr: 'Icône Coche' } }
           - { value: icon, label: { en: 'Item Custom Icon', tr: 'Öğe Özel İkonu', de: 'Benutzerdefiniertes Elementsymbol', ru: 'Своя иконка элемента', es: 'Icono Personalizado del Elemento', fr: "Icône Personnalisée de l'Élément" } }
-          - { value: disc, label: { en: 'Solid Bullet (Disc)', tr: 'Dolu Nokta (Disc)', de: 'Gefüllter Punkt (Disc)', ru: 'Сплошная точка (Disc)', es: 'Viñeta Sólida (Disco)', fr: 'Puce Pleine (Disque)' } }
-          - { value: circle, label: { en: 'Outline Bullet (Circle)', tr: 'Çember Nokta (Circle)', de: Kreis-Aufzählungszeichen, ru: 'Контурный кружок (Circle)', es: 'Viñeta Circular (Círculo)', fr: 'Puce Cerclée (Cercle)' } }
-          - { value: decimal, label: { en: 'Numbered (1, 2, 3)', tr: 'Numaralı (1, 2, 3)', de: 'Nummeriert (1, 2, 3)', ru: 'Нумерованный (1, 2, 3)', es: 'Numerado (1, 2, 3)', fr: 'Numéroté (1, 2, 3)' } }
+          - { value: disc, label: { en: 'Solid Bullet', tr: 'Dolu Nokta', de: 'Gefüllter Punkt', ru: 'Сплошная точка', es: 'Viñeta Sólida', fr: 'Puce Pleine' } }
+          - { value: circle, label: { en: 'Outline Bullet', tr: 'Çember Nokta', de: Kreis-Aufzählungszeichen, ru: 'Контурный кружок', es: 'Viñeta Circular', fr: 'Puce Cerclée' } }
+          - { value: decimal, label: { en: 'Numbered', tr: 'Numaralı', de: 'Nummeriert', ru: 'Нумерованный', es: 'Numerado', fr: 'Numéroté' } }
       marker_color:
         type: select
         label:
@@ -112,6 +112,6 @@ tabs:
         default: default
         col_span: 6
         options:
-          - { value: default, label: { en: 'Clean (Default)', tr: 'Sade (Varsayılan)', de: 'Schlicht (Standard)', ru: 'Чистый (По умолчанию)', es: 'Limpio (Predeterminado)', fr: 'Épuré (Par Défaut)' } }
-          - { value: divider, label: { en: Divided, tr: 'Çizgi Ayırıcılı', de: 'Getrennt (Mit Linien)', ru: 'С разделителями', es: Dividido, fr: 'Avec Séparateurs' } }
+          - { value: default, label: { en: 'Clean', tr: 'Sade', de: 'Schlicht', ru: 'Чистый', es: 'Limpio', fr: 'Épuré' } }
+          - { value: divider, label: { en: Divided, tr: 'Çizgi Ayırıcılı', de: 'Getrennt', ru: 'С разделителями', es: Dividido, fr: 'Avec Séparateurs' } }
           - { value: striped, label: { en: 'Striped Background', tr: 'Şeritli Arka Plan', de: 'Gestreifter Hintergrund', ru: 'Полосатый фон', es: 'Fondo Rayado', fr: 'Fond Rayé' } }

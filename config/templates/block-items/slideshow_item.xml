@@ -26,32 +26,32 @@
         <param name="values" type="collection">
           <param name="dark_medium">
             <meta>
-              <title lang="en">Dark Medium (50%)</title>
-              <title lang="tr">Karanl&#x131;k Orta (%50)</title>
-              <title lang="de">Dunkel Mittel (50%)</title>
-              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x441;&#x440;&#x435;&#x434;&#x43D;&#x438;&#x439; (50%)</title>
-              <title lang="es">Oscuro Medio (50%)</title>
-              <title lang="fr">Sombre Moyen (50%)</title>
+              <title lang="en">Dark Medium</title>
+              <title lang="tr">Karanlık Orta</title>
+              <title lang="de">Dunkel Mittel</title>
+              <title lang="ru">Тёмный средний</title>
+              <title lang="es">Oscuro Medio</title>
+              <title lang="fr">Sombre Moyen</title>
             </meta>
           </param>
           <param name="dark_soft">
             <meta>
-              <title lang="en">Dark Soft (30%)</title>
-              <title lang="tr">Karanl&#x131;k Hafif (%30)</title>
-              <title lang="de">Dunkel Sanft (30%)</title>
-              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x43C;&#x44F;&#x433;&#x43A;&#x438;&#x439; (30%)</title>
-              <title lang="es">Oscuro Suave (30%)</title>
-              <title lang="fr">Sombre Doux (30%)</title>
+              <title lang="en">Dark Soft</title>
+              <title lang="tr">Karanlık Hafif</title>
+              <title lang="de">Dunkel Sanft</title>
+              <title lang="ru">Тёмный мягкий</title>
+              <title lang="es">Oscuro Suave</title>
+              <title lang="fr">Sombre Doux</title>
             </meta>
           </param>
           <param name="dark_strong">
             <meta>
-              <title lang="en">Dark Strong (70%)</title>
-              <title lang="tr">Karanl&#x131;k Yo&#x11F;un (%70)</title>
-              <title lang="de">Dunkel Stark (70%)</title>
-              <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; &#x441;&#x438;&#x43B;&#x44C;&#x43D;&#x44B;&#x439; (70%)</title>
-              <title lang="es">Oscuro Intenso (70%)</title>
-              <title lang="fr">Sombre Intense (70%)</title>
+              <title lang="en">Dark Strong</title>
+              <title lang="tr">Karanlık Yoğun</title>
+              <title lang="de">Dunkel Stark</title>
+              <title lang="ru">Тёмный сильный</title>
+              <title lang="es">Oscuro Intenso</title>
+              <title lang="fr">Sombre Intense</title>
             </meta>
           </param>
           <param name="gradient">

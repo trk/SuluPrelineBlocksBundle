@@ -19,12 +19,12 @@
 
         <block name="elements" default-type="button" minOccurs="0">
             <meta>
-                <title lang="en">Elements (Buttons &amp; Badges)</title>
-                <title lang="tr">Öğeler (Buton &amp; Rozet)</title>
-                <title lang="de">Elemente (Buttons &amp; Abzeichen)</title>
-                <title lang="ru">Элементы (Кнопки и бейджи)</title>
-                <title lang="es">Elementos (Botones e Insignias)</title>
-                <title lang="fr">Éléments (Boutons et Badges)</title>
+                <title lang="en">Elements</title>
+                <title lang="tr">Öğeler</title>
+                <title lang="de">Elemente</title>
+                <title lang="ru">Элементы</title>
+                <title lang="es">Elementos</title>
+                <title lang="fr">Éléments</title>
             </meta>
             <types>
                 <xi:include href="../block-items/button.xml"/>
@@ -40,23 +40,23 @@
                 <title lang="ru">Теги фильтра</title>
                 <title lang="es">Etiquetas de Filtro</title>
                 <title lang="fr">Balises de Filtre</title>
-                <info_text lang="en">Comma-separated tags for category filtering (e.g. Design, Tech)</info_text>
-                <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler (örn. Tasarım, Teknoloji)</info_text>
-                <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung (z.B. Design, Tech)</info_text>
-                <info_text lang="ru">Разделенные запятыми теги для фильтрации (например, Дизайн, Технологии)</info_text>
-                <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías (ej. Diseño, Tecnología)</info_text>
-                <info_text lang="fr">Balises séparées par des virgules pour le filtrage (ex. Design, Tech)</info_text>
+                <info_text lang="en">Comma-separated tags for category filtering</info_text>
+                <info_text lang="tr">Kategori filtreleme için virgülle ayrılmış etiketler</info_text>
+                <info_text lang="de">Kommagetrennte Tags für die Kategoriefilterung</info_text>
+                <info_text lang="ru">Разделенные запятыми теги для фильтрации</info_text>
+                <info_text lang="es">Etiquetas separadas por comas para filtrar por categorías</info_text>
+                <info_text lang="fr">Balises séparées par des virgules pour le filtrage</info_text>
             </meta>
         </property>
 
         <property name="panel_style" type="single_select" colspan="3">
             <meta>
                 <title lang="en">Card Style Override</title>
-                <title lang="tr">Kart Stili (Özel)</title>
+                <title lang="tr">Kart Stili</title>
                 <title lang="de">Kartenstil-Überschreibung</title>
-                <title lang="ru">Стиль карточки (переопределение)</title>
-                <title lang="es">Estilo de Tarjeta (Sobrescribir)</title>
-                <title lang="fr">Style de Carte (Remplacement)</title>
+                <title lang="ru">Стиль карточки</title>
+                <title lang="es">Estilo de Tarjeta</title>
+                <title lang="fr">Style de Carte</title>
             </meta>
             <params>
                 <param name="values" type="collection">
@@ -102,12 +102,12 @@
                     </param>
                     <param name="raised">
                         <meta>
-                            <title lang="en">Raised (Shadow)</title>
+                            <title lang="en">Raised</title>
                             <title lang="tr">Gölgeli</title>
-                            <title lang="de">Erhöht (Schatten)</title>
+                            <title lang="de">Erhöht</title>
                             <title lang="ru">С тенью</title>
-                            <title lang="es">Elevado (Sombra)</title>
-                            <title lang="fr">Surélevé (Ombre)</title>
+                            <title lang="es">Elevado</title>
+                            <title lang="fr">Surélevé</title>
                         </meta>
                     </param>
                 </param>
@@ -138,7 +138,7 @@
                     <param name="primary">
                         <meta>
                             <title lang="en">Primary</title>
-                            <title lang="tr">Birincil (Primary)</title>
+                            <title lang="tr">Birincil</title>
                             <title lang="de">Primär</title>
                             <title lang="ru">Основной</title>
                             <title lang="es">Primario</title>
@@ -148,7 +148,7 @@
                     <param name="secondary">
                         <meta>
                             <title lang="en">Secondary</title>
-                            <title lang="tr">İkincil (Secondary)</title>
+                            <title lang="tr">İkincil</title>
                             <title lang="de">Sekundär</title>
                             <title lang="ru">Вторичный</title>
                             <title lang="es">Secundario</title>
@@ -158,7 +158,7 @@
                     <param name="outline">
                         <meta>
                             <title lang="en">Outline</title>
-                            <title lang="tr">Dış Çizgili (Outline)</title>
+                            <title lang="tr">Dış Çizgili</title>
                             <title lang="de">Umriss</title>
                             <title lang="ru">Контурный</title>
                             <title lang="es">Contorno</title>
@@ -168,7 +168,7 @@
                     <param name="soft">
                         <meta>
                             <title lang="en">Soft</title>
-                            <title lang="tr">Yumuşak (Soft)</title>
+                            <title lang="tr">Yumuşak</title>
                             <title lang="de">Sanft</title>
                             <title lang="ru">Мягкий</title>
                             <title lang="es">Suave</title>

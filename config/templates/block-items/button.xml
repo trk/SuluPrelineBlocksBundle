@@ -38,27 +38,27 @@
           <param name="solid">
             <meta>
               <title lang="en">Solid</title>
-              <title lang="tr">Dolu (Solid)</title>
+              <title lang="tr">Dolu</title>
               <title lang="de">Gef&#xFC;llt</title>
-              <title lang="ru">&#x421;&#x43F;&#x43B;&#x43E;&#x448;&#x43D;&#x43E;&#x439; (Solid)</title>
+              <title lang="ru">Сплошной</title>
               <title lang="es">S&#xF3;lido</title>
-              <title lang="fr">Plein (Solid)</title>
+              <title lang="fr">Plein</title>
             </meta>
           </param>
           <param name="outline">
             <meta>
               <title lang="en">Outline</title>
-              <title lang="tr">Kenarl&#x131;kl&#x131; (Outline)</title>
+              <title lang="tr">Kenarlıklı</title>
               <title lang="de">Umrandung</title>
-              <title lang="ru">&#x41A;&#x43E;&#x43D;&#x442;&#x443;&#x440;&#x43D;&#x44B;&#x439; (Outline)</title>
-              <title lang="es">Contorno (Outline)</title>
-              <title lang="fr">Contour (Outline)</title>
+              <title lang="ru">Контурный</title>
+              <title lang="es">Contorno</title>
+              <title lang="fr">Contour</title>
             </meta>
           </param>
           <param name="soft">
             <meta>
               <title lang="en">Soft</title>
-              <title lang="tr">Yumu&#x15F;ak (Soft)</title>
+              <title lang="tr">Yumuşak</title>
               <title lang="de">Sanft</title>
               <title lang="ru">&#x41C;&#x44F;&#x433;&#x43A;&#x438;&#x439;</title>
               <title lang="es">Suave</title>
@@ -68,17 +68,17 @@
           <param name="ghost">
             <meta>
               <title lang="en">Ghost</title>
-              <title lang="tr">Saydam (Ghost)</title>
+              <title lang="tr">Saydam</title>
               <title lang="de">Geist</title>
-              <title lang="ru">&#x41F;&#x440;&#x43E;&#x437;&#x440;&#x430;&#x447;&#x43D;&#x44B;&#x439; (Ghost)</title>
-              <title lang="es">Fantasma (Transparente)</title>
-              <title lang="fr">Fant&#xF4;me (Transparent)</title>
+              <title lang="ru">Прозрачный</title>
+              <title lang="es">Fantasma</title>
+              <title lang="fr">Fantôme</title>
             </meta>
           </param>
           <param name="link">
             <meta>
               <title lang="en">Link</title>
-              <title lang="tr">Ba&#x11F;lant&#x131; (Link)</title>
+              <title lang="tr">Bağlantı</title>
               <title lang="de">Link</title>
               <title lang="ru">&#x421;&#x441;&#x44B;&#x43B;&#x43A;&#x430;</title>
               <title lang="es">Enlace</title>
@@ -88,7 +88,7 @@
           <param name="white">
             <meta>
               <title lang="en">White</title>
-              <title lang="tr">Beyaz (White)</title>
+              <title lang="tr">Beyaz</title>
               <title lang="de">Wei&#xDF;</title>
               <title lang="ru">&#x411;&#x435;&#x43B;&#x44B;&#x439;</title>
               <title lang="es">Blanco</title>
@@ -123,7 +123,7 @@
           <param name="primary">
             <meta>
               <title lang="en">Primary</title>
-              <title lang="tr">Birincil (Primary)</title>
+              <title lang="tr">Birincil</title>
               <title lang="de">Prim&#xE4;r</title>
               <title lang="ru">&#x41E;&#x441;&#x43D;&#x43E;&#x432;&#x43D;&#x43E;&#x439;</title>
               <title lang="es">Primario</title>
@@ -133,7 +133,7 @@
           <param name="secondary">
             <meta>
               <title lang="en">Secondary</title>
-              <title lang="tr">&#x130;kincil (Secondary)</title>
+              <title lang="tr">İkincil</title>
               <title lang="de">Sekund&#xE4;r</title>
               <title lang="ru">&#x412;&#x442;&#x43E;&#x440;&#x438;&#x447;&#x43D;&#x44B;&#x439;</title>
               <title lang="es">Secundario</title>
@@ -143,7 +143,7 @@
           <param name="dark">
             <meta>
               <title lang="en">Dark / Black</title>
-              <title lang="tr">Koyu (Dark)</title>
+              <title lang="tr">Koyu</title>
               <title lang="de">Dunkel</title>
               <title lang="ru">&#x422;&#x451;&#x43C;&#x43D;&#x44B;&#x439; / &#x427;&#x451;&#x440;&#x43D;&#x44B;&#x439;</title>
               <title lang="es">Oscuro / Negro</title>
@@ -153,7 +153,7 @@
           <param name="white">
             <meta>
               <title lang="en">White</title>
-              <title lang="tr">Beyaz (White)</title>
+              <title lang="tr">Beyaz</title>
               <title lang="de">Wei&#xDF;</title>
               <title lang="ru">&#x411;&#x435;&#x43B;&#x44B;&#x439;</title>
               <title lang="es">Blanco</title>
@@ -163,7 +163,7 @@
           <param name="muted">
             <meta>
               <title lang="en">Muted / Gray</title>
-              <title lang="tr">Soluk (Muted)</title>
+              <title lang="tr">Soluk</title>
               <title lang="de">Ged&#xE4;mpft</title>
               <title lang="ru">&#x41F;&#x440;&#x438;&#x433;&#x43B;&#x443;&#x448;&#x451;&#x43D;&#x43D;&#x44B;&#x439; / &#x421;&#x435;&#x440;&#x44B;&#x439;</title>
               <title lang="es">Atenuado / Gris</title>
@@ -187,22 +187,22 @@
         <param name="values" type="collection">
           <param name="left">
             <meta>
-              <title lang="en">Left (Leading)</title>
-              <title lang="tr">Sol (Ba&#x15F;ta)</title>
+              <title lang="en">Left</title>
+              <title lang="tr">Sol</title>
               <title lang="de">Links</title>
-              <title lang="ru">&#x421;&#x43B;&#x435;&#x432;&#x430; (&#x412; &#x43D;&#x430;&#x447;&#x430;&#x43B;&#x435;)</title>
-              <title lang="es">Izquierda (Inicio)</title>
-              <title lang="fr">Gauche (D&#xE9;but)</title>
+              <title lang="ru">Слева</title>
+              <title lang="es">Izquierda</title>
+              <title lang="fr">Gauche</title>
             </meta>
           </param>
           <param name="right">
             <meta>
-              <title lang="en">Right (Trailing)</title>
-              <title lang="tr">Sa&#x11F; (Sonda)</title>
+              <title lang="en">Right</title>
+              <title lang="tr">Sağ</title>
               <title lang="de">Rechts</title>
-              <title lang="ru">&#x421;&#x43F;&#x440;&#x430;&#x432;&#x430; (&#x412; &#x43A;&#x43E;&#x43D;&#x446;&#x435;)</title>
-              <title lang="es">Derecha (Final)</title>
-              <title lang="fr">Droite (Fin)</title>
+              <title lang="ru">Справа</title>
+              <title lang="es">Derecha</title>
+              <title lang="fr">Droite</title>
             </meta>
           </param>
         </param>

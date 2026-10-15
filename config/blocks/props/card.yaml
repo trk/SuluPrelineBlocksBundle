@@ -25,16 +25,16 @@ tabs:
           - { value: left, label: { en: Left, tr: Solda, de: Links, ru: Слева, es: Izquierda, fr: Gauche } }
           - { value: right, label: { en: Right, tr: Sağda, de: Rechts, ru: Справа, es: Derecha, fr: Droite } }
           - { value: between, label: { en: 'Between Title & Content', tr: 'Başlık ile İçerik Arasında', de: 'Zwischen Titel & Inhalt', ru: 'Между заголовком и текстом', es: 'Entre Título y Contenido', fr: 'Entre le Titre et le Contenu' } }
-          - { value: overlay, label: { en: 'Background Overlay', tr: 'Zemin (Görsel Üzeri Yazı)', de: Hintergrund-Überlagerung, ru: 'Фоновое наложение', es: 'Superposición de Fondo', fr: 'Superposition en Arrière-plan' } }
+          - { value: overlay, label: { en: 'Background Overlay', tr: 'Zemin', de: Hintergrund-Überlagerung, ru: 'Фоновое наложение', es: 'Superposición de Fondo', fr: 'Superposition en Arrière-plan' } }
       media_width:
         type: select
         label:
-          en: 'Media Width (Horizontal)'
+          en: 'Media Width'
           tr: 'Yatayda Medya Genişliği'
-          de: 'Medienbreite (Horizontal)'
-          ru: 'Ширина медиа (горизонтально)'
-          es: 'Ancho Multimedia (Horizontal)'
-          fr: 'Largeur du Média (Horizontal)'
+          de: 'Medienbreite'
+          ru: 'Ширина медиа'
+          es: 'Ancho Multimedia'
+          fr: 'Largeur du Média'
         default: 1-2
         col_span: 6
         options:
@@ -100,10 +100,10 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       title_color:
         type: select
         label:
@@ -145,7 +145,7 @@ tabs:
         default: pill
         col_span: 6
         options:
-          - { value: pill, label: { en: 'Pill Badge', tr: 'Rozet (Pill)', de: Pill-Badge, ru: Значок-капсула, es: 'Insignia Píldora', fr: 'Badge Pilule' } }
+          - { value: pill, label: { en: 'Pill Badge', tr: 'Rozet', de: Pill-Badge, ru: Значок-капсула, es: 'Insignia Píldora', fr: 'Badge Pilule' } }
           - { value: primary_pill, label: { en: 'Primary Badge', tr: 'Renkli Rozet', de: 'Primärer Badge', ru: 'Основной значок', es: 'Insignia Primaria', fr: 'Badge Primaire' } }
           - { value: text, label: { en: 'Plain Text', tr: 'Sade Metin', de: Klartext, ru: 'Обычный текст', es: 'Texto Plano', fr: 'Texte Brut' } }
       badge_style:
@@ -160,10 +160,10 @@ tabs:
         default: glass
         col_span: 6
         options:
-          - { value: glass, label: { en: 'Glass / Translucent', tr: 'Cam (Yarı Saydam)', de: 'Glas / Transparent', ru: 'Стекло / Полупрозрачный', es: 'Cristal / Translúcido', fr: 'Verre / Translucide' } }
-          - { value: soft, label: { en: Soft, tr: 'Yumuşak (Soft)', de: Sanft, ru: Мягкий, es: Suave, fr: Doux } }
-          - { value: solid, label: { en: Solid, tr: 'Dolu (Solid)', de: 'Gefüllt (Solid)', ru: 'Сплошной (Solid)', es: Sólido, fr: 'Plein (Solid)' } }
-          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung (Outline)', ru: 'Контурный (Outline)', es: 'Contorno (Outline)', fr: 'Contour (Outline)' } }
+          - { value: glass, label: { en: 'Glass / Translucent', tr: 'Cam', de: 'Glas / Transparent', ru: 'Стекло / Полупрозрачный', es: 'Cristal / Translúcido', fr: 'Verre / Translucide' } }
+          - { value: soft, label: { en: Soft, tr: 'Yumuşak', de: Sanft, ru: Мягкий, es: Suave, fr: Doux } }
+          - { value: solid, label: { en: Solid, tr: 'Dolu', de: 'Gefüllt', ru: 'Сплошной', es: Sólido, fr: 'Plein' } }
+          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung', ru: 'Контурный', es: 'Contorno', fr: 'Contour' } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
       badge_color:
         type: select
@@ -182,10 +182,10 @@ tabs:
           - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
           - { value: muted, label: { en: Muted, tr: Gri, de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
-          - { value: success, label: { en: Success, tr: 'Yeşil (Başarılı)', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
-          - { value: warning, label: { en: Warning, tr: 'Sarı (Uyarı)', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
-          - { value: danger, label: { en: Danger, tr: 'Kırmızı (Hata)', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
-          - { value: info, label: { en: Info, tr: 'Açık Mavi (Bilgi)', de: Info, ru: Инфо, es: Info, fr: Info } }
+          - { value: success, label: { en: Success, tr: 'Yeşil', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
+          - { value: warning, label: { en: Warning, tr: 'Sarı', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
+          - { value: danger, label: { en: Danger, tr: 'Kırmızı', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
+          - { value: info, label: { en: Info, tr: 'Açık Mavi', de: Info, ru: Инфо, es: Info, fr: Info } }
       badge_position:
         type: select
         label:
@@ -202,7 +202,7 @@ tabs:
           - { value: top-right, label: { en: 'Top Right', tr: 'Sağ Üst', de: 'Oben Rechts', ru: 'Сверху справа', es: 'Arriba Derecha', fr: 'Haut Droite' } }
           - { value: bottom-left, label: { en: 'Bottom Left', tr: 'Sol Alt', de: 'Unten Links', ru: 'Снизу слева', es: 'Abajo Izquierda', fr: 'Bas Gauche' } }
           - { value: bottom-right, label: { en: 'Bottom Right', tr: 'Sağ Alt', de: 'Unten Rechts', ru: 'Снизу справа', es: 'Abajo Derecha', fr: 'Bas Droite' } }
-          - { value: inline, label: { en: 'Inline (Above Title)', tr: 'Başlık Üstü (Metin İçi)', de: 'Inline (Über Titel)', ru: 'В строке (Над заголовком)', es: 'En Línea (Encima del Título)', fr: 'En Ligne (Au-dessus du Titre)' } }
+          - { value: inline, label: { en: 'Inline', tr: 'Başlık Üstü', de: 'Inline', ru: 'В строке', es: 'En Línea', fr: 'En Ligne' } }
       button_style:
         type: select
         label:
@@ -217,9 +217,9 @@ tabs:
         options:
           - { value: primary, label: { en: 'Solid Primary', tr: 'Birincil Buton', de: 'Gefüllt Primär', ru: 'Сплошная основная', es: 'Primario Sólido', fr: 'Primaire Plein' } }
           - { value: secondary, label: { en: 'Soft / Secondary', tr: 'İkincil / Yumuşak', de: 'Sanft / Sekundär', ru: 'Мягкая / Вторичная', es: 'Suave / Secundario', fr: 'Doux / Secondaire' } }
-          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung (Outline)', ru: 'Контурный (Outline)', es: 'Contorno (Outline)', fr: 'Contour (Outline)' } }
+          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung', ru: 'Контурный', es: 'Contorno', fr: 'Contour' } }
           - { value: link, label: { en: 'Simple Link', tr: 'Sade Bağlantı', de: 'Einfacher Link', ru: 'Простая ссылка', es: 'Enlace Simple', fr: 'Lien Simple' } }
-          - { value: ghost, label: { en: Ghost, tr: Hayalet, de: 'Geist (Transparent)', ru: 'Прозрачный (Ghost)', es: 'Fantasma (Transparente)', fr: 'Fantôme (Transparent)' } }
+          - { value: ghost, label: { en: Ghost, tr: Hayalet, de: 'Geist', ru: 'Прозрачный', es: 'Fantasma', fr: 'Fantôme' } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
       button_color:
         type: select
@@ -238,9 +238,9 @@ tabs:
           - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
           - { value: muted, label: { en: Muted, tr: 'Nötr / Gri', de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
-          - { value: success, label: { en: Success, tr: 'Yeşil (Başarılı)', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
-          - { value: warning, label: { en: Warning, tr: 'Sarı (Uyarı)', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
-          - { value: danger, label: { en: Danger, tr: 'Kırmızı (Hata)', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
+          - { value: success, label: { en: Success, tr: 'Yeşil', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
+          - { value: warning, label: { en: Warning, tr: 'Sarı', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
+          - { value: danger, label: { en: Danger, tr: 'Kırmızı', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
       button_size:
         type: select
         label:
@@ -273,8 +273,8 @@ tabs:
           - { value: bordered, label: { en: Bordered, tr: Çizgili, de: Umrandet, ru: 'С рамкой', es: 'Con Borde', fr: Bordé } }
           - { value: shadow, label: { en: Shadow, tr: Gölgeli, de: Schatten, ru: 'С тенью', es: 'Con Sombra', fr: Ombré } }
           - { value: flat, label: { en: Flat, tr: Düz, de: Flach, ru: Плоский, es: Plano, fr: Plat } }
-          - { value: interactive, label: { en: Interactive, tr: 'Etkileşimli (Hover Yükselme)', de: 'Interaktiv (Hover-Effekt)', ru: 'Интерактивный (При наведении)', es: 'Interactivo (Efecto Hover)', fr: 'Interactif (Effet Survol)' } }
-          - { value: group, label: { en: 'Card Group Item', tr: 'Kart Grubu Öğesi (Kenarlıksız)', de: Kartengruppen-Element, ru: 'Элемент группы карточек', es: 'Elemento de Grupo de Tarjetas', fr: 'Élément de Groupe de Cartes' } }
+          - { value: interactive, label: { en: Interactive, tr: 'Etkileşimli', de: 'Interaktiv', ru: 'Интерактивный', es: 'Interactivo', fr: 'Interactif' } }
+          - { value: group, label: { en: 'Card Group Item', tr: 'Kart Grubu Öğesi', de: Kartengruppen-Element, ru: 'Элемент группы карточек', es: 'Elemento de Grupo de Tarjetas', fr: 'Élément de Groupe de Cartes' } }
       bg_color:
         type: select
         label:
@@ -321,10 +321,10 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Köşesiz, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: md, label: { en: Medium, tr: 'Hafif (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: xl, label: { en: Standard, tr: 'Standart (xl)', de: Standard, ru: Стандартный, es: Estándar, fr: Standard } }
-          - { value: 2xl, label: { en: Large, tr: 'Belirgin (2xl)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: 3xl, label: { en: 'Extra Large', tr: 'Geniş (3xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: md, label: { en: Medium, tr: 'Hafif', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: xl, label: { en: Standard, tr: 'Standart', de: Standard, ru: Стандартный, es: Estándar, fr: Standard } }
+          - { value: 2xl, label: { en: Large, tr: 'Belirgin', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: 3xl, label: { en: 'Extra Large', tr: 'Geniş', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       link_card:
         type: select
         label:

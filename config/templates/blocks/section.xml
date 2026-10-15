@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>section</key>
     <meta>
-        <title lang="en">Section (Container)</title>
-        <title lang="tr">Bölüm (Konteyner)</title>
-        <title lang="de">Abschnitt (Container)</title>
-        <title lang="ru">Раздел (Контейнер)</title>
-        <title lang="es">Sección (Contenedor)</title>
-        <title lang="fr">Section (Conteneur)</title>
+        <title lang="en">Section</title>
+        <title lang="tr">Bölüm</title>
+        <title lang="de">Abschnitt</title>
+        <title lang="ru">Раздел</title>
+        <title lang="es">Sección</title>
+        <title lang="fr">Section</title>
     </meta>
     <properties>
         <block name="rows" default-type="row_item" minOccurs="1">

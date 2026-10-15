@@ -23,12 +23,12 @@
         <param name="values" type="collection">
           <param name="x">
             <meta>
-              <title lang="en">X (Twitter)</title>
-              <title lang="tr">X (Twitter)</title>
-              <title lang="de">X (Twitter)</title>
-              <title lang="ru">X (Twitter)</title>
-              <title lang="es">X (Twitter)</title>
-              <title lang="fr">X (Twitter)</title>
+              <title lang="en">X</title>
+              <title lang="tr">X</title>
+              <title lang="de">X</title>
+              <title lang="ru">X</title>
+              <title lang="es">X</title>
+              <title lang="fr">X</title>
             </meta>
           </param>
           <param name="facebook">

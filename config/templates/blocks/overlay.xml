@@ -6,7 +6,7 @@
     <key>overlay</key>
     <meta>
         <title lang="en">Overlay</title>
-        <title lang="tr">Katman (Overlay)</title>
+        <title lang="tr">Katman</title>
         <title lang="ru">Оверлей</title>
         <title lang="fr">Superposition</title>
         <title lang="es">Superposición</title>
@@ -22,12 +22,12 @@
 
         <block name="elements" default-type="button" minOccurs="0">
             <meta>
-                <title lang="en">Elements (Buttons &amp; Badges)</title>
-                <title lang="tr">Öğeler (Buton &amp; Rozet)</title>
-                <title lang="de">Elemente (Buttons &amp; Abzeichen)</title>
-                <title lang="ru">Элементы (Кнопки и бейджи)</title>
-                <title lang="es">Elementos (Botones e Insignias)</title>
-                <title lang="fr">Éléments (Boutons et Badges)</title>
+                <title lang="en">Elements</title>
+                <title lang="tr">Öğeler</title>
+                <title lang="de">Elemente</title>
+                <title lang="ru">Элементы</title>
+                <title lang="es">Elementos</title>
+                <title lang="fr">Éléments</title>
             </meta>
             <types>
                 <xi:include href="../block-items/button.xml"/>

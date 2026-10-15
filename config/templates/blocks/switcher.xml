@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>switcher</key>
     <meta>
-        <title lang="en">Switcher (Tabs)</title>
-        <title lang="tr">Sekmeler (Switcher)</title>
-        <title lang="de">Umschalter (Registerkarten)</title>
-        <title lang="ru">Переключатель (Вкладки)</title>
-        <title lang="es">Conmutador (Pestañas)</title>
-        <title lang="fr">Sélecteur (Onglets)</title>
+        <title lang="en">Switcher</title>
+        <title lang="tr">Sekmeler</title>
+        <title lang="de">Umschalter</title>
+        <title lang="ru">Переключатель</title>
+        <title lang="es">Conmutador</title>
+        <title lang="fr">Sélecteur</title>
     </meta>
     <properties>
         <xi:include href="../fields/title.xml"/>

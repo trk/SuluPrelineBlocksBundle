@@ -15,16 +15,16 @@
       <meta>
         <title lang="en">Location or Address</title>
         <title lang="tr">Konum veya Adres</title>
-        <info_text lang="en">Enter an address or coordinates (e.g. 'Istanbul, Turkey' or '41.0082, 28.9784')</info_text>
-        <info_text lang="tr">Bir adres veya koordinat girin (&#xF6;rn: '&#x130;stanbul, T&#xFC;rkiye' veya '41.0082, 28.9784')</info_text>
+        <info_text lang="en">Enter an address or coordinates</info_text>
+        <info_text lang="tr">Bir adres veya koordinat girin</info_text>
         <title lang="de">Ort oder Adresse</title>
         <title lang="ru">&#x41C;&#x435;&#x441;&#x442;&#x43E;&#x43F;&#x43E;&#x43B;&#x43E;&#x436;&#x435;&#x43D;&#x438;&#x435; &#x438;&#x43B;&#x438; &#x430;&#x434;&#x440;&#x435;&#x441;</title>
         <title lang="es">Ubicaci&#xF3;n o Direcci&#xF3;n</title>
         <title lang="fr">Lieu ou Adresse</title>
-        <info_text lang="de">Adresse oder Koordinaten eingeben (z. B. 'Istanbul, Turkey' oder '41.0082, 28.9784')</info_text>
-        <info_text lang="ru">&#x412;&#x432;&#x435;&#x434;&#x438;&#x442;&#x435; &#x430;&#x434;&#x440;&#x435;&#x441; &#x438;&#x43B;&#x438; &#x43A;&#x43E;&#x43E;&#x440;&#x434;&#x438;&#x43D;&#x430;&#x442;&#x44B; (&#x43D;&#x430;&#x43F;&#x440;&#x438;&#x43C;&#x435;&#x440;, 'Istanbul, Turkey' &#x438;&#x43B;&#x438; '41.0082, 28.9784')</info_text>
-        <info_text lang="es">Introduzca una direcci&#xF3;n o coordenadas (ej. 'Istanbul, Turkey' o '41.0082, 28.9784')</info_text>
-        <info_text lang="fr">Saisissez une adresse ou des coordonn&#xE9;es (ex. 'Istanbul, Turkey' ou '41.0082, 28.9784')</info_text>
+        <info_text lang="de">Adresse oder Koordinaten eingeben</info_text>
+        <info_text lang="ru">Введите адрес или координаты</info_text>
+        <info_text lang="es">Introduzca una dirección o coordenadas</info_text>
+        <info_text lang="fr">Saisissez une adresse ou des coordonnées</info_text>
       </meta>
     </property>
     <property name="zoom" type="number">
@@ -57,42 +57,42 @@
         <param name="values" type="collection">
           <param name="16/9">
             <meta>
-              <title lang="en">16:9 (Widescreen)</title>
-              <title lang="tr">16:9 (Geni&#x15F;)</title>
-              <title lang="de">16:9 (Breitbild)</title>
-              <title lang="ru">16:9 (&#x428;&#x438;&#x440;&#x43E;&#x43A;&#x43E;&#x44D;&#x43A;&#x440;&#x430;&#x43D;&#x43D;&#x44B;&#x439;)</title>
-              <title lang="es">16:9 (Panor&#xE1;mico)</title>
-              <title lang="fr">16:9 (&#xC9;cran Large)</title>
+              <title lang="en">16:9 Widescreen</title>
+              <title lang="tr">16:9 Geniş</title>
+              <title lang="de">16:9 Breitbild</title>
+              <title lang="ru">16:9 Широкоэкранный</title>
+              <title lang="es">16:9 Panorámico</title>
+              <title lang="fr">16:9 Écran Large</title>
             </meta>
           </param>
           <param name="4/3">
             <meta>
-              <title lang="en">4:3 (Standard)</title>
-              <title lang="tr">4:3 (Standart)</title>
-              <title lang="de">4:3 (Standard)</title>
-              <title lang="ru">4:3 (&#x421;&#x442;&#x430;&#x43D;&#x434;&#x430;&#x440;&#x442;&#x43D;&#x44B;&#x439;)</title>
-              <title lang="es">4:3 (Est&#xE1;ndar)</title>
-              <title lang="fr">4:3 (Standard)</title>
+              <title lang="en">4:3 Standard</title>
+              <title lang="tr">4:3 Standart</title>
+              <title lang="de">4:3 Standard</title>
+              <title lang="ru">4:3 Стандартный</title>
+              <title lang="es">4:3 Estándar</title>
+              <title lang="fr">4:3 Standard</title>
             </meta>
           </param>
           <param name="21/9">
             <meta>
-              <title lang="en">21:9 (Ultrawide)</title>
-              <title lang="tr">21:9 (Ultra Geni&#x15F;)</title>
-              <title lang="de">21:9 (Ultrabreit)</title>
-              <title lang="ru">21:9 (&#x423;&#x43B;&#x44C;&#x442;&#x440;&#x430;&#x448;&#x438;&#x440;&#x43E;&#x43A;&#x438;&#x439;)</title>
-              <title lang="es">21:9 (Ultra Panor&#xE1;mico)</title>
-              <title lang="fr">21:9 (Ultra Large)</title>
+              <title lang="en">21:9 Ultrawide</title>
+              <title lang="tr">21:9 Ultra Geniş</title>
+              <title lang="de">21:9 Ultrabreit</title>
+              <title lang="ru">21:9 Ультраширокий</title>
+              <title lang="es">21:9 Ultra Panorámico</title>
+              <title lang="fr">21:9 Ultra Large</title>
             </meta>
           </param>
           <param name="1/1">
             <meta>
-              <title lang="en">1:1 (Square)</title>
-              <title lang="tr">1:1 (Kare)</title>
-              <title lang="de">1:1 (Quadrat)</title>
-              <title lang="ru">1:1 (&#x41A;&#x432;&#x430;&#x434;&#x440;&#x430;&#x442;)</title>
-              <title lang="es">1:1 (Cuadrado)</title>
-              <title lang="fr">1:1 (Carr&#xE9;)</title>
+              <title lang="en">1:1 Square</title>
+              <title lang="tr">1:1 Kare</title>
+              <title lang="de">1:1 Quadrat</title>
+              <title lang="ru">1:1 Квадрат</title>
+              <title lang="es">1:1 Cuadrado</title>
+              <title lang="fr">1:1 Carré</title>
             </meta>
           </param>
           <param name="auto">

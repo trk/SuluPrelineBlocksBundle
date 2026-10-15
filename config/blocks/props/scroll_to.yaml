@@ -20,9 +20,9 @@ tabs:
         default: inline_button
         col_span: 6
         options:
-          - { value: inline_button, label: { en: 'Standard Button (Inline)', tr: 'Standart Buton (Sayfa İçi)', de: 'Standard-Button (Inline)', ru: 'Стандартная кнопка (В тексте)', es: 'Botón Estándar (En Línea)', fr: 'Bouton Standard (En Ligne)' } }
+          - { value: inline_button, label: { en: 'Standard Button', tr: 'Standart Buton', de: 'Standard-Button', ru: 'Стандартная кнопка', es: 'Botón Estándar', fr: 'Bouton Standard' } }
           - { value: totop_circle, label: { en: 'Classic Circle Icon Button', tr: 'Klasik Yuvarlak İkon Butonu', de: 'Klassischer runder Icon-Button', ru: 'Классическая круглая кнопка с иконкой', es: 'Botón Circular Clásico con Icono', fr: 'Bouton Icône Circulaire Classique' } }
-          - { value: floating, label: { en: 'Floating Button (Screen Bottom-Right)', tr: 'Sabit Yüzen Buton (Ekran Sağ-Alt)', de: 'Schwebender Button (Unten rechts)', ru: 'Плавающая кнопка (Внизу справа)', es: 'Botón Flotante (Abajo a la Derecha)', fr: 'Bouton Flottant (En Bas à Droite)' } }
+          - { value: floating, label: { en: 'Floating Button', tr: 'Sabit Yüzen Buton', de: 'Schwebender Button', ru: 'Плавающая кнопка', es: 'Botón Flotante', fr: 'Bouton Flottant' } }
       button_variant:
         type: select
         label:
@@ -38,7 +38,7 @@ tabs:
           - { value: solid, label: { en: 'Solid Background', tr: 'Dolu Arka Plan', de: 'Gefüllter Hintergrund', ru: 'Сплошной фон', es: 'Fondo Sólido', fr: 'Fond Plein' } }
           - { value: outline, label: { en: Outlined, tr: Kenarlıklı, de: Umrandet, ru: Контурный, es: 'Con Contorno', fr: 'Avec Contour' } }
           - { value: soft, label: { en: 'Soft / Pastel', tr: 'Yumuşak Pastel', de: 'Sanft / Pastell', ru: 'Мягкий / Пастельный', es: 'Suave / Pastel', fr: 'Doux / Pastel' } }
-          - { value: ghost, label: { en: 'Ghost (Transparent)', tr: 'Şeffaf (Ghost)', de: 'Geist (Transparent)', ru: 'Прозрачный (Ghost)', es: 'Fantasma (Transparente)', fr: 'Fantôme (Transparent)' } }
+          - { value: ghost, label: { en: 'Ghost', tr: 'Şeffaf', de: 'Geist', ru: 'Прозрачный', es: 'Fantasma', fr: 'Fantôme' } }
       button_color:
         type: select
         label:
@@ -58,12 +58,12 @@ tabs:
       align:
         type: select
         label:
-          en: 'Alignment (Inline Mode)'
-          tr: 'Hizalama (Sayfa İçi Modunda)'
-          de: 'Ausrichtung (Inline-Modus)'
-          ru: 'Выравнивание (Встроенный режим)'
-          es: 'Alineación (Modo en Línea)'
-          fr: 'Alignement (Mode en Ligne)'
+          en: 'Alignment'
+          tr: 'Hizalama'
+          de: 'Ausrichtung'
+          ru: 'Выравнивание'
+          es: 'Alineación'
+          fr: 'Alignement'
         default: right
         col_span: 6
         options:
@@ -82,5 +82,5 @@ tabs:
         default: left
         col_span: 6
         options:
-          - { value: left, label: { en: 'Left (Before Text)', tr: 'Solda (Metinden Önce)', de: 'Links (Vor dem Text)', ru: 'Слева (Перед текстом)', es: 'Izquierda (Antes del Texto)', fr: 'Gauche (Avant le Texte)' } }
-          - { value: right, label: { en: 'Right (After Text)', tr: 'Sağda (Metinden Sonra)', de: 'Rechts (Nach dem Text)', ru: 'Справа (После текста)', es: 'Derecha (Después del Texto)', fr: 'Droite (Après le Texte)' } }
+          - { value: left, label: { en: 'Left', tr: 'Solda', de: 'Links', ru: 'Слева', es: 'Izquierda', fr: 'Gauche' } }
+          - { value: right, label: { en: 'Right', tr: 'Sağda', de: 'Rechts', ru: 'Справа', es: 'Derecha', fr: 'Droite' } }

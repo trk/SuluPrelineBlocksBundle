@@ -37,15 +37,15 @@ tabs:
         default: soft
         col_span: 6
         options:
-          - { value: soft, label: { en: 'Soft Pastel', tr: 'Yumuşak Pastel (Soft)', de: 'Sanftes Pastell', ru: 'Мягкий пастельный', es: 'Pastel Suave', fr: 'Pastel Doux' } }
-          - { value: solid, label: { en: 'Solid Color', tr: 'Doygun Dolgulu (Solid)', de: Vollfarbe, ru: 'Сплошной цвет', es: 'Color Sólido', fr: 'Couleur Pleine' } }
-          - { value: outline, label: { en: 'Border Outline', tr: 'Kenarlık Vurgulu (Outline)', de: Rahmenlinie, ru: 'Контурная рамка', es: 'Contorno de Borde', fr: 'Contour Bordé' } }
-          - { value: glass, label: { en: 'Frosted Glass', tr: 'Buzlu Cam (Glass)', de: Milchglas, ru: 'Матовое стекло', es: 'Cristal Esmerilado', fr: 'Verre Dépoli' } }
+          - { value: soft, label: { en: 'Soft Pastel', tr: 'Yumuşak Pastel', de: 'Sanftes Pastell', ru: 'Мягкий пастельный', es: 'Pastel Suave', fr: 'Pastel Doux' } }
+          - { value: solid, label: { en: 'Solid Color', tr: 'Doygun Dolgulu', de: Vollfarbe, ru: 'Сплошной цвет', es: 'Color Sólido', fr: 'Couleur Pleine' } }
+          - { value: outline, label: { en: 'Border Outline', tr: 'Kenarlık Vurgulu', de: Rahmenlinie, ru: 'Контурная рамка', es: 'Contorno de Borde', fr: 'Contour Bordé' } }
+          - { value: glass, label: { en: 'Frosted Glass', tr: 'Buzlu Cam', de: Milchglas, ru: 'Матовое стекло', es: 'Cristal Esmerilado', fr: 'Verre Dépoli' } }
       dismissible:
         type: select
         label:
           en: Dismissible
-          tr: 'Kapatılabilir (X Butonu)'
+          tr: 'Kapatılabilir'
           de: Schließbar
           ru: Закрываемый
           es: Descartable
@@ -54,7 +54,7 @@ tabs:
         col_span: 6
         options:
           - { value: 'no', label: { en: 'No', tr: Hayır, de: Nein, ru: Нет, es: 'No', fr: Non } }
-          - { value: 'yes', label: { en: 'Yes (Close button)', tr: 'Evet (Kapatma butonu)', de: 'Ja (Schließen-Button)', ru: 'Да (Кнопка закрытия)', es: 'Sí (Botón cerrar)', fr: 'Oui (Bouton fermer)' } }
+          - { value: 'yes', label: { en: 'Yes', tr: 'Evet', de: 'Ja', ru: 'Да', es: 'Sí', fr: 'Oui' } }
       icon_display:
         type: select
         label:
@@ -83,9 +83,9 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Köşesiz, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: md, label: { en: Medium, tr: 'Hafif (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: xl, label: { en: 'Standard (xl)', tr: 'Standart (xl)', de: 'Standard (xl)', ru: 'Стандартный (xl)', es: 'Estándar (xl)', fr: 'Standard (xl)' } }
-          - { value: 2xl, label: { en: 'Large (2xl)', tr: 'Belirgin (2xl)', de: 'Groß (2xl)', ru: 'Большой (2xl)', es: 'Grande (2xl)', fr: 'Grand (2xl)' } }
+          - { value: md, label: { en: Medium, tr: 'Hafif', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: xl, label: { en: 'Standard', tr: 'Standart', de: 'Standard', ru: 'Стандартный', es: 'Estándar', fr: 'Standard' } }
+          - { value: 2xl, label: { en: 'Large', tr: 'Belirgin', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
       title_size:
         type: select
         label:
@@ -98,6 +98,6 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: Standart, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: Standart, de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }

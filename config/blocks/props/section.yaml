@@ -20,16 +20,16 @@ tabs:
         default: 85rem
         col_span: 6
         options:
-          - { value: 85rem, label: { en: 'Preline Standard (85rem / 1360px)', tr: 'Preline Standart (85rem / 1360px)', de: 'Preline Standard (85rem / 1360px)', ru: 'Стандарт Preline (85rem / 1360px)', es: 'Estándar Preline (85rem / 1360px)', fr: 'Standard Preline (85rem / 1360px)' } }
-          - { value: 7xl, label: { en: 'Extra Large (7xl / 1280px)', tr: 'Geniş (7xl / 1280px)', de: 'Extra Groß (7xl / 1280px)', ru: 'Очень большой (7xl / 1280px)', es: 'Extra Grande (7xl / 1280px)', fr: 'Très Grand (7xl / 1280px)' } }
-          - { value: 5xl, label: { en: 'Medium (5xl / 1024px)', tr: 'Orta (5xl / 1024px)', de: 'Mittel (5xl / 1024px)', ru: 'Средний (5xl / 1024px)', es: 'Mediano (5xl / 1024px)', fr: 'Moyen (5xl / 1024px)' } }
-          - { value: 3xl, label: { en: 'Narrow / Prose (3xl / 768px)', tr: 'Dar (3xl / 768px)', de: 'Schmal / Text (3xl / 768px)', ru: 'Узкий / Текст (3xl / 768px)', es: 'Estrecho / Texto (3xl / 768px)', fr: 'Étroit / Texte (3xl / 768px)' } }
-          - { value: full, label: { en: 'Full Width (100%)', tr: 'Tam Genişlik (%100)', de: 'Volle Breite (100%)', ru: 'Во всю ширину (100%)', es: 'Ancho Completo (100%)', fr: 'Pleine Largeur (100%)' } }
+          - { value: 85rem, label: { en: 'Preline Standard', tr: 'Preline Standart', de: 'Preline Standard', ru: 'Стандарт Preline', es: 'Estándar Preline', fr: 'Standard Preline' } }
+          - { value: 7xl, label: { en: 'Extra Large', tr: 'Geniş', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
+          - { value: 5xl, label: { en: 'Medium', tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: 3xl, label: { en: 'Narrow / Prose', tr: 'Dar', de: 'Schmal / Text', ru: 'Узкий / Текст', es: 'Estrecho / Texto', fr: 'Étroit / Texte' } }
+          - { value: full, label: { en: 'Full Width', tr: 'Tam Genişlik', de: 'Volle Breite', ru: 'Во всю ширину', es: 'Ancho Completo', fr: 'Pleine Largeur' } }
       padding_y:
         type: select
         label:
           en: 'Vertical Padding'
-          tr: 'Dikey İç Boşluk (Padding Y)'
+          tr: 'Dikey İç Boşluk'
           de: 'Vertikaler Innenabstand'
           ru: 'Вертикальный внутренний отступ'
           es: 'Relleno Vertical'
@@ -37,17 +37,17 @@ tabs:
         default: default
         col_span: 6
         options:
-          - { value: default, label: { en: 'Default (py-10 sm:py-14)', tr: 'Standart (py-10 sm:py-14)', de: 'Standard (py-10 sm:py-14)', ru: 'По умолчанию (py-10 sm:py-14)', es: 'Predeterminado (py-10 sm:py-14)', fr: 'Par Défaut (py-10 sm:py-14)' } }
-          - { value: none, label: { en: 'None (py-0)', tr: 'Yok (py-0)', de: 'Keine (py-0)', ru: 'Нет (py-0)', es: 'Ninguno (py-0)', fr: 'Aucun (py-0)' } }
-          - { value: xs, label: { en: 'Extra Small (py-4 sm:py-6)', tr: 'Çok Küçük (xs)', de: 'Extra Klein (py-4 sm:py-6)', ru: 'Очень малый (xs)', es: 'Extra Pequeño (xs)', fr: 'Très Petit (xs)' } }
-          - { value: sm, label: { en: 'Small (py-6 sm:py-8)', tr: 'Küçük (sm)', de: 'Klein (py-6 sm:py-8)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: lg, label: { en: 'Large (py-14 sm:py-20)', tr: 'Büyük (lg)', de: 'Groß (py-14 sm:py-20)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large (py-20 sm:py-28)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (py-20 sm:py-28)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: default, label: { en: 'Default', tr: 'Standart', de: 'Standard', ru: 'По умолчанию', es: 'Predeterminado', fr: 'Par Défaut' } }
+          - { value: none, label: { en: 'None', tr: 'Yok', de: 'Keine', ru: 'Нет', es: 'Ninguno', fr: 'Aucun' } }
+          - { value: xs, label: { en: 'Extra Small', tr: 'Çok Küçük', de: 'Extra Klein', ru: 'Очень малый', es: 'Extra Pequeño', fr: 'Très Petit' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       padding_x:
         type: select
         label:
           en: 'Horizontal Padding'
-          tr: 'Yatay İç Boşluk (Padding X)'
+          tr: 'Yatay İç Boşluk'
           de: 'Horizontaler Innenabstand'
           ru: 'Горизонтальный внутренний отступ'
           es: 'Relleno Horizontal'
@@ -55,8 +55,8 @@ tabs:
         default: default
         col_span: 6
         options:
-          - { value: default, label: { en: 'Default (px-4 sm:px-6 lg:px-8)', tr: Standart, de: 'Standard (px-4 sm:px-6 lg:px-8)', ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
-          - { value: none, label: { en: 'None (Edge-to-Edge)', tr: 'Yok (Kenara Sıfır)', de: 'Keine (Randlos)', ru: 'Нет (От края до края)', es: 'Ninguno (Borde a Borde)', fr: 'Aucun (Bord à Bord)' } }
+          - { value: default, label: { en: 'Default', tr: Standart, de: 'Standard', ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
+          - { value: none, label: { en: 'None', tr: 'Yok', de: 'Keine', ru: 'Нет', es: 'Ninguno', fr: 'Aucun' } }
       bg_style:
         type: select
         label:
@@ -70,8 +70,8 @@ tabs:
         col_span: 6
         options:
           - { value: transparent, label: { en: Transparent, tr: Şeffaf, de: Transparent, ru: Прозрачный, es: Transparente, fr: Transparent } }
-          - { value: default, label: { en: 'Surface (White / Dark Neutral)', tr: 'Yüzey (Beyaz / Koyu Nötr)', de: 'Oberfläche (Weiß / Dunkel)', ru: 'Поверхность (Белый / Тёмный)', es: 'Superficie (Blanco / Oscuro)', fr: 'Surface (Blanc / Sombre)' } }
-          - { value: muted, label: { en: 'Muted (Gray 50 / Dark Neutral 800)', tr: 'Mat (Açık Gri / Koyu Gri)', de: 'Gedämpft (Hellgrau / Dunkelgrau)', ru: 'Приглушённый (Светло-серый / Тёмно-серый)', es: 'Atenuado (Gris Claro / Oscuro)', fr: 'Atténué (Gris Clair / Sombre)' } }
+          - { value: default, label: { en: 'Surface', tr: 'Yüzey', de: 'Oberfläche', ru: 'Поверхность', es: 'Superficie', fr: 'Surface' } }
+          - { value: muted, label: { en: 'Muted', tr: 'Mat', de: 'Gedämpft', ru: 'Приглушённый', es: 'Atenuado', fr: 'Atténué' } }
           - { value: subtle, label: { en: 'Subtle Background', tr: 'Hafif Arka Plan', de: 'Dezenter Hintergrund', ru: 'Лёгкий фон', es: 'Fondo Sutil', fr: 'Fond Subtil' } }
           - { value: primary, label: { en: 'Primary Brand Theme', tr: 'Birincil Vurgu Rengi', de: 'Primäres Markenthema', ru: 'Основная тема бренда', es: 'Tema de Marca Primario', fr: 'Thème de Marque Primaire' } }
           - { value: secondary, label: { en: 'Secondary Brand Theme', tr: 'İkincil Vurgu Rengi', de: 'Sekundäres Markenthema', ru: 'Вторичная тема бренда', es: 'Tema de Marca Secundario', fr: 'Thème de Marque Secondaire' } }

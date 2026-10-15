@@ -20,14 +20,14 @@ tabs:
         default: standard
         col_span: 6
         options:
-          - { value: standard, label: { en: 'Standard (Stacked)', tr: 'Standart (Dikey Sıralı)', de: 'Standard (Gestapelt)', ru: 'Стандартный (Вертикально)', es: 'Estándar (Apilado)', fr: 'Standard (Empilé)' } }
-          - { value: split, label: { en: 'Split (2 Columns Hero)', tr: 'İki Sütunlu (Yan Yana Hero)', de: 'Geteilt (2-Spalten-Hero)', ru: 'Разделённый (2 колонки Hero)', es: 'Dividido (Hero de 2 Columnas)', fr: 'Divisé (Héro 2 Colonnes)' } }
-          - { value: minimal, label: { en: 'Minimal (Compact Title & Meta)', tr: 'Minimal (Kompakt Başlık & Meta)', de: 'Minimal (Kompakter Titel & Meta)', ru: 'Минималистичный (Компактный заголовок)', es: 'Minimalista (Título y Meta Compactos)', fr: 'Minimal (Titre et Méta Compacts)' } }
+          - { value: standard, label: { en: 'Standard', tr: 'Standart', de: 'Standard', ru: 'Стандартный', es: 'Estándar', fr: 'Standard' } }
+          - { value: split, label: { en: 'Split', tr: 'İki Sütunlu', de: 'Geteilt', ru: 'Разделённый', es: 'Dividido', fr: 'Divisé' } }
+          - { value: minimal, label: { en: 'Minimal', tr: 'Minimal', de: 'Minimal', ru: 'Минималистичный', es: 'Minimalista', fr: 'Minimal' } }
       show_breadcrumbs:
         type: checkbox
         label:
           en: 'Show Breadcrumbs'
-          tr: 'Sayfa Yolunu (Breadcrumb) Göster'
+          tr: 'Sayfa Yolunu Göster'
           de: 'Brotkrümelnavigation anzeigen'
           ru: 'Показать хлебные крошки'
           es: 'Mostrar Migas de Pan'
@@ -47,6 +47,6 @@ tabs:
         col_span: 6
         options:
           - { value: default, label: { en: Default, tr: Standart, de: Standard, ru: 'По умолчанию', es: Predeterminado, fr: 'Par Défaut' } }
-          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large (xl)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }

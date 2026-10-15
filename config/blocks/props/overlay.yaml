@@ -105,8 +105,8 @@ tabs:
         options:
           - { value: gradient-bottom, label: { en: 'Bottom Gradient', tr: 'Alttan Degrade Karartma', de: 'Verlauf von unten', ru: 'Градиент снизу', es: 'Degradado Inferior', fr: 'Dégradé Inférieur' } }
           - { value: gradient-full, label: { en: 'Full Gradient', tr: 'Tam Degrade Karartma', de: 'Vollständiger Verlauf', ru: 'Полный градиент', es: 'Degradado Completo', fr: 'Dégradé Complet' } }
-          - { value: dark-glass, label: { en: 'Dark Frosted Glass', tr: 'Koyu Buzlu Cam (Glass)', de: 'Dunkles Milchglas', ru: 'Тёмное матовое стекло', es: 'Cristal Esmerilado Oscuro', fr: 'Verre Dépoli Sombre' } }
-          - { value: light-glass, label: { en: 'Light Frosted Glass', tr: 'Açık Buzlu Cam (Glass)', de: 'Helles Milchglas', ru: 'Светлое матовое стекло', es: 'Cristal Esmerilado Claro', fr: 'Verre Dépoli Clair' } }
+          - { value: dark-glass, label: { en: 'Dark Frosted Glass', tr: 'Koyu Buzlu Cam', de: 'Dunkles Milchglas', ru: 'Тёмное матовое стекло', es: 'Cristal Esmerilado Oscuro', fr: 'Verre Dépoli Sombre' } }
+          - { value: light-glass, label: { en: 'Light Frosted Glass', tr: 'Açık Buzlu Cam', de: 'Helles Milchglas', ru: 'Светлое матовое стекло', es: 'Cristal Esmerilado Claro', fr: 'Verre Dépoli Clair' } }
           - { value: primary, label: { en: 'Primary Brand Color', tr: 'Birincil Vurgu Rengi', de: 'Primäre Markenfarbe', ru: 'Основной фирменный цвет', es: 'Color de Marca Primario', fr: 'Couleur de Marque Primaire' } }
           - { value: none, label: { en: 'Transparent / None', tr: 'Şeffaf / Yok', de: 'Transparent / Keine', ru: 'Прозрачный / Нет', es: 'Transparente / Ninguno', fr: 'Transparent / Aucun' } }
       overlay_transition:
@@ -121,10 +121,10 @@ tabs:
         default: fade
         col_span: 6
         options:
-          - { value: fade, label: { en: Fade, tr: 'Belirme (Fade)', de: 'Einblenden (Fade)', ru: 'Плавное появление (Fade)', es: 'Desvanecer (Fade)', fr: 'Fondu (Fade)' } }
-          - { value: slide-up, label: { en: 'Slide Up', tr: 'Aşağıdan Yukarı (Slide Up)', de: 'Nach oben gleiten', ru: 'Скольжение вверх', es: 'Deslizar Arriba', fr: 'Glisser vers le Haut' } }
-          - { value: slide-down, label: { en: 'Slide Down', tr: 'Yukarıdan Aşağı (Slide Down)', de: 'Nach unten gleiten', ru: 'Скольжение вниз', es: 'Deslizar Abajo', fr: 'Glisser vers le Bas' } }
-          - { value: zoom, label: { en: 'Zoom In', tr: 'Yakınlaşma (Zoom In)', de: 'Heranzoomen (Zoom In)', ru: 'Увеличение (Zoom In)', es: 'Acercar (Zoom In)', fr: 'Zoom Avant' } }
+          - { value: fade, label: { en: Fade, tr: 'Belirme', de: 'Einblenden', ru: 'Плавное появление', es: 'Desvanecer', fr: 'Fondu' } }
+          - { value: slide-up, label: { en: 'Slide Up', tr: 'Aşağıdan Yukarı', de: 'Nach oben gleiten', ru: 'Скольжение вверх', es: 'Deslizar Arriba', fr: 'Glisser vers le Haut' } }
+          - { value: slide-down, label: { en: 'Slide Down', tr: 'Yukarıdan Aşağı', de: 'Nach unten gleiten', ru: 'Скольжение вниз', es: 'Deslizar Abajo', fr: 'Glisser vers le Bas' } }
+          - { value: zoom, label: { en: 'Zoom In', tr: 'Yakınlaşma', de: 'Heranzoomen', ru: 'Увеличение', es: 'Acercar', fr: 'Zoom Avant' } }
       image_transition:
         type: select
         label:
@@ -138,7 +138,7 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Sabit, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: scale-up, label: { en: 'Zoom (Scale Up)', tr: 'Hover Yakınlaşma (Zoom)', de: 'Zoom (Vergrößern)', ru: 'Масштабирование (Увеличение)', es: 'Zoom (Aumentar)', fr: 'Zoom (Agrandir)' } }
+          - { value: scale-up, label: { en: 'Zoom', tr: 'Hover Yakınlaşma', de: 'Zoom', ru: 'Масштабирование', es: 'Zoom', fr: 'Zoom' } }
       rounded:
         type: select
         label:
@@ -152,10 +152,10 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Köşesiz, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: md, label: { en: Medium, tr: 'Hafif (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: xl, label: { en: Standard, tr: 'Standart (xl)', de: Standard, ru: Стандартный, es: Estándar, fr: Standard } }
-          - { value: 2xl, label: { en: Large, tr: 'Belirgin (2xl)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: 3xl, label: { en: 'Extra Large', tr: 'Geniş (3xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: md, label: { en: Medium, tr: 'Hafif', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: xl, label: { en: Standard, tr: 'Standart', de: Standard, ru: Стандартный, es: Estándar, fr: Standard } }
+          - { value: 2xl, label: { en: Large, tr: 'Belirgin', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: 3xl, label: { en: 'Extra Large', tr: 'Geniş', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       shadow:
         type: select
         label:
@@ -169,10 +169,10 @@ tabs:
         col_span: 6
         options:
           - { value: none, label: { en: None, tr: Yok, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
-          - { value: sm, label: { en: Small, tr: Hafif, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: Belirgin, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: Geniş, de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: Hafif, de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: Belirgin, de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: Geniş, de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       link_overlay:
         type: select
         label:
@@ -215,10 +215,10 @@ tabs:
         default: lg
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: 'Orta (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: 'Orta', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       title_color:
         type: select
         label:
@@ -248,7 +248,7 @@ tabs:
         col_span: 6
         options:
           - { value: primary_pill, label: { en: 'Primary Badge', tr: 'Renkli Rozet', de: 'Primärer Badge', ru: 'Основной значок', es: 'Insignia Primaria', fr: 'Badge Primaire' } }
-          - { value: pill, label: { en: 'Pill Badge', tr: 'Açık Rozet (Pill)', de: Pill-Badge, ru: Значок-капсула, es: 'Insignia Píldora', fr: 'Badge Pilule' } }
+          - { value: pill, label: { en: 'Pill Badge', tr: 'Açık Rozet', de: Pill-Badge, ru: Значок-капсула, es: 'Insignia Píldora', fr: 'Badge Pilule' } }
           - { value: text, label: { en: 'Plain Text', tr: 'Sade Metin', de: Klartext, ru: 'Обычный текст', es: 'Texto Plano', fr: 'Texte Brut' } }
       badge_style:
         type: select
@@ -262,10 +262,10 @@ tabs:
         default: glass
         col_span: 6
         options:
-          - { value: glass, label: { en: 'Glass / Translucent', tr: 'Cam (Yarı Saydam)', de: 'Glas / Transparent', ru: 'Стекло / Полупрозрачный', es: 'Cristal / Translúcido', fr: 'Verre / Translucide' } }
-          - { value: soft, label: { en: Soft, tr: 'Yumuşak (Soft)', de: Sanft, ru: Мягкий, es: Suave, fr: Doux } }
-          - { value: solid, label: { en: Solid, tr: 'Dolu (Solid)', de: 'Gefüllt (Solid)', ru: 'Сплошной (Solid)', es: Sólido, fr: 'Plein (Solid)' } }
-          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung (Outline)', ru: 'Контурный (Outline)', es: 'Contorno (Outline)', fr: 'Contour (Outline)' } }
+          - { value: glass, label: { en: 'Glass / Translucent', tr: 'Cam', de: 'Glas / Transparent', ru: 'Стекло / Полупрозрачный', es: 'Cristal / Translúcido', fr: 'Verre / Translucide' } }
+          - { value: soft, label: { en: Soft, tr: 'Yumuşak', de: Sanft, ru: Мягкий, es: Suave, fr: Doux } }
+          - { value: solid, label: { en: Solid, tr: 'Dolu', de: 'Gefüllt', ru: 'Сплошной', es: Sólido, fr: 'Plein' } }
+          - { value: outline, label: { en: Outline, tr: Çerçeveli, de: 'Umrandung', ru: 'Контурный', es: 'Contorno', fr: 'Contour' } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
       badge_color:
         type: select
@@ -284,10 +284,10 @@ tabs:
           - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
           - { value: white, label: { en: White, tr: Beyaz, de: Weiß, ru: Белый, es: Blanco, fr: Blanc } }
           - { value: muted, label: { en: Muted, tr: Gri, de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
-          - { value: success, label: { en: Success, tr: 'Yeşil (Başarılı)', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
-          - { value: warning, label: { en: Warning, tr: 'Sarı (Uyarı)', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
-          - { value: danger, label: { en: Danger, tr: 'Kırmızı (Hata)', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
-          - { value: info, label: { en: Info, tr: 'Açık Mavi (Bilgi)', de: Info, ru: Инфо, es: Info, fr: Info } }
+          - { value: success, label: { en: Success, tr: 'Yeşil', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
+          - { value: warning, label: { en: Warning, tr: 'Sarı', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
+          - { value: danger, label: { en: Danger, tr: 'Kırmızı', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
+          - { value: info, label: { en: Info, tr: 'Açık Mavi', de: Info, ru: Инфо, es: Info, fr: Info } }
       badge_position:
         type: select
         label:
@@ -304,7 +304,7 @@ tabs:
           - { value: top-right, label: { en: 'Top Right', tr: 'Sağ Üst', de: 'Oben Rechts', ru: 'Сверху справа', es: 'Arriba Derecha', fr: 'Haut Droite' } }
           - { value: bottom-left, label: { en: 'Bottom Left', tr: 'Sol Alt', de: 'Unten Links', ru: 'Снизу слева', es: 'Abajo Izquierda', fr: 'Bas Gauche' } }
           - { value: bottom-right, label: { en: 'Bottom Right', tr: 'Sağ Alt', de: 'Unten Rechts', ru: 'Снизу справа', es: 'Abajo Derecha', fr: 'Bas Droite' } }
-          - { value: inline, label: { en: 'Inline (Above Title)', tr: 'Başlık Üstü (Metin İçi)', de: 'Inline (Über Titel)', ru: 'В строке (Над заголовком)', es: 'En Línea (Encima del Título)', fr: 'En Ligne (Au-dessus du Titre)' } }
+          - { value: inline, label: { en: 'Inline', tr: 'Başlık Üstü', de: 'Inline', ru: 'В строке', es: 'En Línea', fr: 'En Ligne' } }
       button_style:
         type: select
         label:
@@ -322,7 +322,7 @@ tabs:
           - { value: secondary, label: { en: 'Soft / Secondary', tr: 'İkincil / Yumuşak', de: 'Sanft / Sekundär', ru: 'Мягкая / Вторичная', es: 'Suave / Secundario', fr: 'Doux / Secondaire' } }
           - { value: outline, label: { en: 'Outline White', tr: 'Beyaz Çerçeveli', de: 'Umrandet Weiß', ru: 'Белый контур', es: 'Contorno Blanco', fr: 'Contour Blanc' } }
           - { value: link, label: { en: 'Simple Link', tr: 'Sade Bağlantı', de: 'Einfacher Link', ru: 'Простая ссылка', es: 'Enlace Simple', fr: 'Lien Simple' } }
-          - { value: ghost, label: { en: Ghost, tr: Hayalet, de: 'Geist (Transparent)', ru: 'Прозрачный (Ghost)', es: 'Fantasma (Transparente)', fr: 'Fantôme (Transparent)' } }
+          - { value: ghost, label: { en: Ghost, tr: Hayalet, de: 'Geist', ru: 'Прозрачный', es: 'Fantasma', fr: 'Fantôme' } }
       button_color:
         type: select
         label:
@@ -340,9 +340,9 @@ tabs:
           - { value: secondary, label: { en: Secondary, tr: İkincil, de: Sekundär, ru: Вторичный, es: Secundario, fr: Secondaire } }
           - { value: dark, label: { en: Dark, tr: Koyu, de: Dunkel, ru: Тёмный, es: Oscuro, fr: Sombre } }
           - { value: muted, label: { en: Muted, tr: 'Nötr / Gri', de: Gedämpft, ru: Приглушённый, es: Atenuado, fr: Atténué } }
-          - { value: success, label: { en: Success, tr: 'Yeşil (Başarılı)', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
-          - { value: warning, label: { en: Warning, tr: 'Sarı (Uyarı)', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
-          - { value: danger, label: { en: Danger, tr: 'Kırmızı (Hata)', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
+          - { value: success, label: { en: Success, tr: 'Yeşil', de: Erfolg, ru: Успех, es: Éxito, fr: Succès } }
+          - { value: warning, label: { en: Warning, tr: 'Sarı', de: Warnung, ru: Предупреждение, es: Advertencia, fr: Avertissement } }
+          - { value: danger, label: { en: Danger, tr: 'Kırmızı', de: Gefahr, ru: Опасность, es: Peligro, fr: Danger } }
       button_size:
         type: select
         label:

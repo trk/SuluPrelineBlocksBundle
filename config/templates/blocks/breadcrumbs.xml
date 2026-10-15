@@ -5,11 +5,11 @@
     <key>breadcrumbs</key>
     <meta>
         <title lang="en">Breadcrumbs Navigation</title>
-        <title lang="tr">Sayfa Yolu (Breadcrumbs)</title>
+        <title lang="tr">Sayfa Yolu</title>
         <title lang="de">Brotkrümelnavigation</title>
-        <title lang="ru">Навигационная цепочка (Breadcrumbs)</title>
-        <title lang="es">Migas de Pan (Breadcrumbs)</title>
-        <title lang="fr">Fil d'Ariane (Breadcrumbs)</title>
+        <title lang="ru">Навигационная цепочка</title>
+        <title lang="es">Migas de Pan</title>
+        <title lang="fr">Fil d'Ariane</title>
     </meta>
     <properties>
         <property name="show_home" type="checkbox" colspan="6">

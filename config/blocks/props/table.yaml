@@ -20,7 +20,7 @@ tabs:
         default: default
         col_span: 6
         options:
-          - { value: default, label: { en: 'Clean (Default)', tr: 'Sade (Varsayılan)', de: 'Schlicht (Standard)', ru: 'Чистый (По умолчанию)', es: 'Limpio (Predeterminado)', fr: 'Épuré (Par Défaut)' } }
+          - { value: default, label: { en: 'Clean', tr: 'Sade', de: 'Schlicht', ru: 'Чистый', es: 'Limpio', fr: 'Épuré' } }
           - { value: striped, label: { en: 'Striped & Hoverable', tr: 'Şeritli ve Vurgulu', de: 'Gestreift & Hover-Effekt', ru: 'Полосатые с подсветкой', es: 'Rayado y con Efecto Hover', fr: 'Rayé et Survolable' } }
           - { value: hover, label: { en: 'Hoverable Rows', tr: 'Üzerine Gelince Vurgulu', de: 'Zeilen mit Hover-Effekt', ru: 'Подсветка строк при наведении', es: 'Filas con Efecto Hover', fr: 'Lignes Survolables' } }
       size:
@@ -35,9 +35,9 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Compact (sm)', tr: 'Dar (sm)', de: 'Kompakt (sm)', ru: 'Компактный (sm)', es: 'Compacto (sm)', fr: 'Compact (sm)' } }
-          - { value: md, label: { en: 'Standard (md)', tr: 'Standart (md)', de: 'Standard (md)', ru: 'Стандартный (md)', es: 'Estándar (md)', fr: 'Standard (md)' } }
-          - { value: lg, label: { en: 'Spacious (lg)', tr: 'Geniş (lg)', de: 'Geräumig (lg)', ru: 'Просторный (lg)', es: 'Espacioso (lg)', fr: 'Spacieux (lg)' } }
+          - { value: sm, label: { en: 'Compact', tr: 'Dar', de: 'Kompakt', ru: 'Компактный', es: 'Compacto', fr: 'Compact' } }
+          - { value: md, label: { en: 'Standard', tr: 'Standart', de: 'Standard', ru: 'Стандартный', es: 'Estándar', fr: 'Standard' } }
+          - { value: lg, label: { en: 'Spacious', tr: 'Geniş', de: 'Geräumig', ru: 'Просторный', es: 'Espacioso', fr: 'Spacieux' } }
       bordered:
         type: checkbox
         label:
@@ -53,10 +53,10 @@ tabs:
         type: checkbox
         label:
           en: 'Sticky Table Header'
-          tr: 'Sabit Tablo Başlığı (Sticky)'
-          de: 'Fixierter Tabellenkopf (Sticky)'
-          ru: 'Закреплённая шапка таблицы (Sticky)'
-          es: 'Encabezado de Tabla Fijo (Sticky)'
-          fr: 'En-tête de Tableau Épinglé (Sticky)'
+          tr: 'Sabit Tablo Başlığı'
+          de: 'Fixierter Tabellenkopf'
+          ru: 'Закреплённая шапка таблицы'
+          es: 'Encabezado de Tabla Fijo'
+          fr: 'En-tête de Tableau Épinglé'
         default: false
         col_span: 6

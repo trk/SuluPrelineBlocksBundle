@@ -39,11 +39,11 @@ tabs:
         default: lg
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large (xl)', tr: 'Çok Büyük (xl)', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
-          - { value: 2xl, label: { en: 'Hero Display (2xl)', tr: 'Dev Manşet (2xl)', de: 'Hero-Anzeige (2xl)', ru: 'Крупный баннер (2xl)', es: 'Titular Hero (2xl)', fr: 'Affichage Héro (2xl)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
+          - { value: 2xl, label: { en: 'Hero Display', tr: 'Dev Manşet', de: 'Hero-Anzeige', ru: 'Крупный баннер', es: 'Titular Hero', fr: 'Affichage Héro' } }
       title_color:
         type: select
         label:
@@ -77,16 +77,16 @@ tabs:
           - { value: none, label: { en: None, tr: Sade, de: Keine, ru: Нет, es: Ninguno, fr: Aucun } }
           - { value: divider, label: { en: 'Underline Accent', tr: 'Altı Çizili Vurgu', de: 'Unterstrichener Akzent', ru: 'Акцентное подчёркивание', es: 'Subrayado de Acento', fr: 'Soulignement Accentué' } }
           - { value: bullet, label: { en: 'Left Bullet Bar', tr: 'Sol Yan Çubuk', de: 'Linker Akzentbalken', ru: 'Левая боковая полоса', es: 'Barra Lateral Izquierda', fr: 'Barre Latérale Gauche' } }
-          - { value: line, label: { en: 'Centered Horizontal Lines', tr: 'İki Yanı Çizgili (Ortalı)', de: 'Zentrierte horizontale Linien', ru: 'Горизонтальные линии по бокам', es: 'Líneas Horizontales Centradas', fr: 'Lignes Horizontales Centrées' } }
+          - { value: line, label: { en: 'Centered Horizontal Lines', tr: 'İki Yanı Çizgili', de: 'Zentrierte horizontale Linien', ru: 'Горизонтальные линии по бокам', es: 'Líneas Horizontales Centradas', fr: 'Lignes Horizontales Centrées' } }
       title_text_stroke:
         type: select
         label:
           en: 'Text Stroke'
-          tr: 'İçi Boş Kontur (Outline)'
-          de: 'Textkontur (Outline)'
-          ru: 'Контур текста (Outline)'
-          es: 'Trazo de Texto (Contorno)'
-          fr: 'Contour de Texte (Outline)'
+          tr: 'İçi Boş Kontur'
+          de: 'Textkontur'
+          ru: 'Контур текста'
+          es: 'Trazo de Texto'
+          fr: 'Contour de Texte'
         default: 'no'
         col_span: 6
         options:

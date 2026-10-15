@@ -18,7 +18,7 @@
         <property name="target_id" type="text_line">
             <meta>
                 <title lang="en">Target Element ID</title>
-                <title lang="tr">Hedef Element ID (#buraya-git)</title>
+                <title lang="tr">Hedef Element ID</title>
                 <title lang="ru">ID целевого элемента</title>
                 <title lang="fr">ID de l'élément cible</title>
                 <title lang="es">ID del elemento de destino</title>

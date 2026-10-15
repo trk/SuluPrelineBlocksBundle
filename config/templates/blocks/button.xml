@@ -37,22 +37,22 @@
         <param name="values" type="collection">
           <param name="gap">
             <meta>
-              <title lang="en">Separated (Gap)</title>
-              <title lang="tr">Ayr&#x131;k (Bo&#x15F;luklu)</title>
-              <title lang="de">Getrennt (Abstand)</title>
-              <title lang="ru">&#x420;&#x430;&#x437;&#x434;&#x435;&#x43B;&#x44C;&#x43D;&#x43E; (&#x441; &#x43E;&#x442;&#x441;&#x442;&#x443;&#x43F;&#x43E;&#x43C;)</title>
-              <title lang="es">Separado (Espaciado)</title>
-              <title lang="fr">S&#xE9;par&#xE9; (Espac&#xE9;)</title>
+              <title lang="en">Separated</title>
+              <title lang="tr">Ayrık</title>
+              <title lang="de">Getrennt</title>
+              <title lang="ru">Раздельно</title>
+              <title lang="es">Separado</title>
+              <title lang="fr">Séparé</title>
             </meta>
           </param>
           <param name="connected">
             <meta>
-              <title lang="en">Connected (Segmented)</title>
-              <title lang="tr">Biti&#x15F;ik (Segmented)</title>
-              <title lang="de">Verbunden (Segmentiert)</title>
-              <title lang="ru">&#x421;&#x43B;&#x438;&#x442;&#x43D;&#x43E; (&#x441;&#x435;&#x433;&#x43C;&#x435;&#x43D;&#x442;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x43D;&#x43E;)</title>
-              <title lang="es">Conectado (Segmentado)</title>
-              <title lang="fr">Connect&#xE9; (Segment&#xE9;)</title>
+              <title lang="en">Connected</title>
+              <title lang="tr">Bitişik</title>
+              <title lang="de">Verbunden</title>
+              <title lang="ru">Слитно</title>
+              <title lang="es">Conectado</title>
+              <title lang="fr">Connecté</title>
             </meta>
           </param>
         </param>
@@ -108,7 +108,7 @@
           <param name="start">
             <meta>
               <title lang="en">Left / Start</title>
-              <title lang="tr">Sol (Ba&#x15F;lang&#x131;&#xE7;)</title>
+              <title lang="tr">Sol</title>
               <title lang="de">Links</title>
               <title lang="ru">&#x421;&#x43B;&#x435;&#x432;&#x430; / &#x412; &#x43D;&#x430;&#x447;&#x430;&#x43B;&#x435;</title>
               <title lang="es">Izquierda / Inicio</title>
@@ -118,7 +118,7 @@
           <param name="center">
             <meta>
               <title lang="en">Center</title>
-              <title lang="tr">Orta (Merkez)</title>
+              <title lang="tr">Orta</title>
               <title lang="de">Zentriert</title>
               <title lang="ru">&#x41F;&#x43E; &#x446;&#x435;&#x43D;&#x442;&#x440;&#x443;</title>
               <title lang="es">Centro</title>
@@ -128,7 +128,7 @@
           <param name="end">
             <meta>
               <title lang="en">Right / End</title>
-              <title lang="tr">Sa&#x11F; (Biti&#x15F;)</title>
+              <title lang="tr">Sağ</title>
               <title lang="de">Rechts</title>
               <title lang="ru">&#x421;&#x43F;&#x440;&#x430;&#x432;&#x430; / &#x412; &#x43A;&#x43E;&#x43D;&#x446;&#x435;</title>
               <title lang="es">Derecha / Fin</title>
@@ -138,7 +138,7 @@
           <param name="justify">
             <meta>
               <title lang="en">Full Width / Justify</title>
-              <title lang="tr">Tam Geni&#x15F;lik (Yay)</title>
+              <title lang="tr">Tam Genişlik</title>
               <title lang="de">Volle Breite</title>
               <title lang="ru">&#x412;&#x43E; &#x432;&#x441;&#x44E; &#x448;&#x438;&#x440;&#x438;&#x43D;&#x443;</title>
               <title lang="es">Ancho Completo / Justificado</title>
@@ -162,52 +162,52 @@
         <param name="values" type="collection">
           <param name="none">
             <meta>
-              <title lang="en">None (0)</title>
-              <title lang="tr">Yok (0)</title>
-              <title lang="de">Keine (0)</title>
-              <title lang="ru">&#x41D;&#x435;&#x442; (0)</title>
-              <title lang="es">Ninguno (0)</title>
-              <title lang="fr">Aucun (0)</title>
+              <title lang="en">None</title>
+              <title lang="tr">Yok</title>
+              <title lang="de">Keine</title>
+              <title lang="ru">Нет</title>
+              <title lang="es">Ninguno</title>
+              <title lang="fr">Aucun</title>
             </meta>
           </param>
           <param name="xs">
             <meta>
               <title lang="en">Extra Small</title>
-              <title lang="tr">&#xC7;ok K&#xFC;&#xE7;&#xFC;k (xs)</title>
-              <title lang="de">Extra Klein (xs)</title>
-              <title lang="ru">&#x41E;&#x447;&#x435;&#x43D;&#x44C; &#x43C;&#x430;&#x43B;&#x44B;&#x439; (xs)</title>
-              <title lang="es">Extra Peque&#xF1;o (xs)</title>
-              <title lang="fr">Tr&#xE8;s Petit (xs)</title>
+              <title lang="tr">Çok Küçük</title>
+              <title lang="de">Extra Klein</title>
+              <title lang="ru">Очень малый</title>
+              <title lang="es">Extra Pequeño</title>
+              <title lang="fr">Très Petit</title>
             </meta>
           </param>
           <param name="sm">
             <meta>
               <title lang="en">Small</title>
-              <title lang="tr">K&#xFC;&#xE7;&#xFC;k (sm)</title>
-              <title lang="de">Klein (sm)</title>
-              <title lang="ru">&#x41C;&#x430;&#x43B;&#x44B;&#x439; (sm)</title>
-              <title lang="es">Peque&#xF1;o (sm)</title>
-              <title lang="fr">Petit (sm)</title>
+              <title lang="tr">Küçük</title>
+              <title lang="de">Klein</title>
+              <title lang="ru">Малый</title>
+              <title lang="es">Pequeño</title>
+              <title lang="fr">Petit</title>
             </meta>
           </param>
           <param name="md">
             <meta>
               <title lang="en">Medium</title>
-              <title lang="tr">Orta (md)</title>
-              <title lang="de">Mittel (md)</title>
-              <title lang="ru">&#x421;&#x440;&#x435;&#x434;&#x43D;&#x438;&#x439; (md)</title>
-              <title lang="es">Mediano (md)</title>
-              <title lang="fr">Moyen (md)</title>
+              <title lang="tr">Orta</title>
+              <title lang="de">Mittel</title>
+              <title lang="ru">Средний</title>
+              <title lang="es">Mediano</title>
+              <title lang="fr">Moyen</title>
             </meta>
           </param>
           <param name="lg">
             <meta>
               <title lang="en">Large</title>
-              <title lang="tr">B&#xFC;y&#xFC;k (lg)</title>
-              <title lang="de">Gro&#xDF; (lg)</title>
-              <title lang="ru">&#x411;&#x43E;&#x43B;&#x44C;&#x448;&#x43E;&#x439; (lg)</title>
-              <title lang="es">Grande (lg)</title>
-              <title lang="fr">Grand (lg)</title>
+              <title lang="tr">Büyük</title>
+              <title lang="de">Groß</title>
+              <title lang="ru">Большой</title>
+              <title lang="es">Grande</title>
+              <title lang="fr">Grand</title>
             </meta>
           </param>
         </param>

@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>gallery</key>
     <meta>
-        <title lang="en">Gallery (Overlays)</title>
-        <title lang="tr">Galeri (Katmanlar)</title>
-        <title lang="de">Galerie (Overlays)</title>
-        <title lang="ru">Галерея (Оверлеи)</title>
-        <title lang="es">Galería (Superposiciones)</title>
-        <title lang="fr">Galerie (Superpositions)</title>
+        <title lang="en">Gallery</title>
+        <title lang="tr">Galeri</title>
+        <title lang="de">Galerie</title>
+        <title lang="ru">Галерея</title>
+        <title lang="es">Galería</title>
+        <title lang="fr">Galerie</title>
     </meta>
     <properties>
         <xi:include href="../fields/title.xml"/>

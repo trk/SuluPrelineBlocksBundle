@@ -21,7 +21,7 @@ tabs:
         col_span: 6
         options:
           - { value: boxed, label: { en: 'Boxed Cards', tr: 'Kutulu Kartlar', de: Box-Karten, ru: 'Карточки в блоках', es: 'Tarjetas en Caja', fr: 'Cartes Encadrées' } }
-          - { value: minimal, label: { en: 'Minimal (No Card)', tr: 'Minimal (Kutusuz)', de: 'Minimal (Ohne Karte)', ru: 'Минималистичный (Без карточки)', es: 'Minimalista (Sin Tarjeta)', fr: 'Minimal (Sans Carte)' } }
+          - { value: minimal, label: { en: 'Minimal', tr: 'Minimal', de: 'Minimal', ru: 'Минималистичный', es: 'Minimalista', fr: 'Minimal' } }
           - { value: pill, label: { en: 'Soft Pill', tr: 'Yumuşak Kapsül', de: 'Sanfte Pille', ru: 'Мягкая капсула', es: 'Píldora Suave', fr: 'Pilule Douce' } }
       size:
         type: select
@@ -35,10 +35,10 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
-          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß (xl)', ru: 'Очень большой (xl)', es: 'Extra Grande (xl)', fr: 'Très Grand (xl)' } }
+          - { value: sm, label: { en: Small, tr: Küçük, de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: Medium, tr: Orta, de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: Large, tr: Büyük, de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
+          - { value: xl, label: { en: 'Extra Large', tr: 'Çok Büyük', de: 'Extra Groß', ru: 'Очень большой', es: 'Extra Grande', fr: 'Très Grand' } }
       color:
         type: select
         label:
@@ -73,23 +73,23 @@ tabs:
       show_label:
         type: checkbox
         label:
-          en: 'Show Labels (Days, Hours, ...)'
-          tr: 'Etiketleri Göster (Gün, Saat, ...)'
-          de: 'Beschriftungen anzeigen (Tage, Stunden, ...)'
-          ru: 'Показать подписи (Дни, Часы, ...)'
-          es: 'Mostrar Etiquetas (Días, Horas, ...)'
-          fr: 'Afficher les Libellés (Jours, Heures, ...)'
+          en: 'Show Labels'
+          tr: 'Etiketleri Göster'
+          de: 'Beschriftungen anzeigen'
+          ru: 'Показать подписи'
+          es: 'Mostrar Etiquetas'
+          fr: 'Afficher les Libellés'
         default: true
         col_span: 6
       show_separator:
         type: checkbox
         label:
-          en: 'Show Separators (:)'
-          tr: 'Ayraçları Göster (:)'
-          de: 'Trennzeichen anzeigen (:)'
-          ru: 'Показать разделители (:)'
-          es: 'Mostrar Separadores (:)'
-          fr: 'Afficher les Séparateurs (:)'
+          en: 'Show Separators'
+          tr: 'Ayraçları Göster'
+          de: 'Trennzeichen anzeigen'
+          ru: 'Показать разделители'
+          es: 'Mostrar Separadores'
+          fr: 'Afficher les Séparateurs'
         default: true
         col_span: 6
       on_expire:

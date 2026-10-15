@@ -20,8 +20,8 @@ tabs:
         default: pills
         col_span: 6
         options:
-          - { value: pills, label: { en: Pills, tr: 'Kapsül Butonlar (Pills)', de: 'Pillen (Pills)', ru: 'Капсулы (Pills)', es: 'Píldoras (Pills)', fr: 'Pilules (Pills)' } }
-          - { value: segmented, label: { en: 'Segmented Control', tr: 'Bölümlü Kontrol (Segmented)', de: 'Segmentierte Steuerung', ru: 'Сегментированный переключатель', es: 'Control Segmentado', fr: 'Contrôle Segmenté' } }
+          - { value: pills, label: { en: Pills, tr: 'Kapsül Butonlar', de: 'Pillen', ru: 'Капсулы', es: 'Píldoras', fr: 'Pilules' } }
+          - { value: segmented, label: { en: 'Segmented Control', tr: 'Bölümlü Kontrol', de: 'Segmentierte Steuerung', ru: 'Сегментированный переключатель', es: 'Control Segmentado', fr: 'Contrôle Segmenté' } }
           - { value: underline, label: { en: 'Underline Tabs', tr: 'Alt Çizgili Sekmeler', de: 'Unterstrichene Tabs', ru: 'Подчёркнутые вкладки', es: 'Pestañas Subrayadas', fr: 'Onglets Soulignés' } }
           - { value: divider, label: { en: 'Divided Links', tr: 'Çizgi Ayırıcılı Linkler', de: 'Getrennte Links', ru: 'Ссылки с разделителями', es: 'Enlaces Divididos', fr: 'Liens Séparés' } }
       alignment:
@@ -52,6 +52,6 @@ tabs:
         default: md
         col_span: 6
         options:
-          - { value: sm, label: { en: 'Small (sm)', tr: 'Küçük (sm)', de: 'Klein (sm)', ru: 'Малый (sm)', es: 'Pequeño (sm)', fr: 'Petit (sm)' } }
-          - { value: md, label: { en: 'Medium (md)', tr: 'Standart (md)', de: 'Mittel (md)', ru: 'Средний (md)', es: 'Mediano (md)', fr: 'Moyen (md)' } }
-          - { value: lg, label: { en: 'Large (lg)', tr: 'Büyük (lg)', de: 'Groß (lg)', ru: 'Большой (lg)', es: 'Grande (lg)', fr: 'Grand (lg)' } }
+          - { value: sm, label: { en: 'Small', tr: 'Küçük', de: 'Klein', ru: 'Малый', es: 'Pequeño', fr: 'Petit' } }
+          - { value: md, label: { en: 'Medium', tr: 'Standart', de: 'Mittel', ru: 'Средний', es: 'Mediano', fr: 'Moyen' } }
+          - { value: lg, label: { en: 'Large', tr: 'Büyük', de: 'Groß', ru: 'Большой', es: 'Grande', fr: 'Grand' } }
