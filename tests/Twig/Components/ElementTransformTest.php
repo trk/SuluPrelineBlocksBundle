@@ -101,5 +101,20 @@ final class ElementTransformTest extends TestCase
 
         $scopedCss = ElementTransform::resolveScopedCss($props);
         $this->assertSame('#feature-card { background: #111; }', $scopedCss);
+
+        $arrayAttrs = ElementTransform::resolveCustomAttributes([
+            '_attributes' => [
+                'id' => 'bad',
+                'onclick' => 'alert(1)',
+                'href' => 'javascript:alert(1)',
+                'data-valid' => 'yes',
+            ],
+        ]);
+        $this->assertSame(['data-valid' => 'yes'], $arrayAttrs);
+
+        $preScoped = ElementTransform::resolveScopedCss([
+            '_scoped_css' => '#x { color: red; }</sty</style>le><script>alert(1)</script>',
+        ]);
+        $this->assertSame('#x { color: red; }', $preScoped);
     }
 }

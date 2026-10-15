@@ -37,6 +37,12 @@ final class ScrollToTest extends TestCase
         $scrollHash->target_id = '#iletisim-formu';
         self::assertSame('iletisim-formu', $scrollHash->getTargetId());
         self::assertSame('#iletisim-formu', $scrollHash->getTargetHref());
+
+        // Malicious target ID falls back to 'top'
+        $scrollMalicious = new ScrollTo();
+        $scrollMalicious->targetId = "');alert(1);//";
+        self::assertSame('top', $scrollMalicious->getTargetId());
+        self::assertSame('#top', $scrollMalicious->getTargetHref());
     }
 
     public function testCustomIcon(): void

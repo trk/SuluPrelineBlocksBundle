@@ -90,7 +90,11 @@ final class ScrollTo
 
         $clean = \ltrim(\trim((string) $target), '#');
 
-        return '' === $clean ? 'top' : $clean;
+        if ('' === $clean || 1 !== \preg_match('/^[a-zA-Z0-9_-]+$/', $clean)) {
+            return 'top';
+        }
+
+        return $clean;
     }
 
     public function getTargetHref(): string

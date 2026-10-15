@@ -4,7 +4,7 @@
 {% set btn_classes = this.getButtonClasses() %}
 {% set icon_pos = this.getResolvedProps()['icon_position']|default('left') %}
 {% set is_top = this.isTop() %}
-{% set default_label = is_top ? 'Başa Dön' : 'Aşağı Kaydır' %}
+{% set default_label = is_top ? 'Scroll to top' : 'Scroll down' %}
 {% set aria_text = title|default(default_label) %}
 
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
@@ -16,7 +16,7 @@
        class="{{ btn_classes }}"
        aria-label="{{ aria_text }}"
        data-hs-scroll
-       onclick="var el = document.querySelector('{{ target_href }}'); if(el){ el.scrollIntoView({behavior: 'smooth'}); return false; } else if('{{ target_href }}' === '#top'){ window.scrollTo({top: 0, behavior: 'smooth'}); return false; }">
+       onclick="var href = this.getAttribute('href'); if (href === '#top') { window.scrollTo({top: 0, behavior: 'smooth'}); return false; } var el = href ? document.getElementById(href.slice(1)) : null; if (el) { el.scrollIntoView({behavior: 'smooth'}); return false; }">
 
         {% if mode == 'totop_circle' or mode == 'floating' %}
             {# Circle Icon Only #}

@@ -313,7 +313,9 @@ final class ElementTransform
         }
 
         if (isset($props['css']) && \is_string($props['css']) && '' !== \trim($props['css'])) {
-            return 'el-' . \substr(\md5(\serialize($props)), 0, 8);
+            $encoded = \json_encode($props, \JSON_PARTIAL_OUTPUT_ON_ERROR);
+
+            return 'el-' . \substr(\md5(false !== $encoded ? $encoded : ''), 0, 8);
         }
 
         return null;
@@ -329,11 +331,7 @@ final class ElementTransform
     public static function resolveCustomAttributes(array $props): array
     {
         if (isset($props['_attributes']) && \is_array($props['_attributes'])) {
-            /** @var array<string, string|bool> $attrs */
-            $attrs = $props['_attributes'];
-            unset($attrs['id'], $attrs['class']);
-
-            return $attrs;
+            return \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer::sanitizeAttributesArray($props['_attributes']);
         }
 
         $raw = $props['attributes'] ?? null;
@@ -352,7 +350,9 @@ final class ElementTransform
     public static function resolveScopedCss(array $props): ?string
     {
         if (isset($props['_scoped_css']) && \is_string($props['_scoped_css']) && '' !== \trim($props['_scoped_css'])) {
-            return \trim($props['_scoped_css']);
+            $sanitized = \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer::sanitizeCssFragment($props['_scoped_css']);
+
+            return '' !== $sanitized ? $sanitized : null;
         }
 
         $rawCss = $props['css'] ?? null;
