@@ -78,7 +78,7 @@ final class Section extends PrelineComponent
     {
         return $this->classes(
             'mx-auto w-full',
-            $this->getMaxWidthClasses('85rem', 'section'),
+            $this->getMaxWidthClass('85rem', 'section'),
             $this->getPaddingClasses('default', 'padding_x', 'section_x'),
             $this->getPaddingClasses('default', 'padding_y', 'section_y'),
         );

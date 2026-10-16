@@ -22,7 +22,7 @@ final class SwitcherTest extends TestCase
         self::assertStringContainsString('justify-start', $switcher->getTabNavClasses());
         self::assertStringContainsString('hs-tab-active:bg-primary', $switcher->getTabButtonClasses());
         self::assertSame('', $switcher->getMarginClass());
-        self::assertNull($switcher->getCustomId());
+        self::assertNull($switcher->getElementId());
         self::assertSame('', $switcher->getCustomClass());
     }
 
@@ -44,7 +44,7 @@ final class SwitcherTest extends TestCase
         self::assertStringContainsString('flex-col space-y-1.5', $switcher->getTabNavClasses());
         self::assertStringContainsString('hs-tab-active:border-primary', $switcher->getTabButtonClasses());
         self::assertSame('mt-6 mb-10', $switcher->getMarginClass());
-        self::assertSame('faq-tabs', $switcher->getCustomId());
+        self::assertSame('faq-tabs', $switcher->getElementId());
         self::assertSame('my-switcher', $switcher->getCustomClass());
     }
 

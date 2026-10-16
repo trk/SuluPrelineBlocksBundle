@@ -23,7 +23,7 @@ final class SubnavTest extends TestCase
         self::assertStringContainsString('bg-primary text-primary-foreground', $subnav->getItemClasses(true));
         self::assertStringContainsString('text-muted-foreground-2 hover:text-foreground', $subnav->getItemClasses(false));
         self::assertSame('', $subnav->getMarginClass());
-        self::assertNull($subnav->getCustomId());
+        self::assertNull($subnav->getElementId());
         self::assertSame('', $subnav->getCustomClass());
     }
 
@@ -47,7 +47,7 @@ final class SubnavTest extends TestCase
         self::assertStringContainsString('bg-surface rounded-xl', $subnav->getNavClasses());
         self::assertStringContainsString('bg-layer text-layer-foreground', $subnav->getItemClasses(true));
         self::assertSame('mt-6 mb-10', $subnav->getMarginClass());
-        self::assertSame('tab-nav', $subnav->getCustomId());
+        self::assertSame('tab-nav', $subnav->getElementId());
         self::assertSame('my-subnav', $subnav->getCustomClass());
 
         $subnavUnderline = new Subnav();

@@ -1,0 +1,37 @@
+<script>
+    (function() {
+        var scope = document.getElementById('{{ scope_id }}');
+        if (!scope) return;
+        var btns = scope.querySelectorAll('.filter-btn');
+        var items = scope.querySelectorAll('{{ item_selector|default(".grid-item-card") }}');
+
+        btns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+
+                btns.forEach(function(b) {
+                    b.classList.remove('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
+                    b.classList.add('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
+                });
+
+                this.classList.remove('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
+                this.classList.add('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
+
+                items.forEach(function(item) {
+                    var tags = (item.getAttribute('data-tags') || '').split(' ');
+                    if (filter === '*' || tags.indexOf(filter) !== -1) {
+                        item.style.display = '';
+                        item.style.opacity = '1';
+                    } else {
+                        item.style.display = 'none';
+                        item.style.opacity = '0';
+                    }
+                });
+
+                if (typeof window.HSStaticMethods !== 'undefined') {
+                    window.HSStaticMethods.autoInit();
+                }
+            });
+        });
+    })();
+</script>

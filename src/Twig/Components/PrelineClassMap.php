@@ -1306,17 +1306,6 @@ final class PrelineClassMap
     /**
      * @var array<array-key, string>
      */
-    public const PROPS_RESOLVER_CARD_VARIANTS = [
-        'bordered' => 'border border-card-line shadow-2xs',
-        'group' => 'border-0 rounded-none shadow-none flex-1',
-        'shadow' => 'shadow-lg border border-card-line hover:shadow-xl',
-        'flat' => 'border-0 bg-surface',
-        'glass' => 'backdrop-blur-md bg-card/70 border border-card-line/40 shadow-lg',
-    ];
-
-    /**
-     * @var array<array-key, string>
-     */
     public const OVERLAY_STYLES = [
         'gradient-bottom' => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
         'gradient_bottom' => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',

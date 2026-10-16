@@ -186,4 +186,37 @@ final class PrelineComponentTest extends TestCase
         self::assertSame('secondary', $buttons[0]['button_color'] ?? null);
         self::assertSame('lg', $buttons[0]['size'] ?? null);
     }
+
+    public function testMediaLinkAndIconHelpers(): void
+    {
+        $card = new Card();
+        $card->load(
+            data: [
+                'title' => 'Fallback Alt Title',
+                'image' => [
+                    'url' => 'https://cdn.example.com/hero.jpg',
+                    'formats' => [
+                        'col-sm' => 'https://cdn.example.com/hero-400.webp',
+                    ],
+                    'focalPoint' => ['x' => 25, 'y' => 75],
+                ],
+                'video' => 'https://cdn.example.com/clip.mp4',
+                'icon' => 'sparkles',
+                'link' => ['url' => 'https://example.com/target', 'target' => '_blank'],
+            ],
+            props: [
+                'max_width' => 'md',
+            ],
+        );
+
+        self::assertSame('https://cdn.example.com/hero.jpg', $card->getImageUrl());
+        self::assertNotNull($card->getImageSrcSet());
+        self::assertStringContainsString('hero-400.webp 400w', (string) $card->getImageSrcSet());
+        self::assertSame('object-position: 25% 75%;', $card->getImageFocusPointStyle());
+        self::assertSame('Fallback Alt Title', $card->getImageAlt());
+        self::assertSame('https://cdn.example.com/clip.mp4', $card->getVideoUrl());
+        self::assertSame('ti ti-sparkles', $card->getIconClass());
+        self::assertSame('https://example.com/target', $card->getLinkUrl());
+        self::assertSame('_blank', $card->getLinkTarget());
+    }
 }

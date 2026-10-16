@@ -76,9 +76,13 @@
 
                             {% if item.video_url %}
                                 <div class="relative w-full aspect-video bg-black overflow-hidden">
-                                    <video class="w-full h-full object-cover" controls playsinline preload="metadata">
-                                        <source src="{{ item.video_url }}" type="video/mp4">
-                                    </video>
+                                    <twig:Video
+                                        :bare="true"
+                                        :video_url="item.video_url"
+                                        :controls="true"
+                                        preload="metadata"
+                                        video_class="w-full h-full object-cover"
+                                    />
                                 </div>
                             {% elseif item.image_url %}
                                 <div class="relative w-full h-36 bg-surface overflow-hidden">

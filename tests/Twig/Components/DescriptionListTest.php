@@ -25,7 +25,7 @@ final class DescriptionListTest extends TestCase
         self::assertStringContainsString('font-semibold', $dl->getTermClasses());
         self::assertStringContainsString('sm:w-2/3 text-sm text-muted-foreground-2', $dl->getDescClasses());
         self::assertSame('', $dl->getMarginClass());
-        self::assertNull($dl->getCustomId());
+        self::assertNull($dl->getElementId());
         self::assertSame('', $dl->getCustomClass());
     }
 
@@ -49,7 +49,7 @@ final class DescriptionListTest extends TestCase
         self::assertStringContainsString('even:bg-background-1', $dl->getItemRowClasses());
         self::assertStringContainsString('text-primary', $dl->getTermClasses());
         self::assertSame('mt-6 mb-10', $dl->getMarginClass());
-        self::assertSame('specs-list', $dl->getCustomId());
+        self::assertSame('specs-list', $dl->getElementId());
         self::assertSame('my-specs', $dl->getCustomClass());
     }
 

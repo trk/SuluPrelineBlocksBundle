@@ -24,7 +24,7 @@ final class ColumnTest extends TestCase
         self::assertSame('', $col->getStyleClasses());
         self::assertSame('', $col->getPaddingClasses());
         self::assertSame('justify-start', $col->getVerticalAlignClasses());
-        self::assertSame('text-start', $col->getTextAlignClasses());
+        self::assertSame('text-start', $col->getTextAlignClass());
         self::assertSame('', $col->getOrderClasses());
         self::assertSame('', $col->getStickyClasses());
         self::assertStringContainsString('flex flex-col w-full', $col->getColumnClasses());
@@ -49,7 +49,7 @@ final class ColumnTest extends TestCase
         self::assertStringContainsString('border border-card-line', $col->getStyleClasses());
         self::assertSame('p-6 sm:p-8', $col->getPaddingClasses());
         self::assertSame('justify-center', $col->getVerticalAlignClasses());
-        self::assertSame('text-center', $col->getTextAlignClasses());
+        self::assertSame('text-center', $col->getTextAlignClass());
         self::assertSame('sticky top-20 self-start', $col->getStickyClasses());
         self::assertSame('order-first md:order-none', $col->getOrderClasses());
 

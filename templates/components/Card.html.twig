@@ -64,24 +64,17 @@
                     {{ badges_markup|raw }}
                 </div>
             {% endif %}
-            <video
-                src="{{ active_vid }}"
-                class="w-full h-full {{ object_fit_class }} transition-transform duration-500 ease-out group-hover:scale-105 {% if active_hover_vid %}group-hover:opacity-0{% endif %}"
-                autoplay
-                muted
-                playsinline
-                loop
-            ></video>
-            {% if active_hover_vid %}
-                <video
-                    src="{{ active_hover_vid }}"
-                    class="absolute inset-0 w-full h-full {{ object_fit_class }} opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105"
-                    autoplay
-                    muted
-                    playsinline
-                    loop
-                ></video>
-            {% endif %}
+            <twig:Video
+                :bare="true"
+                :video_url="active_vid"
+                :hover_video_url="active_hover_vid"
+                :controls="false"
+                :autoplay="true"
+                :muted="true"
+                :loop="true"
+                :video_class="'w-full h-full ' ~ object_fit_class ~ ' transition-transform duration-500 ease-out group-hover:scale-105' ~ (active_hover_vid ? ' group-hover:opacity-0' : '')"
+                :hover_video_class="'absolute inset-0 w-full h-full ' ~ object_fit_class ~ ' opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105'"
+            />
         </div>
     {% endif %}
 {% endset %}

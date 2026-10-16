@@ -13,16 +13,35 @@ final class Video extends PrelineComponent
     {
         return [
             'aspect_ratio' => '16/9',
+            'object_fit' => 'cover',
             'rounded' => 'xl',
             'autoplay' => false,
             'controls' => true,
             'loop' => false,
+            'bare' => false,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected function dataKeys(): array
+    {
+        return [
+            'video',
+            'hover_video',
+            'image',
+            'link',
+            'icon',
+            'video_url',
+            'hover_video_url',
         ];
     }
 
     protected function capabilities(): array
     {
         return [
+            'bare' => fn (): bool => $this->boolProp('bare', false),
             'autoplay' => fn (): bool => $this->isAutoplay(),
             'controls' => fn (): bool => $this->isControls(),
             'loop' => fn (): bool => $this->isLoop(),
@@ -32,7 +51,40 @@ final class Video extends PrelineComponent
 
     public function shouldRender(): bool
     {
-        return null !== $this->getVideoUrl() || null !== $this->getUrl();
+        return null !== $this->getVideoUrl() || null !== $this->getUrl() || null !== $this->getPosterUrl();
+    }
+
+    public function isBare(): bool
+    {
+        return $this->is('bare');
+    }
+
+    public function getPreload(): ?string
+    {
+        return $this->nullableStringProp('preload');
+    }
+
+    public function getVideoClasses(): string
+    {
+        $explicit = $this->nullableStringProp('video_class');
+        if (null !== $explicit) {
+            return $explicit;
+        }
+
+        return $this->classes('w-full h-full', $this->getObjectFitClass());
+    }
+
+    public function getHoverVideoClasses(): string
+    {
+        $explicit = $this->nullableStringProp('hover_video_class');
+        if (null !== $explicit) {
+            return $explicit;
+        }
+
+        return $this->classes(
+            'absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105',
+            $this->getObjectFitClass(),
+        );
     }
 
     public function getPosterUrl(): ?string

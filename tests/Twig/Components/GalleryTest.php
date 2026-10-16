@@ -232,7 +232,7 @@ final class GalleryTest extends TestCase
         $gallery->assign('id', 'photo-gallery');
         $gallery->assign('customClass', 'custom-gallery-class');
 
-        self::assertSame('photo-gallery', $gallery->getCustomId());
+        self::assertSame('photo-gallery', $gallery->getElementId());
         self::assertSame('custom-gallery-class', $gallery->getCustomClass());
     }
 }

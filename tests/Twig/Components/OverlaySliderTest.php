@@ -25,7 +25,7 @@ final class OverlaySliderTest extends TestCase
         self::assertSame('px-2.5', $slider->getGapClass());
         self::assertStringContainsString('"isAutoPlay":false', $slider->getCarouselConfigJson());
         self::assertSame('', $slider->getMarginClass());
-        self::assertNull($slider->getCustomId());
+        self::assertNull($slider->getElementId());
         self::assertSame('', $slider->getCustomClass());
     }
 
@@ -56,7 +56,7 @@ final class OverlaySliderTest extends TestCase
         self::assertSame('px-0', $slider->getGapClass());
         self::assertStringContainsString('"speed":2500', $slider->getCarouselConfigJson());
         self::assertSame('mt-10 mb-4', $slider->getMarginClass());
-        self::assertSame('hero-overlays', $slider->getCustomId());
+        self::assertSame('hero-overlays', $slider->getElementId());
         self::assertSame('my-overlay-slider', $slider->getCustomClass());
     }
 }

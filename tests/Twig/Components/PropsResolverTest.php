@@ -76,16 +76,6 @@ final class PropsResolverTest extends TestCase
         self::assertStringContainsString('text-xs', $ghostClasses);
     }
 
-    public function testCardClasses(): void
-    {
-        $bordered = PropsResolver::cardClasses(['card_variant' => 'bordered', 'bg_color' => 'white']);
-        self::assertStringContainsString('border', $bordered);
-        self::assertStringContainsString('bg-card', $bordered);
-
-        $glass = PropsResolver::cardClasses(['card_variant' => 'glass', 'bg_color' => 'transparent']);
-        self::assertStringContainsString('backdrop-blur', $glass);
-    }
-
     public function testResolveUrl(): void
     {
         self::assertSame('https://totoglu.com', PropsResolver::resolveUrl('https://totoglu.com'));

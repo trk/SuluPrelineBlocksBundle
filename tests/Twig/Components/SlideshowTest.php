@@ -25,7 +25,7 @@ final class SlideshowTest extends TestCase
         self::assertStringContainsString('"isAutoPlay":true', $slideshow->getCarouselConfigJson());
         self::assertStringContainsString('"speed":5000', $slideshow->getCarouselConfigJson());
         self::assertSame('', $slideshow->getMarginClass());
-        self::assertNull($slideshow->getCustomId());
+        self::assertNull($slideshow->getElementId());
         self::assertSame('', $slideshow->getCustomClass());
     }
 
@@ -56,7 +56,7 @@ final class SlideshowTest extends TestCase
         self::assertStringContainsString('"isAutoPlay":false', $slideshow->getCarouselConfigJson());
         self::assertStringContainsString('"speed":7000', $slideshow->getCarouselConfigJson());
         self::assertSame('mt-16 mb-6', $slideshow->getMarginClass());
-        self::assertSame('hero-slideshow', $slideshow->getCustomId());
+        self::assertSame('hero-slideshow', $slideshow->getElementId());
         self::assertSame('my-hero-carousel', $slideshow->getCustomClass());
     }
 

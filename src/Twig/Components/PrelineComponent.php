@@ -32,11 +32,6 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::resolveId($this->props());
     }
 
-    public function getCustomId(): ?string
-    {
-        return $this->nullableStringProp('id');
-    }
-
     public function getCustomClass(): string
     {
         return ElementTransform::customClass($this->props());
@@ -45,11 +40,6 @@ abstract class PrelineComponent extends AbstractBlockComponent
     public function getMarginClass(): string
     {
         return ElementTransform::margin($this->props());
-    }
-
-    public function getMarginClasses(): string
-    {
-        return $this->getMarginClass();
     }
 
     public function getPaddingClass(
@@ -83,19 +73,9 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::maxWidth($this->props(), $default, $preset);
     }
 
-    public function getMaxWidthClasses(string $default = 'none', string $preset = 'default'): string
-    {
-        return $this->getMaxWidthClass($default, $preset);
-    }
-
     public function getBlockAlignClass(): string
     {
         return ElementTransform::blockAlign($this->props());
-    }
-
-    public function getBlockAlignClasses(): string
-    {
-        return $this->getBlockAlignClass();
     }
 
     public function getTextAlign(string $default = 'left'): string
@@ -106,11 +86,6 @@ abstract class PrelineComponent extends AbstractBlockComponent
     public function getTextAlignClass(string $default = 'start'): string
     {
         return ElementTransform::textAlign($this->props(), $default, true);
-    }
-
-    public function getTextAlignClasses(string $default = 'start'): string
-    {
-        return $this->getTextAlignClass($default);
     }
 
     public function getAlignClasses(string $default = 'left', string $key = 'align'): string
@@ -170,19 +145,9 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::position($this->props());
     }
 
-    public function getPositionClasses(): string
-    {
-        return $this->getPositionClass();
-    }
-
     public function getVisibilityClass(): string
     {
         return ElementTransform::visibility($this->props());
-    }
-
-    public function getVisibilityClasses(): string
-    {
-        return $this->getVisibilityClass();
     }
 
     public function getAnimationClass(): string
@@ -190,29 +155,14 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::animation($this->props());
     }
 
-    public function getAnimationClasses(): string
-    {
-        return $this->getAnimationClass();
-    }
-
     public function getBlendModeClass(): string
     {
         return ElementTransform::blendMode($this->props());
     }
 
-    public function getBlendModeClasses(): string
-    {
-        return $this->getBlendModeClass();
-    }
-
     public function getParallaxClass(): string
     {
         return ElementTransform::parallax($this->props());
-    }
-
-    public function getParallaxClasses(): string
-    {
-        return $this->getParallaxClass();
     }
 
     /**

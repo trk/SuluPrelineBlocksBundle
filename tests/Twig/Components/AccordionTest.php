@@ -26,7 +26,7 @@ final class AccordionTest extends TestCase
         self::assertSame('pt-2 pb-1', $accordion->getContentWrapperClasses());
         self::assertStringContainsString('hs-accordion-toggle', $accordion->getToggleClasses());
         self::assertSame('', $accordion->getMarginClass());
-        self::assertNull($accordion->getCustomId());
+        self::assertNull($accordion->getElementId());
         self::assertSame('', $accordion->getCustomClass());
     }
 
@@ -56,7 +56,7 @@ final class AccordionTest extends TestCase
         self::assertStringContainsString('border', $accordion->getItemClasses());
         self::assertSame('pt-3', $accordion->getContentWrapperClasses());
         self::assertSame('mt-6 mb-10', $accordion->getMarginClass());
-        self::assertSame('faq-accordion', $accordion->getCustomId());
+        self::assertSame('faq-accordion', $accordion->getElementId());
         self::assertSame('my-faq', $accordion->getCustomClass());
     }
 

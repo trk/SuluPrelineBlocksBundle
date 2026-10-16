@@ -270,28 +270,6 @@ final class PropsResolver
     }
 
     /**
-     * @param array<string, mixed> $props
-     */
-    public static function cardClasses(array $props): string
-    {
-        $variant = self::str($props, 'card_variant', 'bordered', 'variant');
-        $layout = self::str($props, 'layout', 'vertical');
-        $bg = self::bgColor($props);
-
-        $base = 'flex rounded-xl overflow-hidden transition-all';
-
-        $variantClasses = PrelineClassMap::resolve(
-            PrelineClassMap::PROPS_RESOLVER_CARD_VARIANTS,
-            $variant,
-            PrelineClassMap::PROPS_RESOLVER_CARD_VARIANTS['bordered'],
-        );
-
-        $layoutClasses = 'horizontal' === $layout ? 'flex-col md:flex-row' : 'flex-col';
-
-        return AbstractBlockComponent::joinClasses($base, $variantClasses, $layoutClasses, $bg);
-    }
-
-    /**
      * Helper to resolve a Sulu link structure or plain URL string to an href string.
      */
     public static function resolveUrl(mixed $link): string

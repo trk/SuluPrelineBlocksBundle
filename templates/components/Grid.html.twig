@@ -12,24 +12,11 @@
     {% endif %}
 
     {% if is_filter_active %}
-        <div class="mb-8 flex flex-wrap gap-2 {{ this.filterAlignClass }}">
-            <button
-                type="button"
-                data-filter="*"
-                class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden disabled:opacity-50 transition"
-            >
-                {{ this.resolvedProps.filter_all_label|default('All') }}
-            </button>
-            {% for slug, label in this.filterTags %}
-                <button
-                    type="button"
-                    data-filter="{{ slug }}"
-                    class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden disabled:opacity-50 transition"
-                >
-                    {{ label }}
-                </button>
-            {% endfor %}
-        </div>
+        {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
+            filter_align_class: this.filterAlignClass,
+            all_label: this.resolvedProps.filter_all_label|default('All'),
+            filter_tags: this.filterTags,
+        }, with_context = false) }}
     {% endif %}
 
     <div class="{{ this.containerClasses }} grid-container w-full">
@@ -62,42 +49,9 @@
     </div>
 
     {% if is_filter_active %}
-        <script>
-            (function() {
-                var scope = document.getElementById('{{ grid_dom_id }}');
-                if (!scope) return;
-                var btns = scope.querySelectorAll('.filter-btn');
-                var items = scope.querySelectorAll('.grid-item-card');
-
-                btns.forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var filter = this.getAttribute('data-filter');
-
-                        btns.forEach(function(b) {
-                            b.classList.remove('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
-                            b.classList.add('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
-                        });
-
-                        this.classList.remove('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
-                        this.classList.add('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
-
-                        items.forEach(function(item) {
-                            var tags = (item.getAttribute('data-tags') || '').split(' ');
-                            if (filter === '*' || tags.indexOf(filter) !== -1) {
-                                item.style.display = '';
-                                item.style.opacity = '1';
-                            } else {
-                                item.style.display = 'none';
-                                item.style.opacity = '0';
-                            }
-                        });
-
-                        if (typeof window.HSStaticMethods !== 'undefined') {
-                            window.HSStaticMethods.autoInit();
-                        }
-                    });
-                });
-            })();
-        </script>
+        {{ include('@SuluPrelineBlocks/includes/tag_filter_script.html.twig', {
+            scope_id: grid_dom_id,
+            item_selector: '.grid-item-card',
+        }, with_context = false) }}
     {% endif %}
 </section>

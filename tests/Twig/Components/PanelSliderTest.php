@@ -26,7 +26,7 @@ final class PanelSliderTest extends TestCase
         self::assertStringContainsString('"isAutoPlay":false', $slider->getCarouselConfigJson());
         self::assertStringContainsString('"speed":4000', $slider->getCarouselConfigJson());
         self::assertSame('', $slider->getMarginClass());
-        self::assertNull($slider->getCustomId());
+        self::assertNull($slider->getElementId());
         self::assertSame('', $slider->getCustomClass());
     }
 
@@ -58,7 +58,7 @@ final class PanelSliderTest extends TestCase
         self::assertStringContainsString('"isAutoPlay":true', $slider->getCarouselConfigJson());
         self::assertStringContainsString('"isInfiniteLoop":false', $slider->getCarouselConfigJson());
         self::assertSame('mt-6 mb-16', $slider->getMarginClass());
-        self::assertSame('featured-slider', $slider->getCustomId());
+        self::assertSame('featured-slider', $slider->getElementId());
         self::assertSame('my-slider', $slider->getCustomClass());
     }
 }

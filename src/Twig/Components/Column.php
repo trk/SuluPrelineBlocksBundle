@@ -95,7 +95,7 @@ final class Column extends PrelineComponent
             $this->getStyleClasses(),
             $this->getPaddingClasses(),
             $this->getVerticalAlignClasses(),
-            $this->getTextAlignClasses(),
+            $this->getTextAlignClass(),
             $this->getOrderClasses(),
             $this->getStickyClasses(),
         );
