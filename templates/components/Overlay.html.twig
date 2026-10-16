@@ -1,24 +1,4 @@
-{% macro render_badges(badges) %}
-    {% for b in badges %}
-        {% if b.is_clickable %}
-            <a href="{{ b.url }}" {% if b.link_title %}title="{{ b.link_title }}"{% endif %} class="{{ b.classes }} hover:opacity-80 transition-opacity">
-                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
-                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
-                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
-                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
-            </a>
-        {% else %}
-            <span class="{{ b.classes }}">
-                {% if b.has_dot %}<span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>{% endif %}
-                {% if b.icon and b.icon_align == 'left' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
-                {% if b.title %}<span>{{ b.title }}</span>{% endif %}
-                {% if b.icon and b.icon_align == 'right' %}<i class="{{ b.icon }} shrink-0" aria-hidden="true"></i>{% endif %}
-            </span>
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
-
-{% set content = summary|default(content) %}
+{% set content = this.resolvedContent %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
 {% set active_img = this.getActiveImageUrl() %}
@@ -26,7 +6,7 @@
 {% set active_vid = this.getActiveVideoUrl() %}
 {% set active_hover_vid = this.getActiveHoverVideoUrl() %}
 {% set link_url = this.getLinkUrl() %}
-{% set icon_class = icon is defined and icon ? (icon starts with 'ti ' ? icon : 'ti ti-' ~ icon) : null %}
+{% set icon_class = this.iconClass %}
 
 {% set overlay_pos_classes = this.getOverlayPositionClasses() %}
 {% set overlay_style_classes = this.getOverlayStyle() %}
@@ -49,33 +29,25 @@
 {% set wrapper_styles = this.getWrapperStyles() %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {% if wrapper_styles %}style="{{ wrapper_styles }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({
-         class: this.getWrapperClasses(),
-     })) }}>
+<div {% if wrapper_styles %}style="{{ wrapper_styles }}"{% endif %}
+     {{ attributes.defaults(this.getRootAttributes()) }}>
 
     {# 1. Media Layer (Background Image / Video) #}
     <div class="absolute inset-0 z-0 overflow-hidden bg-inverse">
         {% if is_img and active_img %}
-            <img
-                src="{{ active_img }}"
-                {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                alt="{{ title|default('') }}"
-                class="w-full h-full {{ object_fit_class }} {{ img_trans_classes }} {% if active_hover_img %}group-hover:opacity-0{% endif %}"
-                {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
-                loading="lazy"
+            <twig:Image
+                :bare="true"
+                :image_url="active_img"
+                :image_srcset="img_srcset"
+                :sizes="img_sizes"
+                :image_focus_style="img_focus_style"
+                :hover_image_url="active_hover_img"
+                :hover_image_srcset="hover_img_srcset"
+                :hover_image_focus_style="hover_img_focus_style"
+                :alt="this.getImageAlt()"
+                :img_class="'w-full h-full ' ~ object_fit_class ~ ' ' ~ img_trans_classes ~ (active_hover_img ? ' group-hover:opacity-0' : '')"
+                :hover_img_class="'absolute inset-0 w-full h-full ' ~ object_fit_class ~ ' opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105'"
             />
-            {% if active_hover_img %}
-                <img
-                    src="{{ active_hover_img }}"
-                    {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                    alt="{{ title|default('') }}"
-                    class="absolute inset-0 w-full h-full {{ object_fit_class }} opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105"
-                    {% if hover_img_focus_style %}style="{{ hover_img_focus_style }}"{% endif %}
-                    loading="lazy"
-                />
-            {% endif %}
         {% elseif is_vid and active_vid %}
             <video
                 src="{{ active_vid }}"
@@ -104,7 +76,9 @@
     {# 2. Floating Badges (Corner Positioned) #}
     {% if this.hasBadges() and this.getBadgePosition() != 'inline' %}
         <div class="{{ this.getBadgePositionClasses() }}">
-            {{ _self.render_badges(this.getNormalizedBadges()) }}
+            {% for b in this.getNormalizedBadges() %}
+                <twig:Badge :block="b" />
+            {% endfor %}
         </div>
     {% endif %}
 
@@ -114,7 +88,9 @@
             {# Inline Badges #}
             {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
                 <div class="mb-3 flex flex-wrap gap-1.5">
-                    {{ _self.render_badges(this.getNormalizedBadges()) }}
+                    {% for b in this.getNormalizedBadges() %}
+                        <twig:Badge :block="b" />
+                    {% endfor %}
                 </div>
             {% endif %}
 
@@ -164,20 +140,7 @@
             {% if this.hasButtons() %}
                 <div class="relative z-20 mt-5 flex flex-wrap items-center gap-2.5 {% if text_align == 'text-center' %}justify-center{% elseif text_align == 'text-right' %}justify-end{% endif %}">
                     {% for btn in this.getNormalizedButtons() %}
-                        <a href="{{ btn.url }}"
-                           {% if btn.link_title %}title="{{ btn.link_title }}"{% endif %}
-                           class="{{ btn.classes }}"
-                        >
-                            {% if btn.icon and btn.icon_align == 'left' %}
-                                <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
-                            {% endif %}
-                            {% if btn.title %}
-                                <span>{{ btn.title }}</span>
-                            {% endif %}
-                            {% if btn.icon and btn.icon_align == 'right' %}
-                                <i class="{{ btn.icon }} shrink-0" aria-hidden="true"></i>
-                            {% endif %}
-                        </a>
+                        <twig:Button :block="btn" />
                     {% endfor %}
                 </div>
             {% endif %}

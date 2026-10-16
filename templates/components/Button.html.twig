@@ -1,32 +1,16 @@
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 {% if this.isGroup() %}
-    <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-         {{ attributes.defaults(this.customAttributes|merge({class: this.getGroupWrapperClasses()})) }}>
+    <div {{ attributes.defaults(this.getRootAttributes()) }}>
         {% for item in this.getNormalizedItems() %}
-            <a href="{{ item.url }}"
-               {% if item.id %}id="{{ item.id }}"{% endif %}
-               {% if item.link_title %}title="{{ item.link_title }}"{% endif %}
-               class="{{ item.classes }}"
-            >
-                {% if item.icon and item.icon_align == 'left' %}
-                    <i class="{{ item.icon }} shrink-0" aria-hidden="true"></i>
-                {% endif %}
-                {% if item.title %}
-                    <span>{{ item.title }}</span>
-                {% endif %}
-                {% if item.icon and item.icon_align == 'right' %}
-                    <i class="{{ item.icon }} shrink-0" aria-hidden="true"></i>
-                {% endif %}
-            </a>
+            <twig:Button :block="item" />
         {% endfor %}
     </div>
 {% else %}
+    {% set target = this.getLinkTarget() %}
     <a href="{{ this.getUrl() }}"
-       {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
+       {% if target %}target="{{ target }}"{% if target == '_blank' %} rel="noopener noreferrer"{% endif %}{% endif %}
        {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
-       {{ attributes.defaults(this.customAttributes|merge({
-           class: this.getWrapperClasses(),
-       })) }}
+       {{ attributes.defaults(this.getRootAttributes()) }}
     >
         {% if this.getResolvedIcon() and this.getIconAlign() == 'left' %}
             <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>

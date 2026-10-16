@@ -183,7 +183,15 @@ final class Button extends PrelineComponent
 
     public function getUrl(): string
     {
-        return PropsResolver::resolveUrl($this->get('link', '#'));
+        $link = $this->get('link');
+        if (null !== $link && '' !== $link) {
+            $resolved = PropsResolver::resolveUrl($link);
+            if ('#' !== $resolved || null === $this->nullableString('url')) {
+                return $resolved;
+            }
+        }
+
+        return $this->string('url', '#');
     }
 
     public function getResolvedIcon(): ?string
@@ -198,11 +206,20 @@ final class Button extends PrelineComponent
 
     public function getClasses(): string
     {
+        $precomputed = $this->nullableStringProp('classes');
+        if (null !== $precomputed) {
+            return $precomputed;
+        }
+
         return PropsResolver::buttonClasses($this->props());
     }
 
     public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
+        if ($this->isGroup()) {
+            return $this->classes($this->getGroupWrapperClasses(), $extraBase, ...$moreParts);
+        }
+
         return parent::getWrapperClasses($this->getClasses(), $extraBase, ...$moreParts);
     }
 }

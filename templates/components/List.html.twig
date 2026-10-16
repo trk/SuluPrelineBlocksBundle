@@ -5,12 +5,7 @@
 {% set tag = marker == 'decimal' ? 'ol' : 'ul' %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-    {{ attributes.defaults(this.customAttributes|merge({
-        class: this.getWrapperClasses('w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('w-full')) }}>
     {% if title %}
         <h3 class="text-xl font-bold tracking-tight text-foreground mb-4">
             {{ title }}
@@ -20,16 +15,7 @@
     <{{ tag }} class="{{ this.listClasses }}">
         {% for item in normalized_items %}
             {% set link_href = item.link_href|default(null) %}
-            {% if not link_href and item.link is defined and item.link and item.link is iterable and item.link.url is defined %}
-                {% set link_href = item.link.url %}
-            {% endif %}
-
             {% set img_url = item.image_url|default(null) %}
-            {% if not img_url and item.image is defined and item.image %}
-                {% if item.image.url is defined %}
-                    {% set img_url = item.image.url %}
-                {% endif %}
-            {% endif %}
 
             <li class="{{ this.itemClasses }}">
                 <div class="inline-flex items-start gap-x-2.5">
@@ -44,11 +30,17 @@
                     {% endif %}
 
                     {% if img_url %}
-                        <img src="{{ img_url }}" alt="{{ item.title|default('') }}" class="size-5 rounded-full object-cover shrink-0 mt-0.5" {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %} loading="lazy" />
+                        <twig:Image
+                            :bare="true"
+                            :image_url="img_url"
+                            :image_focus_style="item.image_focus_style|default(null)"
+                            :alt="item.title|default('')"
+                            img_class="size-5 rounded-full object-cover shrink-0 mt-0.5"
+                        />
                     {% endif %}
 
                     <div class="grow">
-                        {% if link_href %}
+                        {% if link_href and link_href != '#' %}
                             <a href="{{ link_href }}" class="font-medium hover:text-primary transition-colors">
                                 {{ item.title|default('') }}
                             </a>

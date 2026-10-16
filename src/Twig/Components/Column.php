@@ -101,6 +101,11 @@ final class Column extends PrelineComponent
         );
     }
 
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return $this->classes($this->getColumnClasses(), $extraBase, ...$moreParts);
+    }
+
     public function hasBlocks(): bool
     {
         return [] !== $this->getNormalizedBlocks();

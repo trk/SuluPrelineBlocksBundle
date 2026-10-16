@@ -4,10 +4,7 @@
 {% set icon_classes = this.getIconClasses() %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({
-         class: this.getWrapperClasses(),
-     })) }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
 
     {% if icon_class %}
         {% if url %}

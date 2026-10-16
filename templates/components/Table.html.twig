@@ -1,7 +1,6 @@
 {% set items = this.normalizedItems %}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({class: 'w-full my-6'})) }}>
+<div {{ attributes.defaults(this.getRootAttributesWithClass('w-full my-6')) }}>
     {% if this.title %}
         <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
     {% endif %}
@@ -36,7 +35,13 @@
                             <td class="{{ this.tdClasses }} font-medium">
                                 <div class="flex items-center gap-x-3">
                                     {% if item.image_url %}
-                                        <img class="size-8 rounded-full object-cover shrink-0" src="{{ item.image_url }}" alt="{{ item.title }}" {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %} loading="lazy">
+                                        <twig:Image
+                                            :bare="true"
+                                            :image_url="item.image_url"
+                                            :image_focus_style="item.image_focus_style|default(null)"
+                                            :alt="item.title"
+                                            img_class="size-8 rounded-full object-cover shrink-0"
+                                        />
                                     {% endif %}
                                     <span class="text-foreground font-semibold">{{ item.title }}</span>
                                 </div>
@@ -58,9 +63,13 @@
                         {% if this.header_badge or item.badge %}
                             <td class="{{ this.tdClasses }}">
                                 {% if item.badge %}
-                                    <span class="inline-flex items-center gap-x-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400">
-                                        {{ item.badge }}
-                                    </span>
+                                    <twig:Badge
+                                        :title="item.badge"
+                                        badge_style="soft"
+                                        badge_color="primary"
+                                        size="xs"
+                                        rounded="pill"
+                                    />
                                 {% endif %}
                             </td>
                         {% endif %}

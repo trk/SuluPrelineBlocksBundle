@@ -1,7 +1,6 @@
 {# Preline UI 5 / Tailwind CSS 4 Map Component #}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({class: 'w-full my-6'})) }}>
+<div {{ attributes.defaults(this.getRootAttributesWithClass('w-full my-6')) }}>
     {% if this.title %}
         <div class="mb-4">
             <h3 class="text-xl font-bold text-foreground">{{ this.title }}</h3>
@@ -31,14 +30,15 @@
                 <div class="flex flex-col bg-card border border-card-line rounded-xl p-4 md:p-5 shadow-xs transition hover:shadow-md">
                     {% if item.image_url %}
                         <div class="mb-3 rounded-lg overflow-hidden aspect-video bg-surface">
-                            <img
-                                src="{{ item.image_url }}"
-                                {% if item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"{% endif %}
-                                alt="{{ item.title|default(item.location) }}"
-                                class="w-full h-full object-cover"
-                                {% if item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
-                                loading="lazy"
-                            >
+                            <twig:Image
+                                :bare="true"
+                                :image_url="item.image_url"
+                                :image_srcset="item.image_srcset"
+                                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                :image_focus_style="item.image_focus_style"
+                                :alt="item.title|default(item.location)"
+                                img_class="w-full h-full object-cover"
+                            />
                         </div>
                     {% endif %}
 
@@ -81,14 +81,14 @@
                         </a>
 
                         {% if item.link %}
-                            <a
-                                href="{{ item.link }}"
-                                class="inline-flex items-center gap-x-1.5 py-1.5 px-2.5 rounded-lg text-xs font-medium border border-layer-line bg-layer text-layer-foreground hover:bg-layer-hover focus:outline-hidden focus:ring-2 focus:ring-primary transition-colors">
-                                {{ item.link_title }}
-                                <svg class="shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                                </svg>
-                            </a>
+                            <twig:Button
+                                :title="item.link_title"
+                                :url="item.link"
+                                icon="arrow-right"
+                                icon_align="right"
+                                variant="white"
+                                size="xs"
+                            />
                         {% endif %}
                     </div>
                 </div>

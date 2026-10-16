@@ -66,9 +66,18 @@ final class Code extends PrelineComponent
         return '' === $raw ? [''] : \explode("\n", $raw);
     }
 
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return parent::getWrapperClasses(
+            'relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4',
+            $extraBase,
+            ...$moreParts,
+        );
+    }
+
     public function getContainerClasses(): string
     {
-        return $this->getWrapperClasses('relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4');
+        return $this->getWrapperClasses();
     }
 
     public function getHeaderClasses(): string

@@ -2,15 +2,13 @@
 {% set icon = this.getResolvedIcon() %}
 {% set icon_align = this.getIconAlign() %}
 {% set title = this.getTitle() %}
+{% set link_title = this.getLinkTitle() %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 {% if this.isClickable() %}
     <a href="{{ url }}"
-       {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-       {% if linkTitle|default(this.link_title|default(null)) %}title="{{ linkTitle|default(this.link_title|default(null)) }}"{% endif %}
-       {{ attributes.defaults(this.customAttributes|merge({
-           class: this.getClasses() ~ ' hover:opacity-80 focus:outline-hidden transition-opacity',
-       })) }}
+       {% if link_title %}title="{{ link_title }}"{% endif %}
+       {{ attributes.defaults(this.getRootAttributes('hover:opacity-80 focus:outline-hidden transition-opacity')) }}
     >
         {% if this.hasDot() %}
             <span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>
@@ -26,11 +24,7 @@
         {% endif %}
     </a>
 {% else %}
-    <span {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-          {{ attributes.defaults(this.customAttributes|merge({
-              class: this.getClasses(),
-          })) }}
-    >
+    <span {{ attributes.defaults(this.getRootAttributes()) }}>
         {% if this.hasDot() %}
             <span class="size-1.5 inline-block rounded-full bg-current shrink-0" aria-hidden="true"></span>
         {% endif %}

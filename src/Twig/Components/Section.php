@@ -69,6 +69,11 @@ final class Section extends PrelineComponent
         return ElementTransform::wrapperClasses($sectionProps, $base);
     }
 
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return $this->classes($this->getSectionClasses(), $extraBase, ...$moreParts);
+    }
+
     public function getContainerClasses(): string
     {
         return $this->classes(

@@ -1,8 +1,7 @@
 {% set items = this.normalizedItems %}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <nav aria-label="Social media links"
-     {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses('w-full my-4')})) }}>
+     {{ attributes.defaults(this.getRootAttributes('w-full my-4')) }}>
     {% if this.title %}
         <p class="text-sm font-semibold text-foreground mb-3">{{ this.title }}</p>
     {% endif %}
@@ -44,9 +43,10 @@
                     {% endif %}
 
                     {% if item.badge %}
-                        <span class="ms-1.5 py-0.5 px-1.5 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/50 dark:text-primary-400">
-                            {{ item.badge }}
-                        </span>
+                        <twig:Badge
+                            :title="item.badge"
+                            classes="ms-1.5 py-0.5 px-1.5 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/50 dark:text-primary-400"
+                        />
                     {% endif %}
                 </a>
             </li>

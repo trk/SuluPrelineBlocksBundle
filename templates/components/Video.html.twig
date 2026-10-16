@@ -11,10 +11,7 @@
 {% set icon_class = this.iconClass %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({
-         class: this.getWrapperClasses(),
-     })) }}
+<div {{ attributes.defaults(this.getRootAttributes()) }}
      {% if autoplay_mode %}data-video-autoplay="{{ autoplay_mode }}"{% endif %}>
     {% if vid_url %}
         <video
@@ -29,13 +26,14 @@
         ></video>
     {% elseif poster_url %}
         <div class="relative w-full h-full">
-            <img
-                src="{{ poster_url }}"
-                {% if poster_srcset %}srcset="{{ poster_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
-                alt="{{ this.getPosterAlt() }}"
-                class="w-full h-full object-cover"
-                {% if poster_focus_style %}style="{{ poster_focus_style }}"{% endif %}
-                loading="lazy"
+            <twig:Image
+                :bare="true"
+                :image_url="poster_url"
+                :image_srcset="poster_srcset"
+                sizes="(min-width: 1024px) 80vw, 100vw"
+                :image_focus_style="poster_focus_style"
+                :alt="this.getPosterAlt()"
+                img_class="w-full h-full object-cover"
             />
             {% if url %}
                 <a href="{{ url }}" aria-label="{{ this.getPosterAlt()|default('Play video') }}" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-colors group">

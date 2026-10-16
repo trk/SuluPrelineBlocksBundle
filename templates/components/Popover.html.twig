@@ -2,22 +2,22 @@
 {% set img_url = this.imageUrl %}
 {% set popover_uid = this.elementId|default('hs-hotspot-' ~ random(100000, 999999)) %}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses('relative w-full my-6')})) }}>
+<div {{ attributes.defaults(this.getRootAttributes('relative w-full my-6')) }}>
     {% if this.title %}
         <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
     {% endif %}
 
     {% if img_url %}
         <div class="hotspot-container relative w-full rounded-2xl shadow-lg border border-border bg-muted">
-            <img
-                class="w-full h-auto object-cover rounded-2xl"
-                src="{{ img_url }}"
-                {% if this.imageSrcSet %}srcset="{{ this.imageSrcSet }}" sizes="{{ this.imageSizes }}"{% endif %}
-                alt="{{ this.title|default('Interactive media hotspots') }}"
-                {% if this.imageFocusPointStyle %}style="{{ this.imageFocusPointStyle }}"{% endif %}
-                loading="lazy"
-            >
+            <twig:Image
+                :bare="true"
+                :image_url="img_url"
+                :image_srcset="this.imageSrcSet"
+                :sizes="this.imageSizes"
+                :image_focus_style="this.imageFocusPointStyle"
+                :alt="this.title|default('Interactive media hotspots')"
+                img_class="w-full h-auto object-cover rounded-2xl"
+            />
 
             {% for item in items %}
                 {% set marker_colors = this.markerColorClasses(item.marker_color) %}
@@ -82,21 +82,25 @@
                                 </div>
                             {% elseif item.image_url %}
                                 <div class="relative w-full h-36 bg-surface overflow-hidden">
-                                    <img class="w-full h-full object-cover"
-                                         src="{{ item.image_url }}"
-                                         {% if item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 400px) 320px, 100vw"{% endif %}
-                                         alt="{{ item.title|default('') }}"
-                                         {% if item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
-                                         loading="lazy">
+                                    <twig:Image
+                                        :bare="true"
+                                        :image_url="item.image_url"
+                                        :image_srcset="item.image_srcset"
+                                        sizes="(min-width: 400px) 320px, 100vw"
+                                        :image_focus_style="item.image_focus_style"
+                                        :alt="item.title|default('')"
+                                        img_class="w-full h-full object-cover"
+                                    />
                                 </div>
                             {% endif %}
 
                             <div class="p-4">
                                 <div class="flex items-center justify-between gap-2 mb-1.5">
                                     {% if item.badge %}
-                                        <span class="inline-block py-0.5 px-2 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400">
-                                            {{ item.badge }}
-                                        </span>
+                                        <twig:Badge
+                                            :title="item.badge"
+                                            classes="inline-block py-0.5 px-2 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400"
+                                        />
                                     {% endif %}
                                     {% if item.meta %}
                                         <span class="text-xs font-semibold text-muted-foreground-1 ms-auto">
@@ -118,13 +122,16 @@
                                 {% endif %}
 
                                 {% if item.link %}
-                                    <a class="inline-flex items-center justify-center gap-x-1.5 w-full py-2 px-3 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-colors"
-                                       href="{{ item.link }}">
-                                        {{ item.link_title }}
-                                        <svg class="size-3 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="m9 18 6-6-6-6"/>
-                                        </svg>
-                                    </a>
+                                    <twig:Button
+                                        :title="item.link_title"
+                                        :url="item.link"
+                                        icon="chevron-right"
+                                        icon_align="right"
+                                        variant="solid"
+                                        link_color="primary"
+                                        size="xs"
+                                        :full_width="true"
+                                    />
                                 {% endif %}
                             </div>
                         </div>

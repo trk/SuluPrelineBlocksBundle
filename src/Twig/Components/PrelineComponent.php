@@ -248,6 +248,46 @@ abstract class PrelineComponent extends AbstractBlockComponent
         );
     }
 
+    /**
+     * Builds the root HTML attribute dictionary (`id`, `class`, and custom attributes).
+     *
+     * @param string|array<int|string, mixed>|null|false ...$moreClasses
+     *
+     * @return array<string, string|bool>
+     */
+    public function getRootAttributes(string $extraClass = '', string|array|null|false ...$moreClasses): array
+    {
+        return $this->getRootAttributesWithClass($this->getWrapperClasses($extraClass, ...$moreClasses));
+    }
+
+    /**
+     * Builds the root HTML attribute dictionary (`id`, `class`, and custom attributes) using an explicit class string.
+     *
+     * @return array<string, string|bool>
+     */
+    public function getRootAttributesWithClass(string $class): array
+    {
+        $attrs = $this->getCustomAttributes();
+
+        $id = $this->getElementId();
+        if (null !== $id && '' !== $id) {
+            $attrs['id'] = $id;
+        }
+
+        if ('' !== $class) {
+            $attrs['class'] = $class;
+        }
+
+        return $attrs;
+    }
+
+    public function getResolvedContent(): ?string
+    {
+        return $this->nullableString('summary')
+            ?? $this->nullableString('content')
+            ?? $this->nullableString('text');
+    }
+
     // =========================================================================
     // 2. Shared Colors, Shapes, Shadows & Typography
     // =========================================================================
@@ -849,12 +889,17 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $result[] = [
                 'title' => $title,
                 'url' => $url,
+                'link' => $link,
                 'is_clickable' => $isClickable,
                 'link_title' => $this->itemNullableString($item, 'link_title'),
                 'classes' => $classes,
                 'icon' => $icon,
                 'icon_align' => $iconAlign,
                 'has_dot' => $hasDot,
+                'badge_style' => $itemStyle,
+                'badge_color' => $itemColor,
+                'size' => $itemSize,
+                'rounded' => $itemRounded,
             ];
         }
 
@@ -870,12 +915,17 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $result[] = [
                 'title' => $singleBadge,
                 'url' => '#',
+                'link' => null,
                 'is_clickable' => false,
                 'link_title' => null,
                 'classes' => $classes,
                 'icon' => null,
                 'icon_align' => 'left',
                 'has_dot' => false,
+                'badge_style' => $defaultStyle,
+                'badge_color' => $defaultColor,
+                'size' => 'xs',
+                'rounded' => 'pill',
             ];
         }
 
@@ -942,6 +992,9 @@ abstract class PrelineComponent extends AbstractBlockComponent
                 'icon_align' => $iconAlign,
                 'button_style' => $itemStyle,
                 'button_color' => $itemColor,
+                'variant' => $itemStyle,
+                'link_color' => $itemColor,
+                'size' => $itemSize,
             ];
         }
 
@@ -965,6 +1018,9 @@ abstract class PrelineComponent extends AbstractBlockComponent
                     'icon_align' => 'right',
                     'button_style' => $defaultStyle,
                     'button_color' => $defaultColor,
+                    'variant' => $defaultStyle,
+                    'link_color' => $defaultColor,
+                    'size' => $defaultSize,
                 ];
             }
         }

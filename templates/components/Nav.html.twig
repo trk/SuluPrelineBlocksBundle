@@ -1,7 +1,6 @@
 {# Preline UI 5 / Tailwind CSS 4 Vertical Navigation Component #}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses('w-full my-4')})) }}>
+<div {{ attributes.defaults(this.getRootAttributes('w-full my-4')) }}>
     {% if this.title %}
         <div class="mb-3 px-3">
             <h3 class="text-sm font-bold text-foreground uppercase tracking-wider">
@@ -48,9 +47,10 @@
                         </span>
 
                         {% if item.badge %}
-                            <span class="ms-auto py-0.5 px-2 inline-flex items-center text-xs font-medium bg-surface text-surface-foreground rounded-full">
-                                {{ item.badge }}
-                            </span>
+                            <twig:Badge
+                                :title="item.badge"
+                                classes="ms-auto py-0.5 px-2 inline-flex items-center text-xs font-medium bg-surface text-surface-foreground rounded-full"
+                            />
                         {% endif %}
 
                         {% if item.is_external %}

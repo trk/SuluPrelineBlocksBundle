@@ -4,12 +4,7 @@
 {% set grid_dom_id = custom_id ? custom_id : ('grid-' ~ random()) %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {{ attributes.defaults(this.customAttributes|merge({
-        id: grid_dom_id,
-        class: this.getWrapperClasses('w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: grid_dom_id})) }}>
     {% if title %}
         <div class="mb-8 text-center">
             <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>

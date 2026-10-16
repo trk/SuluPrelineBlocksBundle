@@ -5,12 +5,7 @@
 {% set align_class = this.contentAlign %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-    {{ attributes.defaults(this.customAttributes|merge({
-        class: this.getWrapperClasses('relative w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('relative w-full')) }}>
     {% if title %}
         <div class="mb-6">
             <h3 class="text-2xl font-bold tracking-tight text-foreground">
@@ -27,30 +22,19 @@
             <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                 {% for item in normalized_items %}
                     {% set img_url = item.image_url|default(null) %}
-                    {% if not img_url and item.image is defined and item.image %}
-                        {% if item.image.url is defined %}
-                            {% set img_url = item.image.url %}
-                        {% endif %}
-                    {% endif %}
-
                     {% set link_href = item.link_href|default(null) %}
-                    {% if not link_href and item.link is defined and item.link %}
-                        {% if item.link.url is defined %}
-                            {% set link_href = item.link.url %}
-                        {% endif %}
-                    {% endif %}
-
                     {% set overlay = item.overlay_style|default('dark_medium') %}
 
                     <div class="hs-carousel-slide relative w-full h-full flex flex-col justify-center overflow-hidden">
                         {% if img_url %}
-                            <img
-                                src="{{ img_url }}"
-                                {% if item.image_srcset is defined and item.image_srcset %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1280px) 1600px, 100vw"{% endif %}
-                                alt="{{ item.title|default('') }}"
-                                class="absolute inset-0 w-full h-full object-cover"
-                                {% if item.image_focus_style is defined and item.image_focus_style %}style="{{ item.image_focus_style }}"{% endif %}
-                                loading="lazy"
+                            <twig:Image
+                                :bare="true"
+                                :image_url="img_url"
+                                :image_srcset="item.image_srcset|default(null)"
+                                sizes="(min-width: 1280px) 1600px, 100vw"
+                                :image_focus_style="item.image_focus_style|default(null)"
+                                :alt="item.title|default('')"
+                                img_class="absolute inset-0 w-full h-full object-cover"
                             />
                         {% endif %}
 
@@ -85,15 +69,15 @@
                                 </div>
                             {% endif %}
 
-                            {% if link_href %}
+                            {% if link_href and link_href != '#' %}
                                 <div>
-                                    <a
-                                        href="{{ link_href }}"
-                                        class="inline-flex items-center gap-x-2 py-3 px-6 rounded-xl font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary-hover shadow-md shadow-primary/20 active:scale-95 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                                    >
-                                        <span>{{ item.link_title|default('Discover more'|trans({}, 'sulu_website')) }}</span>
-                                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                                    </a>
+                                    <twig:Button
+                                        :title="item.link_title|default('Discover more'|trans({}, 'sulu_website'))"
+                                        :url="link_href"
+                                        icon="arrow-right"
+                                        icon_align="right"
+                                        classes="inline-flex items-center gap-x-2 py-3 px-6 rounded-xl font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary-hover shadow-md shadow-primary/20 active:scale-95 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                                    />
                                 </div>
                             {% endif %}
                         </div>

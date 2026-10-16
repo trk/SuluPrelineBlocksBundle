@@ -8,10 +8,7 @@
 {% set text_classes = this.getQuoteTextClasses() %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults(this.customAttributes|merge({
-         class: this.getWrapperClasses(),
-     })) }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
 
     <blockquote class="w-full relative {{ container_classes }}">
         {% if style == 'large' %}
@@ -30,11 +27,13 @@
         {% if this.hasAuthor() %}
             <footer class="mt-4 sm:mt-6 flex items-center gap-x-3.5">
                 {% if avatar_url %}
-                    <img class="inline-block size-10 sm:size-12 rounded-full object-cover shadow-2xs"
-                         src="{{ avatar_url }}"
-                         {% if avatar_focus_style %}style="{{ avatar_focus_style }}"{% endif %}
-                         alt="{{ author_name|default('Author Avatar') }}"
-                         loading="lazy" />
+                    <twig:Image
+                        :bare="true"
+                        :image_url="avatar_url"
+                        :image_focus_style="avatar_focus_style"
+                        :alt="author_name|default('Author Avatar')"
+                        img_class="inline-block size-10 sm:size-12 rounded-full object-cover shadow-2xs"
+                    />
                 {% endif %}
 
                 <div class="flex flex-col">

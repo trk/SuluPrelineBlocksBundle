@@ -1,4 +1,4 @@
-{% set tag = this.getTag()|default('h2') %}
+{% set tag = this.getTag() %}
 {% set url = this.getUrl() %}
 {% set img_url = this.getImageUrl() %}
 {% set img_focus_style = this.getImageFocusPointStyle() %}
@@ -6,12 +6,15 @@
 {% set headline_title = this.getTitle() %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<{{ tag }} {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-    {{ attributes.defaults(this.customAttributes|merge({
-        class: this.getWrapperClasses(),
-    })) }}>
+<{{ tag }} {{ attributes.defaults(this.getRootAttributes()) }}>
     {% if img_url %}
-        <img src="{{ img_url }}" alt="{{ this.getImageAlt() }}" class="inline-block w-8 h-8 mr-2 align-middle object-contain" {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %} loading="lazy" />
+        <twig:Image
+            :bare="true"
+            :image_url="img_url"
+            :image_focus_style="img_focus_style"
+            :alt="this.getImageAlt()"
+            img_class="inline-block w-8 h-8 mr-2 align-middle object-contain"
+        />
     {% endif %}
     {% if icon_class %}
         <span class="inline-block mr-2 align-middle"><i class="{{ icon_class }}" aria-hidden="true"></i></span>

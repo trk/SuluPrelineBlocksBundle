@@ -4,12 +4,7 @@
 {% set switcher_uid = 'hs-switcher-' ~ random(100000, 999999) %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
-    {{ attributes.defaults(this.customAttributes|merge({
-        class: this.getWrapperClasses('w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('w-full')) }}>
     {% if title %}
         <h3 class="text-xl font-bold tracking-tight text-foreground mb-6">
             {{ title }}
@@ -39,9 +34,10 @@
                             {% endif %}
                             <span class="truncate">{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-auto py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
-                                    {{ item.badge }}
-                                </span>
+                                <twig:Badge
+                                    :title="item.badge"
+                                    classes="ms-auto py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground"
+                                />
                             {% endif %}
                         </button>
                     {% endfor %}
@@ -54,20 +50,8 @@
                         {% set tab_id = switcher_uid ~ '-tab-' ~ loop.index %}
                         {% set panel_id = switcher_uid ~ '-panel-' ~ loop.index %}
                         {% set is_first = loop.first %}
-
                         {% set link_href = item.link_href|default(null) %}
-                        {% if not link_href and item.link is defined and item.link %}
-                            {% if item.link.url is defined %}
-                                {% set link_href = item.link.url %}
-                            {% endif %}
-                        {% endif %}
-
                         {% set img_url = item.image_url|default(null) %}
-                        {% if not img_url and item.image is defined and item.image %}
-                            {% if item.image.url is defined %}
-                                {% set img_url = item.image.url %}
-                            {% endif %}
-                        {% endif %}
 
                         <div
                             id="{{ panel_id }}"
@@ -77,13 +61,14 @@
                         >
                             {% if img_url %}
                                 <div class="mb-5 overflow-hidden rounded-lg">
-                                    <img
-                                        src="{{ img_url }}"
-                                        {% if item.image_srcset|default(null) %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 60vw, 100vw"{% endif %}
-                                        alt="{{ item.title|default('') }}"
-                                        class="w-full max-h-72 object-cover"
-                                        {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %}
-                                        loading="lazy"
+                                    <twig:Image
+                                        :bare="true"
+                                        :image_url="img_url"
+                                        :image_srcset="item.image_srcset|default(null)"
+                                        sizes="(min-width: 1024px) 60vw, 100vw"
+                                        :image_focus_style="item.image_focus_style|default(null)"
+                                        :alt="item.title|default('')"
+                                        img_class="w-full max-h-72 object-cover"
                                     />
                                 </div>
                             {% endif %}
@@ -100,7 +85,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if link_href %}
+                            {% if link_href and link_href != '#' %}
                                 <div class="mt-4">
                                     <a
                                         href="{{ link_href }}"
@@ -139,9 +124,10 @@
                             {% endif %}
                             <span>{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
-                                    {{ item.badge }}
-                                </span>
+                                <twig:Badge
+                                    :title="item.badge"
+                                    classes="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground"
+                                />
                             {% endif %}
                         </button>
                     {% endfor %}
@@ -153,20 +139,8 @@
                     {% set tab_id = switcher_uid ~ '-tab-' ~ loop.index %}
                     {% set panel_id = switcher_uid ~ '-panel-' ~ loop.index %}
                     {% set is_first = loop.first %}
-
                     {% set link_href = item.link_href|default(null) %}
-                    {% if not link_href and item.link is defined and item.link %}
-                        {% if item.link.url is defined %}
-                            {% set link_href = item.link.url %}
-                        {% endif %}
-                    {% endif %}
-
                     {% set img_url = item.image_url|default(null) %}
-                    {% if not img_url and item.image is defined and item.image %}
-                        {% if item.image.url is defined %}
-                            {% set img_url = item.image.url %}
-                        {% endif %}
-                    {% endif %}
 
                     <div
                         id="{{ panel_id }}"
@@ -176,13 +150,14 @@
                     >
                         {% if img_url %}
                             <div class="mb-5 overflow-hidden rounded-lg">
-                                <img
-                                    src="{{ img_url }}"
-                                    {% if item.image_srcset|default(null) %}srcset="{{ item.image_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
-                                    alt="{{ item.title|default('') }}"
-                                    class="w-full max-h-80 object-cover"
-                                    {% if item.image_focus_style|default(null) %}style="{{ item.image_focus_style }}"{% endif %}
-                                    loading="lazy"
+                                <twig:Image
+                                    :bare="true"
+                                    :image_url="img_url"
+                                    :image_srcset="item.image_srcset|default(null)"
+                                    sizes="(min-width: 1024px) 80vw, 100vw"
+                                    :image_focus_style="item.image_focus_style|default(null)"
+                                    :alt="item.title|default('')"
+                                    img_class="w-full max-h-80 object-cover"
                                 />
                             </div>
                         {% endif %}
@@ -199,7 +174,7 @@
                             </div>
                         {% endif %}
 
-                        {% if link_href %}
+                        {% if link_href and link_href != '#' %}
                             <div class="mt-4">
                                 <a
                                     href="{{ link_href }}"
@@ -235,9 +210,10 @@
                             {% endif %}
                             <span>{{ item.nav_title|default(item.title|default('Tab ' ~ loop.index)) }}</span>
                             {% if item.badge|default(null) %}
-                                <span class="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground">
-                                    {{ item.badge }}
-                                </span>
+                                <twig:Badge
+                                    :title="item.badge"
+                                    classes="ms-1.5 py-0.5 px-2 text-xs font-semibold rounded-full bg-surface text-surface-foreground"
+                                />
                             {% endif %}
                         </button>
                     {% endfor %}

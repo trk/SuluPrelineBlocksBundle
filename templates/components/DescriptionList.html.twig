@@ -3,12 +3,7 @@
 {% set list_dom_id = custom_id ? custom_id : ('dl-' ~ random()) %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {{ attributes.defaults(this.customAttributes|merge({
-        id: list_dom_id,
-        class: this.getWrapperClasses('w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: list_dom_id})) }}>
     {% if title %}
         <div class="mb-6">
             <h2 class="text-2xl font-bold text-foreground">{{ title }}</h2>
@@ -28,9 +23,10 @@
                     <span>{{ item.title|default('') }}</span>
 
                     {% if item.meta is defined and item.meta %}
-                        <span class="inline-flex items-center py-0.5 px-2 rounded-full text-xs font-medium bg-surface text-surface-foreground">
-                            {{ item.meta }}
-                        </span>
+                        <twig:Badge
+                            :title="item.meta"
+                            classes="inline-flex items-center py-0.5 px-2 rounded-full text-xs font-medium bg-surface text-surface-foreground"
+                        />
                     {% endif %}
                 </dt>
 
@@ -42,11 +38,7 @@
                     {% endif %}
 
                     {% set link_href = item.link_href|default(null) %}
-                    {% if not link_href and item.link is defined and item.link and item.link is iterable and item.link.url is defined %}
-                        {% set link_href = item.link.url %}
-                    {% endif %}
-
-                    {% if link_href %}
+                    {% if link_href and link_href != '#' %}
                         <div class="mt-2">
                             <a
                                 href="{{ link_href }}"

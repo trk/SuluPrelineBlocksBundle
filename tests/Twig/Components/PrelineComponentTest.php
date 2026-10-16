@@ -142,4 +142,48 @@ final class PrelineComponentTest extends TestCase
         self::assertStringContainsString('custom-c', $classes);
         self::assertStringContainsString('mt-4', $classes);
     }
+
+    public function testRootAttributesAndSubComponentResolvers(): void
+    {
+        $card = new Card();
+        $card->mergeProps([
+            'title' => 'Card',
+            'badges' => [
+                ['title' => 'Featured', 'badge_style' => 'solid', 'badge_color' => 'primary', 'size' => 'md'],
+            ],
+            'buttons' => [
+                ['title' => 'Read More', 'link' => '/read', 'button_style' => 'outline', 'button_color' => 'secondary', 'size' => 'lg'],
+            ],
+            'props' => [
+                'id' => 'card-root-1',
+                'custom_class' => 'extra-card',
+                'attributes' => 'data-card="true"',
+            ],
+        ]);
+
+        $rootAttrs = $card->getRootAttributes('base-card');
+        self::assertSame('card-root-1', $rootAttrs['id'] ?? null);
+        self::assertSame('true', $rootAttrs['data-card'] ?? null);
+        self::assertStringContainsString('base-card', (string) ($rootAttrs['class'] ?? ''));
+        self::assertStringContainsString('extra-card', (string) ($rootAttrs['class'] ?? ''));
+
+        $explicitClassAttrs = $card->getRootAttributesWithClass('explicit-class-only');
+        self::assertSame('card-root-1', $explicitClassAttrs['id'] ?? null);
+        self::assertSame('explicit-class-only', $explicitClassAttrs['class'] ?? null);
+
+        $badges = $card->getNormalizedBadges();
+        self::assertCount(1, $badges);
+        self::assertSame('Featured', $badges[0]['title'] ?? null);
+        self::assertSame('solid', $badges[0]['badge_style'] ?? null);
+        self::assertSame('primary', $badges[0]['badge_color'] ?? null);
+        self::assertSame('md', $badges[0]['size'] ?? null);
+
+        $buttons = $card->getNormalizedButtons();
+        self::assertCount(1, $buttons);
+        self::assertSame('Read More', $buttons[0]['title'] ?? null);
+        self::assertSame('/read', $buttons[0]['url'] ?? null);
+        self::assertSame('outline', $buttons[0]['button_style'] ?? null);
+        self::assertSame('secondary', $buttons[0]['button_color'] ?? null);
+        self::assertSame('lg', $buttons[0]['size'] ?? null);
+    }
 }

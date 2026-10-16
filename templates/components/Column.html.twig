@@ -1,6 +1,6 @@
 {# Preline UI 5 / Tailwind CSS 4 Column Component #}
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {{ attributes.defaults(this.customAttributes|merge({class: this.columnClasses, id: this.elementId})) }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
     {% if this.hasBlocks %}
         {% set render_context = this.context is not empty ? this.context : _context %}
         <div class="w-full space-y-6">

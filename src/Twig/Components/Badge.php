@@ -36,12 +36,21 @@ final class Badge extends PrelineComponent
 
     public function getTitle(): ?string
     {
-        return $this->nullableString('title') ?? $this->nullableString('content');
+        return $this->nullableString('title')
+            ?? $this->nullableString('content')
+            ?? $this->nullableString('text');
     }
 
     public function getUrl(): ?string
     {
-        return $this->getLinkUrl('link');
+        $fromLink = $this->getLinkUrl('link');
+        if (null !== $fromLink) {
+            return $fromLink;
+        }
+
+        $explicitUrl = $this->nullableString('url') ?? $this->nullableStringProp('url');
+
+        return null !== $explicitUrl && '#' !== $explicitUrl ? $explicitUrl : null;
     }
 
     public function isClickable(): bool
@@ -51,10 +60,15 @@ final class Badge extends PrelineComponent
 
     public function getClasses(): string
     {
-        $base = PropsResolver::badgeClasses($this->props());
-        $custom = $this->getCustomClass();
+        $precomputed = $this->nullableStringProp('classes');
+        $base = null !== $precomputed ? $precomputed : PropsResolver::badgeClasses($this->props());
 
-        return '' !== $custom ? $base . ' ' . $custom : $base;
+        return $this->classes($base, $this->getCustomClass());
+    }
+
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return parent::getWrapperClasses($this->getClasses(), $extraBase, ...$moreParts);
     }
 
     public function getResolvedIcon(): ?string

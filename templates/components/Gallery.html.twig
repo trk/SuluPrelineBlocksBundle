@@ -5,12 +5,7 @@
 {% set gallery_dom_id = custom_id ? custom_id : ('gallery-' ~ random()) %}
 
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section
-    {{ attributes.defaults(this.customAttributes|merge({
-        id: gallery_dom_id,
-        class: this.getWrapperClasses('w-full'),
-    })) }}
->
+<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: gallery_dom_id})) }}>
     {% if title %}
         <div class="mb-8 text-center">
             <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
@@ -95,14 +90,15 @@
                                 </button>
                             </div>
                             <div class="p-4 overflow-y-auto text-center bg-black/5 dark:bg-black/40">
-                                <img
-                                    class="max-h-[75vh] mx-auto object-contain rounded-lg"
-                                    src="{{ image_url }}"
-                                    {% if image_srcset %}srcset="{{ image_srcset }}" sizes="(min-width: 1024px) 80vw, 100vw"{% endif %}
-                                    alt="{{ item.title|default('') }}"
-                                    {% if image_focus_style %}style="{{ image_focus_style }}"{% endif %}
-                                    loading="lazy"
-                                >
+                                <twig:Image
+                                    :bare="true"
+                                    :image_url="image_url"
+                                    :image_srcset="image_srcset"
+                                    sizes="(min-width: 1024px) 80vw, 100vw"
+                                    :image_focus_style="image_focus_style"
+                                    :alt="item.title|default('')"
+                                    img_class="max-h-[75vh] mx-auto object-contain rounded-lg"
+                                />
                                 {% set modal_content = item.summary|default(item.content|default(null)) %}
                                 {% if modal_content %}
                                     <div class="mt-4 text-left text-sm text-muted-foreground-2">

@@ -13,59 +13,82 @@
 {% set caption = this.getCaption() %}
 {% set resolved_alt = this.getAlt() %}
 {% set resolved_hover_alt = this.getHoverAlt() %}
+{% set loading = this.getLoading() %}
 
 {% if img_url %}
-    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-    <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-            {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses()})) }}>
-        {% if url %}
-            <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
-                <img
-                    src="{{ img_url }}"
-                    {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                    alt="{{ resolved_alt }}"
-                    class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
-                    {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
-                    loading="lazy"
-                />
-                {% if hover_img_url %}
-                    <img
-                        src="{{ hover_img_url }}"
-                        {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                        alt="{{ resolved_hover_alt }}"
-                        class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
-                        loading="lazy"
-                    />
-                {% endif %}
-            </a>
-        {% else %}
-            <div class="{% if hover_img_url %}group relative{% endif %} overflow-hidden {{ rounded }}" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
-                <img
-                    src="{{ img_url }}"
-                    {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                    alt="{{ resolved_alt }}"
-                    class="w-full h-auto max-h-[75vh] {{ object_fit }} {{ ratio }} {{ rounded }} {% if hover_img_url %}group-hover:opacity-0 transition-opacity duration-300{% endif %}"
-                    {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
-                    loading="lazy"
-                />
-                {% if hover_img_url %}
-                    <img
-                        src="{{ hover_img_url }}"
-                        {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
-                        alt="{{ resolved_hover_alt }}"
-                        class="absolute inset-0 w-full h-full {{ object_fit }} {{ ratio }} {{ rounded }} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
-                        loading="lazy"
-                    />
-                {% endif %}
-            </div>
+    {% if this.isBare() %}
+        <img
+            src="{{ img_url }}"
+            {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+            alt="{{ resolved_alt }}"
+            class="{{ this.getImgClasses() }}"
+            {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
+            loading="{{ loading }}"
+        />
+        {% if hover_img_url %}
+            <img
+                src="{{ hover_img_url }}"
+                {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                alt="{{ resolved_hover_alt }}"
+                class="{{ this.getHoverImgClasses() }}"
+                {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
+                loading="{{ loading }}"
+            />
         {% endif %}
+    {% else %}
+        {% set standalone_img_class = 'w-full h-auto max-h-[75vh] ' ~ object_fit ~ ' ' ~ ratio ~ ' ' ~ rounded ~ (hover_img_url ? ' group-hover:opacity-0 transition-opacity duration-300' : '') %}
+        {% set standalone_hover_class = 'absolute inset-0 w-full h-full ' ~ object_fit ~ ' ' ~ ratio ~ ' ' ~ rounded ~ ' opacity-0 group-hover:opacity-100 transition-opacity duration-300' %}
+        {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+        <figure {{ attributes.defaults(this.getRootAttributes()) }}>
+            {% if url %}
+                <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
+                    <img
+                        src="{{ img_url }}"
+                        {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                        alt="{{ resolved_alt }}"
+                        class="{{ standalone_img_class }}"
+                        {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
+                        loading="{{ loading }}"
+                    />
+                    {% if hover_img_url %}
+                        <img
+                            src="{{ hover_img_url }}"
+                            {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                            alt="{{ resolved_hover_alt }}"
+                            class="{{ standalone_hover_class }}"
+                            {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
+                            loading="{{ loading }}"
+                        />
+                    {% endif %}
+                </a>
+            {% else %}
+                <div class="{% if hover_img_url %}group relative{% endif %} overflow-hidden {{ rounded }}" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
+                    <img
+                        src="{{ img_url }}"
+                        {% if img_srcset %}srcset="{{ img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                        alt="{{ resolved_alt }}"
+                        class="{{ standalone_img_class }}"
+                        {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %}
+                        loading="{{ loading }}"
+                    />
+                    {% if hover_img_url %}
+                        <img
+                            src="{{ hover_img_url }}"
+                            {% if hover_img_srcset %}srcset="{{ hover_img_srcset }}" sizes="{{ img_sizes }}"{% endif %}
+                            alt="{{ resolved_hover_alt }}"
+                            class="{{ standalone_hover_class }}"
+                            {% if hover_focus_style %}style="{{ hover_focus_style }}"{% endif %}
+                            loading="{{ loading }}"
+                        />
+                    {% endif %}
+                </div>
+            {% endif %}
 
-        {% if caption %}
-            <figcaption class="mt-2 text-sm text-center text-muted-foreground-1">
-                {{ caption }}
-            </figcaption>
-        {% endif %}
-    </figure>
+            {% if caption %}
+                <figcaption class="mt-2 text-sm text-center text-muted-foreground-1">
+                    {{ caption }}
+                </figcaption>
+            {% endif %}
+        </figure>
+    {% endif %}
 {% endif %}
