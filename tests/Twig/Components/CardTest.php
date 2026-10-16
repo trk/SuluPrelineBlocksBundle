@@ -116,6 +116,20 @@ final class CardTest extends TestCase
         self::assertStringContainsString('md:flex-row', $card->getCardClasses());
         self::assertSame('text-center', $card->getTextAlign());
         self::assertSame('text-primary', $card->getTitleColor());
+
+        $raisedCard = new Card();
+        $raisedCard->mergeProps([
+            'panel_style' => 'raised',
+            'link_style' => 'secondary',
+        ]);
+        $raisedCard->assign('link', '/pricing');
+        $raisedCard->assign('link_title', 'View Plans');
+
+        self::assertStringContainsString('shadow-md hover:shadow-lg', $raisedCard->getCardClasses());
+        $buttons = $raisedCard->getNormalizedButtons();
+        self::assertCount(1, $buttons);
+        self::assertIsString($buttons[0]['classes']);
+        self::assertStringContainsString('bg-secondary', $buttons[0]['classes']);
     }
 
     public function testMutualExclusivityImageOnly(): void

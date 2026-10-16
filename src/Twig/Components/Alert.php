@@ -123,6 +123,7 @@ final class Alert extends PrelineComponent
     {
         return parent::getWrapperClasses(
             'relative flex items-start gap-x-3 p-4 sm:p-5 transition-all',
+            $this->isDismissible() ? 'hs-removing:translate-x-5 hs-removing:opacity-0 duration-300' : null,
             $this->getRoundedClasses(),
             $this->getAlertClasses(),
             $extraBase,

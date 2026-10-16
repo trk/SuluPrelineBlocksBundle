@@ -205,6 +205,14 @@ final class PropsResolver
         if ('white' === $variant) {
             $variantClasses = PrelineClassMap::BUTTON_WHITE_VARIANT;
         } else {
+            if ('primary' === $variant) {
+                $variant = 'solid';
+            } elseif ('secondary' === $variant) {
+                $variant = 'solid';
+                if ('primary' === $color) {
+                    $color = 'secondary';
+                }
+            }
             $variantMap = PrelineClassMap::BUTTON_VARIANTS[$variant] ?? PrelineClassMap::BUTTON_VARIANTS['solid'];
             $variantClasses = $variantMap[$color] ?? $variantMap['primary'];
         }
@@ -300,7 +308,13 @@ final class PropsResolver
             return 'ti ' . $raw;
         }
 
-        if (\str_contains($raw, ' ') || \str_starts_with($raw, 'su-') || \str_starts_with($raw, 'bi-') || \str_starts_with($raw, 'fa-')) {
+        if (
+            \str_contains($raw, ' ')
+            || \str_starts_with($raw, 'su-')
+            || \str_starts_with($raw, 'bi-')
+            || \str_starts_with($raw, 'fa-')
+            || \str_starts_with($raw, 'ri-')
+        ) {
             return $raw;
         }
 

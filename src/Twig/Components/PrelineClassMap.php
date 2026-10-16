@@ -1296,8 +1296,10 @@ final class PrelineClassMap
      * @var array<array-key, string>
      */
     public const CARD_VARIANTS = [
+        'default' => 'border border-card-line shadow-2xs',
         'bordered' => 'border border-card-line shadow-2xs',
         'shadow' => 'shadow-md hover:shadow-lg border border-card-line',
+        'raised' => 'shadow-md hover:shadow-lg border border-card-line',
         'flat' => 'border-0',
         'interactive' => 'border border-card-line shadow-2xs hover:-translate-y-1 hover:shadow-lg transition-all duration-300',
         'glass' => 'backdrop-blur-md bg-card/70 border border-card-line/40 shadow-lg',
@@ -1307,12 +1309,15 @@ final class PrelineClassMap
      * @var array<array-key, string>
      */
     public const OVERLAY_STYLES = [
+        'gradient' => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
         'gradient-bottom' => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
         'gradient_bottom' => 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
         'gradient-full' => 'bg-black/60 backdrop-brightness-75',
         'gradient_full' => 'bg-black/60 backdrop-brightness-75',
+        'dark' => 'backdrop-blur-md bg-black/60 border border-white/10 shadow-lg',
         'dark-glass' => 'backdrop-blur-md bg-black/60 border border-white/10 shadow-lg',
         'dark_glass' => 'backdrop-blur-md bg-black/60 border border-white/10 shadow-lg',
+        'light' => 'backdrop-blur-md bg-layer/80 border border-layer-line/40 shadow-lg text-layer-foreground',
         'light-glass' => 'backdrop-blur-md bg-layer/80 border border-layer-line/40 shadow-lg text-layer-foreground',
         'light_glass' => 'backdrop-blur-md bg-layer/80 border border-layer-line/40 shadow-lg text-layer-foreground',
         'primary' => 'bg-primary/80 backdrop-blur-xs',
@@ -1326,6 +1331,7 @@ final class PrelineClassMap
     public const OVERLAY_POSITIONS = [
         'bottom' => 'bottom',
         'center' => 'center',
+        'cover' => 'cover',
         'top' => 'top',
         'bottom-left' => 'bottom-left',
         'bottom_left' => 'bottom-left',
@@ -1345,6 +1351,7 @@ final class PrelineClassMap
     public const OVERLAY_POSITION_CLASSES = [
         'bottom' => 'justify-end items-stretch',
         'center' => 'justify-center items-center',
+        'cover' => 'justify-center items-center',
         'top' => 'justify-start items-stretch',
         'bottom-left' => 'justify-end items-start',
         'bottom-right' => 'justify-end items-end',
@@ -1361,9 +1368,25 @@ final class PrelineClassMap
         'fade' => 'opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out',
         'slide-up' => 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
         'slide_up' => 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
+        'slide-bottom' => 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
+        'slide_bottom' => 'opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
         'slide-down' => 'opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
         'slide_down' => 'opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
+        'slide-top' => 'opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
+        'slide_top' => 'opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out',
         'zoom' => 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out',
+        'zoom-in' => 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out',
+        'zoom_in' => 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out',
+    ];
+
+    /**
+     * @var array<array-key, string>
+     */
+    public const IMAGE_HOVER_EFFECTS = [
+        'none' => '',
+        'zoom' => 'transition-transform duration-500 ease-out group-hover:scale-105 hover:scale-105',
+        'shadow' => 'transition-shadow duration-300 ease-out hover:shadow-xl',
+        'brightness' => 'transition-all duration-300 ease-out hover:brightness-110',
     ];
 
     /**

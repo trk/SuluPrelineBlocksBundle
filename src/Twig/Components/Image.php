@@ -96,6 +96,28 @@ final class Image extends PrelineComponent
         return $this->stringProp('loading', 'lazy');
     }
 
+    public function getHoverEffectClasses(): string
+    {
+        return PrelineClassMap::resolve(
+            PrelineClassMap::IMAGE_HOVER_EFFECTS,
+            $this->stringProp('hover_effect', 'none'),
+        );
+    }
+
+    public function getMediaContainerClasses(): string
+    {
+        $hover = $this->stringProp('hover_effect', 'none');
+        $containerHover = 'shadow' === $hover ? $this->getHoverEffectClasses() : '';
+
+        return $this->classes(
+            'relative overflow-hidden',
+            $this->getRoundedClasses('lg'),
+            $this->getShadowClasses(),
+            $this->getAspectRatio('auto'),
+            $containerHover,
+        );
+    }
+
     public function getImgClasses(): string
     {
         $explicit = $this->nullableStringProp('img_class');
@@ -103,8 +125,14 @@ final class Image extends PrelineComponent
             return $explicit;
         }
 
+        $hover = $this->stringProp('hover_effect', 'none');
+        $imgHover = ('none' !== $hover && 'shadow' !== $hover)
+            ? $this->getHoverEffectClasses()
+            : 'transition-all duration-500 group-hover:scale-[1.01]';
+
         return $this->classes(
-            'w-full h-full transition-all duration-500 group-hover:scale-[1.01]',
+            'w-full h-full',
+            $imgHover,
             $this->getObjectFitClass(),
         );
     }
@@ -116,8 +144,14 @@ final class Image extends PrelineComponent
             return $explicit;
         }
 
+        $hover = $this->stringProp('hover_effect', 'none');
+        $imgHover = ('none' !== $hover && 'shadow' !== $hover)
+            ? $this->getHoverEffectClasses()
+            : 'group-hover:scale-[1.01]';
+
         return $this->classes(
-            'absolute inset-0 w-full h-full transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-[1.01]',
+            'absolute inset-0 w-full h-full transition-all duration-500 opacity-0 group-hover:opacity-100',
+            $imgHover,
             $this->getObjectFitClass(),
         );
     }

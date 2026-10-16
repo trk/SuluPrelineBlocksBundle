@@ -238,6 +238,21 @@ abstract class PrelineComponent extends AbstractBlockComponent
             ?? $this->nullableString('text');
     }
 
+    public function getTitle(): ?string
+    {
+        return $this->nullableString('title');
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->nullableString('subtitle') ?? $this->nullableString('subheading');
+    }
+
+    public function getMeta(): ?string
+    {
+        return $this->nullableString('meta');
+    }
+
     // =========================================================================
     // 2. Shared Colors, Shapes, Shadows & Typography
     // =========================================================================
@@ -775,8 +790,16 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $item['video_url'] = PropsResolver::resolveImageUrl($item['video']);
         }
 
+        if (isset($item['hover_video'])) {
+            $item['hover_video_url'] = PropsResolver::resolveImageUrl($item['hover_video']);
+        }
+
         if (isset($item['icon'])) {
-            $item['icon_class'] = PropsResolver::resolveIcon($item['icon']);
+            $resolvedIcon = PropsResolver::resolveIcon($item['icon']);
+            $item['icon_class'] = $resolvedIcon;
+            if (null !== $resolvedIcon) {
+                $item['icon'] = $resolvedIcon;
+            }
         }
 
         if (isset($item['link'])) {
@@ -785,6 +808,39 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         return $item;
+    }
+
+    /**
+     * Extracts item-level media & style configuration keys so parent collection blocks can merge them into child component props.
+     *
+     * @param array<string, mixed> $item
+     *
+     * @return array<string, mixed>
+     */
+    protected function extractItemForwardedProps(array $item): array
+    {
+        $forwarded = [];
+        $keys = [
+            'media_type',
+            'media_source',
+            'aspect_ratio',
+            'media_aspect_ratio',
+            'object_fit',
+            'aspect_ratio_width',
+            'aspect_ratio_height',
+            'image_url',
+            'hover_image_url',
+            'video_url',
+            'hover_video_url',
+        ];
+
+        foreach ($keys as $key) {
+            if (isset($item[$key]) && '' !== $item[$key]) {
+                $forwarded[$key] = $item[$key];
+            }
+        }
+
+        return $forwarded;
     }
 
     /**
@@ -895,8 +951,20 @@ abstract class PrelineComponent extends AbstractBlockComponent
         ?string $singleButtonText = null,
         ?string $singleLinkTitle = null,
     ): array {
-        $defaultStyle = $this->stringProp('button_style', $fallbackStyle);
-        $defaultColor = $this->stringProp('button_color', $fallbackColor);
+        $linkStyle = $this->nullableStringProp('link_style');
+        $rawButtonStyle = (null !== $linkStyle && 'inherit' !== $linkStyle)
+            ? $linkStyle
+            : $this->nullableStringProp('button_style');
+        $linkColor = $this->nullableStringProp('link_color');
+        $buttonColor = $this->nullableStringProp('button_color');
+        if (null !== $rawButtonStyle && \in_array($rawButtonStyle, ['primary', 'secondary', 'dark', 'muted'], true)) {
+            $defaultStyle = 'solid';
+            $defaultColor = (null !== $linkColor && 'inherit' !== $linkColor) ? $linkColor : $rawButtonStyle;
+        } else {
+            $explicitColor = (null !== $linkColor && 'inherit' !== $linkColor) ? $linkColor : $buttonColor;
+            $defaultStyle = (null !== $rawButtonStyle && 'inherit' !== $rawButtonStyle) ? $rawButtonStyle : $fallbackStyle;
+            $defaultColor = (null !== $explicitColor && 'inherit' !== $explicitColor) ? $explicitColor : $fallbackColor;
+        }
         $defaultSize = $this->stringProp('button_size', $fallbackSize);
 
         /** @var list<array<string, mixed>> $result */
@@ -914,7 +982,12 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         foreach ($buttonItems as $item) {
-            $itemStyle = $this->itemInheritedString($item, 'button_style', $defaultStyle, 'variant');
+            $itemStyle = $this->itemInheritedString(
+                $item,
+                'button_style',
+                $this->itemInheritedString($item, 'link_style', $defaultStyle),
+                'variant',
+            );
             $itemColor = $this->itemInheritedString($item, 'button_color', $defaultColor, 'link_color');
             $itemSize = $this->itemInheritedString($item, 'size', $defaultSize);
 

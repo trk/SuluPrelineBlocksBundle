@@ -176,12 +176,18 @@ final class Overlay extends PrelineComponent
         return parent::getTitleSizeClasses($default, $preset);
     }
 
+    public function isLightOverlay(): bool
+    {
+        $style = $this->stringProp('overlay_style', 'gradient-bottom');
+
+        return $this->oneOf($style, ['light-glass', 'light_glass', 'light']);
+    }
+
     public function getTitleColor(string $default = 'white'): string
     {
         $color = $this->stringProp('title_color', $default);
-        $style = $this->stringProp('overlay_style', 'gradient-bottom');
 
-        if ($this->oneOf($style, ['light-glass', 'light_glass'])) {
+        if ($this->isLightOverlay()) {
             return PrelineClassMap::resolve(
                 PrelineClassMap::OVERLAY_LIGHT_GLASS_TITLE_COLORS,
                 $color,
@@ -203,9 +209,15 @@ final class Overlay extends PrelineComponent
 
     public function getButtonStyleClasses(): string
     {
+        $linkStyle = $this->nullableStringProp('link_style');
+        $rawStyle = (null !== $linkStyle && 'inherit' !== $linkStyle)
+            ? $linkStyle
+            : $this->nullableStringProp('button_style');
+        $style = (null !== $rawStyle && 'inherit' !== $rawStyle) ? $rawStyle : 'primary';
+
         return PrelineClassMap::resolve(
             PrelineClassMap::OVERLAY_BUTTON_STYLES,
-            $this->stringProp('button_style', 'primary'),
+            $style,
             PrelineClassMap::OVERLAY_BUTTON_STYLES['primary'],
         );
     }
@@ -244,18 +256,41 @@ final class Overlay extends PrelineComponent
         return 'card' === $this->stringProp('link_overlay', 'card') && null !== $this->getLinkUrl();
     }
 
-    public function isImage(): bool
+    public function getMediaType(): ?string
     {
-        if (null !== $this->getVideoUrl()) {
-            return false;
+        $forced = $this->stringProp('media_type', 'auto');
+
+        if ('none' === $forced) {
+            return null;
         }
 
-        return null !== $this->getImageUrl();
+        if ('video' === $forced && null !== $this->getVideoUrl()) {
+            return 'video';
+        }
+
+        if ('image' === $forced && null !== $this->getImageUrl()) {
+            return 'image';
+        }
+
+        if (null !== $this->getVideoUrl()) {
+            return 'video';
+        }
+
+        if (null !== $this->getImageUrl()) {
+            return 'image';
+        }
+
+        return null;
+    }
+
+    public function isImage(): bool
+    {
+        return 'image' === $this->getMediaType();
     }
 
     public function isVideo(): bool
     {
-        return null !== $this->getVideoUrl();
+        return 'video' === $this->getMediaType();
     }
 
     public function hasMedia(): bool

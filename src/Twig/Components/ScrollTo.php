@@ -99,7 +99,7 @@ final class ScrollTo extends PrelineComponent
     public function getButtonClasses(): string
     {
         $mode = $this->getDisplayMode();
-        $style = $this->stringProp('button_style', 'solid');
+        $style = $this->nullableStringProp('button_variant') ?? $this->stringProp('button_style', 'solid');
         $color = $this->stringProp('button_color', 'primary');
         $size = $this->stringProp('size', 'md');
 

@@ -104,16 +104,20 @@ final class Gallery extends PrelineComponent
         $buttonStyle = $this->itemInheritedString($item, 'link_style', 'primary');
 
         /** @var array<string, mixed> $merged */
-        $merged = \array_merge([
-            'overlay_position' => $overlayPosition,
-            'overlay_mode' => $overlayMode,
-            'overlay_style' => $overlayStyle,
-            'overlay_transition' => $overlayTransition,
-            'image_transition' => $imageTransition,
-            'media_aspect_ratio' => $mediaAspectRatio,
-            'rounded' => $rounded,
-            'button_style' => $buttonStyle,
-        ], $itemProps);
+        $merged = \array_merge(
+            [
+                'overlay_position' => $overlayPosition,
+                'overlay_mode' => $overlayMode,
+                'overlay_style' => $overlayStyle,
+                'overlay_transition' => $overlayTransition,
+                'image_transition' => $imageTransition,
+                'media_aspect_ratio' => $mediaAspectRatio,
+                'rounded' => $rounded,
+                'button_style' => $buttonStyle,
+            ],
+            $this->extractItemForwardedProps($item),
+            $itemProps,
+        );
 
         return $merged;
     }

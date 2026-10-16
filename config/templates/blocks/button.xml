@@ -242,39 +242,74 @@
             <properties>
                 <property name="variant" type="single_select" colspan="6">
                     <meta>
-                        <title lang="en">sulu_block_suite.field_variant</title>
+                        <title lang="en">Style Variant</title>
+                        <title lang="tr">Stil Varyantı</title>
+                        <title lang="de">Stilvariante</title>
+                        <title lang="ru">Вариант стиля</title>
+                        <title lang="es">Variante de Estilo</title>
+                        <title lang="fr">Variante de Style</title>
                     </meta>
                     <params>
                         <param name="default_value" value="solid"/>
                         <param name="values" type="collection">
                             <param name="solid">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_solid</title>
+                                    <title lang="en">Solid</title>
+                                    <title lang="tr">Dolu</title>
+                                    <title lang="de">Ausgefüllt</title>
+                                    <title lang="ru">Сплошной</title>
+                                    <title lang="es">Sólido</title>
+                                    <title lang="fr">Plein</title>
                                 </meta>
                             </param>
                             <param name="outline">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_outline</title>
+                                    <title lang="en">Outline</title>
+                                    <title lang="tr">Çerçeveli</title>
+                                    <title lang="de">Umriss</title>
+                                    <title lang="ru">Контурный</title>
+                                    <title lang="es">Contorno</title>
+                                    <title lang="fr">Contour</title>
                                 </meta>
                             </param>
                             <param name="soft">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_soft</title>
+                                    <title lang="en">Soft</title>
+                                    <title lang="tr">Yumuşak</title>
+                                    <title lang="de">Sanft</title>
+                                    <title lang="ru">Мягкий</title>
+                                    <title lang="es">Suave</title>
+                                    <title lang="fr">Doux</title>
                                 </meta>
                             </param>
                             <param name="ghost">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_ghost</title>
+                                    <title lang="en">Ghost</title>
+                                    <title lang="tr">Saydam</title>
+                                    <title lang="de">Transparent</title>
+                                    <title lang="ru">Прозрачный</title>
+                                    <title lang="es">Transparente</title>
+                                    <title lang="fr">Transparent</title>
                                 </meta>
                             </param>
                             <param name="link">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_link</title>
+                                    <title lang="en">Link</title>
+                                    <title lang="tr">Bağlantı</title>
+                                    <title lang="de">Link</title>
+                                    <title lang="ru">Ссылка</title>
+                                    <title lang="es">Enlace</title>
+                                    <title lang="fr">Lien</title>
                                 </meta>
                             </param>
                             <param name="white">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_white</title>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
                                 </meta>
                             </param>
                         </param>
@@ -283,34 +318,64 @@
 
                 <property name="link_color" type="single_select" colspan="6">
                     <meta>
-                        <title lang="en">sulu_block_suite.field_link_color</title>
+                        <title lang="en">Button Color</title>
+                        <title lang="tr">Buton Rengi</title>
+                        <title lang="de">Button-Farbe</title>
+                        <title lang="ru">Цвет кнопки</title>
+                        <title lang="es">Color del Botón</title>
+                        <title lang="fr">Couleur du Bouton</title>
                     </meta>
                     <params>
                         <param name="default_value" value="primary"/>
                         <param name="values" type="collection">
                             <param name="primary">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_primary</title>
+                                    <title lang="en">Primary</title>
+                                    <title lang="tr">Birincil</title>
+                                    <title lang="de">Primär</title>
+                                    <title lang="ru">Основной</title>
+                                    <title lang="es">Primario</title>
+                                    <title lang="fr">Primaire</title>
                                 </meta>
                             </param>
                             <param name="secondary">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_secondary</title>
+                                    <title lang="en">Secondary</title>
+                                    <title lang="tr">İkincil</title>
+                                    <title lang="de">Sekundär</title>
+                                    <title lang="ru">Вторичный</title>
+                                    <title lang="es">Secundario</title>
+                                    <title lang="fr">Secondaire</title>
                                 </meta>
                             </param>
                             <param name="dark">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_dark</title>
+                                    <title lang="en">Dark</title>
+                                    <title lang="tr">Koyu</title>
+                                    <title lang="de">Dunkel</title>
+                                    <title lang="ru">Темный</title>
+                                    <title lang="es">Oscuro</title>
+                                    <title lang="fr">Sombre</title>
                                 </meta>
                             </param>
                             <param name="white">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_white</title>
+                                    <title lang="en">White</title>
+                                    <title lang="tr">Beyaz</title>
+                                    <title lang="de">Weiß</title>
+                                    <title lang="ru">Белый</title>
+                                    <title lang="es">Blanco</title>
+                                    <title lang="fr">Blanc</title>
                                 </meta>
                             </param>
                             <param name="muted">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_muted</title>
+                                    <title lang="en">Muted</title>
+                                    <title lang="tr">Soluk</title>
+                                    <title lang="de">Gedämpft</title>
+                                    <title lang="ru">Приглушенный</title>
+                                    <title lang="es">Atenuado</title>
+                                    <title lang="fr">Atténué</title>
                                 </meta>
                             </param>
                         </param>
@@ -319,34 +384,64 @@
 
                 <property name="size" type="single_select" colspan="6">
                     <meta>
-                        <title lang="en">sulu_block_suite.field_size</title>
+                        <title lang="en">Size</title>
+                        <title lang="tr">Boyut</title>
+                        <title lang="de">Größe</title>
+                        <title lang="ru">Размер</title>
+                        <title lang="es">Tamaño</title>
+                        <title lang="fr">Taille</title>
                     </meta>
                     <params>
                         <param name="default_value" value="md"/>
                         <param name="values" type="collection">
                             <param name="xs">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_xs</title>
+                                    <title lang="en">Extra Small</title>
+                                    <title lang="tr">Çok Küçük</title>
+                                    <title lang="de">Extra Klein</title>
+                                    <title lang="ru">Очень маленький</title>
+                                    <title lang="es">Extra Pequeño</title>
+                                    <title lang="fr">Très Petit</title>
                                 </meta>
                             </param>
                             <param name="sm">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_sm</title>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малый</title>
+                                    <title lang="es">Pequeño</title>
+                                    <title lang="fr">Petit</title>
                                 </meta>
                             </param>
                             <param name="md">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_md</title>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Orta</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средний</title>
+                                    <title lang="es">Mediano</title>
+                                    <title lang="fr">Moyen</title>
                                 </meta>
                             </param>
                             <param name="lg">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_lg</title>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большой</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grand</title>
                                 </meta>
                             </param>
                             <param name="xl">
                                 <meta>
-                                    <title lang="en">sulu_block_suite.opt_xl</title>
+                                    <title lang="en">Extra Large</title>
+                                    <title lang="tr">Çok Büyük</title>
+                                    <title lang="de">Extra Groß</title>
+                                    <title lang="ru">Очень большой</title>
+                                    <title lang="es">Extra Grande</title>
+                                    <title lang="fr">Très Grand</title>
                                 </meta>
                             </param>
                         </param>

@@ -74,6 +74,9 @@ final class PropsResolverTest extends TestCase
         $ghostClasses = PropsResolver::buttonClasses(['variant' => 'ghost', 'size' => 'sm', 'link_color' => 'dark']);
         self::assertStringContainsString('text-foreground', $ghostClasses);
         self::assertStringContainsString('text-xs', $ghostClasses);
+
+        $secondaryAlias = PropsResolver::buttonClasses(['variant' => 'secondary', 'size' => 'sm']);
+        self::assertStringContainsString('bg-secondary', $secondaryAlias);
     }
 
     public function testResolveUrl(): void

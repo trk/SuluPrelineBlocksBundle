@@ -63,4 +63,22 @@ final class ImageTest extends TestCase
         self::assertSame('w-full h-full object-cover custom-bare-img', $bareImage->getImgClasses());
         self::assertSame('custom-hover-img', $bareImage->getHoverImgClasses());
     }
+
+    public function testHoverEffectAndBoxShadow(): void
+    {
+        $image = new Image();
+        $image->mergeProps([
+            'image' => ['url' => '/uploads/photo.jpg'],
+            'props' => [
+                'hover_effect' => 'zoom',
+                'box_shadow' => 'xl',
+                'rounded' => '2xl',
+            ],
+        ]);
+
+        self::assertStringContainsString('shadow-xl', $image->getMediaContainerClasses());
+        self::assertStringContainsString('rounded-2xl', $image->getMediaContainerClasses());
+        self::assertStringContainsString('hover:scale-105', $image->getHoverEffectClasses());
+        self::assertStringContainsString('hover:scale-105', $image->getImgClasses());
+    }
 }

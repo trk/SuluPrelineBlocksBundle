@@ -39,7 +39,7 @@ final class Headline extends PrelineComponent
 
     public function getTag(): string
     {
-        return $this->enumProp('tag', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'h2');
+        return $this->enumProp('tag', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'h2');
     }
 
     public function getTitleDecoration(): ?string

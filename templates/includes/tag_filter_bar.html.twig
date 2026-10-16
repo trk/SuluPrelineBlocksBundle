@@ -1,8 +1,25 @@
-<div class="mb-8 flex flex-wrap gap-2 {{ filter_align_class|default('justify-center') }}">
+{% set style = filter_style|default('pills') %}
+{% if style == 'tabs' %}
+    {% set container_extra = 'border-b border-line-2 gap-x-6' %}
+    {% set base_btn = 'filter-btn py-2.5 px-1 inline-flex items-center text-sm font-medium border-b-2 -mb-px focus:outline-hidden transition' %}
+    {% set active_btn = 'border-primary text-primary font-semibold active' %}
+    {% set inactive_btn = 'border-transparent text-muted-foreground-1 hover:text-foreground hover:border-line-3' %}
+{% elseif style == 'buttons' %}
+    {% set container_extra = 'gap-2' %}
+    {% set base_btn = 'filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition' %}
+    {% set active_btn = 'border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active' %}
+    {% set inactive_btn = 'border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover' %}
+{% else %}
+    {% set container_extra = 'gap-2' %}
+    {% set base_btn = 'filter-btn py-2 px-4 inline-flex items-center text-sm font-medium rounded-full border focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition' %}
+    {% set active_btn = 'border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active' %}
+    {% set inactive_btn = 'border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover' %}
+{% endif %}
+<div class="mb-8 flex flex-wrap {{ container_extra }} {{ filter_align_class|default('justify-center') }}" data-filter-active-class="{{ active_btn }}" data-filter-inactive-class="{{ inactive_btn }}">
     <button
         type="button"
         data-filter="*"
-        class="active filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition"
+        class="{{ base_btn }} {{ active_btn }}"
     >
         {{ all_label|default('All') }}
     </button>
@@ -10,7 +27,7 @@
         <button
             type="button"
             data-filter="{{ slug }}"
-            class="filter-btn py-2 px-3.5 inline-flex items-center text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 transition"
+            class="{{ base_btn }} {{ inactive_btn }}"
         >
             {{ label }}
         </button>

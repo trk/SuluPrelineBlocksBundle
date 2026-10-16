@@ -107,12 +107,16 @@ final class Grid extends PrelineComponent
         $textAlign = $this->stringProp('text_align', 'left');
 
         /** @var array<string, mixed> $merged */
-        $merged = \array_merge([
-            'card_variant' => $cardVariant,
-            'button_style' => $buttonStyle,
-            'media_align' => $mediaAlign,
-            'text_align' => $textAlign,
-        ], $itemProps);
+        $merged = \array_merge(
+            [
+                'card_variant' => $cardVariant,
+                'button_style' => $buttonStyle,
+                'media_align' => $mediaAlign,
+                'text_align' => $textAlign,
+            ],
+            $this->extractItemForwardedProps($item),
+            $itemProps,
+        );
 
         return $merged;
     }

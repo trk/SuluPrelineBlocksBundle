@@ -77,7 +77,7 @@ final class Nav extends PrelineComponent
             $itemType = $this->itemString($item, 'item_type', 'link', trim: false);
             $title = $this->itemString($item, 'title', '', trim: false);
             $meta = $this->itemString($item, 'meta', '', trim: false);
-            $icon = $this->itemString($item, 'icon', '', trim: false);
+            $icon = isset($item['icon']) ? (PropsResolver::resolveIcon($item['icon']) ?? '') : '';
             $badge = $this->itemString($item, 'badge', '', trim: false);
 
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;

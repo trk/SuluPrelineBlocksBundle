@@ -144,6 +144,12 @@ final class OverlayTest extends TestCase
         $overlay->mergeProps(['overlay_position' => 'right']);
         self::assertSame('right', $overlay->getOverlayPosition());
         self::assertSame('justify-center items-end', $overlay->getOverlayPositionClasses());
+
+        $overlay->mergeProps(['overlay_position' => 'cover', 'overlay_style' => 'light']);
+        self::assertSame('cover', $overlay->getOverlayPosition());
+        self::assertSame('justify-center items-center', $overlay->getOverlayPositionClasses());
+        self::assertTrue($overlay->isLightOverlay());
+        self::assertStringContainsString('text-layer-foreground', $overlay->getOverlayStyle());
     }
 
     public function testOverlayModesAndTransitions(): void

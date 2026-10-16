@@ -128,7 +128,10 @@ final class Countdown extends PrelineComponent
 
     public function getLabelClasses(): string
     {
-        return 'mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider text-muted-foreground-1';
+        $color = $this->stringProp('color', 'default');
+        $colorClass = 'white' === $color ? 'text-white/80' : 'text-muted-foreground-1';
+
+        return $this->classes('mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider', $colorClass);
     }
 
     public function getOnExpire(): string
@@ -138,7 +141,9 @@ final class Countdown extends PrelineComponent
 
     public function getExpireMessage(): string
     {
-        return $this->stringProp('expire_message', 'Countdown expired!');
+        return $this->nullableString('expired_text')
+            ?? $this->nullableStringProp('expire_message')
+            ?? $this->stringProp('expired_text', 'Countdown expired!');
     }
 
     /**

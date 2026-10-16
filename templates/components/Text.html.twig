@@ -1,4 +1,4 @@
 {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
-    {{ content|raw }}
+    {{ this.content|raw }}
 </div>

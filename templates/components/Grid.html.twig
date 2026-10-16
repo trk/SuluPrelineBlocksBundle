@@ -1,3 +1,4 @@
+{% set title = this.title %}
 {% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
@@ -14,6 +15,7 @@
     {% if is_filter_active %}
         {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
             filter_align_class: this.filterAlignClass,
+            filter_style: this.resolvedProps.filter_style|default('pills'),
             all_label: this.resolvedProps.filter_all_label|default('All'),
             filter_tags: this.filterTags,
         }, with_context = false) }}
@@ -41,6 +43,10 @@
                     :buttons="item.buttons|default([])"
                     :hoverImage="item.hover_image|default(null)"
                     :hoverVideo="item.hover_video|default(null)"
+                    :image_url="item.image_url|default(null)"
+                    :hover_image_url="item.hover_image_url|default(null)"
+                    :video_url="item.video_url|default(null)"
+                    :hover_video_url="item.hover_video_url|default(null)"
                     :props="this.resolveItemProps(item)"
                     class="w-full h-full flex-1"
                 />

@@ -139,7 +139,11 @@ final class Card extends PrelineComponent
 
     public function getRoundedClasses(string $default = 'xl', string $key = 'rounded'): string
     {
-        $variant = $this->nullableStringProp('card_variant') ?? $this->stringProp('variant', 'bordered');
+        $panelStyle = $this->nullableStringProp('panel_style');
+        $rawVariant = (null !== $panelStyle && 'inherit' !== $panelStyle)
+            ? $panelStyle
+            : $this->nullableStringProp('card_variant');
+        $variant = (null !== $rawVariant && 'inherit' !== $rawVariant) ? $rawVariant : $this->stringProp('variant', 'bordered');
         if ('group' === $variant) {
             return 'rounded-none';
         }
@@ -208,9 +212,15 @@ final class Card extends PrelineComponent
 
     public function getButtonStyleClasses(): string
     {
+        $linkStyle = $this->nullableStringProp('link_style');
+        $rawStyle = (null !== $linkStyle && 'inherit' !== $linkStyle)
+            ? $linkStyle
+            : $this->nullableStringProp('button_style');
+        $style = (null !== $rawStyle && 'inherit' !== $rawStyle) ? $rawStyle : 'primary';
+
         return PrelineClassMap::resolve(
             PrelineClassMap::CARD_BUTTON_STYLES,
-            $this->stringProp('button_style', 'primary'),
+            $style,
             PrelineClassMap::CARD_BUTTON_STYLES['primary'],
         );
     }
@@ -244,7 +254,11 @@ final class Card extends PrelineComponent
     public function getCardClasses(): string
     {
         $props = $this->props();
-        $variant = $this->nullableStringProp('card_variant') ?? $this->stringProp('variant', 'bordered');
+        $panelStyle = $this->nullableStringProp('panel_style');
+        $rawVariant = (null !== $panelStyle && 'inherit' !== $panelStyle)
+            ? $panelStyle
+            : $this->nullableStringProp('card_variant');
+        $variant = (null !== $rawVariant && 'inherit' !== $rawVariant) ? $rawVariant : $this->stringProp('variant', 'bordered');
         $bg = PropsResolver::bgColor($props);
         $rounded = $this->getRoundedClasses();
         $mediaAlign = $this->getMediaAlign();

@@ -2,6 +2,9 @@
     (function() {
         var scope = document.getElementById('{{ scope_id }}');
         if (!scope) return;
+        var bar = scope.querySelector('[data-filter-active-class]');
+        var activeClasses = (bar ? bar.getAttribute('data-filter-active-class') : 'bg-primary text-primary-foreground hover:bg-primary-hover border-transparent active').split(' ').filter(Boolean);
+        var inactiveClasses = (bar ? bar.getAttribute('data-filter-inactive-class') : 'bg-layer text-layer-foreground border-layer-line hover:bg-layer-hover').split(' ').filter(Boolean);
         var btns = scope.querySelectorAll('.filter-btn');
         var items = scope.querySelectorAll('{{ item_selector|default(".grid-item-card") }}');
 
@@ -10,12 +13,12 @@
                 var filter = this.getAttribute('data-filter');
 
                 btns.forEach(function(b) {
-                    b.classList.remove('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
-                    b.classList.add('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
+                    activeClasses.forEach(function(c) { b.classList.remove(c); });
+                    inactiveClasses.forEach(function(c) { b.classList.add(c); });
                 });
 
-                this.classList.remove('bg-layer', 'text-layer-foreground', 'border-layer-line', 'hover:bg-layer-hover');
-                this.classList.add('bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'border-transparent', 'active');
+                inactiveClasses.forEach(function(c) { btn.classList.remove(c); });
+                activeClasses.forEach(function(c) { btn.classList.add(c); });
 
                 items.forEach(function(item) {
                     var tags = (item.getAttribute('data-tags') || '').split(' ');

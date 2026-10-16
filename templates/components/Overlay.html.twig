@@ -1,4 +1,7 @@
+{% set title = this.title %}
+{% set meta = this.meta %}
 {% set content = this.resolvedContent %}
+{% set is_light = this.isLightOverlay() %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
 {% set active_img = this.getActiveImageUrl() %}
@@ -89,7 +92,7 @@
 
             {# Icon #}
             {% if icon_class %}
-                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm text-white {% if text_align == 'text-center' %}mx-auto{% elseif text_align == 'text-right' %}ms-auto{% endif %}">
+                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg {{ is_light ? 'bg-primary/10 text-primary' : 'bg-white/20 backdrop-blur-sm text-white' }} {% if text_align == 'text-center' %}mx-auto{% elseif text_align == 'text-right' %}ms-auto{% endif %}">
                     <i class="{{ icon_class }}" aria-hidden="true"></i>
                 </div>
             {% endif %}
@@ -117,7 +120,7 @@
 
             {# Description / Content #}
             {% if content %}
-                <div class="text-white/85 text-sm sm:text-base leading-relaxed mt-2 line-clamp-4">
+                <div class="{{ is_light ? 'text-layer-foreground/85' : 'text-white/85' }} text-sm sm:text-base leading-relaxed mt-2 line-clamp-4">
                     {{ content|raw }}
                 </div>
             {% endif %}
