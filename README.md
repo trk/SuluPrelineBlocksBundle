@@ -114,6 +114,8 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 
 ## Architecture & Override Mechanics
 
+- **`PrelineComponent` Base Class & `PrelineClassMap` Registry**: All 35 Twig component PHP classes extend `PrelineComponent` (which extends `AbstractBlockComponent` from `trk/sulu-block-suite-bundle`). Shared Tailwind CSS 4 / Preline UI 5 token maps (colors, typography, badges, buttons, shadows, borders, radii, aspect ratios, grid columns, animations, blend modes) are centralized in `PrelineClassMap` and `PropsResolver`.
+- **Sub-Component Composition**: Complex components (`Card`, `Overlay`, `Popover`, `Gallery`, `Slideshow`, `OverlaySlider`, `PanelSlider`, `ListBlock`, `DescriptionList`, `Table`, `Subnav`, `Switcher`, `Alert`) compose foundational `<twig:Badge>`, `<twig:Button>`, `<twig:Image :bare="true">`, and `<twig:Video :bare="true">` components as well as shared carousel/filter partials (`@SuluPrelineBlocks/includes/carousel_controls.html.twig`, `tag_filter_bar.html.twig`, `tag_filter_script.html.twig`) instead of duplicating raw HTML markup.
 - **Override Block XML**: Place `config/templates/blocks/{block}.xml` in your application to customize `<section name="content">`, `<section name="settings">`, or add custom tab sections (`<section name="style">`, `<section name="layout">`).
 - **Define Project Presets**: Create `config/blocks/presets/{block}.yaml` in your application.
 - **Override Twig Templates**: Place `templates/blocks/{block}.html.twig` or `templates/bundles/SuluPrelineBlocksBundle/components/{Component}.html.twig` in your application.
@@ -122,8 +124,8 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 
 ## Scoped CSS & Custom Attributes
 
-Every Preline Twig Component (`Section`, `Row`, `Column`, `Card`, `Headline`, `Button`, etc.) processes `props` through `ElementTransform` and `BlockRenderer`:
-- Custom HTML attributes (`data-*`, `aria-*`, `role`, etc.) from `props.attributes` are escaped and applied to the component wrapper.
+Every Preline Twig Component (`Section`, `Row`, `Column`, `Card`, `Headline`, `Button`, etc.) processes `props` through `PrelineComponent::getRootAttributes()`, `ElementTransform`, and `BlockRenderer`:
+- Root wrapper classes (`margin`, `padding`, `max_width`, `block_align`, `text_align`, `position`, `z_index`, `animation`, `blend`, `visibility`, `custom_class`), element `id`, parallax attributes (`data-parallax`), and custom HTML attributes (`data-*`, `aria-*`, `role`, etc.) from `props.attributes` are automatically resolved and merged onto the root element via `{{ attributes.defaults(this.getRootAttributes()) }}`.
 - Custom CSS from `props.css` using `.el-element` (or bare CSS properties) is automatically scoped to the component's unique `#id` and emitted as an inline `<style>` tag before the component root element.
 
 ---
@@ -143,11 +145,11 @@ if (typeof window.HSStaticMethods !== 'undefined') {
 ## Testing & Quality Assurance
 
 ```bash
-# Run PHPUnit 12 test suite
+# Run PHPUnit 12 test suite (35/35 component unit tests + XML schema validation)
 ../../vendor/bin/phpunit
 
-# Run PHPStan static analysis at level max
-../../vendor/bin/phpstan analyse --debug -c phpstan.neon
+# Run PHPStan static analysis at level max (from project root)
+../../vendor/bin/phpstan analyse packages/sulu-preline-blocks-bundle --debug --memory-limit=1G
 ```
 
 ---
