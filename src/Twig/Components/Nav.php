@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible vertical Navigation / Sidebar component.
  */
 #[AsTwigComponent('Nav', template: '@SuluPrelineBlocks/components/Nav.html.twig')]
-final class Nav extends AbstractPrelineComponent
+final class Nav extends PrelineComponent
 {
     /**
      * @return list<string>

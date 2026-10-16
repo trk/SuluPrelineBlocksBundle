@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Video', template: '@SuluPrelineBlocks/components/Video.html.twig')]
-final class Video extends AbstractPrelineComponent
+final class Video extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -52,28 +52,7 @@ final class Video extends AbstractPrelineComponent
 
     public function getPosterAlt(): string
     {
-        $media = $this->get('image');
-        if (\is_array($media)) {
-            $alt = $media['description'] ?? ($media['title'] ?? null);
-            if (\is_string($alt) && '' !== \trim($alt)) {
-                return \trim($alt);
-            }
-        } elseif (\is_object($media)) {
-            if (\method_exists($media, 'getDescription')) {
-                $desc = $media->getDescription();
-                if (\is_string($desc) && '' !== \trim($desc)) {
-                    return \trim($desc);
-                }
-            }
-            if (\method_exists($media, 'getTitle')) {
-                $title = $media->getTitle();
-                if (\is_string($title) && '' !== \trim($title)) {
-                    return \trim($title);
-                }
-            }
-        }
-
-        return '';
+        return $this->extractMediaAlt($this->get('image')) ?? '';
     }
 
     public function getUrl(): ?string
@@ -86,29 +65,14 @@ final class Video extends AbstractPrelineComponent
         return PropsResolver::resolveUrl($link);
     }
 
-    public function getAspectRatio(): string
+    public function getAspectRatio(string $default = '16/9', string $key = 'aspect_ratio'): string
     {
-        return match ($this->stringProp('aspect_ratio', '16/9')) {
-            '4/3', '4x3' => 'aspect-4/3',
-            '9/16', '9x16' => 'aspect-[9/16]',
-            '1/1', '1x1' => 'aspect-square',
-            '21/9', '21x9' => 'aspect-[21/9]',
-            default => 'aspect-video',
-        };
+        return parent::getAspectRatio($default, $key);
     }
 
-    public function getRounded(): string
+    public function getRounded(string $default = 'xl', string $key = 'rounded'): string
     {
-        return match ($this->stringProp('rounded', 'xl')) {
-            'none' => 'rounded-none',
-            'sm' => 'rounded-sm',
-            'md' => 'rounded-md',
-            'lg' => 'rounded-lg',
-            'xl' => 'rounded-xl',
-            '2xl' => 'rounded-2xl',
-            'full' => 'rounded-full',
-            default => 'rounded-xl',
-        };
+        return parent::getRounded($default, $key);
     }
 
     public function isAutoplay(): bool
@@ -152,20 +116,6 @@ final class Video extends AbstractPrelineComponent
         }
 
         return $this->isAutoplay();
-    }
-
-    public function getShadowClasses(): string
-    {
-        $shadow = $this->nullableStringProp('box_shadow') ?? $this->stringProp('shadow', 'none');
-
-        return match ($shadow) {
-            'sm' => 'shadow-sm',
-            'md', 'medium' => 'shadow-md',
-            'lg', 'large' => 'shadow-lg',
-            'xl', 'xlarge' => 'shadow-xl',
-            '2xl' => 'shadow-2xl',
-            default => '',
-        };
     }
 
     public function getWrapperClasses(string $extraBase = ''): string

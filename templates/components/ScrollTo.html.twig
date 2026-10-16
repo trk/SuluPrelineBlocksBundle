@@ -7,10 +7,11 @@
 {% set default_label = is_top ? 'Scroll to top' : 'Scroll down' %}
 {% set aria_text = title|default(default_label) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     <a href="{{ target_href }}"
        class="{{ btn_classes }}"

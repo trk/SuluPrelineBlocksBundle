@@ -1,10 +1,13 @@
-{% set custom_id = this.customId %}
+{% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set list_dom_id = custom_id ? custom_id : ('dl-' ~ random()) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    id="{{ list_dom_id }}"
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {{ attributes.defaults(this.customAttributes|merge({
+        id: list_dom_id,
+        class: this.getWrapperClasses('w-full'),
+    })) }}
 >
     {% if title %}
         <div class="mb-6">

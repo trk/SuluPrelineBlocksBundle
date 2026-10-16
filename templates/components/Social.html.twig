@@ -1,5 +1,8 @@
 {% set items = this.normalizedItems %}
-<nav aria-label="Social media links" {{ attributes.defaults({class: 'w-full my-4'}) }}>
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<nav aria-label="Social media links"
+     {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+     {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses('w-full my-4')})) }}>
     {% if this.title %}
         <p class="text-sm font-semibold text-foreground mb-3">{{ this.title }}</p>
     {% endif %}

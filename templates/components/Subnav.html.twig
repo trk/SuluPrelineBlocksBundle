@@ -1,8 +1,11 @@
 {% set normalized_items = this.normalizedItems %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <nav
-    {% if this.customId %}id="{{ this.customId }}"{% endif %}
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+    {{ attributes.defaults(this.customAttributes|merge({
+        class: this.getWrapperClasses('w-full'),
+    })) }}
     aria-label="{{ title|default('Sub navigation'|trans({}, 'sulu_website')) }}"
 >
     {% if title %}

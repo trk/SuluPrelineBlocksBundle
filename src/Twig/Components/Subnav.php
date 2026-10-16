@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Subnav', template: '@SuluPrelineBlocks/components/Subnav.html.twig')]
-final class Subnav extends AbstractPrelineComponent
+final class Subnav extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -53,10 +53,7 @@ final class Subnav extends AbstractPrelineComponent
     {
         $normalized = [];
         foreach ($this->items('items') as $item) {
-            if (isset($item['link'])) {
-                $item['link_href'] = PropsResolver::resolveUrl($item['link']);
-            }
-            $normalized[] = $item;
+            $normalized[] = $this->normalizeItemMediaAndLinks($item);
         }
 
         return $normalized;
@@ -64,45 +61,29 @@ final class Subnav extends AbstractPrelineComponent
 
     public function getStyle(): string
     {
-        return match ($this->stringProp('style', 'pills')) {
-            'underline' => 'underline',
-            'segmented' => 'segmented',
-            'divider' => 'divider',
-            default => 'pills',
-        };
+        return $this->enumProp('style', ['pills', 'underline', 'segmented', 'divider'], 'pills');
     }
 
     public function getAlignment(): string
     {
-        return match ($this->stringProp('alignment', 'start')) {
-            'center' => 'center',
-            'end' => 'end',
-            'between' => 'between',
-            default => 'start',
-        };
+        return $this->enumProp('alignment', ['start', 'center', 'end', 'between'], 'start');
     }
 
     public function getSize(): string
     {
-        return match ($this->stringProp('size', 'md')) {
-            'sm' => 'sm',
-            'lg' => 'lg',
-            default => 'md',
-        };
+        return $this->enumProp('size', ['sm', 'md', 'lg'], 'md');
     }
 
     public function getNavClasses(): string
     {
         $classes = ['flex items-center flex-wrap overflow-x-auto'];
-        $align = $this->getAlignment();
         $style = $this->getStyle();
 
-        $classes[] = match ($align) {
-            'center' => 'justify-center',
-            'end' => 'justify-end',
-            'between' => 'justify-between',
-            default => 'justify-start',
-        };
+        $classes[] = PrelineClassMap::resolve(
+            PrelineClassMap::FLEX_ALIGN,
+            $this->getAlignment(),
+            PrelineClassMap::FLEX_ALIGN['start'],
+        );
 
         if ('segmented' === $style) {
             $classes[] = 'p-1.5 bg-surface rounded-xl gap-1';
@@ -121,13 +102,12 @@ final class Subnav extends AbstractPrelineComponent
     {
         $classes = ['inline-flex items-center gap-x-2 font-medium transition-colors focus:outline-hidden whitespace-nowrap'];
         $style = $this->getStyle();
-        $size = $this->getSize();
 
-        $classes[] = match ($size) {
-            'sm' => 'text-xs py-1 px-2.5',
-            'lg' => 'text-base py-3 px-5',
-            default => 'text-sm py-2 px-3.5',
-        };
+        $classes[] = PrelineClassMap::resolve(
+            PrelineClassMap::SUBNAV_SIZES,
+            $this->getSize(),
+            PrelineClassMap::SUBNAV_SIZES['md'],
+        );
 
         if ('pills' === $style) {
             $classes[] = 'rounded-lg';
@@ -160,26 +140,5 @@ final class Subnav extends AbstractPrelineComponent
         }
 
         return \implode(' ', $classes);
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
     }
 }

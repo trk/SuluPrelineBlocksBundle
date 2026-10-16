@@ -1,12 +1,15 @@
-{% set custom_id = this.customId %}
+{% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
 {% set is_lightbox_active = this.isLightboxEnabled() %}
 {% set gallery_dom_id = custom_id ? custom_id : ('gallery-' ~ random()) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    id="{{ gallery_dom_id }}"
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {{ attributes.defaults(this.customAttributes|merge({
+        id: gallery_dom_id,
+        class: this.getWrapperClasses('w-full'),
+    })) }}
 >
     {% if title %}
         <div class="mb-8 text-center">

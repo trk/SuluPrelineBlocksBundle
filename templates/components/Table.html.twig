@@ -1,5 +1,7 @@
 {% set items = this.normalizedItems %}
-<div {{ attributes.defaults({class: 'w-full my-6'}) }}>
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+     {{ attributes.defaults(this.customAttributes|merge({class: 'w-full my-6'})) }}>
     {% if this.title %}
         <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
     {% endif %}

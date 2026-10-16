@@ -4,9 +4,12 @@
 {% set slide_width = this.slideWidthClass %}
 {% set gap_class = this.gapClass %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    {% if this.customId %}id="{{ this.customId }}"{% endif %}
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+    {{ attributes.defaults(this.customAttributes|merge({
+        class: this.getWrapperClasses('w-full'),
+    })) }}
 >
     {% if title %}
         <div class="flex items-center justify-between mb-6">

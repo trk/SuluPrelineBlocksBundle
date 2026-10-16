@@ -1,11 +1,14 @@
-{% set custom_id = this.customId %}
+{% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
 {% set grid_dom_id = custom_id ? custom_id : ('grid-' ~ random()) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    id="{{ grid_dom_id }}"
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {{ attributes.defaults(this.customAttributes|merge({
+        id: grid_dom_id,
+        class: this.getWrapperClasses('w-full'),
+    })) }}
 >
     {% if title %}
         <div class="mb-8 text-center">

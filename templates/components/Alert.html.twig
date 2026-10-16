@@ -8,13 +8,14 @@
 {% set alert_title = this.getTitle()|default(title|default(null)) %}
 {% set alert_content = this.getContent()|default(content|default(null)) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div id="{{ alert_id }}"
      role="alert"
      tabindex="-1"
      {% if alert_title %}aria-labelledby="{{ alert_id }}-label"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {% if icon_class %}
         <span class="shrink-0 pt-0.5">

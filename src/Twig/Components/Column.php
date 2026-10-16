@@ -10,8 +10,10 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 pure layout Column component.
  */
 #[AsTwigComponent('Column', template: '@SuluPrelineBlocks/components/Column.html.twig')]
-final class Column extends AbstractPrelineComponent
+final class Column extends PrelineComponent
 {
+    protected bool $applyWrapperPadding = false;
+
     /**
      * @return list<string>
      */
@@ -55,69 +57,29 @@ final class Column extends AbstractPrelineComponent
 
     public function getColSpanClasses(): string
     {
-        return match ($this->stringProp('col_span', 'auto')) {
-            '12' => 'col-span-12',
-            '6' => 'col-span-12 md:col-span-6',
-            '4' => 'col-span-12 md:col-span-4',
-            '8' => 'col-span-12 md:col-span-8',
-            '3' => 'col-span-12 sm:col-span-6 lg:col-span-3',
-            '9' => 'col-span-12 lg:col-span-9',
-            '2' => 'col-span-12 sm:col-span-4 lg:col-span-2',
-            '10' => 'col-span-12 lg:col-span-10',
-            '5' => 'col-span-12 md:col-span-5',
-            '7' => 'col-span-12 md:col-span-7',
-            default => '',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::COLUMN_COL_SPANS,
+            $this->stringProp('col_span', 'auto'),
+            '',
+        );
     }
 
     public function getStyleClasses(): string
     {
-        return match ($this->stringProp('style', 'none')) {
-            'card' => 'bg-card border border-card-line rounded-2xl shadow-xs',
-            'muted' => 'bg-background-1 rounded-2xl',
-            'subtle' => 'bg-surface/70 rounded-2xl',
-            'primary_subtle' => 'bg-primary-50/60 border border-primary-100 rounded-2xl dark:bg-primary-950/20 dark:border-primary-900/30',
-            default => '',
-        };
-    }
-
-    public function getPaddingClasses(): string
-    {
-        return match ($this->stringProp('padding', 'none')) {
-            'sm' => 'p-4',
-            'md' => 'p-6 sm:p-8',
-            'lg' => 'p-8 sm:p-10',
-            default => '',
-        };
-    }
-
-    public function getVerticalAlignClasses(): string
-    {
-        return match ($this->stringProp('vertical_align', 'top')) {
-            'center' => 'justify-center',
-            'bottom' => 'justify-end',
-            'between' => 'justify-between',
-            default => 'justify-start',
-        };
-    }
-
-    public function getTextAlignClasses(): string
-    {
-        return match ($this->stringProp('text_align', 'start')) {
-            'center' => 'text-center',
-            'end', 'right' => 'text-end',
-            'justify' => 'text-justify',
-            default => 'text-start',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::COLUMN_STYLES,
+            $this->stringProp('style', 'none'),
+            '',
+        );
     }
 
     public function getOrderClasses(): string
     {
-        return match ($this->stringProp('order', 'default')) {
-            'first' => 'order-first md:order-none',
-            'last' => 'order-last md:order-none',
-            default => '',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::COLUMN_ORDERS,
+            $this->stringProp('order', 'default'),
+            '',
+        );
     }
 
     public function getStickyClasses(): string
@@ -127,64 +89,21 @@ final class Column extends AbstractPrelineComponent
 
     public function getColumnClasses(): string
     {
-        $classes = [
+        $classes = \array_filter([
             'flex',
             'flex-col',
             'w-full',
             'transition-all',
-        ];
+            $this->getColSpanClasses(),
+            $this->getStyleClasses(),
+            $this->getPaddingClasses(),
+            $this->getVerticalAlignClasses(),
+            $this->getTextAlignClasses(),
+            $this->getOrderClasses(),
+            $this->getStickyClasses(),
+        ], static fn (string $c): bool => '' !== $c);
 
-        $span = $this->getColSpanClasses();
-        if ('' !== $span) {
-            $classes[] = $span;
-        }
-
-        $style = $this->getStyleClasses();
-        if ('' !== $style) {
-            $classes[] = $style;
-        }
-
-        $padding = $this->getPaddingClasses();
-        if ('' !== $padding) {
-            $classes[] = $padding;
-        }
-
-        $align = $this->getVerticalAlignClasses();
-        if ('' !== $align) {
-            $classes[] = $align;
-        }
-
-        $textAlign = $this->getTextAlignClasses();
-        if ('' !== $textAlign) {
-            $classes[] = $textAlign;
-        }
-
-        $order = $this->getOrderClasses();
-        if ('' !== $order) {
-            $classes[] = $order;
-        }
-
-        $sticky = $this->getStickyClasses();
-        if ('' !== $sticky) {
-            $classes[] = $sticky;
-        }
-
-        $props = $this->props();
-        $extra = [
-            ElementTransform::margin($props),
-            ElementTransform::position($props),
-            ElementTransform::visibility($props),
-            ElementTransform::animation($props),
-            ElementTransform::customClass($props),
-        ];
-
-        foreach ($extra as $item) {
-            if ('' !== $item) {
-                $classes[] = $item;
-            }
-        }
-
-        return \implode(' ', $classes);
+        return parent::getWrapperClasses(\implode(' ', $classes));
     }
 
     public function hasBlocks(): bool

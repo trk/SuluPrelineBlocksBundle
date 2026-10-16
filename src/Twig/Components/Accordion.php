@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Accordion', template: '@SuluPrelineBlocks/components/Accordion.html.twig')]
-final class Accordion extends AbstractPrelineComponent
+final class Accordion extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -63,20 +63,12 @@ final class Accordion extends AbstractPrelineComponent
 
     public function getStyle(): string
     {
-        return match ($this->stringProp('style', 'default')) {
-            'bordered' => 'bordered',
-            'soft' => 'soft',
-            default => 'default',
-        };
+        return $this->enumProp('style', ['default', 'bordered', 'soft'], 'default');
     }
 
     public function getIconStyle(): string
     {
-        return match ($this->stringProp('icon_style', 'chevron')) {
-            'plus' => 'plus',
-            'none' => 'none',
-            default => 'chevron',
-        };
+        return $this->enumProp('icon_style', ['chevron', 'plus', 'none'], 'chevron');
     }
 
     public function isMultiple(): bool
@@ -89,74 +81,45 @@ final class Accordion extends AbstractPrelineComponent
         return $this->boolProp('collapsible', true);
     }
 
-    public function getTitleSizeClasses(): string
+    public function getTitleSizeClasses(string $default = 'base', string $preset = 'accordion'): string
     {
-        return match ($this->stringProp('title_size', 'base')) {
-            'sm' => 'text-sm font-medium',
-            'lg' => 'text-lg font-semibold',
-            'xl' => 'text-xl font-bold',
-            default => 'text-base font-semibold',
-        };
+        return parent::getTitleSizeClasses($default, $preset);
     }
 
     public function getImageAlign(): string
     {
-        return match ($this->stringProp('image_align', 'top')) {
-            'bottom' => 'bottom',
-            'left' => 'left',
-            'right' => 'right',
-            default => 'top',
-        };
+        return $this->enumProp('image_align', ['top', 'bottom', 'left', 'right'], 'top');
     }
 
     public function getContainerClasses(): string
     {
-        return match ($this->getStyle()) {
-            'bordered', 'soft' => 'space-y-3',
-            default => 'divide-y divide-border',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ACCORDION_CONTAINER_STYLES,
+            $this->getStyle(),
+            PrelineClassMap::ACCORDION_CONTAINER_STYLES['default'],
+        );
     }
 
     public function getItemClasses(): string
     {
-        return match ($this->getStyle()) {
-            'bordered' => 'hs-accordion border border-card-line bg-card rounded-xl p-4',
-            'soft' => 'hs-accordion bg-surface rounded-xl p-4',
-            default => 'hs-accordion pt-4 pb-3',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ACCORDION_ITEM_STYLES,
+            $this->getStyle(),
+            PrelineClassMap::ACCORDION_ITEM_STYLES['default'],
+        );
     }
 
     public function getToggleClasses(): string
     {
-        return 'hs-accordion-toggle hs-accordion-active:text-primary inline-flex items-center justify-between gap-x-3 w-full text-start text-foreground hover:text-muted-foreground-1 rounded-lg disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden';
+        return PrelineClassMap::ACCORDION_TOGGLE_CLASSES;
     }
 
     public function getContentWrapperClasses(): string
     {
-        return match ($this->getStyle()) {
-            'bordered', 'soft' => 'pt-3',
-            default => 'pt-2 pb-1',
-        };
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ACCORDION_CONTENT_STYLES,
+            $this->getStyle(),
+            PrelineClassMap::ACCORDION_CONTENT_STYLES['default'],
+        );
     }
 }

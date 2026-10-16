@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible responsive Map component.
  */
 #[AsTwigComponent('Map', template: '@SuluPrelineBlocks/components/Map.html.twig')]
-final class Map extends AbstractPrelineComponent
+final class Map extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -73,15 +73,13 @@ final class Map extends AbstractPrelineComponent
         return '' !== $this->getEmbedUrl();
     }
 
-    public function getAspectRatioClasses(): string
+    public function getAspectRatioClasses(string $default = '16/9', string $key = 'aspect_ratio'): string
     {
-        return match ($this->stringProp('aspect_ratio', '16/9')) {
-            '16/9' => 'aspect-video',
-            '4/3' => 'aspect-4/3',
-            '21/9' => 'aspect-21/9',
-            '1/1' => 'aspect-square',
-            default => 'h-96 md:h-[500px]',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::MAP_ASPECT_RATIOS,
+            $this->stringProp($key, $default),
+            PrelineClassMap::MAP_ASPECT_RATIOS['auto'],
+        );
     }
 
     public function getWrapperClasses(string $extraBase = ''): string
@@ -101,7 +99,7 @@ final class Map extends AbstractPrelineComponent
             $classes[] = $extraBase;
         }
 
-        return \implode(' ', $classes);
+        return parent::getWrapperClasses(\implode(' ', $classes));
     }
 
     /**

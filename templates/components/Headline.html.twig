@@ -5,10 +5,11 @@
 {% set icon_class = this.iconClass %}
 {% set headline_title = this.getTitle() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <{{ tag }} {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-    {{ attributes.defaults({
+    {{ attributes.defaults(this.customAttributes|merge({
         class: this.getWrapperClasses(),
-    }) }}>
+    })) }}>
     {% if img_url %}
         <img src="{{ img_url }}" alt="{{ this.getImageAlt() }}" class="inline-block w-8 h-8 mr-2 align-middle object-contain" {% if img_focus_style %}style="{{ img_focus_style }}"{% endif %} loading="lazy" />
     {% endif %}

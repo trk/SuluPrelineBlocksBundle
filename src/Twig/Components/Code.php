@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible code block component with copy-to-clipboard plugin.
  */
 #[AsTwigComponent('Code', template: '@SuluPrelineBlocks/components/Code.html.twig')]
-final class Code extends AbstractPrelineComponent
+final class Code extends PrelineComponent
 {
     private ?string $uniqueId = null;
 
@@ -49,20 +49,11 @@ final class Code extends AbstractPrelineComponent
 
     public function getLanguageLabel(): string
     {
-        return match (\strtolower($this->getLanguage())) {
-            'php' => 'PHP',
-            'javascript', 'js' => 'JavaScript',
-            'typescript', 'ts' => 'TypeScript',
-            'html' => 'HTML',
-            'css' => 'CSS',
-            'bash', 'sh', 'shell' => 'Bash',
-            'json' => 'JSON',
-            'yaml', 'yml' => 'YAML',
-            'sql' => 'SQL',
-            'python', 'py' => 'Python',
-            'markdown', 'md' => 'Markdown',
-            default => 'Code',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::CODE_LANGUAGE_LABELS,
+            \strtolower($this->getLanguage()),
+            'Code',
+        );
     }
 
     /**
@@ -75,7 +66,7 @@ final class Code extends AbstractPrelineComponent
 
     public function getContainerClasses(): string
     {
-        return 'relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4';
+        return $this->getWrapperClasses('relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4');
     }
 
     public function getHeaderClasses(): string

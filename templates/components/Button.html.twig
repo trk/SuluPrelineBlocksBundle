@@ -1,6 +1,7 @@
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 {% if this.isGroup() %}
     <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-         {{ attributes.defaults({class: this.getGroupWrapperClasses()}) }}>
+         {{ attributes.defaults(this.customAttributes|merge({class: this.getGroupWrapperClasses()})) }}>
         {% for item in this.getNormalizedItems() %}
             <a href="{{ item.url }}"
                {% if item.id %}id="{{ item.id }}"{% endif %}
@@ -23,9 +24,9 @@
     <a href="{{ this.getUrl() }}"
        {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
        {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
-       {{ attributes.defaults({
+       {{ attributes.defaults(this.customAttributes|merge({
            class: this.getWrapperClasses(),
-       }) }}
+       })) }}
     >
         {% if this.getResolvedIcon() and this.getIconAlign() == 'left' %}
             <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>

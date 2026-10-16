@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible responsive data table component.
  */
 #[AsTwigComponent('Table', template: '@SuluPrelineBlocks/components/Table.html.twig')]
-final class Table extends AbstractPrelineComponent
+final class Table extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -95,7 +95,7 @@ final class Table extends AbstractPrelineComponent
             $classes[] = $extraBase;
         }
 
-        return \implode(' ', $classes);
+        return parent::getWrapperClasses(\implode(' ', $classes));
     }
 
     public function getTableClasses(): string
@@ -116,11 +116,11 @@ final class Table extends AbstractPrelineComponent
 
     public function getCellPaddingClasses(): string
     {
-        return match ($this->getSize()) {
-            'sm' => 'px-3 py-2 text-xs',
-            'lg' => 'px-6 py-4 text-base',
-            default => 'px-4 py-3 text-sm',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TABLE_CELL_PADDINGS,
+            $this->getSize(),
+            PrelineClassMap::TABLE_CELL_PADDINGS['md'],
+        );
     }
 
     public function getThClasses(): string

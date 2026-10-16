@@ -55,7 +55,7 @@ final class SlideshowTest extends TestCase
         self::assertSame('text-left items-start', $slideshow->getContentAlign());
         self::assertStringContainsString('"isAutoPlay":false', $slideshow->getCarouselConfigJson());
         self::assertStringContainsString('"speed":7000', $slideshow->getCarouselConfigJson());
-        self::assertSame('mt-16 mb-8', $slideshow->getMarginClass());
+        self::assertSame('mt-16 mb-6', $slideshow->getMarginClass());
         self::assertSame('hero-slideshow', $slideshow->getCustomId());
         self::assertSame('my-hero-carousel', $slideshow->getCustomClass());
     }

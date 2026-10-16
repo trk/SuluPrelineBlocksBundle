@@ -4,10 +4,11 @@
 {% set width = this.getDividerWidthClasses() %}
 {% set icon_class = this.getResolvedIcon() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {% if (style == 'icon' or icon_class) and icon_class and style != 'small' and style != 'dashed' and style != 'dotted' %}
         <div class="{{ width }} flex items-center text-xs {{ this.getIconLineClasses() }}">

@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Button', template: '@SuluPrelineBlocks/components/Button.html.twig')]
-final class Button extends AbstractPrelineComponent
+final class Button extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -68,20 +68,13 @@ final class Button extends AbstractPrelineComponent
         $isConnected = $this->is('connected');
         $isVertical = $this->is('vertical');
         $align = $this->getAlign();
-        $gap = $this->getGap();
 
         $classes = [];
 
         if ($isConnected) {
             $classes[] = $isVertical ? 'inline-flex flex-col rounded-lg shadow-2xs' : 'inline-flex rounded-lg shadow-2xs';
         } else {
-            $gapClasses = match ($gap) {
-                'none' => 'gap-0',
-                'xs' => 'gap-1',
-                'sm' => 'gap-1.5 sm:gap-2',
-                'lg' => 'gap-3 sm:gap-4',
-                default => 'gap-2 sm:gap-3',
-            };
+            $gapClasses = $this->getGapClasses('md', 'button_group', 'gap');
 
             $classes[] = $isVertical ? \sprintf('inline-flex flex-col %s', $gapClasses) : \sprintf('flex flex-wrap items-center %s', $gapClasses);
         }

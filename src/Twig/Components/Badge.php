@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Badge', template: '@SuluPrelineBlocks/components/Badge.html.twig')]
-final class Badge extends AbstractPrelineComponent
+final class Badge extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -41,9 +41,7 @@ final class Badge extends AbstractPrelineComponent
 
     public function getUrl(): ?string
     {
-        $url = $this->getLinkUrl('link');
-
-        return ('#' === $url || null === $url || '' === $url) ? null : $url;
+        return $this->getLinkUrl('link');
     }
 
     public function isClickable(): bool

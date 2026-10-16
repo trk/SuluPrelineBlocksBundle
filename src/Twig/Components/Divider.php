@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Divider', template: '@SuluPrelineBlocks/components/Divider.html.twig')]
-final class Divider extends AbstractPrelineComponent
+final class Divider extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -51,44 +51,40 @@ final class Divider extends AbstractPrelineComponent
 
     public function getDividerColorClasses(): string
     {
-        return match ($this->stringProp('divider_color', 'default')) {
-            'primary' => 'border-primary bg-primary',
-            'muted' => 'border-line-1 bg-surface',
-            'dark' => 'border-line-8 bg-inverse',
-            default => 'border-border bg-border',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::DIVIDER_COLORS,
+            $this->stringProp('divider_color', 'default'),
+            PrelineClassMap::DIVIDER_COLORS['default'],
+        );
     }
 
     public function getDividerThicknessClasses(): string
     {
-        return match ($this->stringProp('divider_thickness', '1')) {
-            '2' => 'border-t-2 h-0.5',
-            '4' => 'border-t-4 h-1',
-            default => 'border-t h-px',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::DIVIDER_THICKNESSES,
+            $this->stringProp('divider_thickness', '1'),
+            PrelineClassMap::DIVIDER_THICKNESSES['1'],
+        );
     }
 
     public function getDividerWidthClasses(): string
     {
         $defaultWidth = 'small' === $this->getDividerStyle() ? 'small' : 'full';
-        $width = $this->stringProp('divider_width', $defaultWidth);
 
-        return match ($width) {
-            '3-4' => 'w-3/4',
-            '1-2' => 'w-1/2',
-            '1-3' => 'w-1/3',
-            'small' => 'w-16',
-            default => 'w-full',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::DIVIDER_WIDTHS,
+            $this->stringProp('divider_width', $defaultWidth),
+            PrelineClassMap::DIVIDER_WIDTHS['full'],
+        );
     }
 
     public function getDividerAlignClasses(): string
     {
-        return match ($this->stringProp('divider_align', 'center')) {
-            'left' => 'me-auto justify-start text-start',
-            'right' => 'ms-auto justify-end text-end',
-            default => 'mx-auto justify-center text-center',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::DIVIDER_ALIGNS,
+            $this->stringProp('divider_align', 'center'),
+            PrelineClassMap::DIVIDER_ALIGNS['center'],
+        );
     }
 
     public function getWrapperClasses(string $extraBase = ''): string
@@ -106,54 +102,12 @@ final class Divider extends AbstractPrelineComponent
     public function getIconLineClasses(): string
     {
         $align = $this->getDividerAlign();
-        $thicknessStr = $this->stringProp('divider_thickness', '1');
-        $color = $this->stringProp('divider_color', 'default');
+        $color = $this->enumProp('divider_color', ['default', 'primary', 'muted', 'dark'], 'default');
+        $thickness = $this->enumProp('divider_thickness', ['1', '2', '4'], '1');
+        $key = $color . '_' . $thickness;
 
-        $afterClass = match ($color) {
-            'primary' => match ($thicknessStr) {
-                '2' => 'after:flex-1 after:border-t-2 after:border-primary after:ms-4',
-                '4' => 'after:flex-1 after:border-t-4 after:border-primary after:ms-4',
-                default => 'after:flex-1 after:border-t after:border-primary after:ms-4',
-            },
-            'muted' => match ($thicknessStr) {
-                '2' => 'after:flex-1 after:border-t-2 after:border-line-1 after:ms-4',
-                '4' => 'after:flex-1 after:border-t-4 after:border-line-1 after:ms-4',
-                default => 'after:flex-1 after:border-t after:border-line-1 after:ms-4',
-            },
-            'dark' => match ($thicknessStr) {
-                '2' => 'after:flex-1 after:border-t-2 after:border-line-8 after:ms-4',
-                '4' => 'after:flex-1 after:border-t-4 after:border-line-8 after:ms-4',
-                default => 'after:flex-1 after:border-t after:border-line-8 after:ms-4',
-            },
-            default => match ($thicknessStr) {
-                '2' => 'after:flex-1 after:border-t-2 after:border-border after:ms-4',
-                '4' => 'after:flex-1 after:border-t-4 after:border-border after:ms-4',
-                default => 'after:flex-1 after:border-t after:border-border after:ms-4',
-            },
-        };
-
-        $beforeClass = match ($color) {
-            'primary' => match ($thicknessStr) {
-                '2' => 'before:flex-1 before:border-t-2 before:border-primary before:me-4',
-                '4' => 'before:flex-1 before:border-t-4 before:border-primary before:me-4',
-                default => 'before:flex-1 before:border-t before:border-primary before:me-4',
-            },
-            'muted' => match ($thicknessStr) {
-                '2' => 'before:flex-1 before:border-t-2 before:border-line-1 before:me-4',
-                '4' => 'before:flex-1 before:border-t-4 before:border-line-1 before:me-4',
-                default => 'before:flex-1 before:border-t before:border-line-1 before:me-4',
-            },
-            'dark' => match ($thicknessStr) {
-                '2' => 'before:flex-1 before:border-t-2 before:border-line-8 before:me-4',
-                '4' => 'before:flex-1 before:border-t-4 before:border-line-8 before:me-4',
-                default => 'before:flex-1 before:border-t before:border-line-8 before:me-4',
-            },
-            default => match ($thicknessStr) {
-                '2' => 'before:flex-1 before:border-t-2 before:border-border before:me-4',
-                '4' => 'before:flex-1 before:border-t-4 before:border-border before:me-4',
-                default => 'before:flex-1 before:border-t before:border-border before:me-4',
-            },
-        };
+        $beforeClass = PrelineClassMap::DIVIDER_ICON_BEFORE_LINES[$key] ?? PrelineClassMap::DIVIDER_ICON_BEFORE_LINES['default_1'];
+        $afterClass = PrelineClassMap::DIVIDER_ICON_AFTER_LINES[$key] ?? PrelineClassMap::DIVIDER_ICON_AFTER_LINES['default_1'];
 
         if ('left' === $align) {
             return $afterClass;
@@ -168,11 +122,10 @@ final class Divider extends AbstractPrelineComponent
 
     public function getIconBadgeColorClasses(): string
     {
-        return match ($this->stringProp('divider_color', 'default')) {
-            'primary' => 'border-primary-200 bg-layer text-primary dark:border-primary-900/50',
-            'dark' => 'border-line-8 bg-inverse text-foreground-inverse',
-            'muted' => 'border-border bg-surface text-muted-foreground-1',
-            default => 'border-layer-line bg-layer text-muted-foreground-2',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::DIVIDER_ICON_BADGE_COLORS,
+            $this->stringProp('divider_color', 'default'),
+            PrelineClassMap::DIVIDER_ICON_BADGE_COLORS['default'],
+        );
     }
 }

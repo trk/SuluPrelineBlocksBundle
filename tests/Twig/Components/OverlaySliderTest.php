@@ -55,7 +55,7 @@ final class OverlaySliderTest extends TestCase
         self::assertSame('w-full sm:w-1/2', $slider->getSlideWidthClass());
         self::assertSame('px-0', $slider->getGapClass());
         self::assertStringContainsString('"speed":2500', $slider->getCarouselConfigJson());
-        self::assertSame('mt-12 mb-4', $slider->getMarginClass());
+        self::assertSame('mt-10 mb-4', $slider->getMarginClass());
         self::assertSame('hero-overlays', $slider->getCustomId());
         self::assertSame('my-overlay-slider', $slider->getCustomClass());
     }

@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Countdown', template: '@SuluPrelineBlocks/components/Countdown.html.twig')]
-final class Countdown extends AbstractPrelineComponent
+final class Countdown extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -72,18 +72,9 @@ final class Countdown extends AbstractPrelineComponent
         return $this->boolProp('show_separator', true);
     }
 
-    public function getAlignClasses(): string
+    public function getAlignClasses(string $default = 'center', string $key = 'align'): string
     {
-        $align = $this->nullableStringProp('align');
-        if (null === $align || 'center' === $align) {
-            $align = $this->stringProp('text_align', $align ?? 'center');
-        }
-
-        return match ($align) {
-            'left', 'start' => 'justify-start text-start',
-            'right', 'end' => 'justify-end text-end',
-            default => 'justify-center text-center',
-        };
+        return $this->getAlignWithTextClasses($default, $key);
     }
 
     public function getNumberClasses(): string
@@ -91,17 +82,15 @@ final class Countdown extends AbstractPrelineComponent
         $size = $this->stringProp('size', 'md');
         $color = $this->stringProp('color', 'default');
 
-        $sizeClasses = match ($size) {
-            'sm' => 'text-2xl sm:text-3xl font-bold',
-            'lg' => 'text-4xl sm:text-5xl lg:text-6xl font-extrabold',
-            'xl' => 'text-5xl sm:text-6xl lg:text-7xl font-black',
-            default => 'text-3xl sm:text-4xl lg:text-5xl font-extrabold',
-        };
+        $sizeClasses = PrelineClassMap::resolve(
+            PrelineClassMap::COUNTDOWN_NUMBER_SIZES,
+            $size,
+            PrelineClassMap::COUNTDOWN_NUMBER_SIZES['md'],
+        );
 
         $colorClasses = match ($color) {
             'primary' => 'text-primary',
             'white' => 'text-white',
-            'dark' => 'text-foreground',
             default => 'text-foreground',
         };
 
@@ -110,16 +99,11 @@ final class Countdown extends AbstractPrelineComponent
 
     public function getCardClasses(): string
     {
-        $style = $this->getCountdownStyle();
-        if ('minimal' === $style) {
-            return 'flex flex-col items-center justify-center p-2 min-w-[70px] sm:min-w-[85px]';
-        }
-
-        if ('pill' === $style) {
-            return 'flex flex-col items-center justify-center py-3 px-4 sm:px-6 rounded-2xl bg-surface min-w-[75px] sm:min-w-[95px] shadow-2xs';
-        }
-
-        return 'flex flex-col items-center justify-center p-3 sm:p-5 rounded-xl border border-card-line bg-card shadow-xs min-w-[80px] sm:min-w-[100px]';
+        return PrelineClassMap::resolve(
+            PrelineClassMap::COUNTDOWN_CARD_STYLES,
+            $this->getCountdownStyle(),
+            PrelineClassMap::COUNTDOWN_CARD_STYLES['boxed'],
+        );
     }
 
     public function getSeparatorClasses(): string
@@ -127,17 +111,15 @@ final class Countdown extends AbstractPrelineComponent
         $size = $this->stringProp('size', 'md');
         $color = $this->stringProp('color', 'default');
 
-        $sizeClasses = match ($size) {
-            'sm' => 'text-xl sm:text-2xl font-bold',
-            'lg' => 'text-3xl sm:text-4xl font-extrabold',
-            'xl' => 'text-4xl sm:text-5xl font-black',
-            default => 'text-2xl sm:text-3xl font-extrabold',
-        };
+        $sizeClasses = PrelineClassMap::resolve(
+            PrelineClassMap::COUNTDOWN_SEPARATOR_SIZES,
+            $size,
+            PrelineClassMap::COUNTDOWN_SEPARATOR_SIZES['md'],
+        );
 
         $colorClasses = match ($color) {
             'primary' => 'text-primary-400 dark:text-primary-500',
             'white' => 'text-white/60',
-            'dark' => 'text-muted-foreground',
             default => 'text-muted-foreground',
         };
 

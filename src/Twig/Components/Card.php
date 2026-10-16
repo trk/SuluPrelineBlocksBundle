@@ -7,8 +7,10 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Card', template: '@SuluPrelineBlocks/components/Card.html.twig')]
-final class Card extends AbstractPrelineComponent
+final class Card extends PrelineComponent
 {
+    protected bool $applyWrapperPadding = false;
+
     /**
      * @return list<string>
      */
@@ -128,60 +130,6 @@ final class Card extends AbstractPrelineComponent
         };
     }
 
-    public function getMediaAspectRatioClass(): string
-    {
-        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->stringProp('media_aspect_ratio', '16-9');
-
-        return match ($aspect) {
-            '4-3', '4/3', '4:3' => 'aspect-4/3',
-            '1-1', '1/1', '1:1', 'square' => 'aspect-square',
-            '21-9', '21/9', '21:9' => 'aspect-21/9',
-            'auto', 'manual' => 'aspect-auto',
-            default => 'aspect-video',
-        };
-    }
-
-    public function getMediaAspectRatioStyle(): string
-    {
-        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->nullableStringProp('media_aspect_ratio');
-
-        if ('manual' === $aspect) {
-            $widthVal = $this->floatProp('aspect_ratio_width', 0.0);
-            $heightVal = $this->floatProp('aspect_ratio_height', 0.0);
-
-            if ($widthVal > 0.0 && $heightVal > 0.0) {
-                return \sprintf('aspect-ratio: %s / %s;', $widthVal, $heightVal);
-            }
-        }
-
-        return '';
-    }
-
-    public function getObjectFitClass(): string
-    {
-        return PropsResolver::resolveObjectFit($this->stringProp('object_fit', 'cover'));
-    }
-
-    public function getImageFocusPointStyle(string $key = 'image'): ?string
-    {
-        return PropsResolver::resolveFocusPointStyle($this->get($key));
-    }
-
-    public function getHoverImageFocusPointStyle(): ?string
-    {
-        return PropsResolver::resolveFocusPointStyle($this->get('hover_image'));
-    }
-
-    public function getImageSrcSet(string $key = 'image'): ?string
-    {
-        return PropsResolver::resolveSrcSet($this->get($key));
-    }
-
-    public function getHoverImageSrcSet(): ?string
-    {
-        return PropsResolver::resolveSrcSet($this->get('hover_image'));
-    }
-
     public function getImageSizes(string $default = '100vw'): string
     {
         if (\in_array($this->getMediaAlign(), ['left', 'right'], true)) {
@@ -191,104 +139,14 @@ final class Card extends AbstractPrelineComponent
         return '(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw';
     }
 
-    public function getMetaAlign(): string
-    {
-        return $this->enumProp('meta_align', ['above-title', 'below-title', 'below-content'], 'above-title');
-    }
-
-    public function getTitleElement(): string
-    {
-        $el = $this->nullableStringProp('title_element') ?? $this->stringProp('tag', 'h3');
-
-        return \in_array($el, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], true) ? $el : 'h3';
-    }
-
-    public function getTitleSizeClasses(): string
-    {
-        $size = $this->nullableStringProp('title_size') ?? $this->stringProp('size', 'md');
-
-        return match ($size) {
-            'sm' => 'text-base sm:text-lg font-semibold',
-            'lg' => 'text-xl sm:text-2xl font-bold',
-            'xl' => 'text-2xl sm:text-3xl font-extrabold tracking-tight',
-            default => 'text-lg sm:text-xl font-bold',
-        };
-    }
-
-    public function getTitleDecorationClasses(): string
-    {
-        return match ($this->stringProp('title_decoration', 'none')) {
-            'underline' => 'underline decoration-primary-500 decoration-2 underline-offset-4',
-            default => '',
-        };
-    }
-
-    public function getMetaBadgeClasses(): string
-    {
-        return match ($this->stringProp('meta_badge_style', 'pill')) {
-            'primary_pill' => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary-100 text-primary-800 rounded-full dark:bg-primary-950/40 dark:text-primary-300',
-            'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-surface text-surface-foreground rounded-full',
-        };
-    }
-
-    public function getBadgeClasses(): string
-    {
-        return match ($this->stringProp('badge_style', 'glass')) {
-            'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary text-primary-foreground shadow-xs',
-            'success' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-emerald-600 text-white shadow-xs',
-            'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-inverse text-foreground-inverse shadow-xs',
-            default => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-layer/90 text-layer-foreground backdrop-blur-md shadow-xs',
-        };
-    }
-
-    public function getBadgePosition(): string
-    {
-        return match ($this->stringProp('badge_position', 'top-left')) {
-            'top-right', 'top_right' => 'top-right',
-            'bottom-left', 'bottom_left' => 'bottom-left',
-            'bottom-right', 'bottom_right' => 'bottom-right',
-            'inline' => 'inline',
-            default => 'top-left',
-        };
-    }
-
-    public function getBadgePositionClasses(): string
-    {
-        return match ($this->getBadgePosition()) {
-            'top-right' => 'absolute top-3 end-3 z-10 flex flex-wrap gap-1.5',
-            'bottom-left' => 'absolute bottom-3 start-3 z-10 flex flex-wrap gap-1.5',
-            'bottom-right' => 'absolute bottom-3 end-3 z-10 flex flex-wrap gap-1.5',
-            'inline' => '',
-            default => 'absolute top-3 start-3 z-10 flex flex-wrap gap-1.5',
-        };
-    }
-
-    public function getCardPaddingClasses(): string
-    {
-        return match ($this->stringProp('padding', 'normal')) {
-            'none' => 'p-0',
-            'compact' => 'p-4 sm:p-5',
-            'spacious' => 'p-6 sm:p-8',
-            default => 'p-5 sm:p-6',
-        };
-    }
-
-    public function getRoundedClasses(): string
+    public function getRoundedClasses(string $default = 'xl', string $key = 'rounded'): string
     {
         $variant = $this->nullableStringProp('card_variant') ?? $this->stringProp('variant', 'bordered');
         if ('group' === $variant) {
             return 'rounded-none';
         }
 
-        return match ($this->stringProp('rounded', 'xl')) {
-            'none' => 'rounded-none',
-            'md' => 'rounded-md',
-            '2xl' => 'rounded-2xl',
-            '3xl' => 'rounded-3xl',
-            'full' => 'rounded-full',
-            default => 'rounded-xl',
-        };
+        return parent::getRoundedClasses($default, $key);
     }
 
     public function getLinkUrl(string $key = 'link'): ?string
@@ -349,12 +207,11 @@ final class Card extends AbstractPrelineComponent
 
     public function getButtonStyleClasses(): string
     {
-        return match ($this->stringProp('button_style', 'primary')) {
-            'secondary' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus',
-            'outline' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-primary-line text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30 transition-colors focus:outline-hidden',
-            'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary hover:underline focus:outline-hidden',
-            default => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::CARD_BUTTON_STYLES,
+            $this->stringProp('button_style', 'primary'),
+            PrelineClassMap::CARD_BUTTON_STYLES['primary'],
+        );
     }
 
     public function getResolvedCardUrl(): ?string
@@ -397,13 +254,11 @@ final class Card extends AbstractPrelineComponent
             return \trim(\sprintf('%s rounded-none border-0 shadow-none flex-col flex-1 %s', $base, $bg));
         }
 
-        $variantClasses = match ($variant) {
-            'shadow' => 'shadow-md hover:shadow-lg border border-card-line',
-            'flat' => 'border-0',
-            'interactive' => 'border border-card-line shadow-2xs hover:-translate-y-1 hover:shadow-lg transition-all duration-300',
-            'glass' => 'backdrop-blur-md bg-card/70 border border-card-line/40 shadow-lg',
-            default => 'border border-card-line shadow-2xs',
-        };
+        $variantClasses = PrelineClassMap::resolve(
+            PrelineClassMap::CARD_VARIANTS,
+            $variant,
+            PrelineClassMap::CARD_VARIANTS['bordered'],
+        );
 
         if ('overlay' === $mediaAlign) {
             return \trim(\sprintf('%s %s relative text-white shadow-md', $base, $rounded));
@@ -418,78 +273,13 @@ final class Card extends AbstractPrelineComponent
         return \trim(\sprintf('%s %s %s %s %s', $base, $rounded, $variantClasses, $flexDirection, $bg));
     }
 
-    public function getTextAlign(): string
-    {
-        return PropsResolver::textAlign($this->props());
-    }
-
-    public function getTitleColor(): string
+    public function getTitleColor(string $default = 'default'): string
     {
         if ($this->isOverlay()) {
             return 'text-white';
         }
 
-        return PropsResolver::titleColor($this->props());
-    }
-
-    public function getImageUrl(string $key = 'image'): ?string
-    {
-        $source = $this->stringProp('media_source', 'media');
-        if ('url' === $source) {
-            $url = $this->nullableString('image_url') ?? $this->nullableStringProp('image_url');
-            if (null !== $url) {
-                return $url;
-            }
-        }
-
-        return PropsResolver::resolveImageUrl($this->get($key))
-            ?? $this->nullableString('image_url')
-            ?? $this->nullableStringProp('image_url');
-    }
-
-    public function getHoverImageUrl(): ?string
-    {
-        $source = $this->stringProp('media_source', 'media');
-        if ('url' === $source) {
-            $url = $this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url');
-            if (null !== $url) {
-                return $url;
-            }
-        }
-
-        return PropsResolver::resolveImageUrl($this->get('hover_image'))
-            ?? $this->nullableString('hover_image_url')
-            ?? $this->nullableStringProp('hover_image_url');
-    }
-
-    public function getVideoUrl(string $key = 'video'): ?string
-    {
-        $source = $this->stringProp('media_source', 'media');
-        if ('url' === $source) {
-            $url = $this->nullableString('video_url') ?? $this->nullableStringProp('video_url');
-            if (null !== $url) {
-                return $url;
-            }
-        }
-
-        return PropsResolver::resolveImageUrl($this->get($key))
-            ?? $this->nullableString('video_url')
-            ?? $this->nullableStringProp('video_url');
-    }
-
-    public function getHoverVideoUrl(): ?string
-    {
-        $source = $this->stringProp('media_source', 'media');
-        if ('url' === $source) {
-            $url = $this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url');
-            if (null !== $url) {
-                return $url;
-            }
-        }
-
-        return PropsResolver::resolveImageUrl($this->get('hover_video'))
-            ?? $this->nullableString('hover_video_url')
-            ?? $this->nullableStringProp('hover_video_url');
+        return parent::getTitleColor($default);
     }
 
     public function getMediaType(): ?string
@@ -583,15 +373,5 @@ final class Card extends AbstractPrelineComponent
     public function hasButtons(): bool
     {
         return [] !== $this->getNormalizedButtons();
-    }
-
-    public function getIconClass(string $key = 'icon'): ?string
-    {
-        $mediaType = $this->nullableStringProp('media_type');
-        if (null !== $mediaType && 'icon' !== $mediaType) {
-            return null;
-        }
-
-        return PropsResolver::resolveIcon($this->get($key));
     }
 }

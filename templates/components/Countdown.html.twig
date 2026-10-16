@@ -9,10 +9,11 @@
 {% set on_expire = this.getOnExpire() %}
 {% set expire_msg = this.getExpireMessage() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {% if title %}
         <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-4 sm:mb-6">

@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Quotation', template: '@SuluPrelineBlocks/components/Quotation.html.twig')]
-final class Quotation extends AbstractPrelineComponent
+final class Quotation extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -46,9 +46,7 @@ final class Quotation extends AbstractPrelineComponent
 
     public function getAuthorUrl(): ?string
     {
-        $url = $this->getLinkUrl('link');
-
-        return ('#' === $url || null === $url || '' === $url) ? null : $url;
+        return $this->getLinkUrl('link');
     }
 
     public function hasAuthor(): bool
@@ -63,31 +61,26 @@ final class Quotation extends AbstractPrelineComponent
 
     public function getQuoteTextClasses(): string
     {
-        $size = $this->stringProp('quote_size', 'md');
-        $style = $this->getQuoteStyle();
-
-        $sizeClasses = match ($size) {
-            'sm' => 'text-sm sm:text-base',
-            'lg' => 'text-xl sm:text-2xl',
-            'xl' => 'text-2xl sm:text-3xl font-semibold',
-            default => 'text-base sm:text-lg',
-        };
-
-        if ('large' === $style) {
+        if ('large' === $this->getQuoteStyle()) {
             return 'text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-foreground leading-relaxed';
         }
+
+        $sizeClasses = PrelineClassMap::resolve(
+            PrelineClassMap::QUOTE_SIZES,
+            $this->stringProp('quote_size', 'md'),
+            PrelineClassMap::QUOTE_SIZES['md'],
+        );
 
         return \sprintf('%s text-foreground leading-relaxed italic', $sizeClasses);
     }
 
     public function getBorderAccentClasses(): string
     {
-        return match ($this->stringProp('accent_color', 'primary')) {
-            'secondary' => 'border-s-4 border-secondary ps-4 sm:ps-6',
-            'dark' => 'border-s-4 border-line-8 ps-4 sm:ps-6',
-            'muted' => 'border-s-4 border-line-3 ps-4 sm:ps-6',
-            default => 'border-s-4 border-primary ps-4 sm:ps-6',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ACCENT_BORDER_COLORS,
+            $this->stringProp('accent_color', 'primary'),
+            PrelineClassMap::ACCENT_BORDER_COLORS['primary'],
+        );
     }
 
     public function getContainerClasses(): string
@@ -104,18 +97,18 @@ final class Quotation extends AbstractPrelineComponent
         return '';
     }
 
-    public function getAlignClasses(): string
+    public function getAlignClasses(string $default = 'left', string $key = 'align'): string
     {
-        $align = $this->nullableStringProp('align');
-        if (null === $align || 'left' === $align) {
-            $align = $this->stringProp('text_align', $align ?? 'left');
+        $align = $this->nullableStringProp($key);
+        if (null === $align || $default === $align) {
+            $align = $this->stringProp('text_align', $align ?? $default);
         }
 
-        return match ($align) {
-            'center' => 'text-center items-center',
-            'right', 'end' => 'text-end items-end',
-            default => 'text-start items-start',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::CONTENT_ALIGN_LOGICAL,
+            $align,
+            PrelineClassMap::CONTENT_ALIGN_LOGICAL[$default] ?? 'text-start items-start',
+        );
     }
 
     public function getWrapperClasses(string $extraBase = ''): string

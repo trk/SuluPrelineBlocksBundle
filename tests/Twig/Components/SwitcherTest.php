@@ -43,7 +43,7 @@ final class SwitcherTest extends TestCase
         self::assertSame('underline', $switcher->getNavStyle());
         self::assertStringContainsString('flex-col space-y-1.5', $switcher->getTabNavClasses());
         self::assertStringContainsString('hs-tab-active:border-primary', $switcher->getTabButtonClasses());
-        self::assertSame('mt-8 mb-12', $switcher->getMarginClass());
+        self::assertSame('mt-6 mb-10', $switcher->getMarginClass());
         self::assertSame('faq-tabs', $switcher->getCustomId());
         self::assertSame('my-switcher', $switcher->getCustomClass());
     }

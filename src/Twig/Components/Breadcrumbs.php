@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Breadcrumbs', template: '@SuluPrelineBlocks/components/Breadcrumbs.html.twig')]
-final class Breadcrumbs extends AbstractPrelineComponent
+final class Breadcrumbs extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -59,15 +59,6 @@ final class Breadcrumbs extends AbstractPrelineComponent
     public function getHomeUrl(): string
     {
         return $this->stringProp('home_url', '/');
-    }
-
-    public function getAlignClasses(): string
-    {
-        return match ($this->stringProp('align', 'left')) {
-            'center' => 'justify-center',
-            'right' => 'justify-end',
-            default => 'justify-start',
-        };
     }
 
     /**

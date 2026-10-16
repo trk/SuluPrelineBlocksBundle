@@ -57,7 +57,7 @@ final class PanelSliderTest extends TestCase
         self::assertSame('px-4', $slider->getGapClass());
         self::assertStringContainsString('"isAutoPlay":true', $slider->getCarouselConfigJson());
         self::assertStringContainsString('"isInfiniteLoop":false', $slider->getCarouselConfigJson());
-        self::assertSame('mt-8 mb-16', $slider->getMarginClass());
+        self::assertSame('mt-6 mb-16', $slider->getMarginClass());
         self::assertSame('featured-slider', $slider->getCustomId());
         self::assertSame('my-slider', $slider->getCustomClass());
     }

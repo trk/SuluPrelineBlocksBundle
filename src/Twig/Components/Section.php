@@ -11,7 +11,7 @@ use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
  * Preline UI 5 / Tailwind CSS 4 pure layout Section / Container component.
  */
 #[AsTwigComponent('Section', template: '@SuluPrelineBlocks/components/Section.html.twig')]
-final class Section extends AbstractPrelineComponent
+final class Section extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -57,39 +57,21 @@ final class Section extends AbstractPrelineComponent
             'relative',
             'w-full',
             'overflow-hidden',
+            PrelineClassMap::resolve(
+                PrelineClassMap::SECTION_BG_STYLES,
+                $this->stringProp('bg_style', 'transparent'),
+                PrelineClassMap::SECTION_BG_STYLES['transparent'],
+            ),
         ];
-
-        $classes[] = match ($this->stringProp('bg_style', 'transparent')) {
-            'default' => 'bg-background text-foreground',
-            'muted' => 'bg-background-1 text-foreground',
-            'subtle' => 'bg-surface/70 text-foreground',
-            'primary' => 'bg-primary text-primary-foreground dark:bg-primary-950/40 dark:text-foreground',
-            'secondary' => 'bg-secondary text-secondary-foreground dark:bg-secondary-950/40 dark:text-foreground',
-            'dark' => 'bg-inverse text-foreground-inverse',
-            default => 'bg-transparent',
-        };
 
         if ($this->boolProp('has_border', false)) {
             $classes[] = 'border-t border-b border-border';
         }
 
-        $props = $this->props();
-        $extra = [
-            ElementTransform::margin($props),
-            ElementTransform::position($props),
-            ElementTransform::textAlign($props),
-            ElementTransform::visibility($props),
-            ElementTransform::animation($props),
-            ElementTransform::customClass($props),
-        ];
+        $sectionProps = $this->props();
+        $sectionProps['max_width'] = 'none';
 
-        foreach ($extra as $item) {
-            if ('' !== $item) {
-                $classes[] = $item;
-            }
-        }
-
-        return \implode(' ', \array_filter($classes));
+        return ElementTransform::wrapperClasses($sectionProps, \implode(' ', \array_filter($classes)));
     }
 
     public function getContainerClasses(): string
@@ -97,32 +79,12 @@ final class Section extends AbstractPrelineComponent
         $classes = [
             'mx-auto',
             'w-full',
+            $this->getMaxWidthClasses('85rem', 'section'),
+            $this->getPaddingClasses('default', 'padding_x', 'section_x'),
+            $this->getPaddingClasses('default', 'padding_y', 'section_y'),
         ];
 
-        $classes[] = match ($this->stringProp('max_width', '85rem')) {
-            '7xl', 'xlarge' => 'max-w-7xl',
-            '5xl', 'large' => 'max-w-5xl',
-            '3xl', 'medium' => 'max-w-3xl',
-            'small' => 'max-w-xl',
-            'full', '2xlarge' => 'max-w-full',
-            default => 'max-w-[85rem]',
-        };
-
-        $classes[] = match ($this->stringProp('padding_x', 'default')) {
-            'none' => 'px-0',
-            default => 'px-4 sm:px-6 lg:px-8',
-        };
-
-        $classes[] = match ($this->stringProp('padding_y', 'default')) {
-            'none' => 'py-0',
-            'xs' => 'py-4 sm:py-6',
-            'sm' => 'py-6 sm:py-8',
-            'lg' => 'py-14 sm:py-20',
-            'xl' => 'py-20 sm:py-28',
-            default => 'py-10 sm:py-14',
-        };
-
-        return \implode(' ', $classes);
+        return \implode(' ', \array_filter($classes));
     }
 
     public function hasRows(): bool

@@ -55,7 +55,7 @@ final class AccordionTest extends TestCase
         self::assertSame('space-y-3', $accordion->getContainerClasses());
         self::assertStringContainsString('border', $accordion->getItemClasses());
         self::assertSame('pt-3', $accordion->getContentWrapperClasses());
-        self::assertSame('mt-8 mb-12', $accordion->getMarginClass());
+        self::assertSame('mt-6 mb-10', $accordion->getMarginClass());
         self::assertSame('faq-accordion', $accordion->getCustomId());
         self::assertSame('my-faq', $accordion->getCustomClass());
     }

@@ -1,7 +1,9 @@
 {% set items = this.normalizedItems %}
 {% set img_url = this.imageUrl %}
-{% set popover_uid = this.customId|default('hs-hotspot-' ~ random(100000, 999999)) %}
-<div {{ attributes.defaults({class: 'relative w-full my-6'}) }}>
+{% set popover_uid = this.elementId|default('hs-hotspot-' ~ random(100000, 999999)) %}
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+     {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses('relative w-full my-6')})) }}>
     {% if this.title %}
         <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
     {% endif %}

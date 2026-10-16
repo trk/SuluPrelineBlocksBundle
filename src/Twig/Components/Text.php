@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Text', template: '@SuluPrelineBlocks/components/Text.html.twig')]
-final class Text extends AbstractPrelineComponent
+final class Text extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -44,36 +44,6 @@ final class Text extends AbstractPrelineComponent
         return '' !== $content ? $content : $this->string('text', '');
     }
 
-    public function getTextAlign(): string
-    {
-        return PropsResolver::textAlign($this->props());
-    }
-
-    public function getFontSize(): string
-    {
-        $size = $this->nullableStringProp('font_size');
-        if (null === $size || 'base' === $size) {
-            $size = $this->stringProp('size', $size ?? 'base');
-        }
-
-        return match ($size) {
-            'sm' => 'text-sm',
-            'lg' => 'text-lg',
-            'xl' => 'text-xl',
-            default => 'text-base',
-        };
-    }
-
-    public function getTextColor(): string
-    {
-        $props = $this->props();
-        if (isset($props['color']) && ('default' === ($props['text_color'] ?? 'default'))) {
-            unset($props['text_color']);
-        }
-
-        return PropsResolver::textColor($props);
-    }
-
     public function isProse(): bool
     {
         return $this->is('prose');
@@ -93,12 +63,11 @@ final class Text extends AbstractPrelineComponent
 
     public function getColumnClasses(): string
     {
-        return match ($this->stringProp('column', 'none')) {
-            '1-2' => 'md:columns-2 gap-8',
-            '1-3' => 'md:columns-3 gap-8',
-            '1-4' => 'md:columns-2 lg:columns-4 gap-8',
-            default => '',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TEXT_COLUMNS,
+            $this->stringProp('column', 'none'),
+            '',
+        );
     }
 
     public function isColumnDivider(): bool
@@ -117,13 +86,11 @@ final class Text extends AbstractPrelineComponent
 
     public function getTextStyleClasses(): string
     {
-        return match ($this->stringProp('text_style', 'none')) {
-            'lead' => 'text-xl sm:text-2xl text-muted-foreground-2 font-normal leading-relaxed',
-            'meta' => 'text-xs uppercase tracking-wider text-muted-foreground-1 font-medium',
-            'large' => 'text-lg sm:text-xl text-foreground leading-relaxed',
-            'small' => 'text-sm text-muted-foreground-2 leading-normal',
-            default => '',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TEXT_STYLES,
+            $this->stringProp('text_style', 'none'),
+            '',
+        );
     }
 
     public function getWrapperClasses(string $extraBase = ''): string

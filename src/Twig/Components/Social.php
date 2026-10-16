@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible social icons & share block component.
  */
 #[AsTwigComponent('Social', template: '@SuluPrelineBlocks/components/Social.html.twig')]
-final class Social extends AbstractPrelineComponent
+final class Social extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -67,12 +67,7 @@ final class Social extends AbstractPrelineComponent
 
     public function getAlignment(): string
     {
-        return match ($this->stringProp('alignment', 'start')) {
-            'center' => 'justify-center',
-            'end' => 'justify-end',
-            'between' => 'justify-between',
-            default => 'justify-start',
-        };
+        return $this->getAlignClasses('start', 'alignment');
     }
 
     public function isOpenNewTab(): bool
@@ -95,26 +90,10 @@ final class Social extends AbstractPrelineComponent
             'focus:outline-hidden',
             'focus:ring-2',
             'focus:ring-primary-500',
+            PrelineClassMap::resolve(PrelineClassMap::SOCIAL_SIZES, $this->getSize(), PrelineClassMap::SOCIAL_SIZES['md']),
+            PrelineClassMap::resolve(PrelineClassMap::SOCIAL_SHAPES, $this->getShape(), PrelineClassMap::SOCIAL_SHAPES['rounded']),
+            PrelineClassMap::resolve(PrelineClassMap::SOCIAL_STYLES, $this->getStyle(), PrelineClassMap::SOCIAL_STYLES['icon_only']),
         ];
-
-        $classes[] = match ($this->getSize()) {
-            'sm' => 'size-8 text-xs',
-            'lg' => 'size-11 text-base',
-            default => 'size-9 text-sm',
-        };
-
-        $classes[] = match ($this->getShape()) {
-            'circle' => 'rounded-full',
-            'square' => 'rounded-none',
-            default => 'rounded-lg',
-        };
-
-        $classes[] = match ($this->getStyle()) {
-            'bordered' => 'border border-layer-line bg-layer text-layer-foreground hover:bg-layer-hover hover:text-primary shadow-2xs',
-            'buttons' => 'bg-surface text-surface-foreground hover:bg-primary hover:text-primary-foreground shadow-2xs',
-            'pills' => 'border border-transparent bg-primary-50 text-primary hover:bg-primary-100 dark:bg-primary-950/40 dark:hover:bg-primary-900/40',
-            default => 'text-muted-foreground-1 hover:bg-muted hover:text-primary',
-        };
 
         return \implode(' ', $classes);
     }

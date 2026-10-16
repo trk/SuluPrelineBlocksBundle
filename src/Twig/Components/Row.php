@@ -11,7 +11,7 @@ use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
  * Preline UI 5 / Tailwind CSS 4 pure layout Grid Row component.
  */
 #[AsTwigComponent('Row', template: '@SuluPrelineBlocks/components/Row.html.twig')]
-final class Row extends AbstractPrelineComponent
+final class Row extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -58,38 +58,16 @@ final class Row extends AbstractPrelineComponent
 
     public function getLayoutClasses(): string
     {
-        return match ($this->getResolvedLayout()) {
-            '12-col' => 'grid-cols-1 md:grid-cols-12',
-            'thirds' => 'grid-cols-1 md:grid-cols-3',
-            'quarters' => 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
-            'sixths' => 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6',
-            'thirds-2-1', 'thirds-1-2' => 'grid-cols-1 md:grid-cols-3',
-            'quarters-3-1', 'quarters-1-3' => 'grid-cols-1 lg:grid-cols-4',
-            'auto' => 'grid-flow-row sm:grid-flow-col',
-            default => 'grid-cols-1 sm:grid-cols-2',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ROW_LAYOUTS,
+            $this->getResolvedLayout(),
+            PrelineClassMap::ROW_LAYOUTS['halves'],
+        );
     }
 
-    public function getGapClasses(): string
+    public function getGapClasses(string $default = 'md', string $preset = 'row', string $key = 'gap'): string
     {
-        return match ($this->stringProp('gap', 'md')) {
-            'none' => 'gap-0',
-            'xs' => 'gap-2 sm:gap-3',
-            'sm' => 'gap-4 sm:gap-6',
-            'lg' => 'gap-8 sm:gap-12',
-            'xl' => 'gap-12 sm:gap-16',
-            default => 'gap-6 sm:gap-8',
-        };
-    }
-
-    public function getAlignItemsClasses(): string
-    {
-        return match ($this->stringProp('align_items', 'stretch')) {
-            'start' => 'items-start',
-            'center' => 'items-center',
-            'end' => 'items-end',
-            default => 'items-stretch',
-        };
+        return parent::getGapClasses($default, $preset, $key);
     }
 
     public function getDividerClasses(): string
@@ -114,7 +92,7 @@ final class Row extends AbstractPrelineComponent
             $classes[] = $divider;
         }
 
-        return ElementTransform::wrapperClasses($this->props(), \implode(' ', \array_filter($classes)));
+        return parent::getWrapperClasses(\implode(' ', \array_filter($classes)));
     }
 
     /**

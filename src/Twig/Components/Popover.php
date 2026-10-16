@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Popover', template: '@SuluPrelineBlocks/components/Popover.html.twig')]
-final class Popover extends AbstractPrelineComponent
+final class Popover extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -149,38 +149,7 @@ final class Popover extends AbstractPrelineComponent
      */
     public function getMarkerColorClasses(string $color): array
     {
-        return match ($color) {
-            'dark' => [
-                'ping' => 'bg-inverse',
-                'button' => 'bg-inverse/20 focus:ring-inverse/40',
-                'inner' => 'bg-inverse text-foreground-inverse shadow-md',
-            ],
-            'light' => [
-                'ping' => 'bg-layer',
-                'button' => 'bg-layer/30 focus:ring-layer/50',
-                'inner' => 'bg-layer text-layer-foreground shadow-md border border-layer-line',
-            ],
-            'accent' => [
-                'ping' => 'bg-amber-400',
-                'button' => 'bg-amber-500/20 focus:ring-amber-400/50',
-                'inner' => 'bg-amber-500 text-white shadow-md',
-            ],
-            'success' => [
-                'ping' => 'bg-emerald-400',
-                'button' => 'bg-emerald-500/20 focus:ring-emerald-400/50',
-                'inner' => 'bg-emerald-600 text-white shadow-md',
-            ],
-            'danger' => [
-                'ping' => 'bg-red-400',
-                'button' => 'bg-destructive/20 focus:ring-red-400/50',
-                'inner' => 'bg-destructive text-destructive-foreground shadow-md',
-            ],
-            default => [
-                'ping' => 'bg-primary-400',
-                'button' => 'bg-primary/20 focus:ring-primary/40',
-                'inner' => 'bg-primary text-primary-foreground shadow-md',
-            ],
-        };
+        return PrelineClassMap::POPOVER_MARKER_COLORS[$color] ?? PrelineClassMap::POPOVER_MARKER_COLORS['primary'];
     }
 
     public function getHotspotClasses(): string

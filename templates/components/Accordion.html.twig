@@ -1,4 +1,4 @@
-{% set custom_id = this.customId %}
+{% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set is_multiple = this.isMultiple() %}
 {% set is_collapsible = this.isCollapsible() %}
@@ -7,9 +7,12 @@
 {% set image_align = this.imageAlign %}
 {% set accordion_dom_id = custom_id ? custom_id : ('accordion-' ~ random()) %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    id="{{ accordion_dom_id }}"
-    class="w-full {{ this.marginClass }} {{ this.customClass }}"
+    {{ attributes.defaults(this.customAttributes|merge({
+        id: accordion_dom_id,
+        class: this.getWrapperClasses('w-full'),
+    })) }}
 >
     {% if title %}
         <div class="mb-6">

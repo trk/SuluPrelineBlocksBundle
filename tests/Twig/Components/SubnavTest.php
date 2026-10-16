@@ -46,7 +46,7 @@ final class SubnavTest extends TestCase
         self::assertStringContainsString('justify-center', $subnav->getNavClasses());
         self::assertStringContainsString('bg-surface rounded-xl', $subnav->getNavClasses());
         self::assertStringContainsString('bg-layer text-layer-foreground', $subnav->getItemClasses(true));
-        self::assertSame('mt-8 mb-12', $subnav->getMarginClass());
+        self::assertSame('mt-6 mb-10', $subnav->getMarginClass());
         self::assertSame('tab-nav', $subnav->getCustomId());
         self::assertSame('my-subnav', $subnav->getCustomClass());
 

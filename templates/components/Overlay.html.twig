@@ -48,11 +48,12 @@
 {% set img_sizes = this.getImageSizes() %}
 {% set wrapper_styles = this.getWrapperStyles() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
      {% if wrapper_styles %}style="{{ wrapper_styles }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {# 1. Media Layer (Background Image / Video) #}
     <div class="absolute inset-0 z-0 overflow-hidden bg-inverse">

@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('ScrollTo', template: '@SuluPrelineBlocks/components/ScrollTo.html.twig')]
-final class ScrollTo extends AbstractPrelineComponent
+final class ScrollTo extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -91,13 +91,9 @@ final class ScrollTo extends AbstractPrelineComponent
         };
     }
 
-    public function getAlignClasses(): string
+    public function getAlignClasses(string $default = 'right', string $key = 'align'): string
     {
-        return match ($this->stringProp('align', 'right')) {
-            'left' => 'justify-start',
-            'center' => 'justify-center',
-            default => 'justify-end',
-        };
+        return parent::getAlignClasses($default, $key);
     }
 
     public function getButtonClasses(): string
@@ -108,18 +104,17 @@ final class ScrollTo extends AbstractPrelineComponent
         $size = $this->stringProp('size', 'md');
 
         if ('totop_circle' === $mode || 'floating' === $mode) {
-            $sizeClass = match ($size) {
-                'sm' => 'size-9',
-                'lg' => 'size-13',
-                default => 'size-11',
-            };
+            $sizeClass = PrelineClassMap::resolve(
+                PrelineClassMap::SCROLL_TO_CIRCLE_SIZES,
+                $size,
+                PrelineClassMap::SCROLL_TO_CIRCLE_SIZES['md'],
+            );
 
-            $colorClass = match ($color) {
-                'dark' => 'bg-inverse text-foreground-inverse hover:bg-inverse/90',
-                'light' => 'bg-layer text-layer-foreground border border-layer-line hover:bg-layer-hover',
-                'secondary' => 'bg-secondary text-secondary-foreground hover:bg-secondary-hover',
-                default => 'bg-primary text-primary-foreground hover:bg-primary-hover',
-            };
+            $colorClass = PrelineClassMap::resolve(
+                PrelineClassMap::SCROLL_TO_CIRCLE_COLORS,
+                $color,
+                PrelineClassMap::SCROLL_TO_CIRCLE_COLORS['primary'],
+            );
 
             return \sprintf(
                 'inline-flex items-center justify-center %s rounded-full shadow-lg transition-all duration-300 hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-primary/50 %s',

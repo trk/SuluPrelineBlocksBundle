@@ -1,4 +1,6 @@
-<div {{ attributes.defaults({class: this.containerClasses}) }}>
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+<div {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+     {{ attributes.defaults(this.customAttributes|merge({class: this.containerClasses})) }}>
     <div class="{{ this.headerClasses }}">
         <div class="flex items-center gap-x-2">
             <span class="inline-block size-3 rounded-full bg-red-500/80"></span>

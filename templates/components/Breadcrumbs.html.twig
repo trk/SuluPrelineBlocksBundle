@@ -11,7 +11,10 @@
 {% endif %}
 
 {% if breadcrumb_items|length > 0 %}
-    <nav aria-label="Breadcrumb" class="{{ class|default('') }}">
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <nav aria-label="Breadcrumb"
+         {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+         {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses(class|default(''))})) }}>
         <ol class="flex items-center whitespace-nowrap {{ this.getAlignClasses() }}">
             {% if this.isShowHome() and (breadcrumb_items|first).url != this.getHomeUrl() %}
                 <li class="inline-flex items-center">

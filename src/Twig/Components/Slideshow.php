@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Slideshow', template: '@SuluPrelineBlocks/components/Slideshow.html.twig')]
-final class Slideshow extends AbstractPrelineComponent
+final class Slideshow extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -64,12 +64,11 @@ final class Slideshow extends AbstractPrelineComponent
 
     public function getHeightClass(): string
     {
-        return match ($this->stringProp('height', 'medium')) {
-            'full' => 'min-h-screen',
-            'large' => 'min-h-[550px] sm:min-h-[650px]',
-            'small' => 'min-h-[300px] sm:min-h-[380px]',
-            default => 'min-h-[420px] sm:min-h-[500px]',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::SLIDESHOW_HEIGHTS,
+            $this->stringProp('height', 'medium'),
+            PrelineClassMap::SLIDESHOW_HEIGHTS['medium'],
+        );
     }
 
     public function isAutoplay(): bool
@@ -99,43 +98,19 @@ final class Slideshow extends AbstractPrelineComponent
 
     public function getContentAlign(): string
     {
-        return match ($this->stringProp('content_align', 'center')) {
-            'left' => 'text-left items-start',
-            'right' => 'text-right items-end',
-            default => 'text-center items-center',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::CONTENT_ALIGN,
+            $this->stringProp('content_align', 'center'),
+            PrelineClassMap::CONTENT_ALIGN['center'],
+        );
     }
 
     public function getCarouselConfigJson(): string
     {
-        $config = [
-            'loadingClasses' => 'opacity-0',
-            'isAutoPlay' => $this->isAutoplay(),
-            'speed' => $this->getInterval(),
-            'isInfiniteLoop' => $this->isLoop(),
-        ];
-
-        return (string) \json_encode($config, \JSON_THROW_ON_ERROR);
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
+        return $this->resolveSliderConfigJson(
+            $this->isAutoplay(),
+            $this->getInterval(),
+            $this->isLoop(),
+        );
     }
 }

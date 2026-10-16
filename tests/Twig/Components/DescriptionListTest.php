@@ -48,7 +48,7 @@ final class DescriptionListTest extends TestCase
         self::assertSame('sm:w-3/4', $dl->getDescWidthClasses());
         self::assertStringContainsString('even:bg-background-1', $dl->getItemRowClasses());
         self::assertStringContainsString('text-primary', $dl->getTermClasses());
-        self::assertSame('mt-8 mb-12', $dl->getMarginClass());
+        self::assertSame('mt-6 mb-10', $dl->getMarginClass());
         self::assertSame('specs-list', $dl->getCustomId());
         self::assertSame('my-specs', $dl->getCustomClass());
     }

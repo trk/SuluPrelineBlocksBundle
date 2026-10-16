@@ -129,10 +129,11 @@
     {% endif %}
 {% endset %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {# 1. Overlay Mode (Full Background Media with Gradient) #}
     {% if media_align == 'overlay' and has_media %}

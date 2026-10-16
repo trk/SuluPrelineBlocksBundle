@@ -4,9 +4,12 @@
 {% set height_class = this.heightClass %}
 {% set align_class = this.contentAlign %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <section
-    {% if this.customId %}id="{{ this.customId }}"{% endif %}
-    class="relative w-full {{ this.marginClass }} {{ this.customClass }}"
+    {% if this.elementId %}id="{{ this.elementId }}"{% endif %}
+    {{ attributes.defaults(this.customAttributes|merge({
+        class: this.getWrapperClasses('relative w-full'),
+    })) }}
 >
     {% if title %}
         <div class="mb-6">

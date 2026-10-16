@@ -50,7 +50,7 @@ final class ListBlockTest extends TestCase
         self::assertSame('lg', $list->getSize());
         self::assertStringContainsString('grid sm:grid-cols-2', $list->getListClasses());
         self::assertStringContainsString('odd:bg-transparent even:bg-background-1', $list->getItemClasses());
-        self::assertSame('mt-8 mb-16', $list->getMarginClass());
+        self::assertSame('mt-6 mb-16', $list->getMarginClass());
         self::assertSame('features-list', $list->getCustomId());
         self::assertSame('my-custom-list', $list->getCustomClass());
     }

@@ -4,87 +4,136 @@ declare(strict_types=1);
 
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
+/**
+ * Centralized resolver for Preline UI 5 & Tailwind CSS 4 component properties,
+ * delegating all static utility class lookups to `PrelineClassMap`.
+ */
 final class PropsResolver
 {
     /**
      * @param array<string, mixed> $props
      */
-    public static function textAlign(array $props): string
+    public static function textAlign(array $props, string $default = 'left'): string
     {
-        $align = isset($props['text_align']) && \is_string($props['text_align']) ? $props['text_align'] : 'left';
+        $align = isset($props['text_align']) && \is_string($props['text_align']) ? $props['text_align'] : $default;
 
-        return match ($align) {
-            'center' => 'text-center',
-            'right' => 'text-right',
-            'justify' => 'text-justify',
-            default => 'text-left',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TEXT_ALIGN,
+            $align,
+            PrelineClassMap::TEXT_ALIGN[$default] ?? 'text-left',
+        );
     }
 
     /**
      * @param array<string, mixed> $props
      */
-    public static function titleColor(array $props): string
+    public static function titleColor(array $props, string $default = 'default'): string
     {
-        $color = isset($props['title_color']) && \is_string($props['title_color']) ? $props['title_color'] : 'default';
+        $color = isset($props['title_color']) && \is_string($props['title_color']) ? $props['title_color'] : $default;
 
-        return match ($color) {
-            'primary' => 'text-primary',
-            'secondary' => 'text-secondary',
-            'muted' => 'text-muted-foreground-1',
-            'white' => 'text-white',
-            default => 'text-foreground',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TITLE_COLORS,
+            $color,
+            PrelineClassMap::TITLE_COLORS[$default] ?? 'text-foreground',
+        );
     }
 
     /**
      * @param array<string, mixed> $props
      */
-    public static function linkColor(array $props): string
+    public static function linkColor(array $props, string $default = 'primary'): string
     {
-        $color = isset($props['link_color']) && \is_string($props['link_color']) ? $props['link_color'] : 'primary';
+        $color = isset($props['link_color']) && \is_string($props['link_color']) ? $props['link_color'] : $default;
 
-        return match ($color) {
-            'secondary' => 'text-secondary hover:text-secondary-hover',
-            'dark' => 'text-foreground hover:text-muted-foreground-2',
-            'white' => 'text-white hover:text-white/80',
-            default => 'text-primary hover:text-primary-hover',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::LINK_COLORS,
+            $color,
+            PrelineClassMap::LINK_COLORS[$default] ?? PrelineClassMap::LINK_COLORS['primary'],
+        );
     }
 
     /**
      * @param array<string, mixed> $props
      */
-    public static function textColor(array $props): string
+    public static function textColor(array $props, string $default = 'default'): string
     {
         $color = isset($props['text_color']) && \is_string($props['text_color'])
             ? $props['text_color']
-            : (isset($props['color']) && \is_string($props['color']) ? $props['color'] : 'default');
+            : (isset($props['color']) && \is_string($props['color']) ? $props['color'] : $default);
 
-        return match ($color) {
-            'muted' => 'text-muted-foreground-1',
-            'white' => 'text-white',
-            'primary' => 'text-primary',
-            default => 'text-muted-foreground-2',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::TEXT_COLORS,
+            $color,
+            PrelineClassMap::TEXT_COLORS[$default] ?? 'text-muted-foreground-2',
+        );
     }
 
     /**
      * @param array<string, mixed> $props
      */
-    public static function bgColor(array $props): string
+    public static function bgColor(array $props, string $default = 'transparent'): string
     {
         $color = isset($props['bg_color']) && \is_string($props['bg_color'])
             ? $props['bg_color']
-            : (isset($props['color']) && \is_string($props['color']) ? $props['color'] : 'transparent');
+            : (isset($props['color']) && \is_string($props['color']) ? $props['color'] : $default);
 
-        return match ($color) {
-            'white' => 'bg-card',
-            'muted' => 'bg-surface',
-            'primary' => 'bg-primary text-primary-foreground',
-            'dark' => 'bg-inverse text-foreground-inverse',
-            default => 'bg-transparent',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::BG_COLORS,
+            $color,
+            PrelineClassMap::BG_COLORS[$default] ?? 'bg-transparent',
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $props
+     */
+    public static function rounded(array $props, string $default = 'xl', string $key = 'rounded'): string
+    {
+        $val = isset($props[$key]) && \is_string($props[$key]) ? $props[$key] : $default;
+
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ROUNDED,
+            $val,
+            PrelineClassMap::ROUNDED[$default] ?? 'rounded-xl',
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $props
+     */
+    public static function shadow(array $props, string $default = 'none', string $fallbackEmpty = ''): string
+    {
+        $val = isset($props['box_shadow']) && \is_string($props['box_shadow']) && '' !== \trim($props['box_shadow'])
+            ? $props['box_shadow']
+            : (isset($props['shadow']) && \is_string($props['shadow']) && '' !== \trim($props['shadow'])
+                ? $props['shadow']
+                : $default);
+
+        if ('none' === $val && '' === $fallbackEmpty) {
+            return '';
+        }
+
+        return PrelineClassMap::resolve(
+            PrelineClassMap::SHADOW,
+            $val,
+            'none' === $default ? $fallbackEmpty : (PrelineClassMap::SHADOW[$default] ?? $fallbackEmpty),
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $props
+     */
+    public static function aspectRatio(array $props, string $default = '16/9', string $key = 'aspect_ratio'): string
+    {
+        $val = isset($props[$key]) && \is_string($props[$key])
+            ? $props[$key]
+            : (isset($props['media_aspect_ratio']) && \is_string($props['media_aspect_ratio']) ? $props['media_aspect_ratio'] : $default);
+
+        return PrelineClassMap::resolve(
+            PrelineClassMap::ASPECT_RATIOS,
+            $val,
+            PrelineClassMap::ASPECT_RATIOS[$default] ?? 'aspect-video',
+        );
     }
 
     /**
@@ -99,49 +148,18 @@ final class PropsResolver
             : (isset($props['color']) && \is_string($props['color']) ? $props['color'] : 'primary');
         $isFullWidth = isset($props['full_width']) && true === $props['full_width'];
 
-        $base = 'inline-flex items-center justify-center gap-x-2 font-medium rounded-lg transition-colors focus:outline-hidden focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
+        $sizeClasses = PrelineClassMap::resolve(
+            PrelineClassMap::BUTTON_SIZES,
+            $size,
+            PrelineClassMap::BUTTON_SIZES['md'],
+        );
 
-        $sizeClasses = match ($size) {
-            'xs', 'xsmall' => 'py-1.5 px-2.5 text-xs',
-            'sm', 'small' => 'py-2 px-3 text-xs',
-            'lg', 'large' => 'py-3.5 px-5 text-base',
-            'xl', 'xlarge' => 'py-4 px-6 text-base font-semibold',
-            default => 'py-2.5 px-4 text-sm',
-        };
-
-        $variantClasses = match ($variant) {
-            'outline' => match ($color) {
-                'secondary' => 'border border-secondary-line text-secondary hover:bg-secondary-50 dark:hover:bg-secondary-950/30 focus:ring-secondary',
-                'dark' => 'border border-line-8 text-foreground hover:bg-muted focus:ring-line-8',
-                'white' => 'border border-white text-white hover:bg-white/10 focus:ring-white',
-                default => 'border border-primary-line text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30 focus:ring-primary',
-            },
-            'soft' => match ($color) {
-                'secondary' => 'border border-transparent bg-secondary-100 text-secondary-800 hover:bg-secondary-200 dark:bg-secondary-900/30 dark:text-secondary-400 dark:hover:bg-secondary-900/50 focus:ring-secondary',
-                'dark' => 'border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:ring-surface-focus',
-                'white' => 'border border-transparent bg-white/10 text-white hover:bg-white/20 focus:ring-white',
-                default => 'border border-transparent bg-primary-100 text-primary-800 hover:bg-primary-200 dark:bg-primary-900/30 dark:text-primary-400 dark:hover:bg-primary-900/50 focus:ring-primary',
-            },
-            'ghost' => match ($color) {
-                'secondary' => 'text-secondary hover:bg-secondary-50 dark:hover:bg-secondary-950/30 focus:ring-secondary',
-                'dark' => 'text-foreground hover:bg-muted focus:ring-muted-focus',
-                'white' => 'text-white hover:bg-white/10 focus:ring-white',
-                default => 'text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30 focus:ring-primary',
-            },
-            'link' => match ($color) {
-                'secondary' => 'text-secondary hover:underline p-0 focus:ring-0',
-                'dark' => 'text-foreground hover:underline p-0 focus:ring-0',
-                'white' => 'text-white hover:underline p-0 focus:ring-0',
-                default => 'text-primary hover:underline p-0 focus:ring-0',
-            },
-            'white' => 'border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:ring-layer-focus',
-            default => match ($color) {
-                'secondary' => 'border border-transparent bg-secondary text-secondary-foreground hover:bg-secondary-hover focus:ring-secondary focus:ring-offset-background',
-                'dark' => 'border border-transparent bg-inverse text-foreground-inverse hover:opacity-90 focus:ring-inverse focus:ring-offset-background',
-                'white' => 'border border-transparent bg-layer text-layer-foreground hover:bg-layer-hover shadow-2xs focus:ring-layer-focus focus:ring-offset-background',
-                default => 'border border-transparent bg-primary text-primary-foreground hover:bg-primary-hover focus:ring-primary focus:ring-offset-background',
-            },
-        };
+        if ('white' === $variant) {
+            $variantClasses = PrelineClassMap::BUTTON_WHITE_VARIANT;
+        } else {
+            $variantMap = PrelineClassMap::BUTTON_VARIANTS[$variant] ?? PrelineClassMap::BUTTON_VARIANTS['solid'];
+            $variantClasses = $variantMap[$color] ?? $variantMap['primary'];
+        }
 
         $align = isset($props['text_align']) && \is_string($props['text_align']) ? $props['text_align'] : null;
         $alignClasses = match ($align) {
@@ -151,7 +169,7 @@ final class PropsResolver
         };
         $widthClass = $isFullWidth ? 'w-full' : $alignClasses;
 
-        return \trim(\sprintf('%s %s %s %s', $base, $sizeClasses, $variantClasses, $widthClass));
+        return \trim(\sprintf('%s %s %s %s', PrelineClassMap::BUTTON_BASE, $sizeClasses, $variantClasses, $widthClass));
     }
 
     /**
@@ -180,61 +198,28 @@ final class PropsResolver
             ? $props['rounded']
             : $defaultRounded;
 
-        $base = 'inline-flex items-center gap-x-1.5 font-medium';
+        $roundedClass = PrelineClassMap::resolve(
+            PrelineClassMap::BADGE_ROUNDED,
+            $rounded,
+            PrelineClassMap::BADGE_ROUNDED['pill'],
+        );
 
-        $roundedClass = match ($rounded) {
-            'rounded', 'md' => 'rounded-md',
-            'lg' => 'rounded-lg',
-            'square', 'none' => 'rounded-none',
-            default => 'rounded-full',
-        };
+        $sizeClasses = PrelineClassMap::resolve(
+            PrelineClassMap::BADGE_SIZES,
+            $size,
+            PrelineClassMap::BADGE_SIZES['xs'],
+        );
 
-        $sizeClasses = match ($size) {
-            'sm' => 'py-1 px-2.5 text-xs',
-            'md' => 'py-1.5 px-3 text-sm',
-            'lg' => 'py-2 px-3.5 text-sm font-semibold',
-            default => 'py-0.5 px-2 text-xs',
-        };
+        if ('white' === $variant) {
+            $variantClasses = PrelineClassMap::BADGE_WHITE_VARIANT;
+        } elseif ('glass' === $variant) {
+            $variantClasses = PrelineClassMap::BADGE_GLASS_VARIANT;
+        } else {
+            $variantMap = PrelineClassMap::BADGE_VARIANTS[$variant] ?? PrelineClassMap::BADGE_VARIANTS['soft'];
+            $variantClasses = $variantMap[$color] ?? $variantMap['primary'];
+        }
 
-        $variantClasses = match ($variant) {
-            'solid' => match ($color) {
-                'secondary' => 'bg-secondary text-secondary-foreground',
-                'dark' => 'bg-inverse text-foreground-inverse',
-                'white' => 'bg-layer text-layer-foreground shadow-2xs',
-                'muted' => 'bg-surface text-surface-foreground',
-                'success' => 'bg-teal-500 text-white',
-                'warning' => 'bg-yellow-500 text-white',
-                'danger' => 'bg-destructive text-destructive-foreground',
-                'info' => 'bg-sky-500 text-white',
-                default => 'bg-primary text-primary-foreground',
-            },
-            'outline' => match ($color) {
-                'secondary' => 'border border-secondary-line text-secondary',
-                'dark' => 'border border-line-8 text-foreground',
-                'white' => 'border border-white/60 text-white',
-                'muted' => 'border border-border text-muted-foreground-2',
-                'success' => 'border border-teal-500 text-teal-500',
-                'warning' => 'border border-yellow-500 text-yellow-500',
-                'danger' => 'border border-destructive text-destructive',
-                'info' => 'border border-sky-500 text-sky-500',
-                default => 'border border-primary-line text-primary',
-            },
-            'white' => 'border border-layer-line bg-layer text-layer-foreground shadow-2xs',
-            'glass' => 'bg-layer/80 text-layer-foreground backdrop-blur-md border border-layer-line/40 shadow-xs',
-            default => match ($color) {
-                'secondary' => 'bg-secondary-100 text-secondary-800 dark:bg-secondary-500/20 dark:text-secondary-400',
-                'dark' => 'bg-surface text-surface-foreground',
-                'white' => 'bg-white/20 text-white backdrop-blur-md',
-                'muted' => 'bg-muted text-muted-foreground-2',
-                'success' => 'bg-teal-100 text-teal-800 dark:bg-teal-500/20 dark:text-teal-400',
-                'warning' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-400',
-                'danger' => 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-400',
-                'info' => 'bg-sky-100 text-sky-800 dark:bg-sky-500/20 dark:text-sky-400',
-                default => 'bg-primary-100 text-primary-800 dark:bg-primary-500/20 dark:text-primary-400',
-            },
-        };
-
-        return \trim(\sprintf('%s %s %s %s', $base, $roundedClass, $sizeClasses, $variantClasses));
+        return \trim(\sprintf('%s %s %s %s', PrelineClassMap::BADGE_BASE, $roundedClass, $sizeClasses, $variantClasses));
     }
 
     /**
@@ -250,18 +235,13 @@ final class PropsResolver
 
         $base = 'flex rounded-xl overflow-hidden transition-all';
 
-        $variantClasses = match ($variant) {
-            'group' => 'border-0 rounded-none shadow-none flex-1',
-            'shadow' => 'shadow-lg border border-card-line hover:shadow-xl',
-            'flat' => 'border-0 bg-surface',
-            'glass' => 'backdrop-blur-md bg-card/70 border border-card-line/40 shadow-lg',
-            default => 'border border-card-line shadow-2xs',
-        };
+        $variantClasses = PrelineClassMap::resolve(
+            PrelineClassMap::PROPS_RESOLVER_CARD_VARIANTS,
+            $variant,
+            PrelineClassMap::PROPS_RESOLVER_CARD_VARIANTS['bordered'],
+        );
 
-        $layoutClasses = match ($layout) {
-            'horizontal' => 'flex-col md:flex-row',
-            default => 'flex-col',
-        };
+        $layoutClasses = 'horizontal' === $layout ? 'flex-col md:flex-row' : 'flex-col';
 
         return \trim(\sprintf('%s %s %s %s', $base, $variantClasses, $layoutClasses, $bg));
     }
@@ -325,16 +305,10 @@ final class PropsResolver
      */
     public static function resolveObjectFit(mixed $fit): string
     {
-        if (!\is_string($fit) || '' === \trim($fit)) {
-            return 'object-cover';
-        }
-
-        return match (\trim($fit)) {
-            'contain' => 'object-contain',
-            'fill' => 'object-fill',
-            'scale-down' => 'object-scale-down',
-            'none' => 'object-none',
-            default => 'object-cover',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::OBJECT_FIT,
+            $fit,
+            PrelineClassMap::OBJECT_FIT['cover'],
+        );
     }
 }

@@ -3,10 +3,11 @@
 {% set container_classes = this.getContainerClasses() %}
 {% set icon_classes = this.getIconClasses() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     {% if icon_class %}
         {% if url %}

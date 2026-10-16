@@ -10,7 +10,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Custom HTML / Embed snippet component.
  */
 #[AsTwigComponent('Html', template: '@SuluPrelineBlocks/components/Html.html.twig')]
-final class HtmlBlock extends AbstractPrelineComponent
+final class HtmlBlock extends PrelineComponent
 {
     protected function defaults(): array
     {
@@ -60,6 +60,6 @@ final class HtmlBlock extends AbstractPrelineComponent
             $classes[] = $extraBase;
         }
 
-        return \implode(' ', $classes);
+        return parent::getWrapperClasses(\implode(' ', $classes));
     }
 }

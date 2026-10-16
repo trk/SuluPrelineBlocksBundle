@@ -15,8 +15,9 @@
 {% set resolved_hover_alt = this.getHoverAlt() %}
 
 {% if img_url %}
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
     <figure {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-            {{ attributes.defaults({class: this.getWrapperClasses()}) }}>
+            {{ attributes.defaults(this.customAttributes|merge({class: this.getWrapperClasses()})) }}>
         {% if url %}
             <a href="{{ url }}" class="{% if hover_img_url %}group relative{% endif %} block overflow-hidden {{ rounded }} transition-transform duration-300 hover:scale-[1.01] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary" {% if aspect_style %}style="{{ aspect_style }}"{% endif %}>
                 <img

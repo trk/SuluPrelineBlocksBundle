@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('OverlaySlider', template: '@SuluPrelineBlocks/components/OverlaySlider.html.twig')]
-final class OverlaySlider extends AbstractPrelineComponent
+final class OverlaySlider extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -89,62 +89,21 @@ final class OverlaySlider extends AbstractPrelineComponent
 
     public function getSlideWidthClass(): string
     {
-        return match ($this->getColumns()) {
-            '1' => 'w-full',
-            '2' => 'w-full sm:w-1/2',
-            '4' => 'w-full sm:w-1/2 lg:w-1/4',
-            default => 'w-full sm:w-1/2 lg:w-1/3',
-        };
+        return $this->resolveSliderSlideWidthClass($this->getColumns());
     }
 
     public function getGapClass(): string
     {
-        return match ($this->stringProp('gap', 'md')) {
-            'none' => 'px-0',
-            'sm' => 'px-1.5',
-            'lg' => 'px-4',
-            default => 'px-2.5',
-        };
+        return $this->getGapClasses('md', 'slider', 'gap');
     }
 
     public function getCarouselConfigJson(): string
     {
-        $cols = match ($this->getColumns()) {
-            '1' => ['xs' => 1, 'sm' => 1, 'md' => 1, 'lg' => 1],
-            '2' => ['xs' => 1, 'sm' => 2, 'md' => 2, 'lg' => 2],
-            '4' => ['xs' => 1, 'sm' => 2, 'md' => 3, 'lg' => 4],
-            default => ['xs' => 1, 'sm' => 2, 'md' => 3, 'lg' => 3],
-        };
-
-        $config = [
-            'loadingClasses' => 'opacity-0',
-            'isAutoPlay' => $this->isAutoplay(),
-            'speed' => $this->getInterval(),
-            'isInfiniteLoop' => $this->isLoop(),
-            'slidesQty' => $cols,
-        ];
-
-        return (string) \json_encode($config, \JSON_THROW_ON_ERROR);
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
+        return $this->resolveSliderConfigJson(
+            $this->isAutoplay(),
+            $this->getInterval(),
+            $this->isLoop(),
+            $this->getColumns(),
+        );
     }
 }

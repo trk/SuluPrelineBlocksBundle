@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Switcher', template: '@SuluPrelineBlocks/components/Switcher.html.twig')]
-final class Switcher extends AbstractPrelineComponent
+final class Switcher extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -61,32 +61,17 @@ final class Switcher extends AbstractPrelineComponent
 
     public function getNavPosition(): string
     {
-        return match ($this->stringProp('nav_position', 'top')) {
-            'left' => 'left',
-            'right' => 'right',
-            'bottom' => 'bottom',
-            default => 'top',
-        };
+        return $this->enumProp('nav_position', ['top', 'left', 'right', 'bottom'], 'top');
     }
 
     public function getNavStyle(): string
     {
-        return match ($this->stringProp('nav_style', 'pills')) {
-            'underline' => 'underline',
-            'bordered' => 'bordered',
-            'segmented' => 'segmented',
-            default => 'pills',
-        };
+        return $this->enumProp('nav_style', ['pills', 'underline', 'bordered', 'segmented'], 'pills');
     }
 
     public function getAlignment(): string
     {
-        return match ($this->stringProp('alignment', 'start')) {
-            'center' => 'center',
-            'end' => 'end',
-            'full' => 'full',
-            default => 'start',
-        };
+        return $this->enumProp('alignment', ['start', 'center', 'end', 'full'], 'start');
     }
 
     public function isVertical(): bool
@@ -154,26 +139,5 @@ final class Switcher extends AbstractPrelineComponent
         }
 
         return \implode(' ', $classes);
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
     }
 }

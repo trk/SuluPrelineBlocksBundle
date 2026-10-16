@@ -7,7 +7,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('List', template: '@SuluPrelineBlocks/components/List.html.twig')]
-final class ListBlock extends AbstractPrelineComponent
+final class ListBlock extends PrelineComponent
 {
     /**
      * @return list<string>
@@ -57,16 +57,7 @@ final class ListBlock extends AbstractPrelineComponent
     {
         $normalized = [];
         foreach ($this->items('items') as $item) {
-            if (isset($item['image'])) {
-                $item['image_url'] = PropsResolver::resolveImageUrl($item['image']);
-                $item['image_focus_style'] = PropsResolver::resolveFocusPointStyle($item['image']);
-            }
-
-            if (isset($item['link'])) {
-                $item['link_href'] = PropsResolver::resolveUrl($item['link']);
-            }
-
-            $normalized[] = $item;
+            $normalized[] = $this->normalizeItemMediaAndLinks($item);
         }
 
         return $normalized;
@@ -79,41 +70,26 @@ final class ListBlock extends AbstractPrelineComponent
 
     public function getMarker(): string
     {
-        return match ($this->stringProp('marker', 'none')) {
-            'disc' => 'disc',
-            'circle' => 'circle',
-            'decimal' => 'decimal',
-            'checkmark' => 'checkmark',
-            'icon' => 'icon',
-            default => 'none',
-        };
+        return $this->enumProp('marker', ['none', 'disc', 'circle', 'decimal', 'checkmark', 'icon'], 'none');
     }
 
     public function getMarkerColor(): string
     {
-        return match ($this->stringProp('marker_color', 'primary')) {
-            'secondary' => 'text-secondary',
-            'muted', 'neutral' => 'text-muted-foreground',
-            default => 'text-primary',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::MARKER_COLORS,
+            $this->stringProp('marker_color', 'primary'),
+            PrelineClassMap::MARKER_COLORS['primary'],
+        );
     }
 
     public function getStyle(): string
     {
-        return match ($this->stringProp('style', 'default')) {
-            'divider' => 'divider',
-            'striped' => 'striped',
-            default => 'default',
-        };
+        return $this->enumProp('style', ['default', 'divider', 'striped'], 'default');
     }
 
     public function getSize(): string
     {
-        return match ($this->stringProp('size', 'md')) {
-            'sm' => 'sm',
-            'lg' => 'lg',
-            default => 'md',
-        };
+        return $this->enumProp('size', ['sm', 'md', 'lg'], 'md');
     }
 
     public function getSpacingClasses(): string
@@ -121,18 +97,18 @@ final class ListBlock extends AbstractPrelineComponent
         $spacing = $this->stringProp('spacing', 'md');
 
         if ('horizontal' === $this->getListType()) {
-            return match ($spacing) {
-                'sm' => 'gap-x-3 gap-y-2',
-                'lg' => 'gap-x-8 gap-y-4',
-                default => 'gap-x-5 gap-y-3',
-            };
+            return PrelineClassMap::resolve(
+                PrelineClassMap::LIST_SPACING_HORIZONTAL,
+                $spacing,
+                PrelineClassMap::LIST_SPACING_HORIZONTAL['md'],
+            );
         }
 
-        return match ($spacing) {
-            'sm' => 'space-y-1.5',
-            'lg' => 'space-y-4',
-            default => 'space-y-2.5',
-        };
+        return PrelineClassMap::resolve(
+            PrelineClassMap::LIST_SPACING_VERTICAL,
+            $spacing,
+            PrelineClassMap::LIST_SPACING_VERTICAL['md'],
+        );
     }
 
     public function getListClasses(): string
@@ -182,14 +158,13 @@ final class ListBlock extends AbstractPrelineComponent
     {
         $classes = [];
         $style = $this->getStyle();
-        $size = $this->getSize();
         $isHoriz = 'horizontal' === $this->getListType();
 
-        $classes[] = match ($size) {
-            'sm' => 'text-xs',
-            'lg' => 'text-base sm:text-lg',
-            default => 'text-sm sm:text-base',
-        };
+        $classes[] = PrelineClassMap::resolve(
+            PrelineClassMap::LIST_ITEM_SIZES,
+            $this->getSize(),
+            PrelineClassMap::LIST_ITEM_SIZES['md'],
+        );
 
         $classes[] = 'text-foreground';
 
@@ -202,26 +177,5 @@ final class ListBlock extends AbstractPrelineComponent
         }
 
         return \implode(' ', $classes);
-    }
-
-    public function getMarginClass(): string
-    {
-        $top = match ($this->stringProp('margin_top', 'none')) {
-            'sm' => 'mt-4',
-            'md' => 'mt-8',
-            'lg' => 'mt-12',
-            'xl' => 'mt-16',
-            default => '',
-        };
-
-        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
-            'sm' => 'mb-4',
-            'md' => 'mb-8',
-            'lg' => 'mb-12',
-            'xl' => 'mb-16',
-            default => '',
-        };
-
-        return \trim($top . ' ' . $bottom);
     }
 }

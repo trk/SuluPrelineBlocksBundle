@@ -7,10 +7,11 @@
 {% set container_classes = this.getContainerClasses() %}
 {% set text_classes = this.getQuoteTextClasses() %}
 
+{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {% if this.getElementId() %}id="{{ this.getElementId() }}"{% endif %}
-     {{ attributes.defaults({
+     {{ attributes.defaults(this.customAttributes|merge({
          class: this.getWrapperClasses(),
-     }) }}>
+     })) }}>
 
     <blockquote class="w-full relative {{ container_classes }}">
         {% if style == 'large' %}
