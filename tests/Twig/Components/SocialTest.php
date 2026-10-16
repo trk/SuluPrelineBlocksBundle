@@ -13,7 +13,7 @@ final class SocialTest extends TestCase
     {
         $social = new Social();
 
-        self::assertNull($social->title);
+        self::assertNull($social->get('title'));
         self::assertEmpty($social->getNormalizedItems());
         self::assertSame('icon_only', $social->getStyle());
         self::assertSame('md', $social->getSize());
@@ -27,13 +27,13 @@ final class SocialTest extends TestCase
     public function testCustomProps(): void
     {
         $social = new Social();
-        $social->props = [
+        $social->mergeProps([
             'style' => 'buttons',
             'size' => 'lg',
             'shape' => 'circle',
             'alignment' => 'center',
             'open_new_tab' => false,
-        ];
+        ]);
 
         self::assertSame('buttons', $social->getStyle());
         self::assertSame('lg', $social->getSize());
@@ -48,7 +48,7 @@ final class SocialTest extends TestCase
     public function testNormalizedItems(): void
     {
         $social = new Social();
-        $social->items = [
+        $social->assign('items', [
             [
                 'network' => 'github',
                 'link' => 'https://github.com/trk',
@@ -64,7 +64,7 @@ final class SocialTest extends TestCase
                 'network' => 'linkedin',
                 'link' => '',
             ],
-        ];
+        ]);
 
         $items = $social->getNormalizedItems();
 

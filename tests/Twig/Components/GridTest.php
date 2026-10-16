@@ -13,7 +13,7 @@ final class GridTest extends TestCase
     {
         $grid = new Grid();
 
-        self::assertNull($grid->title);
+        self::assertNull($grid->get('title'));
         self::assertFalse($grid->isFilterEnabled());
         self::assertFalse($grid->isMasonry());
         self::assertEmpty($grid->getNormalizedItems());
@@ -25,45 +25,45 @@ final class GridTest extends TestCase
     public function testInheritLowerBreakpointWhenHigherBreakpointsAreNone(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'columns_default' => '1',
             'columns_sm' => '',
             'columns_md' => '2',
             'columns_lg' => '',
             'columns_xl' => '',
-        ];
+        ]);
 
         self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $grid->getContainerClasses());
 
         // When only md: 2 is provided, default mobile fallback is 1 and md applies for >= 768px
         $grid2 = new Grid();
-        $grid2->props = [
+        $grid2->mergeProps([
             'columns_md' => '2',
-        ];
+        ]);
         self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $grid2->getContainerClasses());
 
         // When only default: 2 is provided and responsive are inherit/empty, 2 applies everywhere
         $grid3 = new Grid();
-        $grid3->props = [
+        $grid3->mergeProps([
             'columns_default' => '2',
             'columns_sm' => '',
             'columns_md' => '',
             'columns_lg' => '',
             'columns_xl' => '',
-        ];
+        ]);
         self::assertSame('grid grid-cols-2 gap-6', $grid3->getContainerClasses());
     }
 
     public function testColumnsAndGapOverrides(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'columns_default' => '2',
             'columns_sm' => '3',
             'columns_md' => '4',
             'columns_lg' => '6',
             'gap' => 'lg',
-        ];
+        ]);
 
         $classes = $grid->getContainerClasses();
         self::assertStringContainsString('grid-cols-2', $classes);
@@ -76,14 +76,14 @@ final class GridTest extends TestCase
     public function testIntegerColumnsAndXlSupport(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'columns_default' => 3,
             'columns_sm' => 2,
             'columns_md' => 4,
             'columns_lg' => 5,
             'columns_xl' => 6,
             'gap' => 'none',
-        ];
+        ]);
 
         $classes = $grid->getContainerClasses();
         self::assertSame('grid grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-0', $classes);
@@ -92,7 +92,7 @@ final class GridTest extends TestCase
     public function testNestedPropsUnpacking(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'props' => [
                 'columns_default' => 4,
                 'columns_sm' => 1,
@@ -101,7 +101,7 @@ final class GridTest extends TestCase
                 'columns_xl' => 4,
                 'gap' => '2xl',
             ],
-        ];
+        ]);
 
         $classes = $grid->getContainerClasses();
         self::assertSame('grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16', $classes);
@@ -110,14 +110,14 @@ final class GridTest extends TestCase
     public function testMasonryMode(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'masonry' => 'columns',
             'columns_default' => '1',
             'columns_sm' => '2',
             'columns_md' => '3',
             'columns_lg' => '4',
             'gap' => 'sm',
-        ];
+        ]);
 
         self::assertTrue($grid->isMasonry());
         $classes = $grid->getContainerClasses();
@@ -131,15 +131,15 @@ final class GridTest extends TestCase
     public function testFilterTagsAndSlugs(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'filter' => true,
             'filter_align' => 'left',
-        ];
-        $grid->items = [
+        ]);
+        $grid->assign('items', [
             ['title' => 'Item 1', 'tags' => 'Design, Tech, Web Development'],
             ['title' => 'Item 2', 'tags' => 'Tech, Marketing'],
             ['title' => 'Item 3', 'tags' => ''],
-        ];
+        ]);
 
         self::assertTrue($grid->isFilterEnabled());
         self::assertSame('justify-start', $grid->getFilterAlignClass());
@@ -151,20 +151,20 @@ final class GridTest extends TestCase
         self::assertSame('Web Development', $tags['web-development']);
         self::assertSame('Marketing', $tags['marketing']);
 
-        self::assertSame('design tech web-development', $grid->getItemTagSlugs($grid->items[0]));
-        self::assertSame('tech marketing', $grid->getItemTagSlugs($grid->items[1]));
-        self::assertSame('', $grid->getItemTagSlugs($grid->items[2]));
+        self::assertSame('design tech web-development', $grid->getItemTagSlugs($grid->items()[0]));
+        self::assertSame('tech marketing', $grid->getItemTagSlugs($grid->items()[1]));
+        self::assertSame('', $grid->getItemTagSlugs($grid->items()[2]));
     }
 
     public function testItemPropsInheritanceAndOverride(): void
     {
         $grid = new Grid();
-        $grid->props = [
+        $grid->mergeProps([
             'card_variant' => 'bordered',
             'button_style' => 'outline',
             'media_align' => 'left',
             'text_align' => 'center',
-        ];
+        ]);
 
         // Item 1 inherits grid defaults
         $item1 = [
@@ -194,7 +194,7 @@ final class GridTest extends TestCase
     public function testCardGroupLayout(): void
     {
         $grid = new Grid();
-        $grid->layoutType = 'card_group';
+        $grid->assign('layoutType', 'card_group');
 
         self::assertTrue($grid->isCardGroup());
         $classes = $grid->getContainerClasses();

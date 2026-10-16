@@ -13,8 +13,8 @@ final class ScrollToTest extends TestCase
     {
         $scroll = new ScrollTo();
 
-        self::assertNull($scroll->title);
-        self::assertNull($scroll->targetId);
+        self::assertNull($scroll->get('title'));
+        self::assertNull($scroll->get('targetId'));
         self::assertSame('top', $scroll->getTargetId());
         self::assertSame('#top', $scroll->getTargetHref());
         self::assertTrue($scroll->isTop());
@@ -26,7 +26,7 @@ final class ScrollToTest extends TestCase
     public function testCustomTargetId(): void
     {
         $scroll = new ScrollTo();
-        $scroll->targetId = 'buraya-git';
+        $scroll->assign('targetId', 'buraya-git');
         self::assertSame('buraya-git', $scroll->getTargetId());
         self::assertSame('#buraya-git', $scroll->getTargetHref());
         self::assertFalse($scroll->isTop());
@@ -34,13 +34,13 @@ final class ScrollToTest extends TestCase
 
         // Target ID with leading hash (#)
         $scrollHash = new ScrollTo();
-        $scrollHash->target_id = '#iletisim-formu';
+        $scrollHash->assign('target_id', '#iletisim-formu');
         self::assertSame('iletisim-formu', $scrollHash->getTargetId());
         self::assertSame('#iletisim-formu', $scrollHash->getTargetHref());
 
         // Malicious target ID falls back to 'top'
         $scrollMalicious = new ScrollTo();
-        $scrollMalicious->targetId = "');alert(1);//";
+        $scrollMalicious->assign('targetId', "');alert(1);//");
         self::assertSame('top', $scrollMalicious->getTargetId());
         self::assertSame('#top', $scrollMalicious->getTargetHref());
     }
@@ -48,23 +48,23 @@ final class ScrollToTest extends TestCase
     public function testCustomIcon(): void
     {
         $scroll = new ScrollTo();
-        $scroll->icon = 'chevron-up';
+        $scroll->assign('icon', 'chevron-up');
         self::assertSame('ti ti-chevron-up', $scroll->getResolvedIcon());
     }
 
     public function testDisplayModesAndStyles(): void
     {
         $scrollCircle = new ScrollTo();
-        $scrollCircle->props = [
+        $scrollCircle->mergeProps([
             'display_mode' => 'totop_circle',
             'button_color' => 'dark',
-        ];
+        ]);
         self::assertSame('totop_circle', $scrollCircle->getDisplayMode());
         self::assertStringContainsString('rounded-full', $scrollCircle->getButtonClasses());
         self::assertStringContainsString('bg-inverse', $scrollCircle->getButtonClasses());
 
         $scrollFloating = new ScrollTo();
-        $scrollFloating->props = ['display_mode' => 'floating'];
+        $scrollFloating->mergeProps(['display_mode' => 'floating']);
         self::assertSame('floating', $scrollFloating->getDisplayMode());
         self::assertStringContainsString('fixed bottom-6 end-6', $scrollFloating->getWrapperClasses());
     }
@@ -72,12 +72,12 @@ final class ScrollToTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $scroll = new ScrollTo();
-        $scroll->props = [
+        $scroll->mergeProps([
             'id' => 'my-scroll-btn',
             'margin_top' => 'md',
             'margin_bottom' => 'lg',
             'custom_class' => 'my-scroll',
-        ];
+        ]);
 
         self::assertSame('my-scroll-btn', $scroll->getElementId());
         $wrapper = $scroll->getWrapperClasses();

@@ -7,70 +7,43 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Switcher', template: '@SuluPrelineBlocks/components/Switcher.html.twig')]
-final class Switcher
+final class Switcher extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var array<int|string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public ?string $navPosition = null;
-    public ?string $nav_position = null;
-    public ?string $navStyle = null;
-    public ?string $nav_style = null;
-    public ?string $alignment = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            /** @var array<string, mixed> $nested */
-            $nested = $resolved['props'];
-            $resolved = \array_merge($nested, $resolved);
-            unset($resolved['props']);
-        }
+        return [
+            'nav_position' => 'top',
+            'nav_style' => 'pills',
+            'alignment' => 'start',
+        ];
+    }
 
-        if (null !== ($this->navPosition ?? $this->nav_position)) {
-            $resolved['nav_position'] = $this->navPosition ?? $this->nav_position;
-        }
-        if (null !== ($this->navStyle ?? $this->nav_style)) {
-            $resolved['nav_style'] = $this->navStyle ?? $this->nav_style;
-        }
-        if (null !== $this->alignment) {
-            $resolved['alignment'] = $this->alignment;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'vertical' => fn (): bool => $this->isVertical(),
+            'horizontal' => fn (): bool => !$this->isVertical(),
+        ];
     }
 
     /**
@@ -79,23 +52,8 @@ final class Switcher
     public function getNormalizedItems(): array
     {
         $normalized = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $itemArr */
-                $itemArr = $item;
-
-                if (isset($itemArr['image'])) {
-                    $itemArr['image_url'] = PropsResolver::resolveImageUrl($itemArr['image']);
-                    $itemArr['image_srcset'] = PropsResolver::resolveSrcSet($itemArr['image']);
-                    $itemArr['image_focus_style'] = PropsResolver::resolveFocusPointStyle($itemArr['image']);
-                }
-
-                if (isset($itemArr['link'])) {
-                    $itemArr['link_href'] = PropsResolver::resolveUrl($itemArr['link']);
-                }
-
-                $normalized[] = $itemArr;
-            }
+        foreach ($this->items('items') as $item) {
+            $normalized[] = $this->normalizeItemMediaAndLinks($item);
         }
 
         return $normalized;
@@ -103,10 +61,7 @@ final class Switcher
 
     public function getNavPosition(): string
     {
-        $props = $this->getResolvedProps();
-        $pos = $props['nav_position'] ?? 'top';
-
-        return match ($pos) {
+        return match ($this->stringProp('nav_position', 'top')) {
             'left' => 'left',
             'right' => 'right',
             'bottom' => 'bottom',
@@ -116,10 +71,7 @@ final class Switcher
 
     public function getNavStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['nav_style'] ?? 'pills';
-
-        return match ($style) {
+        return match ($this->stringProp('nav_style', 'pills')) {
             'underline' => 'underline',
             'bordered' => 'bordered',
             'segmented' => 'segmented',
@@ -129,10 +81,7 @@ final class Switcher
 
     public function getAlignment(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['alignment'] ?? 'start';
-
-        return match ($align) {
+        return match ($this->stringProp('alignment', 'start')) {
             'center' => 'center',
             'end' => 'end',
             'full' => 'full',
@@ -169,10 +118,7 @@ final class Switcher
                 $classes[] = 'p-1.5 bg-surface rounded-xl gap-1';
             } elseif ('underline' === $style) {
                 $classes[] = 'gap-x-6 border-b border-border';
-            } elseif ('bordered' === $style) {
-                $classes[] = 'gap-2';
             } else {
-                // pills
                 $classes[] = 'gap-2';
             }
         }
@@ -212,47 +158,22 @@ final class Switcher
 
     public function getMarginClass(): string
     {
-        $props = $this->getResolvedProps();
-        $classes = [];
+        $top = match ($this->stringProp('margin_top', 'none')) {
+            'sm' => 'mt-4',
+            'md' => 'mt-8',
+            'lg' => 'mt-12',
+            'xl' => 'mt-16',
+            default => '',
+        };
 
-        $top = $props['margin_top'] ?? null;
-        if (\is_string($top) && '' !== $top) {
-            $classes[] = match ($top) {
-                'sm' => 'mt-4',
-                'md' => 'mt-8',
-                'lg' => 'mt-12',
-                'xl' => 'mt-16',
-                default => '',
-            };
-        }
+        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
+            'sm' => 'mb-4',
+            'md' => 'mb-8',
+            'lg' => 'mb-12',
+            'xl' => 'mb-16',
+            default => '',
+        };
 
-        $bottom = $props['margin_bottom'] ?? null;
-        if (\is_string($bottom) && '' !== $bottom) {
-            $classes[] = match ($bottom) {
-                'sm' => 'mb-4',
-                'md' => 'mb-8',
-                'lg' => 'mb-12',
-                'xl' => 'mb-16',
-                default => '',
-            };
-        }
-
-        return \trim(\implode(' ', \array_filter($classes)));
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-        $id = $props['id'] ?? null;
-
-        return \is_string($id) && '' !== \trim($id) ? \trim($id) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-        $class = $props['custom_class'] ?? null;
-
-        return \is_string($class) ? \trim($class) : '';
+        return \trim($top . ' ' . $bottom);
     }
 }

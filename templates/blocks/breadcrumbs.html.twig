@@ -1,10 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Breadcrumbs
-    :show_home="block.show_home|default(true)"
-    home_title="{{ block.home_title|default('Home') }}"
-    home_url="{{ block.home_url|default('/') }}"
-    align="{{ block.align|default('left') }}"
-    :props="block|merge(block._props|default({}))"
-/>
+    <twig:Breadcrumbs :block="block" />
 {% endif %}

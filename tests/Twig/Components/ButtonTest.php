@@ -13,12 +13,8 @@ final class ButtonTest extends TestCase
     {
         $button = new Button();
 
-        self::assertSame('', $button->title);
-        self::assertSame('', $button->content);
+        self::assertFalse($button->shouldRender());
         self::assertSame('', $button->getTitle());
-        self::assertSame('#', $button->link);
-        self::assertNull($button->linkTitle);
-        self::assertNull($button->link_title);
         self::assertSame('#', $button->getUrl());
         self::assertNull($button->getLinkTitle());
         self::assertStringContainsString('bg-primary', $button->getClasses());
@@ -27,39 +23,40 @@ final class ButtonTest extends TestCase
     public function testTitleAndContentResolution(): void
     {
         $buttonTitle = new Button();
-        $buttonTitle->title = 'Primary Action';
+        $buttonTitle->load(data: ['title' => 'Primary Action']);
+        self::assertTrue($buttonTitle->shouldRender());
         self::assertSame('Primary Action', $buttonTitle->getTitle());
 
         $buttonContentFallback = new Button();
-        $buttonContentFallback->content = 'Fallback Action';
+        $buttonContentFallback->load(data: ['content' => 'Fallback Action']);
+        self::assertTrue($buttonContentFallback->shouldRender());
         self::assertSame('Fallback Action', $buttonContentFallback->getTitle());
 
         $buttonBoth = new Button();
-        $buttonBoth->title = 'Primary Title';
-        $buttonBoth->content = 'Fallback Content';
+        $buttonBoth->load(data: ['title' => 'Primary Title', 'content' => 'Fallback Content']);
         self::assertSame('Primary Title', $buttonBoth->getTitle());
     }
 
     public function testLinkTitleResolution(): void
     {
-        $buttonCamel = new Button();
-        $buttonCamel->linkTitle = 'Camel Title';
+        $buttonCamel = new Button(['linkTitle' => 'Camel Title']);
         self::assertSame('Camel Title', $buttonCamel->getLinkTitle());
 
-        $buttonSnake = new Button();
-        $buttonSnake->link_title = 'Snake Title';
+        $buttonSnake = new Button(['link_title' => 'Snake Title']);
         self::assertSame('Snake Title', $buttonSnake->getLinkTitle());
     }
 
     public function testUrlAndProps(): void
     {
         $button = new Button();
-        $button->link = ['url' => 'https://totoglu.com', 'anchor' => 'portfolio'];
-        $button->props = [
-            'variant' => 'outline',
-            'size' => 'lg',
-            'full_width' => true,
-        ];
+        $button->load(
+            data: ['link' => ['url' => 'https://totoglu.com', 'anchor' => 'portfolio']],
+            props: [
+                'variant' => 'outline',
+                'size' => 'lg',
+                'full_width' => true,
+            ],
+        );
 
         self::assertSame('https://totoglu.com#portfolio', $button->getUrl());
         self::assertStringContainsString('border', $button->getClasses());
@@ -69,11 +66,12 @@ final class ButtonTest extends TestCase
 
     public function testIndividualPropsTakePrecedence(): void
     {
-        $button = new Button();
-        $button->props = ['variant' => 'solid', 'size' => 'sm'];
-        $button->variant = 'outline';
-        $button->size = 'lg';
-        $button->linkColor = 'secondary';
+        $button = new Button([
+            'props' => ['variant' => 'solid', 'size' => 'sm'],
+            'variant' => 'outline',
+            'size' => 'lg',
+            'linkColor' => 'secondary',
+        ]);
 
         $classes = $button->getClasses();
         self::assertStringContainsString('border', $classes);
@@ -84,12 +82,14 @@ final class ButtonTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $button = new Button();
-        $button->props = [
-            'margin_top' => 'md',
-            'margin_bottom' => 'lg',
-            'id' => 'my-button',
-            'custom_class' => 'shadow-lg',
-        ];
+        $button->load(
+            props: [
+                'margin_top' => 'md',
+                'margin_bottom' => 'lg',
+                'id' => 'my-button',
+                'custom_class' => 'shadow-lg',
+            ],
+        );
 
         self::assertSame('my-button', $button->getElementId());
         $wrapper = $button->getWrapperClasses();
@@ -101,29 +101,38 @@ final class ButtonTest extends TestCase
     public function testButtonGroupSeparated(): void
     {
         $button = new Button();
-        $button->groupStyle = 'gap';
-        $button->align = 'center';
-        $button->gap = 'sm';
-        $button->items = [
-            [
-                'title' => 'Get Started',
-                'link' => 'https://example.com/start',
-                'button_style' => 'solid',
-                'button_color' => 'primary',
-                'icon' => 'arrow-right',
-                'icon_align' => 'right',
+        $button->load(
+            data: [
+                'items' => [
+                    [
+                        'title' => 'Get Started',
+                        'link' => 'https://example.com/start',
+                        'button_style' => 'solid',
+                        'button_color' => 'primary',
+                        'icon' => 'arrow-right',
+                        'icon_align' => 'right',
+                    ],
+                    [
+                        'title' => 'Learn More',
+                        'link' => 'https://example.com/docs',
+                        'button_style' => 'outline',
+                        'button_color' => 'dark',
+                        'icon' => 'book',
+                        'icon_align' => 'left',
+                    ],
+                ],
             ],
-            [
-                'title' => 'Learn More',
-                'link' => 'https://example.com/docs',
-                'button_style' => 'outline',
-                'button_color' => 'dark',
-                'icon' => 'book',
-                'icon_align' => 'left',
+            props: [
+                'group_style' => 'gap',
+                'align' => 'center',
+                'gap' => 'sm',
             ],
-        ];
+        );
 
         self::assertTrue($button->isGroup());
+        self::assertTrue($button->is('group'));
+        self::assertTrue($button->is('multiple'));
+        self::assertTrue($button->shouldRender());
         self::assertSame('gap', $button->getGroupStyle());
         self::assertSame('center', $button->getAlign());
         self::assertSame('sm', $button->getGap());
@@ -153,15 +162,22 @@ final class ButtonTest extends TestCase
     public function testButtonGroupConnectedSegmented(): void
     {
         $button = new Button();
-        $button->groupStyle = 'connected';
-        $button->orientation = 'horizontal';
-        $button->items = [
-            ['title' => 'Left', 'link' => '#left'],
-            ['title' => 'Middle', 'link' => '#mid'],
-            ['title' => 'Right', 'link' => '#right'],
-        ];
+        $button->load(
+            data: [
+                'items' => [
+                    ['title' => 'Left', 'link' => '#left'],
+                    ['title' => 'Middle', 'link' => '#mid'],
+                    ['title' => 'Right', 'link' => '#right'],
+                ],
+            ],
+            props: [
+                'group_style' => 'connected',
+                'orientation' => 'horizontal',
+            ],
+        );
 
         self::assertTrue($button->isGroup());
+        self::assertTrue($button->is('connected'));
         self::assertSame('connected', $button->getGroupStyle());
         self::assertSame('horizontal', $button->getOrientation());
 
@@ -171,24 +187,28 @@ final class ButtonTest extends TestCase
         $normalized = $button->getNormalizedItems();
         self::assertCount(3, $normalized);
 
-        // First item segmented class
         self::assertStringContainsString('rounded-s-lg rounded-e-none', $normalized[0]['classes']);
-        // Middle item segmented class
         self::assertStringContainsString('rounded-none -ms-px', $normalized[1]['classes']);
-        // Last item segmented class
         self::assertStringContainsString('rounded-e-lg rounded-s-none -ms-px', $normalized[2]['classes']);
     }
 
     public function testButtonGroupVerticalConnected(): void
     {
         $button = new Button();
-        $button->groupStyle = 'connected';
-        $button->orientation = 'vertical';
-        $button->items = [
-            ['title' => 'Top', 'link' => '#top'],
-            ['title' => 'Bottom', 'link' => '#bot'],
-        ];
+        $button->load(
+            data: [
+                'items' => [
+                    ['title' => 'Top', 'link' => '#top'],
+                    ['title' => 'Bottom', 'link' => '#bot'],
+                ],
+            ],
+            props: [
+                'group_style' => 'connected',
+                'orientation' => 'vertical',
+            ],
+        );
 
+        self::assertTrue($button->is('vertical'));
         $wrapper = $button->getGroupWrapperClasses();
         self::assertStringContainsString('inline-flex flex-col rounded-lg shadow-2xs', $wrapper);
 
@@ -201,14 +221,14 @@ final class ButtonTest extends TestCase
     public function testPrelineSoftAndWhiteVariants(): void
     {
         $buttonSoft = new Button();
-        $buttonSoft->props = ['variant' => 'soft', 'link_color' => 'primary', 'size' => 'xs'];
+        $buttonSoft->load(props: ['variant' => 'soft', 'link_color' => 'primary', 'size' => 'xs']);
         $softClasses = $buttonSoft->getClasses();
         self::assertStringContainsString('bg-primary-100', $softClasses);
         self::assertStringContainsString('text-primary-800', $softClasses);
         self::assertStringContainsString('py-1.5 px-2.5', $softClasses);
 
         $buttonWhite = new Button();
-        $buttonWhite->props = ['variant' => 'white', 'size' => 'xl'];
+        $buttonWhite->load(props: ['variant' => 'white', 'size' => 'xl']);
         $whiteClasses = $buttonWhite->getClasses();
         self::assertStringContainsString('bg-layer text-layer-foreground', $whiteClasses);
         self::assertStringContainsString('py-4 px-6', $whiteClasses);

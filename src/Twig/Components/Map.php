@@ -10,26 +10,29 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible responsive Map component.
  */
 #[AsTwigComponent('Map', template: '@SuluPrelineBlocks/components/Map.html.twig')]
-final class Map
+final class Map extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public ?string $location_query = null;
-    public int|string $zoom = 14;
-    public string $aspect_ratio = '16/9';
+    protected function defaults(): array
+    {
+        return [
+            'zoom' => 14,
+            'aspect_ratio' => '16/9',
+        ];
+    }
 
-    /**
-     * @var array<int|string, mixed>
-     */
-    public array $items = [];
+    protected function dataKeys(): array
+    {
+        return ['location_query'];
+    }
 
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
+    public function shouldRender(): bool
+    {
+        return $this->hasMap() || $this->hasItems();
+    }
 
     public function getZoom(): int
     {
-        $z = (int) $this->zoom;
+        $z = $this->intProp('zoom', 14);
         if ($z < 1) {
             return 14;
         }
@@ -39,11 +42,11 @@ final class Map
 
     public function getEmbedUrl(): string
     {
-        $query = $this->location_query;
+        $query = $this->nullableString('location_query');
 
-        if (null === $query || '' === \trim($query)) {
+        if (null === $query) {
             $items = $this->getNormalizedItems();
-            if (!empty($items)) {
+            if ([] !== $items) {
                 $query = $items[0]['location'];
             }
         }
@@ -54,12 +57,10 @@ final class Map
 
         $query = \trim($query);
 
-        // Check if raw iframe code was pasted
         if (\str_contains($query, '<iframe') && 1 === \preg_match('/src="([^"]+)"/i', $query, $matches)) {
             return $matches[1];
         }
 
-        // Check if already an embed URL
         if (\str_starts_with($query, 'https://') && (\str_contains($query, 'google.com/maps') || \str_contains($query, 'openstreetmap.org'))) {
             return $query;
         }
@@ -74,7 +75,7 @@ final class Map
 
     public function getAspectRatioClasses(): string
     {
-        return match ($this->aspect_ratio) {
+        return match ($this->stringProp('aspect_ratio', '16/9')) {
             '16/9' => 'aspect-video',
             '4/3' => 'aspect-4/3',
             '21/9' => 'aspect-21/9',
@@ -83,7 +84,7 @@ final class Map
         };
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
         $classes = [
             'relative',
@@ -95,6 +96,10 @@ final class Map
             'shadow-xs',
             'bg-surface',
         ];
+
+        if ('' !== $extraBase) {
+            $classes[] = $extraBase;
+        }
 
         return \implode(' ', $classes);
     }
@@ -119,11 +124,7 @@ final class Map
     {
         $normalized = [];
 
-        foreach ($this->items as $item) {
-            if (!\is_array($item)) {
-                continue;
-            }
-
+        foreach ($this->items('items') as $item) {
             $location = \is_string($item['location'] ?? null) ? \trim($item['location']) : '';
             if ('' === $location) {
                 continue;
@@ -137,7 +138,7 @@ final class Map
             $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
             $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
-            if ('#' === $link) {
+            if ('#' === $link || '' === $link) {
                 $link = null;
             }
 
@@ -166,6 +167,6 @@ final class Map
 
     public function hasItems(): bool
     {
-        return !empty($this->getNormalizedItems());
+        return [] !== $this->getNormalizedItems();
     }
 }

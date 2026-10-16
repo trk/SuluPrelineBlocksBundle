@@ -16,15 +16,15 @@ final class ComponentSuiteTest extends TestCase
     public function testHeadline(): void
     {
         $headline = new Headline();
-        $headline->title = 'Welcome to Totoglu Studio';
-        $headline->props = [
+        $headline->assign('title', 'Welcome to Totoglu Studio');
+        $headline->mergeProps([
             'tag' => 'h1',
             'title_color' => 'primary',
             'text_align' => 'center',
             'margin_top' => 'md',
             'margin_bottom' => 'sm',
             'id' => 'hero-title',
-        ];
+        ]);
 
         self::assertSame('Welcome to Totoglu Studio', $headline->getTitle());
         self::assertSame('h1', $headline->getTag());
@@ -42,7 +42,7 @@ final class ComponentSuiteTest extends TestCase
     public function testHeadlineDefaults(): void
     {
         $headline = new Headline();
-        $headline->content = 'Hello World !';
+        $headline->assign('content', 'Hello World !');
 
         self::assertSame('Hello World !', $headline->getTitle());
         self::assertSame('h2', $headline->getTag());
@@ -54,31 +54,31 @@ final class ComponentSuiteTest extends TestCase
         self::assertStringContainsString('text-2xl', $classes);
         self::assertStringContainsString('text-foreground', $classes);
 
-        $headline->image = [
+        $headline->assign('image', [
             'url' => 'https://cdn.example.com/icon.png',
             'focalPoint' => ['x' => 25, 'y' => 75],
-        ];
+        ]);
         self::assertSame('object-position: 25% 75%;', $headline->getImageFocusPointStyle());
     }
 
     public function testHeadlineDecorationsAndStroke(): void
     {
         $headline = new Headline();
-        $headline->props = [
+        $headline->mergeProps([
             'size' => '2xl',
             'title_decoration' => 'bullet',
             'title_text_stroke' => true,
-        ];
+        ]);
 
         self::assertSame('bullet', $headline->getTitleDecoration());
         self::assertStringContainsString('before:w-1.5', $headline->getDecorationClasses());
         self::assertTrue($headline->isTextStroke());
         self::assertStringContainsString('-webkit-text-stroke', $headline->getTextStrokeClasses());
 
-        $headline->props['title_decoration'] = 'divider';
+        $headline->setProp('title_decoration', 'divider');
         self::assertStringContainsString('border-b-2', $headline->getDecorationClasses());
 
-        $headline->props['title_decoration'] = 'line';
+        $headline->setProp('title_decoration', 'line');
         self::assertStringContainsString('after:content', $headline->getDecorationClasses());
 
         $classes = $headline->getWrapperClasses();
@@ -88,14 +88,14 @@ final class ComponentSuiteTest extends TestCase
     public function testText(): void
     {
         $text = new Text();
-        $text->content = '<p>Sample text paragraph.</p>';
-        $text->props = [
+        $text->assign('content', '<p>Sample text paragraph.</p>');
+        $text->mergeProps([
             'font_size' => 'lg',
             'text_color' => 'muted',
             'text_align' => 'justify',
             'margin_bottom' => 'lg',
             'id' => 'bio-text',
-        ];
+        ]);
 
         self::assertSame('bio-text', $text->getElementId());
         self::assertSame('text-lg', $text->getFontSize());
@@ -112,14 +112,14 @@ final class ComponentSuiteTest extends TestCase
     public function testImage(): void
     {
         $image = new Image();
-        $image->image = 'https://cdn.example.com/banner.jpg';
-        $image->props = [
+        $image->assign('image', 'https://cdn.example.com/banner.jpg');
+        $image->mergeProps([
             'aspect_ratio' => '16/9',
             'rounded' => 'xl',
             'margin_top' => 'sm',
             'caption' => 'Studio Banner',
             'id' => 'main-banner',
-        ];
+        ]);
 
         self::assertSame('main-banner', $image->getElementId());
         self::assertSame('https://cdn.example.com/banner.jpg', $image->getImageUrl());
@@ -130,21 +130,21 @@ final class ComponentSuiteTest extends TestCase
         self::assertNull($image->getImageFocusPointStyle());
 
         // Test with responsive formats, focal point, and hover image
-        $image->image = [
+        $image->assign('image', [
             'url' => 'https://cdn.example.com/banner.jpg',
             'formats' => [
                 'col-sm' => 'https://cdn.example.com/banner-400.webp',
                 'col-lg' => 'https://cdn.example.com/banner-960.webp',
             ],
             'focalPoint' => ['x' => 30, 'y' => 70],
-        ];
-        $image->hover_image = [
+        ]);
+        $image->assign('hover_image', [
             'url' => 'https://cdn.example.com/banner-hover.jpg',
             'formats' => [
                 'col-sm' => 'https://cdn.example.com/banner-hover-400.webp',
             ],
             'focalPoint' => ['x' => 50, 'y' => 50],
-        ];
+        ]);
 
         self::assertNotNull($image->getImageSrcSet());
         self::assertStringContainsString('banner-400.webp 400w', $image->getImageSrcSet());
@@ -162,23 +162,23 @@ final class ComponentSuiteTest extends TestCase
     public function testVideo(): void
     {
         $video = new Video();
-        $video->video = 'https://cdn.example.com/intro.mp4';
-        $video->image = [
+        $video->assign('video', 'https://cdn.example.com/intro.mp4');
+        $video->assign('image', [
             'url' => 'https://cdn.example.com/poster.jpg',
             'formats' => [
                 'col-md' => 'https://cdn.example.com/poster-640.webp',
                 'col-xl' => 'https://cdn.example.com/poster-1280.webp',
             ],
             'focalPoint' => ['x' => 40, 'y' => 60],
-        ];
-        $video->props = [
+        ]);
+        $video->mergeProps([
             'aspect_ratio' => '16/9',
             'autoplay' => true,
             'controls' => false,
             'loop' => true,
             'margin_bottom' => 'xl',
             'id' => 'intro-video',
-        ];
+        ]);
 
         self::assertSame('intro-video', $video->getElementId());
         self::assertSame('https://cdn.example.com/intro.mp4', $video->getVideoUrl());
@@ -200,40 +200,40 @@ final class ComponentSuiteTest extends TestCase
         self::assertStringContainsString('mb-16', $classes);
 
         // Test autoplay inview/hover modes and shadow
-        $video->props['autoplay'] = 'inview';
+        $video->setProp('autoplay', 'inview');
         self::assertTrue($video->isAutoplay());
         self::assertSame('inview', $video->getAutoplayMode());
         self::assertTrue($video->isMuted());
 
-        $video->props['box_shadow'] = 'xl';
+        $video->setProp('box_shadow', 'xl');
         self::assertSame('shadow-xl', $video->getShadowClasses());
         self::assertStringContainsString('shadow-xl', $video->getWrapperClasses());
 
-        $video->props['muted'] = false;
+        $video->setProp('muted', false);
         self::assertFalse($video->isMuted());
 
         // Aspect ratio variations and alias test
-        $video->props['aspect_ratio'] = '9/16';
+        $video->setProp('aspect_ratio', '9/16');
         self::assertSame('aspect-[9/16]', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '9x16';
+        $video->setProp('aspect_ratio', '9x16');
         self::assertSame('aspect-[9/16]', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '21/9';
+        $video->setProp('aspect_ratio', '21/9');
         self::assertSame('aspect-[21/9]', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '21x9';
+        $video->setProp('aspect_ratio', '21x9');
         self::assertSame('aspect-[21/9]', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '4/3';
+        $video->setProp('aspect_ratio', '4/3');
         self::assertSame('aspect-4/3', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '4x3';
+        $video->setProp('aspect_ratio', '4x3');
         self::assertSame('aspect-4/3', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '1/1';
+        $video->setProp('aspect_ratio', '1/1');
         self::assertSame('aspect-square', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '1x1';
+        $video->setProp('aspect_ratio', '1x1');
         self::assertSame('aspect-square', $video->getAspectRatio());
-        $video->props['aspect_ratio'] = '16x9';
+        $video->setProp('aspect_ratio', '16x9');
         self::assertSame('aspect-video', $video->getAspectRatio());
 
         // Video rounded variations
-        $video->props['rounded'] = 'full';
+        $video->setProp('rounded', 'full');
         self::assertSame('rounded-full', $video->getRounded());
         self::assertStringContainsString('rounded-full', $video->getWrapperClasses());
     }
@@ -241,39 +241,39 @@ final class ComponentSuiteTest extends TestCase
     public function testImageAspectRatiosAndRounded(): void
     {
         $image = new Image();
-        $image->image = 'https://cdn.example.com/banner.jpg';
+        $image->assign('image', 'https://cdn.example.com/banner.jpg');
 
-        $image->props = ['aspect_ratio' => '9/16', 'rounded' => '2xl'];
+        $image->mergeProps(['aspect_ratio' => '9/16', 'rounded' => '2xl']);
         self::assertSame('aspect-[9/16]', $image->getAspectRatio());
         self::assertSame('rounded-2xl', $image->getRounded());
 
-        $image->props = ['aspect_ratio' => '9x16', 'rounded' => 'full'];
+        $image->mergeProps(['aspect_ratio' => '9x16', 'rounded' => 'full']);
         self::assertSame('aspect-[9/16]', $image->getAspectRatio());
         self::assertSame('rounded-full', $image->getRounded());
 
-        $image->props = ['aspect_ratio' => '21/9'];
+        $image->mergeProps(['aspect_ratio' => '21/9']);
         self::assertSame('aspect-[21/9]', $image->getAspectRatio());
 
-        $image->props = ['aspect_ratio' => '21x9'];
+        $image->mergeProps(['aspect_ratio' => '21x9']);
         self::assertSame('aspect-[21/9]', $image->getAspectRatio());
 
-        $image->props = ['aspect_ratio' => '16x9'];
+        $image->mergeProps(['aspect_ratio' => '16x9']);
         self::assertSame('aspect-video', $image->getAspectRatio());
 
-        $image->props = ['aspect_ratio' => '1x1'];
+        $image->mergeProps(['aspect_ratio' => '1x1']);
         self::assertSame('aspect-square', $image->getAspectRatio());
 
-        $image->props = ['aspect_ratio' => '4x3'];
+        $image->mergeProps(['aspect_ratio' => '4x3']);
         self::assertSame('aspect-4/3', $image->getAspectRatio());
     }
 
     public function testTextFallbacks(): void
     {
         $text = new Text();
-        $text->props = [
+        $text->mergeProps([
             'size' => 'xl',
             'color' => 'primary',
-        ];
+        ]);
 
         self::assertSame('text-xl', $text->getFontSize());
         self::assertSame('text-primary', $text->getTextColor());
@@ -282,12 +282,12 @@ final class ComponentSuiteTest extends TestCase
     public function testTextAdvancedFeatures(): void
     {
         $text = new Text();
-        $text->props = [
+        $text->mergeProps([
             'dropcap' => true,
             'column' => '1-2',
             'column_divider' => true,
             'text_style' => 'lead',
-        ];
+        ]);
 
         self::assertTrue($text->isDropcap());
         self::assertStringContainsString('first-letter:float-left', $text->getDropcapClasses());
@@ -304,11 +304,11 @@ final class ComponentSuiteTest extends TestCase
     public function testCardLayoutAndAlignments(): void
     {
         $card = new Card();
-        $card->title = 'Modern Card';
-        $card->meta = 'Technology';
-        $card->content = '<p>Card content text.</p>';
-        $card->image = 'https://cdn.example.com/cover.jpg';
-        $card->props = [
+        $card->assign('title', 'Modern Card');
+        $card->assign('meta', 'Technology');
+        $card->assign('content', '<p>Card content text.</p>');
+        $card->assign('image', 'https://cdn.example.com/cover.jpg');
+        $card->mergeProps([
             'media_align' => 'left',
             'media_width' => '1-3',
             'media_aspect_ratio' => '16-9',
@@ -320,7 +320,7 @@ final class ComponentSuiteTest extends TestCase
             'variant' => 'interactive',
             'rounded' => '2xl',
             'padding' => 'spacious',
-        ];
+        ]);
 
         self::assertSame('left', $card->getMediaAlign());
         self::assertTrue($card->isHorizontal());
@@ -342,7 +342,7 @@ final class ComponentSuiteTest extends TestCase
         self::assertStringContainsString('hover:-translate-y-1', $classes);
 
         // Overlay layout test
-        $card->props['media_align'] = 'overlay';
+        $card->setProp('media_align', 'overlay');
         self::assertSame('overlay', $card->getMediaAlign());
         self::assertTrue($card->isOverlay());
         self::assertFalse($card->isHorizontal());
@@ -353,12 +353,12 @@ final class ComponentSuiteTest extends TestCase
     public function testCardClickableUrl(): void
     {
         $card = new Card();
-        $card->link = ['url' => 'https://example.com/article'];
-        $card->linkTitle = 'Read More';
-        $card->props = [
+        $card->assign('link', ['url' => 'https://example.com/article']);
+        $card->assign('linkTitle', 'Read More');
+        $card->mergeProps([
             'link_card' => 'card',
             'button_style' => 'outline',
-        ];
+        ]);
 
         self::assertSame('https://example.com/article', $card->getLinkUrl());
         self::assertSame('Read More', $card->getButtonText());
@@ -367,17 +367,17 @@ final class ComponentSuiteTest extends TestCase
 
         // Legacy cardLink compatibility test
         $legacyCard = new Card();
-        $legacyCard->cardLink = ['url' => 'https://example.com/legacy'];
-        $legacyCard->props = ['link_card' => 'card_link'];
+        $legacyCard->assign('cardLink', ['url' => 'https://example.com/legacy']);
+        $legacyCard->mergeProps(['link_card' => 'card_link']);
         self::assertSame('https://example.com/legacy', $legacyCard->getResolvedCardUrl());
 
         // First button link fallback test
         $btnCard = new Card();
-        $btnCard->buttons = [
+        $btnCard->assign('buttons', [
             ['link' => 'https://example.com/first-btn', 'content' => 'Read'],
             ['link' => 'https://example.com/second-btn', 'content' => 'Secondary'],
-        ];
-        $btnCard->props['link_card'] = 'first_button';
+        ]);
+        $btnCard->setProp('link_card', 'first_button');
 
         self::assertSame('https://example.com/first-btn', $btnCard->getResolvedCardUrl());
         self::assertSame('Read', $btnCard->getButtonText());

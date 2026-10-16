@@ -13,13 +13,13 @@ final class ColumnTest extends TestCase
     {
         $col = new Column();
 
-        self::assertSame('auto', $col->col_span);
-        self::assertSame('none', $col->style);
-        self::assertSame('none', $col->padding);
-        self::assertSame('top', $col->vertical_align);
-        self::assertSame('start', $col->text_align);
-        self::assertFalse($col->is_sticky);
-        self::assertSame('default', $col->order);
+        self::assertSame('auto', $col->get('col_span'));
+        self::assertSame('none', $col->get('style'));
+        self::assertSame('none', $col->get('padding'));
+        self::assertSame('top', $col->get('vertical_align'));
+        self::assertSame('start', $col->get('text_align'));
+        self::assertFalse($col->get('is_sticky'));
+        self::assertSame('default', $col->get('order'));
         self::assertSame('', $col->getColSpanClasses());
         self::assertSame('', $col->getStyleClasses());
         self::assertSame('', $col->getPaddingClasses());
@@ -33,7 +33,7 @@ final class ColumnTest extends TestCase
     public function testSpansAndStylesFromProps(): void
     {
         $col = new Column();
-        $col->props = [
+        $col->mergeProps([
             'col_span' => '6',
             'style' => 'card',
             'padding' => 'md',
@@ -42,7 +42,7 @@ final class ColumnTest extends TestCase
             'is_sticky' => true,
             'order' => 'first',
             'id' => 'col-main',
-        ];
+        ]);
 
         self::assertSame('col-main', $col->getElementId());
         self::assertSame('col-span-12 md:col-span-6', $col->getColSpanClasses());
@@ -65,10 +65,10 @@ final class ColumnTest extends TestCase
         self::assertFalse($col->hasBlocks());
         self::assertEmpty($col->getNormalizedBlocks());
 
-        $col->blocks = [
+        $col->assign('blocks', [
             ['type' => 'headline', 'title' => 'Inner Title'],
             ['type' => 'text', 'content' => '<p>Inner Text</p>'],
-        ];
+        ]);
 
         self::assertTrue($col->hasBlocks());
         self::assertCount(2, $col->getNormalizedBlocks());

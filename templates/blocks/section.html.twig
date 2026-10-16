@@ -1,8 +1,4 @@
 {% set block = block|block_transform(_context)|hydrate_block_tree(_context, ['rows', 'columns', 'blocks']) %}
 {% if block %}
-<twig:Section
-    :rows="block.rows|default([])"
-    :props="block|merge(block._props|default({}))"
-    :context="_context"
-/>
+    <twig:Section :block="block" :context="_context" />
 {% endif %}

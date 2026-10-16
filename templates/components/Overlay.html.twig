@@ -18,6 +18,7 @@
     {% endfor %}
 {% endmacro %}
 
+{% set content = summary|default(content) %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}
 {% set active_img = this.getActiveImageUrl() %}

@@ -13,12 +13,12 @@ final class SectionTest extends TestCase
     {
         $sec = new Section();
 
-        self::assertSame('85rem', $sec->max_width);
-        self::assertSame('default', $sec->padding_y);
-        self::assertSame('default', $sec->padding_x);
-        self::assertSame('transparent', $sec->bg_style);
-        self::assertFalse($sec->has_border);
-        self::assertEmpty($sec->rows);
+        self::assertSame('85rem', $sec->get('max_width'));
+        self::assertSame('default', $sec->get('padding_y'));
+        self::assertSame('default', $sec->get('padding_x'));
+        self::assertSame('transparent', $sec->get('bg_style'));
+        self::assertFalse($sec->get('has_border'));
+        self::assertEmpty($sec->get('rows'));
 
         self::assertFalse($sec->hasRows());
 
@@ -30,7 +30,7 @@ final class SectionTest extends TestCase
     public function testStylesAndContainersFromProps(): void
     {
         $sec = new Section();
-        $sec->props = [
+        $sec->mergeProps([
             'bg_style' => 'muted',
             'has_border' => true,
             'max_width' => '7xl',
@@ -38,7 +38,7 @@ final class SectionTest extends TestCase
             'padding_x' => 'none',
             'id' => 'features-section',
             'custom_class' => 'my-custom-sec',
-        ];
+        ]);
 
         self::assertSame('features-section', $sec->getElementId());
         self::assertStringContainsString('bg-background-1', $sec->getSectionClasses());
@@ -55,7 +55,7 @@ final class SectionTest extends TestCase
         self::assertFalse($sec->hasRows());
         self::assertEmpty($sec->getNormalizedRows());
 
-        $sec->rows = [
+        $sec->assign('rows', [
             [
                 'props' => ['layout' => 'thirds', 'gap' => 'lg'],
                 'columns' => [
@@ -63,7 +63,7 @@ final class SectionTest extends TestCase
                     ['props' => ['col_span' => '8']],
                 ],
             ],
-        ];
+        ]);
 
         self::assertTrue($sec->hasRows());
         $rows = $sec->getNormalizedRows();

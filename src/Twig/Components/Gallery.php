@@ -7,151 +7,54 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Gallery', template: '@SuluPrelineBlocks/components/Gallery.html.twig')]
-final class Gallery
+final class Gallery extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var list<array<string, mixed>>|array<string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public string|int|null $columnsDefault = null;
-    public string|int|null $columns_default = null;
-    public string|int|null $columnsSm = null;
-    public string|int|null $columns_sm = null;
-    public string|int|null $columnsMd = null;
-    public string|int|null $columns_md = null;
-    public string|int|null $columnsLg = null;
-    public string|int|null $columns_lg = null;
-    public string|int|null $columnsXl = null;
-    public string|int|null $columns_xl = null;
-    public string|int|null $gap = null;
-    public ?string $masonry = null;
-
-    public ?string $overlayPosition = null;
-    public ?string $overlay_position = null;
-    public ?string $overlayMode = null;
-    public ?string $overlay_mode = null;
-    public ?string $overlayStyle = null;
-    public ?string $overlay_style = null;
-    public ?string $overlayTransition = null;
-    public ?string $overlay_transition = null;
-    public ?string $imageTransition = null;
-    public ?string $image_transition = null;
-    public ?string $mediaAspectRatio = null;
-    public ?string $media_aspect_ratio = null;
-    public ?string $rounded = null;
-
-    public ?bool $lightbox = null;
-
-    public ?bool $filter = null;
-    public ?string $filterStyle = null;
-    public ?string $filter_style = null;
-    public ?string $filterAlign = null;
-    public ?string $filter_align = null;
-    public ?string $filterAllLabel = null;
-    public ?string $filter_all_label = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            $resolved = \array_merge($resolved['props'], $resolved);
-        }
+        return [
+            'gap' => 'md',
+            'masonry' => 'none',
+            'overlay_position' => 'bottom',
+            'overlay_mode' => 'cover',
+            'overlay_style' => 'gradient',
+            'overlay_transition' => 'fade',
+            'image_transition' => 'zoom',
+            'media_aspect_ratio' => '4/3',
+            'rounded' => 'xl',
+            'lightbox' => false,
+            'filter' => false,
+            'filter_style' => 'pills',
+            'filter_align' => 'center',
+            'filter_all_label' => 'All',
+        ];
+    }
 
-        $defaultCol = $this->columnsDefault ?? $this->columns_default;
-        if (null !== $defaultCol) {
-            $resolved['columns_default'] = (string) $defaultCol;
-        }
-        $smCol = $this->columnsSm ?? $this->columns_sm;
-        if (null !== $smCol) {
-            $resolved['columns_sm'] = (string) $smCol;
-        }
-        $mdCol = $this->columnsMd ?? $this->columns_md;
-        if (null !== $mdCol) {
-            $resolved['columns_md'] = (string) $mdCol;
-        }
-        $lgCol = $this->columnsLg ?? $this->columns_lg;
-        if (null !== $lgCol) {
-            $resolved['columns_lg'] = (string) $lgCol;
-        }
-        $xlCol = $this->columnsXl ?? $this->columns_xl;
-        if (null !== $xlCol) {
-            $resolved['columns_xl'] = (string) $xlCol;
-        }
-        if (null !== $this->gap) {
-            $resolved['gap'] = (string) $this->gap;
-        }
-        if (null !== $this->masonry) {
-            $resolved['masonry'] = $this->masonry;
-        }
-        if (null !== ($this->overlayPosition ?? $this->overlay_position)) {
-            $resolved['overlay_position'] = $this->overlayPosition ?? $this->overlay_position;
-        }
-        if (null !== ($this->overlayMode ?? $this->overlay_mode)) {
-            $resolved['overlay_mode'] = $this->overlayMode ?? $this->overlay_mode;
-        }
-        if (null !== ($this->overlayStyle ?? $this->overlay_style)) {
-            $resolved['overlay_style'] = $this->overlayStyle ?? $this->overlay_style;
-        }
-        if (null !== ($this->overlayTransition ?? $this->overlay_transition)) {
-            $resolved['overlay_transition'] = $this->overlayTransition ?? $this->overlay_transition;
-        }
-        if (null !== ($this->imageTransition ?? $this->image_transition)) {
-            $resolved['image_transition'] = $this->imageTransition ?? $this->image_transition;
-        }
-        if (null !== ($this->mediaAspectRatio ?? $this->media_aspect_ratio)) {
-            $resolved['media_aspect_ratio'] = $this->mediaAspectRatio ?? $this->media_aspect_ratio;
-        }
-        if (null !== $this->rounded) {
-            $resolved['rounded'] = $this->rounded;
-        }
-        if (null !== $this->lightbox) {
-            $resolved['lightbox'] = $this->lightbox;
-        }
-        if (null !== $this->filter) {
-            $resolved['filter'] = $this->filter;
-        }
-        if (null !== ($this->filterStyle ?? $this->filter_style)) {
-            $resolved['filter_style'] = $this->filterStyle ?? $this->filter_style;
-        }
-        if (null !== ($this->filterAlign ?? $this->filter_align)) {
-            $resolved['filter_align'] = $this->filterAlign ?? $this->filter_align;
-        }
-        if (null !== ($this->filterAllLabel ?? $this->filter_all_label)) {
-            $resolved['filter_all_label'] = $this->filterAllLabel ?? $this->filter_all_label;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'masonry' => fn (): bool => $this->isMasonry(),
+            'filterable' => fn (): bool => $this->isFilterEnabled(),
+        ];
     }
 
     /**
@@ -159,32 +62,19 @@ final class Gallery
      */
     public function getNormalizedItems(): array
     {
-        $items = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $typedItem */
-                $typedItem = $item;
-                $items[] = $typedItem;
-            }
-        }
-
-        return $items;
+        return $this->items('items');
     }
 
     public function isMasonry(): bool
     {
-        $props = $this->getResolvedProps();
-        $masonry = isset($props['masonry']) && \is_string($props['masonry']) ? $props['masonry'] : 'none';
-
-        return 'columns' === $masonry;
+        return 'columns' === $this->stringProp('masonry', 'none');
     }
 
     public function getContainerClasses(): string
     {
-        $props = $this->getResolvedProps();
+        $props = $this->props();
 
-        $gap = isset($props['gap']) && \is_scalar($props['gap']) ? (string) $props['gap'] : 'md';
-        $gapClass = match ($gap) {
+        $gapClass = match ($this->stringProp('gap', 'md')) {
             'none', 'collapse', '0' => 'gap-0',
             'xs', 'xsmall' => 'gap-2',
             'sm', 'small' => 'gap-4',
@@ -194,8 +84,9 @@ final class Gallery
             default => 'gap-6',
         };
 
-        $colsDefault = isset($props['columns_default']) && \is_scalar($props['columns_default']) && '' !== (string) $props['columns_default'] && 'inherit' !== (string) $props['columns_default'] && 'none' !== (string) $props['columns_default']
-            ? (string) $props['columns_default']
+        $rawDefault = $this->nullableStringProp('columns_default');
+        $colsDefault = null !== $rawDefault && 'inherit' !== $rawDefault && 'none' !== $rawDefault
+            ? $rawDefault
             : '1';
 
         $hasExplicitResponsive = \array_key_exists('columns_sm', $props)
@@ -203,18 +94,19 @@ final class Gallery
             || \array_key_exists('columns_lg', $props)
             || \array_key_exists('columns_xl', $props);
 
-        $colsSm = isset($props['columns_sm']) && \is_scalar($props['columns_sm']) && 'inherit' !== (string) $props['columns_sm'] && 'none' !== (string) $props['columns_sm']
-            ? (string) $props['columns_sm']
-            : '';
-        $colsMd = isset($props['columns_md']) && \is_scalar($props['columns_md']) && 'inherit' !== (string) $props['columns_md'] && 'none' !== (string) $props['columns_md']
-            ? (string) $props['columns_md']
+        $rawSm = $this->nullableStringProp('columns_sm');
+        $colsSm = null !== $rawSm && 'inherit' !== $rawSm && 'none' !== $rawSm ? $rawSm : '';
+
+        $rawMd = $this->nullableStringProp('columns_md');
+        $colsMd = null !== $rawMd && 'inherit' !== $rawMd && 'none' !== $rawMd
+            ? $rawMd
             : (!$hasExplicitResponsive ? '3' : '');
-        $colsLg = isset($props['columns_lg']) && \is_scalar($props['columns_lg']) && 'inherit' !== (string) $props['columns_lg'] && 'none' !== (string) $props['columns_lg']
-            ? (string) $props['columns_lg']
-            : '';
-        $colsXl = isset($props['columns_xl']) && \is_scalar($props['columns_xl']) && 'inherit' !== (string) $props['columns_xl'] && 'none' !== (string) $props['columns_xl']
-            ? (string) $props['columns_xl']
-            : '';
+
+        $rawLg = $this->nullableStringProp('columns_lg');
+        $colsLg = null !== $rawLg && 'inherit' !== $rawLg && 'none' !== $rawLg ? $rawLg : '';
+
+        $rawXl = $this->nullableStringProp('columns_xl');
+        $colsXl = null !== $rawXl && 'inherit' !== $rawXl && 'none' !== $rawXl ? $rawXl : '';
 
         if ($this->isMasonry()) {
             $defaultColClass = match ($colsDefault) {
@@ -342,16 +234,12 @@ final class Gallery
 
     public function isFilterEnabled(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return !empty($props['filter']);
+        return $this->boolProp('filter', false);
     }
 
     public function isLightboxEnabled(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return !empty($props['lightbox']);
+        return $this->boolProp('lightbox', false);
     }
 
     /**
@@ -384,10 +272,7 @@ final class Gallery
 
     public function getFilterAlignClass(): string
     {
-        $props = $this->getResolvedProps();
-        $align = isset($props['filter_align']) && \is_string($props['filter_align']) ? $props['filter_align'] : 'center';
-
-        return match ($align) {
+        return match ($this->stringProp('filter_align', 'center')) {
             'left' => 'justify-start',
             'right' => 'justify-end',
             default => 'justify-center',
@@ -427,21 +312,20 @@ final class Gallery
      */
     public function resolveItemProps(array $item): array
     {
-        $props = $this->getResolvedProps();
         $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
 
-        $overlayPosition = isset($props['overlay_position']) && \is_string($props['overlay_position']) ? $props['overlay_position'] : 'bottom';
-        $overlayMode = isset($props['overlay_mode']) && \is_string($props['overlay_mode']) ? $props['overlay_mode'] : 'cover';
+        $overlayPosition = $this->stringProp('overlay_position', 'bottom');
+        $overlayMode = $this->stringProp('overlay_mode', 'cover');
 
-        $overlayStyle = isset($props['overlay_style']) && \is_string($props['overlay_style']) ? $props['overlay_style'] : 'gradient';
+        $overlayStyle = $this->stringProp('overlay_style', 'gradient');
         if (isset($item['overlay_style']) && \is_string($item['overlay_style']) && 'inherit' !== $item['overlay_style'] && '' !== \trim($item['overlay_style'])) {
             $overlayStyle = $item['overlay_style'];
         }
 
-        $overlayTransition = isset($props['overlay_transition']) && \is_string($props['overlay_transition']) ? $props['overlay_transition'] : 'fade';
-        $imageTransition = isset($props['image_transition']) && \is_string($props['image_transition']) ? $props['image_transition'] : 'zoom';
-        $mediaAspectRatio = isset($props['media_aspect_ratio']) && \is_string($props['media_aspect_ratio']) ? $props['media_aspect_ratio'] : '4/3';
-        $rounded = isset($props['rounded']) && \is_string($props['rounded']) ? $props['rounded'] : 'xl';
+        $overlayTransition = $this->stringProp('overlay_transition', 'fade');
+        $imageTransition = $this->stringProp('image_transition', 'zoom');
+        $mediaAspectRatio = $this->stringProp('media_aspect_ratio', '4/3');
+        $rounded = $this->stringProp('rounded', 'xl');
 
         $buttonStyle = 'primary';
         if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style'] && '' !== \trim($item['link_style'])) {
@@ -468,9 +352,7 @@ final class Gallery
      */
     public function resolveItemImageUrl(array $item): ?string
     {
-        $image = $item['image'] ?? null;
-
-        return PropsResolver::resolveImageUrl($image);
+        return PropsResolver::resolveImageUrl($item['image'] ?? null);
     }
 
     /**
@@ -478,9 +360,7 @@ final class Gallery
      */
     public function resolveItemImageSrcSet(array $item): ?string
     {
-        $image = $item['image'] ?? null;
-
-        return PropsResolver::resolveSrcSet($image);
+        return PropsResolver::resolveSrcSet($item['image'] ?? null);
     }
 
     /**
@@ -488,27 +368,6 @@ final class Gallery
      */
     public function resolveItemImageFocusPointStyle(array $item): ?string
     {
-        $image = $item['image'] ?? null;
-
-        return PropsResolver::resolveFocusPointStyle($image);
-    }
-
-    public function getMarginClass(): string
-    {
-        return ElementTransform::margin($this->getResolvedProps());
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-
-        return isset($props['id']) && \is_string($props['id']) && '' !== \trim($props['id']) ? \trim($props['id']) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-
-        return isset($props['custom_class']) && \is_string($props['custom_class']) ? \trim($props['custom_class']) : '';
+        return PropsResolver::resolveFocusPointStyle($item['image'] ?? null);
     }
 }

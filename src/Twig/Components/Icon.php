@@ -7,81 +7,33 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Icon', template: '@SuluPrelineBlocks/components/Icon.html.twig')]
-final class Icon
+final class Icon extends AbstractPrelineComponent
 {
-    public mixed $icon = null;
-    public mixed $link = null;
-
-    public ?string $iconStyle = null;
-    public ?string $icon_style = null;
-    public ?string $iconSize = null;
-    public ?string $icon_size = null;
-    public ?string $iconColor = null;
-    public ?string $icon_color = null;
-    public ?string $align = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
+        return [
+            'icon_style' => 'plain',
+            'icon_size' => 'md',
+            'icon_color' => 'primary',
+            'align' => 'left',
+        ];
+    }
 
-        if (null !== ($this->iconStyle ?? $this->icon_style)) {
-            $resolved['icon_style'] = $this->iconStyle ?? $this->icon_style;
-        }
-        if (null !== ($this->iconSize ?? $this->icon_size)) {
-            $resolved['icon_size'] = $this->iconSize ?? $this->icon_size;
-        }
-        if (null !== ($this->iconColor ?? $this->icon_color)) {
-            $resolved['icon_color'] = $this->iconColor ?? $this->icon_color;
-        }
-        if (null !== $this->align) {
-            $resolved['align'] = $this->align;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-
-        return $resolved;
+    public function shouldRender(): bool
+    {
+        return null !== $this->getResolvedIcon();
     }
 
     public function getResolvedIcon(): ?string
     {
-        return PropsResolver::resolveIcon($this->icon ?? ($this->props['icon'] ?? null));
+        return $this->getIconClass('icon');
     }
 
     public function getUrl(): ?string
     {
-        if (null === $this->link) {
-            return null;
-        }
+        $url = $this->getLinkUrl('link');
 
-        $url = PropsResolver::resolveUrl($this->link);
-
-        return ('#' === $url || '' === $url) ? null : $url;
+        return ('#' === $url || null === $url || '' === $url) ? null : $url;
     }
 
     public function hasLink(): bool
@@ -91,29 +43,20 @@ final class Icon
 
     public function getIconStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['icon_style'] ?? 'plain';
-
-        return match ($style) {
-            'circle_solid' => 'circle_solid',
-            'circle_outline' => 'circle_outline',
-            'square_soft' => 'square_soft',
-            default => 'plain',
-        };
+        return $this->enumProp('icon_style', ['plain', 'circle_solid', 'circle_outline', 'square_soft'], 'plain');
     }
 
     public function getIconSize(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['icon_size'] ?? 'md';
-
-        return \is_scalar($size) ? (string) $size : 'md';
+        return $this->stringProp('icon_size', 'md');
     }
 
     public function getAlignClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['align'] ?? ($props['text_align'] ?? 'left');
+        $align = $this->nullableStringProp('align');
+        if (null === $align || 'left' === $align) {
+            $align = $this->stringProp('text_align', $align ?? 'left');
+        }
 
         return match ($align) {
             'center' => 'justify-center text-center',
@@ -129,8 +72,7 @@ final class Icon
             return '';
         }
 
-        $size = $this->getIconSize();
-        $sizeClass = match ($size) {
+        $sizeClass = match ($this->getIconSize()) {
             'sm' => 'text-xl',
             'lg' => 'text-4xl',
             'xl' => 'text-5xl',
@@ -145,8 +87,7 @@ final class Icon
     {
         $style = $this->getIconStyle();
         $size = $this->getIconSize();
-        $props = $this->getResolvedProps();
-        $color = $props['icon_color'] ?? 'primary';
+        $color = $this->stringProp('icon_color', 'primary');
 
         $dimensionClass = match ($size) {
             'sm' => 'w-10 h-10',
@@ -200,7 +141,6 @@ final class Icon
             return \sprintf('inline-flex items-center justify-center rounded-full border transition-colors %s %s', $dimensionClass, $border);
         }
 
-        // square_soft
         $soft = match ($color) {
             'secondary' => 'bg-secondary-50 text-secondary dark:bg-secondary-950/40',
             'dark' => 'bg-surface text-surface-foreground',
@@ -216,15 +156,10 @@ final class Icon
         return \sprintf('inline-flex items-center justify-center rounded-xl %s %s %s', $dimensionClass, $soft, $hover);
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $base = 'flex items-center ' . $this->getAlignClasses();
+        $base = \trim('flex items-center ' . $this->getAlignClasses() . ' ' . $extraBase);
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 }

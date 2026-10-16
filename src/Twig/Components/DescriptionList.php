@@ -7,78 +7,45 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('DescriptionList', template: '@SuluPrelineBlocks/components/DescriptionList.html.twig')]
-final class DescriptionList
+final class DescriptionList extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var array<int|string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public ?string $layout = null;
-    public ?string $termWidth = null;
-    public ?string $term_width = null;
-    public ?bool $divider = null;
-    public ?string $size = null;
-    public ?string $termStyle = null;
-    public ?string $term_style = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            /** @var array<string, mixed> $nested */
-            $nested = $resolved['props'];
-            $resolved = \array_merge($nested, $resolved);
-            unset($resolved['props']);
-        }
+        return [
+            'layout' => 'horizontal',
+            'term_width' => '1-3',
+            'divider' => true,
+            'size' => 'md',
+            'term_style' => 'bold',
+        ];
+    }
 
-        if (null !== $this->layout) {
-            $resolved['layout'] = $this->layout;
-        }
-        if (null !== ($this->termWidth ?? $this->term_width)) {
-            $resolved['term_width'] = $this->termWidth ?? $this->term_width;
-        }
-        if (null !== $this->divider) {
-            $resolved['divider'] = $this->divider;
-        }
-        if (null !== $this->size) {
-            $resolved['size'] = $this->size;
-        }
-        if (null !== ($this->termStyle ?? $this->term_style)) {
-            $resolved['term_style'] = $this->termStyle ?? $this->term_style;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'horizontal' => fn (): bool => 'stacked' !== $this->getLayout(),
+            'vertical' => fn (): bool => 'stacked' === $this->getLayout(),
+        ];
     }
 
     /**
@@ -87,17 +54,11 @@ final class DescriptionList
     public function getNormalizedItems(): array
     {
         $normalized = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $itemArr */
-                $itemArr = $item;
-
-                if (isset($itemArr['link'])) {
-                    $itemArr['link_href'] = PropsResolver::resolveUrl($itemArr['link']);
-                }
-
-                $normalized[] = $itemArr;
+        foreach ($this->items('items') as $item) {
+            if (isset($item['link'])) {
+                $item['link_href'] = PropsResolver::resolveUrl($item['link']);
             }
+            $normalized[] = $item;
         }
 
         return $normalized;
@@ -105,10 +66,7 @@ final class DescriptionList
 
     public function getLayout(): string
     {
-        $props = $this->getResolvedProps();
-        $layout = $props['layout'] ?? 'horizontal';
-
-        return match ($layout) {
+        return match ($this->stringProp('layout', 'horizontal')) {
             'stacked' => 'stacked',
             'striped' => 'striped',
             'bordered' => 'bordered',
@@ -118,17 +76,12 @@ final class DescriptionList
 
     public function isDivider(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return (bool) ($props['divider'] ?? true);
+        return $this->boolProp('divider', true);
     }
 
     public function getSize(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['size'] ?? 'md';
-
-        return match ($size) {
+        return match ($this->stringProp('size', 'md')) {
             'sm' => 'sm',
             'lg' => 'lg',
             default => 'md',
@@ -137,10 +90,7 @@ final class DescriptionList
 
     public function getTermWidthClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $width = $props['term_width'] ?? '1-3';
-
-        return match ($width) {
+        return match ($this->stringProp('term_width', '1-3')) {
             '1-4', '1/4' => 'sm:w-1/4',
             '1-2', '1/2' => 'sm:w-1/2',
             'auto' => 'sm:w-auto',
@@ -150,10 +100,7 @@ final class DescriptionList
 
     public function getDescWidthClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $width = $props['term_width'] ?? '1-3';
-
-        return match ($width) {
+        return match ($this->stringProp('term_width', '1-3')) {
             '1-4', '1/4' => 'sm:w-3/4',
             '1-2', '1/2' => 'sm:w-1/2',
             'auto' => 'sm:flex-1',
@@ -176,9 +123,8 @@ final class DescriptionList
     public function getItemRowClasses(): string
     {
         $layout = $this->getLayout();
-        $size = $this->getSize();
 
-        $padding = match ($size) {
+        $padding = match ($this->getSize()) {
             'sm' => 'py-2 px-3',
             'lg' => 'py-4 px-4',
             default => 'py-3 px-3.5',
@@ -194,8 +140,7 @@ final class DescriptionList
 
     public function getTermClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['term_style'] ?? 'bold';
+        $style = $this->stringProp('term_style', 'bold');
         $layout = $this->getLayout();
         $termWidth = 'stacked' === $layout ? 'w-full' : $this->getTermWidthClasses();
 
@@ -219,9 +164,7 @@ final class DescriptionList
 
     public function getMarginClass(): string
     {
-        $props = $this->getResolvedProps();
-
-        $top = match ($props['margin_top'] ?? 'none') {
+        $top = match ($this->stringProp('margin_top', 'none')) {
             'sm' => 'mt-4',
             'md' => 'mt-8',
             'lg' => 'mt-12',
@@ -229,7 +172,7 @@ final class DescriptionList
             default => '',
         };
 
-        $bottom = match ($props['margin_bottom'] ?? 'none') {
+        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
             'sm' => 'mb-4',
             'md' => 'mb-8',
             'lg' => 'mb-12',
@@ -238,21 +181,5 @@ final class DescriptionList
         };
 
         return \trim($top . ' ' . $bottom);
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-        $id = $props['id'] ?? null;
-
-        return \is_string($id) && '' !== \trim($id) ? \trim($id) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-        $class = $props['custom_class'] ?? '';
-
-        return \is_string($class) ? \trim($class) : '';
     }
 }

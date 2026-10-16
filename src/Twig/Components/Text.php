@@ -7,94 +7,54 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Text', template: '@SuluPrelineBlocks/components/Text.html.twig')]
-final class Text
+final class Text extends AbstractPrelineComponent
 {
-    public ?string $content = '';
-
-    public ?string $textAlign = null;
-    public ?string $text_align = null;
-    public ?string $fontSize = null;
-    public ?string $font_size = null;
-    public ?string $textColor = null;
-    public ?string $text_color = null;
-    public ?bool $prose = null;
-    public ?bool $dropcap = null;
-    public ?string $column = null;
-    public ?bool $columnDivider = null;
-    public ?bool $column_divider = null;
-    public ?string $textStyle = null;
-    public ?string $text_style = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (null !== ($this->textAlign ?? $this->text_align)) {
-            $resolved['text_align'] = $this->textAlign ?? $this->text_align;
-        }
-        if (null !== ($this->fontSize ?? $this->font_size)) {
-            $resolved['font_size'] = $this->fontSize ?? $this->font_size;
-        }
-        if (null !== ($this->textColor ?? $this->text_color)) {
-            $resolved['text_color'] = $this->textColor ?? $this->text_color;
-        }
-        if (null !== $this->prose) {
-            $resolved['prose'] = $this->prose;
-        }
-        if (null !== $this->dropcap) {
-            $resolved['dropcap'] = $this->dropcap;
-        }
-        if (null !== $this->column) {
-            $resolved['column'] = $this->column;
-        }
-        if (null !== ($this->columnDivider ?? $this->column_divider)) {
-            $resolved['column_divider'] = $this->columnDivider ?? $this->column_divider;
-        }
-        if (null !== ($this->textStyle ?? $this->text_style)) {
-            $resolved['text_style'] = $this->textStyle ?? $this->text_style;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+        return [
+            'text_align' => 'left',
+            'font_size' => 'base',
+            'text_color' => 'default',
+            'prose' => true,
+            'dropcap' => false,
+            'column' => 'none',
+            'column_divider' => false,
+            'text_style' => 'none',
+        ];
+    }
 
-        return $resolved;
+    protected function capabilities(): array
+    {
+        return [
+            'prose' => fn (): bool => $this->boolProp('prose', true),
+            'dropcap' => fn (): bool => $this->boolProp('dropcap', false),
+            'column_divider' => fn (): bool => $this->boolProp('column_divider', false),
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return $this->hasRichText('content') || $this->has('text');
+    }
+
+    public function getContent(): string
+    {
+        $content = $this->string('content', '');
+
+        return '' !== $content ? $content : $this->string('text', '');
     }
 
     public function getTextAlign(): string
     {
-        return PropsResolver::textAlign($this->getResolvedProps());
+        return PropsResolver::textAlign($this->props());
     }
 
     public function getFontSize(): string
     {
-        $props = $this->getResolvedProps();
-        $size = isset($props['font_size']) && \is_string($props['font_size'])
-            ? $props['font_size']
-            : (isset($props['size']) && \is_string($props['size']) ? $props['size'] : 'base');
+        $size = $this->nullableStringProp('font_size');
+        if (null === $size || 'base' === $size) {
+            $size = $this->stringProp('size', $size ?? 'base');
+        }
 
         return match ($size) {
             'sm' => 'text-sm',
@@ -106,21 +66,22 @@ final class Text
 
     public function getTextColor(): string
     {
-        return PropsResolver::textColor($this->getResolvedProps());
+        $props = $this->props();
+        if (isset($props['color']) && ('default' === ($props['text_color'] ?? 'default'))) {
+            unset($props['text_color']);
+        }
+
+        return PropsResolver::textColor($props);
     }
 
     public function isProse(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return !isset($props['prose']) || false !== $props['prose'];
+        return $this->is('prose');
     }
 
     public function isDropcap(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return true === ($props['dropcap'] ?? false);
+        return $this->is('dropcap');
     }
 
     public function getDropcapClasses(): string
@@ -132,10 +93,7 @@ final class Text
 
     public function getColumnClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $col = $props['column'] ?? 'none';
-
-        return match ($col) {
+        return match ($this->stringProp('column', 'none')) {
             '1-2' => 'md:columns-2 gap-8',
             '1-3' => 'md:columns-3 gap-8',
             '1-4' => 'md:columns-2 lg:columns-4 gap-8',
@@ -145,9 +103,7 @@ final class Text
 
     public function isColumnDivider(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return true === ($props['column_divider'] ?? false);
+        return $this->is('column_divider');
     }
 
     public function getColumnDividerClasses(): string
@@ -161,10 +117,7 @@ final class Text
 
     public function getTextStyleClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['text_style'] ?? 'none';
-
-        return match ($style) {
+        return match ($this->stringProp('text_style', 'none')) {
             'lead' => 'text-xl sm:text-2xl text-muted-foreground-2 font-normal leading-relaxed',
             'meta' => 'text-xs uppercase tracking-wider text-muted-foreground-1 font-medium',
             'large' => 'text-lg sm:text-xl text-foreground leading-relaxed',
@@ -173,11 +126,11 @@ final class Text
         };
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
         $base = $this->isProse() ? 'prose dark:prose-invert max-w-none' : '';
         $base = \trim(\sprintf(
-            '%s %s %s %s %s %s %s',
+            '%s %s %s %s %s %s %s %s',
             $base,
             $this->getFontSize(),
             $this->getTextColor(),
@@ -185,13 +138,9 @@ final class Text
             $this->getColumnClasses(),
             $this->getColumnDividerClasses(),
             $this->getDropcapClasses(),
+            $extraBase,
         ));
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 }

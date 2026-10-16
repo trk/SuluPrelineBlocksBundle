@@ -13,8 +13,8 @@ final class CountdownTest extends TestCase
     {
         $countdown = new Countdown();
 
-        self::assertNull($countdown->date);
-        self::assertNull($countdown->title);
+        self::assertNull($countdown->get('date'));
+        self::assertNull($countdown->get('title'));
         self::assertSame('boxed', $countdown->getCountdownStyle());
         self::assertTrue($countdown->isShowLabel());
         self::assertTrue($countdown->isShowSeparator());
@@ -28,19 +28,19 @@ final class CountdownTest extends TestCase
     {
         $countdown = new Countdown();
         $date = new \DateTimeImmutable('2028-12-31 23:59:59+00:00');
-        $countdown->date = $date;
+        $countdown->assign('date', $date);
 
         self::assertSame('2028-12-31T23:59:59+00:00', $countdown->getTargetIsoDate());
 
         $countdownStr = new Countdown();
-        $countdownStr->date = '2029-01-01 12:00:00';
+        $countdownStr->assign('date', '2029-01-01 12:00:00');
         self::assertStringContainsString('2029-01-01', $countdownStr->getTargetIsoDate());
     }
 
     public function testStylesAndSizes(): void
     {
         $countdown = new Countdown();
-        $countdown->props = [
+        $countdown->mergeProps([
             'countdown_style' => 'minimal',
             'size' => 'xl',
             'color' => 'primary',
@@ -49,7 +49,7 @@ final class CountdownTest extends TestCase
             'align' => 'left',
             'on_expire' => 'reload',
             'expire_message' => 'Done!',
-        ];
+        ]);
 
         self::assertSame('minimal', $countdown->getCountdownStyle());
         self::assertFalse($countdown->isShowLabel());
@@ -64,12 +64,12 @@ final class CountdownTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $countdown = new Countdown();
-        $countdown->props = [
+        $countdown->mergeProps([
             'id' => 'sale-countdown',
             'margin_top' => 'md',
             'margin_bottom' => 'lg',
             'custom_class' => 'my-countdown',
-        ];
+        ]);
 
         self::assertSame('sale-countdown', $countdown->getElementId());
         $wrapper = $countdown->getWrapperClasses();

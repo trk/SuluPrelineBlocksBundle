@@ -25,15 +25,8 @@
                 {% for item in normalized_items %}
                     <div class="hs-carousel-slide shrink-0 {{ slide_width }} {{ gap_class }} h-full">
                         <twig:Card
-                            title="{{ item.title|default(null) }}"
-                            meta="{{ item.meta|default(null) }}"
-                            content="{{ item.summary|default(item.content|default(null)) }}"
-                            image="{{ item.image|default(null) }}"
-                            link="{{ item.link|default(item.url|default(null)) }}"
-                            linkTitle="{{ item.link_title|default(null) }}"
-                            icon="{{ item.icon|default(null) }}"
-                            badge="{{ item.badge|default(null) }}"
-                            :props="item.props|default({})"
+                            :block="item"
+                            :link="item.link|default(item.url|default(null))"
                         />
                     </div>
                 {% endfor %}

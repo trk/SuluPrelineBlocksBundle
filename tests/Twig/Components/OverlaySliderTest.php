@@ -13,7 +13,7 @@ final class OverlaySliderTest extends TestCase
     {
         $slider = new OverlaySlider();
 
-        self::assertNull($slider->title);
+        self::assertNull($slider->get('title'));
         self::assertEmpty($slider->getNormalizedItems());
         self::assertFalse($slider->isAutoplay());
         self::assertSame(4000, $slider->getInterval());
@@ -32,7 +32,7 @@ final class OverlaySliderTest extends TestCase
     public function testPropsUnpackingAndConfig(): void
     {
         $slider = new OverlaySlider();
-        $slider->props = [
+        $slider->mergeProps([
             'autoplay' => true,
             'interval' => 2500,
             'loop' => true,
@@ -44,7 +44,7 @@ final class OverlaySliderTest extends TestCase
             'margin_bottom' => 'sm',
             'id' => 'hero-overlays',
             'custom_class' => 'my-overlay-slider',
-        ];
+        ]);
 
         self::assertTrue($slider->isAutoplay());
         self::assertSame(2500, $slider->getInterval());

@@ -13,19 +13,19 @@ final class CardTest extends TestCase
     {
         $card = new Card();
 
-        self::assertNull($card->title);
-        self::assertNull($card->badge);
-        self::assertNull($card->meta);
-        self::assertNull($card->content);
-        self::assertNull($card->image);
-        self::assertNull($card->video);
-        self::assertNull($card->icon);
-        self::assertSame([], $card->buttons);
-        self::assertNull($card->hoverImage);
-        self::assertNull($card->hover_image);
-        self::assertNull($card->hoverVideo);
-        self::assertNull($card->hover_video);
-        self::assertSame([], $card->props);
+        self::assertFalse($card->shouldRender());
+        self::assertNull($card->get('title'));
+        self::assertNull($card->get('badge'));
+        self::assertNull($card->get('meta'));
+        self::assertNull($card->get('content'));
+        self::assertNull($card->get('image'));
+        self::assertNull($card->get('video'));
+        self::assertNull($card->get('icon'));
+        self::assertSame([], $card->items('buttons'));
+        self::assertNull($card->get('hoverImage'));
+        self::assertNull($card->get('hover_image'));
+        self::assertNull($card->get('hoverVideo'));
+        self::assertNull($card->get('hover_video'));
         self::assertNull($card->getImageUrl());
         self::assertNull($card->getHoverImageUrl());
         self::assertNull($card->getVideoUrl());
@@ -36,16 +36,16 @@ final class CardTest extends TestCase
     public function testHoverImageAndVideoResolution(): void
     {
         $card = new Card();
-        $card->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $card->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $card->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $card->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         self::assertSame('https://cdn.example.com/hover.jpg', $card->getHoverImageUrl());
         self::assertSame('https://cdn.example.com/hover.mp4', $card->getHoverVideoUrl());
 
         // Snake case fallback
         $cardSnake = new Card();
-        $cardSnake->hover_image = 'https://cdn.example.com/hover-snake.jpg';
-        $cardSnake->hover_video = 'https://cdn.example.com/hover-snake.mp4';
+        $cardSnake->assign('hover_image', 'https://cdn.example.com/hover-snake.jpg');
+        $cardSnake->assign('hover_video', 'https://cdn.example.com/hover-snake.mp4');
 
         self::assertSame('https://cdn.example.com/hover-snake.jpg', $cardSnake->getHoverImageUrl());
         self::assertSame('https://cdn.example.com/hover-snake.mp4', $cardSnake->getHoverVideoUrl());
@@ -54,10 +54,10 @@ final class CardTest extends TestCase
     public function testMediaSourceAndExternalUrls(): void
     {
         $card = new Card();
-        $card->mediaType = 'image';
-        $card->mediaSource = 'url';
-        $card->imageUrl = 'https://cdn.example.com/external-image.jpg';
-        $card->hoverImageUrl = 'https://cdn.example.com/external-hover.jpg';
+        $card->assign('mediaType', 'image');
+        $card->assign('mediaSource', 'url');
+        $card->assign('imageUrl', 'https://cdn.example.com/external-image.jpg');
+        $card->assign('hoverImageUrl', 'https://cdn.example.com/external-hover.jpg');
 
         self::assertSame('https://cdn.example.com/external-image.jpg', $card->getImageUrl());
         self::assertSame('https://cdn.example.com/external-hover.jpg', $card->getHoverImageUrl());
@@ -66,10 +66,10 @@ final class CardTest extends TestCase
 
         // Snake case fallback
         $cardSnake = new Card();
-        $cardSnake->media_type = 'video';
-        $cardSnake->media_source = 'url';
-        $cardSnake->video_url = 'https://cdn.example.com/external-video.mp4';
-        $cardSnake->hover_video_url = 'https://cdn.example.com/external-hover-video.mp4';
+        $cardSnake->assign('media_type', 'video');
+        $cardSnake->assign('media_source', 'url');
+        $cardSnake->assign('video_url', 'https://cdn.example.com/external-video.mp4');
+        $cardSnake->assign('hover_video_url', 'https://cdn.example.com/external-hover-video.mp4');
 
         self::assertSame('https://cdn.example.com/external-video.mp4', $cardSnake->getVideoUrl());
         self::assertSame('https://cdn.example.com/external-hover-video.mp4', $cardSnake->getHoverVideoUrl());
@@ -78,23 +78,23 @@ final class CardTest extends TestCase
 
         // Icon exclusivity
         $cardIcon = new Card();
-        $cardIcon->mediaType = 'icon';
-        $cardIcon->icon = 'ti ti-star';
+        $cardIcon->assign('mediaType', 'icon');
+        $cardIcon->assign('icon', 'ti ti-star');
         self::assertSame('ti ti-star', $cardIcon->getIconClass());
 
         $cardImageWithIcon = new Card();
-        $cardImageWithIcon->mediaType = 'image';
-        $cardImageWithIcon->icon = 'ti ti-star';
+        $cardImageWithIcon->assign('mediaType', 'image');
+        $cardImageWithIcon->assign('icon', 'ti ti-star');
         self::assertNull($cardImageWithIcon->getIconClass());
     }
 
     public function testNormalizedButtons(): void
     {
         $card = new Card();
-        $card->buttons = [
+        $card->assign('buttons', [
             ['content' => 'Click Me', 'link' => '/test'],
             ['content' => 'Secondary', 'link' => '#contact'],
-        ];
+        ]);
 
         $normalized = $card->getNormalizedButtons();
         self::assertCount(2, $normalized);
@@ -105,12 +105,12 @@ final class CardTest extends TestCase
     public function testCardClassesAndProps(): void
     {
         $card = new Card();
-        $card->props = [
+        $card->mergeProps([
             'card_variant' => 'glass',
             'layout' => 'horizontal',
             'text_align' => 'center',
             'title_color' => 'primary',
-        ];
+        ]);
 
         self::assertStringContainsString('backdrop-blur', $card->getCardClasses());
         self::assertStringContainsString('md:flex-row', $card->getCardClasses());
@@ -121,10 +121,10 @@ final class CardTest extends TestCase
     public function testMutualExclusivityImageOnly(): void
     {
         $card = new Card();
-        $card->image = 'https://cdn.example.com/main.jpg';
-        $card->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $card->video = null;
-        $card->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $card->assign('image', 'https://cdn.example.com/main.jpg');
+        $card->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $card->assign('video', null);
+        $card->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         self::assertTrue($card->isImage());
         self::assertFalse($card->isVideo());
@@ -137,10 +137,10 @@ final class CardTest extends TestCase
     public function testMutualExclusivityVideoOnly(): void
     {
         $card = new Card();
-        $card->image = null;
-        $card->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $card->video = 'https://cdn.example.com/main.mp4';
-        $card->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $card->assign('image', null);
+        $card->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $card->assign('video', 'https://cdn.example.com/main.mp4');
+        $card->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         self::assertFalse($card->isImage());
         self::assertTrue($card->isVideo());
@@ -154,8 +154,8 @@ final class CardTest extends TestCase
     {
         $card = new Card();
         // Hover set without main object
-        $card->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $card->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $card->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $card->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         self::assertFalse($card->isImage());
         self::assertFalse($card->isVideo());
@@ -168,10 +168,10 @@ final class CardTest extends TestCase
     public function testMediaTypePropOverrides(): void
     {
         $card = new Card();
-        $card->image = 'https://cdn.example.com/main.jpg';
-        $card->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $card->video = 'https://cdn.example.com/main.mp4';
-        $card->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $card->assign('image', 'https://cdn.example.com/main.jpg');
+        $card->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $card->assign('video', 'https://cdn.example.com/main.mp4');
+        $card->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         // Auto mode defaults to image
         self::assertTrue($card->isImage());
@@ -179,7 +179,7 @@ final class CardTest extends TestCase
         self::assertSame('https://cdn.example.com/main.jpg', $card->getActiveImageUrl());
 
         // Override to video
-        $card->props = ['media_type' => 'video'];
+        $card->mergeProps(['media_type' => 'video']);
         self::assertFalse($card->isImage());
         self::assertTrue($card->isVideo());
         self::assertSame('https://cdn.example.com/main.mp4', $card->getActiveVideoUrl());
@@ -187,7 +187,7 @@ final class CardTest extends TestCase
         self::assertNull($card->getActiveImageUrl());
 
         // Override to none
-        $card->props = ['media_type' => 'none'];
+        $card->mergeProps(['media_type' => 'none']);
         self::assertFalse($card->isImage());
         self::assertFalse($card->isVideo());
         self::assertNull($card->getActiveImageUrl());
@@ -197,13 +197,13 @@ final class CardTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $card = new Card();
-        $card->props = [
+        $card->mergeProps([
             'card_variant' => 'shadow',
             'margin_top' => 'lg',
             'margin_bottom' => 'xl',
             'id' => 'card-section',
             'custom_class' => 'backdrop-blur-sm',
-        ];
+        ]);
 
         self::assertSame('card-section', $card->getElementId());
         $wrapper = $card->getWrapperClasses();
@@ -217,18 +217,18 @@ final class CardTest extends TestCase
     public function testBadgeAndBadgeStyles(): void
     {
         $card = new Card();
-        $card->badge = 'New Feature';
+        $card->assign('badge', 'New Feature');
 
-        self::assertSame('New Feature', $card->badge);
+        self::assertSame('New Feature', $card->get('badge'));
         self::assertStringContainsString('backdrop-blur-md', $card->getBadgeClasses());
 
-        $card->props = ['badge_style' => 'primary'];
+        $card->mergeProps(['badge_style' => 'primary']);
         self::assertStringContainsString('bg-primary', $card->getBadgeClasses());
 
-        $card->props = ['badge_style' => 'success'];
+        $card->mergeProps(['badge_style' => 'success']);
         self::assertStringContainsString('bg-emerald-600', $card->getBadgeClasses());
 
-        $card->props = ['badge_style' => 'dark'];
+        $card->mergeProps(['badge_style' => 'dark']);
         self::assertStringContainsString('bg-inverse', $card->getBadgeClasses());
     }
 
@@ -238,21 +238,21 @@ final class CardTest extends TestCase
         self::assertSame('top-left', $card->getBadgePosition());
         self::assertSame('absolute top-3 start-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
-        $card->badgePosition = 'top-right';
+        $card->assign('badgePosition', 'top-right');
         self::assertSame('top-right', $card->getBadgePosition());
         self::assertSame('absolute top-3 end-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card = new Card();
-        $card->badge_position = 'bottom-left';
+        $card->assign('badge_position', 'bottom-left');
         self::assertSame('bottom-left', $card->getBadgePosition());
         self::assertSame('absolute bottom-3 start-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
         $card = new Card();
-        $card->props = ['badge_position' => 'bottom-right'];
+        $card->mergeProps(['badge_position' => 'bottom-right']);
         self::assertSame('bottom-right', $card->getBadgePosition());
         self::assertSame('absolute bottom-3 end-3 z-10 flex flex-wrap gap-1.5', $card->getBadgePositionClasses());
 
-        $card->props = ['badge_position' => 'inline'];
+        $card->mergeProps(['badge_position' => 'inline']);
         self::assertSame('inline', $card->getBadgePosition());
         self::assertSame('', $card->getBadgePositionClasses());
     }
@@ -260,15 +260,15 @@ final class CardTest extends TestCase
     public function testMultipleBadgesAndButtons(): void
     {
         $card = new Card();
-        $card->props = [
+        $card->mergeProps([
             'badge_style' => 'soft',
             'badge_color' => 'primary',
             'button_style' => 'solid',
             'button_color' => 'primary',
             'button_size' => 'md',
-        ];
+        ]);
 
-        $card->badges = [
+        $card->assign('badges', [
             [
                 'title' => 'Inherited Badge',
                 'badge_style' => 'inherit',
@@ -280,9 +280,9 @@ final class CardTest extends TestCase
                 'badge_color' => 'danger',
                 'has_dot' => true,
             ],
-        ];
+        ]);
 
-        $card->buttons = [
+        $card->assign('buttons', [
             [
                 'title' => 'Explore',
                 'link' => '/explore',
@@ -295,7 +295,7 @@ final class CardTest extends TestCase
                 'button_style' => 'outline',
                 'button_color' => 'secondary',
             ],
-        ];
+        ]);
 
         self::assertTrue($card->hasBadges());
         $badges = $card->getNormalizedBadges();
@@ -327,7 +327,7 @@ final class CardTest extends TestCase
     public function testCardGroupVariant(): void
     {
         $card = new Card();
-        $card->props = ['card_variant' => 'group'];
+        $card->mergeProps(['card_variant' => 'group']);
 
         $classes = $card->getCardClasses();
         self::assertStringContainsString('border-0', $classes);
@@ -339,14 +339,14 @@ final class CardTest extends TestCase
     public function testUnifiedElementsSeparation(): void
     {
         $card = new Card();
-        $card->props = [
+        $card->mergeProps([
             'badge_style' => 'solid',
             'badge_color' => 'primary',
             'button_style' => 'solid',
             'button_color' => 'secondary',
-        ];
+        ]);
 
-        $card->elements = [
+        $card->assign('elements', [
             [
                 'type' => 'badge',
                 'title' => 'Top Badge',
@@ -373,7 +373,7 @@ final class CardTest extends TestCase
                 'button_style' => 'outline',
                 'button_color' => 'primary',
             ],
-        ];
+        ]);
 
         self::assertTrue($card->hasBadges());
         $badges = $card->getNormalizedBadges();
@@ -408,31 +408,31 @@ final class CardTest extends TestCase
         self::assertSame('object-cover', $card->getObjectFitClass());
 
         // Test standard aspect ratios
-        $card->props = ['aspect_ratio' => 'auto'];
+        $card->mergeProps(['aspect_ratio' => 'auto']);
         self::assertSame('aspect-auto', $card->getMediaAspectRatioClass());
 
-        $card->props = ['aspect_ratio' => '16:9'];
+        $card->mergeProps(['aspect_ratio' => '16:9']);
         self::assertSame('aspect-video', $card->getMediaAspectRatioClass());
 
-        $card->props = ['aspect_ratio' => '4:3'];
+        $card->mergeProps(['aspect_ratio' => '4:3']);
         self::assertSame('aspect-4/3', $card->getMediaAspectRatioClass());
 
-        $card->props = ['aspect_ratio' => '1:1'];
+        $card->mergeProps(['aspect_ratio' => '1:1']);
         self::assertSame('aspect-square', $card->getMediaAspectRatioClass());
 
         // Test manual custom ratio
-        $card->props = [
+        $card->mergeProps([
             'aspect_ratio' => 'manual',
             'aspect_ratio_width' => 21,
             'aspect_ratio_height' => 9,
             'object_fit' => 'contain',
-        ];
+        ]);
         self::assertSame('aspect-auto', $card->getMediaAspectRatioClass());
         self::assertSame('aspect-ratio: 21 / 9;', $card->getMediaAspectRatioStyle());
         self::assertSame('object-contain', $card->getObjectFitClass());
 
         // Test responsive srcset and focal point
-        $card->image = [
+        $card->assign('image', [
             'url' => '/uploads/media/original.jpg',
             'formats' => [
                 'col-sm' => '/uploads/media/col-sm.webp',
@@ -441,7 +441,7 @@ final class CardTest extends TestCase
                 'col-xl' => '/uploads/media/col-xl.webp',
             ],
             'focusPoint' => ['x' => 50, 'y' => 25],
-        ];
+        ]);
 
         self::assertSame('/uploads/media/original.jpg', $card->getActiveImageUrl());
         self::assertNotNull($card->getImageSrcSet());

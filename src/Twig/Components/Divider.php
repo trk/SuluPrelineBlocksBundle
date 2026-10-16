@@ -7,76 +7,25 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Divider', template: '@SuluPrelineBlocks/components/Divider.html.twig')]
-final class Divider
+final class Divider extends AbstractPrelineComponent
 {
-    public mixed $icon = null;
-
-    public ?string $dividerStyle = null;
-    public ?string $divider_style = null;
-    public ?string $dividerColor = null;
-    public ?string $divider_color = null;
-    public ?string $dividerThickness = null;
-    public ?string $divider_thickness = null;
-    public ?string $dividerWidth = null;
-    public ?string $divider_width = null;
-    public ?string $dividerAlign = null;
-    public ?string $divider_align = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
+        return [
+            'divider_color' => 'default',
+            'divider_thickness' => '1',
+            'divider_align' => 'center',
+        ];
+    }
 
-        if (null !== ($this->dividerStyle ?? $this->divider_style)) {
-            $resolved['divider_style'] = $this->dividerStyle ?? $this->divider_style;
-        }
-        if (null !== ($this->dividerColor ?? $this->divider_color)) {
-            $resolved['divider_color'] = $this->dividerColor ?? $this->divider_color;
-        }
-        if (null !== ($this->dividerThickness ?? $this->divider_thickness)) {
-            $resolved['divider_thickness'] = $this->dividerThickness ?? $this->divider_thickness;
-        }
-        if (null !== ($this->dividerWidth ?? $this->divider_width)) {
-            $resolved['divider_width'] = $this->dividerWidth ?? $this->divider_width;
-        }
-        if (null !== ($this->dividerAlign ?? $this->divider_align)) {
-            $resolved['divider_align'] = $this->dividerAlign ?? $this->divider_align;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-
-        return $resolved;
+    public function shouldRender(): bool
+    {
+        return true;
     }
 
     public function getDividerStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['divider_style'] ?? null;
+        $style = $this->nullableStringProp('divider_style');
 
         if (null === $style || 'line' === $style) {
             return null !== $this->getResolvedIcon() ? 'icon' : 'line';
@@ -93,10 +42,7 @@ final class Divider
 
     public function getDividerAlign(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['divider_align'] ?? 'center';
-
-        return match ($align) {
+        return match ($this->stringProp('divider_align', 'center')) {
             'left', 'start' => 'left',
             'right', 'end' => 'right',
             default => 'center',
@@ -105,10 +51,7 @@ final class Divider
 
     public function getDividerColorClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $color = $props['divider_color'] ?? 'default';
-
-        return match ($color) {
+        return match ($this->stringProp('divider_color', 'default')) {
             'primary' => 'border-primary bg-primary',
             'muted' => 'border-line-1 bg-surface',
             'dark' => 'border-line-8 bg-inverse',
@@ -118,11 +61,7 @@ final class Divider
 
     public function getDividerThicknessClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $thickness = $props['divider_thickness'] ?? '1';
-        $thicknessStr = \is_scalar($thickness) ? (string) $thickness : '1';
-
-        return match ($thicknessStr) {
+        return match ($this->stringProp('divider_thickness', '1')) {
             '2' => 'border-t-2 h-0.5',
             '4' => 'border-t-4 h-1',
             default => 'border-t h-px',
@@ -131,8 +70,8 @@ final class Divider
 
     public function getDividerWidthClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $width = $props['divider_width'] ?? ('small' === $this->getDividerStyle() ? 'small' : 'full');
+        $defaultWidth = 'small' === $this->getDividerStyle() ? 'small' : 'full';
+        $width = $this->stringProp('divider_width', $defaultWidth);
 
         return match ($width) {
             '3-4' => 'w-3/4',
@@ -145,40 +84,30 @@ final class Divider
 
     public function getDividerAlignClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['divider_align'] ?? 'center';
-
-        return match ($align) {
+        return match ($this->stringProp('divider_align', 'center')) {
             'left' => 'me-auto justify-start text-start',
             'right' => 'ms-auto justify-end text-end',
             default => 'mx-auto justify-center text-center',
         };
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $base = 'w-full flex items-center ' . $this->getDividerAlignClasses();
+        $base = \trim('w-full flex items-center ' . $this->getDividerAlignClasses() . ' ' . $extraBase);
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 
     public function getResolvedIcon(): ?string
     {
-        return PropsResolver::resolveIcon($this->icon ?? ($this->props['icon'] ?? null));
+        return $this->getIconClass('icon');
     }
 
     public function getIconLineClasses(): string
     {
         $align = $this->getDividerAlign();
-        $props = $this->getResolvedProps();
-        $thickness = $props['divider_thickness'] ?? '1';
-        $thicknessStr = \is_scalar($thickness) ? (string) $thickness : '1';
-        $color = $props['divider_color'] ?? 'default';
+        $thicknessStr = $this->stringProp('divider_thickness', '1');
+        $color = $this->stringProp('divider_color', 'default');
 
         $afterClass = match ($color) {
             'primary' => match ($thicknessStr) {
@@ -239,10 +168,7 @@ final class Divider
 
     public function getIconBadgeColorClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $color = $props['divider_color'] ?? 'default';
-
-        return match ($color) {
+        return match ($this->stringProp('divider_color', 'default')) {
             'primary' => 'border-primary-200 bg-layer text-primary dark:border-primary-900/50',
             'dark' => 'border-line-8 bg-inverse text-foreground-inverse',
             'muted' => 'border-border bg-surface text-muted-foreground-1',

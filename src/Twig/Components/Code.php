@@ -10,20 +10,28 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible code block component with copy-to-clipboard plugin.
  */
 #[AsTwigComponent('Code', template: '@SuluPrelineBlocks/components/Code.html.twig')]
-final class Code
+final class Code extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public string $code = '';
-    public string $language = 'plaintext';
-    public bool $show_copy = true;
-    public bool $show_line_numbers = false;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
     private ?string $uniqueId = null;
+
+    protected function defaults(): array
+    {
+        return [
+            'language' => 'plaintext',
+            'show_copy' => true,
+            'show_line_numbers' => false,
+        ];
+    }
+
+    protected function onReset(): void
+    {
+        $this->uniqueId = null;
+    }
+
+    public function shouldRender(): bool
+    {
+        return $this->has('code');
+    }
 
     public function getId(): string
     {
@@ -34,9 +42,14 @@ final class Code
         return $this->uniqueId;
     }
 
+    public function getLanguage(): string
+    {
+        return $this->stringProp('language', 'plaintext');
+    }
+
     public function getLanguageLabel(): string
     {
-        return match (\strtolower($this->language)) {
+        return match (\strtolower($this->getLanguage())) {
             'php' => 'PHP',
             'javascript', 'js' => 'JavaScript',
             'typescript', 'ts' => 'TypeScript',
@@ -57,7 +70,7 @@ final class Code
      */
     public function getLines(): array
     {
-        return \explode("\n", \rtrim($this->code));
+        return \explode("\n", \rtrim($this->string('code', '')));
     }
 
     public function getContainerClasses(): string

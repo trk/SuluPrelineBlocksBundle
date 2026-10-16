@@ -13,9 +13,9 @@ final class AlertTest extends TestCase
     {
         $alert = new Alert();
 
-        self::assertNull($alert->title);
-        self::assertNull($alert->content);
-        self::assertNull($alert->icon);
+        self::assertNull($alert->get('title'));
+        self::assertNull($alert->get('content'));
+        self::assertNull($alert->get('icon'));
         self::assertSame('info', $alert->getAlertStyle());
         self::assertSame('soft', $alert->getAlertVariant());
         self::assertFalse($alert->isDismissible());
@@ -29,25 +29,25 @@ final class AlertTest extends TestCase
     {
         $alert = new Alert();
 
-        $alert->props = ['alert_style' => 'success', 'alert_variant' => 'solid'];
+        $alert->mergeProps(['alert_style' => 'success', 'alert_variant' => 'solid']);
         self::assertSame('success', $alert->getAlertStyle());
         self::assertSame('solid', $alert->getAlertVariant());
         self::assertStringContainsString('bg-emerald-600', $alert->getAlertClasses());
         self::assertSame('ti ti-circle-check', $alert->getResolvedIcon());
 
-        $alert->props = ['alert_style' => 'warning', 'alert_variant' => 'outline'];
+        $alert->mergeProps(['alert_style' => 'warning', 'alert_variant' => 'outline']);
         self::assertSame('warning', $alert->getAlertStyle());
         self::assertSame('outline', $alert->getAlertVariant());
         self::assertStringContainsString('border-2 border-amber-500', $alert->getAlertClasses());
         self::assertSame('ti ti-alert-triangle', $alert->getResolvedIcon());
 
-        $alert->props = ['alert_style' => 'danger', 'alert_variant' => 'glass'];
+        $alert->mergeProps(['alert_style' => 'danger', 'alert_variant' => 'glass']);
         self::assertSame('danger', $alert->getAlertStyle());
         self::assertSame('glass', $alert->getAlertVariant());
         self::assertStringContainsString('backdrop-blur-md bg-destructive/10', $alert->getAlertClasses());
         self::assertSame('ti ti-alert-circle', $alert->getResolvedIcon());
 
-        $alert->props = ['alert_style' => 'dark', 'alert_variant' => 'soft'];
+        $alert->mergeProps(['alert_style' => 'dark', 'alert_variant' => 'soft']);
         self::assertSame('dark', $alert->getAlertStyle());
         self::assertSame('ti ti-bell', $alert->getResolvedIcon());
     }
@@ -57,11 +57,11 @@ final class AlertTest extends TestCase
         $alert = new Alert();
         self::assertFalse($alert->isDismissible());
 
-        $alert->dismissible = 'yes';
+        $alert->assign('dismissible', 'yes');
         self::assertTrue($alert->isDismissible());
 
         $alertSnake = new Alert();
-        $alertSnake->props = ['dismissible' => 'yes'];
+        $alertSnake->mergeProps(['dismissible' => 'yes']);
         self::assertTrue($alertSnake->isDismissible());
     }
 
@@ -70,23 +70,23 @@ final class AlertTest extends TestCase
         $alert = new Alert();
 
         // Custom icon override
-        $alert->icon = 'shield-check';
+        $alert->assign('icon', 'shield-check');
         self::assertSame('ti ti-shield-check', $alert->getResolvedIcon());
 
         // Custom icon array
-        $alert->icon = ['icon' => 'ti ti-sparkles'];
+        $alert->assign('icon', ['icon' => 'ti ti-sparkles']);
         self::assertSame('ti ti-sparkles', $alert->getResolvedIcon());
 
         // Disabled icon
-        $alert->props = ['icon_display' => 'none'];
+        $alert->mergeProps(['icon_display' => 'none']);
         self::assertNull($alert->getResolvedIcon());
     }
 
     public function testTitleAndContent(): void
     {
         $alert = new Alert();
-        $alert->title = '  Important Notice  ';
-        $alert->content = '<p>System maintenance tonight.</p>';
+        $alert->assign('title', '  Important Notice  ');
+        $alert->assign('content', '<p>System maintenance tonight.</p>');
 
         self::assertSame('Important Notice', $alert->getTitle());
         self::assertSame('<p>System maintenance tonight.</p>', $alert->getContent());
@@ -95,12 +95,12 @@ final class AlertTest extends TestCase
     public function testLinkAndButtonText(): void
     {
         $alert = new Alert();
-        $alert->link = [
+        $alert->assign('link', [
             'url' => 'https://example.com/docs',
             'target' => '_blank',
             'title' => 'Documentation Tooltip',
-        ];
-        $alert->link_title = 'Read Documentation';
+        ]);
+        $alert->assign('link_title', 'Read Documentation');
 
         self::assertSame('https://example.com/docs', $alert->getLinkUrl());
         self::assertSame('_blank', $alert->getLinkTarget());
@@ -111,13 +111,13 @@ final class AlertTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $alert = new Alert();
-        $alert->props = [
+        $alert->mergeProps([
             'id' => 'system-alert',
             'custom_class' => 'my-alert',
             'margin_top' => 'md',
             'margin_bottom' => 'lg',
             'rounded' => '2xl',
-        ];
+        ]);
 
         self::assertSame('system-alert', $alert->getElementId());
         $wrapper = $alert->getWrapperClasses();

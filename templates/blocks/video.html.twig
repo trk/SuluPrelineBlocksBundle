@@ -1,10 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Video
-    :video="block.video|default(null)"
-    :link="block.link|default(null)"
-    :image="block.image|default(null)"
-    :icon="block.icon|default(null)"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Video :block="block" />
 {% endif %}

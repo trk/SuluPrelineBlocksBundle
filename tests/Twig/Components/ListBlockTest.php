@@ -13,7 +13,7 @@ final class ListBlockTest extends TestCase
     {
         $list = new ListBlock();
 
-        self::assertNull($list->title);
+        self::assertNull($list->get('title'));
         self::assertEmpty($list->getNormalizedItems());
         self::assertSame('vertical', $list->getListType());
         self::assertSame('none', $list->getMarker());
@@ -31,7 +31,7 @@ final class ListBlockTest extends TestCase
     public function testMarkersAndColors(): void
     {
         $list = new ListBlock();
-        $list->props = [
+        $list->mergeProps([
             'marker' => 'checkmark',
             'marker_color' => 'secondary',
             'style' => 'striped',
@@ -42,7 +42,7 @@ final class ListBlockTest extends TestCase
             'margin_bottom' => 'xl',
             'id' => 'features-list',
             'custom_class' => 'my-custom-list',
-        ];
+        ]);
 
         self::assertSame('checkmark', $list->getMarker());
         self::assertSame('text-secondary', $list->getMarkerColor());
@@ -58,9 +58,9 @@ final class ListBlockTest extends TestCase
     public function testHorizontalListAndDividerStyle(): void
     {
         $list = new ListBlock();
-        $list->listType = 'horizontal';
-        $list->style = 'divider';
-        $list->spacing = 'sm';
+        $list->assign('listType', 'horizontal');
+        $list->assign('style', 'divider');
+        $list->assign('spacing', 'sm');
 
         self::assertSame('horizontal', $list->getListType());
         self::assertSame('divider', $list->getStyle());
@@ -72,7 +72,7 @@ final class ListBlockTest extends TestCase
     public function testItemNormalization(): void
     {
         $list = new ListBlock();
-        $list->items = [
+        $list->assign('items', [
             [
                 'title' => 'Feature 1',
                 'content' => 'Description 1',
@@ -88,7 +88,7 @@ final class ListBlockTest extends TestCase
                 'link' => ['url' => 'https://example.com/two'],
             ],
             'invalid_item',
-        ];
+        ]);
 
         $normalized = $list->getNormalizedItems();
         self::assertCount(2, $normalized);

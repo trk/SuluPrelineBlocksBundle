@@ -13,8 +13,8 @@ final class PopoverTest extends TestCase
     {
         $popover = new Popover();
 
-        self::assertNull($popover->title);
-        self::assertNull($popover->image);
+        self::assertNull($popover->get('title'));
+        self::assertNull($popover->get('image'));
         self::assertNull($popover->getImageUrl());
         self::assertEmpty($popover->getNormalizedItems());
         self::assertSame('click', $popover->getResolvedTrigger());
@@ -26,21 +26,21 @@ final class PopoverTest extends TestCase
     public function testImageUrlExtraction(): void
     {
         $popover = new Popover();
-        $popover->image = ['url' => '/media/map-background.jpg'];
+        $popover->assign('image', ['url' => '/media/map-background.jpg']);
 
         self::assertSame('/media/map-background.jpg', $popover->getImageUrl());
 
-        $popover->image = '/media/direct.png';
+        $popover->assign('image', '/media/direct.png');
         self::assertSame('/media/direct.png', $popover->getImageUrl());
     }
 
     public function testNormalizedHotspotItemsWithLegacyPositions(): void
     {
         $popover = new Popover();
-        $popover->trigger = 'click';
-        $popover->markerType = 'pulse';
-        $popover->markerColor = 'primary';
-        $popover->items = [
+        $popover->assign('trigger', 'click');
+        $popover->assign('markerType', 'pulse');
+        $popover->assign('markerColor', 'primary');
+        $popover->assign('items', [
             [
                 'position_x' => 25.5,
                 'position_y' => 60.0,
@@ -56,7 +56,7 @@ final class PopoverTest extends TestCase
                 'position_y' => -20, // Should clamp to 0
                 'title' => 'Boundary item',
             ],
-        ];
+        ]);
 
         $items = $popover->getNormalizedItems();
 
@@ -81,11 +81,11 @@ final class PopoverTest extends TestCase
     public function testNormalizedHotspotItemsWithBlockInheritanceAndOverrides(): void
     {
         $popover = new Popover();
-        $popover->trigger = 'hover';
-        $popover->markerType = 'plus';
-        $popover->markerColor = 'accent';
+        $popover->assign('trigger', 'hover');
+        $popover->assign('markerType', 'plus');
+        $popover->assign('markerColor', 'accent');
 
-        $popover->items = [
+        $popover->assign('items', [
             // Item 1: Inherits block defaults
             [
                 'hotspot' => ['x' => 30.0, 'y' => 40.0],
@@ -102,7 +102,7 @@ final class PopoverTest extends TestCase
                 'title' => 'Featured Product',
                 'meta' => '$199',
             ],
-        ];
+        ]);
 
         $items = $popover->getNormalizedItems();
 

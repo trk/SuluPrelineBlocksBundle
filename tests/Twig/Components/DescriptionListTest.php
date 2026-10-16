@@ -13,7 +13,7 @@ final class DescriptionListTest extends TestCase
     {
         $dl = new DescriptionList();
 
-        self::assertNull($dl->title);
+        self::assertNull($dl->get('title'));
         self::assertEmpty($dl->getNormalizedItems());
         self::assertSame('horizontal', $dl->getLayout());
         self::assertTrue($dl->isDivider());
@@ -32,7 +32,7 @@ final class DescriptionListTest extends TestCase
     public function testLayoutsAndTermStyles(): void
     {
         $dl = new DescriptionList();
-        $dl->props = [
+        $dl->mergeProps([
             'layout' => 'striped',
             'term_width' => '1-4',
             'term_style' => 'primary',
@@ -41,7 +41,7 @@ final class DescriptionListTest extends TestCase
             'margin_bottom' => 'lg',
             'id' => 'specs-list',
             'custom_class' => 'my-specs',
-        ];
+        ]);
 
         self::assertSame('striped', $dl->getLayout());
         self::assertSame('sm:w-1/4', $dl->getTermWidthClasses());
@@ -56,9 +56,9 @@ final class DescriptionListTest extends TestCase
     public function testStackedAndBorderedLayouts(): void
     {
         $dlStacked = new DescriptionList();
-        $dlStacked->layout = 'stacked';
-        $dlStacked->termStyle = 'muted';
-        $dlStacked->divider = false;
+        $dlStacked->assign('layout', 'stacked');
+        $dlStacked->assign('termStyle', 'muted');
+        $dlStacked->assign('divider', false);
 
         self::assertSame('stacked', $dlStacked->getLayout());
         self::assertFalse($dlStacked->isDivider());
@@ -69,7 +69,7 @@ final class DescriptionListTest extends TestCase
         self::assertStringContainsString('w-full', $dlStacked->getDescClasses());
 
         $dlBordered = new DescriptionList();
-        $dlBordered->props = ['layout' => 'bordered', 'term_width' => '1-2'];
+        $dlBordered->mergeProps(['layout' => 'bordered', 'term_width' => '1-2']);
         self::assertSame('bordered', $dlBordered->getLayout());
         self::assertSame('sm:w-1/2', $dlBordered->getTermWidthClasses());
         self::assertSame('sm:w-1/2', $dlBordered->getDescWidthClasses());
@@ -79,17 +79,17 @@ final class DescriptionListTest extends TestCase
     public function testNormalizedItemsAndPropsUnpacking(): void
     {
         $dl = new DescriptionList();
-        $dl->items = [
+        $dl->assign('items', [
             ['title' => 'Operating System', 'content' => 'macOS Sequoia', 'meta' => 'Latest'],
             ['title' => 'RAM', 'content' => '32 GB', 'icon' => 'ti ti-cpu'],
             'invalid_item',
-        ];
-        $dl->props = [
+        ]);
+        $dl->mergeProps([
             'props' => [
                 'layout' => 'striped',
                 'term_style' => 'medium',
             ],
-        ];
+        ]);
 
         $items = $dl->getNormalizedItems();
         self::assertCount(2, $items);
@@ -102,7 +102,7 @@ final class DescriptionListTest extends TestCase
     public function testLinkNormalization(): void
     {
         $dl = new DescriptionList();
-        $dl->items = [
+        $dl->assign('items', [
             [
                 'title' => 'String link',
                 'content' => 'Link as string',
@@ -117,7 +117,7 @@ final class DescriptionListTest extends TestCase
                 'title' => 'No link',
                 'content' => 'Plain description',
             ],
-        ];
+        ]);
 
         $items = $dl->getNormalizedItems();
         self::assertCount(3, $items);

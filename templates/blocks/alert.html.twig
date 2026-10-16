@@ -1,12 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Alert
-    title="{{ block.title|default(null) }}"
-    content="{{ block.content|default('') }}"
-    :icon="block.icon|default(null)"
-    :link="block.link|default(null)"
-    link_title="{{ block.link_title|default(null) }}"
-    linkTitle="{{ block.link_title|default(null) }}"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Alert :block="block" />
 {% endif %}

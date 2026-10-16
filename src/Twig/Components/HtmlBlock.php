@@ -10,20 +10,32 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Custom HTML / Embed snippet component.
  */
 #[AsTwigComponent('Html', template: '@SuluPrelineBlocks/components/Html.html.twig')]
-final class HtmlBlock
+final class HtmlBlock extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public ?string $content = null;
-    public bool $raw_output = false;
+    protected function defaults(): array
+    {
+        return [
+            'raw_output' => false,
+            'card' => false,
+        ];
+    }
 
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
+    protected function capabilities(): array
+    {
+        return [
+            'raw' => fn (): bool => $this->boolProp('raw_output', false),
+            'card' => fn (): bool => $this->boolProp('card', false),
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return $this->hasContent();
+    }
 
     public function getContent(): string
     {
-        return $this->content ?? '';
+        return $this->string('content', $this->string('html', ''));
     }
 
     public function hasContent(): bool
@@ -33,33 +45,21 @@ final class HtmlBlock
 
     public function isRaw(): bool
     {
-        return $this->raw_output;
+        return $this->is('raw');
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
         $classes = ['w-full', 'my-4'];
 
-        $resolved = $this->resolveProps();
-        if (!empty($resolved['card'])) {
+        if ($this->is('card')) {
             $classes[] = 'p-6 bg-card border border-card-line rounded-xl shadow-xs';
         }
 
-        return \implode(' ', $classes);
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function resolveProps(): array
-    {
-        if (isset($this->props['props']) && \is_array($this->props['props'])) {
-            /** @var array<string, mixed> $inner */
-            $inner = $this->props['props'];
-
-            return $inner;
+        if ('' !== $extraBase) {
+            $classes[] = $extraBase;
         }
 
-        return $this->props;
+        return \implode(' ', $classes);
     }
 }

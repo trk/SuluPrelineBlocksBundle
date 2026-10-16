@@ -13,12 +13,12 @@ final class TableTest extends TestCase
     {
         $table = new Table();
 
-        self::assertNull($table->title);
-        self::assertNull($table->header_title);
-        self::assertNull($table->header_meta);
-        self::assertNull($table->header_content);
-        self::assertNull($table->header_badge);
-        self::assertNull($table->header_link);
+        self::assertNull($table->get('title'));
+        self::assertNull($table->get('header_title'));
+        self::assertNull($table->get('header_meta'));
+        self::assertNull($table->get('header_content'));
+        self::assertNull($table->get('header_badge'));
+        self::assertNull($table->get('header_link'));
         self::assertEmpty($table->getNormalizedItems());
         self::assertSame('default', $table->getStyle());
         self::assertSame('md', $table->getSize());
@@ -33,7 +33,7 @@ final class TableTest extends TestCase
     public function testHeaderPresence(): void
     {
         $table = new Table();
-        $table->header_title = 'Product';
+        $table->assign('header_title', 'Product');
 
         self::assertTrue($table->hasHeader());
     }
@@ -41,12 +41,12 @@ final class TableTest extends TestCase
     public function testStylesAndSizes(): void
     {
         $table = new Table();
-        $table->props = [
+        $table->mergeProps([
             'style' => 'striped',
             'size' => 'lg',
             'sticky_header' => true,
             'bordered' => true,
-        ];
+        ]);
 
         self::assertSame('striped', $table->getStyle());
         self::assertSame('lg', $table->getSize());
@@ -63,7 +63,7 @@ final class TableTest extends TestCase
     public function testNormalizedItems(): void
     {
         $table = new Table();
-        $table->items = [
+        $table->assign('items', [
             [
                 'title' => 'Alpha',
                 'meta' => 'Sub alpha',
@@ -84,7 +84,7 @@ final class TableTest extends TestCase
                 'image' => '/media/beta.jpg',
                 'link' => ['url' => '/detail/beta'],
             ],
-        ];
+        ]);
 
         $items = $table->getNormalizedItems();
 

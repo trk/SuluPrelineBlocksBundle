@@ -13,7 +13,7 @@ final class DividerTest extends TestCase
     {
         $divider = new Divider();
 
-        self::assertNull($divider->icon);
+        self::assertNull($divider->get('icon'));
         self::assertNull($divider->getResolvedIcon());
         self::assertSame('line', $divider->getDividerStyle());
         self::assertStringContainsString('border-border', $divider->getDividerColorClasses());
@@ -26,23 +26,23 @@ final class DividerTest extends TestCase
     {
         $divider = new Divider();
 
-        $divider->props = ['divider_style' => 'dashed'];
+        $divider->mergeProps(['divider_style' => 'dashed']);
         self::assertSame('dashed', $divider->getDividerStyle());
 
-        $divider->props = ['divider_style' => 'dotted'];
+        $divider->mergeProps(['divider_style' => 'dotted']);
         self::assertSame('dotted', $divider->getDividerStyle());
 
-        $divider->props = ['divider_style' => 'small'];
+        $divider->mergeProps(['divider_style' => 'small']);
         self::assertSame('small', $divider->getDividerStyle());
         self::assertSame('w-16', $divider->getDividerWidthClasses());
 
-        $divider->props = ['divider_style' => 'icon'];
+        $divider->mergeProps(['divider_style' => 'icon']);
         self::assertSame('icon', $divider->getDividerStyle());
 
-        $divider->props = ['divider_thickness' => '2'];
+        $divider->mergeProps(['divider_thickness' => '2']);
         self::assertStringContainsString('border-t-2', $divider->getDividerThicknessClasses());
 
-        $divider->props = ['divider_thickness' => '4'];
+        $divider->mergeProps(['divider_thickness' => '4']);
         self::assertStringContainsString('border-t-4', $divider->getDividerThicknessClasses());
     }
 
@@ -50,13 +50,13 @@ final class DividerTest extends TestCase
     {
         $divider = new Divider();
 
-        $divider->props = ['divider_color' => 'primary'];
+        $divider->mergeProps(['divider_color' => 'primary']);
         self::assertStringContainsString('border-primary', $divider->getDividerColorClasses());
 
-        $divider->props = ['divider_color' => 'dark'];
+        $divider->mergeProps(['divider_color' => 'dark']);
         self::assertStringContainsString('border-line-8', $divider->getDividerColorClasses());
 
-        $divider->props = ['divider_color' => 'muted'];
+        $divider->mergeProps(['divider_color' => 'muted']);
         self::assertStringContainsString('border-line-1', $divider->getDividerColorClasses());
     }
 
@@ -64,71 +64,71 @@ final class DividerTest extends TestCase
     {
         $divider = new Divider();
 
-        $divider->props = ['divider_width' => '1-2'];
+        $divider->mergeProps(['divider_width' => '1-2']);
         self::assertSame('w-1/2', $divider->getDividerWidthClasses());
 
-        $divider->props = ['divider_width' => '3-4'];
+        $divider->mergeProps(['divider_width' => '3-4']);
         self::assertSame('w-3/4', $divider->getDividerWidthClasses());
 
-        $divider->props = ['divider_align' => 'left'];
+        $divider->mergeProps(['divider_align' => 'left']);
         self::assertStringContainsString('justify-start', $divider->getDividerAlignClasses());
 
-        $divider->props = ['divider_align' => 'right'];
+        $divider->mergeProps(['divider_align' => 'right']);
         self::assertStringContainsString('justify-end', $divider->getDividerAlignClasses());
     }
 
     public function testIconResolution(): void
     {
         $divider = new Divider();
-        $divider->icon = 'star';
+        $divider->assign('icon', 'star');
         self::assertSame('ti ti-star', $divider->getResolvedIcon());
         self::assertSame('icon', $divider->getDividerStyle());
 
-        $divider->icon = 'ti ti-heart';
+        $divider->assign('icon', 'ti ti-heart');
         self::assertSame('ti ti-heart', $divider->getResolvedIcon());
 
-        $divider->icon = ['icon' => 'check'];
+        $divider->assign('icon', ['icon' => 'check']);
         self::assertSame('ti ti-check', $divider->getResolvedIcon());
 
         // Sulu single_icon_selection format
-        $divider->icon = ['name' => 'star', 'icon_set' => 'tabler'];
+        $divider->assign('icon', ['name' => 'star', 'icon_set' => 'tabler']);
         self::assertSame('ti ti-star', $divider->getResolvedIcon());
     }
 
     public function testIconAlignmentAndLineClasses(): void
     {
         $dividerLeft = new Divider();
-        $dividerLeft->props = ['divider_align' => 'left'];
+        $dividerLeft->mergeProps(['divider_align' => 'left']);
         $leftClasses = $dividerLeft->getIconLineClasses();
         self::assertStringContainsString('after:flex-1', $leftClasses);
         self::assertStringNotContainsString('before:flex-1', $leftClasses);
 
         $dividerRight = new Divider();
-        $dividerRight->props = ['divider_align' => 'right'];
+        $dividerRight->mergeProps(['divider_align' => 'right']);
         $rightClasses = $dividerRight->getIconLineClasses();
         self::assertStringContainsString('before:flex-1', $rightClasses);
         self::assertStringNotContainsString('after:flex-1', $rightClasses);
 
         $dividerCenter = new Divider();
-        $dividerCenter->props = ['divider_align' => 'center'];
+        $dividerCenter->mergeProps(['divider_align' => 'center']);
         $centerClasses = $dividerCenter->getIconLineClasses();
         self::assertStringContainsString('before:flex-1', $centerClasses);
         self::assertStringContainsString('after:flex-1', $centerClasses);
 
         $dividerPrimary = new Divider();
-        $dividerPrimary->props = ['divider_color' => 'primary'];
+        $dividerPrimary->mergeProps(['divider_color' => 'primary']);
         self::assertStringContainsString('text-primary', $dividerPrimary->getIconBadgeColorClasses());
     }
 
     public function testWrapperClassesAndId(): void
     {
         $divider = new Divider();
-        $divider->props = [
+        $divider->mergeProps([
             'id' => 'section-divider',
             'custom_class' => 'my-divider',
             'margin_top' => 'lg',
             'margin_bottom' => 'xl',
-        ];
+        ]);
 
         self::assertSame('section-divider', $divider->getElementId());
         $wrapper = $divider->getWrapperClasses();

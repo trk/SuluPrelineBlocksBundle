@@ -1,20 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Overlay
-    title="{{ block.title|default(null) }}"
-    meta="{{ block.meta|default(null) }}"
-    badge="{{ block.badge|default(null) }}"
-    :elements="block.elements|default([])"
-    :badges="block.badges|default([])"
-    content="{{ block.summary|default(block.content|default(null)) }}"
-    :image="block.image|default(null)"
-    :video="block.video|default(null)"
-    :icon="block.icon|default(null)"
-    :link="block.link|default(null)"
-    linkTitle="{{ block.link_title|default(null) }}"
-    :buttons="block.buttons|default([])"
-    :hoverImage="block.hover_image|default(null)"
-    :hoverVideo="block.hover_video|default(null)"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Overlay :block="block" />
 {% endif %}

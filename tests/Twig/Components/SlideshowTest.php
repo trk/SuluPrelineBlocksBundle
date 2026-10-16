@@ -13,7 +13,7 @@ final class SlideshowTest extends TestCase
     {
         $slideshow = new Slideshow();
 
-        self::assertNull($slideshow->title);
+        self::assertNull($slideshow->get('title'));
         self::assertEmpty($slideshow->getNormalizedItems());
         self::assertSame('min-h-[420px] sm:min-h-[500px]', $slideshow->getHeightClass());
         self::assertTrue($slideshow->isAutoplay());
@@ -32,7 +32,7 @@ final class SlideshowTest extends TestCase
     public function testPropsUnpackingAndConfig(): void
     {
         $slideshow = new Slideshow();
-        $slideshow->props = [
+        $slideshow->mergeProps([
             'height' => 'full',
             'autoplay' => false,
             'interval' => 7000,
@@ -44,7 +44,7 @@ final class SlideshowTest extends TestCase
             'margin_bottom' => 'md',
             'id' => 'hero-slideshow',
             'custom_class' => 'my-hero-carousel',
-        ];
+        ]);
 
         self::assertSame('min-h-screen', $slideshow->getHeightClass());
         self::assertFalse($slideshow->isAutoplay());
@@ -63,7 +63,7 @@ final class SlideshowTest extends TestCase
     public function testItemNormalization(): void
     {
         $slideshow = new Slideshow();
-        $slideshow->items = [
+        $slideshow->assign('items', [
             [
                 'title' => 'Hero Slide 1',
                 'image' => '/uploads/hero1.jpg',
@@ -75,7 +75,7 @@ final class SlideshowTest extends TestCase
                 'link' => ['url' => 'https://example.com/two'],
             ],
             'invalid',
-        ];
+        ]);
 
         $items = $slideshow->getNormalizedItems();
         self::assertCount(2, $items);
@@ -95,12 +95,12 @@ final class SlideshowTest extends TestCase
             }
         };
 
-        $slideshow->items = [
+        $slideshow->assign('items', [
             [
                 'title' => 'Object Slide',
                 'image' => $mediaMock,
             ],
-        ];
+        ]);
 
         $items = $slideshow->getNormalizedItems();
         self::assertCount(1, $items);

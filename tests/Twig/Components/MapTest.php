@@ -13,11 +13,11 @@ final class MapTest extends TestCase
     {
         $map = new Map();
 
-        self::assertNull($map->title);
-        self::assertNull($map->location_query);
+        self::assertNull($map->get('title'));
+        self::assertNull($map->get('location_query'));
         self::assertSame(14, $map->getZoom());
-        self::assertSame('16/9', $map->aspect_ratio);
-        self::assertEmpty($map->items);
+        self::assertSame('16/9', $map->get('aspect_ratio'));
+        self::assertEmpty($map->get('items'));
         self::assertFalse($map->hasMap());
         self::assertFalse($map->hasItems());
         self::assertSame('', $map->getEmbedUrl());
@@ -28,8 +28,8 @@ final class MapTest extends TestCase
     public function testEmbedUrlGeneration(): void
     {
         $map = new Map();
-        $map->location_query = 'Istanbul, Turkey';
-        $map->zoom = 12;
+        $map->assign('location_query', 'Istanbul, Turkey');
+        $map->assign('zoom', 12);
 
         self::assertTrue($map->hasMap());
         self::assertSame('https://maps.google.com/maps?q=Istanbul%2C%20Turkey&z=12&output=embed', $map->getEmbedUrl());
@@ -38,7 +38,7 @@ final class MapTest extends TestCase
     public function testEmbedUrlFromIframeSrc(): void
     {
         $map = new Map();
-        $map->location_query = '<iframe src="https://www.google.com/maps/embed?pb=123" width="600"></iframe>';
+        $map->assign('location_query', '<iframe src="https://www.google.com/maps/embed?pb=123" width="600"></iframe>');
 
         self::assertSame('https://www.google.com/maps/embed?pb=123', $map->getEmbedUrl());
     }
@@ -46,12 +46,12 @@ final class MapTest extends TestCase
     public function testEmbedUrlFallbackToFirstItem(): void
     {
         $map = new Map();
-        $map->items = [
+        $map->assign('items', [
             [
                 'location' => 'Ankara, Turkey',
                 'title' => 'Capital Office',
             ],
-        ];
+        ]);
 
         self::assertTrue($map->hasMap());
         self::assertSame('https://maps.google.com/maps?q=Ankara%2C%20Turkey&z=14&output=embed', $map->getEmbedUrl());
@@ -61,23 +61,23 @@ final class MapTest extends TestCase
     {
         $map = new Map();
 
-        $map->aspect_ratio = '4/3';
+        $map->assign('aspect_ratio', '4/3');
         self::assertSame('aspect-4/3', $map->getAspectRatioClasses());
 
-        $map->aspect_ratio = '21/9';
+        $map->assign('aspect_ratio', '21/9');
         self::assertSame('aspect-21/9', $map->getAspectRatioClasses());
 
-        $map->aspect_ratio = '1/1';
+        $map->assign('aspect_ratio', '1/1');
         self::assertSame('aspect-square', $map->getAspectRatioClasses());
 
-        $map->aspect_ratio = 'auto';
+        $map->assign('aspect_ratio', 'auto');
         self::assertSame('h-96 md:h-[500px]', $map->getAspectRatioClasses());
     }
 
     public function testNormalizedItems(): void
     {
         $map = new Map();
-        $map->items = [
+        $map->assign('items', [
             [
                 'location' => 'Levent, Istanbul',
                 'title' => 'Headquarters',
@@ -94,7 +94,7 @@ final class MapTest extends TestCase
                 'link' => '/contact',
                 'link_title' => 'Details',
             ],
-        ];
+        ]);
 
         self::assertTrue($map->hasItems());
         $items = $map->getNormalizedItems();

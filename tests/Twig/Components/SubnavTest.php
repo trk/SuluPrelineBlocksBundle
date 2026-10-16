@@ -13,7 +13,7 @@ final class SubnavTest extends TestCase
     {
         $subnav = new Subnav();
 
-        self::assertNull($subnav->title);
+        self::assertNull($subnav->get('title'));
         self::assertEmpty($subnav->getNormalizedItems());
         self::assertSame('pills', $subnav->getStyle());
         self::assertSame('start', $subnav->getAlignment());
@@ -30,7 +30,7 @@ final class SubnavTest extends TestCase
     public function testStylesAndAlignments(): void
     {
         $subnav = new Subnav();
-        $subnav->props = [
+        $subnav->mergeProps([
             'style' => 'segmented',
             'alignment' => 'center',
             'size' => 'lg',
@@ -38,7 +38,7 @@ final class SubnavTest extends TestCase
             'margin_bottom' => 'lg',
             'id' => 'tab-nav',
             'custom_class' => 'my-subnav',
-        ];
+        ]);
 
         self::assertSame('segmented', $subnav->getStyle());
         self::assertSame('center', $subnav->getAlignment());
@@ -51,7 +51,7 @@ final class SubnavTest extends TestCase
         self::assertSame('my-subnav', $subnav->getCustomClass());
 
         $subnavUnderline = new Subnav();
-        $subnavUnderline->style = 'underline';
+        $subnavUnderline->assign('style', 'underline');
         self::assertSame('underline', $subnavUnderline->getStyle());
         self::assertStringContainsString('border-b border-border', $subnavUnderline->getNavClasses());
         self::assertStringContainsString('border-primary text-primary', $subnavUnderline->getItemClasses(true));
@@ -60,7 +60,7 @@ final class SubnavTest extends TestCase
     public function testItemNormalization(): void
     {
         $subnav = new Subnav();
-        $subnav->items = [
+        $subnav->assign('items', [
             [
                 'title' => 'Overview',
                 'link' => '/overview',
@@ -72,7 +72,7 @@ final class SubnavTest extends TestCase
                 'badge' => '3',
             ],
             'invalid',
-        ];
+        ]);
 
         $items = $subnav->getNormalizedItems();
         self::assertCount(2, $items);

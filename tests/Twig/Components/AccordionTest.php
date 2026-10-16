@@ -13,7 +13,7 @@ final class AccordionTest extends TestCase
     {
         $accordion = new Accordion();
 
-        self::assertNull($accordion->title);
+        self::assertNull($accordion->get('title'));
         self::assertEmpty($accordion->getNormalizedItems());
         self::assertSame('default', $accordion->getStyle());
         self::assertSame('chevron', $accordion->getIconStyle());
@@ -33,7 +33,7 @@ final class AccordionTest extends TestCase
     public function testStylesAndVariants(): void
     {
         $accordion = new Accordion();
-        $accordion->props = [
+        $accordion->mergeProps([
             'style' => 'bordered',
             'icon_style' => 'plus',
             'multiple' => true,
@@ -44,7 +44,7 @@ final class AccordionTest extends TestCase
             'margin_bottom' => 'lg',
             'id' => 'faq-accordion',
             'custom_class' => 'my-faq',
-        ];
+        ]);
 
         self::assertSame('bordered', $accordion->getStyle());
         self::assertSame('plus', $accordion->getIconStyle());
@@ -63,12 +63,12 @@ final class AccordionTest extends TestCase
     public function testSoftStyleAndTitleSizes(): void
     {
         $accordion = new Accordion();
-        $accordion->props = [
+        $accordion->mergeProps([
             'style' => 'soft',
             'icon_style' => 'none',
             'title_size' => 'xl',
             'image_align' => 'right',
-        ];
+        ]);
 
         self::assertSame('soft', $accordion->getStyle());
         self::assertSame('none', $accordion->getIconStyle());
@@ -77,24 +77,24 @@ final class AccordionTest extends TestCase
         self::assertStringContainsString('bg-surface', $accordion->getItemClasses());
 
         $accordionSm = new Accordion();
-        $accordionSm->titleSize = 'sm';
+        $accordionSm->assign('titleSize', 'sm');
         self::assertSame('text-sm font-medium', $accordionSm->getTitleSizeClasses());
     }
 
     public function testNormalizedItemsAndPropsUnpacking(): void
     {
         $accordion = new Accordion();
-        $accordion->items = [
+        $accordion->assign('items', [
             ['title' => 'Item 1', 'content' => '<p>Answer 1</p>', 'is_active' => true],
             ['title' => 'Item 2', 'content' => '<p>Answer 2</p>'],
             'invalid_item_ignored',
-        ];
-        $accordion->props = [
+        ]);
+        $accordion->mergeProps([
             'props' => [
                 'style' => 'bordered',
                 'title_size' => 'lg',
             ],
-        ];
+        ]);
 
         $items = $accordion->getNormalizedItems();
         self::assertCount(2, $items);
@@ -107,7 +107,7 @@ final class AccordionTest extends TestCase
     public function testImageAndLinkNormalization(): void
     {
         $accordion = new Accordion();
-        $accordion->items = [
+        $accordion->assign('items', [
             [
                 'title' => 'String inputs',
                 'image' => '/uploads/test.jpg',
@@ -121,7 +121,7 @@ final class AccordionTest extends TestCase
             [
                 'title' => 'No image or link',
             ],
-        ];
+        ]);
 
         $items = $accordion->getNormalizedItems();
         self::assertCount(3, $items);

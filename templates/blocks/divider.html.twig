@@ -1,7 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Divider
-    :icon="block.icon|default(null)"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Divider :block="block" />
 {% endif %}

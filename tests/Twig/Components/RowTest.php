@@ -13,11 +13,11 @@ final class RowTest extends TestCase
     {
         $row = new Row();
 
-        self::assertSame('halves', $row->layout);
-        self::assertSame('md', $row->gap);
-        self::assertSame('stretch', $row->align_items);
-        self::assertFalse($row->has_divider);
-        self::assertEmpty($row->columns);
+        self::assertSame('halves', $row->get('layout'));
+        self::assertSame('md', $row->get('gap'));
+        self::assertSame('stretch', $row->get('align_items'));
+        self::assertFalse($row->get('has_divider'));
+        self::assertEmpty($row->get('columns'));
         self::assertFalse($row->hasColumns());
         self::assertSame('grid-cols-1 sm:grid-cols-2', $row->getLayoutClasses());
         self::assertSame('gap-6 sm:gap-8', $row->getGapClasses());
@@ -29,13 +29,13 @@ final class RowTest extends TestCase
     public function testLayoutsAndGapsFromProps(): void
     {
         $row = new Row();
-        $row->props = [
+        $row->mergeProps([
             'layout' => 'thirds',
             'gap' => 'lg',
             'align_items' => 'center',
             'has_divider' => true,
             'id' => 'row-1',
-        ];
+        ]);
 
         self::assertSame('row-1', $row->getElementId());
         self::assertSame('grid-cols-1 md:grid-cols-3', $row->getLayoutClasses());
@@ -43,21 +43,21 @@ final class RowTest extends TestCase
         self::assertSame('items-center', $row->getAlignItemsClasses());
         self::assertStringContainsString('divide-border', $row->getDividerClasses());
 
-        $row->props['layout'] = 'quarters';
+        $row->setProp('layout', 'quarters');
         self::assertSame('grid-cols-1 sm:grid-cols-2 lg:grid-cols-4', $row->getLayoutClasses());
 
-        $row->props['layout'] = '12-col';
+        $row->setProp('layout', '12-col');
         self::assertSame('grid-cols-1 md:grid-cols-12', $row->getLayoutClasses());
     }
 
     public function testNormalizedColumns(): void
     {
         $row = new Row();
-        $row->props = ['layout' => 'thirds-2-1'];
-        $row->columns = [
+        $row->mergeProps(['layout' => 'thirds-2-1']);
+        $row->assign('columns', [
             ['props' => ['col_span' => 'auto'], 'blocks' => [['type' => 'headline']]],
             ['props' => ['col_span' => 'auto'], 'blocks' => [['type' => 'text']]],
-        ];
+        ]);
 
         self::assertTrue($row->hasColumns());
         $cols = $row->getNormalizedColumns();

@@ -7,119 +7,64 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Headline', template: '@SuluPrelineBlocks/components/Headline.html.twig')]
-final class Headline
+final class Headline extends AbstractPrelineComponent
 {
-    public ?string $title = '';
-    public ?string $content = '';
-    public mixed $link = null;
-    public mixed $image = null;
-    public mixed $icon = null;
+    protected function defaults(): array
+    {
+        return [
+            'tag' => 'h2',
+            'text_align' => 'left',
+            'title_color' => 'default',
+            'title_decoration' => 'none',
+            'title_text_stroke' => false,
+        ];
+    }
+
+    protected function capabilities(): array
+    {
+        return [
+            'text_stroke' => fn (): bool => $this->boolProp('title_text_stroke', false),
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return '' !== \trim($this->getTitle());
+    }
 
     public function getTitle(): string
     {
-        if (null !== $this->title && '' !== $this->title) {
-            return $this->title;
+        $title = $this->string('title', '');
+        if ('' !== $title) {
+            return $title;
         }
 
-        return $this->content ?? '';
-    }
-
-    public ?string $tag = null;
-    public ?string $size = null;
-    public ?string $textAlign = null;
-    public ?string $text_align = null;
-    public ?string $titleColor = null;
-    public ?string $title_color = null;
-    public ?string $titleDecoration = null;
-    public ?string $title_decoration = null;
-    public ?bool $titleTextStroke = null;
-    public ?bool $title_text_stroke = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
-    {
-        $resolved = $this->props;
-        if (null !== $this->tag) {
-            $resolved['tag'] = $this->tag;
-        }
-        if (null !== $this->size) {
-            $resolved['size'] = $this->size;
-        }
-        if (null !== ($this->textAlign ?? $this->text_align)) {
-            $resolved['text_align'] = $this->textAlign ?? $this->text_align;
-        }
-        if (null !== ($this->titleColor ?? $this->title_color)) {
-            $resolved['title_color'] = $this->titleColor ?? $this->title_color;
-        }
-        if (null !== ($this->titleDecoration ?? $this->title_decoration)) {
-            $resolved['title_decoration'] = $this->titleDecoration ?? $this->title_decoration;
-        }
-        if (null !== ($this->titleTextStroke ?? $this->title_text_stroke)) {
-            $resolved['title_text_stroke'] = $this->titleTextStroke ?? $this->title_text_stroke;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-
-        return $resolved;
+        return $this->string('content', '');
     }
 
     public function getTag(): string
     {
-        $props = $this->getResolvedProps();
-        $tag = isset($props['tag']) && \is_string($props['tag']) ? $props['tag'] : 'h2';
-
-        return \in_array($tag, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true) ? $tag : 'h2';
+        return $this->enumProp('tag', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'h2');
     }
 
     public function getTextAlign(): string
     {
-        return PropsResolver::textAlign($this->getResolvedProps());
+        return PropsResolver::textAlign($this->props());
     }
 
     public function getTitleColor(): string
     {
-        return PropsResolver::titleColor($this->getResolvedProps());
+        return PropsResolver::titleColor($this->props());
     }
 
     public function getTitleDecoration(): ?string
     {
-        $props = $this->getResolvedProps();
-        $decoration = $props['title_decoration'] ?? null;
-
-        return \is_string($decoration) && '' !== $decoration ? $decoration : null;
+        return $this->nullableStringProp('title_decoration');
     }
 
     public function getDecorationClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $decoration = $props['title_decoration'] ?? 'none';
-
-        return match ($decoration) {
+        return match ($this->stringProp('title_decoration', 'none')) {
             'divider' => 'border-b-2 border-primary pb-2 inline-block',
             'bullet' => "flex items-center gap-3 before:content-[''] before:w-1.5 before:h-6 before:bg-primary before:rounded-full",
             'line' => "flex items-center gap-4 before:content-[''] before:flex-1 before:h-px before:bg-border after:content-[''] after:flex-1 after:h-px after:bg-border",
@@ -129,9 +74,7 @@ final class Headline
 
     public function isTextStroke(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return true === ($props['title_text_stroke'] ?? false);
+        return $this->is('text_stroke');
     }
 
     public function getTextStrokeClasses(): string
@@ -139,10 +82,9 @@ final class Headline
         return $this->isTextStroke() ? '[-webkit-text-stroke:1.5px_currentColor] text-transparent' : '';
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $props = $this->getResolvedProps();
-        $customSize = $props['size'] ?? ($props['title_size'] ?? null);
+        $customSize = $this->nullableStringProp('size') ?? $this->nullableStringProp('title_size');
 
         $sizeClasses = match ($customSize) {
             'sm' => 'text-base sm:text-lg font-semibold',
@@ -162,67 +104,50 @@ final class Headline
         };
 
         $base = \trim(\sprintf(
-            'tracking-tight %s %s %s %s',
+            'tracking-tight %s %s %s %s %s',
             $sizeClasses,
             $this->getTitleColor(),
             $this->getDecorationClasses(),
             $this->getTextStrokeClasses(),
+            $extraBase,
         ));
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 
     public function getUrl(): ?string
     {
-        if (null === $this->link || '' === $this->link) {
+        $link = $this->get('link');
+        if (null === $link || '' === $link) {
             return null;
         }
 
-        return PropsResolver::resolveUrl($this->link);
+        return PropsResolver::resolveUrl($link);
     }
 
-    public function getImageUrl(): ?string
+    public function getImageAlt(string $key = 'image', string $fallbackKey = ''): string
     {
-        return PropsResolver::resolveImageUrl($this->image);
-    }
-
-    public function getImageFocusPointStyle(): ?string
-    {
-        return PropsResolver::resolveFocusPointStyle($this->image);
-    }
-
-    public function getImageAlt(): string
-    {
-        if (\is_array($this->image)) {
-            $alt = $this->image['description'] ?? ($this->image['title'] ?? null);
+        $media = $this->get($key);
+        if (\is_array($media)) {
+            $alt = $media['description'] ?? ($media['title'] ?? null);
             if (\is_string($alt) && '' !== \trim($alt)) {
                 return \trim($alt);
             }
-        } elseif (\is_object($this->image)) {
-            if (\method_exists($this->image, 'getDescription')) {
-                $desc = $this->image->getDescription();
+        } elseif (\is_object($media)) {
+            if (\method_exists($media, 'getDescription')) {
+                $desc = $media->getDescription();
                 if (\is_string($desc) && '' !== \trim($desc)) {
                     return \trim($desc);
                 }
             }
-            if (\method_exists($this->image, 'getTitle')) {
-                $title = $this->image->getTitle();
+            if (\method_exists($media, 'getTitle')) {
+                $title = $media->getTitle();
                 if (\is_string($title) && '' !== \trim($title)) {
                     return \trim($title);
                 }
             }
         }
 
-        return '';
-    }
-
-    public function getIconClass(): ?string
-    {
-        return PropsResolver::resolveIcon($this->icon);
+        return '' !== $fallbackKey ? $this->string($fallbackKey, '') : '';
     }
 }

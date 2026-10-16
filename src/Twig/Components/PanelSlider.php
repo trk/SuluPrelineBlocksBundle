@@ -7,84 +7,45 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('PanelSlider', template: '@SuluPrelineBlocks/components/PanelSlider.html.twig')]
-final class PanelSlider
+final class PanelSlider extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var array<int|string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public ?bool $autoplay = null;
-    public ?int $interval = null;
-    public ?bool $loop = null;
-    public ?string $arrows = null;
-    public ?string $dots = null;
-    public ?string $columns = null;
-    public ?string $gap = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            /** @var array<string, mixed> $nested */
-            $nested = $resolved['props'];
-            $resolved = \array_merge($nested, $resolved);
-            unset($resolved['props']);
-        }
+        return [
+            'autoplay' => false,
+            'interval' => 4000,
+            'loop' => true,
+            'arrows' => 'inside',
+            'dots' => 'bottom',
+            'columns' => '3',
+            'gap' => 'md',
+        ];
+    }
 
-        if (null !== $this->autoplay) {
-            $resolved['autoplay'] = $this->autoplay;
-        }
-        if (null !== $this->interval) {
-            $resolved['interval'] = $this->interval;
-        }
-        if (null !== $this->loop) {
-            $resolved['loop'] = $this->loop;
-        }
-        if (null !== $this->arrows) {
-            $resolved['arrows'] = $this->arrows;
-        }
-        if (null !== $this->dots) {
-            $resolved['dots'] = $this->dots;
-        }
-        if (null !== $this->columns) {
-            $resolved['columns'] = $this->columns;
-        }
-        if (null !== $this->gap) {
-            $resolved['gap'] = $this->gap;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+        ];
     }
 
     /**
@@ -92,62 +53,37 @@ final class PanelSlider
      */
     public function getNormalizedItems(): array
     {
-        $normalized = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $itemArr */
-                $itemArr = $item;
-                $normalized[] = $itemArr;
-            }
-        }
-
-        return $normalized;
+        return $this->items('items');
     }
 
     public function isAutoplay(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return (bool) ($props['autoplay'] ?? false);
+        return $this->boolProp('autoplay', false);
     }
 
     public function getInterval(): int
     {
-        $props = $this->getResolvedProps();
-        $interval = $props['interval'] ?? 4000;
-
-        return \is_numeric($interval) ? (int) $interval : 4000;
+        return $this->intProp('interval', 4000);
     }
 
     public function isLoop(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return (bool) ($props['loop'] ?? true);
+        return $this->boolProp('loop', true);
     }
 
     public function getArrows(): string
     {
-        $props = $this->getResolvedProps();
-        $arrows = $props['arrows'] ?? 'inside';
-
-        return \is_string($arrows) ? $arrows : 'inside';
+        return $this->stringProp('arrows', 'inside');
     }
 
     public function getDots(): string
     {
-        $props = $this->getResolvedProps();
-        $dots = $props['dots'] ?? 'bottom';
-
-        return \is_string($dots) ? $dots : 'bottom';
+        return $this->stringProp('dots', 'bottom');
     }
 
     public function getColumns(): string
     {
-        $props = $this->getResolvedProps();
-        $columns = $props['columns'] ?? '3';
-
-        return \is_string($columns) || \is_int($columns) ? (string) $columns : '3';
+        return $this->stringProp('columns', '3');
     }
 
     public function getSlideWidthClass(): string
@@ -162,10 +98,7 @@ final class PanelSlider
 
     public function getGapClass(): string
     {
-        $props = $this->getResolvedProps();
-        $gap = $props['gap'] ?? 'md';
-
-        return match ($gap) {
+        return match ($this->stringProp('gap', 'md')) {
             'none' => 'px-0',
             'sm' => 'px-1.5',
             'lg' => 'px-4',
@@ -195,47 +128,22 @@ final class PanelSlider
 
     public function getMarginClass(): string
     {
-        $props = $this->getResolvedProps();
-        $classes = [];
+        $top = match ($this->stringProp('margin_top', 'none')) {
+            'sm' => 'mt-4',
+            'md' => 'mt-8',
+            'lg' => 'mt-12',
+            'xl' => 'mt-16',
+            default => '',
+        };
 
-        $top = $props['margin_top'] ?? null;
-        if (\is_string($top) && '' !== $top) {
-            $classes[] = match ($top) {
-                'sm' => 'mt-4',
-                'md' => 'mt-8',
-                'lg' => 'mt-12',
-                'xl' => 'mt-16',
-                default => '',
-            };
-        }
+        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
+            'sm' => 'mb-4',
+            'md' => 'mb-8',
+            'lg' => 'mb-12',
+            'xl' => 'mb-16',
+            default => '',
+        };
 
-        $bottom = $props['margin_bottom'] ?? null;
-        if (\is_string($bottom) && '' !== $bottom) {
-            $classes[] = match ($bottom) {
-                'sm' => 'mb-4',
-                'md' => 'mb-8',
-                'lg' => 'mb-12',
-                'xl' => 'mb-16',
-                default => '',
-            };
-        }
-
-        return \trim(\implode(' ', \array_filter($classes)));
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-        $id = $props['id'] ?? null;
-
-        return \is_string($id) && '' !== \trim($id) ? \trim($id) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-        $class = $props['custom_class'] ?? null;
-
-        return \is_string($class) ? \trim($class) : '';
+        return \trim($top . ' ' . $bottom);
     }
 }

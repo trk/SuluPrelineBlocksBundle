@@ -7,137 +7,51 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Grid', template: '@SuluPrelineBlocks/components/Grid.html.twig')]
-final class Grid
+final class Grid extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var list<array<string, mixed>>|array<string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public string|int|null $columnsDefault = null;
-    public string|int|null $columns_default = null;
-    public string|int|null $columnsSm = null;
-    public string|int|null $columns_sm = null;
-    public string|int|null $columnsMd = null;
-    public string|int|null $columns_md = null;
-    public string|int|null $columnsLg = null;
-    public string|int|null $columns_lg = null;
-    public string|int|null $columnsXl = null;
-    public string|int|null $columns_xl = null;
-    public string|int|null $gap = null;
-    public ?string $masonry = null;
-    public ?string $layoutType = null;
-    public ?string $layout_type = null;
-
-    public ?bool $filter = null;
-    public ?string $filterStyle = null;
-    public ?string $filter_style = null;
-    public ?string $filterAlign = null;
-    public ?string $filter_align = null;
-    public ?string $filterAllLabel = null;
-    public ?string $filter_all_label = null;
-
-    public ?string $cardVariant = null;
-    public ?string $card_variant = null;
-    public ?string $mediaAlign = null;
-    public ?string $media_align = null;
-    public ?string $textAlign = null;
-    public ?string $text_align = null;
-    public ?string $buttonStyle = null;
-    public ?string $button_style = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            $resolved = \array_merge($resolved['props'], $resolved);
-        }
+        return [
+            'gap' => 'md',
+            'masonry' => 'none',
+            'filter' => false,
+            'filter_style' => 'pills',
+            'filter_align' => 'center',
+            'filter_all_label' => 'All',
+            'card_variant' => 'default',
+            'media_align' => 'top',
+            'text_align' => 'left',
+            'button_style' => 'primary',
+        ];
+    }
 
-        $defaultCol = $this->columnsDefault ?? $this->columns_default;
-        if (null !== $defaultCol) {
-            $resolved['columns_default'] = (string) $defaultCol;
-        }
-        $smCol = $this->columnsSm ?? $this->columns_sm;
-        if (null !== $smCol) {
-            $resolved['columns_sm'] = (string) $smCol;
-        }
-        $mdCol = $this->columnsMd ?? $this->columns_md;
-        if (null !== $mdCol) {
-            $resolved['columns_md'] = (string) $mdCol;
-        }
-        $lgCol = $this->columnsLg ?? $this->columns_lg;
-        if (null !== $lgCol) {
-            $resolved['columns_lg'] = (string) $lgCol;
-        }
-        $xlCol = $this->columnsXl ?? $this->columns_xl;
-        if (null !== $xlCol) {
-            $resolved['columns_xl'] = (string) $xlCol;
-        }
-        if (null !== $this->gap) {
-            $resolved['gap'] = (string) $this->gap;
-        }
-        if (null !== $this->masonry) {
-            $resolved['masonry'] = $this->masonry;
-        }
-        if (null !== ($this->layoutType ?? $this->layout_type)) {
-            $resolved['layout_type'] = $this->layoutType ?? $this->layout_type;
-        }
-        if (null !== $this->filter) {
-            $resolved['filter'] = $this->filter;
-        }
-        if (null !== ($this->filterStyle ?? $this->filter_style)) {
-            $resolved['filter_style'] = $this->filterStyle ?? $this->filter_style;
-        }
-        if (null !== ($this->filterAlign ?? $this->filter_align)) {
-            $resolved['filter_align'] = $this->filterAlign ?? $this->filter_align;
-        }
-        if (null !== ($this->filterAllLabel ?? $this->filter_all_label)) {
-            $resolved['filter_all_label'] = $this->filterAllLabel ?? $this->filter_all_label;
-        }
-        if (null !== ($this->cardVariant ?? $this->card_variant)) {
-            $resolved['card_variant'] = $this->cardVariant ?? $this->card_variant;
-        }
-        if (null !== ($this->mediaAlign ?? $this->media_align)) {
-            $resolved['media_align'] = $this->mediaAlign ?? $this->media_align;
-        }
-        if (null !== ($this->textAlign ?? $this->text_align)) {
-            $resolved['text_align'] = $this->textAlign ?? $this->text_align;
-        }
-        if (null !== ($this->buttonStyle ?? $this->button_style)) {
-            $resolved['button_style'] = $this->buttonStyle ?? $this->button_style;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'masonry' => fn (): bool => $this->isMasonry(),
+            'card_group' => fn (): bool => $this->isCardGroup(),
+            'filterable' => fn (): bool => $this->isFilterEnabled(),
+        ];
     }
 
     /**
@@ -145,32 +59,18 @@ final class Grid
      */
     public function getNormalizedItems(): array
     {
-        $items = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $typedItem */
-                $typedItem = $item;
-                $items[] = $typedItem;
-            }
-        }
-
-        return $items;
+        return $this->items('items');
     }
 
     public function isMasonry(): bool
     {
-        $props = $this->getResolvedProps();
-        $masonry = isset($props['masonry']) && \is_string($props['masonry']) ? $props['masonry'] : 'none';
-
-        return 'columns' === $masonry;
+        return 'columns' === $this->stringProp('masonry', 'none');
     }
 
     public function isCardGroup(): bool
     {
-        $props = $this->getResolvedProps();
-        $layout = isset($props['layout_type']) && \is_string($props['layout_type'])
-            ? $props['layout_type']
-            : (isset($props['card_group']) && !empty($props['card_group']) ? 'card_group' : 'grid');
+        $layout = $this->nullableStringProp('layout_type')
+            ?? ($this->boolProp('card_group', false) ? 'card_group' : 'grid');
 
         return 'card_group' === $layout;
     }
@@ -181,10 +81,9 @@ final class Grid
             return 'grid border border-card-line bg-card rounded-xl shadow-2xs divide-y overflow-hidden sm:flex sm:divide-y-0 sm:divide-x divide-card-divider';
         }
 
-        $props = $this->getResolvedProps();
+        $props = $this->props();
 
-        $gap = isset($props['gap']) && \is_scalar($props['gap']) ? (string) $props['gap'] : 'md';
-        $gapClass = match ($gap) {
+        $gapClass = match ($this->stringProp('gap', 'md')) {
             'none', 'collapse', '0' => 'gap-0',
             'xs', 'xsmall' => 'gap-2',
             'sm', 'small' => 'gap-4',
@@ -194,8 +93,9 @@ final class Grid
             default => 'gap-6',
         };
 
-        $colsDefault = isset($props['columns_default']) && \is_scalar($props['columns_default']) && '' !== (string) $props['columns_default'] && 'inherit' !== (string) $props['columns_default'] && 'none' !== (string) $props['columns_default']
-            ? (string) $props['columns_default']
+        $rawDefault = $this->nullableStringProp('columns_default');
+        $colsDefault = null !== $rawDefault && 'inherit' !== $rawDefault && 'none' !== $rawDefault
+            ? $rawDefault
             : '1';
 
         $hasExplicitResponsive = \array_key_exists('columns_sm', $props)
@@ -203,18 +103,19 @@ final class Grid
             || \array_key_exists('columns_lg', $props)
             || \array_key_exists('columns_xl', $props);
 
-        $colsSm = isset($props['columns_sm']) && \is_scalar($props['columns_sm']) && 'inherit' !== (string) $props['columns_sm'] && 'none' !== (string) $props['columns_sm']
-            ? (string) $props['columns_sm']
-            : '';
-        $colsMd = isset($props['columns_md']) && \is_scalar($props['columns_md']) && 'inherit' !== (string) $props['columns_md'] && 'none' !== (string) $props['columns_md']
-            ? (string) $props['columns_md']
+        $rawSm = $this->nullableStringProp('columns_sm');
+        $colsSm = null !== $rawSm && 'inherit' !== $rawSm && 'none' !== $rawSm ? $rawSm : '';
+
+        $rawMd = $this->nullableStringProp('columns_md');
+        $colsMd = null !== $rawMd && 'inherit' !== $rawMd && 'none' !== $rawMd
+            ? $rawMd
             : (!$hasExplicitResponsive ? '3' : '');
-        $colsLg = isset($props['columns_lg']) && \is_scalar($props['columns_lg']) && 'inherit' !== (string) $props['columns_lg'] && 'none' !== (string) $props['columns_lg']
-            ? (string) $props['columns_lg']
-            : '';
-        $colsXl = isset($props['columns_xl']) && \is_scalar($props['columns_xl']) && 'inherit' !== (string) $props['columns_xl'] && 'none' !== (string) $props['columns_xl']
-            ? (string) $props['columns_xl']
-            : '';
+
+        $rawLg = $this->nullableStringProp('columns_lg');
+        $colsLg = null !== $rawLg && 'inherit' !== $rawLg && 'none' !== $rawLg ? $rawLg : '';
+
+        $rawXl = $this->nullableStringProp('columns_xl');
+        $colsXl = null !== $rawXl && 'inherit' !== $rawXl && 'none' !== $rawXl ? $rawXl : '';
 
         if ($this->isMasonry()) {
             $defaultColClass = match ($colsDefault) {
@@ -342,9 +243,7 @@ final class Grid
 
     public function isFilterEnabled(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return !empty($props['filter']);
+        return $this->boolProp('filter', false);
     }
 
     /**
@@ -377,10 +276,7 @@ final class Grid
 
     public function getFilterAlignClass(): string
     {
-        $props = $this->getResolvedProps();
-        $align = isset($props['filter_align']) && \is_string($props['filter_align']) ? $props['filter_align'] : 'center';
-
-        return match ($align) {
+        return match ($this->stringProp('filter_align', 'center')) {
             'left' => 'justify-start',
             'right' => 'justify-end',
             default => 'justify-center',
@@ -420,25 +316,22 @@ final class Grid
      */
     public function resolveItemProps(array $item): array
     {
-        $props = $this->getResolvedProps();
         $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
 
-        // Determine card variant (item panel_style override takes priority if not 'inherit' and not empty)
-        $cardVariant = isset($props['card_variant']) && \is_string($props['card_variant']) ? $props['card_variant'] : 'default';
+        $cardVariant = $this->stringProp('card_variant', 'default');
         if ($this->isCardGroup()) {
             $cardVariant = 'group';
         } elseif (isset($item['panel_style']) && \is_string($item['panel_style']) && 'inherit' !== $item['panel_style'] && '' !== \trim($item['panel_style'])) {
             $cardVariant = $item['panel_style'];
         }
 
-        // Determine button style (item link_style override takes priority if not 'inherit' and not empty)
-        $buttonStyle = isset($props['button_style']) && \is_string($props['button_style']) ? $props['button_style'] : 'primary';
+        $buttonStyle = $this->stringProp('button_style', 'primary');
         if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style'] && '' !== \trim($item['link_style'])) {
             $buttonStyle = $item['link_style'];
         }
 
-        $mediaAlign = isset($props['media_align']) && \is_string($props['media_align']) ? $props['media_align'] : 'top';
-        $textAlign = isset($props['text_align']) && \is_string($props['text_align']) ? $props['text_align'] : 'left';
+        $mediaAlign = $this->stringProp('media_align', 'top');
+        $textAlign = $this->stringProp('text_align', 'left');
 
         /** @var array<string, mixed> $merged */
         $merged = \array_merge([
@@ -449,24 +342,5 @@ final class Grid
         ], $itemProps);
 
         return $merged;
-    }
-
-    public function getMarginClass(): string
-    {
-        return ElementTransform::margin($this->getResolvedProps());
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-
-        return isset($props['id']) && \is_string($props['id']) && '' !== \trim($props['id']) ? \trim($props['id']) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-
-        return isset($props['custom_class']) && \is_string($props['custom_class']) ? \trim($props['custom_class']) : '';
     }
 }

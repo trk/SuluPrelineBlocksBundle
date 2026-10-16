@@ -7,187 +7,96 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Card', template: '@SuluPrelineBlocks/components/Card.html.twig')]
-final class Card
+final class Card extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public ?string $badge = null;
     /**
-     * @var list<array<string, mixed>>|array<string, mixed>
+     * @return list<string>
      */
-    public array $badges = [];
-    public ?string $badgePosition = null;
-    public ?string $badge_position = null;
-    public ?string $badgeStyle = null;
-    public ?string $badge_style = null;
-    public ?string $badgeColor = null;
-    public ?string $badge_color = null;
-    public ?string $meta = null;
-    public ?string $content = null;
-    public mixed $image = null;
-    public mixed $video = null;
-    public mixed $icon = null;
-    public mixed $cardLink = null;
-    public mixed $card_link = null;
-    public mixed $link = null;
-    public ?string $linkTitle = null;
-    public ?string $link_title = null;
-    public ?string $linkText = null;
-    public ?string $link_text = null;
-    public ?string $buttonStyle = null;
-    public ?string $button_style = null;
-    public ?string $buttonColor = null;
-    public ?string $button_color = null;
-    public ?string $buttonSize = null;
-    public ?string $button_size = null;
-
-    /**
-     * @var list<array<string, mixed>>|array<string, mixed>
-     */
-    public array $buttons = [];
-
-    /**
-     * @var list<array<string, mixed>>|array<string, mixed>
-     */
-    public array $elements = [];
-
-    public mixed $hoverImage = null;
-    public mixed $hover_image = null;
-    public mixed $hoverVideo = null;
-    public mixed $hover_video = null;
-    public ?string $mediaType = null;
-    public ?string $media_type = null;
-    public ?string $mediaSource = null;
-    public ?string $media_source = null;
-    public ?string $imageUrl = null;
-    public ?string $image_url = null;
-    public ?string $hoverImageUrl = null;
-    public ?string $hover_image_url = null;
-    public ?string $videoUrl = null;
-    public ?string $video_url = null;
-    public ?string $hoverVideoUrl = null;
-    public ?string $hover_video_url = null;
-
-    public ?string $cardVariant = null;
-    public ?string $card_variant = null;
-    public ?string $layout = null;
-    public ?string $mediaAlign = null;
-    public ?string $media_align = null;
-    public ?string $aspectRatio = null;
-    public ?string $aspect_ratio = null;
-    public ?string $mediaAspectRatio = null;
-    public ?string $media_aspect_ratio = null;
-    public ?string $objectFit = null;
-    public ?string $object_fit = null;
-    public int|string|null $aspectRatioWidth = null;
-    public int|string|null $aspect_ratio_width = null;
-    public int|string|null $aspectRatioHeight = null;
-    public int|string|null $aspect_ratio_height = null;
-    public ?string $bgColor = null;
-    public ?string $bg_color = null;
-    public ?string $textAlign = null;
-    public ?string $text_align = null;
-    public ?string $titleColor = null;
-    public ?string $title_color = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
+    protected function dataKeys(): array
+    {
+        return [
+            'title',
+            'badge',
+            'badges',
+            'meta',
+            'summary',
+            'content',
+            'image',
+            'video',
+            'icon',
+            'card_link',
+            'link',
+            'link_title',
+            'link_text',
+            'buttons',
+            'elements',
+            'hover_image',
+            'hover_video',
+            'image_url',
+            'hover_image_url',
+            'video_url',
+            'hover_video_url',
+        ];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (null !== ($this->cardVariant ?? $this->card_variant)) {
-            $resolved['card_variant'] = $this->cardVariant ?? $this->card_variant;
-        }
-        if (null !== ($this->mediaAlign ?? $this->media_align)) {
-            $resolved['media_align'] = $this->mediaAlign ?? $this->media_align;
-        }
-        if (null !== ($this->aspectRatio ?? $this->aspect_ratio)) {
-            $resolved['aspect_ratio'] = $this->aspectRatio ?? $this->aspect_ratio;
-        }
-        if (null !== ($this->mediaAspectRatio ?? $this->media_aspect_ratio)) {
-            $resolved['media_aspect_ratio'] = $this->mediaAspectRatio ?? $this->media_aspect_ratio;
-        }
-        if (null !== ($this->objectFit ?? $this->object_fit)) {
-            $resolved['object_fit'] = $this->objectFit ?? $this->object_fit;
-        }
-        if (null !== ($this->aspectRatioWidth ?? $this->aspect_ratio_width)) {
-            $resolved['aspect_ratio_width'] = $this->aspectRatioWidth ?? $this->aspect_ratio_width;
-        }
-        if (null !== ($this->aspectRatioHeight ?? $this->aspect_ratio_height)) {
-            $resolved['aspect_ratio_height'] = $this->aspectRatioHeight ?? $this->aspect_ratio_height;
-        }
-        if (null !== $this->layout) {
-            $resolved['layout'] = $this->layout;
-        }
-        if (null !== ($this->bgColor ?? $this->bg_color)) {
-            $resolved['bg_color'] = $this->bgColor ?? $this->bg_color;
-        }
-        if (null !== ($this->textAlign ?? $this->text_align)) {
-            $resolved['text_align'] = $this->textAlign ?? $this->text_align;
-        }
-        if (null !== ($this->titleColor ?? $this->title_color)) {
-            $resolved['title_color'] = $this->titleColor ?? $this->title_color;
-        }
-        if (null !== ($this->mediaType ?? $this->media_type)) {
-            $resolved['media_type'] = $this->mediaType ?? $this->media_type;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-        if (null !== ($this->buttonStyle ?? $this->button_style)) {
-            $resolved['button_style'] = $this->buttonStyle ?? $this->button_style;
-        }
-        if (null !== ($this->buttonColor ?? $this->button_color)) {
-            $resolved['button_color'] = $this->buttonColor ?? $this->button_color;
-        }
-        if (null !== ($this->buttonSize ?? $this->button_size)) {
-            $resolved['button_size'] = $this->buttonSize ?? $this->button_size;
-        }
-        if (null !== ($this->badgeStyle ?? $this->badge_style)) {
-            $resolved['badge_style'] = $this->badgeStyle ?? $this->badge_style;
-        }
-        if (null !== ($this->badgeColor ?? $this->badge_color)) {
-            $resolved['badge_color'] = $this->badgeColor ?? $this->badge_color;
-        }
-        if (null !== ($this->badgePosition ?? $this->badge_position)) {
-            $resolved['badge_position'] = $this->badgePosition ?? $this->badge_position;
-        }
+        return [
+            'media_width' => '1-2',
+            'object_fit' => 'cover',
+            'meta_align' => 'above-title',
+            'title_element' => 'h3',
+            'title_size' => 'md',
+            'title_decoration' => 'none',
+            'meta_badge_style' => 'pill',
+            'badge_style' => 'glass',
+            'badge_color' => 'primary',
+            'badge_position' => 'top-left',
+            'padding' => 'normal',
+            'rounded' => 'xl',
+            'button_style' => 'solid',
+            'button_color' => 'primary',
+            'button_size' => 'sm',
+            'link_card' => 'none',
+            'media_source' => 'media',
+        ];
+    }
 
-        return $resolved;
+    public function shouldRender(): bool
+    {
+        return $this->hasAny('title', 'summary', 'content', 'meta', 'badge', 'badges', 'buttons', 'elements')
+            || $this->hasMedia()
+            || null !== $this->getIconClass();
+    }
+
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'overlay' => fn (): bool => $this->isOverlay(),
+            'horizontal' => fn (): bool => $this->isHorizontal(),
+            'vertical' => fn (): bool => !$this->isHorizontal() && !$this->isOverlay(),
+            'image' => fn (): bool => $this->isImage(),
+            'video' => fn (): bool => $this->isVideo(),
+            'media' => fn (): bool => $this->hasMedia(),
+            'linked' => fn (): bool => null !== $this->getResolvedCardUrl(),
+        ];
     }
 
     public function getMediaAlign(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['media_align'] ?? ($props['layout'] ?? 'top');
+        $align = $this->nullableStringProp('media_align') ?? $this->stringProp('layout', 'top');
         if ('horizontal' === $align) {
             return 'left';
         }
 
         return \in_array($align, ['top', 'bottom', 'left', 'right', 'between', 'overlay'], true)
-            ? (string) $align
+            ? $align
             : 'top';
     }
 
@@ -203,10 +112,7 @@ final class Card
 
     public function getMediaGridWidthClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $width = $props['media_width'] ?? '1-2';
-
-        return match ($width) {
+        return match ($this->stringProp('media_width', '1-2')) {
             '1-3' => 'md:w-1/3',
             '2-5' => 'md:w-2/5',
             default => 'md:w-1/2',
@@ -215,10 +121,7 @@ final class Card
 
     public function getContentGridWidthClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $width = $props['media_width'] ?? '1-2';
-
-        return match ($width) {
+        return match ($this->stringProp('media_width', '1-2')) {
             '1-3' => 'md:w-2/3',
             '2-5' => 'md:w-3/5',
             default => 'md:w-1/2',
@@ -227,30 +130,24 @@ final class Card
 
     public function getMediaAspectRatioClass(): string
     {
-        $props = $this->getResolvedProps();
-        $aspect = $props['aspect_ratio'] ?? ($props['media_aspect_ratio'] ?? '16-9');
+        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->stringProp('media_aspect_ratio', '16-9');
 
         return match ($aspect) {
             '4-3', '4/3', '4:3' => 'aspect-4/3',
             '1-1', '1/1', '1:1', 'square' => 'aspect-square',
             '21-9', '21/9', '21:9' => 'aspect-21/9',
-            'auto' => 'aspect-auto',
-            'manual' => 'aspect-auto',
+            'auto', 'manual' => 'aspect-auto',
             default => 'aspect-video',
         };
     }
 
     public function getMediaAspectRatioStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $aspect = $props['aspect_ratio'] ?? ($props['media_aspect_ratio'] ?? null);
+        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->nullableStringProp('media_aspect_ratio');
 
         if ('manual' === $aspect) {
-            $w = $props['aspect_ratio_width'] ?? ($this->aspectRatioWidth ?? $this->aspect_ratio_width ?? null);
-            $h = $props['aspect_ratio_height'] ?? ($this->aspectRatioHeight ?? $this->aspect_ratio_height ?? null);
-
-            $widthVal = \is_numeric($w) ? (float) $w : 0.0;
-            $heightVal = \is_numeric($h) ? (float) $h : 0.0;
+            $widthVal = $this->floatProp('aspect_ratio_width', 0.0);
+            $heightVal = $this->floatProp('aspect_ratio_height', 0.0);
 
             if ($widthVal > 0.0 && $heightVal > 0.0) {
                 return \sprintf('aspect-ratio: %s / %s;', $widthVal, $heightVal);
@@ -262,44 +159,32 @@ final class Card
 
     public function getObjectFitClass(): string
     {
-        $props = $this->getResolvedProps();
-        $fit = $props['object_fit'] ?? ($this->objectFit ?? $this->object_fit ?? 'cover');
-
-        return PropsResolver::resolveObjectFit($fit);
+        return PropsResolver::resolveObjectFit($this->stringProp('object_fit', 'cover'));
     }
 
-    public function getImageFocusPointStyle(): ?string
+    public function getImageFocusPointStyle(string $key = 'image'): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveFocusPointStyle($this->image ?? $props['image'] ?? null);
+        return PropsResolver::resolveFocusPointStyle($this->get($key));
     }
 
     public function getHoverImageFocusPointStyle(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveFocusPointStyle($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
+        return PropsResolver::resolveFocusPointStyle($this->get('hover_image'));
     }
 
-    public function getImageSrcSet(): ?string
+    public function getImageSrcSet(string $key = 'image'): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveSrcSet($this->image ?? $props['image'] ?? null);
+        return PropsResolver::resolveSrcSet($this->get($key));
     }
 
     public function getHoverImageSrcSet(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveSrcSet($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
+        return PropsResolver::resolveSrcSet($this->get('hover_image'));
     }
 
-    public function getImageSizes(): string
+    public function getImageSizes(string $default = '100vw'): string
     {
-        $mediaAlign = $this->getMediaAlign();
-        if (\in_array($mediaAlign, ['left', 'right'], true)) {
+        if (\in_array($this->getMediaAlign(), ['left', 'right'], true)) {
             return '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw';
         }
 
@@ -308,26 +193,19 @@ final class Card
 
     public function getMetaAlign(): string
     {
-        $props = $this->getResolvedProps();
-        $metaAlign = $props['meta_align'] ?? 'above-title';
-
-        return \in_array($metaAlign, ['above-title', 'below-title', 'below-content'], true)
-            ? (string) $metaAlign
-            : 'above-title';
+        return $this->enumProp('meta_align', ['above-title', 'below-title', 'below-content'], 'above-title');
     }
 
     public function getTitleElement(): string
     {
-        $props = $this->getResolvedProps();
-        $el = $props['title_element'] ?? ($props['tag'] ?? 'h3');
+        $el = $this->nullableStringProp('title_element') ?? $this->stringProp('tag', 'h3');
 
-        return \in_array($el, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], true) ? (string) $el : 'h3';
+        return \in_array($el, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], true) ? $el : 'h3';
     }
 
     public function getTitleSizeClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['title_size'] ?? ($props['size'] ?? 'md');
+        $size = $this->nullableStringProp('title_size') ?? $this->stringProp('size', 'md');
 
         return match ($size) {
             'sm' => 'text-base sm:text-lg font-semibold',
@@ -339,10 +217,7 @@ final class Card
 
     public function getTitleDecorationClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $decoration = $props['title_decoration'] ?? 'none';
-
-        return match ($decoration) {
+        return match ($this->stringProp('title_decoration', 'none')) {
             'underline' => 'underline decoration-primary-500 decoration-2 underline-offset-4',
             default => '',
         };
@@ -350,10 +225,7 @@ final class Card
 
     public function getMetaBadgeClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['meta_badge_style'] ?? 'pill';
-
-        return match ($style) {
+        return match ($this->stringProp('meta_badge_style', 'pill')) {
             'primary_pill' => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-semibold bg-primary-100 text-primary-800 rounded-full dark:bg-primary-950/40 dark:text-primary-300',
             'text' => 'inline-block text-xs font-bold uppercase tracking-wider text-primary',
             default => 'py-1 px-2.5 inline-flex items-center gap-x-1.5 text-xs font-medium bg-surface text-surface-foreground rounded-full',
@@ -362,10 +234,7 @@ final class Card
 
     public function getBadgeClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['badge_style'] ?? 'glass';
-
-        return match ($style) {
+        return match ($this->stringProp('badge_style', 'glass')) {
             'primary' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-primary text-primary-foreground shadow-xs',
             'success' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-emerald-600 text-white shadow-xs',
             'dark' => 'py-1 px-2.5 inline-flex items-center gap-x-1 text-xs font-semibold rounded-full bg-inverse text-foreground-inverse shadow-xs',
@@ -375,10 +244,7 @@ final class Card
 
     public function getBadgePosition(): string
     {
-        $props = $this->getResolvedProps();
-        $pos = $props['badge_position'] ?? 'top-left';
-
-        return match ($pos) {
+        return match ($this->stringProp('badge_position', 'top-left')) {
             'top-right', 'top_right' => 'top-right',
             'bottom-left', 'bottom_left' => 'bottom-left',
             'bottom-right', 'bottom_right' => 'bottom-right',
@@ -400,10 +266,7 @@ final class Card
 
     public function getCardPaddingClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $padding = $props['padding'] ?? 'normal';
-
-        return match ($padding) {
+        return match ($this->stringProp('padding', 'normal')) {
             'none' => 'p-0',
             'compact' => 'p-4 sm:p-5',
             'spacious' => 'p-6 sm:p-8',
@@ -413,15 +276,12 @@ final class Card
 
     public function getRoundedClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $variant = $props['card_variant'] ?? ($props['variant'] ?? 'bordered');
+        $variant = $this->nullableStringProp('card_variant') ?? $this->stringProp('variant', 'bordered');
         if ('group' === $variant) {
             return 'rounded-none';
         }
 
-        $rounded = $props['rounded'] ?? 'xl';
-
-        return match ($rounded) {
+        return match ($this->stringProp('rounded', 'xl')) {
             'none' => 'rounded-none',
             'md' => 'rounded-md',
             '2xl' => 'rounded-2xl',
@@ -431,9 +291,9 @@ final class Card
         };
     }
 
-    public function getLinkUrl(): ?string
+    public function getLinkUrl(string $key = 'link'): ?string
     {
-        $link = $this->link ?? ($this->cardLink ?? $this->card_link);
+        $link = $this->get('link') ?? $this->get('card_link');
         if (null !== $link) {
             $url = PropsResolver::resolveUrl($link);
             if ('#' !== $url && '' !== $url) {
@@ -441,14 +301,16 @@ final class Card
             }
         }
 
-        $buttonList = [] !== $this->buttons ? $this->buttons : $this->elements;
-        if ([] !== $buttonList) {
-            foreach ($buttonList as $button) {
-                if (\is_array($button) && ('badge' !== ($button['type'] ?? '')) && isset($button['link'])) {
-                    $url = PropsResolver::resolveUrl($button['link']);
-                    if ('#' !== $url && '' !== $url) {
-                        return $url;
-                    }
+        $buttonList = $this->items('buttons');
+        if ([] === $buttonList) {
+            $buttonList = $this->items('elements');
+        }
+
+        foreach ($buttonList as $button) {
+            if (('badge' !== ($button['type'] ?? '')) && isset($button['link'])) {
+                $url = PropsResolver::resolveUrl($button['link']);
+                if ('#' !== $url && '' !== $url) {
+                    return $url;
                 }
             }
         }
@@ -458,24 +320,26 @@ final class Card
 
     public function getButtonText(): ?string
     {
-        $text = $this->linkTitle ?? ($this->link_title ?? ($this->linkText ?? $this->link_text));
-        if (null !== $text && '' !== \trim($text)) {
-            return \trim($text);
+        $text = $this->nullableString('link_title') ?? $this->nullableString('link_text');
+        if (null !== $text) {
+            return $text;
         }
 
-        $link = $this->link ?? ($this->cardLink ?? $this->card_link);
+        $link = $this->get('link') ?? $this->get('card_link');
         if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
             return \trim($link['title']);
         }
 
-        $buttonList = [] !== $this->buttons ? $this->buttons : $this->elements;
-        if ([] !== $buttonList) {
-            foreach ($buttonList as $button) {
-                if (\is_array($button) && ('badge' !== ($button['type'] ?? ''))) {
-                    $content = $button['title'] ?? ($button['content'] ?? null);
-                    if (\is_string($content) && '' !== \trim($content)) {
-                        return \trim($content);
-                    }
+        $buttonList = $this->items('buttons');
+        if ([] === $buttonList) {
+            $buttonList = $this->items('elements');
+        }
+
+        foreach ($buttonList as $button) {
+            if ('badge' !== ($button['type'] ?? '')) {
+                $content = $button['title'] ?? ($button['content'] ?? null);
+                if (\is_string($content) && '' !== \trim($content)) {
+                    return \trim($content);
                 }
             }
         }
@@ -485,10 +349,7 @@ final class Card
 
     public function getButtonStyleClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $this->buttonStyle ?? ($this->button_style ?? ($props['button_style'] ?? 'primary'));
-
-        return match ($style) {
+        return match ($this->stringProp('button_style', 'primary')) {
             'secondary' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-layer-line bg-layer text-layer-foreground shadow-2xs hover:bg-layer-hover focus:outline-hidden focus:bg-layer-focus',
             'outline' => 'py-2 px-3.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-primary-line text-primary hover:bg-primary-50 dark:hover:bg-primary-950/30 transition-colors focus:outline-hidden',
             'link' => 'inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary hover:underline focus:outline-hidden',
@@ -498,8 +359,7 @@ final class Card
 
     public function getResolvedCardUrl(): ?string
     {
-        $props = $this->getResolvedProps();
-        $linkCard = $props['link_card'] ?? 'none';
+        $linkCard = $this->stringProp('link_card', 'none');
         $url = $this->getLinkUrl();
 
         if (null === $url) {
@@ -510,7 +370,6 @@ final class Card
             return $url;
         }
 
-        // When linkCard is none or button, but no visible button text was provided, clicking the card navigates
         if ('none' === $linkCard && null === $this->getButtonText()) {
             return $url;
         }
@@ -526,8 +385,8 @@ final class Card
 
     public function getCardClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $variant = $props['card_variant'] ?? ($props['variant'] ?? 'bordered');
+        $props = $this->props();
+        $variant = $this->nullableStringProp('card_variant') ?? $this->stringProp('variant', 'bordered');
         $bg = PropsResolver::bgColor($props);
         $rounded = $this->getRoundedClasses();
         $mediaAlign = $this->getMediaAlign();
@@ -561,7 +420,7 @@ final class Card
 
     public function getTextAlign(): string
     {
-        return PropsResolver::textAlign($this->getResolvedProps());
+        return PropsResolver::textAlign($this->props());
     }
 
     public function getTitleColor(): string
@@ -570,73 +429,72 @@ final class Card
             return 'text-white';
         }
 
-        return PropsResolver::titleColor($this->getResolvedProps());
+        return PropsResolver::titleColor($this->props());
     }
 
-    public function getImageUrl(): ?string
+    public function getImageUrl(string $key = 'image'): ?string
     {
-        $props = $this->getResolvedProps();
-        $source = $this->mediaSource ?? $this->media_source ?? ($props['media_source'] ?? 'media');
+        $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->imageUrl ?? $this->image_url ?? (isset($props['image_url']) && \is_string($props['image_url']) ? $props['image_url'] : null);
-            if (null !== $url && '' !== $url) {
+            $url = $this->nullableString('image_url') ?? $this->nullableStringProp('image_url');
+            if (null !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->image ?? $props['image'] ?? null)
-            ?? ($this->imageUrl ?? $this->image_url ?? (isset($props['image_url']) && \is_string($props['image_url']) ? $props['image_url'] : null));
+        return PropsResolver::resolveImageUrl($this->get($key))
+            ?? $this->nullableString('image_url')
+            ?? $this->nullableStringProp('image_url');
     }
 
     public function getHoverImageUrl(): ?string
     {
-        $props = $this->getResolvedProps();
-        $source = $this->mediaSource ?? $this->media_source ?? ($props['media_source'] ?? 'media');
+        $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->hoverImageUrl ?? $this->hover_image_url ?? (isset($props['hover_image_url']) && \is_string($props['hover_image_url']) ? $props['hover_image_url'] : null);
-            if (null !== $url && '' !== $url) {
+            $url = $this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url');
+            if (null !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null)
-            ?? ($this->hoverImageUrl ?? $this->hover_image_url ?? (isset($props['hover_image_url']) && \is_string($props['hover_image_url']) ? $props['hover_image_url'] : null));
+        return PropsResolver::resolveImageUrl($this->get('hover_image'))
+            ?? $this->nullableString('hover_image_url')
+            ?? $this->nullableStringProp('hover_image_url');
     }
 
-    public function getVideoUrl(): ?string
+    public function getVideoUrl(string $key = 'video'): ?string
     {
-        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->videoUrl ?? $this->video_url;
-            if (null !== $url && '' !== $url) {
+            $url = $this->nullableString('video_url') ?? $this->nullableStringProp('video_url');
+            if (null !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->video)
-            ?? ($this->videoUrl ?? $this->video_url);
+        return PropsResolver::resolveImageUrl($this->get($key))
+            ?? $this->nullableString('video_url')
+            ?? $this->nullableStringProp('video_url');
     }
 
     public function getHoverVideoUrl(): ?string
     {
-        $source = $this->mediaSource ?? $this->media_source ?? 'media';
+        $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->hoverVideoUrl ?? $this->hover_video_url;
-            if (null !== $url && '' !== $url) {
+            $url = $this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url');
+            if (null !== $url) {
                 return $url;
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->hoverVideo ?? $this->hover_video)
-            ?? ($this->hoverVideoUrl ?? $this->hover_video_url);
+        return PropsResolver::resolveImageUrl($this->get('hover_video'))
+            ?? $this->nullableString('hover_video_url')
+            ?? $this->nullableStringProp('hover_video_url');
     }
 
     public function getMediaType(): ?string
     {
-        $props = $this->getResolvedProps();
-        $forced = isset($props['media_type']) && \is_string($props['media_type'])
-            ? $props['media_type']
-            : ($this->mediaType ?? $this->media_type ?? 'auto');
+        $forced = $this->stringProp('media_type', 'auto');
 
         if ('none' === $forced) {
             return null;
@@ -691,16 +549,11 @@ final class Card
         return $this->isVideo() && null !== $this->getVideoUrl() ? $this->getHoverVideoUrl() : null;
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $base = 'group relative w-full ' . $this->getCardClasses() . ' ' . $this->getTextAlign();
+        $base = \trim('group relative w-full ' . $this->getCardClasses() . ' ' . $this->getTextAlign() . ' ' . $extraBase);
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 
     /**
@@ -708,107 +561,7 @@ final class Card
      */
     public function getNormalizedBadges(): array
     {
-        $props = $this->getResolvedProps();
-        $defaultStyle = isset($props['badge_style']) && \is_string($props['badge_style']) && '' !== \trim($props['badge_style']) ? $props['badge_style'] : 'glass';
-        $defaultColor = isset($props['badge_color']) && \is_string($props['badge_color']) && '' !== \trim($props['badge_color']) ? $props['badge_color'] : 'primary';
-
-        /** @var list<array<string, mixed>> $result */
-        $result = [];
-
-        /** @var list<array<string, mixed>> $badgeItems */
-        $badgeItems = [];
-        if ([] !== $this->badges) {
-            foreach ($this->badges as $item) {
-                if (\is_array($item)) {
-                    $badgeItems[] = $item;
-                }
-            }
-        } elseif ([] !== $this->elements) {
-            foreach ($this->elements as $item) {
-                if (\is_array($item) && 'badge' === ($item['type'] ?? '')) {
-                    $badgeItems[] = $item;
-                }
-            }
-        }
-
-        if ([] !== $badgeItems) {
-            foreach ($badgeItems as $item) {
-                $itemStyle = isset($item['badge_style']) && \is_string($item['badge_style']) && 'inherit' !== $item['badge_style'] && '' !== \trim($item['badge_style'])
-                    ? $item['badge_style']
-                    : $defaultStyle;
-
-                $itemColor = isset($item['badge_color']) && \is_string($item['badge_color']) && 'inherit' !== $item['badge_color'] && '' !== \trim($item['badge_color'])
-                    ? $item['badge_color']
-                    : $defaultColor;
-
-                $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
-                    ? $item['size']
-                    : 'xs';
-
-                $itemRounded = isset($item['rounded']) && \is_string($item['rounded']) && 'inherit' !== $item['rounded'] && '' !== \trim($item['rounded'])
-                    ? $item['rounded']
-                    : 'pill';
-
-                $title = '';
-                if (isset($item['title']) && \is_string($item['title'])) {
-                    $title = \trim($item['title']);
-                } elseif (isset($item['text']) && \is_string($item['text'])) {
-                    $title = \trim($item['text']);
-                }
-
-                if ('' === $title && !isset($item['icon'])) {
-                    continue;
-                }
-
-                $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-                $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
-                $hasDot = !empty($item['has_dot']);
-                $link = $item['link'] ?? null;
-                $url = PropsResolver::resolveUrl($link);
-                $isClickable = '#' !== $url && '' !== $url;
-
-                $classes = PropsResolver::badgeClasses([
-                    'badge_style' => $itemStyle,
-                    'badge_color' => $itemColor,
-                    'size' => $itemSize,
-                    'rounded' => $itemRounded,
-                ], $defaultStyle, $defaultColor, $itemSize, $itemRounded);
-
-                $result[] = [
-                    'title' => $title,
-                    'url' => $url,
-                    'is_clickable' => $isClickable,
-                    'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
-                    'classes' => $classes,
-                    'icon' => $icon,
-                    'icon_align' => $iconAlign,
-                    'has_dot' => $hasDot,
-                ];
-            }
-        }
-
-        // Backward compatibility: If no badges block items, check single $this->badge string
-        if ([] === $result && null !== $this->badge && '' !== \trim($this->badge)) {
-            $classes = PropsResolver::badgeClasses([
-                'badge_style' => $defaultStyle,
-                'badge_color' => $defaultColor,
-                'size' => 'xs',
-                'rounded' => 'pill',
-            ], $defaultStyle, $defaultColor, 'xs', 'pill');
-
-            $result[] = [
-                'title' => \trim($this->badge),
-                'url' => '#',
-                'is_clickable' => false,
-                'link_title' => null,
-                'classes' => $classes,
-                'icon' => null,
-                'icon_align' => 'left',
-                'has_dot' => false,
-            ];
-        }
-
-        return $result;
+        return $this->resolveBadgesList('glass', 'primary');
     }
 
     public function hasBadges(): bool
@@ -821,111 +574,10 @@ final class Card
      */
     public function getNormalizedButtons(): array
     {
-        $props = $this->getResolvedProps();
-        $defaultStyle = isset($props['button_style']) && \is_string($props['button_style']) ? $props['button_style'] : 'solid';
-        $defaultColor = isset($props['button_color']) && \is_string($props['button_color']) ? $props['button_color'] : 'primary';
-        $defaultSize = isset($props['button_size']) && \is_string($props['button_size']) ? $props['button_size'] : 'sm';
+        $singleLink = $this->get('link') ?? $this->get('card_link');
+        $singleLinkTitle = $this->nullableString('link_title') ?? $this->nullableString('link_text');
 
-        /** @var list<array<string, mixed>> $result */
-        $result = [];
-
-        /** @var list<array<string, mixed>> $buttonItems */
-        $buttonItems = [];
-        if ([] !== $this->buttons) {
-            foreach ($this->buttons as $item) {
-                if (\is_array($item)) {
-                    $buttonItems[] = $item;
-                }
-            }
-        } elseif ([] !== $this->elements) {
-            foreach ($this->elements as $item) {
-                if (\is_array($item) && ('button' === ($item['type'] ?? 'button') || 'badge' !== ($item['type'] ?? ''))) {
-                    $buttonItems[] = $item;
-                }
-            }
-        }
-
-        if ([] !== $buttonItems) {
-            foreach ($buttonItems as $item) {
-                $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
-
-                $rawStyle = $item['button_style'] ?? ($item['variant'] ?? ($itemProps['button_style'] ?? ($itemProps['variant'] ?? null)));
-                $itemStyle = \is_string($rawStyle) && 'inherit' !== $rawStyle && '' !== \trim($rawStyle)
-                    ? $rawStyle
-                    : $defaultStyle;
-
-                $rawColor = $item['button_color'] ?? ($item['link_color'] ?? ($itemProps['button_color'] ?? ($itemProps['link_color'] ?? null)));
-                $itemColor = \is_string($rawColor) && 'inherit' !== $rawColor && '' !== \trim($rawColor)
-                    ? $rawColor
-                    : $defaultColor;
-
-                $rawSize = $item['size'] ?? ($itemProps['size'] ?? null);
-                $itemSize = \is_string($rawSize) && 'inherit' !== $rawSize && '' !== \trim($rawSize)
-                    ? $rawSize
-                    : $defaultSize;
-
-                $title = '';
-                if (isset($item['title']) && \is_string($item['title'])) {
-                    $title = \trim($item['title']);
-                } elseif (isset($item['content']) && \is_string($item['content'])) {
-                    $title = \trim($item['content']);
-                }
-
-                $link = $item['link'] ?? null;
-                $url = PropsResolver::resolveUrl($link);
-                $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-                $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
-
-                $classes = PropsResolver::buttonClasses([
-                    'variant' => $itemStyle,
-                    'color' => $itemColor,
-                    'size' => $itemSize,
-                ]);
-
-                $result[] = [
-                    'title' => $title,
-                    'content' => $title,
-                    'url' => $url,
-                    'link' => $link,
-                    'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
-                    'classes' => $classes,
-                    'icon' => $icon,
-                    'icon_align' => $iconAlign,
-                    'button_style' => $itemStyle,
-                    'button_color' => $itemColor,
-                ];
-            }
-        }
-
-        // Backward compatibility: If no buttons block items, check single button / link
-        if ([] === $result) {
-            $singleLink = $this->link ?? ($this->cardLink ?? $this->card_link);
-            $linkUrl = null !== $singleLink ? PropsResolver::resolveUrl($singleLink) : null;
-            $buttonText = $this->getButtonText();
-
-            if (null !== $linkUrl && '#' !== $linkUrl && '' !== $linkUrl && null !== $buttonText && '' !== $buttonText) {
-                $classes = PropsResolver::buttonClasses([
-                    'variant' => $defaultStyle,
-                    'color' => $defaultColor,
-                    'size' => $defaultSize,
-                ]);
-
-                $result[] = [
-                    'title' => $buttonText,
-                    'content' => $buttonText,
-                    'url' => $linkUrl,
-                    'link' => $singleLink,
-                    'link_title' => $this->linkTitle ?? ($this->link_title ?? ($this->linkText ?? $this->link_text)),
-                    'classes' => $classes,
-                    'icon' => null,
-                    'icon_align' => 'right',
-                    'button_style' => $defaultStyle,
-                    'button_color' => $defaultColor,
-                ];
-            }
-        }
-
-        return $result;
+        return $this->resolveButtonsList('solid', 'primary', 'sm', $singleLink, $this->getButtonText(), $singleLinkTitle);
     }
 
     public function hasButtons(): bool
@@ -933,17 +585,13 @@ final class Card
         return [] !== $this->getNormalizedButtons();
     }
 
-    public function getIconClass(): ?string
+    public function getIconClass(string $key = 'icon'): ?string
     {
-        $props = $this->getResolvedProps();
-        $mediaType = isset($props['media_type']) && \is_string($props['media_type'])
-            ? $props['media_type']
-            : ($this->mediaType ?? $this->media_type);
-
+        $mediaType = $this->nullableStringProp('media_type');
         if (null !== $mediaType && 'icon' !== $mediaType) {
             return null;
         }
 
-        return PropsResolver::resolveIcon($this->icon);
+        return PropsResolver::resolveIcon($this->get($key));
     }
 }

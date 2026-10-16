@@ -13,7 +13,7 @@ final class SwitcherTest extends TestCase
     {
         $switcher = new Switcher();
 
-        self::assertNull($switcher->title);
+        self::assertNull($switcher->get('title'));
         self::assertEmpty($switcher->getNormalizedItems());
         self::assertSame('top', $switcher->getNavPosition());
         self::assertSame('pills', $switcher->getNavStyle());
@@ -29,14 +29,14 @@ final class SwitcherTest extends TestCase
     public function testVerticalAndUnderlineVariants(): void
     {
         $switcher = new Switcher();
-        $switcher->props = [
+        $switcher->mergeProps([
             'nav_position' => 'left',
             'nav_style' => 'underline',
             'margin_top' => 'md',
             'margin_bottom' => 'lg',
             'id' => 'faq-tabs',
             'custom_class' => 'my-switcher',
-        ];
+        ]);
 
         self::assertSame('left', $switcher->getNavPosition());
         self::assertTrue($switcher->isVertical());
@@ -51,7 +51,7 @@ final class SwitcherTest extends TestCase
     public function testItemNormalization(): void
     {
         $switcher = new Switcher();
-        $switcher->items = [
+        $switcher->assign('items', [
             [
                 'title' => 'Tab 1',
                 'nav_title' => 'First',
@@ -71,7 +71,7 @@ final class SwitcherTest extends TestCase
                 'link' => ['url' => 'https://example.com/tab2'],
             ],
             'invalid',
-        ];
+        ]);
 
         $items = $switcher->getNormalizedItems();
         self::assertCount(2, $items);

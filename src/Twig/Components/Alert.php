@@ -7,113 +7,45 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Alert', template: '@SuluPrelineBlocks/components/Alert.html.twig')]
-final class Alert
+final class Alert extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public ?string $content = null;
-    public mixed $icon = null;
-    public mixed $link = null;
-    public ?string $linkTitle = null;
-    public ?string $link_title = null;
-
-    public ?string $alertStyle = null;
-    public ?string $alert_style = null;
-    public ?string $alertVariant = null;
-    public ?string $alert_variant = null;
-    public ?string $dismissible = null;
-    public ?string $iconDisplay = null;
-    public ?string $icon_display = null;
-    public ?string $titleSize = null;
-    public ?string $title_size = null;
-    public ?string $rounded = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
+        return [
+            'alert_style' => 'info',
+            'alert_variant' => 'soft',
+            'dismissible' => 'no',
+            'icon_display' => 'auto',
+            'title_size' => 'md',
+            'rounded' => 'xl',
+        ];
+    }
 
-        if (null !== ($this->alertStyle ?? $this->alert_style)) {
-            $resolved['alert_style'] = $this->alertStyle ?? $this->alert_style;
-        }
-        if (null !== ($this->alertVariant ?? $this->alert_variant)) {
-            $resolved['alert_variant'] = $this->alertVariant ?? $this->alert_variant;
-        }
-        if (null !== $this->dismissible) {
-            $resolved['dismissible'] = $this->dismissible;
-        }
-        if (null !== ($this->iconDisplay ?? $this->icon_display)) {
-            $resolved['icon_display'] = $this->iconDisplay ?? $this->icon_display;
-        }
-        if (null !== ($this->titleSize ?? $this->title_size)) {
-            $resolved['title_size'] = $this->titleSize ?? $this->title_size;
-        }
-        if (null !== $this->rounded) {
-            $resolved['rounded'] = $this->rounded;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    protected function capabilities(): array
+    {
+        return [
+            'dismissible' => fn (): bool => $this->boolProp('dismissible', false),
+        ];
+    }
 
-        return $resolved;
+    public function shouldRender(): bool
+    {
+        return $this->hasAny('title', 'content', 'description');
     }
 
     public function getAlertStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['alert_style'] ?? 'info';
-
-        return match ($style) {
-            'success' => 'success',
-            'warning' => 'warning',
-            'danger' => 'danger',
-            'dark' => 'dark',
-            default => 'info',
-        };
+        return $this->enumProp('alert_style', ['info', 'success', 'warning', 'danger', 'dark'], 'info');
     }
 
     public function getAlertVariant(): string
     {
-        $props = $this->getResolvedProps();
-        $variant = $props['alert_variant'] ?? 'soft';
-
-        return match ($variant) {
-            'solid' => 'solid',
-            'outline' => 'outline',
-            'glass' => 'glass',
-            default => 'soft',
-        };
+        return $this->enumProp('alert_variant', ['soft', 'solid', 'outline', 'glass'], 'soft');
     }
 
     public function isDismissible(): bool
     {
-        $props = $this->getResolvedProps();
-        $d = $props['dismissible'] ?? 'no';
-
-        return 'yes' === $d || true === $d;
+        return $this->is('dismissible');
     }
 
     public function getAlertClasses(): string
@@ -152,19 +84,19 @@ final class Alert
 
     public function getResolvedIcon(): ?string
     {
-        $props = $this->getResolvedProps();
-        $display = $props['icon_display'] ?? 'auto';
+        $display = $this->stringProp('icon_display', 'auto');
 
         if ('none' === $display) {
             return null;
         }
 
-        if (null !== $this->icon && '' !== $this->icon) {
-            if (\is_string($this->icon)) {
-                return \str_starts_with($this->icon, 'ti ') ? $this->icon : 'ti ti-' . $this->icon;
+        $icon = $this->get('icon');
+        if (null !== $icon && '' !== $icon) {
+            if (\is_string($icon)) {
+                return \str_starts_with($icon, 'ti ') ? $icon : 'ti ti-' . $icon;
             }
-            if (\is_array($this->icon) && isset($this->icon['icon']) && \is_string($this->icon['icon'])) {
-                $name = $this->icon['icon'];
+            if (\is_array($icon) && isset($icon['icon']) && \is_string($icon['icon'])) {
+                $name = $icon['icon'];
 
                 return \str_starts_with($name, 'ti ') ? $name : 'ti ti-' . $name;
             }
@@ -185,58 +117,41 @@ final class Alert
 
     public function getTitle(): ?string
     {
-        return (null !== $this->title && '' !== \trim($this->title)) ? \trim($this->title) : null;
+        return $this->nullableString('title');
     }
 
     public function getContent(): ?string
     {
-        return (null !== $this->content && '' !== \trim($this->content)) ? \trim($this->content) : null;
+        return $this->nullableString('content');
     }
 
-    public function getLinkUrl(): ?string
+    public function getLinkUrl(string $key = 'link'): ?string
     {
-        if (null !== $this->link) {
-            $url = PropsResolver::resolveUrl($this->link);
-            if ('#' !== $url && '' !== $url) {
-                return $url;
-            }
-        }
+        $url = parent::getLinkUrl($key);
 
-        return null;
+        return ('#' === $url || null === $url || '' === $url) ? null : $url;
     }
 
-    public function getLinkTarget(): ?string
+    public function getLinkTitle(string $key = 'link', string $fallbackKey = 'link_title'): ?string
     {
-        if (\is_array($this->link) && isset($this->link['target']) && \is_string($this->link['target']) && '' !== \trim($this->link['target'])) {
-            return \trim($this->link['target']);
+        $link = $this->get($key);
+        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
+            return \trim($link['title']);
         }
 
-        return null;
-    }
-
-    public function getLinkTitle(): ?string
-    {
-        if (\is_array($this->link) && isset($this->link['title']) && \is_string($this->link['title']) && '' !== \trim($this->link['title'])) {
-            return \trim($this->link['title']);
-        }
-
-        $text = $this->linkTitle ?? $this->link_title;
-        if (null !== $text && '' !== \trim($text)) {
-            return \trim($text);
-        }
-
-        return null;
+        return $this->nullableString($fallbackKey);
     }
 
     public function getButtonText(): ?string
     {
-        $text = $this->linkTitle ?? $this->link_title;
-        if (null !== $text && '' !== \trim($text)) {
-            return \trim($text);
+        $explicit = $this->nullableString('link_title');
+        if (null !== $explicit) {
+            return $explicit;
         }
 
-        if (\is_array($this->link) && isset($this->link['title']) && \is_string($this->link['title']) && '' !== \trim($this->link['title'])) {
-            return \trim($this->link['title']);
+        $link = $this->get('link');
+        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
+            return \trim($link['title']);
         }
 
         return null;
@@ -244,10 +159,7 @@ final class Alert
 
     public function getTitleSizeClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['title_size'] ?? 'md';
-
-        return match ($size) {
+        return match ($this->stringProp('title_size', 'md')) {
             'sm' => 'text-sm font-semibold',
             'lg' => 'text-lg font-bold',
             default => 'text-base font-semibold',
@@ -256,10 +168,7 @@ final class Alert
 
     public function getRoundedClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $rounded = $props['rounded'] ?? 'xl';
-
-        return match ($rounded) {
+        return match ($this->stringProp('rounded', 'xl')) {
             'none' => 'rounded-none',
             'md' => 'rounded-md',
             '2xl' => 'rounded-2xl',
@@ -267,15 +176,15 @@ final class Alert
         };
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $base = \sprintf('relative flex items-start gap-x-3 p-4 sm:p-5 transition-all %s %s', $this->getRoundedClasses(), $this->getAlertClasses());
+        $base = \trim(\sprintf(
+            'relative flex items-start gap-x-3 p-4 sm:p-5 transition-all %s %s %s',
+            $this->getRoundedClasses(),
+            $this->getAlertClasses(),
+            $extraBase,
+        ));
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 }

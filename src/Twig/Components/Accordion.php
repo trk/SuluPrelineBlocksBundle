@@ -7,83 +7,45 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Accordion', template: '@SuluPrelineBlocks/components/Accordion.html.twig')]
-final class Accordion
+final class Accordion extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var array<int|string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public ?string $style = null;
-    public ?string $iconStyle = null;
-    public ?string $icon_style = null;
-    public ?bool $multiple = null;
-    public ?bool $collapsible = null;
-    public ?string $titleSize = null;
-    public ?string $title_size = null;
-    public ?string $imageAlign = null;
-    public ?string $image_align = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            /** @var array<string, mixed> $nested */
-            $nested = $resolved['props'];
-            $resolved = \array_merge($nested, $resolved);
-            unset($resolved['props']);
-        }
+        return [
+            'style' => 'default',
+            'icon_style' => 'chevron',
+            'multiple' => false,
+            'collapsible' => true,
+            'title_size' => 'base',
+            'image_align' => 'top',
+        ];
+    }
 
-        if (null !== $this->style) {
-            $resolved['style'] = $this->style;
-        }
-        if (null !== ($this->iconStyle ?? $this->icon_style)) {
-            $resolved['icon_style'] = $this->iconStyle ?? $this->icon_style;
-        }
-        if (null !== $this->multiple) {
-            $resolved['multiple'] = $this->multiple;
-        }
-        if (null !== $this->collapsible) {
-            $resolved['collapsible'] = $this->collapsible;
-        }
-        if (null !== ($this->titleSize ?? $this->title_size)) {
-            $resolved['title_size'] = $this->titleSize ?? $this->title_size;
-        }
-        if (null !== ($this->imageAlign ?? $this->image_align)) {
-            $resolved['image_align'] = $this->imageAlign ?? $this->image_align;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'collapsible' => fn (): bool => $this->isCollapsible(),
+        ];
     }
 
     /**
@@ -92,23 +54,8 @@ final class Accordion
     public function getNormalizedItems(): array
     {
         $normalized = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $itemArr */
-                $itemArr = $item;
-
-                if (isset($itemArr['image'])) {
-                    $itemArr['image_url'] = PropsResolver::resolveImageUrl($itemArr['image']);
-                    $itemArr['image_srcset'] = PropsResolver::resolveSrcSet($itemArr['image']);
-                    $itemArr['image_focus_style'] = PropsResolver::resolveFocusPointStyle($itemArr['image']);
-                }
-
-                if (isset($itemArr['link'])) {
-                    $itemArr['link_href'] = PropsResolver::resolveUrl($itemArr['link']);
-                }
-
-                $normalized[] = $itemArr;
-            }
+        foreach ($this->items('items') as $item) {
+            $normalized[] = $this->normalizeItemMediaAndLinks($item);
         }
 
         return $normalized;
@@ -116,10 +63,7 @@ final class Accordion
 
     public function getStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['style'] ?? 'default';
-
-        return match ($style) {
+        return match ($this->stringProp('style', 'default')) {
             'bordered' => 'bordered',
             'soft' => 'soft',
             default => 'default',
@@ -128,10 +72,7 @@ final class Accordion
 
     public function getIconStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $icon = $props['icon_style'] ?? 'chevron';
-
-        return match ($icon) {
+        return match ($this->stringProp('icon_style', 'chevron')) {
             'plus' => 'plus',
             'none' => 'none',
             default => 'chevron',
@@ -140,24 +81,17 @@ final class Accordion
 
     public function isMultiple(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return (bool) ($props['multiple'] ?? false);
+        return $this->boolProp('multiple', false);
     }
 
     public function isCollapsible(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return (bool) ($props['collapsible'] ?? true);
+        return $this->boolProp('collapsible', true);
     }
 
     public function getTitleSizeClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['title_size'] ?? 'base';
-
-        return match ($size) {
+        return match ($this->stringProp('title_size', 'base')) {
             'sm' => 'text-sm font-medium',
             'lg' => 'text-lg font-semibold',
             'xl' => 'text-xl font-bold',
@@ -167,10 +101,7 @@ final class Accordion
 
     public function getImageAlign(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['image_align'] ?? 'top';
-
-        return match ($align) {
+        return match ($this->stringProp('image_align', 'top')) {
             'bottom' => 'bottom',
             'left' => 'left',
             'right' => 'right',
@@ -180,20 +111,15 @@ final class Accordion
 
     public function getContainerClasses(): string
     {
-        $style = $this->getStyle();
-
-        return match ($style) {
-            'bordered' => 'space-y-3',
-            'soft' => 'space-y-3',
+        return match ($this->getStyle()) {
+            'bordered', 'soft' => 'space-y-3',
             default => 'divide-y divide-border',
         };
     }
 
     public function getItemClasses(): string
     {
-        $style = $this->getStyle();
-
-        return match ($style) {
+        return match ($this->getStyle()) {
             'bordered' => 'hs-accordion border border-card-line bg-card rounded-xl p-4',
             'soft' => 'hs-accordion bg-surface rounded-xl p-4',
             default => 'hs-accordion pt-4 pb-3',
@@ -207,9 +133,7 @@ final class Accordion
 
     public function getContentWrapperClasses(): string
     {
-        $style = $this->getStyle();
-
-        return match ($style) {
+        return match ($this->getStyle()) {
             'bordered', 'soft' => 'pt-3',
             default => 'pt-2 pb-1',
         };
@@ -217,9 +141,7 @@ final class Accordion
 
     public function getMarginClass(): string
     {
-        $props = $this->getResolvedProps();
-
-        $top = match ($props['margin_top'] ?? 'none') {
+        $top = match ($this->stringProp('margin_top', 'none')) {
             'sm' => 'mt-4',
             'md' => 'mt-8',
             'lg' => 'mt-12',
@@ -227,7 +149,7 @@ final class Accordion
             default => '',
         };
 
-        $bottom = match ($props['margin_bottom'] ?? 'none') {
+        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
             'sm' => 'mb-4',
             'md' => 'mb-8',
             'lg' => 'mb-12',
@@ -236,21 +158,5 @@ final class Accordion
         };
 
         return \trim($top . ' ' . $bottom);
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-        $id = $props['id'] ?? null;
-
-        return \is_string($id) && '' !== \trim($id) ? \trim($id) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-        $class = $props['custom_class'] ?? '';
-
-        return \is_string($class) ? \trim($class) : '';
     }
 }

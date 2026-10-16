@@ -1,15 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Button
-    :items="block.items|default([])"
-    group_style="{{ block.group_style|default('gap') }}"
-    orientation="{{ block.orientation|default('horizontal') }}"
-    align="{{ block.align|default('start') }}"
-    gap="{{ block.gap|default('md') }}"
-    title="{{ block.title|default(block.content|default('')) }}"
-    content="{{ block.title|default(block.content|default('')) }}"
-    :link="block.link|default(null)"
-    linkTitle="{{ block.link_title|default(null) }}"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Button :block="block" />
 {% endif %}

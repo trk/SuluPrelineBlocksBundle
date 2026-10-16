@@ -13,7 +13,7 @@ final class GalleryTest extends TestCase
     {
         $gallery = new Gallery();
 
-        self::assertNull($gallery->title);
+        self::assertNull($gallery->get('title'));
         self::assertFalse($gallery->isFilterEnabled());
         self::assertFalse($gallery->isLightboxEnabled());
         self::assertFalse($gallery->isMasonry());
@@ -26,45 +26,45 @@ final class GalleryTest extends TestCase
     public function testInheritLowerBreakpointWhenHigherBreakpointsAreNone(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'columns_default' => '1',
             'columns_sm' => '',
             'columns_md' => '2',
             'columns_lg' => '',
             'columns_xl' => '',
-        ];
+        ]);
 
         self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $gallery->getContainerClasses());
 
         // When only md: 2 is provided, default mobile fallback is 1 and md applies for >= 768px
         $gallery2 = new Gallery();
-        $gallery2->props = [
+        $gallery2->mergeProps([
             'columns_md' => '2',
-        ];
+        ]);
         self::assertSame('grid grid-cols-1 md:grid-cols-2 gap-6', $gallery2->getContainerClasses());
 
         // When only default: 2 is provided and responsive are inherit/empty, 2 applies everywhere
         $gallery3 = new Gallery();
-        $gallery3->props = [
+        $gallery3->mergeProps([
             'columns_default' => '2',
             'columns_sm' => '',
             'columns_md' => '',
             'columns_lg' => '',
             'columns_xl' => '',
-        ];
+        ]);
         self::assertSame('grid grid-cols-2 gap-6', $gallery3->getContainerClasses());
     }
 
     public function testColumnsAndGapOverrides(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'columns_default' => '2',
             'columns_sm' => '3',
             'columns_md' => '4',
             'columns_lg' => '5',
             'gap' => 'xl',
-        ];
+        ]);
 
         $classes = $gallery->getContainerClasses();
         self::assertStringContainsString('grid-cols-2', $classes);
@@ -77,14 +77,14 @@ final class GalleryTest extends TestCase
     public function testIntegerColumnsAndXlSupport(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'columns_default' => 3,
             'columns_sm' => 2,
             'columns_md' => 4,
             'columns_lg' => 5,
             'columns_xl' => 6,
             'gap' => 'none',
-        ];
+        ]);
 
         $classes = $gallery->getContainerClasses();
         self::assertSame('grid grid-cols-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-0', $classes);
@@ -93,7 +93,7 @@ final class GalleryTest extends TestCase
     public function testNestedPropsUnpacking(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'props' => [
                 'columns_default' => 4,
                 'columns_sm' => 1,
@@ -102,7 +102,7 @@ final class GalleryTest extends TestCase
                 'columns_xl' => 4,
                 'gap' => '2xl',
             ],
-        ];
+        ]);
 
         $classes = $gallery->getContainerClasses();
         self::assertSame('grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16', $classes);
@@ -111,14 +111,14 @@ final class GalleryTest extends TestCase
     public function testMasonryMode(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'masonry' => 'columns',
             'columns_default' => '1',
             'columns_sm' => '2',
             'columns_md' => '3',
             'columns_lg' => '4',
             'gap' => 'sm',
-        ];
+        ]);
 
         self::assertTrue($gallery->isMasonry());
         $classes = $gallery->getContainerClasses();
@@ -132,14 +132,14 @@ final class GalleryTest extends TestCase
     public function testFilterTagsAndSlugs(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'filter' => true,
             'filter_align' => 'right',
-        ];
-        $gallery->items = [
+        ]);
+        $gallery->assign('items', [
             ['title' => 'Photo 1', 'tags' => 'Landscape, Architecture'],
             ['title' => 'Photo 2', 'tags' => 'Portrait, Landscape'],
-        ];
+        ]);
 
         self::assertTrue($gallery->isFilterEnabled());
         self::assertSame('justify-end', $gallery->getFilterAlignClass());
@@ -150,20 +150,20 @@ final class GalleryTest extends TestCase
         self::assertSame('Architecture', $tags['architecture']);
         self::assertSame('Portrait', $tags['portrait']);
 
-        self::assertSame('landscape architecture', $gallery->getItemTagSlugs($gallery->items[0]));
-        self::assertSame('portrait landscape', $gallery->getItemTagSlugs($gallery->items[1]));
+        self::assertSame('landscape architecture', $gallery->getItemTagSlugs($gallery->items()[0]));
+        self::assertSame('portrait landscape', $gallery->getItemTagSlugs($gallery->items()[1]));
     }
 
     public function testItemPropsInheritanceAndOverride(): void
     {
         $gallery = new Gallery();
-        $gallery->props = [
+        $gallery->mergeProps([
             'overlay_position' => 'center',
             'overlay_style' => 'dark',
             'media_aspect_ratio' => '16/9',
             'rounded' => '2xl',
             'lightbox' => true,
-        ];
+        ]);
 
         self::assertTrue($gallery->isLightboxEnabled());
 
@@ -229,8 +229,8 @@ final class GalleryTest extends TestCase
     public function testCustomIdAndClass(): void
     {
         $gallery = new Gallery();
-        $gallery->id = 'photo-gallery';
-        $gallery->customClass = 'custom-gallery-class';
+        $gallery->assign('id', 'photo-gallery');
+        $gallery->assign('customClass', 'custom-gallery-class');
 
         self::assertSame('photo-gallery', $gallery->getCustomId());
         self::assertSame('custom-gallery-class', $gallery->getCustomClass());

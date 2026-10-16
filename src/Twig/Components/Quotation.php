@@ -7,110 +7,48 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Quotation', template: '@SuluPrelineBlocks/components/Quotation.html.twig')]
-final class Quotation
+final class Quotation extends AbstractPrelineComponent
 {
-    public ?string $content = null;
-    public ?string $author = null;
-    public ?string $authorTitle = null;
-    public ?string $author_title = null;
-    public mixed $image = null;
-    public mixed $link = null;
-
-    public ?string $quoteStyle = null;
-    public ?string $quote_style = null;
-    public ?string $quoteSize = null;
-    public ?string $quote_size = null;
-    public ?string $accentColor = null;
-    public ?string $accent_color = null;
-    public ?string $align = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
+        return [
+            'quote_style' => 'bordered',
+            'quote_size' => 'md',
+            'accent_color' => 'primary',
+            'align' => 'left',
+        ];
+    }
 
-        if (null !== ($this->quoteStyle ?? $this->quote_style)) {
-            $resolved['quote_style'] = $this->quoteStyle ?? $this->quote_style;
-        }
-        if (null !== ($this->quoteSize ?? $this->quote_size)) {
-            $resolved['quote_size'] = $this->quoteSize ?? $this->quote_size;
-        }
-        if (null !== ($this->accentColor ?? $this->accent_color)) {
-            $resolved['accent_color'] = $this->accentColor ?? $this->accent_color;
-        }
-        if (null !== $this->align) {
-            $resolved['align'] = $this->align;
-        }
-
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-
-        return $resolved;
+    public function shouldRender(): bool
+    {
+        return $this->hasAny('content', 'quote', 'text');
     }
 
     public function getAuthor(): ?string
     {
-        if (null !== $this->author && '' !== \trim($this->author)) {
-            return \trim($this->author);
-        }
-
-        return null;
+        return $this->nullableString('author');
     }
 
     public function getAuthorTitle(): ?string
     {
-        $title = $this->authorTitle ?? $this->author_title;
-        if (null !== $title && '' !== \trim($title)) {
-            return \trim($title);
-        }
-
-        return null;
+        return $this->nullableString('author_title');
     }
 
     public function getAvatarUrl(): ?string
     {
-        return PropsResolver::resolveImageUrl($this->image);
+        return $this->getImageUrl('image');
     }
 
     public function getAvatarFocusPointStyle(): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($this->image);
+        return $this->getImageFocusPointStyle('image');
     }
 
     public function getAuthorUrl(): ?string
     {
-        if (null === $this->link) {
-            return null;
-        }
+        $url = $this->getLinkUrl('link');
 
-        $url = PropsResolver::resolveUrl($this->link);
-
-        return ('#' === $url || '' === $url) ? null : $url;
+        return ('#' === $url || null === $url || '' === $url) ? null : $url;
     }
 
     public function hasAuthor(): bool
@@ -120,21 +58,12 @@ final class Quotation
 
     public function getQuoteStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['quote_style'] ?? 'bordered';
-
-        return match ($style) {
-            'card' => 'card',
-            'large' => 'large',
-            'plain' => 'plain',
-            default => 'bordered',
-        };
+        return $this->enumProp('quote_style', ['bordered', 'card', 'large', 'plain'], 'bordered');
     }
 
     public function getQuoteTextClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['quote_size'] ?? 'md';
+        $size = $this->stringProp('quote_size', 'md');
         $style = $this->getQuoteStyle();
 
         $sizeClasses = match ($size) {
@@ -153,10 +82,7 @@ final class Quotation
 
     public function getBorderAccentClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $color = $props['accent_color'] ?? 'primary';
-
-        return match ($color) {
+        return match ($this->stringProp('accent_color', 'primary')) {
             'secondary' => 'border-s-4 border-secondary ps-4 sm:ps-6',
             'dark' => 'border-s-4 border-line-8 ps-4 sm:ps-6',
             'muted' => 'border-s-4 border-line-3 ps-4 sm:ps-6',
@@ -180,8 +106,10 @@ final class Quotation
 
     public function getAlignClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $align = $props['align'] ?? ($props['text_align'] ?? 'left');
+        $align = $this->nullableStringProp('align');
+        if (null === $align || 'left' === $align) {
+            $align = $this->stringProp('text_align', $align ?? 'left');
+        }
 
         return match ($align) {
             'center' => 'text-center items-center',
@@ -190,15 +118,10 @@ final class Quotation
         };
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $base = 'w-full flex flex-col ' . $this->getAlignClasses();
+        $base = \trim('w-full flex flex-col ' . $this->getAlignClasses() . ' ' . $extraBase);
 
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 }

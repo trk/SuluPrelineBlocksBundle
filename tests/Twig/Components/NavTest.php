@@ -13,8 +13,8 @@ final class NavTest extends TestCase
     {
         $nav = new Nav();
 
-        self::assertNull($nav->title);
-        self::assertEmpty($nav->items);
+        self::assertNull($nav->get('title'));
+        self::assertEmpty($nav->get('items'));
         self::assertFalse($nav->hasItems());
         self::assertSame('flex flex-col space-y-1 w-full', $nav->getNavClasses());
     }
@@ -22,7 +22,7 @@ final class NavTest extends TestCase
     public function testCardProp(): void
     {
         $nav = new Nav();
-        $nav->props = ['card' => true];
+        $nav->mergeProps(['card' => true]);
 
         self::assertStringContainsString('border border-card-line', $nav->getNavClasses());
         self::assertStringContainsString('bg-card', $nav->getNavClasses());
@@ -31,7 +31,7 @@ final class NavTest extends TestCase
     public function testNormalizedItems(): void
     {
         $nav = new Nav();
-        $nav->items = [
+        $nav->assign('items', [
             [
                 'item_type' => 'header',
                 'title' => 'Main Navigation',
@@ -54,7 +54,7 @@ final class NavTest extends TestCase
                 'link' => 'https://example.com/docs',
                 'is_active' => false,
             ],
-        ];
+        ]);
 
         self::assertTrue($nav->hasItems());
         $items = $nav->getNormalizedItems();

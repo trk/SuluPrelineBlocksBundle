@@ -18,6 +18,7 @@
     {% endfor %}
 {% endmacro %}
 
+{% set content = summary|default(content) %}
 {% set title_color = this.getTitleColor() %}
 {% set is_img = this.isImage() %}
 {% set is_vid = this.isVideo() %}

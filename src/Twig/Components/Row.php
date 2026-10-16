@@ -5,87 +5,55 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 /**
  * Preline UI 5 / Tailwind CSS 4 pure layout Grid Row component.
  */
 #[AsTwigComponent('Row', template: '@SuluPrelineBlocks/components/Row.html.twig')]
-final class Row
+final class Row extends AbstractPrelineComponent
 {
-    public string $layout = 'halves';
-    public string $gap = 'md';
-    public string $align_items = 'stretch';
-    public bool $has_divider = false;
-
     /**
-     * @var list<array<string, mixed>>|array<string|int, mixed>
+     * @return list<string>
      */
-    public array $columns = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $context = [];
-
-    private function resolveStringProp(string $key, string $current, string $default): string
+    protected function dataKeys(): array
     {
-        if ($current !== $default) {
-            return $current;
-        }
-
-        $val = $this->props[$key] ?? null;
-
-        return \is_string($val) && '' !== $val ? $val : $current;
-    }
-
-    private function resolveBoolProp(string $key, bool $current, bool $default = false): bool
-    {
-        if ($current !== $default) {
-            return $current;
-        }
-
-        if (\array_key_exists($key, $this->props)) {
-            $val = $this->props[$key];
-            if (\is_bool($val)) {
-                return $val;
-            }
-            if (\is_string($val)) {
-                return \in_array(\strtolower($val), ['true', '1', 'yes'], true);
-            }
-            if (\is_int($val)) {
-                return 1 === $val;
-            }
-        }
-
-        return $current;
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->props);
+        return ['columns'];
     }
 
     /**
-     * @return array<string, string|bool>
+     * @return array<string, mixed>
      */
-    public function getCustomAttributes(): array
+    protected function defaults(): array
     {
-        return ElementTransform::resolveCustomAttributes($this->props);
+        return [
+            'layout' => 'halves',
+            'gap' => 'md',
+            'align_items' => 'stretch',
+            'has_divider' => false,
+        ];
     }
 
-    public function getScopedCss(): ?string
+    public function shouldRender(): bool
     {
-        return ElementTransform::resolveScopedCss($this->props);
+        return true;
+    }
+
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'container' => true,
+            'multiple' => true,
+            'horizontal' => true,
+        ];
     }
 
     public function getResolvedLayout(): string
     {
-        return $this->resolveStringProp('layout', $this->layout, 'halves');
+        return $this->stringProp('layout', 'halves');
     }
 
     public function getLayoutClasses(): string
@@ -104,9 +72,7 @@ final class Row
 
     public function getGapClasses(): string
     {
-        $gap = $this->resolveStringProp('gap', $this->gap, 'md');
-
-        return match ($gap) {
+        return match ($this->stringProp('gap', 'md')) {
             'none' => 'gap-0',
             'xs' => 'gap-2 sm:gap-3',
             'sm' => 'gap-4 sm:gap-6',
@@ -118,9 +84,7 @@ final class Row
 
     public function getAlignItemsClasses(): string
     {
-        $alignItems = $this->resolveStringProp('align_items', $this->align_items, 'stretch');
-
-        return match ($alignItems) {
+        return match ($this->stringProp('align_items', 'stretch')) {
             'start' => 'items-start',
             'center' => 'items-center',
             'end' => 'items-end',
@@ -130,7 +94,7 @@ final class Row
 
     public function getDividerClasses(): string
     {
-        return $this->resolveBoolProp('has_divider', $this->has_divider, false)
+        return $this->boolProp('has_divider', false)
             ? 'divide-y md:divide-y-0 md:divide-x divide-border'
             : '';
     }
@@ -150,7 +114,7 @@ final class Row
             $classes[] = $divider;
         }
 
-        return ElementTransform::wrapperClasses($this->props, \implode(' ', \array_filter($classes)));
+        return ElementTransform::wrapperClasses($this->props(), \implode(' ', \array_filter($classes)));
     }
 
     /**
@@ -160,31 +124,31 @@ final class Row
      */
     public function getNormalizedColumns(): array
     {
-        $cols = !empty($this->columns) ? $this->columns : ($this->props['columns'] ?? []);
-        if (!\is_array($cols)) {
-            return [];
+        $cols = $this->items('columns');
+        if ([] === $cols) {
+            $propCols = $this->prop('columns', []);
+            if (\is_array($propCols)) {
+                foreach ($propCols as $col) {
+                    if (\is_array($col)) {
+                        /** @var array<string, mixed> $col */
+                        $cols[] = $col;
+                    }
+                }
+            }
         }
 
         $resolvedLayout = $this->getResolvedLayout();
         $normalized = [];
         $index = 0;
 
-        foreach ($cols as $col) {
-            if (!\is_array($col)) {
-                continue;
-            }
-
-            /** @var array<string, mixed> $colArr */
-            $colArr = $col;
-
-            $colProps = \Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer::extractProps($colArr);
+        foreach ($cols as $colArr) {
+            $colProps = SuluDataNormalizer::extractProps($colArr);
             if ([] !== $colProps) {
                 $colArr = \array_merge($colArr, $colProps);
             }
 
             $span = \is_string($colArr['col_span'] ?? null) && '' !== $colArr['col_span'] ? $colArr['col_span'] : 'auto';
 
-            // Automatic span presets for asymmetric layouts when col_span is 'auto'
             if ('auto' === $span) {
                 if ('thirds-2-1' === $resolvedLayout) {
                     $span = 0 === $index ? '8' : '4';
@@ -209,6 +173,6 @@ final class Row
 
     public function hasColumns(): bool
     {
-        return !empty($this->getNormalizedColumns());
+        return [] !== $this->getNormalizedColumns();
     }
 }

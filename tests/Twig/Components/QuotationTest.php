@@ -13,9 +13,9 @@ final class QuotationTest extends TestCase
     {
         $quote = new Quotation();
 
-        self::assertNull($quote->content);
-        self::assertNull($quote->author);
-        self::assertNull($quote->authorTitle);
+        self::assertNull($quote->get('content'));
+        self::assertNull($quote->get('author'));
+        self::assertNull($quote->get('authorTitle'));
         self::assertNull($quote->getAuthor());
         self::assertNull($quote->getAuthorTitle());
         self::assertNull($quote->getAvatarUrl());
@@ -29,13 +29,13 @@ final class QuotationTest extends TestCase
     public function testAuthorAndAvatar(): void
     {
         $quote = new Quotation();
-        $quote->author = 'Steve Jobs';
-        $quote->authorTitle = 'CEO, Apple';
-        $quote->image = [
+        $quote->assign('author', 'Steve Jobs');
+        $quote->assign('authorTitle', 'CEO, Apple');
+        $quote->assign('image', [
             'url' => '/uploads/avatar.jpg',
             'focalPoint' => ['x' => 50, 'y' => 20],
-        ];
-        $quote->link = 'https://apple.com';
+        ]);
+        $quote->assign('link', 'https://apple.com');
 
         self::assertSame('Steve Jobs', $quote->getAuthor());
         self::assertSame('CEO, Apple', $quote->getAuthorTitle());
@@ -48,13 +48,13 @@ final class QuotationTest extends TestCase
     public function testStyles(): void
     {
         $quoteCard = new Quotation();
-        $quoteCard->props = ['quote_style' => 'card', 'quote_size' => 'lg'];
+        $quoteCard->mergeProps(['quote_style' => 'card', 'quote_size' => 'lg']);
         self::assertSame('card', $quoteCard->getQuoteStyle());
         self::assertStringContainsString('rounded-2xl', $quoteCard->getContainerClasses());
         self::assertStringContainsString('text-xl', $quoteCard->getQuoteTextClasses());
 
         $quoteLarge = new Quotation();
-        $quoteLarge->props = ['quote_style' => 'large'];
+        $quoteLarge->mergeProps(['quote_style' => 'large']);
         self::assertSame('large', $quoteLarge->getQuoteStyle());
         self::assertStringContainsString('text-xl', $quoteLarge->getQuoteTextClasses());
     }
@@ -62,12 +62,12 @@ final class QuotationTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $quote = new Quotation();
-        $quote->props = [
+        $quote->mergeProps([
             'id' => 'hero-quote',
             'margin_top' => 'lg',
             'margin_bottom' => 'xl',
             'custom_class' => 'my-quote',
-        ];
+        ]);
 
         self::assertSame('hero-quote', $quote->getElementId());
         $wrapper = $quote->getWrapperClasses();

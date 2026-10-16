@@ -13,7 +13,7 @@ final class PanelSliderTest extends TestCase
     {
         $slider = new PanelSlider();
 
-        self::assertNull($slider->title);
+        self::assertNull($slider->get('title'));
         self::assertEmpty($slider->getNormalizedItems());
         self::assertFalse($slider->isAutoplay());
         self::assertSame(4000, $slider->getInterval());
@@ -33,7 +33,7 @@ final class PanelSliderTest extends TestCase
     public function testPropsUnpackingAndConfig(): void
     {
         $slider = new PanelSlider();
-        $slider->props = [
+        $slider->mergeProps([
             'autoplay' => true,
             'interval' => 3000,
             'loop' => false,
@@ -45,7 +45,7 @@ final class PanelSliderTest extends TestCase
             'margin_bottom' => 'xl',
             'id' => 'featured-slider',
             'custom_class' => 'my-slider',
-        ];
+        ]);
 
         self::assertTrue($slider->isAutoplay());
         self::assertSame(3000, $slider->getInterval());

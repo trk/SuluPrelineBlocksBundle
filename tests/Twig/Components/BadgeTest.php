@@ -12,9 +12,9 @@ final class BadgeTest extends TestCase
     public function testDefaultValues(): void
     {
         $badge = new Badge();
-        $badge->title = 'New Feature';
+        $badge->assign('title', 'New Feature');
 
-        self::assertSame('New Feature', $badge->title);
+        self::assertSame('New Feature', $badge->get('title'));
         self::assertFalse($badge->isClickable());
         self::assertNull($badge->getUrl());
         self::assertFalse($badge->hasDot());
@@ -31,8 +31,8 @@ final class BadgeTest extends TestCase
     public function testClickableBadgeWithLink(): void
     {
         $badge = new Badge();
-        $badge->title = 'Clickable';
-        $badge->link = '/changelog';
+        $badge->assign('title', 'Clickable');
+        $badge->assign('link', '/changelog');
 
         self::assertTrue($badge->isClickable());
         self::assertSame('/changelog', $badge->getUrl());
@@ -41,11 +41,11 @@ final class BadgeTest extends TestCase
     public function testStylesAndColors(): void
     {
         $badge = new Badge();
-        $badge->badgeStyle = 'solid';
-        $badge->badgeColor = 'danger';
-        $badge->size = 'lg';
-        $badge->rounded = 'rounded';
-        $badge->hasDot = true;
+        $badge->assign('badgeStyle', 'solid');
+        $badge->assign('badgeColor', 'danger');
+        $badge->assign('size', 'lg');
+        $badge->assign('rounded', 'rounded');
+        $badge->assign('hasDot', true);
 
         self::assertTrue($badge->hasDot());
         $classes = $badge->getClasses();
@@ -56,16 +56,16 @@ final class BadgeTest extends TestCase
 
         // Soft style with success
         $badge = new Badge();
-        $badge->badgeStyle = 'soft';
-        $badge->badgeColor = 'success';
+        $badge->assign('badgeStyle', 'soft');
+        $badge->assign('badgeColor', 'success');
         $classes = $badge->getClasses();
         self::assertStringContainsString('bg-teal-100', $classes);
         self::assertStringContainsString('text-teal-800', $classes);
 
         // Outline style with warning
         $badge = new Badge();
-        $badge->badgeStyle = 'outline';
-        $badge->badgeColor = 'warning';
+        $badge->assign('badgeStyle', 'outline');
+        $badge->assign('badgeColor', 'warning');
         $classes = $badge->getClasses();
         self::assertStringContainsString('border-yellow-500', $classes);
         self::assertStringContainsString('text-yellow-500', $classes);
@@ -74,8 +74,8 @@ final class BadgeTest extends TestCase
     public function testIconAndAlignment(): void
     {
         $badge = new Badge();
-        $badge->icon = 'heroicons:star';
-        $badge->iconAlign = 'right';
+        $badge->assign('icon', 'heroicons:star');
+        $badge->assign('iconAlign', 'right');
 
         self::assertSame('ti ti-heroicons:star', $badge->getResolvedIcon());
         self::assertSame('right', $badge->getIconAlign());
@@ -84,14 +84,14 @@ final class BadgeTest extends TestCase
     public function testPropsResolution(): void
     {
         $badge = new Badge();
-        $badge->props = [
+        $badge->mergeProps([
             'badge_style' => 'glass',
             'badge_color' => 'white',
             'size' => 'xs',
             'has_dot' => true,
             'id' => 'promo-badge',
             'custom_class' => 'my-custom-badge',
-        ];
+        ]);
 
         self::assertTrue($badge->hasDot());
         self::assertSame('promo-badge', $badge->getElementId());

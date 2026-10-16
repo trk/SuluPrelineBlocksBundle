@@ -10,50 +10,64 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible social icons & share block component.
  */
 #[AsTwigComponent('Social', template: '@SuluPrelineBlocks/components/Social.html.twig')]
-final class Social
+final class Social extends AbstractPrelineComponent
 {
-    public ?string $title = null;
+    /**
+     * @return list<string>
+     */
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
-     * @var array<int|string, mixed>
+     * @return array<string, mixed>
      */
-    public array $items = [];
+    protected function defaults(): array
+    {
+        return [
+            'style' => 'icon_only',
+            'size' => 'md',
+            'shape' => 'rounded',
+            'alignment' => 'start',
+            'open_new_tab' => true,
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
     /**
-     * @var array<string, mixed>
+     * @return array<string, bool|\Closure>
      */
-    public array $props = [];
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'linked' => true,
+        ];
+    }
 
     public function getStyle(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $style = $resolvedProps['style'] ?? 'icon_only';
-
-        return \is_string($style) && '' !== $style ? $style : 'icon_only';
+        return $this->stringProp('style', 'icon_only');
     }
 
     public function getSize(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $size = $resolvedProps['size'] ?? 'md';
-
-        return \is_string($size) && '' !== $size ? $size : 'md';
+        return $this->stringProp('size', 'md');
     }
 
     public function getShape(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $shape = $resolvedProps['shape'] ?? 'rounded';
-
-        return \is_string($shape) && '' !== $shape ? $shape : 'rounded';
+        return $this->stringProp('shape', 'rounded');
     }
 
     public function getAlignment(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $alignment = $resolvedProps['alignment'] ?? 'start';
-
-        return match ($alignment) {
+        return match ($this->stringProp('alignment', 'start')) {
             'center' => 'justify-center',
             'end' => 'justify-end',
             'between' => 'justify-between',
@@ -63,10 +77,7 @@ final class Social
 
     public function isOpenNewTab(): bool
     {
-        $resolvedProps = $this->resolveProps();
-        $openNewTab = $resolvedProps['open_new_tab'] ?? true;
-
-        return (bool) $openNewTab;
+        return $this->boolProp('open_new_tab', true);
     }
 
     public function getUlClasses(): string
@@ -86,23 +97,19 @@ final class Social
             'focus:ring-primary-500',
         ];
 
-        // Size
         $classes[] = match ($this->getSize()) {
             'sm' => 'size-8 text-xs',
             'lg' => 'size-11 text-base',
             default => 'size-9 text-sm',
         };
 
-        // Shape
         $classes[] = match ($this->getShape()) {
             'circle' => 'rounded-full',
             'square' => 'rounded-none',
             default => 'rounded-lg',
         };
 
-        // Style
-        $style = $this->getStyle();
-        $classes[] = match ($style) {
+        $classes[] = match ($this->getStyle()) {
             'bordered' => 'border border-layer-line bg-layer text-layer-foreground hover:bg-layer-hover hover:text-primary shadow-2xs',
             'buttons' => 'bg-surface text-surface-foreground hover:bg-primary hover:text-primary-foreground shadow-2xs',
             'pills' => 'border border-transparent bg-primary-50 text-primary hover:bg-primary-100 dark:bg-primary-950/40 dark:hover:bg-primary-900/40',
@@ -124,11 +131,7 @@ final class Social
     {
         $normalized = [];
 
-        foreach ($this->items as $item) {
-            if (!\is_array($item)) {
-                continue;
-            }
-
+        foreach ($this->items('items') as $item) {
             $network = \is_string($item['network'] ?? null) && '' !== $item['network']
                 ? \strtolower($item['network'])
                 : 'website';
@@ -160,20 +163,5 @@ final class Social
         }
 
         return $normalized;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function resolveProps(): array
-    {
-        if (isset($this->props['props']) && \is_array($this->props['props'])) {
-            /** @var array<string, mixed> $inner */
-            $inner = $this->props['props'];
-
-            return $inner;
-        }
-
-        return $this->props;
     }
 }

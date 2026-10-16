@@ -10,87 +10,52 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 pure layout Column component.
  */
 #[AsTwigComponent('Column', template: '@SuluPrelineBlocks/components/Column.html.twig')]
-final class Column
+final class Column extends AbstractPrelineComponent
 {
-    public string $col_span = 'auto';
-    public string $style = 'none';
-    public string $padding = 'none';
-    public string $vertical_align = 'top';
-    public string $text_align = 'start';
-    public bool $is_sticky = false;
-    public string $order = 'default';
-
     /**
-     * @var list<array<string, mixed>>|array<string|int, mixed>
+     * @return list<string>
      */
-    public array $blocks = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $context = [];
-
-    private function resolveStringProp(string $key, string $current, string $default): string
+    protected function dataKeys(): array
     {
-        if ($current !== $default) {
-            return $current;
-        }
-
-        $val = $this->props[$key] ?? null;
-
-        return \is_string($val) && '' !== $val ? $val : $current;
-    }
-
-    private function resolveBoolProp(string $key, bool $current, bool $default = false): bool
-    {
-        if ($current !== $default) {
-            return $current;
-        }
-
-        if (\array_key_exists($key, $this->props)) {
-            $val = $this->props[$key];
-            if (\is_bool($val)) {
-                return $val;
-            }
-            if (\is_string($val)) {
-                return \in_array(\strtolower($val), ['true', '1', 'yes'], true);
-            }
-            if (\is_int($val)) {
-                return 1 === $val;
-            }
-        }
-
-        return $current;
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->props);
+        return ['blocks'];
     }
 
     /**
-     * @return array<string, string|bool>
+     * @return array<string, mixed>
      */
-    public function getCustomAttributes(): array
+    protected function defaults(): array
     {
-        return ElementTransform::resolveCustomAttributes($this->props);
+        return [
+            'col_span' => 'auto',
+            'style' => 'none',
+            'padding' => 'none',
+            'vertical_align' => 'top',
+            'text_align' => 'start',
+            'is_sticky' => false,
+            'order' => 'default',
+        ];
     }
 
-    public function getScopedCss(): ?string
+    public function shouldRender(): bool
     {
-        return ElementTransform::resolveScopedCss($this->props);
+        return true;
+    }
+
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'container' => true,
+            'multiple' => true,
+            'vertical' => true,
+        ];
     }
 
     public function getColSpanClasses(): string
     {
-        $colSpan = $this->resolveStringProp('col_span', $this->col_span, 'auto');
-
-        return match ($colSpan) {
+        return match ($this->stringProp('col_span', 'auto')) {
             '12' => 'col-span-12',
             '6' => 'col-span-12 md:col-span-6',
             '4' => 'col-span-12 md:col-span-4',
@@ -107,9 +72,7 @@ final class Column
 
     public function getStyleClasses(): string
     {
-        $style = $this->resolveStringProp('style', $this->style, 'none');
-
-        return match ($style) {
+        return match ($this->stringProp('style', 'none')) {
             'card' => 'bg-card border border-card-line rounded-2xl shadow-xs',
             'muted' => 'bg-background-1 rounded-2xl',
             'subtle' => 'bg-surface/70 rounded-2xl',
@@ -120,9 +83,7 @@ final class Column
 
     public function getPaddingClasses(): string
     {
-        $padding = $this->resolveStringProp('padding', $this->padding, 'none');
-
-        return match ($padding) {
+        return match ($this->stringProp('padding', 'none')) {
             'sm' => 'p-4',
             'md' => 'p-6 sm:p-8',
             'lg' => 'p-8 sm:p-10',
@@ -132,9 +93,7 @@ final class Column
 
     public function getVerticalAlignClasses(): string
     {
-        $verticalAlign = $this->resolveStringProp('vertical_align', $this->vertical_align, 'top');
-
-        return match ($verticalAlign) {
+        return match ($this->stringProp('vertical_align', 'top')) {
             'center' => 'justify-center',
             'bottom' => 'justify-end',
             'between' => 'justify-between',
@@ -144,9 +103,7 @@ final class Column
 
     public function getTextAlignClasses(): string
     {
-        $textAlign = $this->resolveStringProp('text_align', $this->text_align, 'start');
-
-        return match ($textAlign) {
+        return match ($this->stringProp('text_align', 'start')) {
             'center' => 'text-center',
             'end', 'right' => 'text-end',
             'justify' => 'text-justify',
@@ -156,9 +113,7 @@ final class Column
 
     public function getOrderClasses(): string
     {
-        $order = $this->resolveStringProp('order', $this->order, 'default');
-
-        return match ($order) {
+        return match ($this->stringProp('order', 'default')) {
             'first' => 'order-first md:order-none',
             'last' => 'order-last md:order-none',
             default => '',
@@ -167,7 +122,7 @@ final class Column
 
     public function getStickyClasses(): string
     {
-        return $this->resolveBoolProp('is_sticky', $this->is_sticky, false) ? 'sticky top-20 self-start' : '';
+        return $this->boolProp('is_sticky', false) ? 'sticky top-20 self-start' : '';
     }
 
     public function getColumnClasses(): string
@@ -214,12 +169,13 @@ final class Column
             $classes[] = $sticky;
         }
 
+        $props = $this->props();
         $extra = [
-            ElementTransform::margin($this->props),
-            ElementTransform::position($this->props),
-            ElementTransform::visibility($this->props),
-            ElementTransform::animation($this->props),
-            ElementTransform::customClass($this->props),
+            ElementTransform::margin($props),
+            ElementTransform::position($props),
+            ElementTransform::visibility($props),
+            ElementTransform::animation($props),
+            ElementTransform::customClass($props),
         ];
 
         foreach ($extra as $item) {
@@ -233,7 +189,7 @@ final class Column
 
     public function hasBlocks(): bool
     {
-        return !empty($this->getNormalizedBlocks());
+        return [] !== $this->getNormalizedBlocks();
     }
 
     /**
@@ -241,19 +197,19 @@ final class Column
      */
     public function getNormalizedBlocks(): array
     {
-        $raw = !empty($this->blocks) ? $this->blocks : ($this->props['blocks'] ?? []);
-        if (!\is_array($raw)) {
-            return [];
-        }
-
-        $list = [];
-        foreach ($raw as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $item */
-                $list[] = $item;
+        $raw = $this->items('blocks');
+        if ([] === $raw) {
+            $propBlocks = $this->prop('blocks', []);
+            if (\is_array($propBlocks)) {
+                foreach ($propBlocks as $item) {
+                    if (\is_array($item)) {
+                        /** @var array<string, mixed> $item */
+                        $raw[] = $item;
+                    }
+                }
             }
         }
 
-        return $list;
+        return $raw;
     }
 }

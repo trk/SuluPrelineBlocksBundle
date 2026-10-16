@@ -7,86 +7,47 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('List', template: '@SuluPrelineBlocks/components/List.html.twig')]
-final class ListBlock
+final class ListBlock extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-
     /**
-     * @var array<int|string, mixed>
+     * @return list<string>
      */
-    public array $items = [];
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    public ?string $listType = null;
-    public ?string $list_type = null;
-    public ?string $marker = null;
-    public ?string $markerColor = null;
-    public ?string $marker_color = null;
-    public ?string $style = null;
-    public ?string $size = null;
-    public ?string $columns = null;
-    public ?string $spacing = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
      * @return array<string, mixed>
      */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (isset($resolved['props']) && \is_array($resolved['props'])) {
-            /** @var array<string, mixed> $nested */
-            $nested = $resolved['props'];
-            $resolved = \array_merge($nested, $resolved);
-            unset($resolved['props']);
-        }
+        return [
+            'list_type' => 'vertical',
+            'marker' => 'none',
+            'marker_color' => 'primary',
+            'style' => 'default',
+            'size' => 'md',
+            'columns' => '1',
+            'spacing' => 'md',
+        ];
+    }
 
-        if (null !== ($this->listType ?? $this->list_type)) {
-            $resolved['list_type'] = $this->listType ?? $this->list_type;
-        }
-        if (null !== $this->marker) {
-            $resolved['marker'] = $this->marker;
-        }
-        if (null !== ($this->markerColor ?? $this->marker_color)) {
-            $resolved['marker_color'] = $this->markerColor ?? $this->marker_color;
-        }
-        if (null !== $this->style) {
-            $resolved['style'] = $this->style;
-        }
-        if (null !== $this->size) {
-            $resolved['size'] = $this->size;
-        }
-        if (null !== $this->columns) {
-            $resolved['columns'] = $this->columns;
-        }
-        if (null !== $this->spacing) {
-            $resolved['spacing'] = $this->spacing;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems();
+    }
 
-        return $resolved;
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'horizontal' => fn (): bool => 'horizontal' === $this->getListType(),
+            'vertical' => fn (): bool => 'vertical' === $this->getListType(),
+        ];
     }
 
     /**
@@ -95,22 +56,17 @@ final class ListBlock
     public function getNormalizedItems(): array
     {
         $normalized = [];
-        foreach ($this->items as $item) {
-            if (\is_array($item)) {
-                /** @var array<string, mixed> $itemArr */
-                $itemArr = $item;
-
-                if (isset($itemArr['image'])) {
-                    $itemArr['image_url'] = PropsResolver::resolveImageUrl($itemArr['image']);
-                    $itemArr['image_focus_style'] = PropsResolver::resolveFocusPointStyle($itemArr['image']);
-                }
-
-                if (isset($itemArr['link'])) {
-                    $itemArr['link_href'] = PropsResolver::resolveUrl($itemArr['link']);
-                }
-
-                $normalized[] = $itemArr;
+        foreach ($this->items('items') as $item) {
+            if (isset($item['image'])) {
+                $item['image_url'] = PropsResolver::resolveImageUrl($item['image']);
+                $item['image_focus_style'] = PropsResolver::resolveFocusPointStyle($item['image']);
             }
+
+            if (isset($item['link'])) {
+                $item['link_href'] = PropsResolver::resolveUrl($item['link']);
+            }
+
+            $normalized[] = $item;
         }
 
         return $normalized;
@@ -118,17 +74,12 @@ final class ListBlock
 
     public function getListType(): string
     {
-        $props = $this->getResolvedProps();
-
-        return ($props['list_type'] ?? 'vertical') === 'horizontal' ? 'horizontal' : 'vertical';
+        return 'horizontal' === $this->stringProp('list_type', 'vertical') ? 'horizontal' : 'vertical';
     }
 
     public function getMarker(): string
     {
-        $props = $this->getResolvedProps();
-        $marker = $props['marker'] ?? 'none';
-
-        return match ($marker) {
+        return match ($this->stringProp('marker', 'none')) {
             'disc' => 'disc',
             'circle' => 'circle',
             'decimal' => 'decimal',
@@ -140,10 +91,7 @@ final class ListBlock
 
     public function getMarkerColor(): string
     {
-        $props = $this->getResolvedProps();
-        $color = $props['marker_color'] ?? 'primary';
-
-        return match ($color) {
+        return match ($this->stringProp('marker_color', 'primary')) {
             'secondary' => 'text-secondary',
             'muted', 'neutral' => 'text-muted-foreground',
             default => 'text-primary',
@@ -152,10 +100,7 @@ final class ListBlock
 
     public function getStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $style = $props['style'] ?? 'default';
-
-        return match ($style) {
+        return match ($this->stringProp('style', 'default')) {
             'divider' => 'divider',
             'striped' => 'striped',
             default => 'default',
@@ -164,10 +109,7 @@ final class ListBlock
 
     public function getSize(): string
     {
-        $props = $this->getResolvedProps();
-        $size = $props['size'] ?? 'md';
-
-        return match ($size) {
+        return match ($this->stringProp('size', 'md')) {
             'sm' => 'sm',
             'lg' => 'lg',
             default => 'md',
@@ -176,11 +118,9 @@ final class ListBlock
 
     public function getSpacingClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $spacing = $props['spacing'] ?? 'md';
-        $isHoriz = 'horizontal' === $this->getListType();
+        $spacing = $this->stringProp('spacing', 'md');
 
-        if ($isHoriz) {
+        if ('horizontal' === $this->getListType()) {
             return match ($spacing) {
                 'sm' => 'gap-x-3 gap-y-2',
                 'lg' => 'gap-x-8 gap-y-4',
@@ -201,7 +141,6 @@ final class ListBlock
         $isHoriz = 'horizontal' === $this->getListType();
         $style = $this->getStyle();
         $marker = $this->getMarker();
-        $props = $this->getResolvedProps();
 
         if ($isHoriz) {
             $classes[] = 'flex flex-wrap items-center';
@@ -210,7 +149,7 @@ final class ListBlock
                 $classes[] = 'divide-x divide-border';
             }
         } else {
-            $columns = $props['columns'] ?? '1';
+            $columns = $this->stringProp('columns', '1');
             if ('2' === $columns) {
                 $classes[] = 'grid sm:grid-cols-2 gap-x-6';
             } elseif ('3' === $columns) {
@@ -267,47 +206,22 @@ final class ListBlock
 
     public function getMarginClass(): string
     {
-        $props = $this->getResolvedProps();
-        $classes = [];
+        $top = match ($this->stringProp('margin_top', 'none')) {
+            'sm' => 'mt-4',
+            'md' => 'mt-8',
+            'lg' => 'mt-12',
+            'xl' => 'mt-16',
+            default => '',
+        };
 
-        $top = $props['margin_top'] ?? null;
-        if (\is_string($top) && '' !== $top) {
-            $classes[] = match ($top) {
-                'sm' => 'mt-4',
-                'md' => 'mt-8',
-                'lg' => 'mt-12',
-                'xl' => 'mt-16',
-                default => '',
-            };
-        }
+        $bottom = match ($this->stringProp('margin_bottom', 'none')) {
+            'sm' => 'mb-4',
+            'md' => 'mb-8',
+            'lg' => 'mb-12',
+            'xl' => 'mb-16',
+            default => '',
+        };
 
-        $bottom = $props['margin_bottom'] ?? null;
-        if (\is_string($bottom) && '' !== $bottom) {
-            $classes[] = match ($bottom) {
-                'sm' => 'mb-4',
-                'md' => 'mb-8',
-                'lg' => 'mb-12',
-                'xl' => 'mb-16',
-                default => '',
-            };
-        }
-
-        return \trim(\implode(' ', \array_filter($classes)));
-    }
-
-    public function getCustomId(): ?string
-    {
-        $props = $this->getResolvedProps();
-        $id = $props['id'] ?? null;
-
-        return \is_string($id) && '' !== \trim($id) ? \trim($id) : null;
-    }
-
-    public function getCustomClass(): string
-    {
-        $props = $this->getResolvedProps();
-        $class = $props['custom_class'] ?? null;
-
-        return \is_string($class) ? \trim($class) : '';
+        return \trim($top . ' ' . $bottom);
     }
 }

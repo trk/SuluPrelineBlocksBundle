@@ -7,49 +7,63 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Breadcrumbs', template: '@SuluPrelineBlocks/components/Breadcrumbs.html.twig')]
-final class Breadcrumbs
+final class Breadcrumbs extends AbstractPrelineComponent
 {
     /**
-     * @var list<array{title?: string, url?: string, link?: string}>
+     * @return list<string>
      */
-    public array $items = [];
-
-    public bool $showHome = true;
-    public bool $show_home = true;
-
-    public string $homeTitle = 'Home';
-    public string $home_title = 'Home';
-
-    public string $homeUrl = '/';
-    public string $home_url = '/';
-
-    public string $align = 'left';
-
-    public ?string $class = null;
+    protected function dataKeys(): array
+    {
+        return ['items'];
+    }
 
     /**
-     * @var array<string, mixed>
+     * @return array<string, mixed>
      */
-    public array $props = [];
+    protected function defaults(): array
+    {
+        return [
+            'show_home' => true,
+            'home_title' => 'Home',
+            'home_url' => '/',
+            'align' => 'left',
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array<string, bool|\Closure>
+     */
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'linked' => true,
+        ];
+    }
 
     public function isShowHome(): bool
     {
-        return $this->showHome && $this->show_home;
+        return $this->boolProp('show_home', true);
     }
 
     public function getHomeTitle(): string
     {
-        return 'Home' !== $this->homeTitle ? $this->homeTitle : $this->home_title;
+        return $this->stringProp('home_title', 'Home');
     }
 
     public function getHomeUrl(): string
     {
-        return '/' !== $this->homeUrl ? $this->homeUrl : $this->home_url;
+        return $this->stringProp('home_url', '/');
     }
 
     public function getAlignClasses(): string
     {
-        return match ($this->align) {
+        return match ($this->stringProp('align', 'left')) {
             'center' => 'justify-center',
             'right' => 'justify-end',
             default => 'justify-start',
@@ -62,7 +76,7 @@ final class Breadcrumbs
     public function getNormalizedItems(): array
     {
         $normalized = [];
-        foreach ($this->items as $item) {
+        foreach ($this->items('items') as $item) {
             $title = $item['title'] ?? null;
             if (!\is_string($title) || '' === \trim($title)) {
                 continue;

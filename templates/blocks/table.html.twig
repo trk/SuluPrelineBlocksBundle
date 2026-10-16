@@ -1,13 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-<twig:Table
-    title="{{ block.title|default(null) }}"
-    header_title="{{ block.header_title|default(null) }}"
-    header_meta="{{ block.header_meta|default(null) }}"
-    header_content="{{ block.header_content|default(null) }}"
-    header_badge="{{ block.header_badge|default(null) }}"
-    header_link="{{ block.header_link|default(null) }}"
-    :items="block.items|default([])"
-    :props="block|merge(block.props|default({}))"
-/>
+    <twig:Table :block="block" />
 {% endif %}

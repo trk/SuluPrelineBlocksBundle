@@ -7,165 +7,66 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Button', template: '@SuluPrelineBlocks/components/Button.html.twig')]
-final class Button
+final class Button extends AbstractPrelineComponent
 {
-    /**
-     * Multiple items for button group.
-     *
-     * @var list<array<string, mixed>>|array<string, mixed>
-     */
-    public mixed $items = [];
-
-    /**
-     * Group layout style: 'gap' (separated) or 'connected' (segmented Preline button group).
-     */
-    public ?string $groupStyle = null;
-    public ?string $group_style = null;
-
-    /**
-     * Group orientation: 'horizontal' or 'vertical'.
-     */
-    public ?string $orientation = null;
-
-    /**
-     * Group alignment: 'start', 'center', 'end', 'justify'.
-     */
-    public ?string $align = null;
-
-    /**
-     * Gap size between buttons in 'gap' mode: 'none', 'xs', 'sm', 'md', 'lg'.
-     */
-    public ?string $gap = null;
-
-    /**
-     * Single button properties (for standalone use or backwards compatibility).
-     */
-    public ?string $title = '';
-    public ?string $content = '';
-    public mixed $link = '#';
-    public ?string $linkTitle = null;
-    public ?string $link_title = null;
-    public mixed $icon = null;
-    public ?string $iconAlign = null;
-    public ?string $icon_align = null;
-
-    public ?string $variant = null;
-    public ?string $size = null;
-    public ?string $linkColor = null;
-    public ?string $link_color = null;
-    public ?string $textAlign = null;
-    public ?string $text_align = null;
-    public ?bool $fullWidth = null;
-    public ?bool $full_width = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (null !== $this->variant) {
-            $resolved['variant'] = $this->variant;
-        }
-        if (null !== $this->size) {
-            $resolved['size'] = $this->size;
-        }
-        if (null !== ($this->linkColor ?? $this->link_color)) {
-            $resolved['link_color'] = $this->linkColor ?? $this->link_color;
-        }
-        if (null !== ($this->textAlign ?? $this->text_align)) {
-            $resolved['text_align'] = $this->textAlign ?? $this->text_align;
-        }
-        if (null !== ($this->fullWidth ?? $this->full_width)) {
-            $resolved['full_width'] = $this->fullWidth ?? $this->full_width;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-        if (null !== ($this->groupStyle ?? $this->group_style)) {
-            $resolved['group_style'] = $this->groupStyle ?? $this->group_style;
-        }
-        if (null !== $this->orientation) {
-            $resolved['orientation'] = $this->orientation;
-        }
-        if (null !== $this->align) {
-            $resolved['align'] = $this->align;
-        }
-        if (null !== $this->gap) {
-            $resolved['gap'] = $this->gap;
-        }
+        return [
+            'group_style' => 'gap',
+            'orientation' => 'horizontal',
+            'align' => 'start',
+            'gap' => 'md',
+            'variant' => 'solid',
+            'size' => 'md',
+            'link_color' => 'primary',
+            'icon_align' => 'left',
+            'full_width' => false,
+        ];
+    }
 
-        return $resolved;
+    protected function capabilities(): array
+    {
+        return [
+            'group' => fn (): bool => [] !== $this->items('items'),
+            'connected' => fn (): bool => 'connected' === $this->getGroupStyle(),
+            'vertical' => fn (): bool => 'vertical' === $this->getOrientation(),
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return $this->isGroup() || '' !== \trim($this->getTitle()) || null !== $this->getResolvedIcon();
     }
 
     public function isGroup(): bool
     {
-        return [] !== $this->items;
+        return $this->is('group');
     }
 
     public function getGroupStyle(): string
     {
-        $props = $this->getResolvedProps();
-
-        return (isset($props['group_style']) && \is_string($props['group_style']))
-            ? $props['group_style']
-            : ($this->groupStyle ?? ($this->group_style ?? 'gap'));
+        return $this->stringProp('group_style', 'gap');
     }
 
     public function getOrientation(): string
     {
-        $props = $this->getResolvedProps();
-
-        return (isset($props['orientation']) && \is_string($props['orientation']))
-            ? $props['orientation']
-            : ($this->orientation ?? 'horizontal');
+        return $this->stringProp('orientation', 'horizontal');
     }
 
     public function getAlign(): string
     {
-        $props = $this->getResolvedProps();
-
-        return (isset($props['align']) && \is_string($props['align']))
-            ? $props['align']
-            : ($this->align ?? 'start');
+        return $this->stringProp('align', 'start');
     }
 
     public function getGap(): string
     {
-        $props = $this->getResolvedProps();
-
-        return (isset($props['gap']) && \is_string($props['gap']))
-            ? $props['gap']
-            : ($this->gap ?? 'md');
+        return $this->stringProp('gap', 'md');
     }
 
     public function getGroupWrapperClasses(): string
     {
-        $props = $this->getResolvedProps();
-        $isConnected = 'connected' === $this->getGroupStyle();
-        $isVertical = 'vertical' === $this->getOrientation();
+        $isConnected = $this->is('connected');
+        $isVertical = $this->is('vertical');
         $align = $this->getAlign();
         $gap = $this->getGap();
 
@@ -194,7 +95,7 @@ final class Button
 
         $classes[] = $alignClasses;
 
-        return ElementTransform::wrapperClasses($props, \trim(\implode(' ', $classes)));
+        return parent::getWrapperClasses(\trim(\implode(' ', $classes)));
     }
 
     /**
@@ -210,16 +111,15 @@ final class Button
      */
     public function getNormalizedItems(): array
     {
-        if ([] === $this->items) {
+        $rawItems = $this->items('items');
+        if ([] === $rawItems) {
             return [];
         }
 
-        $isConnected = 'connected' === $this->getGroupStyle();
-        $isVertical = 'vertical' === $this->getOrientation();
-        $groupProps = $this->getResolvedProps();
+        $isConnected = $this->is('connected');
+        $isVertical = $this->is('vertical');
+        $groupProps = $this->props();
 
-        /** @var list<array<string, mixed>> $rawItems */
-        $rawItems = \array_values(\array_filter($this->items, '\is_array'));
         $total = \count($rawItems);
         $result = [];
 
@@ -228,7 +128,6 @@ final class Button
                 ? $item['title']
                 : (isset($item['content']) && \is_string($item['content']) ? $item['content'] : '');
 
-            /** @var mixed $itemLink */
             $itemLink = $item['link'] ?? '#';
             $url = PropsResolver::resolveUrl($itemLink);
 
@@ -239,7 +138,6 @@ final class Button
             $icon = PropsResolver::resolveIcon($item['icon'] ?? null);
             $iconAlign = isset($item['icon_align']) && \is_string($item['icon_align']) ? $item['icon_align'] : 'left';
 
-            // Resolve item style and color (override or inherit from group props)
             $itemStyle = isset($item['button_style']) && \is_string($item['button_style']) && 'inherit' !== $item['button_style']
                 ? $item['button_style']
                 : ($item['variant'] ?? ($groupProps['variant'] ?? 'solid'));
@@ -256,7 +154,6 @@ final class Button
             $buttonClasses = PropsResolver::buttonClasses($itemProps);
 
             if ($isConnected) {
-                // Remove rounded-lg and apply connected segmented classes
                 $buttonClasses = \str_replace('rounded-lg', '', $buttonClasses);
 
                 if ($total > 1) {
@@ -297,47 +194,40 @@ final class Button
 
     public function getTitle(): string
     {
-        if (null !== $this->title && '' !== $this->title) {
-            return $this->title;
+        $title = $this->string('title', '');
+        if ('' !== $title) {
+            return $title;
         }
 
-        return $this->content ?? '';
+        return $this->string('content', '');
     }
 
     public function getUrl(): string
     {
-        return PropsResolver::resolveUrl($this->link);
+        $link = $this->get('link', '#');
+
+        return PropsResolver::resolveUrl($link);
     }
 
     public function getResolvedIcon(): ?string
     {
-        return PropsResolver::resolveIcon($this->icon ?? ($this->props['icon'] ?? null));
+        return $this->getIconClass('icon');
     }
 
     public function getIconAlign(): string
     {
-        $align = $this->iconAlign ?? ($this->icon_align ?? ($this->props['icon_align'] ?? 'left'));
-
-        return \is_string($align) ? $align : 'left';
+        return $this->stringProp('icon_align', 'left');
     }
 
     public function getClasses(): string
     {
-        return PropsResolver::buttonClasses($this->getResolvedProps());
+        return PropsResolver::buttonClasses($this->props());
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        return ElementTransform::wrapperClasses($this->getResolvedProps(), $this->getClasses());
-    }
+        $base = \trim($this->getClasses() . ' ' . $extraBase);
 
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
-    }
-
-    public function getLinkTitle(): ?string
-    {
-        return $this->linkTitle ?? $this->link_title;
+        return parent::getWrapperClasses($base);
     }
 }

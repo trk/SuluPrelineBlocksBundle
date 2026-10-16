@@ -13,19 +13,20 @@ final class OverlayTest extends TestCase
     {
         $overlay = new Overlay();
 
-        self::assertNull($overlay->title);
-        self::assertNull($overlay->badge);
-        self::assertNull($overlay->meta);
-        self::assertNull($overlay->content);
-        self::assertNull($overlay->image);
-        self::assertNull($overlay->video);
-        self::assertNull($overlay->icon);
-        self::assertSame([], $overlay->buttons);
-        self::assertNull($overlay->hoverImage);
-        self::assertNull($overlay->hover_image);
-        self::assertNull($overlay->hoverVideo);
-        self::assertNull($overlay->hover_video);
-        self::assertSame([], $overlay->props);
+        self::assertFalse($overlay->shouldRender());
+        self::assertTrue($overlay->is('overlay'));
+        self::assertNull($overlay->get('title'));
+        self::assertNull($overlay->get('badge'));
+        self::assertNull($overlay->get('meta'));
+        self::assertNull($overlay->get('content'));
+        self::assertNull($overlay->get('image'));
+        self::assertNull($overlay->get('video'));
+        self::assertNull($overlay->get('icon'));
+        self::assertSame([], $overlay->items('buttons'));
+        self::assertNull($overlay->get('hoverImage'));
+        self::assertNull($overlay->get('hover_image'));
+        self::assertNull($overlay->get('hoverVideo'));
+        self::assertNull($overlay->get('hover_video'));
         self::assertNull($overlay->getImageUrl());
         self::assertNull($overlay->getHoverImageUrl());
         self::assertNull($overlay->getVideoUrl());
@@ -42,16 +43,16 @@ final class OverlayTest extends TestCase
     public function testHoverImageAndVideoResolution(): void
     {
         $overlay = new Overlay();
-        $overlay->hoverImage = 'https://cdn.example.com/hover.jpg';
-        $overlay->hoverVideo = 'https://cdn.example.com/hover.mp4';
+        $overlay->assign('hoverImage', 'https://cdn.example.com/hover.jpg');
+        $overlay->assign('hoverVideo', 'https://cdn.example.com/hover.mp4');
 
         self::assertSame('https://cdn.example.com/hover.jpg', $overlay->getHoverImageUrl());
         self::assertSame('https://cdn.example.com/hover.mp4', $overlay->getHoverVideoUrl());
 
         // Snake case fallback
         $overlaySnake = new Overlay();
-        $overlaySnake->hover_image = 'https://cdn.example.com/hover-snake.jpg';
-        $overlaySnake->hover_video = 'https://cdn.example.com/hover-snake.mp4';
+        $overlaySnake->assign('hover_image', 'https://cdn.example.com/hover-snake.jpg');
+        $overlaySnake->assign('hover_video', 'https://cdn.example.com/hover-snake.mp4');
 
         self::assertSame('https://cdn.example.com/hover-snake.jpg', $overlaySnake->getHoverImageUrl());
         self::assertSame('https://cdn.example.com/hover-snake.mp4', $overlaySnake->getHoverVideoUrl());
@@ -60,10 +61,10 @@ final class OverlayTest extends TestCase
     public function testMediaSourceAndExternalUrls(): void
     {
         $overlay = new Overlay();
-        $overlay->mediaType = 'image';
-        $overlay->mediaSource = 'url';
-        $overlay->imageUrl = 'https://cdn.example.com/overlay-image.jpg';
-        $overlay->hoverImageUrl = 'https://cdn.example.com/overlay-hover.jpg';
+        $overlay->assign('mediaType', 'image');
+        $overlay->assign('mediaSource', 'url');
+        $overlay->assign('imageUrl', 'https://cdn.example.com/overlay-image.jpg');
+        $overlay->assign('hoverImageUrl', 'https://cdn.example.com/overlay-hover.jpg');
 
         self::assertSame('https://cdn.example.com/overlay-image.jpg', $overlay->getImageUrl());
         self::assertSame('https://cdn.example.com/overlay-hover.jpg', $overlay->getHoverImageUrl());
@@ -72,10 +73,10 @@ final class OverlayTest extends TestCase
 
         // Snake case fallback
         $overlaySnake = new Overlay();
-        $overlaySnake->media_type = 'video';
-        $overlaySnake->media_source = 'url';
-        $overlaySnake->video_url = 'https://cdn.example.com/overlay-video.mp4';
-        $overlaySnake->hover_video_url = 'https://cdn.example.com/overlay-hover-video.mp4';
+        $overlaySnake->assign('media_type', 'video');
+        $overlaySnake->assign('media_source', 'url');
+        $overlaySnake->assign('video_url', 'https://cdn.example.com/overlay-video.mp4');
+        $overlaySnake->assign('hover_video_url', 'https://cdn.example.com/overlay-hover-video.mp4');
 
         self::assertSame('https://cdn.example.com/overlay-video.mp4', $overlaySnake->getVideoUrl());
         self::assertSame('https://cdn.example.com/overlay-hover-video.mp4', $overlaySnake->getHoverVideoUrl());
@@ -84,23 +85,23 @@ final class OverlayTest extends TestCase
 
         // Icon exclusivity
         $overlayIcon = new Overlay();
-        $overlayIcon->mediaType = 'icon';
-        $overlayIcon->icon = 'ti ti-star';
+        $overlayIcon->assign('mediaType', 'icon');
+        $overlayIcon->assign('icon', 'ti ti-star');
         self::assertSame('ti ti-star', $overlayIcon->getIconClass());
 
         $overlayImageWithIcon = new Overlay();
-        $overlayImageWithIcon->mediaType = 'image';
-        $overlayImageWithIcon->icon = 'ti ti-star';
+        $overlayImageWithIcon->assign('mediaType', 'image');
+        $overlayImageWithIcon->assign('icon', 'ti ti-star');
         self::assertNull($overlayImageWithIcon->getIconClass());
     }
 
     public function testNormalizedButtons(): void
     {
         $overlay = new Overlay();
-        $overlay->buttons = [
+        $overlay->assign('buttons', [
             ['content' => 'Explore', 'link' => '/explore'],
             ['content' => 'Watch Demo', 'link' => '#demo'],
-        ];
+        ]);
 
         $normalized = $overlay->getNormalizedButtons();
         self::assertCount(2, $normalized);
@@ -112,35 +113,35 @@ final class OverlayTest extends TestCase
     {
         $overlay = new Overlay();
 
-        $overlay->props = ['overlay_position' => 'center'];
+        $overlay->mergeProps(['overlay_position' => 'center']);
         self::assertSame('center', $overlay->getOverlayPosition());
         self::assertSame('justify-center items-center', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'top'];
+        $overlay->mergeProps(['overlay_position' => 'top']);
         self::assertSame('top', $overlay->getOverlayPosition());
         self::assertSame('justify-start items-stretch', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'bottom-left'];
+        $overlay->mergeProps(['overlay_position' => 'bottom-left']);
         self::assertSame('bottom-left', $overlay->getOverlayPosition());
         self::assertSame('justify-end items-start', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'bottom-right'];
+        $overlay->mergeProps(['overlay_position' => 'bottom-right']);
         self::assertSame('bottom-right', $overlay->getOverlayPosition());
         self::assertSame('justify-end items-end', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'top-left'];
+        $overlay->mergeProps(['overlay_position' => 'top-left']);
         self::assertSame('top-left', $overlay->getOverlayPosition());
         self::assertSame('justify-start items-start', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'top-right'];
+        $overlay->mergeProps(['overlay_position' => 'top-right']);
         self::assertSame('top-right', $overlay->getOverlayPosition());
         self::assertSame('justify-start items-end', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'left'];
+        $overlay->mergeProps(['overlay_position' => 'left']);
         self::assertSame('left', $overlay->getOverlayPosition());
         self::assertSame('justify-center items-start', $overlay->getOverlayPositionClasses());
 
-        $overlay->props = ['overlay_position' => 'right'];
+        $overlay->mergeProps(['overlay_position' => 'right']);
         self::assertSame('right', $overlay->getOverlayPosition());
         self::assertSame('justify-center items-end', $overlay->getOverlayPositionClasses());
     }
@@ -151,20 +152,20 @@ final class OverlayTest extends TestCase
         self::assertSame('always', $overlay->getOverlayMode());
         self::assertStringContainsString('transition-all', $overlay->getOverlayTransitionClasses());
 
-        $overlay->props = ['overlay_mode' => 'hover', 'overlay_transition' => 'slide-up'];
+        $overlay->mergeProps(['overlay_mode' => 'hover', 'overlay_transition' => 'slide-up']);
         self::assertSame('hover', $overlay->getOverlayMode());
         self::assertStringContainsString('translate-y-4', $overlay->getOverlayTransitionClasses());
         self::assertStringContainsString('group-hover:translate-y-0', $overlay->getOverlayTransitionClasses());
 
-        $overlay->props = ['overlay_mode' => 'hover', 'overlay_transition' => 'slide-down'];
+        $overlay->mergeProps(['overlay_mode' => 'hover', 'overlay_transition' => 'slide-down']);
         self::assertStringContainsString('-translate-y-4', $overlay->getOverlayTransitionClasses());
         self::assertStringContainsString('group-hover:translate-y-0', $overlay->getOverlayTransitionClasses());
 
-        $overlay->props = ['overlay_mode' => 'hover', 'overlay_transition' => 'zoom'];
+        $overlay->mergeProps(['overlay_mode' => 'hover', 'overlay_transition' => 'zoom']);
         self::assertStringContainsString('scale-95', $overlay->getOverlayTransitionClasses());
         self::assertStringContainsString('group-hover:scale-100', $overlay->getOverlayTransitionClasses());
 
-        $overlay->props = ['overlay_mode' => 'hover', 'overlay_transition' => 'fade'];
+        $overlay->mergeProps(['overlay_mode' => 'hover', 'overlay_transition' => 'fade']);
         self::assertStringContainsString('transition-opacity', $overlay->getOverlayTransitionClasses());
     }
 
@@ -173,16 +174,16 @@ final class OverlayTest extends TestCase
         $overlay = new Overlay();
         self::assertStringContainsString('bg-gradient-to-t', $overlay->getOverlayStyle());
 
-        $overlay->props = ['overlay_style' => 'dark-glass'];
+        $overlay->mergeProps(['overlay_style' => 'dark-glass']);
         self::assertStringContainsString('backdrop-blur-md bg-black/60', $overlay->getOverlayStyle());
 
-        $overlay->props = ['overlay_style' => 'light-glass'];
+        $overlay->mergeProps(['overlay_style' => 'light-glass']);
         self::assertStringContainsString('bg-layer/80', $overlay->getOverlayStyle());
 
-        $overlay->props = ['overlay_style' => 'primary'];
+        $overlay->mergeProps(['overlay_style' => 'primary']);
         self::assertStringContainsString('bg-primary/80', $overlay->getOverlayStyle());
 
-        $overlay->props = ['overlay_style' => 'none'];
+        $overlay->mergeProps(['overlay_style' => 'none']);
         self::assertSame('bg-transparent', $overlay->getOverlayStyle());
     }
 
@@ -191,71 +192,71 @@ final class OverlayTest extends TestCase
         $overlay = new Overlay();
         self::assertSame('aspect-video', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = ['media_aspect_ratio' => '4-3'];
+        $overlay->mergeProps(['media_aspect_ratio' => '4-3']);
         self::assertSame('aspect-4/3', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = ['media_aspect_ratio' => '1-1'];
+        $overlay->mergeProps(['media_aspect_ratio' => '1-1']);
         self::assertSame('aspect-square', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = ['media_aspect_ratio' => '21-9'];
+        $overlay->mergeProps(['media_aspect_ratio' => '21-9']);
         self::assertSame('aspect-21/9', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = ['media_aspect_ratio' => 'auto'];
+        $overlay->mergeProps(['media_aspect_ratio' => 'auto']);
         self::assertStringContainsString('aspect-auto', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = ['aspect_ratio' => '16:9'];
+        $overlay->mergeProps(['aspect_ratio' => '16:9']);
         self::assertSame('aspect-video', $overlay->getMediaAspectRatioClass());
 
-        $overlay->props = [
+        $overlay->mergeProps([
             'aspect_ratio' => 'manual',
             'aspect_ratio_width' => 16,
             'aspect_ratio_height' => 10,
             'object_fit' => 'contain',
-        ];
+        ]);
         self::assertSame('aspect-auto', $overlay->getMediaAspectRatioClass());
         self::assertSame('aspect-ratio: 16 / 10;', $overlay->getMediaAspectRatioStyle());
         self::assertSame('aspect-ratio: 16 / 10;', $overlay->getWrapperStyles());
         self::assertSame('object-contain', $overlay->getObjectFitClass());
 
-        $overlay->image = [
+        $overlay->assign('image', [
             'url' => '/uploads/media/overlay.jpg',
             'formats' => [
                 'col-sm' => '/uploads/media/col-sm.webp',
                 'col-md' => '/uploads/media/col-md.webp',
             ],
             'focalPoint' => ['x' => 40, 'y' => 60],
-        ];
+        ]);
         self::assertNotNull($overlay->getImageSrcSet());
         self::assertStringContainsString('/uploads/media/col-sm.webp 400w', (string) $overlay->getImageSrcSet());
         self::assertSame('object-position: 40% 60%;', $overlay->getImageFocusPointStyle());
 
-        $overlay->props = ['image_transition' => 'scale-up'];
+        $overlay->mergeProps(['image_transition' => 'scale-up']);
         self::assertStringContainsString('group-hover:scale-105', $overlay->getImageTransitionClasses());
 
-        $overlay->props = ['image_transition' => 'none'];
+        $overlay->mergeProps(['image_transition' => 'none']);
         self::assertSame('transition-opacity duration-300 ease-out', $overlay->getImageTransitionClasses());
     }
 
     public function testBadgeAndPositions(): void
     {
         $overlay = new Overlay();
-        $overlay->badge = 'Featured Story';
+        $overlay->assign('badge', 'Featured Story');
 
-        self::assertSame('Featured Story', $overlay->badge);
+        self::assertSame('Featured Story', $overlay->get('badge'));
         self::assertStringContainsString('backdrop-blur-md', $overlay->getBadgeClasses());
 
-        $overlay->props = ['badge_style' => 'primary'];
+        $overlay->mergeProps(['badge_style' => 'primary']);
         self::assertStringContainsString('bg-primary', $overlay->getBadgeClasses());
 
-        $overlay->props = ['badge_position' => 'top-right'];
+        $overlay->mergeProps(['badge_position' => 'top-right']);
         self::assertSame('top-right', $overlay->getBadgePosition());
         self::assertSame('absolute top-3 end-3 z-20 flex flex-wrap gap-1.5', $overlay->getBadgePositionClasses());
 
-        $overlay->props = ['badge_position' => 'bottom-left'];
+        $overlay->mergeProps(['badge_position' => 'bottom-left']);
         self::assertSame('bottom-left', $overlay->getBadgePosition());
         self::assertSame('absolute bottom-3 start-3 z-20 flex flex-wrap gap-1.5', $overlay->getBadgePositionClasses());
 
-        $overlay->props = ['badge_position' => 'inline'];
+        $overlay->mergeProps(['badge_position' => 'inline']);
         self::assertSame('inline', $overlay->getBadgePosition());
         self::assertSame('', $overlay->getBadgePositionClasses());
     }
@@ -263,15 +264,15 @@ final class OverlayTest extends TestCase
     public function testMultipleBadgesAndButtons(): void
     {
         $overlay = new Overlay();
-        $overlay->props = [
+        $overlay->mergeProps([
             'badge_style' => 'glass',
             'badge_color' => 'primary',
             'button_style' => 'solid',
             'button_color' => 'white',
             'button_size' => 'sm',
-        ];
+        ]);
 
-        $overlay->badges = [
+        $overlay->assign('badges', [
             [
                 'title' => 'Hot Deal',
                 'badge_style' => 'inherit',
@@ -282,16 +283,16 @@ final class OverlayTest extends TestCase
                 'badge_style' => 'solid',
                 'badge_color' => 'success',
             ],
-        ];
+        ]);
 
-        $overlay->buttons = [
+        $overlay->assign('buttons', [
             [
                 'title' => 'View Overlay',
                 'link' => '/details',
                 'button_style' => 'inherit',
                 'button_color' => 'inherit',
             ],
-        ];
+        ]);
 
         self::assertTrue($overlay->hasBadges());
         $badges = $overlay->getNormalizedBadges();
@@ -315,23 +316,23 @@ final class OverlayTest extends TestCase
     public function testLinkAndClickableOverlay(): void
     {
         $overlay = new Overlay();
-        $overlay->link = '/case-studies/enterprise';
-        $overlay->linkTitle = 'Case Study';
+        $overlay->assign('link', '/case-studies/enterprise');
+        $overlay->assign('linkTitle', 'Case Study');
 
         self::assertSame('/case-studies/enterprise', $overlay->getLinkUrl());
         self::assertSame('Case Study', $overlay->getButtonText());
         self::assertTrue($overlay->isEntireOverlayClickable());
 
         // Button only
-        $overlay->props = ['link_overlay' => 'none'];
+        $overlay->mergeProps(['link_overlay' => 'none']);
         self::assertFalse($overlay->isEntireOverlayClickable());
     }
 
     public function testMediaMutualExclusivity(): void
     {
         $overlay = new Overlay();
-        $overlay->image = 'https://cdn.example.com/cover.jpg';
-        $overlay->video = 'https://cdn.example.com/cover.mp4';
+        $overlay->assign('image', 'https://cdn.example.com/cover.jpg');
+        $overlay->assign('video', 'https://cdn.example.com/cover.mp4');
 
         // Video takes priority
         self::assertTrue($overlay->isVideo());
@@ -341,7 +342,7 @@ final class OverlayTest extends TestCase
 
         // Image only
         $overlayImage = new Overlay();
-        $overlayImage->image = 'https://cdn.example.com/cover.jpg';
+        $overlayImage->assign('image', 'https://cdn.example.com/cover.jpg');
         self::assertTrue($overlayImage->isImage());
         self::assertFalse($overlayImage->isVideo());
         self::assertSame('https://cdn.example.com/cover.jpg', $overlayImage->getActiveImageUrl());
@@ -351,14 +352,14 @@ final class OverlayTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $overlay = new Overlay();
-        $overlay->props = [
+        $overlay->mergeProps([
             'id' => 'hero-overlay',
             'custom_class' => 'my-custom-overlay',
             'margin_top' => 'lg',
             'margin_bottom' => 'xl',
             'rounded' => '3xl',
             'shadow' => 'xl',
-        ];
+        ]);
 
         self::assertSame('hero-overlay', $overlay->getElementId());
         $wrapper = $overlay->getWrapperClasses();
@@ -373,14 +374,14 @@ final class OverlayTest extends TestCase
     public function testUnifiedElementsSeparation(): void
     {
         $overlay = new Overlay();
-        $overlay->props = [
+        $overlay->mergeProps([
             'badge_style' => 'glass',
             'badge_color' => 'primary',
             'button_style' => 'solid',
             'button_color' => 'white',
-        ];
+        ]);
 
-        $overlay->elements = [
+        $overlay->assign('elements', [
             [
                 'type' => 'badge',
                 'title' => 'Top Overlay Badge',
@@ -407,7 +408,7 @@ final class OverlayTest extends TestCase
                 'button_style' => 'outline',
                 'button_color' => 'white',
             ],
-        ];
+        ]);
 
         self::assertTrue($overlay->hasBadges());
         $badges = $overlay->getNormalizedBadges();

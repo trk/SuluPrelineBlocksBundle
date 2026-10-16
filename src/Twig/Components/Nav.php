@@ -10,26 +10,48 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible vertical Navigation / Sidebar component.
  */
 #[AsTwigComponent('Nav', template: '@SuluPrelineBlocks/components/Nav.html.twig')]
-final class Nav
+final class Nav extends AbstractPrelineComponent
 {
-    public ?string $title = null;
+    /**
+     * @return list<string>
+     */
+    protected function dataKeys(): array
+    {
+        return ['title', 'items'];
+    }
 
     /**
-     * @var array<int|string, mixed>
+     * @return array<string, mixed>
      */
-    public array $items = [];
+    protected function defaults(): array
+    {
+        return [
+            'card' => false,
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return $this->hasItems();
+    }
 
     /**
-     * @var array<string, mixed>
+     * @return array<string, bool|\Closure>
      */
-    public array $props = [];
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+            'vertical' => true,
+            'linked' => true,
+        ];
+    }
 
     public function getNavClasses(): string
     {
         $classes = ['flex', 'flex-col', 'space-y-1', 'w-full'];
 
-        $resolved = $this->resolveProps();
-        if (!empty($resolved['card'])) {
+        if ($this->boolProp('card', false)) {
             $classes[] = 'p-3 bg-card border border-card-line rounded-xl shadow-xs';
         }
 
@@ -54,11 +76,7 @@ final class Nav
     {
         $normalized = [];
 
-        foreach ($this->items as $item) {
-            if (!\is_array($item)) {
-                continue;
-            }
-
+        foreach ($this->items('items') as $item) {
             $itemType = \is_string($item['item_type'] ?? null) && '' !== $item['item_type']
                 ? $item['item_type']
                 : 'link';
@@ -69,7 +87,7 @@ final class Nav
             $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
 
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
-            if ('#' === $link) {
+            if ('#' === $link || '' === $link) {
                 $link = null;
             }
 
@@ -93,21 +111,6 @@ final class Nav
 
     public function hasItems(): bool
     {
-        return !empty($this->getNormalizedItems());
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function resolveProps(): array
-    {
-        if (isset($this->props['props']) && \is_array($this->props['props'])) {
-            /** @var array<string, mixed> $inner */
-            $inner = $this->props['props'];
-
-            return $inner;
-        }
-
-        return $this->props;
+        return [] !== $this->getNormalizedItems();
     }
 }

@@ -13,8 +13,8 @@ final class IconTest extends TestCase
     {
         $icon = new Icon();
 
-        self::assertNull($icon->icon);
-        self::assertNull($icon->link);
+        self::assertNull($icon->get('icon'));
+        self::assertNull($icon->get('link'));
         self::assertNull($icon->getResolvedIcon());
         self::assertNull($icon->getUrl());
         self::assertFalse($icon->hasLink());
@@ -26,8 +26,8 @@ final class IconTest extends TestCase
     public function testIconAndLinkResolution(): void
     {
         $icon = new Icon();
-        $icon->icon = 'star';
-        $icon->link = 'https://totoglu.com';
+        $icon->assign('icon', 'star');
+        $icon->assign('link', 'https://totoglu.com');
 
         self::assertSame('ti ti-star', $icon->getResolvedIcon());
         self::assertSame('https://totoglu.com', $icon->getUrl());
@@ -38,13 +38,13 @@ final class IconTest extends TestCase
     public function testStylesAndContainers(): void
     {
         $icon = new Icon();
-        $icon->icon = 'check';
-        $icon->props = [
+        $icon->assign('icon', 'check');
+        $icon->mergeProps([
             'icon_style' => 'circle_solid',
             'icon_size' => 'lg',
             'icon_color' => 'primary',
             'align' => 'center',
-        ];
+        ]);
 
         self::assertSame('circle_solid', $icon->getIconStyle());
         self::assertSame('lg', $icon->getIconSize());
@@ -57,10 +57,10 @@ final class IconTest extends TestCase
     public function testSquareSoftStyle(): void
     {
         $icon = new Icon();
-        $icon->props = [
+        $icon->mergeProps([
             'icon_style' => 'square_soft',
             'icon_color' => 'secondary',
-        ];
+        ]);
 
         self::assertStringContainsString('rounded-xl', $icon->getContainerClasses());
         self::assertStringContainsString('bg-secondary-50', $icon->getContainerClasses());
@@ -69,12 +69,12 @@ final class IconTest extends TestCase
     public function testWrapperClassesAndId(): void
     {
         $icon = new Icon();
-        $icon->props = [
+        $icon->mergeProps([
             'id' => 'feature-icon',
             'margin_top' => 'sm',
             'margin_bottom' => 'md',
             'custom_class' => 'my-icon',
-        ];
+        ]);
 
         self::assertSame('feature-icon', $icon->getElementId());
         $wrapper = $icon->getWrapperClasses();

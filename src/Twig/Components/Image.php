@@ -7,150 +7,62 @@ namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('Image', template: '@SuluPrelineBlocks/components/Image.html.twig')]
-final class Image
+final class Image extends AbstractPrelineComponent
 {
-    public mixed $image = null;
-    public ?string $imageUrl = null;
-    public ?string $image_url = null;
-    public mixed $hoverImage = null;
-    public mixed $hover_image = null;
-    public ?string $hoverImageUrl = null;
-    public ?string $hover_image_url = null;
-    public mixed $link = null;
-    public ?string $alt = null;
-
-    public ?string $aspectRatio = null;
-    public ?string $aspect_ratio = null;
-    public ?string $objectFit = null;
-    public ?string $object_fit = null;
-    public int|string|null $aspectRatioWidth = null;
-    public int|string|null $aspect_ratio_width = null;
-    public int|string|null $aspectRatioHeight = null;
-    public int|string|null $aspect_ratio_height = null;
-    public ?string $rounded = null;
-    public ?string $caption = null;
-
-    public ?string $marginTop = null;
-    public ?string $margin_top = null;
-    public ?string $marginBottom = null;
-    public ?string $margin_bottom = null;
-    public ?string $id = null;
-    public ?string $customClass = null;
-    public ?string $custom_class = null;
-
-    /**
-     * @var array<string, mixed>
-     */
-    public array $props = [];
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getResolvedProps(): array
+    protected function defaults(): array
     {
-        $resolved = $this->props;
-        if (null !== ($this->aspectRatio ?? $this->aspect_ratio)) {
-            $resolved['aspect_ratio'] = $this->aspectRatio ?? $this->aspect_ratio;
-        }
-        if (null !== ($this->objectFit ?? $this->object_fit)) {
-            $resolved['object_fit'] = $this->objectFit ?? $this->object_fit;
-        }
-        if (null !== ($this->aspectRatioWidth ?? $this->aspect_ratio_width)) {
-            $resolved['aspect_ratio_width'] = $this->aspectRatioWidth ?? $this->aspect_ratio_width;
-        }
-        if (null !== ($this->aspectRatioHeight ?? $this->aspect_ratio_height)) {
-            $resolved['aspect_ratio_height'] = $this->aspectRatioHeight ?? $this->aspect_ratio_height;
-        }
-        if (null !== $this->rounded) {
-            $resolved['rounded'] = $this->rounded;
-        }
-        if (null !== $this->caption) {
-            $resolved['caption'] = $this->caption;
-        }
-        if (null !== ($this->marginTop ?? $this->margin_top)) {
-            $resolved['margin_top'] = $this->marginTop ?? $this->margin_top;
-        }
-        if (null !== ($this->marginBottom ?? $this->margin_bottom)) {
-            $resolved['margin_bottom'] = $this->marginBottom ?? $this->margin_bottom;
-        }
-        if (null !== $this->id) {
-            $resolved['id'] = $this->id;
-        }
-        if (null !== ($this->customClass ?? $this->custom_class)) {
-            $resolved['custom_class'] = $this->customClass ?? $this->custom_class;
-        }
-
-        return $resolved;
+        return [
+            'aspect_ratio' => 'auto',
+            'object_fit' => 'cover',
+            'rounded' => 'lg',
+        ];
     }
 
-    public function getImageUrl(): ?string
+    protected function dataKeys(): array
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveImageUrl($this->image ?? $props['image'] ?? null)
-            ?? ($this->imageUrl ?? $this->image_url ?? (isset($props['image_url']) && \is_string($props['image_url']) ? $props['image_url'] : null));
+        return ['image_url', 'hover_image_url'];
     }
 
-    public function getImageSrcSet(): ?string
+    public function shouldRender(): bool
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveSrcSet($this->image ?? $props['image'] ?? null);
+        return null !== $this->getImageUrl();
     }
 
-    public function getImageSizes(): string
+    public function getImageUrl(string $key = 'image'): ?string
     {
-        return '(min-width: 1280px) 1024px, 100vw';
+        return parent::getImageUrl($key) ?? $this->nullableString('image_url');
     }
 
-    public function getImageFocusPointStyle(): ?string
+    public function getImageSizes(string $default = '(min-width: 1280px) 1024px, 100vw'): string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveFocusPointStyle($this->image ?? $props['image'] ?? null);
+        return $default;
     }
 
     public function getHoverImageUrl(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveImageUrl($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null)
-            ?? ($this->hoverImageUrl ?? $this->hover_image_url ?? (isset($props['hover_image_url']) && \is_string($props['hover_image_url']) ? $props['hover_image_url'] : null));
+        return parent::getImageUrl('hover_image') ?? $this->nullableString('hover_image_url');
     }
 
     public function getHoverImageSrcSet(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveSrcSet($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
+        return $this->getImageSrcSet('hover_image');
     }
 
     public function getHoverImageFocusPointStyle(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return PropsResolver::resolveFocusPointStyle($this->hoverImage ?? $this->hover_image ?? $props['hover_image'] ?? null);
+        return $this->getImageFocusPointStyle('hover_image');
     }
 
     public function getObjectFitClass(): string
     {
-        $props = $this->getResolvedProps();
-        $fit = $props['object_fit'] ?? ($this->objectFit ?? $this->object_fit ?? 'cover');
-
-        return PropsResolver::resolveObjectFit($fit);
+        return PropsResolver::resolveObjectFit($this->stringProp('object_fit', 'cover'));
     }
 
     public function getMediaAspectRatioStyle(): string
     {
-        $props = $this->getResolvedProps();
-        $aspect = $props['aspect_ratio'] ?? null;
-
-        if ('manual' === $aspect) {
-            $w = $props['aspect_ratio_width'] ?? ($this->aspectRatioWidth ?? $this->aspect_ratio_width ?? null);
-            $h = $props['aspect_ratio_height'] ?? ($this->aspectRatioHeight ?? $this->aspect_ratio_height ?? null);
-
-            $widthVal = \is_numeric($w) ? (float) $w : 0.0;
-            $heightVal = \is_numeric($h) ? (float) $h : 0.0;
+        if ('manual' === $this->stringProp('aspect_ratio', 'auto')) {
+            $widthVal = $this->floatProp('aspect_ratio_width', 0.0);
+            $heightVal = $this->floatProp('aspect_ratio_height', 0.0);
 
             if ($widthVal > 0.0 && $heightVal > 0.0) {
                 return \sprintf('aspect-ratio: %s / %s;', $widthVal, $heightVal);
@@ -162,19 +74,17 @@ final class Image
 
     public function getUrl(): ?string
     {
-        if (null === $this->link || '' === $this->link) {
+        $link = $this->get('link');
+        if (null === $link || '' === $link) {
             return null;
         }
 
-        return PropsResolver::resolveUrl($this->link);
+        return PropsResolver::resolveUrl($link);
     }
 
     public function getAspectRatio(): string
     {
-        $props = $this->getResolvedProps();
-        $ratio = isset($props['aspect_ratio']) && \is_string($props['aspect_ratio']) ? $props['aspect_ratio'] : 'auto';
-
-        return match ($ratio) {
+        return match ($this->stringProp('aspect_ratio', 'auto')) {
             '16/9', '16x9', '16:9' => 'aspect-video',
             '4/3', '4x3', '4:3' => 'aspect-4/3',
             '1/1', '1x1', '1:1', 'square' => 'aspect-square',
@@ -187,10 +97,7 @@ final class Image
 
     public function getRounded(): string
     {
-        $props = $this->getResolvedProps();
-        $rounded = isset($props['rounded']) && \is_string($props['rounded']) ? $props['rounded'] : 'lg';
-
-        return match ($rounded) {
+        return match ($this->stringProp('rounded', 'lg')) {
             'none' => 'rounded-none',
             'sm' => 'rounded-sm',
             'md' => 'rounded-md',
@@ -204,33 +111,22 @@ final class Image
 
     public function getCaption(): ?string
     {
-        $props = $this->getResolvedProps();
-
-        return isset($props['caption']) && \is_string($props['caption']) && '' !== $props['caption']
-            ? $props['caption']
-            : null;
+        return $this->nullableString('caption') ?? $this->nullableStringProp('caption');
     }
 
     public function getAlt(): string
     {
-        if (null !== $this->alt && '' !== \trim($this->alt)) {
-            return \trim($this->alt);
+        $explicit = $this->nullableString('alt') ?? $this->nullableStringProp('alt');
+        if (null !== $explicit) {
+            return $explicit;
         }
 
-        $props = $this->getResolvedProps();
-        if (isset($props['alt']) && \is_string($props['alt']) && '' !== \trim($props['alt'])) {
-            return \trim($props['alt']);
-        }
-
-        return $this->extractMediaAlt($this->image ?? ($props['image'] ?? null)) ?? ($this->getCaption() ?? '');
+        return $this->extractMediaAlt($this->get('image')) ?? ($this->getCaption() ?? '');
     }
 
     public function getHoverAlt(): string
     {
-        $props = $this->getResolvedProps();
-
-        return $this->extractMediaAlt($this->hoverImage ?? $this->hover_image ?? ($props['hover_image'] ?? null))
-            ?? $this->getAlt();
+        return $this->extractMediaAlt($this->get('hover_image')) ?? $this->getAlt();
     }
 
     private function extractMediaAlt(mixed $media): ?string
@@ -258,17 +154,12 @@ final class Image
         return null;
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
-        $props = $this->getResolvedProps();
-        $hasMaxWidth = isset($props['max_width']) && '' !== $props['max_width'] && 'none' !== $props['max_width'];
-        $base = $hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto';
+        $maxWidth = $this->nullableStringProp('max_width');
+        $hasMaxWidth = null !== $maxWidth && 'none' !== $maxWidth;
+        $base = \trim(($hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto') . ' ' . $extraBase);
 
-        return ElementTransform::wrapperClasses($props, $base);
-    }
-
-    public function getElementId(): ?string
-    {
-        return ElementTransform::resolveId($this->getResolvedProps());
+        return parent::getWrapperClasses($base);
     }
 }

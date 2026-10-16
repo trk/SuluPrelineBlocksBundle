@@ -23,28 +23,28 @@ final class BreadcrumbsTest extends TestCase
     public function testBreadcrumbsAlignment(): void
     {
         $breadcrumbsCenter = new Breadcrumbs();
-        $breadcrumbsCenter->align = 'center';
+        $breadcrumbsCenter->assign('align', 'center');
         self::assertSame('justify-center', $breadcrumbsCenter->getAlignClasses());
 
         $breadcrumbsRight = new Breadcrumbs();
-        $breadcrumbsRight->align = 'right';
+        $breadcrumbsRight->assign('align', 'right');
         self::assertSame('justify-end', $breadcrumbsRight->getAlignClasses());
 
         $breadcrumbsLeft = new Breadcrumbs();
-        $breadcrumbsLeft->align = 'left';
+        $breadcrumbsLeft->assign('align', 'left');
         self::assertSame('justify-start', $breadcrumbsLeft->getAlignClasses());
     }
 
     public function testBreadcrumbsItemNormalization(): void
     {
         $breadcrumbs = new Breadcrumbs();
-        $breadcrumbs->items = [
+        $breadcrumbs->assign('items', [
             ['title' => 'Blog', 'url' => '/blog'],
             ['title' => 'Articles', 'link' => '/blog/articles'],
             ['title' => 'Current Post'],
             ['title' => ''], // should be skipped
             ['invalid' => 'no title'], // should be skipped
-        ];
+        ]);
 
         $normalized = $breadcrumbs->getNormalizedItems();
 
@@ -60,9 +60,9 @@ final class BreadcrumbsTest extends TestCase
     public function testCustomHomeSettings(): void
     {
         $breadcrumbs = new Breadcrumbs();
-        $breadcrumbs->home_title = 'Anasayfa';
-        $breadcrumbs->home_url = '/tr';
-        $breadcrumbs->show_home = false;
+        $breadcrumbs->assign('home_title', 'Anasayfa');
+        $breadcrumbs->assign('home_url', '/tr');
+        $breadcrumbs->assign('show_home', false);
 
         self::assertFalse($breadcrumbs->isShowHome());
         self::assertSame('Anasayfa', $breadcrumbs->getHomeTitle());

@@ -10,47 +10,65 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
  * Preline UI 5 / Tailwind CSS 4 accessible responsive data table component.
  */
 #[AsTwigComponent('Table', template: '@SuluPrelineBlocks/components/Table.html.twig')]
-final class Table
+final class Table extends AbstractPrelineComponent
 {
-    public ?string $title = null;
-    public ?string $header_title = null;
-    public ?string $header_meta = null;
-    public ?string $header_content = null;
-    public ?string $header_badge = null;
-    public ?string $header_link = null;
+    /**
+     * @return list<string>
+     */
+    protected function dataKeys(): array
+    {
+        return [
+            'title',
+            'header_title',
+            'header_meta',
+            'header_content',
+            'header_badge',
+            'header_link',
+            'items',
+        ];
+    }
 
     /**
-     * @var array<int|string, mixed>
+     * @return array<string, mixed>
      */
-    public array $items = [];
+    protected function defaults(): array
+    {
+        return [
+            'style' => 'default',
+            'size' => 'md',
+            'sticky_header' => false,
+            'bordered' => false,
+        ];
+    }
+
+    public function shouldRender(): bool
+    {
+        return [] !== $this->getNormalizedItems() || $this->hasHeader();
+    }
 
     /**
-     * @var array<string, mixed>
+     * @return array<string, bool|\Closure>
      */
-    public array $props = [];
+    protected function capabilities(): array
+    {
+        return [
+            'multiple' => true,
+        ];
+    }
 
     public function getStyle(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $style = $resolvedProps['style'] ?? 'default';
-
-        return \is_string($style) && '' !== $style ? $style : 'default';
+        return $this->stringProp('style', 'default');
     }
 
     public function getSize(): string
     {
-        $resolvedProps = $this->resolveProps();
-        $size = $resolvedProps['size'] ?? 'md';
-
-        return \is_string($size) && '' !== $size ? $size : 'md';
+        return $this->stringProp('size', 'md');
     }
 
     public function isStickyHeader(): bool
     {
-        $resolvedProps = $this->resolveProps();
-        $sticky = $resolvedProps['sticky_header'] ?? false;
-
-        return (bool) $sticky;
+        return $this->boolProp('sticky_header', false);
     }
 
     public function isHover(): bool
@@ -62,20 +80,19 @@ final class Table
 
     public function hasHeader(): bool
     {
-        return null !== $this->header_title && '' !== $this->header_title
-            || null !== $this->header_meta && '' !== $this->header_meta
-            || null !== $this->header_content && '' !== $this->header_content
-            || null !== $this->header_badge && '' !== $this->header_badge
-            || null !== $this->header_link && '' !== $this->header_link;
+        return $this->hasAny('header_title', 'header_meta', 'header_content', 'header_badge', 'header_link');
     }
 
-    public function getWrapperClasses(): string
+    public function getWrapperClasses(string $extraBase = ''): string
     {
         $classes = ['overflow-x-auto', 'w-full'];
 
-        $resolvedProps = $this->resolveProps();
-        if (!empty($resolvedProps['bordered'])) {
+        if ($this->boolProp('bordered', false)) {
             $classes[] = 'border border-table-line rounded-xl shadow-xs';
+        }
+
+        if ('' !== $extraBase) {
+            $classes[] = $extraBase;
         }
 
         return \implode(' ', $classes);
@@ -83,9 +100,7 @@ final class Table
 
     public function getTableClasses(): string
     {
-        $classes = ['min-w-full', 'divide-y', 'divide-table-line', 'text-start'];
-
-        return \implode(' ', $classes);
+        return 'min-w-full divide-y divide-table-line text-start';
     }
 
     public function getTheadClasses(): string
@@ -110,25 +125,19 @@ final class Table
 
     public function getThClasses(): string
     {
-        $padding = $this->getCellPaddingClasses();
-
-        return $padding . ' font-semibold text-muted-foreground-2 uppercase tracking-wider text-start';
+        return $this->getCellPaddingClasses() . ' font-semibold text-muted-foreground-2 uppercase tracking-wider text-start';
     }
 
     public function getTdClasses(): string
     {
-        $padding = $this->getCellPaddingClasses();
-
-        return $padding . ' text-foreground align-middle';
+        return $this->getCellPaddingClasses() . ' text-foreground align-middle';
     }
 
     public function getRowClasses(int $index): string
     {
         $classes = ['transition-colors'];
 
-        $style = $this->getStyle();
-
-        if ('striped' === $style) {
+        if ('striped' === $this->getStyle()) {
             $classes[] = 0 === $index % 2
                 ? 'bg-card'
                 : 'bg-background-1';
@@ -161,11 +170,7 @@ final class Table
     {
         $normalized = [];
 
-        foreach ($this->items as $item) {
-            if (!\is_array($item)) {
-                continue;
-            }
-
+        foreach ($this->items('items') as $item) {
             $title = \is_string($item['title'] ?? null) ? $item['title'] : '';
             $meta = \is_string($item['meta'] ?? null) ? $item['meta'] : '';
             $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
@@ -174,7 +179,7 @@ final class Table
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
             $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
-            if ('#' === $link) {
+            if ('#' === $link || '' === $link) {
                 $link = null;
             }
 
@@ -195,20 +200,5 @@ final class Table
         }
 
         return $normalized;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function resolveProps(): array
-    {
-        if (isset($this->props['props']) && \is_array($this->props['props'])) {
-            /** @var array<string, mixed> $inner */
-            $inner = $this->props['props'];
-
-            return $inner;
-        }
-
-        return $this->props;
     }
 }
