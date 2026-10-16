@@ -125,4 +125,21 @@ final class PrelineComponentTest extends TestCase
         self::assertStringContainsString('mt-4', $section->getSectionClasses());
         self::assertStringContainsString('max-w-3xl', $section->getContainerClasses());
     }
+
+    public function testVariadicGetWrapperClassesNormalizesExtraParts(): void
+    {
+        $headline = new Headline();
+        $headline->mergeProps([
+            'title' => 'Hello',
+            'props' => [
+                'margin_top' => 'sm',
+            ],
+        ]);
+
+        $classes = $headline->getWrapperClasses('custom-a', ['custom-b', null, ''], false, 'custom-c');
+        self::assertStringContainsString('custom-a', $classes);
+        self::assertStringContainsString('custom-b', $classes);
+        self::assertStringContainsString('custom-c', $classes);
+        self::assertStringContainsString('mt-4', $classes);
+    }
 }

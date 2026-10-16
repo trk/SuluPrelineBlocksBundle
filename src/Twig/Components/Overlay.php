@@ -181,7 +181,7 @@ final class Overlay extends PrelineComponent
         $color = $this->stringProp('title_color', $default);
         $style = $this->stringProp('overlay_style', 'gradient-bottom');
 
-        if (\in_array($style, ['light-glass', 'light_glass'], true)) {
+        if ($this->oneOf($style, ['light-glass', 'light_glass'])) {
             return PrelineClassMap::resolve(
                 PrelineClassMap::OVERLAY_LIGHT_GLASS_TITLE_COLORS,
                 $color,
@@ -212,12 +212,9 @@ final class Overlay extends PrelineComponent
 
     public function getLinkUrl(string $key = 'link'): ?string
     {
-        $link = $this->get($key);
-        if (null !== $link) {
-            $url = PropsResolver::resolveUrl($link);
-            if ('#' !== $url && '' !== $url) {
-                return $url;
-            }
+        $url = parent::getLinkUrl($key);
+        if (null !== $url) {
+            return $url;
         }
 
         $buttonList = $this->items('buttons');
@@ -226,10 +223,10 @@ final class Overlay extends PrelineComponent
         }
 
         foreach ($buttonList as $button) {
-            if (('badge' !== ($button['type'] ?? '')) && isset($button['link'])) {
-                $url = PropsResolver::resolveUrl($button['link']);
-                if ('#' !== $url && '' !== $url) {
-                    return $url;
+            if (('badge' !== $this->itemString($button, 'type')) && isset($button['link'])) {
+                $resolved = PropsResolver::resolveUrl($button['link']);
+                if ('#' !== $resolved && '' !== $resolved) {
+                    return $resolved;
                 }
             }
         }
@@ -239,31 +236,7 @@ final class Overlay extends PrelineComponent
 
     public function getButtonText(): ?string
     {
-        $text = $this->nullableString('link_title');
-        if (null !== $text) {
-            return $text;
-        }
-
-        $link = $this->get('link');
-        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
-            return \trim($link['title']);
-        }
-
-        $buttonList = $this->items('buttons');
-        if ([] === $buttonList) {
-            $buttonList = $this->items('elements');
-        }
-
-        foreach ($buttonList as $button) {
-            if ('badge' !== ($button['type'] ?? '')) {
-                $content = $button['title'] ?? ($button['content'] ?? null);
-                if (\is_string($content) && '' !== \trim($content)) {
-                    return \trim($content);
-                }
-            }
-        }
-
-        return null;
+        return $this->getLinkTitle('link', 'link_title', true);
     }
 
     public function isEntireOverlayClickable(): bool
@@ -310,15 +283,16 @@ final class Overlay extends PrelineComponent
         return $this->isVideo() && null !== $this->getVideoUrl() ? $this->getHoverVideoUrl() : null;
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $aspect = $this->getMediaAspectRatioClass();
-        $rounded = $this->getRoundedClasses();
-        $shadow = $this->getShadowClasses();
-
-        $base = \trim(\sprintf('group relative overflow-hidden flex flex-col w-full min-h-[220px] %s %s %s %s', $aspect, $rounded, $shadow, $extraBase));
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses(
+            'group relative overflow-hidden flex flex-col w-full min-h-[220px]',
+            $this->getMediaAspectRatioClass(),
+            $this->getRoundedClasses(),
+            $this->getShadowClasses(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 
     /**

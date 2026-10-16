@@ -39,9 +39,7 @@ final class Text extends PrelineComponent
 
     public function getContent(): string
     {
-        $content = $this->string('content', '');
-
-        return '' !== $content ? $content : $this->string('text', '');
+        return $this->nullableString('content') ?? $this->string('text', '');
     }
 
     public function isProse(): bool
@@ -93,12 +91,10 @@ final class Text extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = $this->isProse() ? 'prose dark:prose-invert max-w-none' : '';
-        $base = \trim(\sprintf(
-            '%s %s %s %s %s %s %s %s',
-            $base,
+        return parent::getWrapperClasses(
+            $this->isProse() ? 'prose dark:prose-invert max-w-none' : '',
             $this->getFontSize(),
             $this->getTextColor(),
             $this->getTextStyleClasses(),
@@ -106,8 +102,7 @@ final class Text extends PrelineComponent
             $this->getColumnDividerClasses(),
             $this->getDropcapClasses(),
             $extraBase,
-        ));
-
-        return parent::getWrapperClasses($base);
+            ...$moreParts,
+        );
     }
 }

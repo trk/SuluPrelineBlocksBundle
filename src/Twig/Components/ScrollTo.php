@@ -54,7 +54,7 @@ final class ScrollTo extends PrelineComponent
             return 'top';
         }
 
-        $clean = \ltrim($raw, "# \t\n\r\0\x0B");
+        $clean = $this->ltrim($raw, "# \t\n\r\0\x0B");
         if ('' === $clean || 1 !== \preg_match('/^[a-zA-Z0-9_-]+$/', $clean)) {
             return 'top';
         }
@@ -116,9 +116,10 @@ final class ScrollTo extends PrelineComponent
                 PrelineClassMap::SCROLL_TO_CIRCLE_COLORS['primary'],
             );
 
-            return \sprintf(
-                'inline-flex items-center justify-center %s rounded-full shadow-lg transition-all duration-300 hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-primary/50 %s',
+            return $this->classes(
+                'inline-flex items-center justify-center',
                 $sizeClass,
+                'rounded-full shadow-lg transition-all duration-300 hover:-translate-y-0.5 focus:outline-hidden focus:ring-2 focus:ring-primary/50',
                 $colorClass,
             );
         }
@@ -130,18 +131,12 @@ final class ScrollTo extends PrelineComponent
         ]);
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $mode = $this->getDisplayMode();
-
-        if ('floating' === $mode) {
-            $base = \trim('fixed bottom-6 end-6 z-50 ' . $extraBase);
-
-            return parent::getWrapperClasses($base);
+        if ('floating' === $this->getDisplayMode()) {
+            return parent::getWrapperClasses('fixed bottom-6 end-6 z-50', $extraBase, ...$moreParts);
         }
 
-        $base = \trim('w-full flex items-center ' . $this->getAlignClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses('w-full flex items-center', $this->getAlignClasses(), $extraBase, ...$moreParts);
     }
 }

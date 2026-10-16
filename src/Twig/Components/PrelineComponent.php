@@ -236,9 +236,16 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::resolveScopedCss($this->props());
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return ElementTransform::wrapperClasses($this->props(), $extraBase, $this->applyWrapperPadding);
+        return ElementTransform::wrapperClasses(
+            $this->props(),
+            $this->classes($extraBase, ...$moreParts),
+            $this->applyWrapperPadding,
+        );
     }
 
     // =========================================================================
@@ -292,7 +299,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
     {
         $el = $this->nullableStringProp('title_element') ?? $this->stringProp('tag', $default);
 
-        return \in_array($el, $allowed, true) ? $el : $default;
+        return $this->oneOf($el, $allowed) ? $el : $default;
     }
 
     public function getTitleSizeClasses(string $default = 'md', string $preset = 'default'): string
@@ -474,21 +481,22 @@ abstract class PrelineComponent extends AbstractBlockComponent
     {
         if (\is_array($media)) {
             foreach (['alt', 'description', 'title'] as $field) {
-                if (isset($media[$field]) && \is_string($media[$field]) && '' !== \trim($media[$field])) {
-                    return \trim($media[$field]);
+                $candidate = $this->itemNullableString($media, $field);
+                if (null !== $candidate) {
+                    return $candidate;
                 }
             }
         } elseif (\is_object($media)) {
             if (\method_exists($media, 'getDescription')) {
-                $desc = $media->getDescription();
-                if (\is_string($desc) && '' !== \trim($desc)) {
-                    return \trim($desc);
+                $desc = $this->trim($media->getDescription());
+                if ('' !== $desc) {
+                    return $desc;
                 }
             }
             if (\method_exists($media, 'getTitle')) {
-                $title = $media->getTitle();
-                if (\is_string($title) && '' !== \trim($title)) {
-                    return \trim($title);
+                $title = $this->trim($media->getTitle());
+                if ('' !== $title) {
+                    return $title;
                 }
             }
         }
@@ -554,23 +562,49 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         $link = $this->get($key);
-        if (\is_array($link) && isset($link['target']) && \is_string($link['target']) && '' !== \trim($link['target'])) {
-            return \trim($link['target']);
+        if (\is_array($link)) {
+            return $this->itemNullableString($link, 'target');
         }
 
         return null;
     }
 
-    public function getLinkTitle(string $key = 'link', string $fallbackKey = 'link_title'): ?string
-    {
+    public function getLinkTitle(
+        string $key = 'link',
+        string $fallbackKey = 'link_title',
+        bool $fallbackToFirstButton = false,
+    ): ?string {
         $explicit = $this->nullableString($fallbackKey);
         if (null !== $explicit) {
             return $explicit;
         }
 
         $link = $this->get($key);
-        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
-            return \trim($link['title']);
+        if (\is_array($link)) {
+            $fromLink = $this->itemNullableString($link, 'title');
+            if (null !== $fromLink) {
+                return $fromLink;
+            }
+        }
+
+        if ($fallbackToFirstButton) {
+            $buttonList = $this->items('buttons');
+            if ([] === $buttonList) {
+                $buttonList = $this->items('elements');
+            }
+
+            foreach ($buttonList as $button) {
+                if ('badge' === $this->itemString($button, 'type')) {
+                    continue;
+                }
+
+                $buttonLabel = $this->itemNullableString($button, 'title')
+                    ?? $this->itemNullableString($button, 'content')
+                    ?? $this->itemNullableString($button, 'link_title');
+                if (null !== $buttonLabel) {
+                    return $buttonLabel;
+                }
+            }
         }
 
         return null;
@@ -645,38 +679,11 @@ abstract class PrelineComponent extends AbstractBlockComponent
         $uniqueTags = [];
 
         foreach ($this->items($itemsKey) as $item) {
-            if (isset($item['tags'])) {
-                if (\is_array($item['tags'])) {
-                    foreach ($item['tags'] as $tagObj) {
-                        $tagName = \is_array($tagObj) ? ($tagObj['name'] ?? '') : (\is_string($tagObj) ? $tagObj : '');
-                        if (\is_string($tagName) && '' !== \trim($tagName)) {
-                            $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', \trim($tagName)));
-                            if ('' !== $slug && !isset($uniqueTags[$slug])) {
-                                $uniqueTags[$slug] = \trim($tagName);
-                            }
-                        }
-                    }
-                } elseif (\is_string($item['tags']) && '' !== \trim($item['tags'])) {
-                    foreach (\explode(',', $item['tags']) as $part) {
-                        $trimmed = \trim($part);
-                        if ('' !== $trimmed) {
-                            $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', $trimmed));
-                            if ('' !== $slug && !isset($uniqueTags[$slug])) {
-                                $uniqueTags[$slug] = $trimmed;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (isset($item['tag']) && \is_string($item['tag']) && '' !== \trim($item['tag'])) {
-                foreach (\explode(',', $item['tag']) as $part) {
-                    $trimmed = \trim($part);
-                    if ('' !== $trimmed) {
-                        $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', $trimmed));
-                        if ('' !== $slug && !isset($uniqueTags[$slug])) {
-                            $uniqueTags[$slug] = $trimmed;
-                        }
+            foreach (['tags', 'tag'] as $field) {
+                foreach ($this->split($item[$field] ?? null) as $label) {
+                    $slug = $this->slug($label);
+                    if ('' !== $slug && !isset($uniqueTags[$slug])) {
+                        $uniqueTags[$slug] = $label;
                     }
                 }
             }
@@ -692,43 +699,16 @@ abstract class PrelineComponent extends AbstractBlockComponent
     {
         $slugs = [];
 
-        if (isset($item['tags'])) {
-            if (\is_array($item['tags'])) {
-                foreach ($item['tags'] as $tagObj) {
-                    $tagName = \is_array($tagObj) ? ($tagObj['name'] ?? '') : (\is_string($tagObj) ? $tagObj : '');
-                    if (\is_string($tagName) && '' !== \trim($tagName)) {
-                        $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', \trim($tagName)));
-                        if ('' !== $slug) {
-                            $slugs[] = $slug;
-                        }
-                    }
-                }
-            } elseif (\is_string($item['tags']) && '' !== \trim($item['tags'])) {
-                foreach (\explode(',', $item['tags']) as $part) {
-                    $trimmed = \trim($part);
-                    if ('' !== $trimmed) {
-                        $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', $trimmed));
-                        if ('' !== $slug) {
-                            $slugs[] = $slug;
-                        }
-                    }
+        foreach (['tags', 'tag'] as $field) {
+            foreach ($this->split($item[$field] ?? null) as $label) {
+                $slug = $this->slug($label);
+                if ('' !== $slug) {
+                    $slugs[] = $slug;
                 }
             }
         }
 
-        if (isset($item['tag']) && \is_string($item['tag']) && '' !== \trim($item['tag'])) {
-            foreach (\explode(',', $item['tag']) as $part) {
-                $trimmed = \trim($part);
-                if ('' !== $trimmed) {
-                    $slug = \strtolower((string) \preg_replace('/[^a-zA-Z0-9_-]/', '-', $trimmed));
-                    if ('' !== $slug) {
-                        $slugs[] = $slug;
-                    }
-                }
-            }
-        }
-
-        return \implode(' ', \array_unique($slugs));
+        return $this->join(\array_unique($slugs));
     }
 
     /**
@@ -825,13 +805,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
     protected function resolveBadgesList(string $fallbackStyle = 'glass', string $fallbackColor = 'primary'): array
     {
         $defaultStyle = $this->stringProp('badge_style', $fallbackStyle);
-        if ('' === $defaultStyle) {
-            $defaultStyle = $fallbackStyle;
-        }
         $defaultColor = $this->stringProp('badge_color', $fallbackColor);
-        if ('' === $defaultColor) {
-            $defaultColor = $fallbackColor;
-        }
 
         /** @var list<array<string, mixed>> $result */
         $result = [];
@@ -840,43 +814,27 @@ abstract class PrelineComponent extends AbstractBlockComponent
         $badgeItems = $this->items('badges');
         if ([] === $badgeItems) {
             foreach ($this->items('elements') as $item) {
-                if ('badge' === ($item['type'] ?? '')) {
+                if ('badge' === $this->itemString($item, 'type')) {
                     $badgeItems[] = $item;
                 }
             }
         }
 
         foreach ($badgeItems as $item) {
-            $itemStyle = isset($item['badge_style']) && \is_string($item['badge_style']) && 'inherit' !== $item['badge_style'] && '' !== \trim($item['badge_style'])
-                ? $item['badge_style']
-                : $defaultStyle;
+            $itemStyle = $this->itemInheritedString($item, 'badge_style', $defaultStyle);
+            $itemColor = $this->itemInheritedString($item, 'badge_color', $defaultColor);
+            $itemSize = $this->itemInheritedString($item, 'size', 'xs');
+            $itemRounded = $this->itemInheritedString($item, 'rounded', 'pill');
 
-            $itemColor = isset($item['badge_color']) && \is_string($item['badge_color']) && 'inherit' !== $item['badge_color'] && '' !== \trim($item['badge_color'])
-                ? $item['badge_color']
-                : $defaultColor;
-
-            $itemSize = isset($item['size']) && \is_string($item['size']) && 'inherit' !== $item['size'] && '' !== \trim($item['size'])
-                ? $item['size']
-                : 'xs';
-
-            $itemRounded = isset($item['rounded']) && \is_string($item['rounded']) && 'inherit' !== $item['rounded'] && '' !== \trim($item['rounded'])
-                ? $item['rounded']
-                : 'pill';
-
-            $title = '';
-            if (isset($item['title']) && \is_string($item['title'])) {
-                $title = \trim($item['title']);
-            } elseif (isset($item['text']) && \is_string($item['text'])) {
-                $title = \trim($item['text']);
-            }
+            $title = $this->itemString($item, 'title', $this->itemString($item, 'text'));
 
             if ('' === $title && !isset($item['icon'])) {
                 continue;
             }
 
             $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-            $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
-            $hasDot = !empty($item['has_dot']);
+            $iconAlign = 'right' === $this->itemString($item, 'icon_align') ? 'right' : 'left';
+            $hasDot = $this->itemBool($item, 'has_dot');
             $link = $item['link'] ?? null;
             $url = PropsResolver::resolveUrl($link);
             $isClickable = '#' !== $url && '' !== $url;
@@ -892,7 +850,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
                 'title' => $title,
                 'url' => $url,
                 'is_clickable' => $isClickable,
-                'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
+                'link_title' => $this->itemNullableString($item, 'link_title'),
                 'classes' => $classes,
                 'icon' => $icon,
                 'icon_align' => $iconAlign,
@@ -948,41 +906,24 @@ abstract class PrelineComponent extends AbstractBlockComponent
         $buttonItems = $this->items('buttons');
         if ([] === $buttonItems) {
             foreach ($this->items('elements') as $item) {
-                if ('button' === ($item['type'] ?? 'button') || 'badge' !== ($item['type'] ?? '')) {
+                $type = $this->itemString($item, 'type', 'button');
+                if ('button' === $type || 'badge' !== $type) {
                     $buttonItems[] = $item;
                 }
             }
         }
 
         foreach ($buttonItems as $item) {
-            $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
+            $itemStyle = $this->itemInheritedString($item, 'button_style', $defaultStyle, 'variant');
+            $itemColor = $this->itemInheritedString($item, 'button_color', $defaultColor, 'link_color');
+            $itemSize = $this->itemInheritedString($item, 'size', $defaultSize);
 
-            $rawStyle = $item['button_style'] ?? ($item['variant'] ?? ($itemProps['button_style'] ?? ($itemProps['variant'] ?? null)));
-            $itemStyle = \is_string($rawStyle) && 'inherit' !== $rawStyle && '' !== \trim($rawStyle)
-                ? $rawStyle
-                : $defaultStyle;
-
-            $rawColor = $item['button_color'] ?? ($item['link_color'] ?? ($itemProps['button_color'] ?? ($itemProps['link_color'] ?? null)));
-            $itemColor = \is_string($rawColor) && 'inherit' !== $rawColor && '' !== \trim($rawColor)
-                ? $rawColor
-                : $defaultColor;
-
-            $rawSize = $item['size'] ?? ($itemProps['size'] ?? null);
-            $itemSize = \is_string($rawSize) && 'inherit' !== $rawSize && '' !== \trim($rawSize)
-                ? $rawSize
-                : $defaultSize;
-
-            $title = '';
-            if (isset($item['title']) && \is_string($item['title'])) {
-                $title = \trim($item['title']);
-            } elseif (isset($item['content']) && \is_string($item['content'])) {
-                $title = \trim($item['content']);
-            }
+            $title = $this->itemString($item, 'title', $this->itemString($item, 'content'));
 
             $link = $item['link'] ?? null;
             $url = PropsResolver::resolveUrl($link);
             $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
-            $iconAlign = isset($item['icon_align']) && 'right' === $item['icon_align'] ? 'right' : 'left';
+            $iconAlign = 'right' === $this->itemString($item, 'icon_align') ? 'right' : 'left';
 
             $classes = PropsResolver::buttonClasses([
                 'variant' => $itemStyle,
@@ -995,7 +936,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
                 'content' => $title,
                 'url' => $url,
                 'link' => $link,
-                'link_title' => isset($item['link_title']) && \is_string($item['link_title']) ? $item['link_title'] : null,
+                'link_title' => $this->itemNullableString($item, 'link_title'),
                 'classes' => $classes,
                 'icon' => $icon,
                 'icon_align' => $iconAlign,

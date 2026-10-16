@@ -35,12 +35,12 @@ final class HtmlBlock extends PrelineComponent
 
     public function getContent(): string
     {
-        return $this->string('content', $this->string('html', ''));
+        return $this->nullableString('content') ?? $this->string('html', '');
     }
 
     public function hasContent(): bool
     {
-        return '' !== \trim($this->getContent());
+        return '' !== $this->getContent();
     }
 
     public function isRaw(): bool
@@ -48,18 +48,13 @@ final class HtmlBlock extends PrelineComponent
         return $this->is('raw');
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $classes = ['w-full', 'my-4'];
-
-        if ($this->is('card')) {
-            $classes[] = 'p-6 bg-card border border-card-line rounded-xl shadow-xs';
-        }
-
-        if ('' !== $extraBase) {
-            $classes[] = $extraBase;
-        }
-
-        return parent::getWrapperClasses(\implode(' ', $classes));
+        return parent::getWrapperClasses(
+            'w-full my-4',
+            $this->is('card') ? 'p-6 bg-card border border-card-line rounded-xl shadow-xs' : null,
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

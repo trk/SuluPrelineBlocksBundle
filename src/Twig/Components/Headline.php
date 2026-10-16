@@ -29,17 +29,12 @@ final class Headline extends PrelineComponent
 
     public function shouldRender(): bool
     {
-        return '' !== \trim($this->getTitle());
+        return '' !== $this->getTitle();
     }
 
     public function getTitle(): string
     {
-        $title = $this->string('title', '');
-        if ('' !== $title) {
-            return $title;
-        }
-
-        return $this->string('content', '');
+        return $this->nullableString('title') ?? $this->string('content', '');
     }
 
     public function getTag(): string
@@ -67,7 +62,7 @@ final class Headline extends PrelineComponent
         return $this->isTextStroke() ? '[-webkit-text-stroke:1.5px_currentColor] text-transparent' : '';
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
         $customSize = $this->nullableStringProp('size') ?? $this->nullableStringProp('title_size');
         $fallbackTagSize = PrelineClassMap::HEADLINE_TAG_SIZES[$this->getTag()] ?? PrelineClassMap::HEADLINE_TAG_SIZES['h2'];
@@ -76,16 +71,15 @@ final class Headline extends PrelineComponent
             ? PrelineClassMap::resolve(PrelineClassMap::HEADLINE_SIZES, $customSize, $fallbackTagSize)
             : $fallbackTagSize;
 
-        $base = \trim(\sprintf(
-            'tracking-tight %s %s %s %s %s',
+        return parent::getWrapperClasses(
+            'tracking-tight',
             $sizeClasses,
             $this->getTitleColor(),
             $this->getDecorationClasses(),
             $this->getTextStrokeClasses(),
             $extraBase,
-        ));
-
-        return parent::getWrapperClasses($base);
+            ...$moreParts,
+        );
     }
 
     public function getUrl(): ?string

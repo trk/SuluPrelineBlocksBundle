@@ -97,9 +97,7 @@ final class Card extends PrelineComponent
             return 'left';
         }
 
-        return \in_array($align, ['top', 'bottom', 'left', 'right', 'between', 'overlay'], true)
-            ? $align
-            : 'top';
+        return $this->matchEnum($align, ['top', 'bottom', 'left', 'right', 'between', 'overlay'], 'top');
     }
 
     public function isOverlay(): bool
@@ -109,7 +107,7 @@ final class Card extends PrelineComponent
 
     public function isHorizontal(): bool
     {
-        return \in_array($this->getMediaAlign(), ['left', 'right'], true);
+        return $this->oneOf($this->getMediaAlign(), ['left', 'right']);
     }
 
     public function getMediaGridWidthClasses(): string
@@ -132,7 +130,7 @@ final class Card extends PrelineComponent
 
     public function getImageSizes(string $default = '100vw'): string
     {
-        if (\in_array($this->getMediaAlign(), ['left', 'right'], true)) {
+        if ($this->isHorizontal()) {
             return '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw';
         }
 
@@ -165,7 +163,7 @@ final class Card extends PrelineComponent
         }
 
         foreach ($buttonList as $button) {
-            if (('badge' !== ($button['type'] ?? '')) && isset($button['link'])) {
+            if ('badge' !== $this->itemString($button, 'type') && isset($button['link'])) {
                 $url = PropsResolver::resolveUrl($button['link']);
                 if ('#' !== $url && '' !== $url) {
                     return $url;
@@ -184,8 +182,11 @@ final class Card extends PrelineComponent
         }
 
         $link = $this->get('link') ?? $this->get('card_link');
-        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
-            return \trim($link['title']);
+        if (\is_array($link)) {
+            $fromLink = $this->itemNullableString($link, 'title');
+            if (null !== $fromLink) {
+                return $fromLink;
+            }
         }
 
         $buttonList = $this->items('buttons');
@@ -194,10 +195,10 @@ final class Card extends PrelineComponent
         }
 
         foreach ($buttonList as $button) {
-            if ('badge' !== ($button['type'] ?? '')) {
-                $content = $button['title'] ?? ($button['content'] ?? null);
-                if (\is_string($content) && '' !== \trim($content)) {
-                    return \trim($content);
+            if ('badge' !== $this->itemString($button, 'type')) {
+                $content = $this->itemNullableString($button, 'title') ?? $this->itemNullableString($button, 'content');
+                if (null !== $content) {
+                    return $content;
                 }
             }
         }
@@ -223,7 +224,7 @@ final class Card extends PrelineComponent
             return null;
         }
 
-        if (\in_array($linkCard, ['card', 'card_link', 'first_button'], true)) {
+        if ($this->oneOf($linkCard, ['card', 'card_link', 'first_button'])) {
             return $url;
         }
 
@@ -251,7 +252,7 @@ final class Card extends PrelineComponent
         $base = 'w-full flex overflow-hidden transition-all';
 
         if ('group' === $variant) {
-            return \trim(\sprintf('%s rounded-none border-0 shadow-none flex-col flex-1 %s', $base, $bg));
+            return $this->classes($base, 'rounded-none border-0 shadow-none flex-col flex-1', $bg);
         }
 
         $variantClasses = PrelineClassMap::resolve(
@@ -261,7 +262,7 @@ final class Card extends PrelineComponent
         );
 
         if ('overlay' === $mediaAlign) {
-            return \trim(\sprintf('%s %s relative text-white shadow-md', $base, $rounded));
+            return $this->classes($base, $rounded, 'relative text-white shadow-md');
         }
 
         $flexDirection = match ($mediaAlign) {
@@ -270,7 +271,7 @@ final class Card extends PrelineComponent
             default => 'flex-col',
         };
 
-        return \trim(\sprintf('%s %s %s %s %s', $base, $rounded, $variantClasses, $flexDirection, $bg));
+        return $this->classes($base, $rounded, $variantClasses, $flexDirection, $bg);
     }
 
     public function getTitleColor(string $default = 'default'): string
@@ -339,11 +340,15 @@ final class Card extends PrelineComponent
         return $this->isVideo() && null !== $this->getVideoUrl() ? $this->getHoverVideoUrl() : null;
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim('group relative w-full ' . $this->getCardClasses() . ' ' . $this->getTextAlign() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses(
+            'group relative w-full',
+            $this->getCardClasses(),
+            $this->getTextAlign(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 
     /**

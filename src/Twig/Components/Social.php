@@ -77,25 +77,17 @@ final class Social extends PrelineComponent
 
     public function getUlClasses(): string
     {
-        return 'flex flex-wrap items-center gap-2 ' . $this->getAlignment();
+        return $this->classes('flex flex-wrap items-center gap-2', $this->getAlignment());
     }
 
     public function getItemClasses(): string
     {
-        $classes = [
-            'inline-flex',
-            'items-center',
-            'justify-center',
-            'transition-all',
-            'focus:outline-hidden',
-            'focus:ring-2',
-            'focus:ring-primary-500',
+        return $this->classes(
+            'inline-flex items-center justify-center transition-all focus:outline-hidden focus:ring-2 focus:ring-primary-500',
             PrelineClassMap::resolve(PrelineClassMap::SOCIAL_SIZES, $this->getSize(), PrelineClassMap::SOCIAL_SIZES['md']),
             PrelineClassMap::resolve(PrelineClassMap::SOCIAL_SHAPES, $this->getShape(), PrelineClassMap::SOCIAL_SHAPES['rounded']),
             PrelineClassMap::resolve(PrelineClassMap::SOCIAL_STYLES, $this->getStyle(), PrelineClassMap::SOCIAL_STYLES['icon_only']),
-        ];
-
-        return \implode(' ', $classes);
+        );
     }
 
     /**
@@ -111,27 +103,20 @@ final class Social extends PrelineComponent
         $normalized = [];
 
         foreach ($this->items('items') as $item) {
-            $network = \is_string($item['network'] ?? null) && '' !== $item['network']
-                ? \strtolower($item['network'])
-                : 'website';
+            $network = $this->itemString($item, 'network', 'website', trim: false, fn: 'lower');
 
-            $link = '';
-            $rawLink = $item['link'] ?? null;
-            if (\is_string($rawLink)) {
-                $link = $rawLink;
-            } elseif (\is_array($rawLink) && isset($rawLink['url']) && \is_string($rawLink['url'])) {
-                $link = $rawLink['url'];
+            $link = $this->itemString($item, 'link', '', trim: false);
+            if ('' === $link) {
+                $rawLink = $this->itemArray($item, 'link');
+                $link = $this->itemString($rawLink, 'url', '', trim: false);
             }
 
             if ('' === $link) {
                 continue;
             }
 
-            $title = \is_string($item['title'] ?? null) && '' !== $item['title']
-                ? $item['title']
-                : \ucfirst($network);
-
-            $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
+            $title = $this->itemString($item, 'title', $this->ucfirst($network), trim: false);
+            $badge = $this->itemString($item, 'badge', '', trim: false);
 
             $normalized[] = [
                 'network' => $network,

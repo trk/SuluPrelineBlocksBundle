@@ -151,31 +151,24 @@ final class ListBlock extends PrelineComponent
             }
         }
 
-        return \implode(' ', \array_filter($classes));
+        return $this->classes($classes);
     }
 
     public function getItemClasses(): string
     {
-        $classes = [];
         $style = $this->getStyle();
         $isHoriz = 'horizontal' === $this->getListType();
 
-        $classes[] = PrelineClassMap::resolve(
-            PrelineClassMap::LIST_ITEM_SIZES,
-            $this->getSize(),
-            PrelineClassMap::LIST_ITEM_SIZES['md'],
+        return $this->classes(
+            PrelineClassMap::resolve(
+                PrelineClassMap::LIST_ITEM_SIZES,
+                $this->getSize(),
+                PrelineClassMap::LIST_ITEM_SIZES['md'],
+            ),
+            'text-foreground',
+            'striped' === $style ? 'p-3 rounded-lg odd:bg-transparent even:bg-background-1' : null,
+            ('divider' === $style && !$isHoriz) ? 'pt-2.5 pb-2.5 first:pt-0 last:pb-0' : null,
+            ('divider' === $style && $isHoriz) ? 'px-3 first:ps-0 last:pe-0' : null,
         );
-
-        $classes[] = 'text-foreground';
-
-        if ('striped' === $style) {
-            $classes[] = 'p-3 rounded-lg odd:bg-transparent even:bg-background-1';
-        } elseif ('divider' === $style && !$isHoriz) {
-            $classes[] = 'pt-2.5 pb-2.5 first:pt-0 last:pb-0';
-        } elseif ('divider' === $style && $isHoriz) {
-            $classes[] = 'px-3 first:ps-0 last:pe-0';
-        }
-
-        return \implode(' ', $classes);
     }
 }

@@ -111,12 +111,14 @@ final class DescriptionList extends PrelineComponent
             PrelineClassMap::DESCRIPTION_LIST_ROW_PADDINGS['md'],
         );
 
-        return match ($this->getLayout()) {
-            'horizontal' => \sprintf('%s sm:flex sm:items-baseline gap-x-4', $padding),
-            'striped' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 even:bg-background-1', $padding),
-            'bordered' => \sprintf('%s sm:flex sm:items-baseline gap-x-4 bg-card', $padding),
-            default => \sprintf('%s flex flex-col gap-y-1', $padding),
+        $layoutClasses = match ($this->getLayout()) {
+            'horizontal' => 'sm:flex sm:items-baseline gap-x-4',
+            'striped' => 'sm:flex sm:items-baseline gap-x-4 even:bg-background-1',
+            'bordered' => 'sm:flex sm:items-baseline gap-x-4 bg-card',
+            default => 'flex flex-col gap-y-1',
         };
+
+        return $this->classes($padding, $layoutClasses);
     }
 
     public function getTermClasses(): string
@@ -128,13 +130,13 @@ final class DescriptionList extends PrelineComponent
             PrelineClassMap::DESCRIPTION_LIST_TERM_STYLES['bold'],
         );
 
-        return \trim(\sprintf('%s %s shrink-0 inline-flex items-center gap-x-2 text-sm', $termWidth, $font));
+        return $this->classes($termWidth, $font, 'shrink-0 inline-flex items-center gap-x-2 text-sm');
     }
 
     public function getDescClasses(): string
     {
         $descWidth = 'stacked' === $this->getLayout() ? 'w-full' : $this->getDescWidthClasses();
 
-        return \trim(\sprintf('%s text-sm text-muted-foreground-2', $descWidth));
+        return $this->classes($descWidth, 'text-sm text-muted-foreground-2');
     }
 }

@@ -83,19 +83,14 @@ final class Table extends PrelineComponent
         return $this->hasAny('header_title', 'header_meta', 'header_content', 'header_badge', 'header_link');
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $classes = ['overflow-x-auto', 'w-full'];
-
-        if ($this->boolProp('bordered', false)) {
-            $classes[] = 'border border-table-line rounded-xl shadow-xs';
-        }
-
-        if ('' !== $extraBase) {
-            $classes[] = $extraBase;
-        }
-
-        return parent::getWrapperClasses(\implode(' ', $classes));
+        return parent::getWrapperClasses(
+            'overflow-x-auto w-full',
+            $this->boolProp('bordered', false) ? 'border border-table-line rounded-xl shadow-xs' : null,
+            $extraBase,
+            ...$moreParts,
+        );
     }
 
     public function getTableClasses(): string
@@ -105,13 +100,10 @@ final class Table extends PrelineComponent
 
     public function getTheadClasses(): string
     {
-        $classes = ['bg-background-1'];
-
-        if ($this->isStickyHeader()) {
-            $classes[] = 'sticky top-0 z-10';
-        }
-
-        return \implode(' ', $classes);
+        return $this->classes(
+            'bg-background-1',
+            $this->isStickyHeader() ? 'sticky top-0 z-10' : null,
+        );
     }
 
     public function getCellPaddingClasses(): string
@@ -125,31 +117,23 @@ final class Table extends PrelineComponent
 
     public function getThClasses(): string
     {
-        return $this->getCellPaddingClasses() . ' font-semibold text-muted-foreground-2 uppercase tracking-wider text-start';
+        return $this->classes($this->getCellPaddingClasses(), 'font-semibold text-muted-foreground-2 uppercase tracking-wider text-start');
     }
 
     public function getTdClasses(): string
     {
-        return $this->getCellPaddingClasses() . ' text-foreground align-middle';
+        return $this->classes($this->getCellPaddingClasses(), 'text-foreground align-middle');
     }
 
     public function getRowClasses(int $index): string
     {
-        $classes = ['transition-colors'];
-
-        if ('striped' === $this->getStyle()) {
-            $classes[] = 0 === $index % 2
-                ? 'bg-card'
-                : 'bg-background-1';
-        } else {
-            $classes[] = 'bg-card';
-        }
-
-        if ($this->isHover()) {
-            $classes[] = 'hover:bg-muted-hover';
-        }
-
-        return \implode(' ', $classes);
+        return $this->classes(
+            'transition-colors',
+            'striped' === $this->getStyle()
+                ? (0 === $index % 2 ? 'bg-card' : 'bg-background-1')
+                : 'bg-card',
+            $this->isHover() ? 'hover:bg-muted-hover' : null,
+        );
     }
 
     /**
@@ -171,10 +155,10 @@ final class Table extends PrelineComponent
         $normalized = [];
 
         foreach ($this->items('items') as $item) {
-            $title = \is_string($item['title'] ?? null) ? $item['title'] : '';
-            $meta = \is_string($item['meta'] ?? null) ? $item['meta'] : '';
-            $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
-            $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
+            $title = $this->itemString($item, 'title', '', trim: false);
+            $meta = $this->itemString($item, 'meta', '', trim: false);
+            $content = $this->itemString($item, 'content', '', trim: false);
+            $badge = $this->itemString($item, 'badge', '', trim: false);
 
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
             $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
@@ -183,9 +167,7 @@ final class Table extends PrelineComponent
                 $link = null;
             }
 
-            $linkTitle = \is_string($item['link_title'] ?? null) && '' !== $item['link_title']
-                ? $item['link_title']
-                : 'View';
+            $linkTitle = $this->itemString($item, 'link_title', 'View', trim: false);
 
             $normalized[] = [
                 'title' => $title,

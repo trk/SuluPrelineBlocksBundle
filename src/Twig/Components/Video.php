@@ -79,23 +79,14 @@ final class Video extends PrelineComponent
     {
         $autoplay = $this->prop('autoplay');
 
-        return true === $autoplay
-            || 'true' === $autoplay
-            || '1' === $autoplay
-            || 1 === $autoplay
-            || 'on' === $autoplay
-            || 'inview' === $autoplay
-            || 'hover' === $autoplay;
+        return $this->oneOf($autoplay, [true, 'true', '1', 1, 'on', 'inview', 'hover']);
     }
 
     public function getAutoplayMode(): ?string
     {
-        $autoplay = $this->prop('autoplay');
-        if (\is_string($autoplay) && \in_array($autoplay, ['inview', 'hover'], true)) {
-            return $autoplay;
-        }
+        $autoplay = $this->nullableStringProp('autoplay');
 
-        return null;
+        return null !== $autoplay && $this->oneOf($autoplay, ['inview', 'hover']) ? $autoplay : null;
     }
 
     public function isControls(): bool
@@ -118,12 +109,16 @@ final class Video extends PrelineComponent
         return $this->isAutoplay();
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $shadow = $this->getShadowClasses();
-        $shadowPart = '' !== $shadow ? ' ' . $shadow : '';
-        $base = \trim('relative w-full overflow-hidden ' . $this->getRounded() . $shadowPart . ' bg-black ' . $this->getAspectRatio() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses(
+            'relative w-full overflow-hidden',
+            $this->getRounded(),
+            $this->getShadowClasses(),
+            'bg-black',
+            $this->getAspectRatio(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

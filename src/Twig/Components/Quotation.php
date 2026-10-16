@@ -71,7 +71,7 @@ final class Quotation extends PrelineComponent
             PrelineClassMap::QUOTE_SIZES['md'],
         );
 
-        return \sprintf('%s text-foreground leading-relaxed italic', $sizeClasses);
+        return $this->classes($sizeClasses, 'text-foreground leading-relaxed italic');
     }
 
     public function getBorderAccentClasses(): string
@@ -111,10 +111,8 @@ final class Quotation extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim('w-full flex flex-col ' . $this->getAlignClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses('w-full flex flex-col', $this->getAlignClasses(), $extraBase, ...$moreParts);
     }
 }

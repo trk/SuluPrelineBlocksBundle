@@ -93,11 +93,17 @@ final class Alert extends PrelineComponent
         return $this->nullableString('content');
     }
 
-    public function getLinkTitle(string $key = 'link', string $fallbackKey = 'link_title'): ?string
-    {
+    public function getLinkTitle(
+        string $key = 'link',
+        string $fallbackKey = 'link_title',
+        bool $fallbackToFirstButton = false,
+    ): ?string {
         $link = $this->get($key);
-        if (\is_array($link) && isset($link['title']) && \is_string($link['title']) && '' !== \trim($link['title'])) {
-            return \trim($link['title']);
+        if (\is_array($link)) {
+            $fromLink = $this->itemNullableString($link, 'title');
+            if (null !== $fromLink) {
+                return $fromLink;
+            }
         }
 
         return $this->nullableString($fallbackKey);
@@ -113,15 +119,14 @@ final class Alert extends PrelineComponent
         return parent::getTitleSizeClasses($default, $preset);
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim(\sprintf(
-            'relative flex items-start gap-x-3 p-4 sm:p-5 transition-all %s %s %s',
+        return parent::getWrapperClasses(
+            'relative flex items-start gap-x-3 p-4 sm:p-5 transition-all',
             $this->getRoundedClasses(),
             $this->getAlertClasses(),
             $extraBase,
-        ));
-
-        return parent::getWrapperClasses($base);
+            ...$moreParts,
+        );
     }
 }

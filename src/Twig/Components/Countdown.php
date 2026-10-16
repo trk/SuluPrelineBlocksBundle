@@ -44,8 +44,8 @@ final class Countdown extends PrelineComponent
             return $date->format(\DateTimeInterface::ATOM);
         }
 
-        if (\is_string($date) && '' !== \trim($date)) {
-            $trimmed = \trim($date);
+        $trimmed = $this->nullableString('date') ?? $this->nullableString('target_date');
+        if (null !== $trimmed) {
             $parsed = \strtotime($trimmed);
             if (false !== $parsed) {
                 return \date(\DateTimeInterface::ATOM, $parsed);
@@ -94,7 +94,7 @@ final class Countdown extends PrelineComponent
             default => 'text-foreground',
         };
 
-        return \sprintf('%s %s tabular-nums tracking-tight', $sizeClasses, $colorClasses);
+        return $this->classes($sizeClasses, $colorClasses, 'tabular-nums tracking-tight');
     }
 
     public function getCardClasses(): string
@@ -123,7 +123,7 @@ final class Countdown extends PrelineComponent
             default => 'text-muted-foreground',
         };
 
-        return \sprintf('flex items-center %s %s px-1 select-none self-center', $sizeClasses, $colorClasses);
+        return $this->classes('flex items-center', $sizeClasses, $colorClasses, 'px-1 select-none self-center');
     }
 
     public function getLabelClasses(): string
@@ -154,10 +154,8 @@ final class Countdown extends PrelineComponent
         ];
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim('w-full flex flex-col ' . $this->getAlignClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses('w-full flex flex-col', $this->getAlignClasses(), $extraBase, ...$moreParts);
     }
 }

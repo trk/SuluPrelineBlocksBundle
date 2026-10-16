@@ -37,7 +37,7 @@ final class Map extends PrelineComponent
             return 14;
         }
 
-        return \min($z, 20);
+        return (int) $this->clamp($z, 1, 20);
     }
 
     public function getEmbedUrl(): string
@@ -51,11 +51,9 @@ final class Map extends PrelineComponent
             }
         }
 
-        if (null === $query || '' === \trim($query)) {
+        if (null === $query || '' === $query) {
             return '';
         }
-
-        $query = \trim($query);
 
         if (\str_contains($query, '<iframe') && 1 === \preg_match('/src="([^"]+)"/i', $query, $matches)) {
             return $matches[1];
@@ -82,24 +80,13 @@ final class Map extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $classes = [
-            'relative',
-            'w-full',
-            'rounded-2xl',
-            'overflow-hidden',
-            'border',
-            'border-card-line',
-            'shadow-xs',
-            'bg-surface',
-        ];
-
-        if ('' !== $extraBase) {
-            $classes[] = $extraBase;
-        }
-
-        return parent::getWrapperClasses(\implode(' ', $classes));
+        return parent::getWrapperClasses(
+            'relative w-full rounded-2xl overflow-hidden border border-card-line shadow-xs bg-surface',
+            $extraBase,
+            ...$moreParts,
+        );
     }
 
     /**
@@ -123,14 +110,14 @@ final class Map extends PrelineComponent
         $normalized = [];
 
         foreach ($this->items('items') as $item) {
-            $location = \is_string($item['location'] ?? null) ? \trim($item['location']) : '';
+            $location = $this->itemString($item, 'location');
             if ('' === $location) {
                 continue;
             }
 
-            $title = \is_string($item['title'] ?? null) ? $item['title'] : '';
-            $meta = \is_string($item['meta'] ?? null) ? $item['meta'] : '';
-            $content = \is_string($item['content'] ?? null) ? $item['content'] : '';
+            $title = $this->itemString($item, 'title', '', trim: false);
+            $meta = $this->itemString($item, 'meta', '', trim: false);
+            $content = $this->itemString($item, 'content', '', trim: false);
 
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
             $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
@@ -140,10 +127,7 @@ final class Map extends PrelineComponent
                 $link = null;
             }
 
-            $linkTitle = \is_string($item['link_title'] ?? null) && '' !== $item['link_title']
-                ? $item['link_title']
-                : 'View';
-
+            $linkTitle = $this->itemString($item, 'link_title', 'View', trim: false);
             $directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' . \rawurlencode($location);
 
             $normalized[] = [

@@ -87,11 +87,9 @@ final class Divider extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim('w-full flex items-center ' . $this->getDividerAlignClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses('w-full flex items-center', $this->getDividerAlignClasses(), $extraBase, ...$moreParts);
     }
 
     public function getResolvedIcon(): ?string

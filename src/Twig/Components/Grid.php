@@ -96,20 +96,13 @@ final class Grid extends PrelineComponent
      */
     public function resolveItemProps(array $item): array
     {
-        $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
+        $itemProps = $this->itemArray($item, 'props');
 
-        $cardVariant = $this->stringProp('card_variant', 'default');
-        if ($this->isCardGroup()) {
-            $cardVariant = 'group';
-        } elseif (isset($item['panel_style']) && \is_string($item['panel_style']) && 'inherit' !== $item['panel_style'] && '' !== \trim($item['panel_style'])) {
-            $cardVariant = $item['panel_style'];
-        }
+        $cardVariant = $this->isCardGroup()
+            ? 'group'
+            : $this->itemInheritedString($item, 'panel_style', $this->stringProp('card_variant', 'default'));
 
-        $buttonStyle = $this->stringProp('button_style', 'primary');
-        if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style'] && '' !== \trim($item['link_style'])) {
-            $buttonStyle = $item['link_style'];
-        }
-
+        $buttonStyle = $this->itemInheritedString($item, 'link_style', $this->stringProp('button_style', 'primary'));
         $mediaAlign = $this->stringProp('media_align', 'top');
         $textAlign = $this->stringProp('text_align', 'left');
 

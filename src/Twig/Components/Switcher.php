@@ -108,7 +108,7 @@ final class Switcher extends PrelineComponent
             }
         }
 
-        return \implode(' ', $classes);
+        return $this->classes($classes);
     }
 
     public function getTabButtonClasses(): string
@@ -138,6 +138,6 @@ final class Switcher extends PrelineComponent
             $classes[] = 'hs-tab-active:border-primary hs-tab-active:bg-primary-50 hs-tab-active:text-primary dark:hs-tab-active:bg-primary-950/40';
         }
 
-        return \implode(' ', $classes);
+        return $this->classes($classes);
     }
 }

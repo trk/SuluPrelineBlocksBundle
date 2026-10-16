@@ -95,7 +95,7 @@ final class Subnav extends PrelineComponent
             $classes[] = 'gap-2';
         }
 
-        return \implode(' ', $classes);
+        return $this->classes($classes);
     }
 
     public function getItemClasses(bool $isActive): string
@@ -139,6 +139,6 @@ final class Subnav extends PrelineComponent
             }
         }
 
-        return \implode(' ', $classes);
+        return $this->classes($classes);
     }
 }

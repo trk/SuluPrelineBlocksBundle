@@ -63,12 +63,15 @@ final class Image extends PrelineComponent
         return $this->extractMediaAlt($this->get('hover_image')) ?? $this->getAlt();
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
         $maxWidth = $this->nullableStringProp('max_width');
         $hasMaxWidth = null !== $maxWidth && 'none' !== $maxWidth;
-        $base = \trim(($hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto') . ' ' . $extraBase);
 
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses(
+            $hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto',
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

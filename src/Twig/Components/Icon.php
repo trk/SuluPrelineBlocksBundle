@@ -67,7 +67,7 @@ final class Icon extends PrelineComponent
             PrelineClassMap::ICON_FONT_SIZES['md'],
         );
 
-        return \sprintf('%s %s', $iconClass, $sizeClass);
+        return $this->classes($iconClass, $sizeClass);
     }
 
     public function getContainerClasses(): string
@@ -90,7 +90,7 @@ final class Icon extends PrelineComponent
             );
             $hover = $this->hasLink() ? 'hover:opacity-80 transition-opacity' : '';
 
-            return \sprintf('inline-flex items-center justify-center %s %s', $textColor, $hover);
+            return $this->classes('inline-flex items-center justify-center', $textColor, $hover);
         }
 
         if ('circle_solid' === $style) {
@@ -100,7 +100,7 @@ final class Icon extends PrelineComponent
                 PrelineClassMap::ICON_CIRCLE_SOLID_COLORS['primary'],
             );
 
-            return \sprintf('inline-flex items-center justify-center rounded-full shadow-xs transition-colors %s %s', $dimensionClass, $bg);
+            return $this->classes('inline-flex items-center justify-center rounded-full shadow-xs transition-colors', $dimensionClass, $bg);
         }
 
         if ('circle_outline' === $style) {
@@ -110,7 +110,7 @@ final class Icon extends PrelineComponent
                 PrelineClassMap::ICON_CIRCLE_OUTLINE_COLORS['primary'],
             );
 
-            return \sprintf('inline-flex items-center justify-center rounded-full border transition-colors %s %s', $dimensionClass, $border);
+            return $this->classes('inline-flex items-center justify-center rounded-full border transition-colors', $dimensionClass, $border);
         }
 
         $soft = PrelineClassMap::resolve(
@@ -120,13 +120,11 @@ final class Icon extends PrelineComponent
         );
         $hover = $this->hasLink() ? 'hover:scale-105 transition-transform' : '';
 
-        return \sprintf('inline-flex items-center justify-center rounded-xl %s %s %s', $dimensionClass, $soft, $hover);
+        return $this->classes('inline-flex items-center justify-center rounded-xl', $dimensionClass, $soft, $hover);
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim('flex items-center ' . $this->getAlignClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses('flex items-center', $this->getAlignClasses(), $extraBase, ...$moreParts);
     }
 }

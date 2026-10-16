@@ -68,17 +68,14 @@ final class Breadcrumbs extends PrelineComponent
     {
         $normalized = [];
         foreach ($this->items('items') as $item) {
-            $title = $item['title'] ?? null;
-            if (!\is_string($title) || '' === \trim($title)) {
+            $title = $this->itemNullableString($item, 'title');
+            if (null === $title) {
                 continue;
             }
 
-            $rawUrl = $item['url'] ?? ($item['link'] ?? null);
-            $url = \is_string($rawUrl) && '' !== \trim($rawUrl) ? \trim($rawUrl) : null;
-
             $normalized[] = [
-                'title' => \trim($title),
-                'url' => $url,
+                'title' => $title,
+                'url' => $this->itemNullableString($item, 'url') ?? $this->itemNullableString($item, 'link'),
             ];
         }
 

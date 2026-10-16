@@ -79,20 +79,13 @@ final class Row extends PrelineComponent
 
     public function getRowClasses(): string
     {
-        $classes = [
-            'grid',
-            'w-full',
+        return parent::getWrapperClasses(
+            'grid w-full',
             $this->getLayoutClasses(),
             $this->getGapClasses(),
             $this->getAlignItemsClasses(),
-        ];
-
-        $divider = $this->getDividerClasses();
-        if ('' !== $divider) {
-            $classes[] = $divider;
-        }
-
-        return parent::getWrapperClasses(\implode(' ', \array_filter($classes)));
+            $this->getDividerClasses(),
+        );
     }
 
     /**
@@ -125,7 +118,7 @@ final class Row extends PrelineComponent
                 $colArr = \array_merge($colArr, $colProps);
             }
 
-            $span = \is_string($colArr['col_span'] ?? null) && '' !== $colArr['col_span'] ? $colArr['col_span'] : 'auto';
+            $span = $this->itemString($colArr, 'col_span', 'auto');
 
             if ('auto' === $span) {
                 if ('thirds-2-1' === $resolvedLayout) {

@@ -35,7 +35,7 @@ final class Button extends PrelineComponent
 
     public function shouldRender(): bool
     {
-        return $this->isGroup() || '' !== \trim($this->getTitle()) || null !== $this->getResolvedIcon();
+        return $this->isGroup() || '' !== $this->getTitle() || null !== $this->getResolvedIcon();
     }
 
     public function isGroup(): bool
@@ -69,15 +69,12 @@ final class Button extends PrelineComponent
         $isVertical = $this->is('vertical');
         $align = $this->getAlign();
 
-        $classes = [];
-
-        if ($isConnected) {
-            $classes[] = $isVertical ? 'inline-flex flex-col rounded-lg shadow-2xs' : 'inline-flex rounded-lg shadow-2xs';
-        } else {
-            $gapClasses = $this->getGapClasses('md', 'button_group', 'gap');
-
-            $classes[] = $isVertical ? \sprintf('inline-flex flex-col %s', $gapClasses) : \sprintf('flex flex-wrap items-center %s', $gapClasses);
-        }
+        $layoutClass = $isConnected
+            ? ($isVertical ? 'inline-flex flex-col rounded-lg shadow-2xs' : 'inline-flex rounded-lg shadow-2xs')
+            : $this->classes(
+                $isVertical ? 'inline-flex flex-col' : 'flex flex-wrap items-center',
+                $this->getGapClasses('md', 'button_group', 'gap'),
+            );
 
         $alignClasses = match ($align) {
             'center' => 'justify-center mx-auto text-center',
@@ -86,9 +83,7 @@ final class Button extends PrelineComponent
             default => 'justify-start text-left',
         };
 
-        $classes[] = $alignClasses;
-
-        return parent::getWrapperClasses(\trim(\implode(' ', $classes)));
+        return parent::getWrapperClasses($layoutClass, $alignClasses);
     }
 
     /**
@@ -117,27 +112,25 @@ final class Button extends PrelineComponent
         $result = [];
 
         foreach ($rawItems as $index => $item) {
-            $title = isset($item['title']) && \is_string($item['title']) && '' !== $item['title']
-                ? $item['title']
-                : (isset($item['content']) && \is_string($item['content']) ? $item['content'] : '');
-
-            $itemLink = $item['link'] ?? '#';
-            $url = PropsResolver::resolveUrl($itemLink);
-
-            $linkTitle = isset($item['link_title']) && \is_string($item['link_title']) && '' !== $item['link_title']
-                ? $item['link_title']
-                : (isset($item['linkTitle']) && \is_string($item['linkTitle']) ? $item['linkTitle'] : null);
-
+            $title = $this->itemString($item, 'title', $this->itemString($item, 'content'));
+            $url = PropsResolver::resolveUrl($item['link'] ?? '#');
+            $linkTitle = $this->itemNullableString($item, 'link_title');
             $icon = PropsResolver::resolveIcon($item['icon'] ?? null);
-            $iconAlign = isset($item['icon_align']) && \is_string($item['icon_align']) ? $item['icon_align'] : 'left';
+            $iconAlign = $this->itemString($item, 'icon_align', 'left');
 
-            $itemStyle = isset($item['button_style']) && \is_string($item['button_style']) && 'inherit' !== $item['button_style']
-                ? $item['button_style']
-                : ($item['variant'] ?? ($groupProps['variant'] ?? 'solid'));
+            $itemStyle = $this->itemInheritedString(
+                $item,
+                'button_style',
+                $this->stringProp('variant', 'solid'),
+                'variant',
+            );
 
-            $itemColor = isset($item['button_color']) && \is_string($item['button_color']) && 'inherit' !== $item['button_color']
-                ? $item['button_color']
-                : ($item['link_color'] ?? ($groupProps['link_color'] ?? 'primary'));
+            $itemColor = $this->itemInheritedString(
+                $item,
+                'button_color',
+                $this->stringProp('link_color', 'primary'),
+                'link_color',
+            );
 
             $itemProps = \array_merge($groupProps, $item, [
                 'variant' => $itemStyle,
@@ -163,13 +156,11 @@ final class Button extends PrelineComponent
                             default => 'rounded-none -ms-px focus:z-10',
                         };
                     }
-                    $buttonClasses .= ' ' . $segmentClass;
+                    $buttonClasses = $this->classes($buttonClasses, $segmentClass);
                 } else {
-                    $buttonClasses .= ' rounded-lg';
+                    $buttonClasses = $this->classes($buttonClasses, 'rounded-lg');
                 }
             }
-
-            $id = isset($item['id']) && \is_string($item['id']) && '' !== $item['id'] ? $item['id'] : null;
 
             $result[] = [
                 'title' => $title,
@@ -177,8 +168,8 @@ final class Button extends PrelineComponent
                 'link_title' => $linkTitle,
                 'icon' => $icon,
                 'icon_align' => $iconAlign,
-                'classes' => \trim(\preg_replace('/\s+/', ' ', $buttonClasses) ?? $buttonClasses),
-                'id' => $id,
+                'classes' => $this->classes($buttonClasses),
+                'id' => $this->itemNullableString($item, 'id'),
             ];
         }
 
@@ -187,19 +178,12 @@ final class Button extends PrelineComponent
 
     public function getTitle(): string
     {
-        $title = $this->string('title', '');
-        if ('' !== $title) {
-            return $title;
-        }
-
-        return $this->string('content', '');
+        return $this->string('title', $this->string('content'));
     }
 
     public function getUrl(): string
     {
-        $link = $this->get('link', '#');
-
-        return PropsResolver::resolveUrl($link);
+        return PropsResolver::resolveUrl($this->get('link', '#'));
     }
 
     public function getResolvedIcon(): ?string
@@ -217,10 +201,8 @@ final class Button extends PrelineComponent
         return PropsResolver::buttonClasses($this->props());
     }
 
-    public function getWrapperClasses(string $extraBase = ''): string
+    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $base = \trim($this->getClasses() . ' ' . $extraBase);
-
-        return parent::getWrapperClasses($base);
+        return parent::getWrapperClasses($this->getClasses(), $extraBase, ...$moreParts);
     }
 }

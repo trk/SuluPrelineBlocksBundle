@@ -51,7 +51,7 @@ final class Code extends PrelineComponent
     {
         return PrelineClassMap::resolve(
             PrelineClassMap::CODE_LANGUAGE_LABELS,
-            \strtolower($this->getLanguage()),
+            $this->stringProp('language', 'plaintext', fn: 'lower'),
             'Code',
         );
     }
@@ -61,7 +61,9 @@ final class Code extends PrelineComponent
      */
     public function getLines(): array
     {
-        return \explode("\n", \rtrim($this->string('code', '')));
+        $raw = $this->string('code', '', trim: false, fn: 'rtrim');
+
+        return '' === $raw ? [''] : \explode("\n", $raw);
     }
 
     public function getContainerClasses(): string

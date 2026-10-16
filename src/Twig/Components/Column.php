@@ -89,11 +89,8 @@ final class Column extends PrelineComponent
 
     public function getColumnClasses(): string
     {
-        $classes = \array_filter([
-            'flex',
-            'flex-col',
-            'w-full',
-            'transition-all',
+        return parent::getWrapperClasses(
+            'flex flex-col w-full transition-all',
             $this->getColSpanClasses(),
             $this->getStyleClasses(),
             $this->getPaddingClasses(),
@@ -101,9 +98,7 @@ final class Column extends PrelineComponent
             $this->getTextAlignClasses(),
             $this->getOrderClasses(),
             $this->getStickyClasses(),
-        ], static fn (string $c): bool => '' !== $c);
-
-        return parent::getWrapperClasses(\implode(' ', $classes));
+        );
     }
 
     public function hasBlocks(): bool

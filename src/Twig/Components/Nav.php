@@ -49,13 +49,10 @@ final class Nav extends PrelineComponent
 
     public function getNavClasses(): string
     {
-        $classes = ['flex', 'flex-col', 'space-y-1', 'w-full'];
-
-        if ($this->boolProp('card', false)) {
-            $classes[] = 'p-3 bg-card border border-card-line rounded-xl shadow-xs';
-        }
-
-        return \implode(' ', $classes);
+        return $this->classes(
+            'flex flex-col space-y-1 w-full',
+            $this->boolProp('card', false) ? 'p-3 bg-card border border-card-line rounded-xl shadow-xs' : null,
+        );
     }
 
     /**
@@ -77,21 +74,18 @@ final class Nav extends PrelineComponent
         $normalized = [];
 
         foreach ($this->items('items') as $item) {
-            $itemType = \is_string($item['item_type'] ?? null) && '' !== $item['item_type']
-                ? $item['item_type']
-                : 'link';
-
-            $title = \is_string($item['title'] ?? null) ? $item['title'] : '';
-            $meta = \is_string($item['meta'] ?? null) ? $item['meta'] : '';
-            $icon = \is_string($item['icon'] ?? null) ? $item['icon'] : '';
-            $badge = \is_string($item['badge'] ?? null) ? $item['badge'] : '';
+            $itemType = $this->itemString($item, 'item_type', 'link', trim: false);
+            $title = $this->itemString($item, 'title', '', trim: false);
+            $meta = $this->itemString($item, 'meta', '', trim: false);
+            $icon = $this->itemString($item, 'icon', '', trim: false);
+            $badge = $this->itemString($item, 'badge', '', trim: false);
 
             $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
             if ('#' === $link || '' === $link) {
                 $link = null;
             }
 
-            $isActive = !empty($item['is_active']);
+            $isActive = $this->itemBool($item, 'is_active', false);
             $isExternal = null !== $link && (\str_starts_with($link, 'http://') || \str_starts_with($link, 'https://'));
 
             $normalized[] = [

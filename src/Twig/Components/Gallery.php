@@ -92,25 +92,16 @@ final class Gallery extends PrelineComponent
      */
     public function resolveItemProps(array $item): array
     {
-        $itemProps = isset($item['props']) && \is_array($item['props']) ? $item['props'] : [];
+        $itemProps = $this->itemArray($item, 'props');
 
         $overlayPosition = $this->stringProp('overlay_position', 'bottom');
         $overlayMode = $this->stringProp('overlay_mode', 'cover');
-
-        $overlayStyle = $this->stringProp('overlay_style', 'gradient');
-        if (isset($item['overlay_style']) && \is_string($item['overlay_style']) && 'inherit' !== $item['overlay_style'] && '' !== \trim($item['overlay_style'])) {
-            $overlayStyle = $item['overlay_style'];
-        }
-
+        $overlayStyle = $this->itemInheritedString($item, 'overlay_style', $this->stringProp('overlay_style', 'gradient'));
         $overlayTransition = $this->stringProp('overlay_transition', 'fade');
         $imageTransition = $this->stringProp('image_transition', 'zoom');
         $mediaAspectRatio = $this->stringProp('media_aspect_ratio', '4/3');
         $rounded = $this->stringProp('rounded', 'xl');
-
-        $buttonStyle = 'primary';
-        if (isset($item['link_style']) && \is_string($item['link_style']) && 'inherit' !== $item['link_style'] && '' !== \trim($item['link_style'])) {
-            $buttonStyle = $item['link_style'];
-        }
+        $buttonStyle = $this->itemInheritedString($item, 'link_style', 'primary');
 
         /** @var array<string, mixed> $merged */
         $merged = \array_merge([

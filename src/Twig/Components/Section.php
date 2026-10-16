@@ -53,38 +53,30 @@ final class Section extends PrelineComponent
 
     public function getSectionClasses(): string
     {
-        $classes = [
-            'relative',
-            'w-full',
-            'overflow-hidden',
+        $base = $this->classes(
+            'relative w-full overflow-hidden',
             PrelineClassMap::resolve(
                 PrelineClassMap::SECTION_BG_STYLES,
                 $this->stringProp('bg_style', 'transparent'),
                 PrelineClassMap::SECTION_BG_STYLES['transparent'],
             ),
-        ];
-
-        if ($this->boolProp('has_border', false)) {
-            $classes[] = 'border-t border-b border-border';
-        }
+            $this->boolProp('has_border', false) ? 'border-t border-b border-border' : null,
+        );
 
         $sectionProps = $this->props();
         $sectionProps['max_width'] = 'none';
 
-        return ElementTransform::wrapperClasses($sectionProps, \implode(' ', \array_filter($classes)));
+        return ElementTransform::wrapperClasses($sectionProps, $base);
     }
 
     public function getContainerClasses(): string
     {
-        $classes = [
-            'mx-auto',
-            'w-full',
+        return $this->classes(
+            'mx-auto w-full',
             $this->getMaxWidthClasses('85rem', 'section'),
             $this->getPaddingClasses('default', 'padding_x', 'section_x'),
             $this->getPaddingClasses('default', 'padding_y', 'section_y'),
-        ];
-
-        return \implode(' ', \array_filter($classes));
+        );
     }
 
     public function hasRows(): bool
