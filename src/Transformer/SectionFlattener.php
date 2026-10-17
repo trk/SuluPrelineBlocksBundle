@@ -106,8 +106,10 @@ final class SectionFlattener implements NestedBlockFlattenerInterface
             } elseif (\method_exists($node, 'toArray')) {
                 /** @var mixed $node */
                 $node = $node->toArray();
-            } else {
+            } elseif ($node instanceof \stdClass) {
                 $node = (array) $node;
+            } else {
+                return null;
             }
         }
 
