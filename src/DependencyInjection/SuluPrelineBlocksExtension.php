@@ -49,6 +49,31 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
                         '@SuluPrelineBlocks/blocks' => 200,
                     ],
                 ],
+                'preview_tags' => [
+                    'excluded_fields' => [
+                        'hover_image',
+                        'hover_video',
+                        'hover_image_url',
+                        'hover_video_url',
+                        'aspect_ratio_width',
+                        'aspect_ratio_height',
+                        'zoom',
+                    ],
+                    'primary_text_fields' => [
+                        'title',
+                        'headline',
+                        'text',
+                        'content',
+                        'quote',
+                        'code',
+                        'term',
+                        'author',
+                        'header_title',
+                        'override_title',
+                        'target_id',
+                        'location_query',
+                    ],
+                ],
             ]);
         }
     }

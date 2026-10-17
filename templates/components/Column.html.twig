@@ -2,7 +2,7 @@
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
     {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
     {% if this.hasBlocks %}
-        {% set render_context = (this.context is not empty ? this.context : _context)|merge(this.childContext) %}
+        {% set render_context = (this.context is not empty ? this.context : _context)|merge(this.childContext)|merge({_nested_block: true}) %}
         <div class="space-y-6">
             {% for item in this.normalizedBlocks|hydrate_blocks(render_context) %}
                 {{ sulu_block_render(item, render_context) }}

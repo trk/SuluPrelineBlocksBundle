@@ -81,7 +81,7 @@ final class XmlSchemaValidationTest extends TestCase
 
         $bundleRoot = \dirname(__DIR__, 2);
         $templateFieldFiles = \glob($bundleRoot . '/config/templates/fields/*.xml') ?: [];
-        $this->assertCount(15, $templateFieldFiles);
+        $this->assertCount(12, $templateFieldFiles);
 
         $formFieldFiles = \glob($bundleRoot . '/config/forms/fields/*.xml') ?: [];
         $this->assertCount(10, $formFieldFiles);

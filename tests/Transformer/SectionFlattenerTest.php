@@ -237,7 +237,7 @@ final class SectionFlattenerTest extends TestCase
                     ],
                 ],
             ],
-        ], ['_in_column' => true]);
+        ], ['_nested_block' => true]);
 
         self::assertCount(3, $processed);
         self::assertSame('headline', $processed[0]['type']);

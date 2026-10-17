@@ -634,7 +634,10 @@ abstract class PrelineComponent extends AbstractBlockComponent
      */
     public function getChildContext(): array
     {
-        return \array_merge($this->context(), [self::SLOT_KEY => $this->getSlotWidth()->toArray()]);
+        return \array_merge($this->context(), [
+            self::SLOT_KEY => $this->getSlotWidth()->toArray(),
+            '_nested_block' => true,
+        ]);
     }
 
     /**
