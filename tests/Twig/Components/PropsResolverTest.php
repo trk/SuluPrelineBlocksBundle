@@ -79,39 +79,6 @@ final class PropsResolverTest extends TestCase
         self::assertStringContainsString('bg-secondary', $secondaryAlias);
     }
 
-    public function testResolveUrl(): void
-    {
-        self::assertSame('https://totoglu.com', PropsResolver::resolveUrl('https://totoglu.com'));
-        self::assertSame('/about-us', PropsResolver::resolveUrl(['url' => '/about-us']));
-        self::assertSame('#', PropsResolver::resolveUrl(null));
-        self::assertSame('#', PropsResolver::resolveUrl(12345));
-    }
-
-    public function testResolveImageUrl(): void
-    {
-        self::assertSame('https://cdn.totoglu.com/sample.jpg', PropsResolver::resolveImageUrl('https://cdn.totoglu.com/sample.jpg'));
-        self::assertSame('/uploads/media/test.png', PropsResolver::resolveImageUrl(['url' => '/uploads/media/test.png']));
-        self::assertNull(PropsResolver::resolveImageUrl(null));
-        self::assertNull(PropsResolver::resolveImageUrl([]));
-
-        // Object with getUrl()
-        $mediaWithUrl = new class {
-            public function getUrl(): string
-            {
-                return '/uploads/media/from-url.png';
-            }
-        };
-        self::assertSame('/uploads/media/from-url.png', PropsResolver::resolveImageUrl($mediaWithUrl));
-
-        // Object with getFormats() fallback
-        $mediaWithFormats = new DummyMediaWithFormats();
-        self::assertSame('/uploads/media/thumb.png', PropsResolver::resolveImageUrl($mediaWithFormats));
-
-        // Object with empty getUrl and empty getFormats
-        $emptyMedia = new DummyEmptyMedia();
-        self::assertNull(PropsResolver::resolveImageUrl($emptyMedia));
-    }
-
     public function testResolveIcon(): void
     {
         self::assertNull(PropsResolver::resolveIcon(null));
@@ -160,43 +127,5 @@ final class PropsResolverTest extends TestCase
             }
         };
         self::assertSame('ti ti-home', PropsResolver::resolveIcon($stringable));
-    }
-}
-
-/**
- * @internal
- */
-final class DummyMediaWithFormats
-{
-    public function getUrl(): null
-    {
-        return null;
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function getFormats(): array
-    {
-        return ['thumbnail' => '/uploads/media/thumb.png'];
-    }
-}
-
-/**
- * @internal
- */
-final class DummyEmptyMedia
-{
-    public function getUrl(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function getFormats(): array
-    {
-        return [];
     }
 }

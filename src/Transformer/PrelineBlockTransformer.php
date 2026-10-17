@@ -41,20 +41,20 @@ final class PrelineBlockTransformer implements BlockTransformerInterface
 
         // 2. Pre-resolve media URLs and responsive srcset + Tailwind object-fit
         if (isset($block['image'])) {
-            $block['image_url'] ??= PropsResolver::resolveImageUrl($block['image']);
-            $block['image_srcset'] ??= PropsResolver::resolveSrcSet($block['image']);
-            $block['image_focus_style'] ??= PropsResolver::resolveFocusPointStyle($block['image']);
+            $block['image_url'] ??= SuluDataNormalizer::resolveImageUrl($block['image']);
+            $block['image_srcset'] ??= SuluDataNormalizer::resolveSrcSet($block['image']);
+            $block['image_focus_style'] ??= SuluDataNormalizer::resolveFocusPointStyle($block['image']);
             $block['image_object_fit'] = PropsResolver::resolveObjectFit($props['object_fit'] ?? ($block['object_fit'] ?? null));
         }
 
         if (isset($block['hover_image'])) {
-            $block['hover_image_url'] ??= PropsResolver::resolveImageUrl($block['hover_image']);
+            $block['hover_image_url'] ??= SuluDataNormalizer::resolveImageUrl($block['hover_image']);
         }
 
         // 3. Pre-resolve link URL
         $link = $block['link'] ?? ($block['card_link'] ?? null);
         if (null !== $link) {
-            $block['link_url'] ??= PropsResolver::resolveUrl($link);
+            $block['link_url'] ??= SuluDataNormalizer::resolveUrl($link);
         }
 
         // 4. Pre-resolve Preline/Tabler icon classes

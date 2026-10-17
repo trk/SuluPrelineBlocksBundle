@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 #[AsTwigComponent('Button', template: '@SuluPrelineBlocks/components/Button.html.twig')]
 final class Button extends PrelineComponent
@@ -149,7 +150,7 @@ final class Button extends PrelineComponent
 
         foreach ($rawItems as $index => $item) {
             $title = $this->itemString($item, 'title', $this->itemString($item, 'content'));
-            $url = PropsResolver::resolveUrl($item['link'] ?? '#');
+            $url = SuluDataNormalizer::resolveUrl($item['link'] ?? '#');
             $linkTitle = $this->itemNullableString($item, 'link_title');
             $icon = PropsResolver::resolveIcon($item['icon'] ?? null);
             $iconAlign = $this->itemString($item, 'icon_align', 'left');
@@ -229,7 +230,7 @@ final class Button extends PrelineComponent
     {
         $link = $this->get('link');
         if (null !== $link && '' !== $link) {
-            $resolved = PropsResolver::resolveUrl($link);
+            $resolved = SuluDataNormalizer::resolveUrl($link);
             if ('#' !== $resolved || null === $this->nullableString('url')) {
                 return $resolved;
             }
@@ -237,7 +238,7 @@ final class Button extends PrelineComponent
 
         $rawUrl = $this->nullableString('url') ?? $this->nullableStringProp('url');
 
-        return null !== $rawUrl ? PropsResolver::resolveUrl($rawUrl, '#') : '#';
+        return null !== $rawUrl ? SuluDataNormalizer::resolveUrl($rawUrl, '#') : '#';
     }
 
     public function getResolvedIcon(): ?string

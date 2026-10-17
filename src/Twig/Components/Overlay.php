@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 #[AsTwigComponent('Overlay', template: '@SuluPrelineBlocks/components/Overlay.html.twig')]
 final class Overlay extends PrelineComponent
@@ -246,7 +247,7 @@ final class Overlay extends PrelineComponent
 
         foreach ($buttonList as $button) {
             if (('badge' !== $this->itemString($button, 'type')) && isset($button['link'])) {
-                $resolved = PropsResolver::resolveUrl($button['link']);
+                $resolved = SuluDataNormalizer::resolveUrl($button['link']);
                 if ('#' !== $resolved && '' !== $resolved) {
                     return $resolved;
                 }

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
-use Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer;
-use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
+use Totoglu\SuluBlockSuiteBundle\Security\AttributeSanitizer;
+use Totoglu\SuluBlockSuiteBundle\Security\CssScoper;
+use Totoglu\SuluBlockSuiteBundle\Util\ClassList;
+use Totoglu\SuluBlockSuiteBundle\Util\PropReader;
 
 /**
  * Universal pre-render element transformation pipeline.
@@ -24,7 +26,7 @@ final class ElementTransform
      */
     public static function wrapperClasses(array $props, string $extraBase = '', bool $includePadding = false): string
     {
-        $joined = AbstractBlockComponent::joinClasses(
+        $joined = ClassList::join(
             $extraBase,
             self::margin($props),
             $includePadding ? self::padding($props) : null,
@@ -44,7 +46,7 @@ final class ElementTransform
             return '';
         }
 
-        return \implode(' ', \array_unique(\explode(' ', $joined)));
+        return \implode(' ', ClassList::tokens($joined));
     }
 
     /**
@@ -55,21 +57,21 @@ final class ElementTransform
      */
     public static function margin(array $props): string
     {
-        if ('absolute' === PropsResolver::nullableStr($props, 'position')) {
+        if ('absolute' === PropReader::nullableString($props, 'position')) {
             return '';
         }
 
-        $top = PropsResolver::nullableStr($props, 'margin_top');
-        $bottom = PropsResolver::nullableStr($props, 'margin_bottom');
-        $vertical = PropsResolver::nullableStr($props, 'margin');
-        $removeTop = PropsResolver::bool($props, 'margin_remove_top', false);
-        $removeBottom = PropsResolver::bool($props, 'margin_remove_bottom', false);
+        $top = PropReader::nullableString($props, 'margin_top');
+        $bottom = PropReader::nullableString($props, 'margin_bottom');
+        $vertical = PropReader::nullableString($props, 'margin');
+        $removeTop = PropReader::bool($props, 'margin_remove_top', false);
+        $removeBottom = PropReader::bool($props, 'margin_remove_bottom', false);
 
         if (null !== $top || null !== $bottom) {
             $topClass = $removeTop ? 'mt-0' : PrelineClassMap::resolve(PrelineClassMap::MARGIN_TOP, $top);
             $bottomClass = $removeBottom ? 'mb-0' : PrelineClassMap::resolve(PrelineClassMap::MARGIN_BOTTOM, $bottom);
 
-            return AbstractBlockComponent::joinClasses($topClass, $bottomClass);
+            return ClassList::join($topClass, $bottomClass);
         }
 
         if ('none' === $vertical) {
@@ -81,13 +83,13 @@ final class ElementTransform
                 return 'my-0';
             }
             if ($removeTop) {
-                return AbstractBlockComponent::joinClasses(
+                return ClassList::join(
                     'mt-0',
                     PrelineClassMap::resolve(PrelineClassMap::MARGIN_BOTTOM, $vertical),
                 );
             }
             if ($removeBottom) {
-                return AbstractBlockComponent::joinClasses(
+                return ClassList::join(
                     PrelineClassMap::resolve(PrelineClassMap::MARGIN_TOP, $vertical),
                     'mb-0',
                 );
@@ -120,13 +122,13 @@ final class ElementTransform
         string $key = 'padding',
         string $preset = 'default',
     ): string {
-        $raw = PropsResolver::str($props, $key, $default);
+        $raw = PropReader::string($props, $key, $default);
         if ('padding' !== $key && $raw === $default) {
-            $raw = PropsResolver::str($props, 'padding', $default);
+            $raw = PropReader::string($props, 'padding', $default);
         }
 
-        $removeTop = PropsResolver::bool($props, 'padding_remove_top', false);
-        $removeBottom = PropsResolver::bool($props, 'padding_remove_bottom', false);
+        $removeTop = PropReader::bool($props, 'padding_remove_top', false);
+        $removeBottom = PropReader::bool($props, 'padding_remove_bottom', false);
 
         $map = match ($preset) {
             'card' => PrelineClassMap::CARD_PADDING,
@@ -145,7 +147,7 @@ final class ElementTransform
             return 'py-0';
         }
 
-        return AbstractBlockComponent::joinClasses(
+        return ClassList::join(
             $baseClass,
             $removeTop ? 'pt-0 sm:pt-0' : null,
             $removeBottom ? 'pb-0 sm:pb-0' : null,
@@ -159,11 +161,11 @@ final class ElementTransform
      */
     public static function containerPaddingRemove(array $props): string
     {
-        if ('absolute' === PropsResolver::nullableStr($props, 'position')) {
+        if ('absolute' === PropReader::nullableString($props, 'position')) {
             return '';
         }
 
-        return PropsResolver::bool($props, 'container_padding_remove', false) ? 'px-0' : '';
+        return PropReader::bool($props, 'container_padding_remove', false) ? 'px-0' : '';
     }
 
     /**
@@ -173,12 +175,12 @@ final class ElementTransform
      */
     public static function maxWidth(array $props, string $default = 'none', string $preset = 'default'): string
     {
-        $width = PropsResolver::str($props, 'max_width', $default, 'maxwidth');
+        $width = PropReader::string($props, 'max_width', $default, 'maxwidth');
         if ('section' === $preset) {
             return PrelineClassMap::sectionMaxWidth($width)['class'];
         }
 
-        $breakpoint = PropsResolver::str($props, 'max_width_breakpoint', '', 'maxwidth_breakpoint');
+        $breakpoint = PropReader::string($props, 'max_width_breakpoint', '', 'maxwidth_breakpoint');
         if ('' !== $breakpoint && isset(PrelineClassMap::MAX_WIDTH_BREAKPOINTS[$breakpoint][$width])) {
             return PrelineClassMap::MAX_WIDTH_BREAKPOINTS[$breakpoint][$width];
         }
@@ -194,20 +196,20 @@ final class ElementTransform
      */
     public static function blockAlign(array $props): string
     {
-        if ('absolute' === PropsResolver::nullableStr($props, 'position')) {
+        if ('absolute' === PropReader::nullableString($props, 'position')) {
             return '';
         }
 
-        $align = PropsResolver::nullableStr($props, 'block_align', 'block_alignment');
+        $align = PropReader::nullableString($props, 'block_align', 'block_alignment');
         if (null === $align || '' === $align) {
             return '';
         }
 
-        $breakpoint = PropsResolver::str($props, 'block_align_breakpoint', '');
+        $breakpoint = PropReader::string($props, 'block_align_breakpoint', '');
         if ('' !== $breakpoint && isset(PrelineClassMap::BLOCK_ALIGN_BREAKPOINTS[$breakpoint][$align])) {
-            $fallback = PropsResolver::nullableStr($props, 'block_align_fallback');
+            $fallback = PropReader::nullableString($props, 'block_align_fallback');
 
-            return AbstractBlockComponent::joinClasses(
+            return ClassList::join(
                 PrelineClassMap::resolve(PrelineClassMap::BLOCK_ALIGN, $fallback),
                 PrelineClassMap::BLOCK_ALIGN_BREAKPOINTS[$breakpoint][$align],
             );
@@ -223,23 +225,23 @@ final class ElementTransform
      */
     public static function textAlign(array $props, string $default = '', bool $logical = false): string
     {
-        $align = PropsResolver::str($props, 'text_align', $default);
+        $align = PropReader::string($props, 'text_align', $default);
         if ('' === $align || 'none' === $align) {
             return '';
         }
 
         $map = $logical ? PrelineClassMap::TEXT_ALIGN_LOGICAL : PrelineClassMap::TEXT_ALIGN;
-        $breakpoint = PropsResolver::str($props, 'text_align_breakpoint', '');
+        $breakpoint = PropReader::string($props, 'text_align_breakpoint', '');
 
         if ('justify' !== $align && '' !== $breakpoint) {
             $bpMap = $logical ? PrelineClassMap::TEXT_ALIGN_LOGICAL_BREAKPOINTS : PrelineClassMap::TEXT_ALIGN_BREAKPOINTS;
             if (isset($bpMap[$breakpoint][$align])) {
-                $fallback = PropsResolver::str($props, 'text_align_fallback', '');
+                $fallback = PropReader::string($props, 'text_align_fallback', '');
                 $fallbackClass = ('' !== $fallback && 'none' !== $fallback)
                     ? PrelineClassMap::resolve($map, $fallback)
                     : '';
 
-                return AbstractBlockComponent::joinClasses($fallbackClass, $bpMap[$breakpoint][$align]);
+                return ClassList::join($fallbackClass, $bpMap[$breakpoint][$align]);
             }
         }
 
@@ -253,15 +255,15 @@ final class ElementTransform
      */
     public static function position(array $props): string
     {
-        $pos = PropsResolver::nullableStr($props, 'position');
+        $pos = PropReader::nullableString($props, 'position');
         $posClass = PrelineClassMap::resolve(PrelineClassMap::POSITION, $pos);
         if ('' === $posClass) {
             return '';
         }
 
-        $zIndex = PropsResolver::nullableStr($props, 'position_z_index');
+        $zIndex = PropReader::nullableString($props, 'position_z_index');
 
-        return AbstractBlockComponent::joinClasses(
+        return ClassList::join(
             $posClass,
             PrelineClassMap::resolve(PrelineClassMap::POSITION_Z_INDEX, $zIndex),
         );
@@ -275,7 +277,7 @@ final class ElementTransform
      */
     public static function resolvePositionStyle(array $props): string
     {
-        $pos = PropsResolver::nullableStr($props, 'position');
+        $pos = PropReader::nullableString($props, 'position');
         if (null === $pos || '' === $pos || 'static' === $pos) {
             return '';
         }
@@ -335,7 +337,7 @@ final class ElementTransform
      */
     public static function visibility(array $props): string
     {
-        return PrelineClassMap::resolve(PrelineClassMap::VISIBILITY, PropsResolver::nullableStr($props, 'visibility'));
+        return PrelineClassMap::resolve(PrelineClassMap::VISIBILITY, PropReader::nullableString($props, 'visibility'));
     }
 
     /**
@@ -345,7 +347,7 @@ final class ElementTransform
      */
     public static function animation(array $props): string
     {
-        return PrelineClassMap::resolve(PrelineClassMap::ANIMATION, PropsResolver::nullableStr($props, 'animation'));
+        return PrelineClassMap::resolve(PrelineClassMap::ANIMATION, PropReader::nullableString($props, 'animation'));
     }
 
     /**
@@ -411,41 +413,45 @@ final class ElementTransform
     }
 
     /**
-     * Resolve custom class names (`custom_class` or `class`).
+     * Resolve custom class names: Core's normalized `_class` when the block went through the
+     * transform pipeline, otherwise the raw `class` / `custom_class` prop tokenized by Core's `ClassList`.
      *
      * @param array<string, mixed> $props
      */
     public static function customClass(array $props): string
     {
-        return PropsResolver::str($props, 'custom_class', '', 'class');
+        if (isset($props['_class']) && \is_string($props['_class'])) {
+            return $props['_class'];
+        }
+
+        return \implode(' ', ClassList::tokens(PropReader::nullableString($props, 'class', 'custom_class')));
     }
 
     /**
-     * Resolve an HTML id attribute if provided, or auto-generate a stable id when custom CSS is defined.
+     * Resolve the HTML id: Core's `_id` when the block went through the transform pipeline, otherwise a
+     * valid explicit `id`, otherwise a stable Core-generated id when custom CSS is defined.
      *
      * @param array<string, mixed> $props
      * @param array<int|string, mixed> $seed
      */
     public static function resolveId(array $props, array $seed = []): ?string
     {
-        $explicitId = PropsResolver::nullableStr($props, 'id', '_id');
-        if (null !== $explicitId && 1 === \preg_match('/^[a-zA-Z][a-zA-Z0-9_-]*$/', $explicitId)) {
-            return $explicitId;
+        $resolvedId = AttributeSanitizer::sanitizeId($props['_id'] ?? null)
+            ?? AttributeSanitizer::sanitizeId($props['id'] ?? null);
+        if (null !== $resolvedId) {
+            return $resolvedId;
         }
 
-        $rawCss = PropsResolver::nullableStr($props, 'css', 'custom_css');
-        if (null !== $rawCss) {
-            $payload = [] === $seed ? $props : [$seed, $props];
-            $encoded = \json_encode($payload, \JSON_PARTIAL_OUTPUT_ON_ERROR);
-
-            return 'el-' . \substr(\md5(false !== $encoded ? $encoded : ''), 0, 8);
+        if (null !== PropReader::nullableString($props, 'css', 'custom_css')) {
+            return CssScoper::generateElementId([] === $seed ? $props : [$seed, $props]);
         }
 
         return null;
     }
 
     /**
-     * Resolve custom HTML attributes (key=value lines) from props, merged with parallax attributes.
+     * Resolve custom HTML attributes merged with parallax attributes: Core's `_attributes` when the block
+     * went through the transform pipeline, otherwise the raw `attributes` prop parsed by Core.
      *
      * @param array<string, mixed> $props
      *
@@ -456,36 +462,33 @@ final class ElementTransform
         $parallaxAttrs = self::resolveParallaxAttributes($props);
 
         if (isset($props['_attributes']) && \is_array($props['_attributes'])) {
-            $sanitized = DefaultAttributesTransformer::sanitizeAttributesArray($props['_attributes']);
-
-            return \array_merge($parallaxAttrs, $sanitized);
+            return \array_merge($parallaxAttrs, AttributeSanitizer::sanitize($props['_attributes']));
         }
 
-        $raw = PropsResolver::nullableStr($props, 'attributes');
+        $raw = PropReader::nullableString($props, 'attributes');
         if (null === $raw) {
             return $parallaxAttrs;
         }
 
-        $parsed = DefaultAttributesTransformer::parseAttributes($raw);
-
-        return \array_merge($parallaxAttrs, $parsed);
+        return \array_merge($parallaxAttrs, AttributeSanitizer::parse($raw));
     }
 
     /**
-     * Resolve scoped CSS rules for the element when custom CSS (`css` or `custom_css`) is defined.
+     * Resolve scoped CSS: Core's `_scoped_css` when the block went through the transform pipeline,
+     * otherwise the raw `css` / `custom_css` prop scoped by Core to the element id.
      *
      * @param array<string, mixed> $props
      */
     public static function resolveScopedCss(array $props, ?string $elementId = null): ?string
     {
-        $preScoped = PropsResolver::nullableStr($props, '_scoped_css');
+        $preScoped = PropReader::nullableString($props, '_scoped_css');
         if (null !== $preScoped) {
-            $sanitized = DefaultAttributesTransformer::sanitizeCssFragment($preScoped);
+            $sanitized = CssScoper::sanitize($preScoped);
 
             return '' !== $sanitized ? $sanitized : null;
         }
 
-        $rawCss = PropsResolver::nullableStr($props, 'css', 'custom_css');
+        $rawCss = PropReader::nullableString($props, 'css', 'custom_css');
         if (null === $rawCss) {
             return null;
         }
@@ -495,9 +498,8 @@ final class ElementTransform
             return null;
         }
 
-        $scoped = DefaultAttributesTransformer::scopeCss($rawCss, '#' . $elementId);
+        $scoped = CssScoper::scope($rawCss, '#' . $elementId);
 
         return '' !== $scoped ? $scoped : null;
     }
 }
-

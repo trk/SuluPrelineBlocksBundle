@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
-use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
+use Totoglu\SuluBlockSuiteBundle\Util\ClassList;
 use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 /**
@@ -2285,7 +2285,7 @@ final class PrelineClassMap
         $gapClass = self::resolve(self::GRID_GAPS, $props['gap'] ?? null, self::GRID_GAPS[$defaultGap] ?? '');
         $counts = self::gridColumnCounts($props, $defaultCols, $defaultMdCols);
 
-        return AbstractBlockComponent::joinClasses(
+        return ClassList::join(
             $masonry ? '' : 'grid',
             self::responsiveClasses($masonry ? self::MASONRY_COLUMNS : self::GRID_COLUMNS, $counts),
             $gapClass,

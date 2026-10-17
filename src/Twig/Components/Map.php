@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 /**
  * Preline UI 5 / Tailwind CSS 4 accessible responsive Map component.
@@ -144,10 +145,10 @@ final class Map extends PrelineComponent
             $meta = $this->itemString($item, 'meta', '', trim: false);
             $content = $this->itemString($item, 'content', '', trim: false);
 
-            $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
-            $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
-            $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
-            $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
+            $imageUrl = isset($item['image']) ? SuluDataNormalizer::resolveImageUrl($item['image']) : null;
+            $imageSrcSet = isset($item['image']) ? SuluDataNormalizer::resolveSrcSet($item['image']) : null;
+            $imageFocusStyle = isset($item['image']) ? SuluDataNormalizer::resolveFocusPointStyle($item['image']) : null;
+            $link = isset($item['link']) ? SuluDataNormalizer::resolveUrl($item['link']) : null;
             if ('#' === $link || '' === $link) {
                 $link = null;
             }

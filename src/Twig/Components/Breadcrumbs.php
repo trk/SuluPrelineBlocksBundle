@@ -108,7 +108,7 @@ final class Breadcrumbs extends PrelineComponent
             }
 
             $rawUrl = $this->itemValue($item, 'url') ?? $this->itemValue($item, 'link');
-            $url = null !== $rawUrl ? PropsResolver::resolveUrl($rawUrl, '') : null;
+            $url = null !== $rawUrl ? SuluDataNormalizer::resolveUrl($rawUrl, '') : null;
             if ('' === $url || '#' === $url) {
                 $url = null;
             }

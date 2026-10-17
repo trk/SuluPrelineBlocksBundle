@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Popover', template: '@SuluPrelineBlocks/components/Popover.html.twig')]
@@ -92,12 +93,12 @@ final class Popover extends PrelineComponent
             $markerColor = $this->itemEnum($item, 'marker_color', ['primary', 'dark', 'light', 'accent', 'success', 'danger'], $blockMarkerColor);
 
             $iconClass = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : $this->getIconClass('icon');
-            $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
-            $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
-            $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
-            $videoUrl = isset($item['video']) ? PropsResolver::resolveImageUrl($item['video']) : null;
+            $imageUrl = isset($item['image']) ? SuluDataNormalizer::resolveImageUrl($item['image']) : null;
+            $imageSrcSet = isset($item['image']) ? SuluDataNormalizer::resolveSrcSet($item['image']) : null;
+            $imageFocusStyle = isset($item['image']) ? SuluDataNormalizer::resolveFocusPointStyle($item['image']) : null;
+            $videoUrl = isset($item['video']) ? SuluDataNormalizer::resolveImageUrl($item['video']) : null;
 
-            $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : '';
+            $link = isset($item['link']) ? SuluDataNormalizer::resolveUrl($item['link']) : '';
             $linkTitle = $this->itemString($item, 'link_title', 'Learn More');
 
             $result[] = [

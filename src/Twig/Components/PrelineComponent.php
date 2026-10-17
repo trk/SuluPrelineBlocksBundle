@@ -596,7 +596,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
             }
         }
 
-        $resolved = PropsResolver::resolveImageUrl($this->get($key));
+        $resolved = SuluDataNormalizer::resolveImageUrl($this->get($key));
         if (null !== $resolved || 'image' !== $key) {
             return $resolved;
         }
@@ -614,18 +614,18 @@ abstract class PrelineComponent extends AbstractBlockComponent
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->get('hover_image'))
+        return SuluDataNormalizer::resolveImageUrl($this->get('hover_image'))
             ?? self::sanitizeMediaUrl($this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url'));
     }
 
     public function getImageSrcSet(string $key = 'image'): ?string
     {
-        return PropsResolver::resolveSrcSet($this->get($key));
+        return SuluDataNormalizer::resolveSrcSet($this->get($key));
     }
 
     public function getHoverImageSrcSet(): ?string
     {
-        return PropsResolver::resolveSrcSet($this->get('hover_image'));
+        return SuluDataNormalizer::resolveSrcSet($this->get('hover_image'));
     }
 
     public function getImageSizes(): string
@@ -635,12 +635,12 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     public function getImageFocusPointStyle(string $key = 'image'): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($this->get($key));
+        return SuluDataNormalizer::resolveFocusPointStyle($this->get($key));
     }
 
     public function getHoverImageFocusPointStyle(): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($this->get('hover_image'));
+        return SuluDataNormalizer::resolveFocusPointStyle($this->get('hover_image'));
     }
 
     public function isImageEager(): bool
@@ -727,7 +727,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
             }
         }
 
-        $resolved = PropsResolver::resolveImageUrl($this->get($key));
+        $resolved = SuluDataNormalizer::resolveImageUrl($this->get($key));
         if (null !== $resolved || 'video' !== $key) {
             return $resolved;
         }
@@ -745,7 +745,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
             }
         }
 
-        return PropsResolver::resolveImageUrl($this->get('hover_video'))
+        return SuluDataNormalizer::resolveImageUrl($this->get('hover_video'))
             ?? self::sanitizeMediaUrl($this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url'));
     }
 
@@ -761,7 +761,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     public function getLinkUrl(string $key = 'link'): ?string
     {
-        $resolved = PropsResolver::resolveUrl($this->get($key));
+        $resolved = SuluDataNormalizer::resolveUrl($this->get($key));
 
         return '#' !== $resolved && '' !== $resolved ? $resolved : null;
     }
@@ -937,7 +937,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
      */
     public function resolveItemImageUrl(array $item, string $key = 'image'): ?string
     {
-        return PropsResolver::resolveImageUrl($item[$key] ?? null);
+        return SuluDataNormalizer::resolveImageUrl($item[$key] ?? null);
     }
 
     /**
@@ -945,7 +945,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
      */
     public function resolveItemImageSrcSet(array $item, string $key = 'image'): ?string
     {
-        return PropsResolver::resolveSrcSet($item[$key] ?? null);
+        return SuluDataNormalizer::resolveSrcSet($item[$key] ?? null);
     }
 
     /**
@@ -953,7 +953,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
      */
     public function resolveItemImageFocusPointStyle(array $item, string $key = 'image'): ?string
     {
-        return PropsResolver::resolveFocusPointStyle($item[$key] ?? null);
+        return SuluDataNormalizer::resolveFocusPointStyle($item[$key] ?? null);
     }
 
     /**
@@ -1042,23 +1042,23 @@ abstract class PrelineComponent extends AbstractBlockComponent
     protected function normalizeItemMediaAndLinks(array $item): array
     {
         if (isset($item['image'])) {
-            $item['image_url'] = PropsResolver::resolveImageUrl($item['image']);
-            $item['image_srcset'] = PropsResolver::resolveSrcSet($item['image']);
-            $item['image_focus_style'] = PropsResolver::resolveFocusPointStyle($item['image']);
+            $item['image_url'] = SuluDataNormalizer::resolveImageUrl($item['image']);
+            $item['image_srcset'] = SuluDataNormalizer::resolveSrcSet($item['image']);
+            $item['image_focus_style'] = SuluDataNormalizer::resolveFocusPointStyle($item['image']);
         }
 
         if (isset($item['hover_image'])) {
-            $item['hover_image_url'] = PropsResolver::resolveImageUrl($item['hover_image']);
-            $item['hover_image_srcset'] = PropsResolver::resolveSrcSet($item['hover_image']);
-            $item['hover_image_focus_style'] = PropsResolver::resolveFocusPointStyle($item['hover_image']);
+            $item['hover_image_url'] = SuluDataNormalizer::resolveImageUrl($item['hover_image']);
+            $item['hover_image_srcset'] = SuluDataNormalizer::resolveSrcSet($item['hover_image']);
+            $item['hover_image_focus_style'] = SuluDataNormalizer::resolveFocusPointStyle($item['hover_image']);
         }
 
         if (isset($item['video'])) {
-            $item['video_url'] = PropsResolver::resolveImageUrl($item['video']);
+            $item['video_url'] = SuluDataNormalizer::resolveImageUrl($item['video']);
         }
 
         if (isset($item['hover_video'])) {
-            $item['hover_video_url'] = PropsResolver::resolveImageUrl($item['hover_video']);
+            $item['hover_video_url'] = SuluDataNormalizer::resolveImageUrl($item['hover_video']);
         }
 
         if (isset($item['icon'])) {
@@ -1070,7 +1070,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         if (isset($item['link'])) {
-            $item['link_href'] = PropsResolver::resolveUrl($item['link']);
+            $item['link_href'] = SuluDataNormalizer::resolveUrl($item['link']);
             $item['link_url'] = $item['link_href'];
             if (\is_array($item['link'])) {
                 if (!isset($item['link_target']) && '_blank' === ($item['link']['target'] ?? null)) {
@@ -1189,7 +1189,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $iconAlign = 'right' === $this->itemString($item, 'icon_align') ? 'right' : 'left';
             $hasDot = $this->itemBool($item, 'has_dot');
             $link = $item['link'] ?? null;
-            $url = PropsResolver::resolveUrl($link);
+            $url = SuluDataNormalizer::resolveUrl($link);
             $isClickable = '#' !== $url && '' !== $url;
 
             $classes = PropsResolver::badgeClasses([
@@ -1301,7 +1301,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $title = $this->itemString($item, 'title', $this->itemString($item, 'content'));
 
             $link = $item['link'] ?? null;
-            $url = PropsResolver::resolveUrl($link);
+            $url = SuluDataNormalizer::resolveUrl($link);
             $icon = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
             $iconAlign = 'right' === $this->itemString($item, 'icon_align') ? 'right' : 'left';
 
@@ -1330,7 +1330,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         if ([] === $result && null !== $singleLink && null !== $singleButtonText && '' !== $singleButtonText) {
-            $linkUrl = PropsResolver::resolveUrl($singleLink);
+            $linkUrl = SuluDataNormalizer::resolveUrl($singleLink);
             if ('#' !== $linkUrl && '' !== $linkUrl) {
                 $classes = PropsResolver::buttonClasses([
                     'variant' => $defaultStyle,

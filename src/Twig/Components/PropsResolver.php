@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
-use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
+use Totoglu\SuluBlockSuiteBundle\Util\ClassList;
+use Totoglu\SuluBlockSuiteBundle\Util\PropReader;
 
 /**
  * Centralized resolver for Preline UI 5 & Tailwind CSS 4 component properties,
@@ -14,96 +15,11 @@ use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
 final class PropsResolver
 {
     /**
-     * Reads a trimmed string value from `$props[$key]` (with optional `$fallbackKey`),
-     * optionally ignoring `'inherit'`, and falling back to `$default`.
-     *
-     * @param array<string, mixed> $props
-     */
-    public static function str(
-        array $props,
-        string $key,
-        string $default = '',
-        ?string $fallbackKey = null,
-        bool $ignoreInherit = false,
-    ): string {
-        $primary = self::nullableStr($props, $key, null, $ignoreInherit);
-        if (null !== $primary) {
-            return $primary;
-        }
-
-        if (null !== $fallbackKey) {
-            $fallback = self::nullableStr($props, $fallbackKey, null, $ignoreInherit);
-            if (null !== $fallback) {
-                return $fallback;
-            }
-        }
-
-        return $default;
-    }
-
-    /**
-     * Reads a trimmed non-empty string value from `$props[$key]` (with optional `$fallbackKey`),
-     * optionally ignoring `'inherit'`, or returns `null`.
-     *
-     * @param array<string, mixed> $props
-     */
-    public static function nullableStr(
-        array $props,
-        string $key,
-        ?string $fallbackKey = null,
-        bool $ignoreInherit = false,
-    ): ?string {
-        foreach ([$key, $fallbackKey] as $candidateKey) {
-            if (null === $candidateKey || !isset($props[$candidateKey]) || !\is_string($props[$candidateKey])) {
-                continue;
-            }
-
-            $trimmed = \trim($props[$candidateKey]);
-            if ('' === $trimmed || ($ignoreInherit && 'inherit' === $trimmed)) {
-                continue;
-            }
-
-            return $trimmed;
-        }
-
-        return null;
-    }
-
-    /**
-     * Reads a boolean value from `$props[$key]` using `AbstractBlockComponent::parseBoolean`.
-     *
-     * @param array<string, mixed> $props
-     */
-    public static function bool(array $props, string $key, bool $default = false): bool
-    {
-        if (!\array_key_exists($key, $props) || null === $props[$key] || '' === $props[$key]) {
-            return $default;
-        }
-
-        $value = $props[$key];
-        if (\is_bool($value)) {
-            return $value;
-        }
-        if (\is_int($value) || \is_float($value)) {
-            return 0 !== (int) $value;
-        }
-        if (\is_string($value)) {
-            return match (\strtolower(\trim($value))) {
-                '1', 'true', 'yes', 'on' => true,
-                '0', 'false', 'no', 'off', 'none' => false,
-                default => $default,
-            };
-        }
-
-        return $default;
-    }
-
-    /**
      * @param array<string, mixed> $props
      */
     public static function textAlign(array $props, string $default = 'left'): string
     {
-        $align = self::str($props, 'text_align', $default);
+        $align = PropReader::string($props, 'text_align', $default);
 
         return PrelineClassMap::resolve(
             PrelineClassMap::TEXT_ALIGN,
@@ -117,7 +33,7 @@ final class PropsResolver
      */
     public static function titleColor(array $props, string $default = 'default'): string
     {
-        $color = self::str($props, 'title_color', $default);
+        $color = PropReader::string($props, 'title_color', $default);
 
         return PrelineClassMap::resolve(
             PrelineClassMap::TITLE_COLORS,
@@ -131,7 +47,7 @@ final class PropsResolver
      */
     public static function linkColor(array $props, string $default = 'primary'): string
     {
-        $color = self::str($props, 'link_color', $default);
+        $color = PropReader::string($props, 'link_color', $default);
 
         return PrelineClassMap::resolve(
             PrelineClassMap::LINK_COLORS,
@@ -145,7 +61,7 @@ final class PropsResolver
      */
     public static function textColor(array $props, string $default = 'default'): string
     {
-        $color = self::str($props, 'text_color', $default, 'color');
+        $color = PropReader::string($props, 'text_color', $default, 'color');
 
         return PrelineClassMap::resolve(
             PrelineClassMap::TEXT_COLORS,
@@ -159,7 +75,7 @@ final class PropsResolver
      */
     public static function bgColor(array $props, string $default = 'transparent'): string
     {
-        $color = self::str($props, 'bg_color', $default, 'color');
+        $color = PropReader::string($props, 'bg_color', $default, 'color');
 
         return PrelineClassMap::resolve(
             PrelineClassMap::BG_COLORS,
@@ -173,7 +89,7 @@ final class PropsResolver
      */
     public static function rounded(array $props, string $default = 'xl', string $key = 'rounded'): string
     {
-        $val = self::str($props, $key, $default);
+        $val = PropReader::string($props, $key, $default);
 
         return PrelineClassMap::resolve(
             PrelineClassMap::ROUNDED,
@@ -187,7 +103,7 @@ final class PropsResolver
      */
     public static function shadow(array $props, string $default = 'none', string $fallbackEmpty = ''): string
     {
-        $val = self::str($props, 'box_shadow', $default, 'shadow');
+        $val = PropReader::string($props, 'box_shadow', $default, 'shadow');
 
         if ('none' === $val && '' === $fallbackEmpty) {
             return '';
@@ -205,7 +121,7 @@ final class PropsResolver
      */
     public static function aspectRatio(array $props, string $default = '16/9', string $key = 'aspect_ratio'): string
     {
-        $preset = PrelineClassMap::aspectRatio(self::str($props, $key, $default, 'media_aspect_ratio'))
+        $preset = PrelineClassMap::aspectRatio(PropReader::string($props, $key, $default, 'media_aspect_ratio'))
             ?? PrelineClassMap::aspectRatio($default)
             ?? PrelineClassMap::ASPECT_RATIOS['auto'];
 
@@ -217,10 +133,10 @@ final class PropsResolver
      */
     public static function buttonClasses(array $props): string
     {
-        $variant = self::str($props, 'variant', 'solid', 'button_style', true);
-        $size = self::str($props, 'size', 'md', 'button_size', true);
-        $color = self::nullableStr($props, 'link_color', 'button_color', true)
-            ?? self::str($props, 'color', 'primary', null, true);
+        $variant = PropReader::string($props, 'variant', 'solid', 'button_style', true);
+        $size = PropReader::string($props, 'size', 'md', 'button_size', true);
+        $color = PropReader::nullableString($props, 'link_color', 'button_color', true)
+            ?? PropReader::string($props, 'color', 'primary', null, true);
         $isFullWidth = isset($props['full_width']) && true === $props['full_width'];
 
         $sizeClasses = PrelineClassMap::resolve(
@@ -244,7 +160,7 @@ final class PropsResolver
             $variantClasses = $variantMap[$color] ?? $variantMap['primary'];
         }
 
-        $align = self::nullableStr($props, 'text_align');
+        $align = PropReader::nullableString($props, 'text_align');
         $alignClasses = match ($align) {
             'center' => 'mx-auto flex w-fit',
             'right' => 'ml-auto flex w-fit',
@@ -252,7 +168,7 @@ final class PropsResolver
         };
         $widthClass = $isFullWidth ? 'w-full' : $alignClasses;
 
-        return AbstractBlockComponent::joinClasses(
+        return ClassList::join(
             PrelineClassMap::BUTTON_BASE,
             $sizeClasses,
             $variantClasses,
@@ -270,10 +186,10 @@ final class PropsResolver
         string $defaultSize = 'xs',
         string $defaultRounded = 'pill',
     ): string {
-        $variant = self::str($props, 'badge_style', $defaultStyle, 'variant', true);
-        $color = self::str($props, 'badge_color', $defaultColor, 'color', true);
-        $size = self::str($props, 'size', $defaultSize, null, true);
-        $rounded = self::str($props, 'rounded', $defaultRounded, null, true);
+        $variant = PropReader::string($props, 'badge_style', $defaultStyle, 'variant', true);
+        $color = PropReader::string($props, 'badge_color', $defaultColor, 'color', true);
+        $size = PropReader::string($props, 'size', $defaultSize, null, true);
+        $rounded = PropReader::string($props, 'rounded', $defaultRounded, null, true);
 
         $roundedClass = PrelineClassMap::resolve(
             PrelineClassMap::BADGE_ROUNDED,
@@ -296,28 +212,12 @@ final class PropsResolver
             $variantClasses = $variantMap[$color] ?? $variantMap['primary'];
         }
 
-        return AbstractBlockComponent::joinClasses(
+        return ClassList::join(
             PrelineClassMap::BADGE_BASE,
             $roundedClass,
             $sizeClasses,
             $variantClasses,
         );
-    }
-
-    /**
-     * Helper to resolve a Sulu link structure or plain URL string to an href string.
-     */
-    public static function resolveUrl(mixed $link, string $default = '#'): string
-    {
-        return SuluDataNormalizer::resolveUrl($link, $default);
-    }
-
-    /**
-     * Helper to resolve a Sulu Media structure, object, or string to an image URL.
-     */
-    public static function resolveImageUrl(mixed $media): ?string
-    {
-        return SuluDataNormalizer::resolveImageUrl($media);
     }
 
     public static function resolveIcon(mixed $icon): ?string
@@ -346,22 +246,6 @@ final class PropsResolver
         }
 
         return 'ti ti-' . $raw;
-    }
-
-    /**
-     * Helper to resolve responsive srcset from a Sulu Media structure.
-     */
-    public static function resolveSrcSet(mixed $media): ?string
-    {
-        return SuluDataNormalizer::resolveSrcSet($media);
-    }
-
-    /**
-     * Helper to resolve focal/focus point to CSS object-position.
-     */
-    public static function resolveFocusPointStyle(mixed $media): ?string
-    {
-        return SuluDataNormalizer::resolveFocusPointStyle($media);
     }
 
     /**

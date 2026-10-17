@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Card', template: '@SuluPrelineBlocks/components/Card.html.twig')]
@@ -195,7 +196,7 @@ final class Card extends PrelineComponent
     {
         $link = $this->get('link') ?? $this->get('card_link');
         if (null !== $link) {
-            $url = PropsResolver::resolveUrl($link);
+            $url = SuluDataNormalizer::resolveUrl($link);
             if ('#' !== $url && '' !== $url) {
                 return $url;
             }
@@ -208,7 +209,7 @@ final class Card extends PrelineComponent
 
         foreach ($buttonList as $button) {
             if ('badge' !== $this->itemString($button, 'type') && isset($button['link'])) {
-                $url = PropsResolver::resolveUrl($button['link']);
+                $url = SuluDataNormalizer::resolveUrl($button['link']);
                 if ('#' !== $url && '' !== $url) {
                     return $url;
                 }

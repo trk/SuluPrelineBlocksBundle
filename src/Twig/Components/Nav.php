@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 /**
  * Preline UI 5 / Tailwind CSS 4 accessible vertical Navigation / Sidebar component.
@@ -80,7 +81,7 @@ final class Nav extends PrelineComponent
             $icon = isset($item['icon']) ? (PropsResolver::resolveIcon($item['icon']) ?? '') : '';
             $badge = $this->itemString($item, 'badge', '', trim: false);
 
-            $link = isset($item['link']) ? PropsResolver::resolveUrl($item['link']) : null;
+            $link = isset($item['link']) ? SuluDataNormalizer::resolveUrl($item['link']) : null;
             if ('#' === $link || '' === $link) {
                 $link = null;
             }

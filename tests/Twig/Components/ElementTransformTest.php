@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Tests\Twig\Components;
 
 use PHPUnit\Framework\TestCase;
+use Totoglu\SuluBlockSuiteBundle\Security\CssScoper;
+use Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer;
 use Totoglu\SuluPrelineBlocksBundle\Twig\Components\ElementTransform;
 
 final class ElementTransformTest extends TestCase
@@ -184,4 +186,53 @@ final class ElementTransformTest extends TestCase
         ]);
         $this->assertSame('#x { color: red; }', $preScoped);
     }
+
+    public function testConsumesCorePipelineKeys(): void
+    {
+        $block = (new DefaultAttributesTransformer())->transform([
+            'type' => 'card',
+            'props' => [
+                'class' => '  shadow-lg   p-6 shadow-lg ',
+                'attributes' => "data-aos=fade-up\nonclick=evil()",
+                'css' => '.el-element { color: red; }',
+            ],
+        ], []);
+
+        $this->assertIsString($block['_id']);
+        $this->assertSame($block['_id'], ElementTransform::resolveId($block, ['seed-is-ignored']));
+        $this->assertSame($block['_class'], ElementTransform::customClass($block));
+        $this->assertSame('shadow-lg p-6', ElementTransform::customClass($block));
+        $this->assertSame($block['_scoped_css'], ElementTransform::resolveScopedCss($block, $block['_id']));
+        $this->assertSame(['data-aos' => 'fade-up'], ElementTransform::resolveCustomAttributes($block));
+    }
+
+    public function testCoreKeysTakePrecedenceOverRawProps(): void
+    {
+        $props = [
+            '_id' => 'el-core1234',
+            'id' => 'raw-id',
+            '_class' => 'core-class',
+            'class' => 'raw-class',
+            '_scoped_css' => '#el-core1234 { color: red; }',
+            'css' => 'color: blue;',
+        ];
+
+        $this->assertSame('el-core1234', ElementTransform::resolveId($props));
+        $this->assertSame('core-class', ElementTransform::customClass($props));
+        $this->assertSame('#el-core1234 { color: red; }', ElementTransform::resolveScopedCss($props));
+    }
+
+    public function testFallsBackToCoreUtilitiesWithoutPipeline(): void
+    {
+        $props = ['css' => 'color: red;'];
+        $seed = ['component', ['title' => 'x'], 0];
+        $expectedId = CssScoper::generateElementId([$seed, $props]);
+
+        $this->assertSame($expectedId, ElementTransform::resolveId($props, $seed));
+        $this->assertSame(CssScoper::generateElementId($props), ElementTransform::resolveId($props));
+        $this->assertSame('#' . $expectedId . ' { color: red; }', ElementTransform::resolveScopedCss($props, $expectedId));
+        $this->assertSame('a b', ElementTransform::customClass(['class' => ' a  b a ']));
+        $this->assertNull(ElementTransform::resolveId(['_id' => 'bad id']));
+    }
 }
+
