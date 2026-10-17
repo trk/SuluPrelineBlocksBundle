@@ -1,7 +1,7 @@
 # Sulu Preline Blocks Bundle
 
-[![Latest Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/trk/SuluPrelineBlocksBundle)
-[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%208.2%20%7C%208.5-8892BF.svg)](https://php.net)
+[![Latest Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/trk/SuluPrelineBlocksBundle)
+[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%208.3%20%7C%208.5-8892BF.svg)](https://php.net)
 [![Sulu CMS](https://img.shields.io/badge/Sulu%20CMS-%5E3.0-orange.svg)](https://sulu.io)
 [![Symfony](https://img.shields.io/badge/Symfony-%5E7.4-black.svg)](https://symfony.com)
 [![Preline UI](https://img.shields.io/badge/Preline%20UI-v5.0-blueviolet.svg)](https://preline.co)
@@ -83,12 +83,12 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Requirements
 
-- **PHP**: `>= 8.2` (Fully tested on PHP 8.5 with `declare(strict_types=1);`)
+- **PHP**: `>= 8.3` (Fully tested on PHP 8.5 with `declare(strict_types=1);`)
 - **Sulu CMS**: `~3.0.10`
 - **Symfony**: `^7.4`
 - **Preline UI**: `>= 5.0`
 - **Tailwind CSS**: `>= 4.0`
-- **`trk/sulu-block-suite-bundle`**: `^1.0 || ^2.0`
+- **`trk/sulu-block-suite-bundle`**: `^0.1`
 
 ---
 
