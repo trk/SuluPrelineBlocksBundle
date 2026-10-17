@@ -137,15 +137,15 @@ final class ComponentSuiteTest extends TestCase
         $image->assign('image', [
             'url' => 'https://cdn.example.com/banner.jpg',
             'formats' => [
-                'col-sm' => 'https://cdn.example.com/banner-400.webp',
-                'col-lg' => 'https://cdn.example.com/banner-960.webp',
+                '400w' => 'https://cdn.example.com/banner-400.webp',
+                '960w' => 'https://cdn.example.com/banner-960.webp',
             ],
             'focalPoint' => ['x' => 30, 'y' => 70],
         ]);
         $image->assign('hover_image', [
             'url' => 'https://cdn.example.com/banner-hover.jpg',
             'formats' => [
-                'col-sm' => 'https://cdn.example.com/banner-hover-400.webp',
+                '400w' => 'https://cdn.example.com/banner-hover-400.webp',
             ],
             'focalPoint' => ['x' => 50, 'y' => 50],
         ]);
@@ -170,8 +170,8 @@ final class ComponentSuiteTest extends TestCase
         $video->assign('image', [
             'url' => 'https://cdn.example.com/poster.jpg',
             'formats' => [
-                'col-md' => 'https://cdn.example.com/poster-640.webp',
-                'col-xl' => 'https://cdn.example.com/poster-1280.webp',
+                '640w' => 'https://cdn.example.com/poster-640.webp',
+                '1280w' => 'https://cdn.example.com/poster-1280.webp',
             ],
             'focalPoint' => ['x' => 40, 'y' => 60],
         ]);

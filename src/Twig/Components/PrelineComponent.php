@@ -24,10 +24,102 @@ abstract class PrelineComponent extends AbstractBlockComponent
     public const SLOT_KEY = '_slot';
 
     /**
+     * Preline-specific content payload keys recognized automatically when a block or input array is mounted.
+     *
+     * @var list<string>
+     */
+    private const PRELINE_DATA_KEYS = [
+        'subheading',
+        'eyebrow',
+        'meta',
+        'badge',
+        'badges',
+        'code',
+        'quote',
+        'author',
+        'author_name',
+        'author_title',
+        'author_role',
+        'author_avatar',
+        'avatar',
+        'source',
+        'source_title',
+        'source_url',
+        'hover_image',
+        'before_image',
+        'after_image',
+        'before_label',
+        'after_label',
+        'hover_video',
+        'poster',
+        'embed_url',
+        'html',
+        'card_link',
+        'link_title',
+        'button_text',
+        'buttons',
+        'elements',
+        'rows',
+        'columns',
+        'headers',
+        'footnotes',
+        'hotspots',
+        'target_date',
+        'expired_text',
+        'label_days',
+        'label_hours',
+        'label_minutes',
+        'label_seconds',
+        'target_selector',
+        'trigger_text',
+        'label',
+        'caption',
+        'alt',
+        'address',
+        'latitude',
+        'longitude',
+        'marker_title',
+        'marker_description',
+    ];
+
+    /**
      * When true, `getWrapperClasses()` includes `props['padding']` in addition to `props['block_padding']`.
      * Components that apply `props['padding']` to an inner container (e.g. `Card`, `Column`) set this to false.
      */
     protected bool $applyWrapperPadding = true;
+
+    /**
+     * @return list<string>
+     */
+    protected function dataKeys(): array
+    {
+        return self::PRELINE_DATA_KEYS;
+    }
+
+    /**
+     * @return array<string, bool|\Closure(): bool>
+     */
+    protected function capabilityMap(): array
+    {
+        return [
+            ...parent::capabilityMap(),
+            'multiple' => fn (): bool => $this->hasNonEmptyCollection(['items', 'elements', 'headers'])
+                || $this->boolProp('multiple', false),
+            'container' => fn (): bool => $this->hasNonEmptyCollection(['rows', 'columns', 'blocks']),
+            'media' => fn (): bool => null !== SuluDataNormalizer::resolveImageUrl($this->get('image'))
+                || null !== SuluDataNormalizer::resolveImageUrl($this->get('video'))
+                || null !== SuluDataNormalizer::resolveImageUrl($this->get('hover_image'))
+                || null !== SuluDataNormalizer::resolveImageUrl($this->get('hover_video')),
+            'video' => fn (): bool => null !== SuluDataNormalizer::resolveImageUrl($this->get('video'))
+                || $this->has('embed_url'),
+            'linked' => fn (): bool => '' !== SuluDataNormalizer::resolveUrl($this->get('link') ?? $this->get('card_link') ?? $this->get('url'), ''),
+            'clickable' => fn (): bool => '' !== SuluDataNormalizer::resolveUrl($this->get('link') ?? $this->get('card_link') ?? $this->get('url'), ''),
+            'interactive' => fn (): bool => $this->boolProp('collapsible', false)
+                || $this->boolProp('dismissible', false)
+                || $this->boolProp('filter', false)
+                || $this->boolProp('lightbox', false),
+        ];
+    }
 
     // =========================================================================
     // 1. Universal Element Controls (Margin, Padding, Width, Align, Position,

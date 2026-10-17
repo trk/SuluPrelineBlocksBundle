@@ -212,8 +212,8 @@ final class GalleryTest extends TestCase
             'image' => [
                 'url' => '/uploads/media/photo.jpg',
                 'formats' => [
-                    'col-sm' => '/uploads/media/photo-400.webp',
-                    'col-lg' => '/uploads/media/photo-960.webp',
+                    '400w' => '/uploads/media/photo-400.webp',
+                    '960w' => '/uploads/media/photo-960.webp',
                 ],
                 'focalPoint' => ['x' => 40, 'y' => 60],
             ],

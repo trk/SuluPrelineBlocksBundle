@@ -453,10 +453,10 @@ final class CardTest extends TestCase
         $card->assign('image', [
             'url' => '/uploads/media/original.jpg',
             'formats' => [
-                'col-sm' => '/uploads/media/col-sm.webp',
-                'col-md' => '/uploads/media/col-md.webp',
-                'col-lg' => '/uploads/media/col-lg.webp',
-                'col-xl' => '/uploads/media/col-xl.webp',
+                '400w' => '/uploads/media/col-sm.webp',
+                '640w' => '/uploads/media/col-md.webp',
+                '960w' => '/uploads/media/col-lg.webp',
+                '1280w' => '/uploads/media/col-xl.webp',
             ],
             'focusPoint' => ['x' => 50, 'y' => 25],
         ]);

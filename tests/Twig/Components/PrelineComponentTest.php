@@ -202,7 +202,7 @@ final class PrelineComponentTest extends TestCase
                 'image' => [
                     'url' => 'https://cdn.example.com/hero.jpg',
                     'formats' => [
-                        'col-sm' => 'https://cdn.example.com/hero-400.webp',
+                        '400w' => 'https://cdn.example.com/hero-400.webp',
                     ],
                     'focalPoint' => ['x' => 25, 'y' => 75],
                 ],

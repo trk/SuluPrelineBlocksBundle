@@ -63,8 +63,8 @@ final class SwitcherTest extends TestCase
                 'image' => [
                     'url' => '/uploads/tab2.jpg',
                     'formats' => [
-                        'col-sm' => '/uploads/tab2-400.webp',
-                        'col-lg' => '/uploads/tab2-960.webp',
+                        '400w' => '/uploads/tab2-400.webp',
+                        '960w' => '/uploads/tab2-960.webp',
                     ],
                     'focalPoint' => ['x' => 45, 'y' => 60],
                 ],

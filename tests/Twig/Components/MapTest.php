@@ -108,8 +108,8 @@ final class MapTest extends TestCase
                 'image' => [
                     'url' => '/media/hq.jpg',
                     'formats' => [
-                        'col-sm' => '/media/hq-400.webp',
-                        'col-lg' => '/media/hq-960.webp',
+                        '400w' => '/media/hq-400.webp',
+                        '960w' => '/media/hq-960.webp',
                     ],
                     'focalPoint' => ['x' => 55, 'y' => 45],
                 ],

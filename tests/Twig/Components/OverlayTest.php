@@ -228,8 +228,8 @@ final class OverlayTest extends TestCase
         $overlay->assign('image', [
             'url' => '/uploads/media/overlay.jpg',
             'formats' => [
-                'col-sm' => '/uploads/media/col-sm.webp',
-                'col-md' => '/uploads/media/col-md.webp',
+                '400w' => '/uploads/media/col-sm.webp',
+                '640w' => '/uploads/media/col-md.webp',
             ],
             'focalPoint' => ['x' => 40, 'y' => 60],
         ]);
