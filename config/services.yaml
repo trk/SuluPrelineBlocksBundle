@@ -9,6 +9,9 @@ services:
     Totoglu\SuluPrelineBlocksBundle\Transformer\PrelineBlockTransformer:
         tags: ['sulu_block_suite.block_transformer']
 
+    Totoglu\SuluPrelineBlocksBundle\Transformer\SectionFlattener:
+        tags: ['sulu_block_suite.nested_block_flattener']
+
     Totoglu\SuluPrelineBlocksBundle\Renderer\PrelineBlockCollectionRenderer: ~
 
     Totoglu\SuluBlockSuiteBundle\Renderer\BlockCollectionRendererInterface:

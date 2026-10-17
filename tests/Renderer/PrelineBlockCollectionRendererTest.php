@@ -63,7 +63,11 @@ final class PrelineBlockCollectionRendererTest extends TestCase
 
         $twig = new Environment($loader);
         $pipeline = new \Totoglu\SuluBlockSuiteBundle\Transformer\BlockTransformPipeline([
-            new \Totoglu\SuluBlockSuiteBundle\Transformer\ReusableBlockTransformer(),
+            new \Totoglu\SuluBlockSuiteBundle\Transformer\ReusableBlockTransformer(
+                null,
+                null,
+                [new \Totoglu\SuluPrelineBlocksBundle\Transformer\SectionFlattener()],
+            ),
             new \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer(),
         ]);
         $blockRenderer = new \Totoglu\SuluBlockSuiteBundle\Renderer\BlockRenderer($twig, $pipeline);
