@@ -1,9 +1,8 @@
-{# Preline UI 5 / Tailwind CSS 4 Auto-Sectioning Block Renderer with Dynamic Content Hydration #}
+{# Preline UI 5 / Tailwind CSS 4 Auto-Sectioning Block Renderer #}
 {% set outer_context = _context %}
-{% set rendered_blocks = blocks|default([])|hydrate_blocks(outer_context) %}
-{% set should_wrap_loose = wrap_loose_blocks is defined ? wrap_loose_blocks : true %}
+{% set rendered_blocks = blocks|default([]) %}
 
-{% if not should_wrap_loose %}
+{% if disable_auto_section|default(false) %}
     {% for block_item in rendered_blocks %}
         {{ sulu_block_render(block_item, outer_context) }}
     {% endfor %}

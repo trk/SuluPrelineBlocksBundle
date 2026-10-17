@@ -29,7 +29,6 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
         if ($container->hasExtension('twig')) {
             $container->prependExtensionConfig('twig', [
                 'paths' => [
-                    '%kernel.project_dir%/templates' => null,
                     \dirname(__DIR__, 2) . '/templates' => 'SuluPrelineBlocks',
                 ],
             ]);
@@ -47,9 +46,7 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
             $container->prependExtensionConfig('sulu_block_suite', [
                 'rendering' => [
                     'template_namespaces' => [
-                        'blocks',
-                        '@SuluPrelineBlocks/blocks',
-                        '@SuluBlockSuite/blocks',
+                        '@SuluPrelineBlocks/blocks' => 200,
                     ],
                 ],
             ]);
@@ -57,7 +54,7 @@ final class SuluPrelineBlocksExtension extends Extension implements PrependExten
     }
 
     /**
-     * @param array<string, mixed> $configs
+     * @param array<array-key, mixed> $configs
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

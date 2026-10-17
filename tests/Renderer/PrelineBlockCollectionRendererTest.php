@@ -22,7 +22,7 @@ final class PrelineBlockCollectionRendererTest extends TestCase
     public function testRenderCollectionDelegatesToPrelineBlocksRendererTemplateWithContext(): void
     {
         $loader = new ArrayLoader([
-            '@SuluPrelineBlocks/includes/blocks_renderer.html.twig' => '{% for b in blocks %}<div data-wrap="{{ (wrap_loose_blocks is defined ? wrap_loose_blocks : true) ? "yes" : "no" }}">{{ b.type }}:{{ b.title }}</div>{% endfor %}',
+            '@SuluPrelineBlocks/includes/blocks_renderer.html.twig' => '{% for b in blocks %}<div data-wrap="{{ (disable_auto_section|default(false)) ? "no" : "yes" }}">{{ b.type }}:{{ b.title }}</div>{% endfor %}',
         ]);
         $twig = new Environment($loader);
         $collectionRenderer = new PrelineBlockCollectionRenderer($twig);
@@ -32,7 +32,7 @@ final class PrelineBlockCollectionRendererTest extends TestCase
             ['type' => 'text', 'title' => 'Paragraph'],
         ];
 
-        $html = $collectionRenderer->renderCollection($blocks, ['wrap_loose_blocks' => false]);
+        $html = $collectionRenderer->renderCollection($blocks, ['disable_auto_section' => true]);
 
         $this->assertSame(
             '<div data-wrap="no">headline:Intro</div><div data-wrap="no">text:Paragraph</div>',
@@ -54,11 +54,11 @@ final class PrelineBlockCollectionRendererTest extends TestCase
 
         $loader = new ArrayLoader([
             '@SuluPrelineBlocks/includes/blocks_renderer.html.twig' => $normalizedTemplate,
-            '@SuluBlockSuite/blocks/headline.html.twig' => '[headline:{{ block.title }}]',
-            '@SuluBlockSuite/blocks/text.html.twig' => '[text:{{ block.title }}]',
-            '@SuluBlockSuite/blocks/image.html.twig' => '[image:{{ block.title }}]',
-            '@SuluBlockSuite/blocks/button.html.twig' => '[button:{{ block.title }}]',
-            '@SuluBlockSuite/blocks/section.html.twig' => '<section class="explicit-section"><div class="row"><div class="column">{% for r in block.rows %}{% for c in r.columns %}{% for b in c.blocks %}{{ sulu_block_render(b, _context) }}{% endfor %}{% endfor %}{% endfor %}</div></div></section>',
+            '@SuluPrelineBlocks/blocks/headline.html.twig' => '[headline:{{ block.title }}]',
+            '@SuluPrelineBlocks/blocks/text.html.twig' => '[text:{{ block.title }}]',
+            '@SuluPrelineBlocks/blocks/image.html.twig' => '[image:{{ block.title }}]',
+            '@SuluPrelineBlocks/blocks/button.html.twig' => '[button:{{ block.title }}]',
+            '@SuluPrelineBlocks/blocks/section.html.twig' => '<section class="explicit-section"><div class="row"><div class="column">{% for r in block.rows %}{% for c in r.columns %}{% for b in c.blocks %}{{ sulu_block_render(b, _context) }}{% endfor %}{% endfor %}{% endfor %}</div></div></section>',
         ]);
 
         $twig = new Environment($loader);
@@ -70,7 +70,11 @@ final class PrelineBlockCollectionRendererTest extends TestCase
             ),
             new \Totoglu\SuluBlockSuiteBundle\Transformer\DefaultAttributesTransformer(),
         ]);
-        $blockRenderer = new \Totoglu\SuluBlockSuiteBundle\Renderer\BlockRenderer($twig, $pipeline);
+        $blockRenderer = new \Totoglu\SuluBlockSuiteBundle\Renderer\BlockRenderer(
+            $twig,
+            $pipeline,
+            ['@SuluPrelineBlocks/blocks' => 200],
+        );
         $collectionRenderer = new PrelineBlockCollectionRenderer($twig);
         $blockRenderer->setCollectionRenderer($collectionRenderer);
         $twig->addExtension(new \Totoglu\SuluBlockSuiteBundle\Twig\DynamicContentTwigExtension($pipeline, $blockRenderer));
