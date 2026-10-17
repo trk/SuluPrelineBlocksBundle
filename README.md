@@ -30,7 +30,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Overview & Philosophy
 
-`SuluPrelineBlocksBundle` provides a complete library of **31 top-level Sulu CMS blocks, 16 nested block-items, 9 `general` styling section variants, 10 styling field fragments, and 15 content/settings field fragments** alongside **35 Symfony UX Twig Components** (including `Container`) built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
+`SuluPrelineBlocksBundle` provides a complete library of **31 top-level Sulu CMS blocks, 16 nested block-items, 9 `general` styling section variants, 10 styling field fragments, and 12 content/settings field fragments (plus 1 shared media include)** alongside **35 Symfony UX Twig Components** (including `Container`) built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
 
 1. **100% Native Sulu XML Block Definitions (`config/templates/blocks/*.xml`, `config/templates/block-items/*.xml`, `config/templates/fields/*.xml`, `config/forms/general/*.xml`, and `config/forms/fields/*.xml`)**:
    - Every block defines its editorial fields in `<section name="content">` and its block-specific options in `<section name="settings">`.
@@ -77,7 +77,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 - **General Tab Variants (`config/forms/general/*.xml`)**: `general.xml`, `general_justify.xml`, `general_media.xml`, `general_collection.xml`, `general_slider.xml`, `general_code.xml`, `general_map.xml`, `general_divider.xml`, `general_countdown.xml`.
 - **General Styling Fields (`config/forms/fields/*.xml`)**: `margin.xml`, `maxwidth.xml`, `block_align.xml`, `text_align.xml`, `text_align_justify.xml`, `position.xml`, `animation.xml`, `blend.xml`, `visibility.xml`, `container_padding_remove.xml`.
-- **Content & Settings Fields (`config/templates/fields/*.xml` & `includes/media.xml`)**: `title.xml`, `meta.xml`, `content.xml`, `image.xml`, `hover_image.xml`, `video.xml`, `hover_video.xml`, `media.xml`, `media_display.xml`, `image_loading.xml`, `icon.xml`, `badge.xml`, `link.xml`, `link_title.xml`, `padding.xml`.
+- **Content & Settings Fields (`config/templates/fields/*.xml` & `includes/media.xml`)**: `title.xml`, `meta.xml`, `content.xml`, `image.xml`, `video.xml`, `media_display.xml`, `image_loading.xml`, `icon.xml`, `badge.xml`, `link.xml`, `link_title.xml`, `padding.xml`, plus shared include `includes/media.xml`.
 
 ---
 
@@ -88,7 +88,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 - **Symfony**: `^7.4`
 - **Preline UI**: `>= 5.0`
 - **Tailwind CSS**: `>= 4.0`
-- **`trk/sulu-block-suite-bundle`**: `^2.0`
+- **`trk/sulu-block-suite-bundle`**: `^1.0 || ^2.0`
 
 ---
 
@@ -163,11 +163,11 @@ if (typeof window.HSStaticMethods !== 'undefined') {
 ## Testing & Quality Assurance
 
 ```bash
-# Run PHPUnit 12 test suite (component unit tests, integration tests, and XML schema validation)
-../../vendor/bin/phpunit packages/sulu-preline-blocks-bundle/tests
+# Run PHPUnit 12 test suite from project root (component unit tests, integration tests, and XML schema validation)
+vendor/bin/phpunit packages/sulu-preline-blocks-bundle/tests
 
-# Run PHPStan static analysis at level max (from project root)
-../../vendor/bin/phpstan analyse --debug --memory-limit=1G packages/sulu-preline-blocks-bundle/src packages/sulu-preline-blocks-bundle/tests
+# Run PHPStan static analysis at level max from project root
+vendor/bin/phpstan analyse --debug --memory-limit=1G packages/sulu-preline-blocks-bundle/src packages/sulu-preline-blocks-bundle/tests
 ```
 
 ---

@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Prioritized Template Namespace**: `SuluPrelineBlocksExtension` now prepends `'@SuluPrelineBlocks/blocks' => 200` to `sulu_block_suite.rendering.template_namespaces`.
 - **Schema-Driven Hotspot Picker Options (`popover_item.xml`)**: Added explicit `<param>` collections (`types`, `colors`, `triggers`) to the `hotspot_picker` property in `config/templates/block-items/popover_item.xml`.
 - **`PrelineComponent` Vocabulary & Capabilities**: Implemented `PrelineComponent::dataKeys()` and `PrelineComponent::capabilityMap()` on top of `AbstractBlockComponent`.
-- **Integration Test Coverage**: Added `PrelineDynamicAndSearchIntegrationTest` and `SectionFlattenerTest`.
+- **Integration Test Coverage**: Added `PrelinePageReindexAndDynamicContentTest` and `SectionFlattenerTest`.
 
 ### Changed
 - **Unified Core Attribute & Security Pipeline**: `ElementTransform`, `PropsResolver`, `PrelineClassMap`, and `PrelineComponent` now consume Core's `ClassList`, `PropReader`, `AttributeSanitizer`, `CssScoper`, and precomputed `_id`, `_class`, `_attributes`, `_scoped_css`, `<field>_url`, `<field>_srcset`, and `<field>_focus_style` values.

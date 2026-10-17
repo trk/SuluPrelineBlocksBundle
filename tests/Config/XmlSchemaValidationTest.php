@@ -83,13 +83,16 @@ final class XmlSchemaValidationTest extends TestCase
         $templateFieldFiles = \glob($bundleRoot . '/config/templates/fields/*.xml') ?: [];
         $this->assertCount(12, $templateFieldFiles);
 
+        $templateIncludeFiles = \glob($bundleRoot . '/config/templates/includes/*.xml') ?: [];
+        $this->assertCount(1, $templateIncludeFiles);
+
         $formFieldFiles = \glob($bundleRoot . '/config/forms/fields/*.xml') ?: [];
         $this->assertCount(10, $formFieldFiles);
 
         $generalSectionFiles = \glob($bundleRoot . '/config/forms/general/*.xml') ?: [];
         $this->assertCount(9, $generalSectionFiles);
 
-        $fieldFiles = \array_merge($templateFieldFiles, $formFieldFiles, $generalSectionFiles);
+        $fieldFiles = \array_merge($templateFieldFiles, $templateIncludeFiles, $formFieldFiles, $generalSectionFiles);
 
         foreach ($fieldFiles as $xmlFile) {
             $fragmentDom = new \DOMDocument();

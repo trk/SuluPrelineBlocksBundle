@@ -225,4 +225,66 @@ final class PrelineComponentTest extends TestCase
         self::assertSame('https://example.com/target', $card->getLinkUrl());
         self::assertSame('_blank', $card->getLinkTarget());
     }
+
+    public function testComponentUidHandlesCircularMediaObjectsAndPreservesArrayParity(): void
+    {
+        $arrayCard = new Card();
+        $arrayCard->load(
+            data: ['title' => 'Array Card', 'image' => ['url' => 'https://cdn.example.com/a.jpg']],
+            props: ['margin' => 'md'],
+        );
+
+        $expectedArrayHash = 'hs-' . \substr(\md5((string) \json_encode([
+            Card::class,
+            $arrayCard->data(),
+            $arrayCard->props(),
+            null,
+        ])), 0, 10);
+        self::assertSame($expectedArrayHash, $arrayCard->getComponentUid());
+
+        $mediaA = new class {
+            public ?object $selfRef = null;
+
+            public function getId(): int
+            {
+                return 101;
+            }
+
+            public function getUrl(): string
+            {
+                return '/media/101/download/photo-a.jpg';
+            }
+        };
+        $mediaA->selfRef = $mediaA;
+
+        $mediaB = new class {
+            public ?object $selfRef = null;
+
+            public function getId(): int
+            {
+                return 202;
+            }
+
+            public function getUrl(): string
+            {
+                return '/media/202/download/photo-b.jpg';
+            }
+        };
+        $mediaB->selfRef = $mediaB;
+
+        $cardA = new Card();
+        $cardA->load(data: ['image' => $mediaA], props: []);
+
+        $cardB = new Card();
+        $cardB->load(data: ['image' => $mediaB], props: []);
+
+        $uidA = $cardA->getComponentUid();
+        $uidB = $cardB->getComponentUid();
+
+        self::assertMatchesRegularExpression('/^hs-[0-9a-f]{10}$/', $uidA);
+        self::assertMatchesRegularExpression('/^hs-[0-9a-f]{10}$/', $uidB);
+        self::assertNotSame('hs-d41d8cd98f', $uidA);
+        self::assertNotSame('hs-d41d8cd98f', $uidB);
+        self::assertNotSame($uidA, $uidB);
+    }
 }

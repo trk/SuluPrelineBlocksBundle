@@ -128,13 +128,63 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     public function getElementId(): ?string
     {
-        return ElementTransform::resolveId($this->props(), [static::class, $this->data, $this->extractRenderLoopIndex()]);
+        return ElementTransform::resolveId($this->props(), [static::class, self::normalizeUidSeed($this->data), $this->extractRenderLoopIndex()]);
     }
 
     public function getComponentUid(): string
     {
-        return $this->getElementId()
-            ?? ('hs-' . \substr(\md5((string) \json_encode([static::class, $this->data, $this->props, $this->extractRenderLoopIndex()])), 0, 10));
+        $elementId = $this->getElementId();
+        if (null !== $elementId) {
+            return $elementId;
+        }
+
+        $payload = \json_encode(
+            [static::class, self::normalizeUidSeed($this->data), $this->props, $this->extractRenderLoopIndex()],
+            \JSON_PARTIAL_OUTPUT_ON_ERROR | \JSON_INVALID_UTF8_SUBSTITUTE,
+        );
+
+        return 'hs-' . \substr(\md5(false !== $payload ? $payload : ''), 0, 10);
+    }
+
+    private static function normalizeUidSeed(mixed $value, int $depth = 0): mixed
+    {
+        if (\is_object($value)) {
+            $id = null;
+            if (\method_exists($value, 'getId')) {
+                /** @var mixed $rawId */
+                $rawId = $value->getId();
+                if (\is_scalar($rawId)) {
+                    $id = $rawId;
+                }
+            }
+
+            $url = null;
+            if (\method_exists($value, 'getUrl')) {
+                /** @var mixed $rawUrl */
+                $rawUrl = $value->getUrl();
+                if (\is_string($rawUrl)) {
+                    $url = $rawUrl;
+                }
+            }
+
+            return [
+                '__class' => $value::class,
+                'id' => $id,
+                'url' => $url,
+                'oid' => \spl_object_id($value),
+            ];
+        }
+
+        if (\is_array($value) && $depth < 4) {
+            $normalized = [];
+            foreach ($value as $k => $v) {
+                $normalized[$k] = self::normalizeUidSeed($v, $depth + 1);
+            }
+
+            return $normalized;
+        }
+
+        return $value;
     }
 
     private function extractRenderLoopIndex(): ?int
