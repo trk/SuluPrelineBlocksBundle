@@ -19,7 +19,7 @@
                 <title lang="fr">Contenu</title>
             </meta>
             <properties>
-            <block name="blocks" default-type="default" minOccurs="0">
+            <block name="blocks" default-type="text" minOccurs="0">
               <meta>
                 <title lang="en">Column Blocks</title>
                 <title lang="tr">S&#xFC;tun &#x130;&#xE7;i Bloklar</title>
@@ -28,19 +28,37 @@
                 <title lang="es">Bloques de columna</title>
                 <title lang="fr">Blocs de colonne</title>
               </meta>
-              <tag name="sulu_block_suite.auto_blocks" default="text" exclude="section,breadcrumbs"/>
               <types>
-                <type name="default">
-                  <meta>
-                    <title lang="en">Default</title>
-                    <title lang="tr">Varsay&#x131;lan</title>
-                    <title lang="de">Standard</title>
-                    <title lang="ru">&#x41F;&#x43E; &#x443;&#x43C;&#x43E;&#x43B;&#x447;&#x430;&#x43D;&#x438;&#x44E;</title>
-                    <title lang="es">Predeterminado</title>
-                    <title lang="fr">Par D&#xE9;faut</title>
-                  </meta>
-                  <properties/>
-                </type>
+                <type ref="accordion"/>
+                <type ref="alert"/>
+                <type ref="button"/>
+                <type ref="card"/>
+                <type ref="code"/>
+                <type ref="countdown"/>
+                <type ref="description_list"/>
+                <type ref="divider"/>
+                <type ref="gallery"/>
+                <type ref="grid"/>
+                <type ref="headline"/>
+                <type ref="html"/>
+                <type ref="icon"/>
+                <type ref="image"/>
+                <type ref="list"/>
+                <type ref="map"/>
+                <type ref="nav"/>
+                <type ref="overlay"/>
+                <type ref="overlay_slider"/>
+                <type ref="panel_slider"/>
+                <type ref="popover"/>
+                <type ref="quotation"/>
+                <type ref="reusable"/>
+                <type ref="scroll_to"/>
+                <type ref="slideshow"/>
+                <type ref="subnav"/>
+                <type ref="switcher"/>
+                <type ref="table"/>
+                <type ref="text"/>
+                <type ref="video"/>
               </types>
             </block>
             </properties>
