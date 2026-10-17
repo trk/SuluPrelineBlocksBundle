@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Switcher', template: '@SuluPrelineBlocks/components/Switcher.html.twig')]
 final class Switcher extends PrelineComponent
@@ -26,6 +27,8 @@ final class Switcher extends PrelineComponent
             'nav_position' => 'top',
             'nav_style' => 'pills',
             'alignment' => 'start',
+            'aspect_ratio' => '16/9',
+            'object_fit' => 'cover',
         ];
     }
 
@@ -79,6 +82,30 @@ final class Switcher extends PrelineComponent
         $pos = $this->getNavPosition();
 
         return 'left' === $pos || 'right' === $pos;
+    }
+
+    /**
+     * Panel image slot: the full block width, or the panel column of a vertical switcher.
+     */
+    public function getMediaSlotWidth(): ResponsiveWidth
+    {
+        $layout = $this->getSlotWidth();
+        if (!$this->isVertical()) {
+            return $layout;
+        }
+
+        return $layout->scale([
+            'base' => 1.0,
+            PrelineClassMap::SWITCHER_VERTICAL_SPLIT['breakpoint'] => PrelineClassMap::SWITCHER_VERTICAL_SPLIT['fraction'],
+        ]);
+    }
+
+    /**
+     * @return array{breakpoint: string, grid: string, nav: string, panel: string, nav_end: string, panel_end: string, fraction: float}
+     */
+    public function getVerticalSplit(): array
+    {
+        return PrelineClassMap::SWITCHER_VERTICAL_SPLIT;
     }
 
     public function getTabNavClasses(): string

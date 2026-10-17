@@ -230,6 +230,81 @@
         </param>
       </params>
     </property>
+    <property name="size" type="single_select" colspan="6">
+      <meta>
+        <title lang="en">Size</title>
+        <title lang="tr">Boyut</title>
+        <title lang="de">Größe</title>
+        <title lang="ru">Размер</title>
+        <title lang="es">Tamaño</title>
+        <title lang="fr">Taille</title>
+      </meta>
+      <params>
+        <param name="default_value" value="inherit"/>
+        <param name="values" type="collection">
+          <param name="inherit">
+            <meta>
+              <title lang="en">Inherit from Group</title>
+              <title lang="tr">Gruptan Devral</title>
+              <title lang="de">Aus Gruppe übernehmen</title>
+              <title lang="ru">Наследовать от группы</title>
+              <title lang="es">Heredar del Grupo</title>
+              <title lang="fr">Hériter du Groupe</title>
+            </meta>
+          </param>
+          <param name="xs">
+            <meta>
+              <title lang="en">Extra Small</title>
+              <title lang="tr">Çok Küçük</title>
+              <title lang="de">Extra Klein</title>
+              <title lang="ru">Очень маленький</title>
+              <title lang="es">Extra Pequeño</title>
+              <title lang="fr">Très Petit</title>
+            </meta>
+          </param>
+          <param name="sm">
+            <meta>
+              <title lang="en">Small</title>
+              <title lang="tr">Küçük</title>
+              <title lang="de">Klein</title>
+              <title lang="ru">Малый</title>
+              <title lang="es">Pequeño</title>
+              <title lang="fr">Petit</title>
+            </meta>
+          </param>
+          <param name="md">
+            <meta>
+              <title lang="en">Medium</title>
+              <title lang="tr">Orta</title>
+              <title lang="de">Mittel</title>
+              <title lang="ru">Средний</title>
+              <title lang="es">Mediano</title>
+              <title lang="fr">Moyen</title>
+            </meta>
+          </param>
+          <param name="lg">
+            <meta>
+              <title lang="en">Large</title>
+              <title lang="tr">Büyük</title>
+              <title lang="de">Groß</title>
+              <title lang="ru">Большой</title>
+              <title lang="es">Grande</title>
+              <title lang="fr">Grand</title>
+            </meta>
+          </param>
+          <param name="xl">
+            <meta>
+              <title lang="en">Extra Large</title>
+              <title lang="tr">Çok Büyük</title>
+              <title lang="de">Extra Groß</title>
+              <title lang="ru">Очень большой</title>
+              <title lang="es">Extra Grande</title>
+              <title lang="fr">Très Grand</title>
+            </meta>
+          </param>
+        </param>
+      </params>
+    </property>
       </properties>
     </section>
   </properties>

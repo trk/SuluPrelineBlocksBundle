@@ -36,6 +36,12 @@ final class BadgeTest extends TestCase
 
         self::assertTrue($badge->isClickable());
         self::assertSame('/changelog', $badge->getUrl());
+
+        $unsafeBadge = new Badge();
+        $unsafeBadge->assign('title', 'Unsafe');
+        $unsafeBadge->assign('url', 'javascript:alert(1)');
+        self::assertNull($unsafeBadge->getUrl());
+        self::assertFalse($unsafeBadge->isClickable());
     }
 
     public function testStylesAndColors(): void

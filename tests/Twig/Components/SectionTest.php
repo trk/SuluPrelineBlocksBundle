@@ -14,17 +14,14 @@ final class SectionTest extends TestCase
         $sec = new Section();
 
         self::assertSame('85rem', $sec->get('max_width'));
-        self::assertSame('default', $sec->get('padding_y'));
-        self::assertSame('default', $sec->get('padding_x'));
+        self::assertSame('default', $sec->get('padding'));
         self::assertSame('transparent', $sec->get('bg_style'));
-        self::assertFalse($sec->get('has_border'));
         self::assertEmpty($sec->get('rows'));
 
         self::assertFalse($sec->hasRows());
 
-        self::assertSame('relative w-full overflow-hidden bg-transparent', $sec->getSectionClasses());
-        self::assertStringContainsString('max-w-[85rem]', $sec->getContainerClasses());
-        self::assertStringContainsString('py-10 sm:py-14', $sec->getContainerClasses());
+        self::assertSame('relative overflow-hidden bg-transparent py-10 sm:py-14', $sec->getSectionClasses());
+        self::assertSame('mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8', $sec->getContainerClasses());
     }
 
     public function testStylesAndContainersFromProps(): void
@@ -32,21 +29,40 @@ final class SectionTest extends TestCase
         $sec = new Section();
         $sec->mergeProps([
             'bg_style' => 'muted',
-            'has_border' => true,
             'max_width' => '7xl',
-            'padding_y' => 'lg',
-            'padding_x' => 'none',
+            'padding' => 'lg',
+            'padding_remove_top' => true,
+            'margin' => 'md',
+            'margin_remove_bottom' => true,
             'id' => 'features-section',
             'custom_class' => 'my-custom-sec',
+            'maxwidth' => 'small',
+            'block_align' => 'right',
         ]);
 
         self::assertSame('features-section', $sec->getElementId());
         self::assertStringContainsString('bg-background-1', $sec->getSectionClasses());
-        self::assertStringContainsString('border-t border-b', $sec->getSectionClasses());
+        self::assertStringContainsString('py-14 sm:py-20', $sec->getSectionClasses());
+        self::assertStringContainsString('pt-0 sm:pt-0', $sec->getSectionClasses());
+        self::assertStringContainsString('mt-6 mb-0', $sec->getSectionClasses());
         self::assertStringContainsString('my-custom-sec', $sec->getSectionClasses());
-        self::assertStringContainsString('max-w-7xl', $sec->getContainerClasses());
-        self::assertStringContainsString('py-14 sm:py-20', $sec->getContainerClasses());
-        self::assertStringContainsString('px-0', $sec->getContainerClasses());
+        self::assertStringNotContainsString('max-w-', $sec->getSectionClasses());
+        self::assertStringNotContainsString('ml-auto', $sec->getSectionClasses());
+
+        self::assertSame('mx-auto max-w-7xl px-4 sm:px-6 lg:px-8', $sec->getContainerClasses());
+        self::assertSame([
+            'max_width' => '7xl',
+        ], $sec->getContainerProps());
+    }
+
+    public function testPrelineContainerPreset(): void
+    {
+        $sec = new Section();
+        $sec->mergeProps(['max_width' => 'container']);
+
+        self::assertSame(['class' => 'container', 'px' => 1536], $sec->getMaxWidthPreset());
+        self::assertSame('mx-auto container px-4 sm:px-6 lg:px-8', $sec->getContainerClasses());
+        self::assertSame(1536, $sec->getSlotWidth()->toArray()['container']);
     }
 
     public function testRowsSupport(): void

@@ -1,4 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-    <twig:Map :block="block" />
+    <twig:Map :block="block" :context="_context" />
 {% endif %}

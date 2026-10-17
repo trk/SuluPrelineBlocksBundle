@@ -1,6 +1,6 @@
 {% set icon_class = this.getResolvedIcon() %}
 {% set is_dismissible = this.isDismissible() %}
-{% set alert_id = this.getElementId()|default('hs-alert-' ~ random()) %}
+{% set alert_id = (this.getElementId() ?: this.componentUid) ~ '-box' %}
 {% set link_url = this.getLinkUrl() %}
 {% set link_text = this.getButtonText() %}
 {% set link_target = this.getLinkTarget() %}
@@ -8,51 +8,54 @@
 {% set alert_title = this.getTitle() %}
 {% set alert_content = this.getContent() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div role="alert"
-     tabindex="-1"
-     {% if alert_title %}aria-labelledby="{{ alert_id }}-label"{% endif %}
-     {{ attributes.defaults(this.getRootAttributes()|merge({id: alert_id})) }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div id="{{ alert_id }}"
+         role="alert"
+         tabindex="-1"
+         {% if alert_title %}aria-labelledby="{{ alert_id }}-label"{% endif %}
+         class="{{ this.blockClasses }}">
 
-    {% if icon_class %}
-        <span class="shrink-0 pt-0.5">
-            <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
-        </span>
-    {% endif %}
-
-    <div class="flex-1">
-        {% if alert_title %}
-            <h3 id="{{ alert_id }}-label" class="{{ this.getTitleSizeClasses() }} leading-tight mb-1">
-                {{ alert_title }}
-            </h3>
+        {% if icon_class %}
+            <span class="shrink-0 pt-0.5">
+                <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
+            </span>
         {% endif %}
 
-        {% if alert_content %}
-            <div class="text-sm leading-relaxed opacity-90">
-                {{ alert_content|raw }}
-            </div>
-        {% endif %}
+        <div class="flex-1">
+            {% if alert_title %}
+                <h3 id="{{ alert_id }}-label" class="{{ this.getTitleSizeClasses() }} leading-tight mb-1">
+                    {{ alert_title }}
+                </h3>
+            {% endif %}
 
-        {% if link_url and link_text %}
-            <div class="mt-2.5">
-                <a href="{{ link_url }}"
-                   {% if link_target %}target="{{ link_target }}" rel="noopener noreferrer"{% endif %}
-                   {% if link_title_attr %}title="{{ link_title_attr }}"{% endif %}
-                   class="inline-flex items-center gap-x-1 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
-                    {{ link_text }}
-                    <i class="ti ti-arrow-right text-xs" aria-hidden="true"></i>
-                </a>
-            </div>
+            {% if alert_content %}
+                <div class="text-sm leading-relaxed opacity-90">
+                    {{ alert_content|raw }}
+                </div>
+            {% endif %}
+
+            {% if link_url and link_text %}
+                <div class="mt-2.5">
+                    <a href="{{ link_url }}"
+                       {% if link_target %}target="{{ link_target }}" rel="noopener noreferrer"{% endif %}
+                       {% if link_title_attr %}title="{{ link_title_attr }}"{% endif %}
+                       class="inline-flex items-center gap-x-1 text-sm font-semibold underline underline-offset-4 hover:opacity-80 transition-opacity">
+                        {{ link_text }}
+                        <i class="ti ti-arrow-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if is_dismissible %}
+            <button type="button"
+                    class="shrink-0 ms-auto inline-flex justify-center items-center size-6 rounded-lg opacity-60 hover:opacity-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-opacity cursor-pointer"
+                    data-hs-remove-element="#{{ alert_id }}"
+                    aria-label="Close alert">
+                <span class="sr-only">Close</span>
+                <i class="ti ti-x text-sm" aria-hidden="true"></i>
+            </button>
         {% endif %}
     </div>
-
-    {% if is_dismissible %}
-        <button type="button"
-                class="shrink-0 ms-auto inline-flex justify-center items-center size-6 rounded-lg opacity-60 hover:opacity-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-opacity cursor-pointer"
-                data-hs-remove-element="#{{ alert_id }}"
-                aria-label="Close alert">
-            <span class="sr-only">Close</span>
-            <i class="ti ti-x text-sm" aria-hidden="true"></i>
-        </button>
-    {% endif %}
 </div>

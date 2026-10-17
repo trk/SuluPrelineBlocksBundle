@@ -1,4 +1,6 @@
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
-    {{ this.content|raw }}
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {{ this.content|raw }}
+    </div>
 </div>

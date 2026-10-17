@@ -30,6 +30,7 @@ final class OverlaySlider extends PrelineComponent
             'dots' => 'bottom',
             'columns' => '3',
             'gap' => 'md',
+            'height' => 'small',
         ];
     }
 
@@ -54,7 +55,14 @@ final class OverlaySlider extends PrelineComponent
      */
     public function getNormalizedItems(): array
     {
-        return $this->items('items');
+        $layout = $this->getSliderItemSlotWidth($this->getColumns())->toArray();
+        $list = [];
+        foreach ($this->items('items') as $item) {
+            $item[self::SLOT_KEY] = $layout;
+            $list[] = $item;
+        }
+
+        return $list;
     }
 
     public function isAutoplay(): bool
@@ -84,7 +92,7 @@ final class OverlaySlider extends PrelineComponent
 
     public function getColumns(): string
     {
-        return $this->stringProp('columns', '3');
+        return $this->resolveSliderColumns();
     }
 
     public function getSlideWidthClass(): string

@@ -2,12 +2,12 @@
 <template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
   <key>table</key>
   <meta>
-    <title lang="en">Data Table</title>
-    <title lang="tr">Veri Tablosu</title>
-    <title lang="de">Datentabelle</title>
-    <title lang="ru">&#x422;&#x430;&#x431;&#x43B;&#x438;&#x446;&#x430; &#x434;&#x430;&#x43D;&#x43D;&#x44B;&#x445;</title>
-    <title lang="es">Tabla de datos</title>
-    <title lang="fr">Tableau de donn&#xE9;es</title>
+    <title lang="en">Table</title>
+    <title lang="tr">Tablo</title>
+    <title lang="de">Tabelle</title>
+    <title lang="ru">Таблица</title>
+    <title lang="es">Tabla</title>
+    <title lang="fr">Tableau</title>
   </meta>
   <properties>
         <section name="content">
@@ -216,6 +216,8 @@
                         <param name="default_value" value="false"/>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
   </properties>

@@ -17,6 +17,9 @@ final class BreadcrumbsTest extends TestCase
         self::assertSame('Home', $breadcrumbs->getHomeTitle());
         self::assertSame('/', $breadcrumbs->getHomeUrl());
         self::assertSame('justify-start', $breadcrumbs->getAlignClasses());
+        self::assertSame('', $breadcrumbs->getWrapperClasses());
+        self::assertSame('w-full', $breadcrumbs->getBlockClasses());
+        self::assertSame('flex items-center whitespace-nowrap justify-start', $breadcrumbs->getListClasses());
         self::assertSame([], $breadcrumbs->getNormalizedItems());
     }
 
@@ -67,5 +70,28 @@ final class BreadcrumbsTest extends TestCase
         self::assertFalse($breadcrumbs->isShowHome());
         self::assertSame('Anasayfa', $breadcrumbs->getHomeTitle());
         self::assertSame('/tr', $breadcrumbs->getHomeUrl());
+
+        $breadcrumbs->assign('home_url', 'javascript:alert(1)');
+        self::assertSame('/', $breadcrumbs->getHomeUrl());
+    }
+
+    public function testPageUuidResolutionAndItemSanitization(): void
+    {
+        $breadcrumbs = new Breadcrumbs(['context' => ['uuid' => 'page-uuid-123']]);
+        self::assertSame('page-uuid-123', $breadcrumbs->getPageUuid());
+
+        $fromView = new Breadcrumbs(['context' => ['view' => ['uuid' => 'view-uuid-456']]]);
+        self::assertSame('view-uuid-456', $fromView->getPageUuid());
+
+        $fromContent = new Breadcrumbs(['context' => ['content' => ['id' => 'content-id-789']]]);
+        self::assertSame('content-id-789', $fromContent->getPageUuid());
+
+        $breadcrumbs->assign('items', [
+            ['title' => 'Safe', 'url' => '/safe'],
+            ['title' => 'Unsafe', 'url' => 'javascript:alert(1)'],
+        ]);
+        $items = $breadcrumbs->getNormalizedItems();
+        self::assertSame('/safe', $items[0]['url']);
+        self::assertNull($items[1]['url']);
     }
 }

@@ -392,6 +392,8 @@
                         </param>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

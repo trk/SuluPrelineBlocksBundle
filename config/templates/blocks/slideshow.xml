@@ -12,6 +12,7 @@
         <title lang="es">Presentación de diapositivas</title>
         <title lang="fr">Diaporama</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" include_fields="container_padding_remove"/>
     <properties>
         <section name="content">
             <meta>
@@ -276,6 +277,8 @@
                         <param name="default_value" value="5000"/>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

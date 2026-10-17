@@ -9,6 +9,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('Alert', template: '@SuluPrelineBlocks/components/Alert.html.twig')]
 final class Alert extends PrelineComponent
 {
+    protected bool $applyWrapperPadding = false;
+
     protected function defaults(): array
     {
         return [
@@ -18,6 +20,7 @@ final class Alert extends PrelineComponent
             'icon_display' => 'auto',
             'title_size' => 'md',
             'rounded' => 'xl',
+            'padding' => 'compact',
         ];
     }
 
@@ -119,11 +122,15 @@ final class Alert extends PrelineComponent
         return parent::getTitleSizeClasses($default, $preset);
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
-            'relative flex items-start gap-x-3 p-4 sm:p-5 transition-all',
+        return $this->classes(
+            'relative flex items-start gap-x-3 transition-all',
             $this->isDismissible() ? 'hs-removing:translate-x-5 hs-removing:opacity-0 duration-300' : null,
+            $this->getPaddingClasses(),
             $this->getRoundedClasses(),
             $this->getAlertClasses(),
             $extraBase,

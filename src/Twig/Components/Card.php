@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Card', template: '@SuluPrelineBlocks/components/Card.html.twig')]
 final class Card extends PrelineComponent
@@ -110,31 +111,70 @@ final class Card extends PrelineComponent
         return $this->oneOf($this->getMediaAlign(), ['left', 'right']);
     }
 
+    /**
+     * @return array{media: string, content: string, fraction: float}
+     */
+    public function getMediaWidthPreset(): array
+    {
+        return PrelineClassMap::CARD_MEDIA_WIDTHS[$this->stringProp('media_width', '1-2')]
+            ?? PrelineClassMap::CARD_MEDIA_WIDTHS['1-2'];
+    }
+
     public function getMediaGridWidthClasses(): string
     {
-        return match ($this->stringProp('media_width', '1-2')) {
-            '1-3' => 'md:w-1/3',
-            '2-5' => 'md:w-2/5',
-            default => 'md:w-1/2',
-        };
+        return $this->getMediaWidthPreset()['media'];
     }
 
     public function getContentGridWidthClasses(): string
     {
-        return match ($this->stringProp('media_width', '1-2')) {
-            '1-3' => 'md:w-2/3',
-            '2-5' => 'md:w-3/5',
-            default => 'md:w-1/2',
-        };
+        return $this->getMediaWidthPreset()['content'];
     }
 
-    public function getImageSizes(string $default = '100vw'): string
+    /**
+     * Media slot: the full card width when stacked, the `media_width` fraction once a horizontal
+     * card switches to side-by-side.
+     */
+    public function getMediaSlotWidth(): ResponsiveWidth
     {
-        if ($this->isHorizontal()) {
-            return '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw';
+        $layout = $this->getSlotWidth();
+        if (!$this->isHorizontal()) {
+            return $layout;
         }
 
-        return '(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw';
+        return $layout->scale([
+            'base' => 1.0,
+            PrelineClassMap::CARD_HORIZONTAL_BREAKPOINT => $this->getMediaWidthPreset()['fraction'],
+        ]);
+    }
+
+    /**
+     * Media column for horizontal cards; never collapses when the aspect ratio is `auto`.
+     */
+    public function getMediaColumnClasses(): string
+    {
+        return $this->classes(
+            'relative shrink-0 overflow-hidden',
+            $this->getMediaGridWidthClasses(),
+            $this->getMediaAspectRatioClass('16/9', PrelineClassMap::MEDIA_AUTO_MIN_HEIGHT . ' md:min-h-full'),
+        );
+    }
+
+    /**
+     * Content layer of overlay-mode cards. The card height comes from the aspect ratio, or from the
+     * minimum media height when the ratio is `auto`.
+     */
+    public function getOverlayContentClasses(): string
+    {
+        return $this->classes(
+            'relative flex flex-1 flex-col justify-end text-white',
+            'auto' === $this->getAspectRatioKey('16/9') ? PrelineClassMap::MEDIA_AUTO_MIN_HEIGHT : null,
+            $this->getCardPaddingClasses(),
+        );
+    }
+
+    public function getIconTileClasses(): string
+    {
+        return $this->isOverlay() ? PrelineClassMap::CARD_ICON_TILE_ON_MEDIA : PrelineClassMap::CARD_ICON_TILE;
     }
 
     public function getRoundedClasses(string $default = 'xl', string $key = 'rounded'): string
@@ -276,14 +316,15 @@ final class Card extends PrelineComponent
         );
 
         if ('overlay' === $mediaAlign) {
-            return $this->classes($base, $rounded, 'relative text-white shadow-md');
+            return $this->classes(
+                $base,
+                $rounded,
+                'relative text-white shadow-md',
+                $this->getMediaAspectRatioClass('16/9', ''),
+            );
         }
 
-        $flexDirection = match ($mediaAlign) {
-            'left' => 'flex-col md:flex-row',
-            'right' => 'flex-col md:flex-row-reverse',
-            default => 'flex-col',
-        };
+        $flexDirection = PrelineClassMap::CARD_HORIZONTAL_DIRECTIONS[$mediaAlign] ?? 'flex-col';
 
         return $this->classes($base, $rounded, $variantClasses, $flexDirection, $bg);
     }
@@ -354,12 +395,14 @@ final class Card extends PrelineComponent
         return $this->isVideo() && null !== $this->getVideoUrl() ? $this->getHoverVideoUrl() : null;
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
+        return $this->classes(
             'group relative w-full',
             $this->getCardClasses(),
-            $this->getTextAlign(),
             $extraBase,
             ...$moreParts,
         );

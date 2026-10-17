@@ -12,7 +12,7 @@
         <title lang="es">Marcadores en imagen</title>
         <title lang="fr">Points interactifs d'image</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" include_fields="container_padding_remove"/>
     <properties>
         <section name="content">
             <meta>
@@ -37,214 +37,6 @@
                     </meta>
                     <params>
                         <param name="types" value="image"/>
-                    </params>
-                </property>
-
-                <property name="trigger" type="single_select" colspan="12">
-                    <meta>
-                        <title lang="en">Trigger Mode</title>
-                        <title lang="tr">Açılma Şekli</title>
-                        <title lang="de">Auslösemodus</title>
-                        <title lang="ru">Режим активации</title>
-                        <title lang="es">Modo de activación</title>
-                        <title lang="fr">Mode de déclenchement</title>
-                        <info_text lang="en">How the card popovers are revealed</info_text>
-                        <info_text lang="tr">Nokta kartlarının açılma şekli</info_text>
-                        <info_text lang="de">Wie die Popover-Karten geöffnet werden</info_text>
-                        <info_text lang="ru">Как открываются карточки меток</info_text>
-                        <info_text lang="es">Cómo se muestran las tarjetas emergentes</info_text>
-                        <info_text lang="fr">Comment les cartes popover sont révélées</info_text>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="click"/>
-                        <param name="values" type="collection">
-                            <param name="click">
-                                <meta>
-                                    <title lang="en">On Click</title>
-                                    <title lang="tr">Tıklama ile</title>
-                                    <title lang="de">Beim Klicken</title>
-                                    <title lang="ru">По клику</title>
-                                    <title lang="es">Al hacer clic</title>
-                                    <title lang="fr">Au clic</title>
-                                </meta>
-                            </param>
-                            <param name="hover">
-                                <meta>
-                                    <title lang="en">On Hover</title>
-                                    <title lang="tr">Hover</title>
-                                    <title lang="de">Beim Überfahren</title>
-                                    <title lang="ru">При наведении</title>
-                                    <title lang="es">Al pasar el cursor</title>
-                                    <title lang="fr">Au survol</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
-                <property name="marker_type" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Default Marker Style</title>
-                        <title lang="tr">Varsayılan İşaretçi Stili</title>
-                        <title lang="de">Standard-Markierungsstil</title>
-                        <title lang="ru">Стиль маркера по умолчанию</title>
-                        <title lang="es">Estilo de marcador predeterminado</title>
-                        <title lang="fr">Style de marqueur par défaut</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="pulse"/>
-                        <param name="values" type="collection">
-                            <param name="pulse">
-                                <meta>
-                                    <title lang="en">Radar Pulse</title>
-                                    <title lang="tr">Radar</title>
-                                    <title lang="de">Radar-Impuls</title>
-                                    <title lang="ru">Пульсирующий радар</title>
-                                    <title lang="es">Pulso de radar</title>
-                                    <title lang="fr">Pulsation radar</title>
-                                </meta>
-                            </param>
-                            <param name="plus">
-                                <meta>
-                                    <title lang="en">Plus</title>
-                                    <title lang="tr">Artı</title>
-                                    <title lang="de">Plus</title>
-                                    <title lang="ru">Плюс</title>
-                                    <title lang="es">Más</title>
-                                    <title lang="fr">Plus</title>
-                                </meta>
-                            </param>
-                            <param name="number">
-                                <meta>
-                                    <title lang="en">Number</title>
-                                    <title lang="tr">Numara</title>
-                                    <title lang="de">Nummer</title>
-                                    <title lang="ru">Номер</title>
-                                    <title lang="es">Número</title>
-                                    <title lang="fr">Numéro</title>
-                                </meta>
-                            </param>
-                            <param name="dot">
-                                <meta>
-                                    <title lang="en">Solid Dot</title>
-                                    <title lang="tr">Nokta</title>
-                                    <title lang="de">Punkt</title>
-                                    <title lang="ru">Точка</title>
-                                    <title lang="es">Punto</title>
-                                    <title lang="fr">Point</title>
-                                </meta>
-                            </param>
-                            <param name="pin">
-                                <meta>
-                                    <title lang="en">Map Pin</title>
-                                    <title lang="tr">Harita İğnesi</title>
-                                    <title lang="de">Kartenstecknadel</title>
-                                    <title lang="ru">Булавка на карте</title>
-                                    <title lang="es">Pin de mapa</title>
-                                    <title lang="fr">Épingle de carte</title>
-                                </meta>
-                            </param>
-                            <param name="icon">
-                                <meta>
-                                    <title lang="en">Custom Icon</title>
-                                    <title lang="tr">Özel İkon</title>
-                                    <title lang="de">Eigenes Symbol</title>
-                                    <title lang="ru">Пользовательская иконка</title>
-                                    <title lang="es">Icono personalizado</title>
-                                    <title lang="fr">Icône personnalisée</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
-                <property name="marker_color" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Default Marker Color</title>
-                        <title lang="tr">Varsayılan İşaretçi Rengi</title>
-                        <title lang="de">Standard-Markierungsfarbe</title>
-                        <title lang="ru">Цвет маркера по умолчанию</title>
-                        <title lang="es">Color de marcador predeterminado</title>
-                        <title lang="fr">Couleur de marqueur par défaut</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="primary"/>
-                        <param name="values" type="collection">
-                            <param name="primary">
-                                <meta>
-                                    <title lang="en">Primary</title>
-                                    <title lang="tr">Birincil</title>
-                                    <title lang="de">Primär</title>
-                                    <title lang="ru">Основной</title>
-                                    <title lang="es">Primario</title>
-                                    <title lang="fr">Primaire</title>
-                                </meta>
-                            </param>
-                            <param name="dark">
-                                <meta>
-                                    <title lang="en">Dark Neutral</title>
-                                    <title lang="tr">Koyu Gri</title>
-                                    <title lang="de">Dunkelgrau</title>
-                                    <title lang="ru">Тёмно-серый</title>
-                                    <title lang="es">Gris oscuro</title>
-                                    <title lang="fr">Gris foncé</title>
-                                </meta>
-                            </param>
-                            <param name="light">
-                                <meta>
-                                    <title lang="en">Light</title>
-                                    <title lang="tr">Açık / Beyaz</title>
-                                    <title lang="de">Hell / Weiß</title>
-                                    <title lang="ru">Светлый / Белый</title>
-                                    <title lang="es">Claro / Blanco</title>
-                                    <title lang="fr">Clair / Blanc</title>
-                                </meta>
-                            </param>
-                            <param name="accent">
-                                <meta>
-                                    <title lang="en">Accent</title>
-                                    <title lang="tr">Sarı / Vurgu</title>
-                                    <title lang="de">Akzent</title>
-                                    <title lang="ru">Акцент</title>
-                                    <title lang="es">Acento</title>
-                                    <title lang="fr">Accent</title>
-                                </meta>
-                            </param>
-                            <param name="success">
-                                <meta>
-                                    <title lang="en">Success</title>
-                                    <title lang="tr">Yeşil</title>
-                                    <title lang="de">Erfolg</title>
-                                    <title lang="ru">Успех</title>
-                                    <title lang="es">Éxito</title>
-                                    <title lang="fr">Succès</title>
-                                </meta>
-                            </param>
-                            <param name="danger">
-                                <meta>
-                                    <title lang="en">Danger</title>
-                                    <title lang="tr">Kırmızı</title>
-                                    <title lang="de">Gefahr</title>
-                                    <title lang="ru">Опасность</title>
-                                    <title lang="es">Peligro</title>
-                                    <title lang="fr">Danger</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
-                <property name="icon" type="single_icon_selection" colspan="12" visibleCondition="marker_type == 'icon'">
-                    <meta>
-                        <title lang="en">Default Marker Icon</title>
-                        <title lang="tr">Varsayılan İşaretçi İkonu</title>
-                        <title lang="de">Standard-Markierungssymbol</title>
-                        <title lang="ru">Иконка маркера по умолчанию</title>
-                        <title lang="es">Icono de marcador predeterminado</title>
-                        <title lang="fr">Icône de marqueur par défaut</title>
-                    </meta>
-                    <params>
-                        <param name="icon_set" value="tabler"/>
                     </params>
                 </property>
 
@@ -386,6 +178,20 @@
                     </params>
                 </property>
 
+                <property name="icon" type="single_icon_selection" colspan="6" visibleCondition="marker_type == 'icon'">
+                    <meta>
+                        <title lang="en">Default Marker Icon</title>
+                        <title lang="tr">Varsayılan İşaretçi İkonu</title>
+                        <title lang="de">Standard-Markierungssymbol</title>
+                        <title lang="ru">Иконка маркера по умолчанию</title>
+                        <title lang="es">Icono de Marcador Predeterminado</title>
+                        <title lang="fr">Icône de Marqueur par Défaut</title>
+                    </meta>
+                    <params>
+                        <param name="icon_set" value="tabler"/>
+                    </params>
+                </property>
+
                 <property name="marker_color" type="single_select" colspan="6">
                     <meta>
                         <title lang="en">Default Marker Color</title>
@@ -461,6 +267,8 @@
                         </param>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

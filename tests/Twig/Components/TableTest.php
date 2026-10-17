@@ -23,9 +23,12 @@ final class TableTest extends TestCase
         self::assertSame('default', $table->getStyle());
         self::assertSame('md', $table->getSize());
         self::assertFalse($table->isStickyHeader());
+        self::assertFalse($table->isBordered());
         self::assertFalse($table->isHover());
         self::assertFalse($table->hasHeader());
-        self::assertSame('overflow-x-auto w-full', $table->getWrapperClasses());
+        self::assertSame('', $table->getWrapperClasses());
+        self::assertSame('w-full', $table->getBlockClasses());
+        self::assertSame('overflow-x-auto w-full', $table->getTableContainerClasses());
         self::assertSame('min-w-full divide-y divide-table-line text-start', $table->getTableClasses());
         self::assertSame('bg-background-1', $table->getTheadClasses());
     }
@@ -46,13 +49,17 @@ final class TableTest extends TestCase
             'size' => 'lg',
             'sticky_header' => true,
             'bordered' => true,
+            'margin_top' => 'md',
         ]);
 
         self::assertSame('striped', $table->getStyle());
         self::assertSame('lg', $table->getSize());
         self::assertTrue($table->isStickyHeader());
+        self::assertTrue($table->isBordered());
         self::assertTrue($table->isHover());
-        self::assertStringContainsString('border border-table-line', $table->getWrapperClasses());
+        self::assertSame('mt-6', $table->getWrapperClasses());
+        self::assertStringContainsString('overflow-x-auto w-full', $table->getTableContainerClasses());
+        self::assertStringContainsString('border border-card-line rounded-2xl overflow-hidden shadow-2xs bg-card', $table->getTableContainerClasses());
         self::assertStringContainsString('sticky top-0 z-10', $table->getTheadClasses());
         self::assertStringContainsString('px-6 py-4 text-base', $table->getThClasses());
         self::assertStringContainsString('px-6 py-4 text-base', $table->getTdClasses());

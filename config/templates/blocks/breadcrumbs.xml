@@ -4,14 +4,14 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>breadcrumbs</key>
     <meta>
-        <title lang="en">Breadcrumbs Navigation</title>
+        <title lang="en">Breadcrumb</title>
         <title lang="tr">Sayfa Yolu</title>
-        <title lang="de">Brotkrümelnavigation</title>
+        <title lang="de">Brotkrümel</title>
         <title lang="ru">Навигационная цепочка</title>
-        <title lang="es">Migas de Pan</title>
+        <title lang="es">Migas de pan</title>
         <title lang="fr">Fil d'Ariane</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" text_align="standard"/>
     <properties>
         <section name="settings">
             <meta>

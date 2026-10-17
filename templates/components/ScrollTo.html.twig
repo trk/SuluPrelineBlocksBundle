@@ -8,36 +8,36 @@
 {% set default_label = is_top ? 'Scroll to top' : 'Scroll down' %}
 {% set aria_text = title|default(default_label) %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        <a href="{{ target_href }}"
+           class="{{ btn_classes }}"
+           aria-label="{{ aria_text }}"
+           data-hs-scroll>
 
-    <a href="{{ target_href }}"
-       class="{{ btn_classes }}"
-       aria-label="{{ aria_text }}"
-       data-hs-scroll
-       onclick="var href = this.getAttribute('href'); if (href === '#top') { window.scrollTo({top: 0, behavior: 'smooth'}); return false; } var el = href ? document.getElementById(href.slice(1)) : null; if (el) { el.scrollIntoView({behavior: 'smooth'}); return false; }">
-
-        {% if mode == 'totop_circle' or mode == 'floating' %}
-            {# Circle Icon Only #}
-            <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
-        {% else %}
-            {# Button with optional title & icon #}
-            {% if icon_pos == 'left' and icon_class %}
-                <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
-            {% endif %}
-
-            {% if title %}
-                <span>{{ title }}</span>
+            {% if mode == 'totop_circle' or mode == 'floating' %}
+                {# Circle Icon Only #}
+                <i class="{{ icon_class }} text-xl" aria-hidden="true"></i>
             {% else %}
-                <span class="sr-only">{{ aria_text }}</span>
-                {% if icon_pos != 'left' and icon_class %}
+                {# Button with optional title & icon #}
+                {% if icon_pos == 'left' and icon_class %}
+                    <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+                {% endif %}
+
+                {% if title %}
+                    <span>{{ title }}</span>
+                {% else %}
+                    <span class="sr-only">{{ aria_text }}</span>
+                    {% if icon_pos != 'left' and icon_class %}
+                        <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+                    {% endif %}
+                {% endif %}
+
+                {% if icon_pos == 'right' and icon_class and title %}
                     <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
                 {% endif %}
             {% endif %}
-
-            {% if icon_pos == 'right' and icon_class and title %}
-                <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
-            {% endif %}
-        {% endif %}
-    </a>
+        </a>
+    </div>
 </div>

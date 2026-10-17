@@ -22,6 +22,7 @@
             {% if muted %}muted{% endif %}
             {% if loop %}loop{% endif %}
             {% if preload %}preload="{{ preload }}"{% endif %}
+            {% if autoplay_mode %}data-video-autoplay="{{ autoplay_mode }}"{% endif %}
             playsinline
             class="{{ this.getVideoClasses() }}"
         ></video>
@@ -37,54 +38,59 @@
         {% endif %}
     {% endif %}
 {% else %}
-    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-    <div {{ attributes.defaults(this.getRootAttributes()) }}
-         {% if autoplay_mode %}data-video-autoplay="{{ autoplay_mode }}"{% endif %}>
-        {% if vid_url %}
-            <video
-                src="{{ vid_url }}"
-                {% if poster_url %}poster="{{ poster_url }}"{% endif %}
-                {% if controls %}controls{% endif %}
-                {% if autoplay %}autoplay{% endif %}
-                {% if muted %}muted{% endif %}
-                {% if loop %}loop{% endif %}
-                {% if preload %}preload="{{ preload }}"{% endif %}
-                playsinline
-                class="{{ this.getVideoClasses() }}"
-            ></video>
-            {% if hover_vid_url %}
+    <div {{ attributes.defaults(this.getRootAttributes()) }}>
+        {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+        <div class="{{ this.blockClasses }}"{% if this.mediaAspectRatioStyle %} style="{{ this.mediaAspectRatioStyle }}"{% endif %}>
+            {% if vid_url %}
                 <video
-                    src="{{ hover_vid_url }}"
+                    src="{{ vid_url }}"
+                    {% if poster_url %}poster="{{ poster_url }}"{% endif %}
+                    {% if controls %}controls{% endif %}
                     {% if autoplay %}autoplay{% endif %}
                     {% if muted %}muted{% endif %}
                     {% if loop %}loop{% endif %}
+                    {% if preload %}preload="{{ preload }}"{% endif %}
+                    {% if autoplay_mode %}data-video-autoplay="{{ autoplay_mode }}"{% endif %}
                     playsinline
-                    class="{{ this.getHoverVideoClasses() }}"
+                    class="{{ this.getVideoClasses() }}"
                 ></video>
-            {% endif %}
-        {% elseif poster_url %}
-            <div class="relative w-full h-full">
-                <twig:Image
-                    :bare="true"
-                    :image_url="poster_url"
-                    :image_srcset="poster_srcset"
-                    sizes="(min-width: 1024px) 80vw, 100vw"
-                    :image_focus_style="poster_focus_style"
-                    :alt="this.getPosterAlt()"
-                    img_class="w-full h-full object-cover"
-                />
-                {% if url %}
-                    <a href="{{ url }}" aria-label="{{ this.getPosterAlt()|default('Play video') }}" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-colors group">
-                        <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-layer/90 text-primary group-hover:scale-110 group-hover:bg-layer transition-all shadow-xl">
-                            {% if icon_class %}
-                                <i class="{{ icon_class }} text-2xl" aria-hidden="true"></i>
-                            {% else %}
-                                <svg class="w-7 h-7 fill-current ml-0.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                            {% endif %}
-                        </span>
-                    </a>
+                {% if hover_vid_url %}
+                    <video
+                        src="{{ hover_vid_url }}"
+                        {% if autoplay %}autoplay{% endif %}
+                        {% if muted %}muted{% endif %}
+                        {% if loop %}loop{% endif %}
+                        playsinline
+                        class="{{ this.getHoverVideoClasses() }}"
+                    ></video>
                 {% endif %}
-            </div>
-        {% endif %}
+            {% elseif poster_url %}
+                <div class="relative w-full h-full">
+                    <twig:Image
+                        :bare="true"
+                        :image_url="poster_url"
+                        :image_srcset="poster_srcset"
+                        :sizes="this.imageSizes"
+                        :dimensions="this.getIntrinsicImageDimensions('16/9')"
+                        :image_focus_style="poster_focus_style"
+                        :alt="this.getPosterAlt()"
+                        :loading="this.getImageLoading()"
+                        :fetchpriority="this.getImageFetchPriority()"
+                        img_class="w-full h-full object-cover"
+                    />
+                    {% if url %}
+                        <a href="{{ url }}" aria-label="{{ this.getPosterAlt()|default('Play video') }}" class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary transition-colors group">
+                            <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-layer/90 text-primary group-hover:scale-110 group-hover:bg-layer transition-all shadow-xl">
+                                {% if icon_class %}
+                                    <i class="{{ icon_class }} text-2xl" aria-hidden="true"></i>
+                                {% else %}
+                                    <svg class="w-7 h-7 fill-current ml-0.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                                {% endif %}
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endif %}

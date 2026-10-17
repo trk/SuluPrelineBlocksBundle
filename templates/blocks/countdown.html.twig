@@ -1,4 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-    <twig:Countdown :block="block" />
+    <twig:Countdown :block="block" :context="_context" />
 {% endif %}

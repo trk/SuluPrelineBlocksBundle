@@ -19,7 +19,8 @@ final class HtmlBlockTest extends TestCase
         self::assertFalse($html->isRaw());
         self::assertFalse($html->hasContent());
         self::assertSame('', $html->getContent());
-        self::assertSame('w-full my-4', $html->getWrapperClasses());
+        self::assertSame('', $html->getWrapperClasses());
+        self::assertSame('w-full', $html->getBlockClasses());
     }
 
     public function testContentAndRaw(): void
@@ -31,6 +32,7 @@ final class HtmlBlockTest extends TestCase
         self::assertTrue($html->hasContent());
         self::assertTrue($html->isRaw());
         self::assertSame('<div class="custom-widget">Widget Content</div>', $html->getContent());
+        self::assertSame('', $html->getBlockClasses());
     }
 
     public function testCardProp(): void
@@ -38,7 +40,8 @@ final class HtmlBlockTest extends TestCase
         $html = new HtmlBlock();
         $html->mergeProps(['card' => true]);
 
-        self::assertStringContainsString('border border-card-line', $html->getWrapperClasses());
-        self::assertStringContainsString('bg-card', $html->getWrapperClasses());
+        self::assertSame('', $html->getWrapperClasses());
+        self::assertStringContainsString('border border-card-line', $html->getBlockClasses());
+        self::assertStringContainsString('bg-card', $html->getBlockClasses());
     }
 }

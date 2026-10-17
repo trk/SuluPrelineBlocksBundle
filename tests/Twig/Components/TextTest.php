@@ -23,7 +23,8 @@ final class TextTest extends TestCase
 
         self::assertTrue($text->shouldRender());
         self::assertSame('<p>Rich body paragraph</p>', $text->getContent());
-        self::assertStringContainsString('prose dark:prose-invert', $text->getWrapperClasses());
+        self::assertSame('text-left', $text->getWrapperClasses());
+        self::assertStringContainsString('prose dark:prose-invert', $text->getBlockClasses());
     }
 
     public function testColumnsDropcapAndTextStyle(): void
@@ -39,6 +40,7 @@ final class TextTest extends TestCase
                 'text_style' => 'lead',
                 'font_size' => 'lg',
                 'text_color' => 'muted',
+                'margin' => 'sm',
             ],
         ]);
 
@@ -49,6 +51,8 @@ final class TextTest extends TestCase
         self::assertStringContainsString('first-letter:float-left', $text->getDropcapClasses());
         self::assertStringContainsString('md:columns-2', $text->getColumnClasses());
         self::assertStringContainsString('column-rule', $text->getColumnDividerClasses());
-        self::assertStringContainsString('text-muted-foreground-1', $text->getWrapperClasses());
+        self::assertStringContainsString('my-4', $text->getWrapperClasses());
+        self::assertStringNotContainsString('text-muted-foreground-1', $text->getWrapperClasses());
+        self::assertStringContainsString('text-muted-foreground-1', $text->getBlockClasses());
     }
 }

@@ -12,7 +12,7 @@
         <title lang="es">Sección</title>
         <title lang="fr">Section</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content,general"/>
     <properties>
         <section name="content">
             <meta>
@@ -33,6 +33,7 @@
                         <title lang="es">Filas</title>
                         <title lang="fr">Lignes</title>
                     </meta>
+                    <tag name="sulu_block_suite.tabs" shared="true" exclude="dynamic_content,general"/>
                     <types>
                         <xi:include href="../block-items/row_item.xml"/>
                     </types>
@@ -64,12 +65,22 @@
                         <param name="values" type="collection">
                             <param name="85rem">
                                 <meta>
-                                    <title lang="en">Preline Standard</title>
-                                    <title lang="tr">Preline Standart</title>
-                                    <title lang="de">Preline Standard</title>
-                                    <title lang="ru">Стандарт Preline</title>
-                                    <title lang="es">Estándar Preline</title>
-                                    <title lang="fr">Standard Preline</title>
+                                    <title lang="en">Preline Standard (85rem)</title>
+                                    <title lang="tr">Preline Standart (85rem)</title>
+                                    <title lang="de">Preline Standard (85rem)</title>
+                                    <title lang="ru">Стандарт Preline (85rem)</title>
+                                    <title lang="es">Estándar Preline (85rem)</title>
+                                    <title lang="fr">Standard Preline (85rem)</title>
+                                </meta>
+                            </param>
+                            <param name="container">
+                                <meta>
+                                    <title lang="en">Preline Container (Breakpoint Based)</title>
+                                    <title lang="tr">Preline Konteyner (Breakpoint Bazlı)</title>
+                                    <title lang="de">Preline Container (Breakpoint-basiert)</title>
+                                    <title lang="ru">Контейнер Preline (по контрольным точкам)</title>
+                                    <title lang="es">Contenedor Preline (por Breakpoint)</title>
+                                    <title lang="fr">Conteneur Preline (par Breakpoint)</title>
                                 </meta>
                             </param>
                             <param name="7xl">
@@ -110,118 +121,6 @@
                                     <title lang="ru">Во всю ширину</title>
                                     <title lang="es">Ancho Completo</title>
                                     <title lang="fr">Pleine Largeur</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
-                <property name="padding_y" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Vertical Padding</title>
-                        <title lang="tr">Dikey İç Boşluk</title>
-                        <title lang="de">Vertikaler Innenabstand</title>
-                        <title lang="ru">Вертикальный внутренний отступ</title>
-                        <title lang="es">Relleno Vertical</title>
-                        <title lang="fr">Marge Intérieure Verticale</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="default"/>
-                        <param name="values" type="collection">
-                            <param name="default">
-                                <meta>
-                                    <title lang="en">Default</title>
-                                    <title lang="tr">Standart</title>
-                                    <title lang="de">Standard</title>
-                                    <title lang="ru">По умолчанию</title>
-                                    <title lang="es">Predeterminado</title>
-                                    <title lang="fr">Par Défaut</title>
-                                </meta>
-                            </param>
-                            <param name="none">
-                                <meta>
-                                    <title lang="en">None</title>
-                                    <title lang="tr">Yok</title>
-                                    <title lang="de">Keine</title>
-                                    <title lang="ru">Нет</title>
-                                    <title lang="es">Ninguno</title>
-                                    <title lang="fr">Aucun</title>
-                                </meta>
-                            </param>
-                            <param name="xs">
-                                <meta>
-                                    <title lang="en">Extra Small</title>
-                                    <title lang="tr">Çok Küçük</title>
-                                    <title lang="de">Extra Klein</title>
-                                    <title lang="ru">Очень малый</title>
-                                    <title lang="es">Extra Pequeño</title>
-                                    <title lang="fr">Très Petit</title>
-                                </meta>
-                            </param>
-                            <param name="sm">
-                                <meta>
-                                    <title lang="en">Small</title>
-                                    <title lang="tr">Küçük</title>
-                                    <title lang="de">Klein</title>
-                                    <title lang="ru">Малый</title>
-                                    <title lang="es">Pequeño</title>
-                                    <title lang="fr">Petit</title>
-                                </meta>
-                            </param>
-                            <param name="lg">
-                                <meta>
-                                    <title lang="en">Large</title>
-                                    <title lang="tr">Büyük</title>
-                                    <title lang="de">Groß</title>
-                                    <title lang="ru">Большой</title>
-                                    <title lang="es">Grande</title>
-                                    <title lang="fr">Grand</title>
-                                </meta>
-                            </param>
-                            <param name="xl">
-                                <meta>
-                                    <title lang="en">Extra Large</title>
-                                    <title lang="tr">Çok Büyük</title>
-                                    <title lang="de">Extra Groß</title>
-                                    <title lang="ru">Очень большой</title>
-                                    <title lang="es">Extra Grande</title>
-                                    <title lang="fr">Très Grand</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
-                <property name="padding_x" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Horizontal Padding</title>
-                        <title lang="tr">Yatay İç Boşluk</title>
-                        <title lang="de">Horizontaler Innenabstand</title>
-                        <title lang="ru">Горизонтальный внутренний отступ</title>
-                        <title lang="es">Relleno Horizontal</title>
-                        <title lang="fr">Marge Intérieure Horizontale</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="default"/>
-                        <param name="values" type="collection">
-                            <param name="default">
-                                <meta>
-                                    <title lang="en">Default</title>
-                                    <title lang="tr">Standart</title>
-                                    <title lang="de">Standard</title>
-                                    <title lang="ru">По умолчанию</title>
-                                    <title lang="es">Predeterminado</title>
-                                    <title lang="fr">Par Défaut</title>
-                                </meta>
-                            </param>
-                            <param name="none">
-                                <meta>
-                                    <title lang="en">None</title>
-                                    <title lang="tr">Yok</title>
-                                    <title lang="de">Keine</title>
-                                    <title lang="ru">Нет</title>
-                                    <title lang="es">Ninguno</title>
-                                    <title lang="fr">Aucun</title>
                                 </meta>
                             </param>
                         </param>
@@ -314,19 +213,8 @@
                     </params>
                 </property>
 
-                <property name="has_border" type="checkbox" colspan="6">
-                    <meta>
-                        <title lang="en">Top &amp; Bottom Borders</title>
-                        <title lang="tr">Üst ve Alt Kenarlıklar</title>
-                        <title lang="de"> Rahmen oben &amp; unten</title>
-                        <title lang="ru">Верхняя и нижняя границы</title>
-                        <title lang="es">Bordes Superior e Inferior</title>
-                        <title lang="fr">Bordures Haut et Bas</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="false"/>
-                    </params>
-                </property>
+                <xi:include href="../fields/padding.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
+                <xi:include href="../fields/margin.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
             </properties>
         </section>
     </properties>

@@ -71,9 +71,12 @@ final class QuotationTest extends TestCase
 
         self::assertSame('hero-quote', $quote->getElementId());
         $wrapper = $quote->getWrapperClasses();
-        self::assertStringContainsString('w-full flex flex-col', $wrapper);
+        self::assertStringNotContainsString('w-full flex flex-col', $wrapper);
         self::assertStringContainsString('mt-10', $wrapper);
         self::assertStringContainsString('mb-16', $wrapper);
         self::assertStringContainsString('my-quote', $wrapper);
+
+        $blockClasses = $quote->getBlockClasses();
+        self::assertStringContainsString('relative w-full flex flex-col', $blockClasses);
     }
 }

@@ -12,7 +12,7 @@
         <title lang="es">Separador</title>
         <title lang="de">Trennlinie</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="text_align,text_align_breakpoint,text_align_fallback"/>
     <properties>
         <section name="content">
             <meta>

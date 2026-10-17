@@ -1,4 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-    <twig:Headline :block="block" />
+    <twig:Headline :block="block" :context="_context" />
 {% endif %}

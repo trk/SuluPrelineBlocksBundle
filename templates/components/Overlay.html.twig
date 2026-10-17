@@ -31,9 +31,9 @@
 {% set img_sizes = this.getImageSizes() %}
 {% set wrapper_styles = this.getWrapperStyles() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {% if wrapper_styles %}style="{{ wrapper_styles }}"{% endif %}
-     {{ attributes.defaults(this.getRootAttributes()) }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}"{% if wrapper_styles %} style="{{ wrapper_styles }}"{% endif %}>
 
     {# 1. Media Layer (Background Image / Video) #}
     <div class="absolute inset-0 z-0 overflow-hidden bg-inverse">
@@ -43,11 +43,14 @@
                 :image_url="active_img"
                 :image_srcset="img_srcset"
                 :sizes="img_sizes"
+                :dimensions="this.getIntrinsicImageDimensions('16/9')"
                 :image_focus_style="img_focus_style"
                 :hover_image_url="active_hover_img"
                 :hover_image_srcset="hover_img_srcset"
                 :hover_image_focus_style="hover_img_focus_style"
                 :alt="this.getImageAlt()"
+                :loading="this.getImageLoading()"
+                :fetchpriority="this.getImageFetchPriority()"
                 :img_class="'w-full h-full ' ~ object_fit_class ~ ' ' ~ img_trans_classes ~ (active_hover_img ? ' group-hover:opacity-0' : '')"
                 :hover_img_class="'absolute inset-0 w-full h-full ' ~ object_fit_class ~ ' opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:scale-105'"
             />
@@ -79,11 +82,11 @@
     {% endif %}
 
     {# 3. Overlay Layer & Content Container #}
-    <div class="absolute inset-0 z-10 flex flex-col {{ overlay_pos_classes }} {{ overlay_style_classes }} {{ overlay_trans_classes }} {{ padding_classes }} {{ text_align }}">
-        <div class="max-w-xl flex flex-col">
+    <div class="absolute inset-0 flex flex-col {{ overlay_pos_classes }} {{ overlay_style_classes }} {{ overlay_trans_classes }} {{ padding_classes }} {{ text_align }}">
+        <div class="{{ this.getContentClasses() }}">
             {# Inline Badges #}
             {% if this.hasBadges() and this.getBadgePosition() == 'inline' %}
-                <div class="mb-3 flex flex-wrap gap-1.5">
+                <div class="relative z-20 mb-3 flex flex-wrap gap-1.5">
                     {% for b in this.getNormalizedBadges() %}
                         <twig:Badge :block="b" />
                     {% endfor %}
@@ -92,7 +95,7 @@
 
             {# Icon #}
             {% if icon_class %}
-                <div class="mb-3 inline-flex items-center justify-center w-10 h-10 rounded-lg {{ is_light ? 'bg-primary/10 text-primary' : 'bg-white/20 backdrop-blur-sm text-white' }} {% if text_align == 'text-center' %}mx-auto{% elseif text_align == 'text-right' %}ms-auto{% endif %}">
+                <div class="{{ this.getIconTileClasses() }} {% if text_align == 'text-center' %}mx-auto{% elseif text_align == 'text-right' %}ms-auto{% endif %}">
                     <i class="{{ icon_class }}" aria-hidden="true"></i>
                 </div>
             {% endif %}
@@ -136,7 +139,7 @@
             {% if this.hasButtons() %}
                 <div class="relative z-20 mt-5 flex flex-wrap items-center gap-2.5 {% if text_align == 'text-center' %}justify-center{% elseif text_align == 'text-right' %}justify-end{% endif %}">
                     {% for btn in this.getNormalizedButtons() %}
-                        <twig:Button :block="btn" />
+                        <twig:Button :bare="true" :block="btn" />
                     {% endfor %}
                 </div>
             {% endif %}
@@ -145,6 +148,7 @@
 
     {# 4. Stretched Link (Clickable Entire Overlay) #}
     {% if is_clickable and link_url %}
-        <a href="{{ link_url }}" class="absolute inset-0 z-20 focus:outline-hidden" aria-label="{{ title|default('Overlay link') }}"></a>
+        <a href="{{ link_url }}" class="absolute inset-0 z-10 focus:outline-hidden" aria-label="{{ title|default('Overlay link') }}"></a>
     {% endif %}
+    </div>
 </div>

@@ -19,6 +19,7 @@
     <button
         type="button"
         data-filter="*"
+        aria-pressed="true"
         class="{{ base_btn }} {{ active_btn }}"
     >
         {{ all_label|default('All') }}
@@ -27,6 +28,7 @@
         <button
             type="button"
             data-filter="{{ slug }}"
+            aria-pressed="false"
             class="{{ base_btn }} {{ inactive_btn }}"
         >
             {{ label }}

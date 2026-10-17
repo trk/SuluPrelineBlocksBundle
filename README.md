@@ -17,7 +17,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 - [Overview & Philosophy](#overview--philosophy)
 - [Key Features](#key-features)
-- [Included Blocks & Block Items (49 Block XMLs + 12 Field Fragments)](#included-blocks--block-items-49-block-xmls--12-field-fragments)
+- [Included Blocks & Block Items (47 Block XMLs + 24 Field Fragments)](#included-blocks--block-items-47-block-xmls--24-field-fragments)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Architecture & Override Mechanics](#architecture--override-mechanics)
@@ -30,7 +30,7 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Overview & Philosophy
 
-`SuluPrelineBlocksBundle` provides a complete library of **32 top-level Sulu CMS blocks, 17 nested block-items, and 12 reusable field fragments** alongside **Symfony UX Twig Components** built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
+`SuluPrelineBlocksBundle` provides a complete library of **31 top-level Sulu CMS blocks, 16 nested block-items, and 24 reusable field fragments** alongside **35 Symfony UX Twig Components** (including `Container`) built with **Tailwind CSS 4** and **Preline UI 5**, engineered with strict separation of concerns:
 
 1. **100% Native Sulu XML Block Definitions (`config/templates/blocks/*.xml`, `config/templates/block-items/*.xml` & `config/templates/fields/*.xml`)**: Every block defines its editorial fields in `<section name="content">` and its visual/layout options directly in `<section name="settings">` using native Sulu field types (`single_select`, `checkbox`, `text_line`, `color`, `number`). No external YAML prop schemas are needed.
 2. **Compile-Time Shared Tab Inheritance**: Through `trk/sulu-block-suite-bundle`, every block automatically compiles with inline `Content`, `Settings`, `General`, `Dynamic Content` (for data-driven blocks), and `Advanced` tabs in Sulu Admin (`FormMetadata`), with all non-content fields automatically namespaced under `props/*`.
@@ -41,27 +41,27 @@ An enterprise-grade, accessible, and fully customizable **Preline UI 5 & Tailwin
 
 ## Key Features
 
-- **32 Top-Level Blocks, 17 Block Items & 12 Field Fragments**:
-  - Layout containers (`section`, `row_item`, `column_item`)
+- **31 Top-Level Blocks, 16 Block Items, 24 Field Fragments & 35 Twig Components**:
+  - Layout containers (`section` + `Container`, `row_item`, `column_item`)
   - Typography & content (`headline`, `text`, `quotation`, `code`, `html`, `divider`)
   - Cards & collections (`card`, `grid`, `list`, `description_list`, `table`)
   - Media & sliders (`image`, `video`, `gallery`, `slideshow`, `overlay`, `overlay_slider`, `panel_slider`)
-  - Interactive & navigation (`accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `social`, `icon`, `countdown`, `map`, `scroll_to`)
+  - Interactive & navigation (`accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `icon`, `countdown`, `map`, `scroll_to`)
 - **Auto-Injected Column & Page Block Lists**: `column_item.xml` uses `<tag name="sulu_block_suite.auto_blocks" default="headline" exclude="section,row,column,row_item,column_item"/>`, automatically supporting all registered content blocks without hardcoded `<type ref="..."/>` lists.
-- **Scoped `.el-element` CSS & Safe Custom Attributes**: `ElementTransform` and `Section`/`Row`/`Column` components natively render `props.attributes` (`data-*`, `aria-*`) and scoped `.el-element` `<style>` blocks.
+- **Scoped `.el-element` CSS & Safe Custom Attributes**: `ElementTransform` and `Section`/`Container`/`Row`/`Column` components natively render `props.attributes` (`data-*`, `aria-*`) and scoped `.el-element` `<style>` blocks inside the root element.
 - **Complete 6-Language Translations**: 100% translated XML metadata labels, info texts, and select options for `en`, `tr`, `de`, `ru`, `es`, and `fr`.
 
 ---
 
-## Included Blocks & Block Items (49 Block XMLs + 12 Field Fragments)
+## Included Blocks & Block Items (47 Block XMLs + 24 Field Fragments)
 
-| Category | Top-Level Blocks (32) | Nested Block Items (17) |
+| Category | Top-Level Blocks (31) | Nested Block Items (16) |
 | --- | --- | --- |
 | **Layout Containers** | `section` | `row_item`, `column_item` |
 | **Typography & Content** | `headline`, `text`, `quotation`, `code`, `html`, `divider` | — |
 | **Cards & Collections** | `card`, `grid`, `list`, `description_list`, `table` | `card`, `list_item`, `description_list_item`, `table_item` |
 | **Media & Sliders** | `image`, `video`, `gallery`, `slideshow`, `overlay`, `overlay_slider`, `panel_slider` | `slideshow_item`, `overlay` |
-| **Interactive & Navigation** | `accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `social`, `icon`, `countdown`, `map`, `scroll_to` | `accordion_item`, `switcher_item`, `popover_item`, `button`, `badge`, `nav_item`, `subnav_item`, `social_item`, `map_item` |
+| **Interactive & Navigation** | `accordion`, `switcher`, `popover`, `button`, `alert`, `nav`, `subnav`, `breadcrumbs`, `icon`, `countdown`, `map`, `scroll_to` | `accordion_item`, `switcher_item`, `popover_item`, `button`, `badge`, `nav_item`, `subnav_item`, `map_item` |
 
 ---
 
@@ -114,8 +114,9 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 
 ## Architecture & Override Mechanics
 
-- **`PrelineComponent` Base Class & `PrelineClassMap` Registry**: All 35 Twig component PHP classes extend `PrelineComponent` (which extends `AbstractBlockComponent` from `trk/sulu-block-suite-bundle`). Shared Tailwind CSS 4 / Preline UI 5 token maps (colors, typography, badges, buttons, shadows, borders, radii, aspect ratios, grid columns, animations, blend modes) are centralized in `PrelineClassMap` and `PropsResolver`.
-- **Sub-Component Composition**: Complex components (`Card`, `Overlay`, `Popover`, `Gallery`, `Slideshow`, `OverlaySlider`, `PanelSlider`, `ListBlock`, `DescriptionList`, `Table`, `Subnav`, `Switcher`, `Alert`) compose foundational `<twig:Badge>`, `<twig:Button>`, `<twig:Image :bare="true">`, and `<twig:Video :bare="true">` components as well as shared carousel/filter partials (`@SuluPrelineBlocks/includes/carousel_controls.html.twig`, `tag_filter_bar.html.twig`, `tag_filter_script.html.twig`) instead of duplicating raw HTML markup.
+- **`PrelineComponent` Base Class & `PrelineClassMap` Registry**: All 35 Twig component PHP classes (including `Container`) extend `PrelineComponent` (which extends `AbstractBlockComponent` from `trk/sulu-block-suite-bundle`). Shared Tailwind CSS 4 / Preline UI 5 token maps (colors, typography, badges, buttons, shadows, borders, radii, aspect ratios, grid columns, animations, blend modes) are centralized in `PrelineClassMap` and `PropsResolver`.
+- **3-Layer Block DOM Structure (`div (block container) > div (block) > context`)**: Content blocks render a consistent 3-layer DOM hierarchy where Layer 1 (`getRootAttributes()` / `getWrapperClasses()`) handles universal outer positioning, margins, max-width, alignment, visibility, custom attributes, and ID; Layer 2 (`getBlockClasses()`) handles block-specific visual framing (backgrounds, borders, rounding, shadows, aspect ratios); and Layer 3 renders the inner semantic content and sub-components.
+- **Sub-Component Composition**: Complex components (`Card`, `Overlay`, `Popover`, `Gallery`, `Slideshow`, `OverlaySlider`, `PanelSlider`, `ListBlock`, `DescriptionList`, `Table`, `Subnav`, `Switcher`, `Alert`) compose foundational `<twig:Badge>`, `<twig:Button>`, `<twig:Image :bare="true">`, and `<twig:Video :bare="true">` components as well as shared carousel/filter partials (`@SuluPrelineBlocks/includes/carousel_controls.html.twig`, `tag_filter_bar.html.twig`) instead of duplicating raw HTML markup.
 - **Override Block XML**: Place `config/templates/blocks/{block}.xml` in your application to customize `<section name="content">`, `<section name="settings">`, or add custom tab sections (`<section name="style">`, `<section name="layout">`).
 - **Define Project Presets**: Create `config/blocks/presets/{block}.yaml` in your application.
 - **Override Twig Templates**: Place `templates/blocks/{block}.html.twig` or `templates/bundles/SuluPrelineBlocksBundle/components/{Component}.html.twig` in your application.
@@ -124,9 +125,9 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 
 ## Scoped CSS & Custom Attributes
 
-Every Preline Twig Component (`Section`, `Row`, `Column`, `Card`, `Headline`, `Button`, etc.) processes `props` through `PrelineComponent::getRootAttributes()`, `ElementTransform`, and `BlockRenderer`:
+Every Preline Twig Component (`Section`, `Container`, `Row`, `Column`, `Card`, `Headline`, `Button`, etc.) processes `props` through `PrelineComponent::getRootAttributes()`, `ElementTransform`, and `BlockRenderer`:
 - Root wrapper classes (`margin`, `padding`, `max_width`, `block_align`, `text_align`, `position`, `z_index`, `animation`, `blend`, `visibility`, `custom_class`), element `id`, parallax attributes (`data-parallax`), and custom HTML attributes (`data-*`, `aria-*`, `role`, etc.) from `props.attributes` are automatically resolved and merged onto the root element via `{{ attributes.defaults(this.getRootAttributes()) }}`.
-- Custom CSS from `props.css` using `.el-element` (or bare CSS properties) is automatically scoped to the component's unique `#id` and emitted as an inline `<style>` tag before the component root element.
+- Custom CSS from `props.css` using `.el-element` (or bare CSS properties) is automatically scoped to the component's unique `#id` and emitted as an inline `<style>` tag inside the component root element.
 
 ---
 

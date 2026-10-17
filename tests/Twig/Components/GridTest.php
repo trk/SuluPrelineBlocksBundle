@@ -206,4 +206,22 @@ final class GridTest extends TestCase
         $itemProps = $grid->resolveItemProps(['title' => 'Group Card']);
         self::assertSame('group', $itemProps['card_variant']);
     }
+
+    public function testFirstItemEagerImageLoadingPropagation(): void
+    {
+        $grid = new Grid();
+        $grid->mergeProps([
+            'image_loading' => true,
+        ]);
+
+        $firstItemProps = $grid->resolveItemProps(['title' => 'First Card'], true);
+        self::assertTrue($firstItemProps['image_loading']);
+        self::assertSame('eager', $firstItemProps['loading']);
+        self::assertSame('high', $firstItemProps['fetchpriority']);
+
+        $secondItemProps = $grid->resolveItemProps(['title' => 'Second Card'], false);
+        self::assertFalse($secondItemProps['image_loading']);
+        self::assertSame('lazy', $secondItemProps['loading']);
+        self::assertArrayNotHasKey('fetchpriority', $secondItemProps);
+    }
 }

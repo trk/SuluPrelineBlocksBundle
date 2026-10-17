@@ -6,144 +6,127 @@
 {% set icon_style = this.iconStyle %}
 {% set title_size_classes = this.titleSizeClasses %}
 {% set image_align = this.imageAlign %}
-{% set accordion_dom_id = custom_id ? custom_id : ('accordion-' ~ random()) %}
+{% set side_image = this.sideImageLayout %}
+{% set image_sizes = this.imageSizes %}
+{% set image_dimensions = this.intrinsicImageDimensions %}
+{% set media_frame_classes = this.mediaFrameClasses %}
+{% set media_img_classes = this.mediaImgClasses %}
+{% set media_aspect_style = this.mediaAspectRatioStyle %}
+{% set accordion_dom_id = custom_id ? custom_id : this.componentUid %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: accordion_dom_id})) }}>
-    {% if title %}
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-foreground">{{ title }}</h2>
-        </div>
-    {% endif %}
+<div {{ attributes.defaults(this.getRootAttributes()|merge({id: accordion_dom_id})) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-foreground">{{ title }}</h2>
+            </div>
+        {% endif %}
 
-    <div
-        class="hs-accordion-group {{ this.containerClasses }} w-full"
-        {% if is_multiple %}data-hs-accordion-always-open{% endif %}
-    >
-        {% for item in items %}
-            {% set is_first = loop.first %}
-            {% set item_is_active = item.is_active is defined and (item.is_active == true or item.is_active == '1') %}
-            {% set is_open = item_is_active or (not is_collapsible and is_first) %}
-            {% set item_heading_id = accordion_dom_id ~ '-heading-' ~ loop.index %}
-            {% set item_collapse_id = accordion_dom_id ~ '-collapse-' ~ loop.index %}
-
-            <div
-                class="{{ this.itemClasses }} {% if is_open %}active{% endif %}"
-                id="{{ item_heading_id }}"
-            >
-                <button
-                    type="button"
-                    class="{{ this.toggleClasses }}"
-                    aria-expanded="{{ is_open ? 'true' : 'false' }}"
-                    aria-controls="{{ item_collapse_id }}"
-                >
-                    <span class="{{ title_size_classes }}">{{ item.title|default('') }}</span>
-
-                    {% if icon_style == 'chevron' %}
-                        <svg class="hs-accordion-active:hidden block size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                        <svg class="hs-accordion-active:block hidden size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-                    {% elseif icon_style == 'plus' %}
-                        <svg class="hs-accordion-active:hidden block size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                        <svg class="hs-accordion-active:block hidden size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
-                    {% endif %}
-                </button>
+        <div
+            class="hs-accordion-group {{ this.containerClasses }}"
+            {% if is_multiple %}data-hs-accordion-always-open{% endif %}
+        >
+            {% for item in items %}
+                {% set is_first = loop.first %}
+                {% set item_is_active = item.is_active is defined and (item.is_active == true or item.is_active == '1') %}
+                {% set is_open = item_is_active or (not is_collapsible and is_first) %}
+                {% set item_heading_id = accordion_dom_id ~ '-heading-' ~ loop.index %}
+                {% set item_collapse_id = accordion_dom_id ~ '-collapse-' ~ loop.index %}
 
                 <div
-                    id="{{ item_collapse_id }}"
-                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {% if not is_open %}hidden{% endif %}"
-                    role="region"
-                    aria-labelledby="{{ item_heading_id }}"
+                    class="{{ this.itemClasses }} {% if is_open %}active{% endif %}"
+                    id="{{ item_heading_id }}"
                 >
-                    <div class="{{ this.contentWrapperClasses }}">
-                        {% set img_url = item.image_url|default(null) %}
+                    <button
+                        type="button"
+                        class="{{ this.toggleClasses }}"
+                        aria-expanded="{{ is_open ? 'true' : 'false' }}"
+                        aria-controls="{{ item_collapse_id }}"
+                    >
+                        <span class="{{ title_size_classes }}">{{ item.title|default('') }}</span>
 
-                        {% if img_url and (image_align == 'left' or image_align == 'right') %}
-                            <div class="sm:flex sm:gap-x-6 items-start my-2">
-                                {% if image_align == 'left' %}
-                                    <div class="sm:w-1/3 shrink-0 mb-3 sm:mb-0">
+                        {% if icon_style == 'chevron' %}
+                            <svg class="hs-accordion-active:hidden block size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            <svg class="hs-accordion-active:block hidden size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                        {% elseif icon_style == 'plus' %}
+                            <svg class="hs-accordion-active:hidden block size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            <svg class="hs-accordion-active:block hidden size-4 text-muted-foreground-2 group-hover:text-muted-foreground-1 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                        {% endif %}
+                    </button>
+
+                    <div
+                        id="{{ item_collapse_id }}"
+                        class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {% if not is_open %}hidden{% endif %}"
+                        role="region"
+                        aria-labelledby="{{ item_heading_id }}"
+                    >
+                        <div class="{{ this.contentWrapperClasses }}">
+                            {% set img_url = item.image_url|default(null) %}
+                            {% set item_image %}
+                                {% if img_url %}
+                                    <div class="{{ media_frame_classes }} rounded-lg" {% if media_aspect_style %}style="{{ media_aspect_style }}"{% endif %}>
                                         <twig:Image
                                             :bare="true"
                                             :image_url="img_url"
                                             :image_srcset="item.image_srcset|default(null)"
-                                            sizes="(min-width: 1024px) 33vw, 100vw"
+                                            :sizes="image_sizes"
+                                            :dimensions="image_dimensions"
                                             :image_focus_style="item.image_focus_style|default(null)"
                                             :alt="item.title|default('')"
-                                            img_class="w-full rounded-lg object-cover"
+                                            :loading="this.getImageLoading(is_first and is_open)"
+                                            :fetchpriority="this.getImageFetchPriority(is_first and is_open, not is_open)"
+                                            :img_class="media_img_classes"
                                         />
                                     </div>
                                 {% endif %}
-                                <div class="sm:flex-1">
-                                    {% if item.content|default('') %}
-                                        <div class="text-muted-foreground-2 leading-relaxed text-sm">
-                                            {{ item.content|raw }}
-                                        </div>
+                            {% endset %}
+                            {% set item_content %}
+                                {% if item.content|default('') %}
+                                    <div class="text-muted-foreground-2 leading-relaxed text-sm">
+                                        {{ item.content|raw }}
+                                    </div>
+                                {% endif %}
+                            {% endset %}
+
+                            {% if img_url and this.hasSideImage() %}
+                                <div class="{{ side_image.row }}">
+                                    {% if image_align == 'left' %}
+                                        <div class="{{ side_image.media_left }}">{{ item_image }}</div>
+                                    {% endif %}
+                                    <div class="{{ side_image.text }}">{{ item_content }}</div>
+                                    {% if image_align == 'right' %}
+                                        <div class="{{ side_image.media_right }}">{{ item_image }}</div>
                                     {% endif %}
                                 </div>
-                                {% if image_align == 'right' %}
-                                    <div class="sm:w-1/3 shrink-0 mt-3 sm:mt-0">
-                                        <twig:Image
-                                            :bare="true"
-                                            :image_url="img_url"
-                                            :image_srcset="item.image_srcset|default(null)"
-                                            sizes="(min-width: 1024px) 33vw, 100vw"
-                                            :image_focus_style="item.image_focus_style|default(null)"
-                                            :alt="item.title|default('')"
-                                            img_class="w-full rounded-lg object-cover"
-                                        />
-                                    </div>
+                            {% else %}
+                                {% if img_url and image_align == 'top' %}
+                                    <div class="mb-3">{{ item_image }}</div>
                                 {% endif %}
-                            </div>
-                        {% else %}
-                            {% if img_url and image_align == 'top' %}
-                                <div class="mb-3">
-                                    <twig:Image
-                                        :bare="true"
-                                        :image_url="img_url"
-                                        :image_srcset="item.image_srcset|default(null)"
-                                        sizes="(min-width: 1024px) 800px, 100vw"
-                                        :image_focus_style="item.image_focus_style|default(null)"
-                                        :alt="item.title|default('')"
-                                        img_class="w-full max-h-80 rounded-lg object-cover"
-                                    />
-                                </div>
+                                {{ item_content }}
+                                {% if img_url and image_align == 'bottom' %}
+                                    <div class="mt-3">{{ item_image }}</div>
+                                {% endif %}
                             {% endif %}
 
-                            {% if item.content|default('') %}
-                                <div class="text-muted-foreground-2 leading-relaxed text-sm">
-                                    {{ item.content|raw }}
-                                </div>
-                            {% endif %}
-
-                            {% if img_url and image_align == 'bottom' %}
+                            {% set link_href = item.link_href|default(null) %}
+                            {% if link_href and link_href != '#' %}
                                 <div class="mt-3">
-                                    <twig:Image
-                                        :bare="true"
-                                        :image_url="img_url"
-                                        :image_srcset="item.image_srcset|default(null)"
-                                        sizes="(min-width: 1024px) 800px, 100vw"
-                                        :image_focus_style="item.image_focus_style|default(null)"
-                                        :alt="item.title|default('')"
-                                        img_class="w-full max-h-80 rounded-lg object-cover"
-                                    />
+                                    <a
+                                        href="{{ link_href }}"
+                                        {% if item.link_target|default(null) == '_blank' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                                        {% if item.link_title|default(null) %}title="{{ item.link_title }}"{% endif %}
+                                        class="inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary hover:text-primary-hover"
+                                    >
+                                        {{ item.link_title|default('Learn more'|trans({}, 'sulu_website')) }}
+                                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                    </a>
                                 </div>
                             {% endif %}
-                        {% endif %}
-
-                        {% set link_href = item.link_href|default(null) %}
-                        {% if link_href and link_href != '#' %}
-                            <div class="mt-3">
-                                <a
-                                    href="{{ link_href }}"
-                                    class="inline-flex items-center gap-x-1.5 text-sm font-semibold text-primary hover:text-primary-hover"
-                                >
-                                    {{ item.link_title|default('Learn more'|trans({}, 'sulu_website')) }}
-                                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                                </a>
-                            </div>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</section>
+</div>

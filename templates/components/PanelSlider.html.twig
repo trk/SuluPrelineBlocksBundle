@@ -5,38 +5,41 @@
 {% set slide_width = this.slideWidthClass %}
 {% set gap_class = this.gapClass %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('w-full')) }}>
-    {% if title %}
-        <div class="flex items-center justify-between mb-6">
-            <h3 class="text-2xl font-bold tracking-tight text-foreground">
-                {{ title }}
-            </h3>
-        </div>
-    {% endif %}
-
-    <div
-        data-hs-carousel='{{ this.carouselConfigJson|raw }}'
-        class="relative w-full"
-    >
-        <div class="hs-carousel relative overflow-hidden w-full min-h-[380px] rounded-xl">
-            <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 -mx-2.5">
-                {% for item in normalized_items %}
-                    <div class="hs-carousel-slide shrink-0 {{ slide_width }} {{ gap_class }} h-full">
-                        <twig:Card
-                            :block="item"
-                            :link="item.link|default(item.url|default(null))"
-                        />
-                    </div>
-                {% endfor %}
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold tracking-tight text-foreground">
+                    {{ title }}
+                </h3>
             </div>
-        </div>
+        {% endif %}
 
-        {{ include('@SuluPrelineBlocks/includes/carousel_controls.html.twig', {
-            arrows: arrows,
-            pagination: dots,
-            items_count: normalized_items|length,
-            variant: 'default',
-        }, with_context = false) }}
+        <div
+            data-hs-carousel='{{ this.carouselConfigJson|raw }}'
+            class="relative w-full"
+        >
+            <div class="hs-carousel relative overflow-hidden w-full {{ this.heightClass }} rounded-xl">
+                <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0 -mx-2.5">
+                    {% for item in normalized_items %}
+                        <div class="hs-carousel-slide shrink-0 {{ slide_width }} {{ gap_class }} h-full">
+                            <twig:Card
+                                :block="item"
+                                :link="item.link|default(item.url|default(null))"
+                                :props="this.resolveItemProps(item, loop.first, not loop.first)"
+                            />
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {{ include('@SuluPrelineBlocks/includes/carousel_controls.html.twig', {
+                arrows: arrows,
+                pagination: dots,
+                items_count: normalized_items|length,
+                variant: 'default',
+            }, with_context: false) }}
+        </div>
     </div>
-</section>
+</div>

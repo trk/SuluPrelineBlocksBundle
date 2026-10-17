@@ -92,10 +92,19 @@ final class ButtonTest extends TestCase
         );
 
         self::assertSame('my-button', $button->getElementId());
+        self::assertFalse($button->isBare());
         $wrapper = $button->getWrapperClasses();
         self::assertStringContainsString('mt-6', $wrapper);
         self::assertStringContainsString('mb-10', $wrapper);
         self::assertStringContainsString('shadow-lg', $wrapper);
+        self::assertStringNotContainsString('bg-primary', $wrapper);
+
+        $blockClasses = $button->getBlockClasses();
+        self::assertStringContainsString('inline-flex flex-wrap items-center', $blockClasses);
+        self::assertStringContainsString('justify-start text-left', $blockClasses);
+
+        $bareButton = new Button(['bare' => true, 'title' => 'Bare']);
+        self::assertTrue($bareButton->isBare());
     }
 
     public function testButtonGroupSeparated(): void
@@ -126,6 +135,7 @@ final class ButtonTest extends TestCase
                 'group_style' => 'gap',
                 'align' => 'center',
                 'gap' => 'sm',
+                'margin' => 'md',
             ],
         );
 
@@ -137,7 +147,8 @@ final class ButtonTest extends TestCase
         self::assertSame('center', $button->getAlign());
         self::assertSame('sm', $button->getGap());
 
-        $wrapper = $button->getGroupWrapperClasses();
+        self::assertSame('my-6', $button->getWrapperClasses());
+        $wrapper = $button->getBlockClasses();
         self::assertStringContainsString('flex flex-wrap items-center', $wrapper);
         self::assertStringContainsString('gap-1.5', $wrapper);
         self::assertStringContainsString('justify-center', $wrapper);
@@ -150,6 +161,7 @@ final class ButtonTest extends TestCase
         self::assertSame('ti ti-arrow-right', $normalized[0]['icon']);
         self::assertSame('right', $normalized[0]['icon_align']);
         self::assertStringContainsString('bg-primary', $normalized[0]['classes']);
+        self::assertTrue($normalized[0]['bare']);
 
         self::assertSame('Learn More', $normalized[1]['title']);
         self::assertSame('https://example.com/docs', $normalized[1]['url']);
@@ -157,6 +169,7 @@ final class ButtonTest extends TestCase
         self::assertSame('left', $normalized[1]['icon_align']);
         self::assertStringContainsString('border', $normalized[1]['classes']);
         self::assertStringContainsString('text-foreground', $normalized[1]['classes']);
+        self::assertTrue($normalized[1]['bare']);
     }
 
     public function testButtonGroupConnectedSegmented(): void

@@ -51,7 +51,7 @@ final class Video extends PrelineComponent
 
     public function shouldRender(): bool
     {
-        return null !== $this->getVideoUrl() || null !== $this->getUrl() || null !== $this->getPosterUrl();
+        return null !== $this->getVideoUrl() || null !== $this->getPosterUrl();
     }
 
     public function isBare(): bool
@@ -109,12 +109,7 @@ final class Video extends PrelineComponent
 
     public function getUrl(): ?string
     {
-        $link = $this->get('link');
-        if (null === $link || '' === $link) {
-            return null;
-        }
-
-        return PropsResolver::resolveUrl($link);
+        return $this->getLinkUrl('link');
     }
 
     public function getAspectRatio(string $default = '16/9', string $key = 'aspect_ratio'): string
@@ -131,7 +126,7 @@ final class Video extends PrelineComponent
     {
         $autoplay = $this->prop('autoplay');
 
-        return $this->oneOf($autoplay, [true, 'true', '1', 1, 'on', 'inview', 'hover']);
+        return $this->oneOf($autoplay, [true, 'true', '1', 1, 'on']);
     }
 
     public function getAutoplayMode(): ?string
@@ -154,16 +149,24 @@ final class Video extends PrelineComponent
     public function isMuted(): bool
     {
         $props = $this->props();
-        if (\array_key_exists('muted', $props) && null !== $props['muted']) {
+        if (
+            \array_key_exists('muted', $props)
+            && null !== $props['muted']
+            && '' !== $props['muted']
+            && 'default' !== $props['muted']
+        ) {
             return $this->boolProp('muted', false);
         }
 
-        return $this->isAutoplay();
+        return $this->isAutoplay() || null !== $this->getAutoplayMode();
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
+        return $this->classes(
             'relative w-full overflow-hidden',
             $this->getRounded(),
             $this->getShadowClasses(),

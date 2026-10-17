@@ -123,8 +123,16 @@ final class Icon extends PrelineComponent
         return $this->classes('inline-flex items-center justify-center rounded-xl', $dimensionClass, $soft, $hover);
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses('flex items-center', $this->getAlignClasses(), $extraBase, ...$moreParts);
+        return $this->classes(
+            'flex items-center',
+            $this->getAlignClasses(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

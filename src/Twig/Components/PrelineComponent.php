@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 /**
  * Unified Preline UI 5 & Tailwind CSS 4 base component.
@@ -16,6 +18,11 @@ use Totoglu\SuluBlockSuiteBundle\Twig\Component\AbstractBlockComponent;
  */
 abstract class PrelineComponent extends AbstractBlockComponent
 {
+    /**
+     * Prop / render-context key carrying the serialized `ResponsiveWidth` of the parent slot.
+     */
+    public const SLOT_KEY = '_slot';
+
     /**
      * When true, `getWrapperClasses()` includes `props['padding']` in addition to `props['block_padding']`.
      * Components that apply `props['padding']` to an inner container (e.g. `Card`, `Column`) set this to false.
@@ -29,7 +36,23 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     public function getElementId(): ?string
     {
-        return ElementTransform::resolveId($this->props());
+        return ElementTransform::resolveId($this->props(), [static::class, $this->data, $this->extractRenderLoopIndex()]);
+    }
+
+    public function getComponentUid(): string
+    {
+        return $this->getElementId()
+            ?? ('hs-' . \substr(\md5((string) \json_encode([static::class, $this->data, $this->props, $this->extractRenderLoopIndex()])), 0, 10));
+    }
+
+    private function extractRenderLoopIndex(): ?int
+    {
+        $loop = $this->context['loop'] ?? null;
+        if (\is_array($loop) && isset($loop['index0']) && \is_numeric($loop['index0'])) {
+            return (int) $loop['index0'];
+        }
+
+        return null;
     }
 
     public function getCustomClass(): string
@@ -63,7 +86,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return ElementTransform::padding($this->props(), $default, $key, 'card');
     }
 
-    public function getOverlayPaddingClasses(string $default = 'normal', string $key = 'overlay_padding'): string
+    public function getOverlayPaddingClasses(string $default = 'normal', string $key = 'padding'): string
     {
         return ElementTransform::padding($this->props(), $default, $key, 'overlay');
     }
@@ -183,7 +206,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     public function getScopedCss(): ?string
     {
-        return ElementTransform::resolveScopedCss($this->props());
+        return ElementTransform::resolveScopedCss($this->props(), $this->getElementId());
     }
 
     /**
@@ -196,6 +219,16 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $this->classes($extraBase, ...$moreParts),
             $this->applyWrapperPadding,
         );
+    }
+
+    /**
+     * Standard block-level classes for the inner block <div> inside the block container.
+     *
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return $this->classes('w-full', $extraBase, ...$moreParts);
     }
 
     /**
@@ -217,6 +250,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
      */
     public function getRootAttributesWithClass(string $class): array
     {
+        $props = $this->props();
         $attrs = $this->getCustomAttributes();
 
         $id = $this->getElementId();
@@ -226,6 +260,16 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
         if ('' !== $class) {
             $attrs['class'] = $class;
+        }
+
+        $positionStyle = ElementTransform::resolvePositionStyle($props);
+        if ('' !== $positionStyle) {
+            $existingStyle = isset($attrs['style']) && \is_string($attrs['style']) ? \rtrim(\trim($attrs['style']), ';') : '';
+            $attrs['style'] = '' !== $existingStyle ? $existingStyle . '; ' . $positionStyle : $positionStyle;
+        }
+
+        if ($this->boolProp('item_animation', false) && '' !== $this->getAnimationClass()) {
+            $attrs['data-item-animation'] = 'true';
         }
 
         return $attrs;
@@ -370,34 +414,160 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return PropsResolver::aspectRatio($this->props(), $default, $key);
     }
 
-    public function getMediaAspectRatioClass(string $default = '16-9', string $autoClass = 'aspect-auto'): string
+    /**
+     * Active aspect-ratio key (`aspect_ratio`, falling back to `media_aspect_ratio`).
+     */
+    public function getAspectRatioKey(string $default = 'auto'): string
     {
-        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->stringProp('media_aspect_ratio', $default);
+        return $this->nullableStringProp('aspect_ratio') ?? $this->stringProp('media_aspect_ratio', $default);
+    }
+
+    public function getMediaAspectRatioClass(string $default = '16/9', string $autoClass = 'aspect-auto'): string
+    {
+        $aspect = $this->getAspectRatioKey($default);
         if ('auto' === $aspect) {
             return $autoClass;
         }
 
-        return PrelineClassMap::resolve(
-            PrelineClassMap::MEDIA_ASPECT_RATIOS,
-            $aspect,
-            PrelineClassMap::MEDIA_ASPECT_RATIOS[$default] ?? 'aspect-video',
-        );
+        $preset = PrelineClassMap::aspectRatio($aspect) ?? PrelineClassMap::aspectRatio($default);
+
+        return null !== $preset ? $preset['class'] : $autoClass;
+    }
+
+    /**
+     * Custom ratio entered by the editor when the aspect ratio is `manual`.
+     *
+     * @return array{float, float}|null
+     */
+    public function getManualAspectRatio(): ?array
+    {
+        if ('manual' !== $this->getAspectRatioKey()) {
+            return null;
+        }
+
+        $width = $this->floatProp('aspect_ratio_width', 0.0);
+        $height = $this->floatProp('aspect_ratio_height', 0.0);
+
+        return $width > 0.0 && $height > 0.0 ? [$width, $height] : null;
+    }
+
+    /**
+     * Numeric width/height ratio of the media (preset or manual); `null` when intrinsic (`auto`).
+     *
+     * @return array{float, float}|null
+     */
+    public function getAspectRatioValue(string $default = 'auto'): ?array
+    {
+        $manual = $this->getManualAspectRatio();
+        if (null !== $manual) {
+            return $manual;
+        }
+
+        $ratio = PrelineClassMap::aspectRatio($this->getAspectRatioKey($default))['ratio'] ?? null;
+
+        return null !== $ratio ? [(float) $ratio[0], (float) $ratio[1]] : null;
     }
 
     public function getMediaAspectRatioStyle(): string
     {
-        $aspect = $this->nullableStringProp('aspect_ratio') ?? $this->nullableStringProp('media_aspect_ratio');
-
-        if ('manual' === $aspect) {
-            $widthVal = $this->floatProp('aspect_ratio_width', 0.0);
-            $heightVal = $this->floatProp('aspect_ratio_height', 0.0);
-
-            if ($widthVal > 0.0 && $heightVal > 0.0) {
-                return \sprintf('aspect-ratio: %s / %s;', $widthVal, $heightVal);
-            }
+        $manual = $this->getManualAspectRatio();
+        if (null === $manual) {
+            return '';
         }
 
-        return '';
+        return \sprintf('aspect-ratio: %s / %s;', self::formatRatioNumber($manual[0]), self::formatRatioNumber($manual[1]));
+    }
+
+    /**
+     * Intrinsic `width`/`height` attributes for `<img>` (reserves space and prevents layout shift):
+     * width is the largest rendered slot width, height follows the active aspect ratio.
+     *
+     * @return array{width: int, height: int}|null
+     */
+    public function getIntrinsicImageDimensions(string $defaultAspect = 'auto'): ?array
+    {
+        $ratio = $this->getAspectRatioValue($defaultAspect);
+        if (null === $ratio) {
+            return null;
+        }
+
+        $width = $this->getMediaSlotWidth()->maxSlotPx();
+
+        return ['width' => $width, 'height' => (int) \round($width * $ratio[1] / $ratio[0])];
+    }
+
+    /**
+     * Rendered width of this block at every breakpoint: the layout slot inherited from the
+     * parent container (`_slot` prop or render context) capped by the block's own `max_width`.
+     * Without a parent container, the default Section container is assumed.
+     */
+    public function getSlotWidth(): ResponsiveWidth
+    {
+        return $this->narrowSlotWidth($this->resolveInheritedSlotWidth())
+            ->cap(PrelineClassMap::blockMaxWidth($this->prop('max_width'))['px']);
+    }
+
+    /**
+     * Slot provided by the parent (`_slot` prop, then render context), or the default Section
+     * container when the block is rendered standalone.
+     */
+    protected function resolveInheritedSlotWidth(): ResponsiveWidth
+    {
+        return ResponsiveWidth::fromArray($this->prop(self::SLOT_KEY))
+            ?? ResponsiveWidth::fromArray($this->context()[self::SLOT_KEY] ?? null)
+            ?? ResponsiveWidth::container(PrelineClassMap::sectionMaxWidth('default')['px']);
+    }
+
+    /**
+     * Hook for components that occupy only part of the inherited slot (e.g. a standalone column span).
+     */
+    protected function narrowSlotWidth(ResponsiveWidth $inherited): ResponsiveWidth
+    {
+        return $inherited;
+    }
+
+    /**
+     * Rendered width of the block's media slot. Components with split layouts
+     * (e.g. horizontal cards, side images) narrow it further.
+     */
+    public function getMediaSlotWidth(): ResponsiveWidth
+    {
+        return $this->getSlotWidth();
+    }
+
+    /**
+     * Render-context entries that pass this block's layout slot to nested blocks.
+     *
+     * @return array<string, mixed>
+     */
+    public function getChildContext(): array
+    {
+        return \array_merge($this->context(), [self::SLOT_KEY => $this->getSlotWidth()->toArray()]);
+    }
+
+    /**
+     * Frame around an embedded image: fixed by the aspect ratio (inline style for `manual`).
+     */
+    public function getMediaFrameClasses(string $defaultAspect = '16/9'): string
+    {
+        return $this->classes('relative w-full overflow-hidden', $this->getMediaAspectRatioClass($defaultAspect, ''));
+    }
+
+    /**
+     * `<img>` inside a media frame: fills the frame when a ratio is set, natural height otherwise.
+     */
+    public function getMediaImgClasses(string $defaultAspect = '16/9'): string
+    {
+        return $this->classes(
+            'block w-full',
+            null !== $this->getAspectRatioValue($defaultAspect) ? 'h-full' : 'h-auto',
+            $this->getObjectFitClass(),
+        );
+    }
+
+    private static function formatRatioNumber(float $value): string
+    {
+        return \rtrim(\rtrim(\number_format($value, 4, '.', ''), '0'), '.');
     }
 
     public function getObjectFitClass(string $default = 'cover', string $key = 'object_fit'): string
@@ -405,11 +575,22 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return PropsResolver::resolveObjectFit($this->stringProp($key, $default));
     }
 
+    private static function sanitizeMediaUrl(?string $url): ?string
+    {
+        if (null === $url) {
+            return null;
+        }
+
+        $clean = SuluDataNormalizer::sanitizeUrl(\trim($url), '');
+
+        return ('' !== $clean && '#' !== $clean) ? $clean : null;
+    }
+
     public function getImageUrl(string $key = 'image'): ?string
     {
         $source = $this->stringProp('media_source', 'media');
         if ('url' === $source && 'image' === $key) {
-            $url = $this->nullableString('image_url') ?? $this->nullableStringProp('image_url');
+            $url = self::sanitizeMediaUrl($this->nullableString('image_url') ?? $this->nullableStringProp('image_url'));
             if (null !== $url) {
                 return $url;
             }
@@ -420,22 +601,21 @@ abstract class PrelineComponent extends AbstractBlockComponent
             return $resolved;
         }
 
-        return $this->nullableString('image_url') ?? $this->nullableStringProp('image_url');
+        return self::sanitizeMediaUrl($this->nullableString('image_url') ?? $this->nullableStringProp('image_url'));
     }
 
     public function getHoverImageUrl(): ?string
     {
         $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url');
+            $url = self::sanitizeMediaUrl($this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url'));
             if (null !== $url) {
                 return $url;
             }
         }
 
         return PropsResolver::resolveImageUrl($this->get('hover_image'))
-            ?? $this->nullableString('hover_image_url')
-            ?? $this->nullableStringProp('hover_image_url');
+            ?? self::sanitizeMediaUrl($this->nullableString('hover_image_url') ?? $this->nullableStringProp('hover_image_url'));
     }
 
     public function getImageSrcSet(string $key = 'image'): ?string
@@ -448,13 +628,9 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return PropsResolver::resolveSrcSet($this->get('hover_image'));
     }
 
-    public function getImageSizes(string $default = '100vw'): string
+    public function getImageSizes(): string
     {
-        return PrelineClassMap::resolve(
-            PrelineClassMap::IMAGE_SIZES_BY_MAX_WIDTH,
-            $this->stringProp('max_width', 'none'),
-            $default,
-        );
+        return $this->nullableStringProp('sizes') ?? $this->getMediaSlotWidth()->toSizes();
     }
 
     public function getImageFocusPointStyle(string $key = 'image'): ?string
@@ -465,6 +641,38 @@ abstract class PrelineComponent extends AbstractBlockComponent
     public function getHoverImageFocusPointStyle(): ?string
     {
         return PropsResolver::resolveFocusPointStyle($this->get('hover_image'));
+    }
+
+    public function isImageEager(): bool
+    {
+        return $this->boolProp('image_loading', false)
+            || 'eager' === $this->stringProp('loading', 'lazy');
+    }
+
+    public function getImageLoading(bool $isFirstItem = true): string
+    {
+        return ($isFirstItem && $this->isImageEager()) ? 'eager' : 'lazy';
+    }
+
+    public function getImageFetchPriority(bool $isFirstItem = true, bool $isHiddenOrOffscreen = false): ?string
+    {
+        $explicit = $this->nullableStringProp('fetchpriority');
+        if ('low' === $explicit) {
+            return 'low';
+        }
+        if ('high' === $explicit && $isFirstItem && $this->isImageEager()) {
+            return 'high';
+        }
+
+        if ($isFirstItem && $this->isImageEager()) {
+            return 'high';
+        }
+
+        if ($isHiddenOrOffscreen) {
+            return 'low';
+        }
+
+        return null;
     }
 
     public function getImageAlt(string $key = 'image', string $fallbackKey = 'title'): string
@@ -513,7 +721,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
     {
         $source = $this->stringProp('media_source', 'media');
         if ('url' === $source && 'video' === $key) {
-            $url = $this->nullableString('video_url') ?? $this->nullableStringProp('video_url');
+            $url = self::sanitizeMediaUrl($this->nullableString('video_url') ?? $this->nullableStringProp('video_url'));
             if (null !== $url) {
                 return $url;
             }
@@ -524,22 +732,21 @@ abstract class PrelineComponent extends AbstractBlockComponent
             return $resolved;
         }
 
-        return $this->nullableString('video_url') ?? $this->nullableStringProp('video_url');
+        return self::sanitizeMediaUrl($this->nullableString('video_url') ?? $this->nullableStringProp('video_url'));
     }
 
     public function getHoverVideoUrl(): ?string
     {
         $source = $this->stringProp('media_source', 'media');
         if ('url' === $source) {
-            $url = $this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url');
+            $url = self::sanitizeMediaUrl($this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url'));
             if (null !== $url) {
                 return $url;
             }
         }
 
         return PropsResolver::resolveImageUrl($this->get('hover_video'))
-            ?? $this->nullableString('hover_video_url')
-            ?? $this->nullableStringProp('hover_video_url');
+            ?? self::sanitizeMediaUrl($this->nullableString('hover_video_url') ?? $this->nullableStringProp('hover_video_url'));
     }
 
     public function getIconClass(string $key = 'icon'): ?string
@@ -661,8 +868,8 @@ abstract class PrelineComponent extends AbstractBlockComponent
 
     protected function resolveResponsiveGridClasses(
         bool $masonry = false,
-        string $defaultCols = '1',
-        string $defaultMdCols = '3',
+        int $defaultCols = 1,
+        int $defaultMdCols = 3,
         string $defaultGap = 'md',
     ): string {
         return PrelineClassMap::resolveResponsiveGridClasses(
@@ -672,6 +879,15 @@ abstract class PrelineComponent extends AbstractBlockComponent
             $defaultMdCols,
             $defaultGap,
         );
+    }
+
+    /**
+     * Rendered width of a single grid / masonry item, derived from the same `columns_*` data as
+     * the grid classes.
+     */
+    public function getGridItemSlotWidth(int $defaultCols = 1, int $defaultMdCols = 3): ResponsiveWidth
+    {
+        return $this->getSlotWidth()->divide(PrelineClassMap::gridColumnCounts($this->props(), $defaultCols, $defaultMdCols));
     }
 
     /**
@@ -740,9 +956,53 @@ abstract class PrelineComponent extends AbstractBlockComponent
         return PropsResolver::resolveFocusPointStyle($item[$key] ?? null);
     }
 
-    protected function resolveSliderSlideWidthClass(string $columns = '3'): string
+    /**
+     * Slider `columns` preset. `columns` is also a universal content key (row columns), so the
+     * scalar setting may arrive as content data; it is read from data first, then props, and
+     * validated against `SLIDER_SLIDES_PER_VIEW`.
+     */
+    protected function resolveSliderColumns(string $default = '3'): string
     {
-        return PrelineClassMap::SLIDER_SLIDE_WIDTHS[$columns] ?? PrelineClassMap::SLIDER_SLIDE_WIDTHS['3'];
+        $value = $this->get('columns');
+        $columns = \is_int($value) || \is_string($value) ? \trim((string) $value) : '';
+
+        return isset(PrelineClassMap::SLIDER_SLIDES_PER_VIEW[$columns]) ? $columns : $default;
+    }
+
+    /**
+     * Slides per view per breakpoint for a slider `columns` preset.
+     *
+     * @return array<string, int> sparse mobile-first map
+     */
+    public function getSlidesPerView(string $columns): array
+    {
+        return PrelineClassMap::SLIDER_SLIDES_PER_VIEW[$columns] ?? PrelineClassMap::SLIDER_SLIDES_PER_VIEW['3'];
+    }
+
+    /**
+     * Carousel viewport height (`height` prop); the carousel body is absolutely positioned, so the
+     * viewport needs an explicit height preset.
+     */
+    public function getHeightClass(): string
+    {
+        return PrelineClassMap::resolve(
+            PrelineClassMap::CAROUSEL_HEIGHTS,
+            $this->prop('height'),
+            PrelineClassMap::CAROUSEL_HEIGHTS['medium'],
+        );
+    }
+
+    protected function resolveSliderSlideWidthClass(string $columns): string
+    {
+        return PrelineClassMap::responsiveClasses(PrelineClassMap::SLIDE_WIDTHS, $this->getSlidesPerView($columns));
+    }
+
+    /**
+     * Rendered width of a single slide for a slider `columns` preset.
+     */
+    public function getSliderItemSlotWidth(string $columns): ResponsiveWidth
+    {
+        return $this->getSlotWidth()->divide($this->getSlidesPerView($columns));
     }
 
     protected function resolveSliderConfigJson(
@@ -759,10 +1019,17 @@ abstract class PrelineComponent extends AbstractBlockComponent
         ];
 
         if (null !== $columns) {
-            $config['slidesQty'] = PrelineClassMap::SLIDER_SLIDES_QTY[$columns] ?? PrelineClassMap::SLIDER_SLIDES_QTY['3'];
+            $slidesQty = [];
+            foreach (ResponsiveWidth::cascade($this->getSlidesPerView($columns), 1) as $bp => $qty) {
+                $slidesQty['base' === $bp ? 'xs' : $bp] = (int) $qty;
+            }
+            $config['slidesQty'] = $slidesQty;
         }
 
-        return (string) \json_encode($config, \JSON_THROW_ON_ERROR);
+        return \json_encode(
+            $config,
+            \JSON_THROW_ON_ERROR | \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_AMP | \JSON_HEX_QUOT,
+        );
     }
 
     /**
@@ -805,6 +1072,14 @@ abstract class PrelineComponent extends AbstractBlockComponent
         if (isset($item['link'])) {
             $item['link_href'] = PropsResolver::resolveUrl($item['link']);
             $item['link_url'] = $item['link_href'];
+            if (\is_array($item['link'])) {
+                if (!isset($item['link_target']) && '_blank' === ($item['link']['target'] ?? null)) {
+                    $item['link_target'] = '_blank';
+                }
+                if (!isset($item['link_title']) && \is_string($item['link']['title'] ?? null) && '' !== \trim($item['link']['title'])) {
+                    $item['link_title'] = \trim($item['link']['title']);
+                }
+            }
         }
 
         return $item;
@@ -841,6 +1116,38 @@ abstract class PrelineComponent extends AbstractBlockComponent
         }
 
         return $forwarded;
+    }
+
+    /**
+     * Resolves per-item props for collection blocks (`PanelSlider`, `OverlaySlider`, `Grid`),
+     * propagating slot width and first-item image loading / fetchpriority rules.
+     *
+     * @param array<string, mixed> $item
+     *
+     * @return array<string, mixed>
+     */
+    public function resolveItemProps(array $item, bool $isFirstItem = true, bool $isOffscreenSlide = false): array
+    {
+        $itemProps = $this->itemArray($item, 'props');
+        $fetchPriority = $this->getImageFetchPriority($isFirstItem, $isOffscreenSlide);
+
+        $loadingProps = [
+            'image_loading' => $isFirstItem && $this->isImageEager(),
+            'loading' => $this->getImageLoading($isFirstItem),
+        ];
+        if (null !== $fetchPriority) {
+            $loadingProps['fetchpriority'] = $fetchPriority;
+        }
+
+        /** @var array<string, mixed> $merged */
+        $merged = \array_merge(
+            isset($item[self::SLOT_KEY]) ? [self::SLOT_KEY => $item[self::SLOT_KEY]] : [],
+            $loadingProps,
+            $this->extractItemForwardedProps($item),
+            $itemProps,
+        );
+
+        return $merged;
     }
 
     /**
@@ -1018,6 +1325,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
                 'variant' => $itemStyle,
                 'link_color' => $itemColor,
                 'size' => $itemSize,
+                'bare' => true,
             ];
         }
 
@@ -1044,6 +1352,7 @@ abstract class PrelineComponent extends AbstractBlockComponent
                     'variant' => $defaultStyle,
                     'link_color' => $defaultColor,
                     'size' => $defaultSize,
+                    'bare' => true,
                 ];
             }
         }

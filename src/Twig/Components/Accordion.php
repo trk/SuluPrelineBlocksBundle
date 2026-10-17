@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Accordion', template: '@SuluPrelineBlocks/components/Accordion.html.twig')]
 final class Accordion extends PrelineComponent
@@ -29,6 +30,8 @@ final class Accordion extends PrelineComponent
             'collapsible' => true,
             'title_size' => 'base',
             'image_align' => 'top',
+            'aspect_ratio' => '16/9',
+            'object_fit' => 'cover',
         ];
     }
 
@@ -89,6 +92,35 @@ final class Accordion extends PrelineComponent
     public function getImageAlign(): string
     {
         return $this->enumProp('image_align', ['top', 'bottom', 'left', 'right'], 'top');
+    }
+
+    public function hasSideImage(): bool
+    {
+        return $this->oneOf($this->getImageAlign(), ['left', 'right']);
+    }
+
+    /**
+     * Image slot: the full panel width, or the side column once side images sit beside the text.
+     */
+    public function getMediaSlotWidth(): ResponsiveWidth
+    {
+        $layout = $this->getSlotWidth();
+        if (!$this->hasSideImage()) {
+            return $layout;
+        }
+
+        return $layout->scale([
+            'base' => 1.0,
+            PrelineClassMap::ACCORDION_SIDE_IMAGE['breakpoint'] => PrelineClassMap::ACCORDION_SIDE_IMAGE['fraction'],
+        ]);
+    }
+
+    /**
+     * @return array{breakpoint: string, row: string, media_left: string, media_right: string, text: string, fraction: float}
+     */
+    public function getSideImageLayout(): array
+    {
+        return PrelineClassMap::ACCORDION_SIDE_IMAGE;
     }
 
     public function getContainerClasses(): string

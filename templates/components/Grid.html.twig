@@ -2,62 +2,58 @@
 {% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
-{% set grid_dom_id = custom_id ? custom_id : ('grid-' ~ random()) %}
+{% set grid_dom_id = custom_id ? custom_id : this.componentUid %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: grid_dom_id})) }}>
-    {% if title %}
-        <div class="mb-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
-        </div>
-    {% endif %}
-
-    {% if is_filter_active %}
-        {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
-            filter_align_class: this.filterAlignClass,
-            filter_style: this.resolvedProps.filter_style|default('pills'),
-            all_label: this.resolvedProps.filter_all_label|default('All'),
-            filter_tags: this.filterTags,
-        }, with_context = false) }}
-    {% endif %}
-
-    <div class="{{ this.containerClasses }} grid-container w-full">
-        {% for item in items %}
-            {% set item_tags = this.getItemTagSlugs(item) %}
-            <div
-                class="grid-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% elseif this.isCardGroup() %}flex-1 flex flex-col{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
-                data-tags="{{ item_tags }}"
-            >
-                <twig:Card
-                    title="{{ item.title|default(null) }}"
-                    meta="{{ item.meta|default(null) }}"
-                    badge="{{ item.badge|default(null) }}"
-                    :elements="item.elements|default([])"
-                    :badges="item.badges|default([])"
-                    content="{{ item.summary|default(item.content|default(null)) }}"
-                    :image="item.image|default(null)"
-                    :video="item.video|default(null)"
-                    :icon="item.icon|default(null)"
-                    :link="item.link|default(item.url|default(null))"
-                    linkTitle="{{ item.link_title|default(null) }}"
-                    :buttons="item.buttons|default([])"
-                    :hoverImage="item.hover_image|default(null)"
-                    :hoverVideo="item.hover_video|default(null)"
-                    :image_url="item.image_url|default(null)"
-                    :hover_image_url="item.hover_image_url|default(null)"
-                    :video_url="item.video_url|default(null)"
-                    :hover_video_url="item.hover_video_url|default(null)"
-                    :props="this.resolveItemProps(item)"
-                    class="w-full h-full flex-1"
-                />
+<div {{ attributes.defaults(this.getRootAttributes()|merge({id: grid_dom_id})) }}{% if is_filter_active %} data-block-filter{% endif %}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
             </div>
-        {% endfor %}
-    </div>
+        {% endif %}
 
-    {% if is_filter_active %}
-        {{ include('@SuluPrelineBlocks/includes/tag_filter_script.html.twig', {
-            scope_id: grid_dom_id,
-            item_selector: '.grid-item-card',
-        }, with_context = false) }}
-    {% endif %}
-</section>
+        {% if is_filter_active %}
+            {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
+                filter_align_class: this.filterAlignClass,
+                filter_style: this.resolvedProps.filter_style|default('pills'),
+                all_label: this.resolvedProps.filter_all_label|default('All'),
+                filter_tags: this.filterTags,
+            }, with_context: false) }}
+        {% endif %}
+
+        <div class="{{ this.containerClasses }} grid-container">
+            {% for item in items %}
+                {% set item_tags = this.getItemTagSlugs(item) %}
+                <div
+                    class="grid-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% elseif this.isCardGroup() %}flex-1 flex flex-col{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
+                    data-filter-item
+                    data-tags="{{ item_tags }}"
+                >
+                    <twig:Card
+                        title="{{ item.title|default(null) }}"
+                        meta="{{ item.meta|default(null) }}"
+                        badge="{{ item.badge|default(null) }}"
+                        :elements="item.elements|default([])"
+                        :badges="item.badges|default([])"
+                        content="{{ item.summary|default(item.content|default(null)) }}"
+                        :image="item.image|default(null)"
+                        :video="item.video|default(null)"
+                        :icon="item.icon|default(null)"
+                        :link="item.link|default(item.url|default(null))"
+                        linkTitle="{{ item.link_title|default(null) }}"
+                        :buttons="item.buttons|default([])"
+                        :hoverImage="item.hover_image|default(null)"
+                        :hoverVideo="item.hover_video|default(null)"
+                        :image_url="item.image_url|default(null)"
+                        :hover_image_url="item.hover_image_url|default(null)"
+                        :video_url="item.video_url|default(null)"
+                        :hover_video_url="item.hover_video_url|default(null)"
+                        :props="this.resolveItemProps(item, loop.first)"
+                        class="w-full h-full flex-1"
+                    />
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

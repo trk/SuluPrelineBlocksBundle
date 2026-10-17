@@ -12,7 +12,7 @@
         <title lang="es">Cuenta regresiva</title>
         <title lang="de">Countdown</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="max_width,max_width_breakpoint,block_align,block_align_breakpoint,block_align_fallback" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>

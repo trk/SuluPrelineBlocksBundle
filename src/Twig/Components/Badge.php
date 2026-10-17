@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 #[AsTwigComponent('Badge', template: '@SuluPrelineBlocks/components/Badge.html.twig')]
 final class Badge extends PrelineComponent
@@ -49,8 +50,13 @@ final class Badge extends PrelineComponent
         }
 
         $explicitUrl = $this->nullableString('url') ?? $this->nullableStringProp('url');
+        if (null === $explicitUrl) {
+            return null;
+        }
 
-        return null !== $explicitUrl && '#' !== $explicitUrl ? $explicitUrl : null;
+        $clean = SuluDataNormalizer::sanitizeUrl(\trim($explicitUrl), '');
+
+        return ('' !== $clean && '#' !== $clean) ? $clean : null;
     }
 
     public function isClickable(): bool

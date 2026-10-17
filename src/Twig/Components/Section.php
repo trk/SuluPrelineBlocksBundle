@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 /**
  * Preline UI 5 / Tailwind CSS 4 pure layout Section / Container component.
@@ -28,10 +28,8 @@ final class Section extends PrelineComponent
     {
         return [
             'max_width' => '85rem',
-            'padding_y' => 'default',
-            'padding_x' => 'default',
+            'padding' => 'default',
             'bg_style' => 'transparent',
-            'has_border' => false,
         ];
     }
 
@@ -54,17 +52,27 @@ final class Section extends PrelineComponent
     public function getSectionClasses(): string
     {
         $base = $this->classes(
-            'relative w-full overflow-hidden',
+            'relative overflow-hidden',
             PrelineClassMap::resolve(
                 PrelineClassMap::SECTION_BG_STYLES,
                 $this->stringProp('bg_style', 'transparent'),
                 PrelineClassMap::SECTION_BG_STYLES['transparent'],
             ),
-            $this->boolProp('has_border', false) ? 'border-t border-b border-border' : null,
+            $this->getPaddingClasses('default', 'padding', 'section_y'),
         );
 
         $sectionProps = $this->props();
-        $sectionProps['max_width'] = 'none';
+        unset(
+            $sectionProps['max_width'],
+            $sectionProps['maxwidth'],
+            $sectionProps['block_align'],
+            $sectionProps['block_alignment'],
+            $sectionProps['padding'],
+            $sectionProps['padding_remove_top'],
+            $sectionProps['padding_remove_bottom'],
+            $sectionProps['block_padding'],
+            $sectionProps['text_align'],
+        );
 
         return ElementTransform::wrapperClasses($sectionProps, $base);
     }
@@ -74,25 +82,37 @@ final class Section extends PrelineComponent
         return $this->classes($this->getSectionClasses(), $extraBase, ...$moreParts);
     }
 
-    public function getContainerClasses(): string
+    /**
+     * Extracts the inner Container props (`max_width`, `container_width`, `_slot`)
+     * from the Section's combined Sulu settings so `<twig:Container>` only receives its own layer props.
+     *
+     * @return array<string, mixed>
+     */
+    public function getContainerProps(): array
     {
-        return $this->classes(
-            'mx-auto w-full',
-            $this->getMaxWidthClass('85rem', 'section'),
-            $this->getPaddingClasses('default', 'padding_x', 'section_x'),
-            $this->getPaddingClasses('default', 'padding_y', 'section_y'),
-        );
-    }
+        $props = [
+            'max_width' => $this->stringProp('max_width', '85rem'),
+        ];
 
-    public function hasRows(): bool
-    {
-        return [] !== $this->getNormalizedRows();
+        $containerWidth = $this->stringProp('container_width');
+        if ('' !== $containerWidth) {
+            $props['container_width'] = $containerWidth;
+        }
+
+        $slot = $this->prop(self::SLOT_KEY) ?? ($this->context()[self::SLOT_KEY] ?? null);
+        if (\is_array($slot)) {
+            $props[self::SLOT_KEY] = $slot;
+        }
+
+        return $props;
     }
 
     /**
+     * Raw rows assigned to this section, passed down to `<twig:Container>`.
+     *
      * @return list<array<string, mixed>>
      */
-    public function getNormalizedRows(): array
+    public function getRows(): array
     {
         $raw = $this->items('rows');
         if ([] === $raw) {
@@ -107,15 +127,49 @@ final class Section extends PrelineComponent
             }
         }
 
-        $list = [];
-        foreach ($raw as $item) {
-            $rowProps = SuluDataNormalizer::extractProps($item);
-            if ([] !== $rowProps) {
-                $item = \array_merge($item, $rowProps);
-            }
-            $list[] = $item;
-        }
+        return $raw;
+    }
 
-        return $list;
+    public function getContainerClasses(): string
+    {
+        return $this->createContainer()->getContainerClasses();
+    }
+
+    /**
+     * @return array{class: string, px: int|null}
+     */
+    public function getMaxWidthPreset(): array
+    {
+        return $this->createContainer()->getMaxWidthPreset();
+    }
+
+    /**
+     * The section's inner container slot width.
+     */
+    public function getSlotWidth(): ResponsiveWidth
+    {
+        return $this->createContainer()->getSlotWidth();
+    }
+
+    public function hasRows(): bool
+    {
+        return [] !== $this->getRows();
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getNormalizedRows(): array
+    {
+        return $this->createContainer()->getNormalizedRows();
+    }
+
+    private function createContainer(): Container
+    {
+        return new Container([
+            'props' => $this->getContainerProps(),
+            'rows' => $this->getRows(),
+            'context' => $this->context(),
+        ]);
     }
 }

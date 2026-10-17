@@ -48,11 +48,18 @@ final class HtmlBlock extends PrelineComponent
         return $this->is('raw');
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
-            'w-full my-4',
-            $this->is('card') ? 'p-6 bg-card border border-card-line rounded-xl shadow-xs' : null,
+        if ($this->isRaw()) {
+            return $this->classes($extraBase, ...$moreParts);
+        }
+
+        return $this->classes(
+            'w-full',
+            $this->is('card') ? 'p-6 bg-card border border-card-line rounded-2xl shadow-2xs overflow-x-auto' : null,
             $extraBase,
             ...$moreParts,
         );

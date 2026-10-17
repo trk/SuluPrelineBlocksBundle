@@ -91,9 +91,13 @@ final class Text extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
+        return $this->classes(
+            'w-full',
             $this->isProse() ? 'prose dark:prose-invert max-w-none' : '',
             $this->getFontSize(),
             $this->getTextColor(),

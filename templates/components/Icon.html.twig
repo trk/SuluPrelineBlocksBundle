@@ -1,20 +1,26 @@
 {% set icon_class = this.getResolvedIcon() %}
 {% set url = this.getUrl() %}
+{% set link_target = this.getLinkTarget() %}
+{% set link_title = this.getLinkTitle() %}
 {% set container_classes = this.getContainerClasses() %}
 {% set icon_classes = this.getIconClasses() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
-
-    {% if icon_class %}
-        {% if url %}
-            <a href="{{ url }}" class="{{ container_classes }}">
-                <i class="{{ icon_classes }}" aria-hidden="true"></i>
-            </a>
-        {% else %}
-            <span class="{{ container_classes }}">
-                <i class="{{ icon_classes }}" aria-hidden="true"></i>
-            </span>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if icon_class %}
+            {% if url %}
+                <a href="{{ url }}"
+                   class="{{ container_classes }}"
+                   {% if link_target == '_blank' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                   {% if link_title %}aria-label="{{ link_title }}" title="{{ link_title }}"{% endif %}>
+                    <i class="{{ icon_classes }}" aria-hidden="true"></i>
+                </a>
+            {% else %}
+                <span class="{{ container_classes }}">
+                    <i class="{{ icon_classes }}" aria-hidden="true"></i>
+                </span>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    </div>
 </div>

@@ -66,7 +66,9 @@ final class ScrollToTest extends TestCase
         $scrollFloating = new ScrollTo();
         $scrollFloating->mergeProps(['display_mode' => 'floating']);
         self::assertSame('floating', $scrollFloating->getDisplayMode());
+        self::assertTrue($scrollFloating->isFloating());
         self::assertStringContainsString('fixed bottom-6 end-6', $scrollFloating->getWrapperClasses());
+        self::assertSame('inline-block', $scrollFloating->getBlockClasses());
     }
 
     public function testWrapperClassesAndId(): void
@@ -81,9 +83,12 @@ final class ScrollToTest extends TestCase
 
         self::assertSame('my-scroll-btn', $scroll->getElementId());
         $wrapper = $scroll->getWrapperClasses();
-        self::assertStringContainsString('flex items-center', $wrapper);
+        self::assertStringNotContainsString('flex items-center', $wrapper);
         self::assertStringContainsString('mt-6', $wrapper);
         self::assertStringContainsString('mb-10', $wrapper);
         self::assertStringContainsString('my-scroll', $wrapper);
+
+        $blockClasses = $scroll->getBlockClasses();
+        self::assertStringContainsString('w-full flex items-center', $blockClasses);
     }
 }

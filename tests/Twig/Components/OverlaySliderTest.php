@@ -21,7 +21,7 @@ final class OverlaySliderTest extends TestCase
         self::assertSame('inside', $slider->getArrows());
         self::assertSame('bottom', $slider->getDots());
         self::assertSame('3', $slider->getColumns());
-        self::assertSame('w-full sm:w-1/2 lg:w-1/3', $slider->getSlideWidthClass());
+        self::assertSame('w-full sm:w-1/2 md:w-1/3', $slider->getSlideWidthClass());
         self::assertSame('px-2.5', $slider->getGapClass());
         self::assertStringContainsString('"isAutoPlay":false', $slider->getCarouselConfigJson());
         self::assertSame('', $slider->getMarginClass());

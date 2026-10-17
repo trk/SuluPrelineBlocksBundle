@@ -1,17 +1,15 @@
 {# Preline UI 5 / Tailwind CSS 4 Grid Row Component #}
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {{ attributes.defaults(this.getRootAttributesWithClass('w-full my-4')) }}>
-    <div class="{{ this.rowClasses }}">
-        {% if this.hasColumns %}
-            {% for col in this.normalizedColumns %}
-                <twig:Column
-                    :blocks="col.blocks|default([])"
-                    :props="col"
-                    :context="this.context"
-                />
-            {% endfor %}
-        {% endif %}
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    {% if this.hasColumns %}
+        {% for col in this.normalizedColumns %}
+            <twig:Column
+                :blocks="col.blocks|default([])"
+                :props="col"
+                :context="this.childContext"
+            />
+        {% endfor %}
+    {% endif %}
 
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
 </div>

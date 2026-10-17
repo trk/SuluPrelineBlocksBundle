@@ -12,7 +12,7 @@
         <title lang="es">Icono</title>
         <title lang="de">Symbol</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>

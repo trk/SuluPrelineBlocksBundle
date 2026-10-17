@@ -2,13 +2,14 @@
 <template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
   <key>button</key>
   <meta>
-    <title lang="en">Buttons / Button Group</title>
-    <title lang="tr">Butonlar / Buton Grubu</title>
-    <title lang="de">Schaltfl&#xE4;chen / Schaltfl&#xE4;chengruppe</title>
-    <title lang="ru">&#x41A;&#x43D;&#x43E;&#x43F;&#x43A;&#x438; / &#x413;&#x440;&#x443;&#x43F;&#x43F;&#x430; &#x43A;&#x43D;&#x43E;&#x43F;&#x43E;&#x43A;</title>
-    <title lang="es">Botones / Grupo de botones</title>
-    <title lang="fr">Boutons / Groupe de boutons</title>
+    <title lang="en">Button</title>
+    <title lang="tr">Buton</title>
+    <title lang="de">Schaltfläche</title>
+    <title lang="ru">Кнопка</title>
+    <title lang="es">Botón</title>
+    <title lang="fr">Bouton</title>
   </meta>
+  <tag name="sulu_block_suite.tabs" text_align="standard"/>
   <properties>
         <section name="content">
             <meta>

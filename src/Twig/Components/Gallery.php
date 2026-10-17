@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Gallery', template: '@SuluPrelineBlocks/components/Gallery.html.twig')]
 final class Gallery extends PrelineComponent
@@ -90,21 +91,32 @@ final class Gallery extends PrelineComponent
      *
      * @return array<string, mixed>
      */
-    public function resolveItemProps(array $item): array
+    public function resolveItemProps(array $item, bool $isFirstItem = true, bool $isOffscreenSlide = false): array
     {
         $itemProps = $this->itemArray($item, 'props');
 
         $overlayPosition = $this->stringProp('overlay_position', 'bottom');
-        $overlayMode = $this->stringProp('overlay_mode', 'cover');
-        $overlayStyle = $this->itemInheritedString($item, 'overlay_style', $this->stringProp('overlay_style', 'gradient'));
         $overlayTransition = $this->stringProp('overlay_transition', 'fade');
+        $defaultOverlayMode = ('' !== $overlayTransition && 'none' !== $overlayTransition) ? 'hover' : 'always';
+        $overlayMode = $this->stringProp('overlay_mode', $defaultOverlayMode);
+        $overlayStyle = $this->itemInheritedString($item, 'overlay_style', $this->stringProp('overlay_style', 'gradient'));
         $imageTransition = $this->stringProp('image_transition', 'zoom');
         $mediaAspectRatio = $this->stringProp('media_aspect_ratio', '4/3');
         $rounded = $this->stringProp('rounded', 'xl');
         $buttonStyle = $this->itemInheritedString($item, 'link_style', 'primary');
+        $fetchPriority = $this->getImageFetchPriority($isFirstItem, $isOffscreenSlide);
+
+        $loadingProps = [
+            'image_loading' => $isFirstItem && $this->isImageEager(),
+            'loading' => $this->getImageLoading($isFirstItem),
+        ];
+        if (null !== $fetchPriority) {
+            $loadingProps['fetchpriority'] = $fetchPriority;
+        }
 
         /** @var array<string, mixed> $merged */
         $merged = \array_merge(
+            [self::SLOT_KEY => $this->getGridItemSlotWidth()->toArray()],
             [
                 'overlay_position' => $overlayPosition,
                 'overlay_mode' => $overlayMode,
@@ -115,10 +127,26 @@ final class Gallery extends PrelineComponent
                 'rounded' => $rounded,
                 'button_style' => $buttonStyle,
             ],
+            $loadingProps,
             $this->extractItemForwardedProps($item),
             $itemProps,
         );
 
         return $merged;
+    }
+
+    public function getLightboxDialogClasses(): string
+    {
+        return PrelineClassMap::GALLERY_LIGHTBOX['dialog'];
+    }
+
+    public function getLightboxImageClasses(): string
+    {
+        return PrelineClassMap::GALLERY_LIGHTBOX['image'];
+    }
+
+    public function getLightboxImageSizes(): string
+    {
+        return ResponsiveWidth::container(PrelineClassMap::GALLERY_LIGHTBOX['max_px'])->toSizes();
     }
 }

@@ -80,5 +80,42 @@ final class ImageTest extends TestCase
         self::assertStringContainsString('rounded-2xl', $image->getMediaContainerClasses());
         self::assertStringContainsString('hover:scale-105', $image->getHoverEffectClasses());
         self::assertStringContainsString('hover:scale-105', $image->getImgClasses());
+        self::assertSame('', $image->getWrapperClasses());
+        self::assertSame('block w-full', $image->getBlockClasses());
+    }
+
+    public function testImageLoadingAndFetchPriority(): void
+    {
+        $lazyImage = new Image();
+        $lazyImage->mergeProps([
+            'image' => ['url' => '/uploads/below-fold.jpg'],
+        ]);
+
+        self::assertFalse($lazyImage->isImageEager());
+        self::assertSame('lazy', $lazyImage->getLoading());
+        self::assertNull($lazyImage->getFetchPriority());
+
+        $eagerImage = new Image();
+        $eagerImage->mergeProps([
+            'image' => ['url' => '/uploads/lcp-hero.jpg'],
+            'props' => [
+                'image_loading' => true,
+            ],
+        ]);
+
+        self::assertTrue($eagerImage->isImageEager());
+        self::assertSame('eager', $eagerImage->getLoading());
+        self::assertSame('high', $eagerImage->getFetchPriority());
+
+        $offscreenImage = new Image();
+        $offscreenImage->mergeProps([
+            'image' => ['url' => '/uploads/modal.jpg'],
+            'loading' => 'lazy',
+            'fetchpriority' => 'low',
+        ]);
+
+        self::assertFalse($offscreenImage->isImageEager());
+        self::assertSame('lazy', $offscreenImage->getLoading());
+        self::assertSame('low', $offscreenImage->getFetchPriority());
     }
 }

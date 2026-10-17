@@ -1,57 +1,59 @@
 {% set title = this.title %}
-{% set custom_id = this.elementId %}
 {% set items = this.normalizedItems %}
-{% set list_dom_id = custom_id ? custom_id : ('dl-' ~ random()) %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: list_dom_id})) }}>
-    {% if title %}
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-foreground">{{ title }}</h2>
-        </div>
-    {% endif %}
-
-    <dl class="{{ this.listClasses }} w-full">
-        {% for item in items %}
-            <div class="{{ this.itemRowClasses }}">
-                <dt class="{{ this.termClasses }}">
-                    {% if item.icon is defined and item.icon %}
-                        <span class="inline-flex items-center justify-center size-7 rounded-md bg-primary-50 text-primary dark:bg-primary-950/40 shrink-0">
-                            <i class="{{ item.icon }} text-base leading-none"></i>
-                        </span>
-                    {% endif %}
-
-                    <span>{{ item.title|default('') }}</span>
-
-                    {% if item.meta is defined and item.meta %}
-                        <twig:Badge
-                            :title="item.meta"
-                            classes="inline-flex items-center py-0.5 px-2 rounded-full text-xs font-medium bg-surface text-surface-foreground"
-                        />
-                    {% endif %}
-                </dt>
-
-                <dd class="{{ this.descClasses }}">
-                    {% if item.content|default('') %}
-                        <div class="leading-relaxed">
-                            {{ item.content|raw }}
-                        </div>
-                    {% endif %}
-
-                    {% set link_href = item.link_href|default(null) %}
-                    {% if link_href and link_href != '#' %}
-                        <div class="mt-2">
-                            <a
-                                href="{{ link_href }}"
-                                class="inline-flex items-center gap-x-1 text-sm font-semibold text-primary hover:text-primary-hover"
-                            >
-                                {{ item.link_title|default('More info'|trans({}, 'sulu_website')) }}
-                                <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                            </a>
-                        </div>
-                    {% endif %}
-                </dd>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-foreground">{{ title }}</h2>
             </div>
-        {% endfor %}
-    </dl>
-</section>
+        {% endif %}
+
+        <dl class="{{ this.listClasses }}">
+            {% for item in items %}
+                <div class="{{ this.itemRowClasses }}">
+                    <dt class="{{ this.termClasses }}">
+                        {% if item.icon is defined and item.icon %}
+                            <span class="inline-flex items-center justify-center size-7 rounded-md bg-primary-50 text-primary dark:bg-primary-950/40 shrink-0">
+                                <i class="{{ item.icon }} text-base leading-none"></i>
+                            </span>
+                        {% endif %}
+
+                        <span>{{ item.title|default('') }}</span>
+
+                        {% if item.meta is defined and item.meta %}
+                            <twig:Badge
+                                :title="item.meta"
+                                classes="inline-flex items-center py-0.5 px-2 rounded-full text-xs font-medium bg-surface text-surface-foreground"
+                            />
+                        {% endif %}
+                    </dt>
+
+                    <dd class="{{ this.descClasses }}">
+                        {% if item.content|default('') %}
+                            <div class="leading-relaxed">
+                                {{ item.content|raw }}
+                            </div>
+                        {% endif %}
+
+                        {% set link_href = item.link_href|default(null) %}
+                        {% if link_href and link_href != '#' %}
+                            <div class="mt-2">
+                                <a
+                                    href="{{ link_href }}"
+                                    {% if item.link_target|default(null) == '_blank' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                                    {% if item.link_title|default(null) %}title="{{ item.link_title }}"{% endif %}
+                                    class="inline-flex items-center gap-x-1 text-sm font-semibold text-primary hover:text-primary-hover"
+                                >
+                                    {{ item.link_title|default('More info'|trans({}, 'sulu_website')) }}
+                                    <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </dd>
+                </div>
+            {% endfor %}
+        </dl>
+    </div>
+</div>

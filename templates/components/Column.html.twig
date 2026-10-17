@@ -1,9 +1,9 @@
 {# Preline UI 5 / Tailwind CSS 4 Column Component #}
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
     {% if this.hasBlocks %}
-        {% set render_context = this.context is not empty ? this.context : _context %}
-        <div class="w-full space-y-6">
+        {% set render_context = (this.context is not empty ? this.context : _context)|merge(this.childContext) %}
+        <div class="space-y-6">
             {% for item in this.normalizedBlocks|hydrate_blocks(render_context) %}
                 {{ sulu_block_render(item, render_context) }}
             {% endfor %}

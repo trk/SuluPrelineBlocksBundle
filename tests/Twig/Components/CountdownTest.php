@@ -73,9 +73,12 @@ final class CountdownTest extends TestCase
 
         self::assertSame('sale-countdown', $countdown->getElementId());
         $wrapper = $countdown->getWrapperClasses();
-        self::assertStringContainsString('w-full flex flex-col', $wrapper);
+        self::assertStringNotContainsString('w-full flex flex-col', $wrapper);
         self::assertStringContainsString('mt-6', $wrapper);
         self::assertStringContainsString('mb-10', $wrapper);
         self::assertStringContainsString('my-countdown', $wrapper);
+
+        $blockClasses = $countdown->getBlockClasses();
+        self::assertStringContainsString('w-full flex flex-col', $blockClasses);
     }
 }

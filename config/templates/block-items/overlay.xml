@@ -167,6 +167,16 @@
                             <title lang="fr">Primaire</title>
                         </meta>
                     </param>
+                    <param name="white">
+                        <meta>
+                            <title lang="en">Solid White</title>
+                            <title lang="tr">Beyaz Buton</title>
+                            <title lang="de">Gefüllt Weiß</title>
+                            <title lang="ru">Сплошной белый</title>
+                            <title lang="es">Blanco Sólido</title>
+                            <title lang="fr">Blanc Plein</title>
+                        </meta>
+                    </param>
                     <param name="secondary">
                         <meta>
                             <title lang="en">Secondary</title>

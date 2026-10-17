@@ -3,95 +3,98 @@
 {% set arrows = this.arrows %}
 {% set indicators = this.indicators %}
 {% set height_class = this.heightClass %}
-{% set align_class = this.contentAlign %}
+{% set slide_content_classes = this.slideContentClasses %}
+{% set slide_sizes = this.imageSizes %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('relative w-full')) }}>
-    {% if title %}
-        <div class="mb-6">
-            <h3 class="text-2xl font-bold tracking-tight text-foreground">
-                {{ title }}
-            </h3>
-        </div>
-    {% endif %}
-
-    <div
-        data-hs-carousel='{{ this.carouselConfigJson|raw }}'
-        class="relative w-full"
-    >
-        <div class="hs-carousel relative overflow-hidden w-full {{ height_class }} rounded-2xl bg-inverse">
-            <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-                {% for item in normalized_items %}
-                    {% set img_url = item.image_url|default(null) %}
-                    {% set link_href = item.link_href|default(null) %}
-                    {% set overlay = item.overlay_style|default('dark_medium') %}
-
-                    <div class="hs-carousel-slide relative w-full h-full flex flex-col justify-center overflow-hidden">
-                        {% if img_url %}
-                            <twig:Image
-                                :bare="true"
-                                :image_url="img_url"
-                                :image_srcset="item.image_srcset|default(null)"
-                                sizes="(min-width: 1280px) 1600px, 100vw"
-                                :image_focus_style="item.image_focus_style|default(null)"
-                                :alt="item.title|default('')"
-                                img_class="absolute inset-0 w-full h-full object-cover"
-                            />
-                        {% endif %}
-
-                        {# Overlay tint #}
-                        {% if overlay == 'dark_soft' %}
-                            <div class="absolute inset-0 bg-black/30"></div>
-                        {% elseif overlay == 'dark_strong' %}
-                            <div class="absolute inset-0 bg-black/70"></div>
-                        {% elseif overlay == 'gradient' %}
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
-                        {% elseif overlay != 'none' %}
-                            <div class="absolute inset-0 bg-black/50"></div>
-                        {% endif %}
-
-                        {# Content layer #}
-                        <div class="relative z-10 max-w-4xl mx-auto px-6 sm:px-12 py-12 flex flex-col {{ align_class }}">
-                            {% if item.meta|default(null) %}
-                                <span class="inline-block text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 mb-2">
-                                    {{ item.meta }}
-                                </span>
-                            {% endif %}
-
-                            {% if item.title|default(null) %}
-                                <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
-                                    {{ item.title }}
-                                </h2>
-                            {% endif %}
-
-                            {% if item.content|default(null) %}
-                                <div class="text-sm sm:text-base md:text-lg text-white/85 leading-relaxed max-w-2xl mb-6">
-                                    {{ item.content|raw }}
-                                </div>
-                            {% endif %}
-
-                            {% if link_href and link_href != '#' %}
-                                <div>
-                                    <twig:Button
-                                        :title="item.link_title|default('Discover more'|trans({}, 'sulu_website'))"
-                                        :url="link_href"
-                                        icon="arrow-right"
-                                        icon_align="right"
-                                        classes="inline-flex items-center gap-x-2 py-3 px-6 rounded-xl font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary-hover shadow-md shadow-primary/20 active:scale-95 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                                    />
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold tracking-tight text-foreground">
+                    {{ title }}
+                </h3>
             </div>
-        </div>
+        {% endif %}
 
-        {{ include('@SuluPrelineBlocks/includes/carousel_controls.html.twig', {
-            arrows: arrows,
-            pagination: indicators,
-            items_count: normalized_items|length,
-            variant: 'slideshow',
-        }, with_context = false) }}
+        <div
+            data-hs-carousel='{{ this.carouselConfigJson|raw }}'
+            class="relative w-full"
+        >
+            <div class="hs-carousel relative overflow-hidden w-full {{ height_class }} rounded-2xl bg-inverse">
+                <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+                    {% for item in normalized_items %}
+                        {% set img_url = item.image_url|default(null) %}
+                        {% set link_href = item.link_href|default(null) %}
+                        {% set overlay = item.overlay_style|default('dark_medium') %}
+
+                        <div class="hs-carousel-slide relative w-full h-full flex flex-col justify-center overflow-hidden">
+                            {% if img_url %}
+                                <twig:Image
+                                    :bare="true"
+                                    :image_url="img_url"
+                                    :image_srcset="item.image_srcset|default(null)"
+                                    :sizes="slide_sizes"
+                                    :image_focus_style="item.image_focus_style|default(null)"
+                                    :alt="item.title|default('')"
+                                    :loading="this.getImageLoading(loop.first)"
+                                    :fetchpriority="this.getImageFetchPriority(loop.first, not loop.first)"
+                                    img_class="absolute inset-0 w-full h-full object-cover"
+                                />
+                            {% endif %}
+
+                            {# Overlay tint #}
+                            {% set tint_classes = this.getOverlayTintClasses(overlay) %}
+                            {% if tint_classes %}
+                                <div class="absolute inset-0 {{ tint_classes }}"></div>
+                            {% endif %}
+
+                            {# Content layer #}
+                            <div class="{{ slide_content_classes }}">
+                                {% if item.meta|default(null) %}
+                                    <span class="inline-block text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary-300 mb-2">
+                                        {{ item.meta }}
+                                    </span>
+                                {% endif %}
+
+                                {% if item.title|default(null) %}
+                                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                                        {{ item.title }}
+                                    </h2>
+                                {% endif %}
+
+                                {% if item.content|default(null) %}
+                                    <div class="text-sm sm:text-base md:text-lg text-white/85 leading-relaxed {{ this.textMeasureClass }} mb-6">
+                                        {{ item.content|raw }}
+                                    </div>
+                                {% endif %}
+
+                                {% if link_href and link_href != '#' %}
+                                    <div>
+                                        <twig:Button
+                                            :bare="true"
+                                            :title="item.link_title|default('Discover more'|trans({}, 'sulu_website'))"
+                                            :url="link_href"
+                                            icon="arrow-right"
+                                            icon_align="right"
+                                            variant="solid"
+                                            link_color="primary"
+                                            size="lg"
+                                        />
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {{ include('@SuluPrelineBlocks/includes/carousel_controls.html.twig', {
+                arrows: arrows,
+                pagination: indicators,
+                items_count: normalized_items|length,
+                variant: 'slideshow',
+            }, with_context: false) }}
+        </div>
     </div>
-</section>
+</div>

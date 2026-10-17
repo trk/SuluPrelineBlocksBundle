@@ -21,7 +21,7 @@ final class PanelSliderTest extends TestCase
         self::assertSame('inside', $slider->getArrows());
         self::assertSame('bottom', $slider->getDots());
         self::assertSame('3', $slider->getColumns());
-        self::assertSame('w-full sm:w-1/2 lg:w-1/3', $slider->getSlideWidthClass());
+        self::assertSame('w-full sm:w-1/2 md:w-1/3', $slider->getSlideWidthClass());
         self::assertSame('px-2.5', $slider->getGapClass());
         self::assertStringContainsString('"isAutoPlay":false', $slider->getCarouselConfigJson());
         self::assertStringContainsString('"speed":4000', $slider->getCarouselConfigJson());
@@ -53,12 +53,30 @@ final class PanelSliderTest extends TestCase
         self::assertSame('outside', $slider->getArrows());
         self::assertSame('none', $slider->getDots());
         self::assertSame('4', $slider->getColumns());
-        self::assertSame('w-full sm:w-1/2 lg:w-1/4', $slider->getSlideWidthClass());
+        self::assertSame('w-full sm:w-1/2 md:w-1/3 lg:w-1/4', $slider->getSlideWidthClass());
         self::assertSame('px-4', $slider->getGapClass());
         self::assertStringContainsString('"isAutoPlay":true', $slider->getCarouselConfigJson());
         self::assertStringContainsString('"isInfiniteLoop":false', $slider->getCarouselConfigJson());
         self::assertSame('mt-6 mb-16', $slider->getMarginClass());
         self::assertSame('featured-slider', $slider->getElementId());
         self::assertSame('my-slider', $slider->getCustomClass());
+    }
+
+    public function testResolveItemPropsForFirstAndOffscreenSlides(): void
+    {
+        $slider = new PanelSlider();
+        $slider->mergeProps([
+            'image_loading' => true,
+        ]);
+
+        $firstSlideProps = $slider->resolveItemProps(['title' => 'Slide 1'], true, false);
+        self::assertTrue($firstSlideProps['image_loading']);
+        self::assertSame('eager', $firstSlideProps['loading']);
+        self::assertSame('high', $firstSlideProps['fetchpriority']);
+
+        $offscreenSlideProps = $slider->resolveItemProps(['title' => 'Slide 2'], false, true);
+        self::assertFalse($offscreenSlideProps['image_loading']);
+        self::assertSame('lazy', $offscreenSlideProps['loading']);
+        self::assertSame('low', $offscreenSlideProps['fetchpriority']);
     }
 }

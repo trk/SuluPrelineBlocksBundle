@@ -147,7 +147,7 @@ final class OverlayTest extends TestCase
 
         $overlay->mergeProps(['overlay_position' => 'cover', 'overlay_style' => 'light']);
         self::assertSame('cover', $overlay->getOverlayPosition());
-        self::assertSame('justify-center items-center', $overlay->getOverlayPositionClasses());
+        self::assertSame('inset-0 flex flex-col justify-center items-center text-center', $overlay->getOverlayPositionClasses());
         self::assertTrue($overlay->isLightOverlay());
         self::assertStringContainsString('text-layer-foreground', $overlay->getOverlayStyle());
     }
@@ -207,8 +207,9 @@ final class OverlayTest extends TestCase
         $overlay->mergeProps(['media_aspect_ratio' => '21-9']);
         self::assertSame('aspect-21/9', $overlay->getMediaAspectRatioClass());
 
+        // `auto` has no intrinsic height for absolutely positioned media: a minimum height applies.
         $overlay->mergeProps(['media_aspect_ratio' => 'auto']);
-        self::assertStringContainsString('aspect-auto', $overlay->getMediaAspectRatioClass());
+        self::assertSame('min-h-72', $overlay->getMediaAspectRatioClass());
 
         $overlay->mergeProps(['aspect_ratio' => '16:9']);
         self::assertSame('aspect-video', $overlay->getMediaAspectRatioClass());
@@ -369,12 +370,17 @@ final class OverlayTest extends TestCase
 
         self::assertSame('hero-overlay', $overlay->getElementId());
         $wrapper = $overlay->getWrapperClasses();
-        self::assertStringContainsString('group relative overflow-hidden', $wrapper);
-        self::assertStringContainsString('rounded-3xl', $wrapper);
-        self::assertStringContainsString('shadow-xl', $wrapper);
+        self::assertStringNotContainsString('group relative overflow-hidden', $wrapper);
+        self::assertStringNotContainsString('rounded-3xl', $wrapper);
+        self::assertStringNotContainsString('shadow-xl', $wrapper);
         self::assertStringContainsString('mt-10', $wrapper);
         self::assertStringContainsString('mb-16', $wrapper);
         self::assertStringContainsString('my-custom-overlay', $wrapper);
+
+        $blockClasses = $overlay->getBlockClasses();
+        self::assertStringContainsString('group relative overflow-hidden', $blockClasses);
+        self::assertStringContainsString('rounded-3xl', $blockClasses);
+        self::assertStringContainsString('shadow-xl', $blockClasses);
     }
 
     public function testUnifiedElementsSeparation(): void

@@ -12,6 +12,7 @@
         <title lang="es">Control deslizante de superposición</title>
         <title lang="fr">Curseur de superposition</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" include_fields="container_padding_remove"/>
     <properties>
         <section name="content">
             <meta>
@@ -51,6 +52,62 @@
                 <title lang="fr">Paramètres</title>
             </meta>
             <properties>
+                <property name="height" type="single_select" colspan="6">
+                    <meta>
+                        <title lang="en">Slider Height</title>
+                        <title lang="tr">Slider Yüksekliği</title>
+                        <title lang="de">Slider-Höhe</title>
+                        <title lang="ru">Высота слайдера</title>
+                        <title lang="es">Altura del slider</title>
+                        <title lang="fr">Hauteur du slider</title>
+                    </meta>
+                    <params>
+                        <param name="default_value" value="small"/>
+                        <param name="values" type="collection">
+                            <param name="small">
+                                <meta>
+                                    <title lang="en">Small</title>
+                                    <title lang="tr">Küçük</title>
+                                    <title lang="de">Klein</title>
+                                    <title lang="ru">Малая</title>
+                                    <title lang="es">Pequeña</title>
+                                    <title lang="fr">Petite</title>
+                                </meta>
+                            </param>
+                            <param name="medium">
+                                <meta>
+                                    <title lang="en">Medium</title>
+                                    <title lang="tr">Standart</title>
+                                    <title lang="de">Mittel</title>
+                                    <title lang="ru">Средняя</title>
+                                    <title lang="es">Mediana</title>
+                                    <title lang="fr">Moyenne</title>
+                                </meta>
+                            </param>
+                            <param name="large">
+                                <meta>
+                                    <title lang="en">Large</title>
+                                    <title lang="tr">Büyük</title>
+                                    <title lang="de">Groß</title>
+                                    <title lang="ru">Большая</title>
+                                    <title lang="es">Grande</title>
+                                    <title lang="fr">Grande</title>
+                                </meta>
+                            </param>
+                            <param name="full">
+                                <meta>
+                                    <title lang="en">Full Viewport</title>
+                                    <title lang="tr">Tam Ekran</title>
+                                    <title lang="de">Vollbild</title>
+                                    <title lang="ru">Во весь экран</title>
+                                    <title lang="es">Pantalla Completa</title>
+                                    <title lang="fr">Plein Écran</title>
+                                </meta>
+                            </param>
+                        </param>
+                    </params>
+                </property>
+
                 <property name="columns" type="single_select" colspan="6">
                     <meta>
                         <title lang="en">Visible Slides</title>
@@ -286,6 +343,8 @@
                         <param name="default_value" value="4000"/>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

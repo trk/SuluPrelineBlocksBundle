@@ -116,15 +116,23 @@ final class AlertTest extends TestCase
             'custom_class' => 'my-alert',
             'margin_top' => 'md',
             'margin_bottom' => 'lg',
+            'padding' => 'lg',
             'rounded' => '2xl',
         ]);
 
         self::assertSame('system-alert', $alert->getElementId());
         $wrapper = $alert->getWrapperClasses();
-        self::assertStringContainsString('relative flex items-start', $wrapper);
-        self::assertStringContainsString('rounded-2xl', $wrapper);
+        self::assertStringNotContainsString('relative flex items-start', $wrapper);
+        self::assertStringNotContainsString('rounded-2xl', $wrapper);
+        self::assertStringNotContainsString('p-8', $wrapper);
         self::assertStringContainsString('mt-6', $wrapper);
         self::assertStringContainsString('mb-10', $wrapper);
         self::assertStringContainsString('my-alert', $wrapper);
+
+        $blockClasses = $alert->getBlockClasses();
+        self::assertStringContainsString('relative flex items-start', $blockClasses);
+        self::assertStringContainsString('rounded-2xl', $blockClasses);
+        self::assertStringContainsString('p-8 sm:p-10', $blockClasses);
+        self::assertStringNotContainsString('p-4 sm:p-5', $blockClasses);
     }
 }

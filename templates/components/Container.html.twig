@@ -1,0 +1,17 @@
+{# Preline UI 5 / Tailwind CSS 4 Container Component #}
+<div {{ attributes.defaults(this.getRootAttributes('relative z-10')) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    {% if this.hasRows %}
+        <div class="space-y-8">
+            {% for row in this.normalizedRows %}
+                <twig:Row
+                    :columns="row.columns|default([])"
+                    :props="row"
+                    :context="this.childContext"
+                />
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</div>

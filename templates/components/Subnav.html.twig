@@ -1,48 +1,51 @@
 {% set title = this.title %}
 {% set normalized_items = this.normalizedItems %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<nav
-    {{ attributes.defaults(this.getRootAttributes('w-full')) }}
-    aria-label="{{ title|default('Sub navigation'|trans({}, 'sulu_website')) }}"
->
-    {% if title %}
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-muted-foreground-1 mb-2.5">
-            {{ title }}
-        </h3>
-    {% endif %}
-
-    <div class="{{ this.navClasses }}">
-        {% for item in normalized_items %}
-            {% set link_href = item.link_href|default(null) %}
-            {% set is_active = item.is_active|default(false) %}
-            {% set badge_classes = 'py-0.5 px-1.5 text-xs font-semibold rounded-full ' ~ (is_active ? 'bg-white/20 text-current' : 'bg-surface-1 text-surface-foreground') %}
-
-            {% if link_href and link_href != '#' %}
-                <a
-                    href="{{ link_href }}"
-                    class="{{ this.itemClasses(is_active) }}"
-                    {% if is_active %}aria-current="page"{% endif %}
-                >
-                    {% if item.icon|default(null) %}
-                        <i class="{{ item.icon }} text-sm"></i>
-                    {% endif %}
-                    <span>{{ item.title|default('') }}</span>
-                    {% if item.badge|default(null) %}
-                        <twig:Badge :title="item.badge" :classes="badge_classes" />
-                    {% endif %}
-                </a>
-            {% else %}
-                <span class="{{ this.itemClasses(is_active) }}">
-                    {% if item.icon|default(null) %}
-                        <i class="{{ item.icon }} text-sm"></i>
-                    {% endif %}
-                    <span>{{ item.title|default('') }}</span>
-                    {% if item.badge|default(null) %}
-                        <twig:Badge :title="item.badge" :classes="badge_classes" />
-                    {% endif %}
-                </span>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        <nav aria-label="{{ title|default('Sub navigation'|trans({}, 'sulu_website')) }}">
+            {% if title %}
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-muted-foreground-1 mb-2.5">
+                    {{ title }}
+                </h3>
             {% endif %}
-        {% endfor %}
+
+            <div class="{{ this.navClasses }}">
+                {% for item in normalized_items %}
+                    {% set link_href = item.link_href|default(null) %}
+                    {% set is_active = item.is_active|default(false) %}
+                    {% set badge_classes = 'py-0.5 px-1.5 text-xs font-semibold rounded-full ' ~ (is_active ? 'bg-white/20 text-current' : 'bg-surface-1 text-surface-foreground') %}
+
+                    {% if link_href and link_href != '#' %}
+                        <a
+                            href="{{ link_href }}"
+                            {% if item.link_target|default(null) == '_blank' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                            {% if item.link_title|default(null) %}title="{{ item.link_title }}"{% endif %}
+                            class="{{ this.itemClasses(is_active) }}"
+                            {% if is_active %}aria-current="page"{% endif %}
+                        >
+                            {% if item.icon|default(null) %}
+                                <i class="{{ item.icon }} text-sm"></i>
+                            {% endif %}
+                            <span>{{ item.title|default('') }}</span>
+                            {% if item.badge|default(null) %}
+                                <twig:Badge :title="item.badge" :classes="badge_classes" />
+                            {% endif %}
+                        </a>
+                    {% else %}
+                        <span class="{{ this.itemClasses(is_active) }}">
+                            {% if item.icon|default(null) %}
+                                <i class="{{ item.icon }} text-sm"></i>
+                            {% endif %}
+                            <span>{{ item.title|default('') }}</span>
+                            {% if item.badge|default(null) %}
+                                <twig:Badge :title="item.badge" :classes="badge_classes" />
+                            {% endif %}
+                        </span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </nav>
     </div>
-</nav>
+</div>

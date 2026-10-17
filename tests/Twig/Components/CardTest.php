@@ -221,11 +221,15 @@ final class CardTest extends TestCase
 
         self::assertSame('card-section', $card->getElementId());
         $wrapper = $card->getWrapperClasses();
-        self::assertStringContainsString('group relative', $wrapper);
-        self::assertStringContainsString('shadow-lg', $wrapper);
+        self::assertStringNotContainsString('group relative', $wrapper);
+        self::assertStringNotContainsString('shadow-lg', $wrapper);
         self::assertStringContainsString('mt-10', $wrapper);
         self::assertStringContainsString('mb-16', $wrapper);
         self::assertStringContainsString('backdrop-blur-sm', $wrapper);
+
+        $blockClasses = $card->getBlockClasses();
+        self::assertStringContainsString('group relative w-full', $blockClasses);
+        self::assertStringContainsString('shadow-lg', $blockClasses);
     }
 
     public function testBadgeAndBadgeStyles(): void
@@ -465,5 +469,14 @@ final class CardTest extends TestCase
         self::assertStringContainsString('/uploads/media/col-xl.webp 1280w', (string) $card->getImageSrcSet());
         self::assertSame('object-position: 50% 25%;', $card->getImageFocusPointStyle());
         self::assertNotEmpty($card->getImageSizes());
+
+        // Overlay mode should not trap z-20 children inside a z-10 content wrapper or overwrite Layer 1 position style
+        $card->mergeProps([
+            'media_align' => 'overlay',
+            'position' => 'relative',
+            'position_top' => '10px',
+        ]);
+        self::assertStringNotContainsString('z-10', $card->getOverlayContentClasses());
+        self::assertSame('top: 10px;', $card->getRootAttributes()['style'] ?? null);
     }
 }

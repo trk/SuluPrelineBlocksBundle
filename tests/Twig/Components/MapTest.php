@@ -22,7 +22,9 @@ final class MapTest extends TestCase
         self::assertFalse($map->hasItems());
         self::assertSame('', $map->getEmbedUrl());
         self::assertSame('aspect-video', $map->getAspectRatioClasses());
-        self::assertStringContainsString('rounded-2xl', $map->getWrapperClasses());
+        self::assertSame('', $map->getWrapperClasses());
+        self::assertSame('w-full', $map->getBlockClasses());
+        self::assertSame('relative w-full rounded-2xl overflow-hidden border border-card-line shadow-xs bg-surface', $map->getMapFrameClasses());
     }
 
     public function testEmbedUrlGeneration(): void
@@ -38,9 +40,29 @@ final class MapTest extends TestCase
     public function testEmbedUrlFromIframeSrc(): void
     {
         $map = new Map();
-        $map->assign('location_query', '<iframe src="https://www.google.com/maps/embed?pb=123" width="600"></iframe>');
+        $map->assign('location_query', '<iframe src="https://www.google.com/maps/embed?pb=123&amp;hl=en" width="600"></iframe>');
 
-        self::assertSame('https://www.google.com/maps/embed?pb=123', $map->getEmbedUrl());
+        self::assertSame('https://www.google.com/maps/embed?pb=123&hl=en', $map->getEmbedUrl());
+    }
+
+    public function testEmbedUrlRejectsUntrustedHostsAndSchemes(): void
+    {
+        $map = new Map();
+
+        $map->assign('location_query', '<iframe src="javascript:alert(1)"></iframe>');
+        self::assertSame('', $map->getEmbedUrl());
+
+        $map->assign('location_query', '<iframe src="https://evil.com/google.com/maps"></iframe>');
+        self::assertSame('', $map->getEmbedUrl());
+
+        $map->assign('location_query', 'https://evil.com/google.com/maps');
+        self::assertSame('', $map->getEmbedUrl());
+
+        $map->assign('location_query', 'javascript:alert(1)');
+        self::assertSame('', $map->getEmbedUrl());
+
+        $map->assign('location_query', 'https://www.openstreetmap.org/export/embed.html?bbox=1,2,3,4');
+        self::assertSame('https://www.openstreetmap.org/export/embed.html?bbox=1,2,3,4', $map->getEmbedUrl());
     }
 
     public function testEmbedUrlFallbackToFirstItem(): void

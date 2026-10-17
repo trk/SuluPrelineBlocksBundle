@@ -39,9 +39,10 @@ final class PrelineComponentTest extends TestCase
         $component->mergeProps([
             'title' => 'Universal Controls Test',
             'props' => [
-                'margin_top' => 'md',
-                'margin_bottom' => 'lg',
+                'margin' => 'lg',
+                'margin_remove_top' => true,
                 'padding' => 'md',
+                'padding_remove_bottom' => true,
                 'max_width' => '3xl',
                 'block_align' => 'center',
                 'text_align' => 'center',
@@ -57,8 +58,8 @@ final class PrelineComponentTest extends TestCase
             ],
         ]);
 
-        self::assertSame('mt-6 mb-10', $component->getMarginClass());
-        self::assertSame('p-6 sm:p-8', $component->getPaddingClass());
+        self::assertSame('mt-0 mb-10', $component->getMarginClass());
+        self::assertSame('p-6 sm:p-8 pb-0 sm:pb-0', $component->getPaddingClass());
         self::assertSame('max-w-3xl', $component->getMaxWidthClass());
         self::assertSame('mx-auto', $component->getBlockAlignClass());
         self::assertSame('text-center', $component->getTextAlignClass());
@@ -72,8 +73,8 @@ final class PrelineComponentTest extends TestCase
         self::assertSame('hero-heading', $component->getElementId());
 
         $wrapperClasses = $component->getWrapperClasses();
-        self::assertStringContainsString('mt-6 mb-10', $wrapperClasses);
-        self::assertStringContainsString('p-6 sm:p-8', $wrapperClasses);
+        self::assertStringContainsString('mt-0 mb-10', $wrapperClasses);
+        self::assertStringContainsString('p-6 sm:p-8 pb-0 sm:pb-0', $wrapperClasses);
         self::assertStringContainsString('max-w-3xl', $wrapperClasses);
         self::assertStringContainsString('mx-auto', $wrapperClasses);
         self::assertStringContainsString('text-center', $wrapperClasses);
@@ -112,17 +113,17 @@ final class PrelineComponentTest extends TestCase
     {
         $section = new Section();
         $section->mergeProps([
-            'max_width' => 'md',
-            'padding_y' => 'md',
+            'max_width' => '3xl',
+            'padding' => 'md',
             'props' => [
                 'blend' => 'screen',
-                'margin_top' => 'sm',
+                'margin' => 'sm',
             ],
         ]);
 
         self::assertStringNotContainsString('max-w-3xl', $section->getSectionClasses());
         self::assertStringContainsString('mix-blend-screen', $section->getSectionClasses());
-        self::assertStringContainsString('mt-4', $section->getSectionClasses());
+        self::assertStringContainsString('my-4', $section->getSectionClasses());
         self::assertStringContainsString('max-w-3xl', $section->getContainerClasses());
     }
 
@@ -132,7 +133,7 @@ final class PrelineComponentTest extends TestCase
         $headline->mergeProps([
             'title' => 'Hello',
             'props' => [
-                'margin_top' => 'sm',
+                'margin' => 'sm',
             ],
         ]);
 
@@ -140,7 +141,11 @@ final class PrelineComponentTest extends TestCase
         self::assertStringContainsString('custom-a', $classes);
         self::assertStringContainsString('custom-b', $classes);
         self::assertStringContainsString('custom-c', $classes);
-        self::assertStringContainsString('mt-4', $classes);
+        self::assertStringContainsString('my-4', $classes);
+        self::assertStringNotContainsString('tracking-tight', $classes);
+
+        $blockClasses = $headline->getBlockClasses('inner-a', ['inner-b', null]);
+        self::assertSame('w-full inner-a inner-b', $blockClasses);
     }
 
     public function testRootAttributesAndSubComponentResolvers(): void
@@ -185,6 +190,7 @@ final class PrelineComponentTest extends TestCase
         self::assertSame('outline', $buttons[0]['button_style'] ?? null);
         self::assertSame('secondary', $buttons[0]['button_color'] ?? null);
         self::assertSame('lg', $buttons[0]['size'] ?? null);
+        self::assertTrue($buttons[0]['bare'] ?? false);
     }
 
     public function testMediaLinkAndIconHelpers(): void

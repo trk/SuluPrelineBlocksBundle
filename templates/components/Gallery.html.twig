@@ -3,116 +3,116 @@
 {% set items = this.normalizedItems %}
 {% set is_filter_active = this.isFilterEnabled() and this.filterTags|length > 0 %}
 {% set is_lightbox_active = this.isLightboxEnabled() %}
-{% set gallery_dom_id = custom_id ? custom_id : ('gallery-' ~ random()) %}
+{% set lightbox_dialog_classes = this.lightboxDialogClasses %}
+{% set lightbox_image_sizes = this.lightboxImageSizes %}
+{% set gallery_dom_id = custom_id ? custom_id : this.componentUid %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<section {{ attributes.defaults(this.getRootAttributes('w-full')|merge({id: gallery_dom_id})) }}>
-    {% if title %}
-        <div class="mb-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
-        </div>
-    {% endif %}
-
-    {% if is_filter_active %}
-        {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
-            filter_align_class: this.filterAlignClass,
-            filter_style: this.resolvedProps.filter_style|default('pills'),
-            all_label: this.resolvedProps.filter_all_label|default('All'),
-            filter_tags: this.filterTags,
-        }, with_context = false) }}
-    {% endif %}
-
-    <div class="{{ this.containerClasses }} gallery-container w-full">
-        {% for item in items %}
-            {% set item_tags = this.getItemTagSlugs(item) %}
-            {% set image_url = this.resolveItemImageUrl(item) %}
-            {% set image_srcset = this.resolveItemImageSrcSet(item) %}
-            {% set image_focus_style = this.resolveItemImageFocusPointStyle(item) %}
-            {% set modal_id = gallery_dom_id ~ '-modal-' ~ loop.index %}
-            {% set item_props = this.resolveItemProps(item) %}
-
-            <div
-                class="gallery-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
-                data-tags="{{ item_tags }}"
-            >
-                <div class="w-full h-full flex flex-col {% if is_lightbox_active and image_url and not item.link|default(null) %}cursor-pointer{% endif %}" {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}"{% endif %}>
-                    <twig:Overlay
-                        title="{{ item.title|default(null) }}"
-                        meta="{{ item.meta|default(null) }}"
-                        badge="{{ item.badge|default(null) }}"
-                        :elements="item.elements|default([])"
-                        :badges="item.badges|default([])"
-                        content="{{ item.summary|default(item.content|default(null)) }}"
-                        :image="item.image|default(null)"
-                        :video="item.video|default(null)"
-                        :icon="item.icon|default(null)"
-                        :link="item.link|default(item.url|default(null))"
-                        linkTitle="{{ item.link_title|default(null) }}"
-                        :buttons="item.buttons|default([])"
-                        :hoverImage="item.hover_image|default(null)"
-                        :hoverVideo="item.hover_video|default(null)"
-                        :image_url="item.image_url|default(null)"
-                        :hover_image_url="item.hover_image_url|default(null)"
-                        :video_url="item.video_url|default(null)"
-                        :hover_video_url="item.hover_video_url|default(null)"
-                        :props="item_props"
-                        class="w-full h-full flex-1"
-                    />
-                </div>
+<div {{ attributes.defaults(this.getRootAttributes()|merge({id: gallery_dom_id})) }}{% if is_filter_active %} data-block-filter{% endif %}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if title %}
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-foreground">{{ title }}</h2>
             </div>
+        {% endif %}
 
-            {% if is_lightbox_active and image_url %}
+        {% if is_filter_active %}
+            {{ include('@SuluPrelineBlocks/includes/tag_filter_bar.html.twig', {
+                filter_align_class: this.filterAlignClass,
+                filter_style: this.resolvedProps.filter_style|default('pills'),
+                all_label: this.resolvedProps.filter_all_label|default('All'),
+                filter_tags: this.filterTags,
+            }, with_context: false) }}
+        {% endif %}
+
+        <div class="{{ this.containerClasses }} gallery-container">
+            {% for item in items %}
+                {% set item_tags = this.getItemTagSlugs(item) %}
+                {% set image_url = this.resolveItemImageUrl(item) %}
+                {% set image_srcset = this.resolveItemImageSrcSet(item) %}
+                {% set image_focus_style = this.resolveItemImageFocusPointStyle(item) %}
+                {% set modal_id = gallery_dom_id ~ '-modal-' ~ loop.index %}
+                {% set item_props = this.resolveItemProps(item, loop.first) %}
+
                 <div
-                    id="{{ modal_id }}"
-                    class="hs-overlay hidden ti-modal fixed inset-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none"
-                    role="dialog"
-                    tabindex="-1"
-                    aria-labelledby="{{ modal_id }}-label"
+                    class="gallery-item-card w-full {% if this.isMasonry() %}break-inside-avoid mb-6 inline-block{% else %}h-full flex flex-col{% endif %} transition-all duration-300 ease-in-out"
+                    data-filter-item
+                    data-tags="{{ item_tags }}"
                 >
-                    <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-4xl sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
-                        <div class="w-full flex flex-col bg-overlay border border-overlay-line shadow-xl rounded-2xl pointer-events-auto overflow-hidden">
-                            <div class="flex justify-between items-center py-3 px-4 border-b border-overlay-divider bg-overlay-header">
-                                <h3 id="{{ modal_id }}-label" class="font-bold text-foreground">
-                                    {{ item.title|default('') }}
-                                </h3>
-                                <button
-                                    type="button"
-                                    class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
-                                    aria-label="Close"
-                                    data-hs-overlay="#{{ modal_id }}"
-                                >
-                                    <span class="sr-only">Close</span>
-                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                                </button>
-                            </div>
-                            <div class="p-4 overflow-y-auto text-center bg-black/5 dark:bg-black/40">
-                                <twig:Image
-                                    :bare="true"
-                                    :image_url="image_url"
-                                    :image_srcset="image_srcset"
-                                    sizes="(min-width: 1024px) 80vw, 100vw"
-                                    :image_focus_style="image_focus_style"
-                                    :alt="item.title|default('')"
-                                    img_class="max-h-[75vh] mx-auto object-contain rounded-lg"
-                                />
-                                {% set modal_content = item.summary|default(item.content|default(null)) %}
-                                {% if modal_content %}
-                                    <div class="mt-4 text-left text-sm text-muted-foreground-2">
-                                        {{ modal_content|raw }}
-                                    </div>
-                                {% endif %}
+                    <div class="w-full h-full flex flex-col {% if is_lightbox_active and image_url and not item.link|default(null) %}cursor-pointer{% endif %}" {% if is_lightbox_active and image_url and not item.link|default(null) %}data-hs-overlay="#{{ modal_id }}"{% endif %}>
+                        <twig:Overlay
+                            title="{{ item.title|default(null) }}"
+                            meta="{{ item.meta|default(null) }}"
+                            badge="{{ item.badge|default(null) }}"
+                            :elements="item.elements|default([])"
+                            :badges="item.badges|default([])"
+                            content="{{ item.summary|default(item.content|default(null)) }}"
+                            :image="item.image|default(null)"
+                            :video="item.video|default(null)"
+                            :icon="item.icon|default(null)"
+                            :link="item.link|default(item.url|default(null))"
+                            linkTitle="{{ item.link_title|default(null) }}"
+                            :buttons="item.buttons|default([])"
+                            :hoverImage="item.hover_image|default(null)"
+                            :hoverVideo="item.hover_video|default(null)"
+                            :image_url="item.image_url|default(null)"
+                            :hover_image_url="item.hover_image_url|default(null)"
+                            :video_url="item.video_url|default(null)"
+                            :hover_video_url="item.hover_video_url|default(null)"
+                            :props="item_props"
+                            class="w-full h-full flex-1"
+                        />
+                    </div>
+                </div>
+
+                {% if is_lightbox_active and image_url %}
+                    <div
+                        id="{{ modal_id }}"
+                        class="hs-overlay hidden ti-modal fixed inset-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none"
+                        role="dialog"
+                        tabindex="-1"
+                        aria-labelledby="{{ modal_id }}-label"
+                    >
+                        <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all {{ lightbox_dialog_classes }}">
+                            <div class="w-full flex flex-col bg-overlay border border-overlay-line shadow-xl rounded-2xl pointer-events-auto overflow-hidden">
+                                <div class="flex justify-between items-center py-3 px-4 border-b border-overlay-divider bg-overlay-header">
+                                    <h3 id="{{ modal_id }}-label" class="font-bold text-foreground">
+                                        {{ item.title|default('') }}
+                                    </h3>
+                                    <button
+                                        type="button"
+                                        class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-surface text-surface-foreground hover:bg-surface-hover focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
+                                        aria-label="Close"
+                                        data-hs-overlay="#{{ modal_id }}"
+                                    >
+                                        <span class="sr-only">Close</span>
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                    </button>
+                                </div>
+                                <div class="p-4 overflow-y-auto text-center bg-black/5 dark:bg-black/40">
+                                    <twig:Image
+                                        :bare="true"
+                                        :image_url="image_url"
+                                        :image_srcset="image_srcset"
+                                        :sizes="lightbox_image_sizes"
+                                        :image_focus_style="image_focus_style"
+                                        :alt="item.title|default('')"
+                                        loading="lazy"
+                                        fetchpriority="low"
+                                        :img_class="this.lightboxImageClasses"
+                                    />
+                                    {% set modal_content = item.summary|default(item.content|default(null)) %}
+                                    {% if modal_content %}
+                                        <div class="mt-4 text-left text-sm text-muted-foreground-2">
+                                            {{ modal_content|raw }}
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-
-    {% if is_filter_active %}
-        {{ include('@SuluPrelineBlocks/includes/tag_filter_script.html.twig', {
-            scope_id: gallery_dom_id,
-            item_selector: '.gallery-item-card',
-        }, with_context = false) }}
-    {% endif %}
-</section>
+</div>

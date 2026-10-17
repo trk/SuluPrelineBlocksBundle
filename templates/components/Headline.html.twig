@@ -1,29 +1,40 @@
 {% set tag = this.getTag() %}
 {% set url = this.getUrl() %}
+{% set link_target = this.getLinkTarget() %}
+{% set link_title = this.getLinkTitle() %}
 {% set img_url = this.getImageUrl() %}
 {% set img_focus_style = this.getImageFocusPointStyle() %}
 {% set icon_class = this.iconClass %}
 {% set headline_title = this.getTitle() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<{{ tag }} {{ attributes.defaults(this.getRootAttributes()) }}>
-    {% if img_url %}
-        <twig:Image
-            :bare="true"
-            :image_url="img_url"
-            :image_focus_style="img_focus_style"
-            :alt="this.getImageAlt()"
-            img_class="inline-block w-8 h-8 mr-2 align-middle object-contain"
-        />
-    {% endif %}
-    {% if icon_class %}
-        <span class="inline-block mr-2 align-middle"><i class="{{ icon_class }}" aria-hidden="true"></i></span>
-    {% endif %}
-    {% if url %}
-        <a href="{{ url }}" class="hover:underline transition-colors">
-            {{ headline_title }}
-        </a>
-    {% else %}
-        {{ headline_title }}
-    {% endif %}
-</{{ tag }}>
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        <{{ tag }} class="{{ this.headingClasses }}">
+            {% if img_url %}
+                <twig:Image
+                    :bare="true"
+                    :image_url="img_url"
+                    :image_focus_style="img_focus_style"
+                    :alt="this.getImageAlt()"
+                    :loading="this.getImageLoading()"
+                    :fetchpriority="this.getImageFetchPriority()"
+                    img_class="inline-block w-8 h-8 mr-2 align-middle object-contain"
+                />
+            {% endif %}
+            {% if icon_class %}
+                <span class="inline-block mr-2 align-middle"><i class="{{ icon_class }}" aria-hidden="true"></i></span>
+            {% endif %}
+            {% if url %}
+                <a href="{{ url }}"
+                   {% if link_target == '_blank' %}target="_blank" rel="noopener noreferrer"{% endif %}
+                   {% if link_title %}title="{{ link_title }}"{% endif %}
+                   class="hover:underline transition-colors">
+                    {{ headline_title }}
+                </a>
+            {% else %}
+                {{ headline_title }}
+            {% endif %}
+        </{{ tag }}>
+    </div>
+</div>

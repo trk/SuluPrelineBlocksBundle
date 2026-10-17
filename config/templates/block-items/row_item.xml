@@ -29,6 +29,7 @@
                         <title lang="es">Columnas</title>
                         <title lang="fr">Colonnes</title>
                     </meta>
+                    <tag name="sulu_block_suite.tabs" shared="true" exclude="dynamic_content,general"/>
                     <types>
                         <xi:include href="column_item.xml"/>
                     </types>

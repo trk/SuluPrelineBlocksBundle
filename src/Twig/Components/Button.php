@@ -21,12 +21,14 @@ final class Button extends PrelineComponent
             'link_color' => 'primary',
             'icon_align' => 'left',
             'full_width' => false,
+            'bare' => false,
         ];
     }
 
     protected function capabilities(): array
     {
         return [
+            'bare' => fn (): bool => $this->boolProp('bare', false),
             'group' => fn (): bool => [] !== $this->items('items'),
             'connected' => fn (): bool => 'connected' === $this->getGroupStyle(),
             'vertical' => fn (): bool => 'vertical' === $this->getOrientation(),
@@ -36,6 +38,11 @@ final class Button extends PrelineComponent
     public function shouldRender(): bool
     {
         return $this->isGroup() || '' !== $this->getTitle() || null !== $this->getResolvedIcon();
+    }
+
+    public function isBare(): bool
+    {
+        return $this->is('bare');
     }
 
     public function isGroup(): bool
@@ -55,7 +62,12 @@ final class Button extends PrelineComponent
 
     public function getAlign(): string
     {
-        return $this->stringProp('align', 'start');
+        $align = $this->nullableStringProp('align');
+        if (null === $align || 'start' === $align) {
+            return $this->stringProp('text_align', $align ?? 'start');
+        }
+
+        return $align;
     }
 
     public function getGap(): string
@@ -63,11 +75,20 @@ final class Button extends PrelineComponent
         return $this->stringProp('gap', 'md');
     }
 
+    public function getGroupAlignClasses(): string
+    {
+        return match ($this->getAlign()) {
+            'center' => 'justify-center mx-auto text-center',
+            'end', 'right' => 'justify-end ml-auto text-right',
+            'justify' => 'w-full *:flex-1',
+            default => 'justify-start text-left',
+        };
+    }
+
     public function getGroupWrapperClasses(): string
     {
         $isConnected = $this->is('connected');
         $isVertical = $this->is('vertical');
-        $align = $this->getAlign();
 
         $layoutClass = $isConnected
             ? ($isVertical ? 'inline-flex flex-col rounded-lg shadow-2xs' : 'inline-flex rounded-lg shadow-2xs')
@@ -76,14 +97,28 @@ final class Button extends PrelineComponent
                 $this->getGapClasses('md', 'button_group', 'gap'),
             );
 
-        $alignClasses = match ($align) {
-            'center' => 'justify-center mx-auto text-center',
-            'end', 'right' => 'justify-end ml-auto text-right',
-            'justify' => 'w-full *:flex-1',
-            default => 'justify-start text-left',
-        };
+        return $this->classes($layoutClass, $this->getGroupAlignClasses());
+    }
 
-        return parent::getWrapperClasses($layoutClass, $alignClasses);
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        if ($this->isGroup()) {
+            return $this->classes(
+                $this->getGroupWrapperClasses(),
+                $extraBase,
+                ...$moreParts,
+            );
+        }
+
+        return $this->classes(
+            $this->boolProp('full_width', false) ? 'block w-full' : 'inline-flex flex-wrap items-center',
+            $this->getGroupAlignClasses(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 
     /**
@@ -94,7 +129,8 @@ final class Button extends PrelineComponent
      *     icon: ?string,
      *     icon_align: string,
      *     classes: string,
-     *     id: ?string
+     *     id: ?string,
+     *     bare: bool
      * }>
      */
     public function getNormalizedItems(): array
@@ -132,9 +168,16 @@ final class Button extends PrelineComponent
                 'link_color',
             );
 
+            $itemSize = $this->itemInheritedString(
+                $item,
+                'size',
+                $this->stringProp('size', 'md'),
+            );
+
             $itemProps = \array_merge($groupProps, $item, [
                 'variant' => $itemStyle,
                 'link_color' => $itemColor,
+                'size' => $itemSize,
             ]);
 
             $buttonClasses = PropsResolver::buttonClasses($itemProps);
@@ -170,6 +213,7 @@ final class Button extends PrelineComponent
                 'icon_align' => $iconAlign,
                 'classes' => $this->classes($buttonClasses),
                 'id' => $this->itemNullableString($item, 'id'),
+                'bare' => true,
             ];
         }
 
@@ -191,7 +235,9 @@ final class Button extends PrelineComponent
             }
         }
 
-        return $this->string('url', '#');
+        $rawUrl = $this->nullableString('url') ?? $this->nullableStringProp('url');
+
+        return null !== $rawUrl ? PropsResolver::resolveUrl($rawUrl, '#') : '#';
     }
 
     public function getResolvedIcon(): ?string
@@ -212,14 +258,5 @@ final class Button extends PrelineComponent
         }
 
         return PropsResolver::buttonClasses($this->props());
-    }
-
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
-    {
-        if ($this->isGroup()) {
-            return $this->classes($this->getGroupWrapperClasses(), $extraBase, ...$moreParts);
-        }
-
-        return parent::getWrapperClasses($this->getClasses(), $extraBase, ...$moreParts);
     }
 }

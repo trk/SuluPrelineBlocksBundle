@@ -34,19 +34,28 @@ final class VideoTest extends TestCase
 
         self::assertTrue($video->shouldRender());
         self::assertFalse($video->isBare());
-        self::assertTrue($video->isAutoplay());
+        self::assertFalse($video->isAutoplay());
         self::assertSame('inview', $video->getAutoplayMode());
         self::assertFalse($video->isControls());
         self::assertTrue($video->isLoop());
         self::assertTrue($video->isMuted());
+
+        $video->setProp('muted', 'default');
+        self::assertTrue($video->isMuted());
+
+        $video->setProp('autoplay', 'false');
+        self::assertFalse($video->isMuted());
+        $video->setProp('autoplay', 'inview');
+
         self::assertSame('/uploads/promo.mp4', $video->getVideoUrl());
         self::assertSame('/uploads/promo-hover.mp4', $video->getHoverVideoUrl());
         self::assertSame('/uploads/poster.jpg', $video->getPosterUrl());
         self::assertSame('Promo Poster', $video->getPosterAlt());
         self::assertSame('object-position: 50% 50%;', $video->getPosterFocusPointStyle());
         self::assertSame('https://example.com/watch', $video->getUrl());
-        self::assertStringContainsString('rounded-2xl', $video->getWrapperClasses());
-        self::assertStringContainsString('aspect-video', $video->getWrapperClasses());
+        self::assertSame('', $video->getWrapperClasses());
+        self::assertStringContainsString('rounded-2xl', $video->getBlockClasses());
+        self::assertStringContainsString('aspect-video', $video->getBlockClasses());
 
         // Bare mode with custom classes and preload
         $bareVideo = new Video();
@@ -63,5 +72,14 @@ final class VideoTest extends TestCase
         self::assertSame('metadata', $bareVideo->getPreload());
         self::assertSame('custom-bare-video', $bareVideo->getVideoClasses());
         self::assertSame('custom-hover-video', $bareVideo->getHoverVideoClasses());
+
+        $video->mergeProps([
+            'props' => [
+                'aspect_ratio' => 'manual',
+                'aspect_ratio_width' => 2.35,
+                'aspect_ratio_height' => 1,
+            ],
+        ]);
+        self::assertSame('aspect-ratio: 2.35 / 1;', $video->getMediaAspectRatioStyle());
     }
 }

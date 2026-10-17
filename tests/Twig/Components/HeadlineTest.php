@@ -24,7 +24,9 @@ final class HeadlineTest extends TestCase
 
         self::assertTrue($headline->shouldRender());
         self::assertSame('Enterprise Solutions', $headline->getTitle());
-        self::assertStringContainsString('text-3xl', $headline->getWrapperClasses());
+        self::assertSame('text-left', $headline->getWrapperClasses());
+        self::assertSame('w-full', $headline->getBlockClasses());
+        self::assertStringContainsString('text-3xl', $headline->getHeadingClasses());
     }
 
     public function testTagsDecorationsAndTextStroke(): void
@@ -39,6 +41,7 @@ final class HeadlineTest extends TestCase
                 'title_color' => 'primary',
                 'title_decoration' => 'underline',
                 'title_text_stroke' => true,
+                'margin' => 'md',
             ],
         ]);
 
@@ -47,6 +50,8 @@ final class HeadlineTest extends TestCase
         self::assertSame('underline', $headline->getTitleDecoration());
         self::assertTrue($headline->isTextStroke());
         self::assertStringContainsString('-webkit-text-stroke', $headline->getTextStrokeClasses());
-        self::assertStringContainsString('text-primary', $headline->getWrapperClasses());
+        self::assertStringContainsString('my-6', $headline->getWrapperClasses());
+        self::assertStringNotContainsString('text-primary', $headline->getWrapperClasses());
+        self::assertStringContainsString('text-primary', $headline->getHeadingClasses());
     }
 }

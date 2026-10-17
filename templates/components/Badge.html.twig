@@ -4,7 +4,6 @@
 {% set title = this.getTitle() %}
 {% set link_title = this.getLinkTitle() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 {% if this.isClickable() %}
     <a href="{{ url }}"
        {% if link_title %}title="{{ link_title }}"{% endif %}

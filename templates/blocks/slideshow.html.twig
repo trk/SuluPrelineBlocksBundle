@@ -1,4 +1,4 @@
 {% set block = block|block_transform(_context) %}
 {% if block %}
-    <twig:Slideshow :block="block" />
+    <twig:Slideshow :block="block" :context="_context" />
 {% endif %}

@@ -159,8 +159,16 @@ final class Countdown extends PrelineComponent
         ];
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses('w-full flex flex-col', $this->getAlignClasses(), $extraBase, ...$moreParts);
+        return $this->classes(
+            'w-full flex flex-col',
+            $this->getAlignClasses(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

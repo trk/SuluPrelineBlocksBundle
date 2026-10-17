@@ -70,6 +70,35 @@ final class PropsResolver
     }
 
     /**
+     * Reads a boolean value from `$props[$key]` using `AbstractBlockComponent::parseBoolean`.
+     *
+     * @param array<string, mixed> $props
+     */
+    public static function bool(array $props, string $key, bool $default = false): bool
+    {
+        if (!\array_key_exists($key, $props) || null === $props[$key] || '' === $props[$key]) {
+            return $default;
+        }
+
+        $value = $props[$key];
+        if (\is_bool($value)) {
+            return $value;
+        }
+        if (\is_int($value) || \is_float($value)) {
+            return 0 !== (int) $value;
+        }
+        if (\is_string($value)) {
+            return match (\strtolower(\trim($value))) {
+                '1', 'true', 'yes', 'on' => true,
+                '0', 'false', 'no', 'off', 'none' => false,
+                default => $default,
+            };
+        }
+
+        return $default;
+    }
+
+    /**
      * @param array<string, mixed> $props
      */
     public static function textAlign(array $props, string $default = 'left'): string
@@ -176,13 +205,11 @@ final class PropsResolver
      */
     public static function aspectRatio(array $props, string $default = '16/9', string $key = 'aspect_ratio'): string
     {
-        $val = self::str($props, $key, $default, 'media_aspect_ratio');
+        $preset = PrelineClassMap::aspectRatio(self::str($props, $key, $default, 'media_aspect_ratio'))
+            ?? PrelineClassMap::aspectRatio($default)
+            ?? PrelineClassMap::ASPECT_RATIOS['auto'];
 
-        return PrelineClassMap::resolve(
-            PrelineClassMap::ASPECT_RATIOS,
-            $val,
-            PrelineClassMap::ASPECT_RATIOS[$default] ?? 'aspect-video',
-        );
+        return $preset['class'];
     }
 
     /**
@@ -280,9 +307,9 @@ final class PropsResolver
     /**
      * Helper to resolve a Sulu link structure or plain URL string to an href string.
      */
-    public static function resolveUrl(mixed $link): string
+    public static function resolveUrl(mixed $link, string $default = '#'): string
     {
-        return SuluDataNormalizer::resolveUrl($link);
+        return SuluDataNormalizer::resolveUrl($link, $default);
     }
 
     /**

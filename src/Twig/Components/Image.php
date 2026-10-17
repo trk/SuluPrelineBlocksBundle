@@ -86,14 +86,31 @@ final class Image extends PrelineComponent
             ?? $this->nullableStringProp('hover_focus_style');
     }
 
-    public function getImageSizes(string $default = '(min-width: 1280px) 1024px, 100vw'): string
+    /**
+     * Intrinsic `width`/`height` attributes: provided by the parent (`dimensions`) for bare images,
+     * otherwise derived from this image's own aspect ratio and layout slot.
+     *
+     * @return array{width: int, height: int}|null
+     */
+    public function getDimensions(): ?array
     {
-        return $this->nullableStringProp('sizes') ?? $default;
+        $provided = $this->prop('dimensions');
+        if (\is_array($provided) && \is_int($provided['width'] ?? null) && \is_int($provided['height'] ?? null)
+            && $provided['width'] > 0 && $provided['height'] > 0) {
+            return ['width' => $provided['width'], 'height' => $provided['height']];
+        }
+
+        return $this->getIntrinsicImageDimensions();
     }
 
     public function getLoading(): string
     {
-        return $this->stringProp('loading', 'lazy');
+        return $this->getImageLoading();
+    }
+
+    public function getFetchPriority(): ?string
+    {
+        return $this->getImageFetchPriority();
     }
 
     public function getHoverEffectClasses(): string
@@ -110,10 +127,10 @@ final class Image extends PrelineComponent
         $containerHover = 'shadow' === $hover ? $this->getHoverEffectClasses() : '';
 
         return $this->classes(
-            'relative overflow-hidden',
+            'group relative block overflow-hidden',
             $this->getRoundedClasses('lg'),
             $this->getShadowClasses(),
-            $this->getAspectRatio('auto'),
+            $this->getMediaAspectRatioClass('auto'),
             $containerHover,
         );
     }
@@ -125,15 +142,12 @@ final class Image extends PrelineComponent
             return $explicit;
         }
 
-        $hover = $this->stringProp('hover_effect', 'none');
-        $imgHover = ('none' !== $hover && 'shadow' !== $hover)
-            ? $this->getHoverEffectClasses()
-            : 'transition-all duration-500 group-hover:scale-[1.01]';
-
         return $this->classes(
-            'w-full h-full',
-            $imgHover,
+            'block w-full',
+            null !== $this->getAspectRatioValue() ? 'h-full' : 'h-auto',
             $this->getObjectFitClass(),
+            $this->getImageHoverTransformClasses(),
+            null !== $this->getHoverImageUrl() ? 'transition-all duration-500 group-hover:opacity-0' : null,
         );
     }
 
@@ -144,26 +158,26 @@ final class Image extends PrelineComponent
             return $explicit;
         }
 
-        $hover = $this->stringProp('hover_effect', 'none');
-        $imgHover = ('none' !== $hover && 'shadow' !== $hover)
-            ? $this->getHoverEffectClasses()
-            : 'group-hover:scale-[1.01]';
-
         return $this->classes(
-            'absolute inset-0 w-full h-full transition-all duration-500 opacity-0 group-hover:opacity-100',
-            $imgHover,
+            'absolute inset-0 w-full h-full opacity-0 transition-all duration-500 group-hover:opacity-100',
             $this->getObjectFitClass(),
+            $this->getImageHoverTransformClasses(),
         );
+    }
+
+    /**
+     * Image-level hover transform (`shadow` is applied to the container instead).
+     */
+    private function getImageHoverTransformClasses(): string
+    {
+        $hover = $this->stringProp('hover_effect', 'none');
+
+        return 'none' !== $hover && 'shadow' !== $hover ? $this->getHoverEffectClasses() : '';
     }
 
     public function getUrl(): ?string
     {
-        $link = $this->get('link');
-        if (null === $link || '' === $link) {
-            return null;
-        }
-
-        return PropsResolver::resolveUrl($link);
+        return $this->getLinkUrl('link');
     }
 
     public function getCaption(): ?string
@@ -186,15 +200,11 @@ final class Image extends PrelineComponent
         return $this->extractMediaAlt($this->get('hover_image')) ?? $this->getAlt();
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        $maxWidth = $this->nullableStringProp('max_width');
-        $hasMaxWidth = null !== $maxWidth && 'none' !== $maxWidth;
-
-        return parent::getWrapperClasses(
-            $hasMaxWidth ? 'block w-full mx-auto' : 'block w-full max-w-5xl mx-auto',
-            $extraBase,
-            ...$moreParts,
-        );
+        return $this->classes('block w-full', $extraBase, ...$moreParts);
     }
 }

@@ -1129,62 +1129,6 @@
                     </params>
                 </property>
 
-                <property name="padding" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Padding</title>
-                        <title lang="tr">İç Boşluk</title>
-                        <title lang="de">Innenabstand</title>
-                        <title lang="ru">Внутренний отступ</title>
-                        <title lang="es">Relleno Interior</title>
-                        <title lang="fr">Marge Intérieure</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="normal"/>
-                        <param name="values" type="collection">
-                            <param name="none">
-                                <meta>
-                                    <title lang="en">None</title>
-                                    <title lang="tr">Boşluksuz</title>
-                                    <title lang="de">Keine</title>
-                                    <title lang="ru">Нет</title>
-                                    <title lang="es">Ninguno</title>
-                                    <title lang="fr">Aucun</title>
-                                </meta>
-                            </param>
-                            <param name="compact">
-                                <meta>
-                                    <title lang="en">Compact</title>
-                                    <title lang="tr">Dar</title>
-                                    <title lang="de">Kompakt</title>
-                                    <title lang="ru">Компактный</title>
-                                    <title lang="es">Compacto</title>
-                                    <title lang="fr">Compact</title>
-                                </meta>
-                            </param>
-                            <param name="normal">
-                                <meta>
-                                    <title lang="en">Normal</title>
-                                    <title lang="tr">Standart</title>
-                                    <title lang="de">Normal</title>
-                                    <title lang="ru">Обычный</title>
-                                    <title lang="es">Normal</title>
-                                    <title lang="fr">Normal</title>
-                                </meta>
-                            </param>
-                            <param name="spacious">
-                                <meta>
-                                    <title lang="en">Spacious</title>
-                                    <title lang="tr">Geniş</title>
-                                    <title lang="de">Geräumig</title>
-                                    <title lang="ru">Просторный</title>
-                                    <title lang="es">Espacioso</title>
-                                    <title lang="fr">Spacieux</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
-
                 <property name="rounded" type="single_select" colspan="6">
                     <meta>
                         <title lang="en">Border Radius</title>
@@ -1296,6 +1240,9 @@
                         </param>
                     </params>
                 </property>
+
+                <xi:include href="../fields/padding.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

@@ -78,16 +78,28 @@ final class Table extends PrelineComponent
         return 'hover' === $style || 'striped' === $style;
     }
 
+    public function isBordered(): bool
+    {
+        return $this->boolProp('bordered', false);
+    }
+
     public function hasHeader(): bool
     {
         return $this->hasAny('header_title', 'header_meta', 'header_content', 'header_badge', 'header_link');
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int, string|null|false>|null|false ...$moreParts
+     */
+    public function getTableContainerClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
+        $border = $this->isBordered()
+            ? 'border border-card-line rounded-2xl overflow-hidden shadow-2xs bg-card'
+            : '';
+
+        return $this->classes(
             'overflow-x-auto w-full',
-            $this->boolProp('bordered', false) ? 'border border-table-line rounded-xl shadow-xs' : null,
+            $border,
             $extraBase,
             ...$moreParts,
         );

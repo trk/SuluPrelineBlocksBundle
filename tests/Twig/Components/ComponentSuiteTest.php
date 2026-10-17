@@ -33,10 +33,11 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('text-primary', $headline->getTitleColor());
 
         $classes = $headline->getWrapperClasses();
-        self::assertStringContainsString('text-3xl', $classes);
         self::assertStringContainsString('text-center', $classes);
         self::assertStringContainsString('mt-6', $classes);
         self::assertStringContainsString('mb-4', $classes);
+        self::assertStringContainsString('text-3xl', $headline->getHeadingClasses());
+        self::assertStringContainsString('text-primary', $headline->getHeadingClasses());
     }
 
     public function testHeadlineDefaults(): void
@@ -51,8 +52,9 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('text-foreground', $headline->getTitleColor());
 
         $classes = $headline->getWrapperClasses();
-        self::assertStringContainsString('text-2xl', $classes);
-        self::assertStringContainsString('text-foreground', $classes);
+        self::assertStringContainsString('text-left', $classes);
+        self::assertStringContainsString('text-2xl', $headline->getHeadingClasses());
+        self::assertStringContainsString('text-foreground', $headline->getHeadingClasses());
 
         $headline->assign('image', [
             'url' => 'https://cdn.example.com/icon.png',
@@ -81,7 +83,7 @@ final class ComponentSuiteTest extends TestCase
         $headline->setProp('title_decoration', 'line');
         self::assertStringContainsString('after:content', $headline->getDecorationClasses());
 
-        $classes = $headline->getWrapperClasses();
+        $classes = $headline->getHeadingClasses();
         self::assertStringContainsString('text-4xl', $classes);
     }
 
@@ -103,10 +105,12 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('text-justify', $text->getTextAlign());
 
         $classes = $text->getWrapperClasses();
-        self::assertStringContainsString('prose', $classes);
-        self::assertStringContainsString('text-lg', $classes);
         self::assertStringContainsString('text-justify', $classes);
         self::assertStringContainsString('mb-10', $classes);
+
+        $blockClasses = $text->getBlockClasses();
+        self::assertStringContainsString('prose', $blockClasses);
+        self::assertStringContainsString('text-lg', $blockClasses);
     }
 
     public function testImage(): void
@@ -155,8 +159,8 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('object-position: 50% 50%;', $image->getHoverImageFocusPointStyle());
 
         $classes = $image->getWrapperClasses();
-        self::assertStringContainsString('w-full', $classes);
         self::assertStringContainsString('mt-4', $classes);
+        self::assertSame('block w-full', $image->getBlockClasses());
     }
 
     public function testVideo(): void
@@ -195,32 +199,33 @@ final class ComponentSuiteTest extends TestCase
         self::assertSame('rounded-xl', $video->getRounded());
 
         $classes = $video->getWrapperClasses();
-        self::assertStringContainsString('relative w-full overflow-hidden rounded-xl', $classes);
-        self::assertStringContainsString('aspect-video', $classes);
         self::assertStringContainsString('mb-16', $classes);
+        $blockClasses = $video->getBlockClasses();
+        self::assertStringContainsString('relative w-full overflow-hidden rounded-xl', $blockClasses);
+        self::assertStringContainsString('aspect-video', $blockClasses);
 
         // Test autoplay inview/hover modes and shadow
         $video->setProp('autoplay', 'inview');
-        self::assertTrue($video->isAutoplay());
+        self::assertFalse($video->isAutoplay());
         self::assertSame('inview', $video->getAutoplayMode());
         self::assertTrue($video->isMuted());
 
         $video->setProp('box_shadow', 'xl');
         self::assertSame('shadow-xl', $video->getShadowClasses());
-        self::assertStringContainsString('shadow-xl', $video->getWrapperClasses());
+        self::assertStringContainsString('shadow-xl', $video->getBlockClasses());
 
         $video->setProp('muted', false);
         self::assertFalse($video->isMuted());
 
         // Aspect ratio variations and alias test
         $video->setProp('aspect_ratio', '9/16');
-        self::assertSame('aspect-[9/16]', $video->getAspectRatio());
+        self::assertSame('aspect-9/16', $video->getAspectRatio());
         $video->setProp('aspect_ratio', '9x16');
-        self::assertSame('aspect-[9/16]', $video->getAspectRatio());
+        self::assertSame('aspect-9/16', $video->getAspectRatio());
         $video->setProp('aspect_ratio', '21/9');
-        self::assertSame('aspect-[21/9]', $video->getAspectRatio());
+        self::assertSame('aspect-21/9', $video->getAspectRatio());
         $video->setProp('aspect_ratio', '21x9');
-        self::assertSame('aspect-[21/9]', $video->getAspectRatio());
+        self::assertSame('aspect-21/9', $video->getAspectRatio());
         $video->setProp('aspect_ratio', '4/3');
         self::assertSame('aspect-4/3', $video->getAspectRatio());
         $video->setProp('aspect_ratio', '4x3');
@@ -235,7 +240,7 @@ final class ComponentSuiteTest extends TestCase
         // Video rounded variations
         $video->setProp('rounded', 'full');
         self::assertSame('rounded-full', $video->getRounded());
-        self::assertStringContainsString('rounded-full', $video->getWrapperClasses());
+        self::assertStringContainsString('rounded-full', $video->getBlockClasses());
     }
 
     public function testImageAspectRatiosAndRounded(): void
@@ -244,18 +249,18 @@ final class ComponentSuiteTest extends TestCase
         $image->assign('image', 'https://cdn.example.com/banner.jpg');
 
         $image->mergeProps(['aspect_ratio' => '9/16', 'rounded' => '2xl']);
-        self::assertSame('aspect-[9/16]', $image->getAspectRatio());
+        self::assertSame('aspect-9/16', $image->getAspectRatio());
         self::assertSame('rounded-2xl', $image->getRounded());
 
         $image->mergeProps(['aspect_ratio' => '9x16', 'rounded' => 'full']);
-        self::assertSame('aspect-[9/16]', $image->getAspectRatio());
+        self::assertSame('aspect-9/16', $image->getAspectRatio());
         self::assertSame('rounded-full', $image->getRounded());
 
         $image->mergeProps(['aspect_ratio' => '21/9']);
-        self::assertSame('aspect-[21/9]', $image->getAspectRatio());
+        self::assertSame('aspect-21/9', $image->getAspectRatio());
 
         $image->mergeProps(['aspect_ratio' => '21x9']);
-        self::assertSame('aspect-[21/9]', $image->getAspectRatio());
+        self::assertSame('aspect-21/9', $image->getAspectRatio());
 
         $image->mergeProps(['aspect_ratio' => '16x9']);
         self::assertSame('aspect-video', $image->getAspectRatio());
@@ -296,9 +301,9 @@ final class ComponentSuiteTest extends TestCase
         self::assertStringContainsString('column-rule', $text->getColumnDividerClasses());
         self::assertStringContainsString('text-xl sm:text-2xl', $text->getTextStyleClasses());
 
-        $wrapper = $text->getWrapperClasses();
-        self::assertStringContainsString('md:columns-2', $wrapper);
-        self::assertStringContainsString('first-letter:float-left', $wrapper);
+        $blockClasses = $text->getBlockClasses();
+        self::assertStringContainsString('md:columns-2', $blockClasses);
+        self::assertStringContainsString('first-letter:float-left', $blockClasses);
     }
 
     public function testCardLayoutAndAlignments(): void

@@ -62,15 +62,6 @@ final class Slideshow extends PrelineComponent
         return $normalized;
     }
 
-    public function getHeightClass(): string
-    {
-        return PrelineClassMap::resolve(
-            PrelineClassMap::SLIDESHOW_HEIGHTS,
-            $this->stringProp('height', 'medium'),
-            PrelineClassMap::SLIDESHOW_HEIGHTS['medium'],
-        );
-    }
-
     public function isAutoplay(): bool
     {
         return $this->boolProp('autoplay', true);
@@ -112,5 +103,32 @@ final class Slideshow extends PrelineComponent
             $this->getInterval(),
             $this->isLoop(),
         );
+    }
+
+    public function getOverlayTintClasses(string $style): string
+    {
+        return PrelineClassMap::resolve(
+            PrelineClassMap::SLIDESHOW_OVERLAY_TINTS,
+            $style,
+            PrelineClassMap::SLIDESHOW_OVERLAY_TINTS['dark_medium'],
+        );
+    }
+
+    public function getSlideContentClasses(): string
+    {
+        return $this->classes(PrelineClassMap::SLIDESHOW_CONTENT, $this->getContentAlign());
+    }
+
+    public function getTextMeasureClass(): string
+    {
+        return PrelineClassMap::SLIDESHOW_TEXT_MEASURE;
+    }
+
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return $this->classes('relative w-full', $extraBase, ...$moreParts);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Grid', template: '@SuluPrelineBlocks/components/Grid.html.twig')]
 final class Grid extends PrelineComponent
@@ -84,6 +85,19 @@ final class Grid extends PrelineComponent
         return $this->resolveResponsiveGridClasses($this->isMasonry());
     }
 
+    /**
+     * Rendered width of one item: grid / masonry columns, or equal flex cells for card groups
+     * (side by side from `sm`, matching `CARD_GROUP_CONTAINER`).
+     */
+    public function getItemSlotWidth(): ResponsiveWidth
+    {
+        if ($this->isCardGroup()) {
+            return $this->getSlotWidth()->divide(['base' => 1, 'sm' => \max(1, \count($this->getNormalizedItems()))]);
+        }
+
+        return $this->getGridItemSlotWidth();
+    }
+
     public function isFilterEnabled(): bool
     {
         return $this->boolProp('filter', false);
@@ -94,7 +108,7 @@ final class Grid extends PrelineComponent
      *
      * @return array<string, mixed>
      */
-    public function resolveItemProps(array $item): array
+    public function resolveItemProps(array $item, bool $isFirstItem = true, bool $isOffscreenSlide = false): array
     {
         $itemProps = $this->itemArray($item, 'props');
 
@@ -105,15 +119,26 @@ final class Grid extends PrelineComponent
         $buttonStyle = $this->itemInheritedString($item, 'link_style', $this->stringProp('button_style', 'primary'));
         $mediaAlign = $this->stringProp('media_align', 'top');
         $textAlign = $this->stringProp('text_align', 'left');
+        $fetchPriority = $this->getImageFetchPriority($isFirstItem, $isOffscreenSlide);
+
+        $loadingProps = [
+            'image_loading' => $isFirstItem && $this->isImageEager(),
+            'loading' => $this->getImageLoading($isFirstItem),
+        ];
+        if (null !== $fetchPriority) {
+            $loadingProps['fetchpriority'] = $fetchPriority;
+        }
 
         /** @var array<string, mixed> $merged */
         $merged = \array_merge(
+            [self::SLOT_KEY => $this->getItemSlotWidth()->toArray()],
             [
                 'card_variant' => $cardVariant,
                 'button_style' => $buttonStyle,
                 'media_align' => $mediaAlign,
                 'text_align' => $textAlign,
             ],
+            $loadingProps,
             $this->extractItemForwardedProps($item),
             $itemProps,
         );

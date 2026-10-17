@@ -2,14 +2,14 @@
 <template xmlns="http://schemas.sulu.io/template/template" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
   <key>code</key>
   <meta>
-    <title lang="en">Code Block</title>
-    <title lang="tr">Kod Blo&#x11F;u</title>
-    <title lang="de">Code-Block</title>
-    <title lang="ru">&#x411;&#x43B;&#x43E;&#x43A; &#x43A;&#x43E;&#x434;&#x430;</title>
-    <title lang="es">Bloque de c&#xF3;digo</title>
-    <title lang="fr">Bloc de code</title>
+    <title lang="en">Code</title>
+    <title lang="tr">Kod</title>
+    <title lang="de">Code</title>
+    <title lang="ru">Код</title>
+    <title lang="es">Código</title>
+    <title lang="fr">Code</title>
   </meta>
-  <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+  <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="max_width,max_width_breakpoint,block_align,block_align_breakpoint,block_align_fallback,text_align,text_align_breakpoint,text_align_fallback"/>
   <properties>
         <section name="content">
             <meta>
@@ -31,167 +31,6 @@
                 <title lang="es">Contenido del C&#xF3;digo</title>
                 <title lang="fr">Contenu du Code</title>
               </meta>
-            </property>
-            <property name="language" type="single_select">
-              <meta>
-                <title lang="en">Language</title>
-                <title lang="tr">Programlama Dili</title>
-                <title lang="de">Programmiersprache</title>
-                <title lang="ru">&#x42F;&#x437;&#x44B;&#x43A; &#x43F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x43C;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
-                <title lang="es">Lenguaje de Programaci&#xF3;n</title>
-                <title lang="fr">Langage de Programmation</title>
-              </meta>
-              <params>
-                <param name="default_value" value="plaintext"/>
-                <param name="values" type="collection">
-                  <param name="plaintext">
-                    <meta>
-                      <title lang="en">Plain Text</title>
-                      <title lang="tr">Sade Metin</title>
-                      <title lang="de">Klartext</title>
-                      <title lang="ru">&#x41E;&#x431;&#x44B;&#x447;&#x43D;&#x44B;&#x439; &#x442;&#x435;&#x43A;&#x441;&#x442;</title>
-                      <title lang="es">Texto Plano</title>
-                      <title lang="fr">Texte Brut</title>
-                    </meta>
-                  </param>
-                  <param name="php">
-                    <meta>
-                      <title lang="en">PHP</title>
-                      <title lang="tr">PHP</title>
-                      <title lang="de">PHP</title>
-                      <title lang="ru">PHP</title>
-                      <title lang="es">PHP</title>
-                      <title lang="fr">PHP</title>
-                    </meta>
-                  </param>
-                  <param name="javascript">
-                    <meta>
-                      <title lang="en">JavaScript</title>
-                      <title lang="tr">JavaScript</title>
-                      <title lang="de">JavaScript</title>
-                      <title lang="ru">JavaScript</title>
-                      <title lang="es">JavaScript</title>
-                      <title lang="fr">JavaScript</title>
-                    </meta>
-                  </param>
-                  <param name="typescript">
-                    <meta>
-                      <title lang="en">TypeScript</title>
-                      <title lang="tr">TypeScript</title>
-                      <title lang="de">TypeScript</title>
-                      <title lang="ru">TypeScript</title>
-                      <title lang="es">TypeScript</title>
-                      <title lang="fr">TypeScript</title>
-                    </meta>
-                  </param>
-                  <param name="html">
-                    <meta>
-                      <title lang="en">HTML</title>
-                      <title lang="tr">HTML</title>
-                      <title lang="de">HTML</title>
-                      <title lang="ru">HTML</title>
-                      <title lang="es">HTML</title>
-                      <title lang="fr">HTML</title>
-                    </meta>
-                  </param>
-                  <param name="css">
-                    <meta>
-                      <title lang="en">CSS</title>
-                      <title lang="tr">CSS</title>
-                      <title lang="de">CSS</title>
-                      <title lang="ru">CSS</title>
-                      <title lang="es">CSS</title>
-                      <title lang="fr">CSS</title>
-                    </meta>
-                  </param>
-                  <param name="bash">
-                    <meta>
-                      <title lang="en">Bash / Shell</title>
-                      <title lang="tr">Bash / Shell</title>
-                      <title lang="de">Bash / Shell</title>
-                      <title lang="ru">Bash / Shell</title>
-                      <title lang="es">Bash / Shell</title>
-                      <title lang="fr">Bash / Shell</title>
-                    </meta>
-                  </param>
-                  <param name="json">
-                    <meta>
-                      <title lang="en">JSON</title>
-                      <title lang="tr">JSON</title>
-                      <title lang="de">JSON</title>
-                      <title lang="ru">JSON</title>
-                      <title lang="es">JSON</title>
-                      <title lang="fr">JSON</title>
-                    </meta>
-                  </param>
-                  <param name="yaml">
-                    <meta>
-                      <title lang="en">YAML</title>
-                      <title lang="tr">YAML</title>
-                      <title lang="de">YAML</title>
-                      <title lang="ru">YAML</title>
-                      <title lang="es">YAML</title>
-                      <title lang="fr">YAML</title>
-                    </meta>
-                  </param>
-                  <param name="sql">
-                    <meta>
-                      <title lang="en">SQL</title>
-                      <title lang="tr">SQL</title>
-                      <title lang="de">SQL</title>
-                      <title lang="ru">SQL</title>
-                      <title lang="es">SQL</title>
-                      <title lang="fr">SQL</title>
-                    </meta>
-                  </param>
-                  <param name="python">
-                    <meta>
-                      <title lang="en">Python</title>
-                      <title lang="tr">Python</title>
-                      <title lang="de">Python</title>
-                      <title lang="ru">Python</title>
-                      <title lang="es">Python</title>
-                      <title lang="fr">Python</title>
-                    </meta>
-                  </param>
-                  <param name="markdown">
-                    <meta>
-                      <title lang="en">Markdown</title>
-                      <title lang="tr">Markdown</title>
-                      <title lang="de">Markdown</title>
-                      <title lang="ru">Markdown</title>
-                      <title lang="es">Markdown</title>
-                      <title lang="fr">Markdown</title>
-                    </meta>
-                  </param>
-                </param>
-              </params>
-            </property>
-            <property name="show_copy" type="checkbox">
-              <meta>
-                <title lang="en">Show Copy Button</title>
-                <title lang="tr">Kopyala Butonunu G&#xF6;ster</title>
-                <title lang="de">Kopieren-Schaltfl&#xE4;che anzeigen</title>
-                <title lang="ru">&#x41F;&#x43E;&#x43A;&#x430;&#x437;&#x430;&#x442;&#x44C; &#x43A;&#x43D;&#x43E;&#x43F;&#x43A;&#x443; &#x43A;&#x43E;&#x43F;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
-                <title lang="es">Mostrar Bot&#xF3;n de Copiar</title>
-                <title lang="fr">Afficher le Bouton Copier</title>
-              </meta>
-              <params>
-                <param name="default_value" value="true"/>
-              </params>
-            </property>
-            <property name="show_line_numbers" type="checkbox">
-              <meta>
-                <title lang="en">Show Line Numbers</title>
-                <title lang="tr">Sat&#x131;r Numaralar&#x131;n&#x131; G&#xF6;ster</title>
-                <title lang="de">Zeilennummern anzeigen</title>
-                <title lang="ru">&#x41F;&#x43E;&#x43A;&#x430;&#x437;&#x430;&#x442;&#x44C; &#x43D;&#x43E;&#x43C;&#x435;&#x440;&#x430; &#x441;&#x442;&#x440;&#x43E;&#x43A;</title>
-                <title lang="es">Mostrar N&#xFA;meros de L&#xED;nea</title>
-                <title lang="fr">Afficher les Num&#xE9;ros de Ligne</title>
-              </meta>
-              <params>
-                <param name="default_value" value="false"/>
-              </params>
             </property>
             </properties>
         </section>

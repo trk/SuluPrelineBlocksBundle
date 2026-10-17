@@ -9,6 +9,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('Overlay', template: '@SuluPrelineBlocks/components/Overlay.html.twig')]
 final class Overlay extends PrelineComponent
 {
+    protected bool $applyWrapperPadding = false;
+
     /**
      * @return list<string>
      */
@@ -49,7 +51,7 @@ final class Overlay extends PrelineComponent
             'overlay_transition' => 'fade',
             'image_transition' => 'scale-up',
             'object_fit' => 'cover',
-            'overlay_padding' => 'normal',
+            'padding' => 'normal',
             'rounded' => '2xl',
             'shadow' => 'md',
             'badge_style' => 'glass',
@@ -141,14 +143,22 @@ final class Overlay extends PrelineComponent
             : 'transition-all duration-500 ease-out group-hover:scale-105';
     }
 
-    public function getMediaAspectRatioClass(string $default = '16-9', string $autoClass = 'aspect-auto min-h-[300px]'): string
+    public function getMediaAspectRatioClass(string $default = '16/9', string $autoClass = PrelineClassMap::MEDIA_AUTO_MIN_HEIGHT): string
     {
         return parent::getMediaAspectRatioClass($default, $autoClass);
     }
 
-    public function getImageSizes(string $default = '100vw'): string
+    /**
+     * Inner content column (readable line length inside full-bleed media).
+     */
+    public function getContentClasses(): string
     {
-        return '(min-width: 1280px) 50vw, 100vw';
+        return $this->classes('flex flex-col', PrelineClassMap::OVERLAY_CONTENT_MAX_WIDTH);
+    }
+
+    public function getIconTileClasses(): string
+    {
+        return $this->isLightOverlay() ? PrelineClassMap::CARD_ICON_TILE : PrelineClassMap::CARD_ICON_TILE_ON_MEDIA;
     }
 
     public function getWrapperStyles(): string
@@ -318,10 +328,13 @@ final class Overlay extends PrelineComponent
         return $this->isVideo() && null !== $this->getVideoUrl() ? $this->getHoverVideoUrl() : null;
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
-            'group relative overflow-hidden flex flex-col w-full min-h-[220px]',
+        return $this->classes(
+            'group relative overflow-hidden flex flex-col w-full',
             $this->getMediaAspectRatioClass(),
             $this->getRoundedClasses(),
             $this->getShadowClasses(),

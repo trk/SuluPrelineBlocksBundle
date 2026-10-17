@@ -17,8 +17,8 @@ final class PrelineBlockTransformerTest extends TestCase
             'type' => 'card',
             '_class' => 'custom-user-class',
             'props' => [
-                'margin_top' => 'md',
-                'margin_bottom' => 'lg',
+                'margin' => 'lg',
+                'margin_remove_top' => true,
                 'max_width' => 'large',
                 'block_align' => 'center',
             ],
@@ -30,7 +30,7 @@ final class PrelineBlockTransformerTest extends TestCase
         /** @var string $wrapper */
         $wrapper = $transformed['wrapper_class'];
         $this->assertStringContainsString('custom-user-class', $wrapper);
-        $this->assertStringContainsString('mt-6', $wrapper);
+        $this->assertStringContainsString('mt-0', $wrapper);
         $this->assertStringContainsString('mb-10', $wrapper);
         $this->assertStringContainsString('max-w-lg', $wrapper);
         $this->assertStringContainsString('mx-auto', $wrapper);
@@ -85,6 +85,21 @@ final class PrelineBlockTransformerTest extends TestCase
         $this->assertStringContainsString('md:grid-cols-2', $gridClasses);
         $this->assertStringContainsString('lg:grid-cols-3', $gridClasses);
         $this->assertStringContainsString('gap-8', $gridClasses);
+
+        $columnsBlock = [
+            'type' => 'gallery',
+            'props' => [
+                'columns_default' => '2',
+                'columns_md' => '3',
+                'columns_lg' => '4',
+            ],
+        ];
+        $transformedColumns = $transformer->transform($columnsBlock, []);
+        /** @var string $columnsClasses */
+        $columnsClasses = $transformedColumns['grid_classes'];
+        $this->assertStringContainsString('grid-cols-2', $columnsClasses);
+        $this->assertStringContainsString('md:grid-cols-3', $columnsClasses);
+        $this->assertStringContainsString('lg:grid-cols-4', $columnsClasses);
     }
 
     public function testTransformComputesColumnClasses(): void

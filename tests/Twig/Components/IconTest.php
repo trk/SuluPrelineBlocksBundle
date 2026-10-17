@@ -78,9 +78,12 @@ final class IconTest extends TestCase
 
         self::assertSame('feature-icon', $icon->getElementId());
         $wrapper = $icon->getWrapperClasses();
-        self::assertStringContainsString('flex items-center', $wrapper);
+        self::assertStringNotContainsString('flex items-center', $wrapper);
         self::assertStringContainsString('mt-4', $wrapper);
         self::assertStringContainsString('mb-6', $wrapper);
         self::assertStringContainsString('my-icon', $wrapper);
+
+        $blockClasses = $icon->getBlockClasses();
+        self::assertStringContainsString('flex items-center', $blockClasses);
     }
 }

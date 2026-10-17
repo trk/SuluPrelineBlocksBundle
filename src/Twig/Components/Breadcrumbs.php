@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluBlockSuiteBundle\Normalizer\SuluDataNormalizer;
 
 #[AsTwigComponent('Breadcrumbs', template: '@SuluPrelineBlocks/components/Breadcrumbs.html.twig')]
 final class Breadcrumbs extends PrelineComponent
@@ -58,7 +59,40 @@ final class Breadcrumbs extends PrelineComponent
 
     public function getHomeUrl(): string
     {
-        return $this->stringProp('home_url', '/');
+        $url = SuluDataNormalizer::sanitizeUrl($this->stringProp('home_url', '/'), '/');
+
+        return ('#' === $url || '' === $url) ? '/' : $url;
+    }
+
+    public function getPageUuid(): ?string
+    {
+        $uuid = $this->context['uuid'] ?? null;
+
+        if (!\is_string($uuid) || '' === \trim($uuid)) {
+            $view = $this->context['view'] ?? null;
+            if (\is_array($view) && \is_string($view['uuid'] ?? null)) {
+                $uuid = $view['uuid'];
+            }
+        }
+
+        if (!\is_string($uuid) || '' === \trim($uuid)) {
+            $content = $this->context['content'] ?? null;
+            if (\is_array($content) && \is_string($content['id'] ?? null)) {
+                $uuid = $content['id'];
+            }
+        }
+
+        if (!\is_string($uuid) || '' === \trim($uuid)) {
+            $uuid = $this->nullableStringProp('uuid');
+        }
+
+        if (!\is_string($uuid)) {
+            return null;
+        }
+
+        $trimmed = \trim($uuid);
+
+        return '' !== $trimmed ? $trimmed : null;
     }
 
     /**
@@ -73,12 +107,23 @@ final class Breadcrumbs extends PrelineComponent
                 continue;
             }
 
+            $rawUrl = $this->itemValue($item, 'url') ?? $this->itemValue($item, 'link');
+            $url = null !== $rawUrl ? PropsResolver::resolveUrl($rawUrl, '') : null;
+            if ('' === $url || '#' === $url) {
+                $url = null;
+            }
+
             $normalized[] = [
                 'title' => $title,
-                'url' => $this->itemNullableString($item, 'url') ?? $this->itemNullableString($item, 'link'),
+                'url' => $url,
             ];
         }
 
         return $normalized;
+    }
+
+    public function getListClasses(): string
+    {
+        return $this->classes('flex items-center whitespace-nowrap', $this->getAlignClasses());
     }
 }

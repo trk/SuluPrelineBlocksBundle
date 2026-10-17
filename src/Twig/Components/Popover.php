@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Totoglu\SuluPrelineBlocksBundle\Twig\Components;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use Totoglu\SuluPrelineBlocksBundle\Layout\ResponsiveWidth;
 
 #[AsTwigComponent('Popover', template: '@SuluPrelineBlocks/components/Popover.html.twig')]
 final class Popover extends PrelineComponent
@@ -44,11 +45,6 @@ final class Popover extends PrelineComponent
             'image' => fn (): bool => null !== $this->getImageUrl(),
             'media' => fn (): bool => null !== $this->getImageUrl(),
         ];
-    }
-
-    public function getImageSizes(string $default = '100vw'): string
-    {
-        return '100vw';
     }
 
     public function getResolvedTrigger(): string
@@ -95,7 +91,7 @@ final class Popover extends PrelineComponent
             $markerType = $this->itemEnum($item, 'marker_type', ['pulse', 'plus', 'number', 'pin', 'icon', 'dot'], $blockMarkerType);
             $markerColor = $this->itemEnum($item, 'marker_color', ['primary', 'dark', 'light', 'accent', 'success', 'danger'], $blockMarkerColor);
 
-            $iconClass = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : null;
+            $iconClass = isset($item['icon']) ? PropsResolver::resolveIcon($item['icon']) : $this->getIconClass('icon');
             $imageUrl = isset($item['image']) ? PropsResolver::resolveImageUrl($item['image']) : null;
             $imageSrcSet = isset($item['image']) ? PropsResolver::resolveSrcSet($item['image']) : null;
             $imageFocusStyle = isset($item['image']) ? PropsResolver::resolveFocusPointStyle($item['image']) : null;
@@ -145,5 +141,23 @@ final class Popover extends PrelineComponent
             $colors['button'],
             $colors['inner'],
         );
+    }
+
+    public function getMenuWidthClasses(): string
+    {
+        return PrelineClassMap::POPOVER_MENU_WIDTH['class'];
+    }
+
+    public function getMenuImageSizes(): string
+    {
+        return ResponsiveWidth::fixedSizes(PrelineClassMap::POPOVER_MENU_WIDTH['px']);
+    }
+
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        return $this->classes('relative w-full', $extraBase, ...$moreParts);
     }
 }

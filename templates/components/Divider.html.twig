@@ -4,22 +4,23 @@
 {% set width = this.getDividerWidthClasses() %}
 {% set icon_class = this.getResolvedIcon() %}
 
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
 <div {{ attributes.defaults(this.getRootAttributes()) }}>
-
-    {% if (style == 'icon' or icon_class) and icon_class and style != 'small' and style != 'dashed' and style != 'dotted' %}
-        <div class="{{ width }} flex items-center text-xs {{ this.getIconLineClasses() }}">
-            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full border shadow-2xs {{ this.getIconBadgeColorClasses() }}">
-                <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
-            </span>
-        </div>
-    {% elseif style == 'small' %}
-        <div class="{{ width }} {{ thickness }} {{ color }} rounded-full" role="separator"></div>
-    {% elseif style == 'dashed' %}
-        <hr class="{{ width }} border-0 border-t border-dashed {{ thickness }} {{ color }}" role="separator" />
-    {% elseif style == 'dotted' %}
-        <hr class="{{ width }} border-0 border-t border-dotted {{ thickness }} {{ color }}" role="separator" />
-    {% else %}
-        <hr class="{{ width }} border-0 border-t {{ thickness }} {{ color }}" role="separator" />
-    {% endif %}
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if (style == 'icon' or icon_class) and icon_class and style != 'small' and style != 'dashed' and style != 'dotted' %}
+            <div class="{{ width }} flex items-center text-xs {{ this.getIconLineClasses() }}" role="separator">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full border shadow-2xs {{ this.getIconBadgeColorClasses() }}">
+                    <i class="{{ icon_class }} text-base" aria-hidden="true"></i>
+                </span>
+            </div>
+        {% elseif style == 'small' %}
+            <div class="{{ width }} {{ thickness }} {{ color }} rounded-full" role="separator"></div>
+        {% elseif style == 'dashed' %}
+            <hr class="{{ width }} border-0 border-t border-dashed {{ thickness }} {{ color }}" role="separator" />
+        {% elseif style == 'dotted' %}
+            <hr class="{{ width }} border-0 border-t border-dotted {{ thickness }} {{ color }}" role="separator" />
+        {% else %}
+            <hr class="{{ width }} border-0 border-t {{ thickness }} {{ color }}" role="separator" />
+        {% endif %}
+    </div>
 </div>

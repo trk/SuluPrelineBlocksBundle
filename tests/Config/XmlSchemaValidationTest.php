@@ -19,7 +19,7 @@ final class XmlSchemaValidationTest extends TestCase
 
         $bundleRoot = \dirname(__DIR__, 2);
         $templateXmlFiles = \glob($bundleRoot . '/config/templates/blocks/*.xml') ?: [];
-        $this->assertCount(32, $templateXmlFiles);
+        $this->assertCount(31, $templateXmlFiles);
 
         foreach ($templateXmlFiles as $xmlFile) {
             $dom = new \DOMDocument();
@@ -42,7 +42,7 @@ final class XmlSchemaValidationTest extends TestCase
 
         $bundleRoot = \dirname(__DIR__, 2);
         $blockItemFiles = \glob($bundleRoot . '/config/templates/block-items/*.xml') ?: [];
-        $this->assertCount(17, $blockItemFiles);
+        $this->assertCount(16, $blockItemFiles);
 
         foreach ($blockItemFiles as $xmlFile) {
             $fragmentDom = new \DOMDocument();
@@ -81,7 +81,7 @@ final class XmlSchemaValidationTest extends TestCase
 
         $bundleRoot = \dirname(__DIR__, 2);
         $fieldFiles = \glob($bundleRoot . '/config/templates/fields/*.xml') ?: [];
-        $this->assertCount(12, $fieldFiles);
+        $this->assertCount(25, $fieldFiles);
 
         foreach ($fieldFiles as $xmlFile) {
             $fragmentDom = new \DOMDocument();
@@ -97,8 +97,14 @@ final class XmlSchemaValidationTest extends TestCase
             $this->assertNotNull($wrapperDom->documentElement);
             $this->assertNotNull($fragmentDom->documentElement);
 
-            $importedNode = $wrapperDom->importNode($fragmentDom->documentElement, true);
-            $wrapperDom->documentElement->appendChild($importedNode);
+            // Multi-property fragments use a <properties> root and are included via XPointer.
+            $fragmentRoot = $fragmentDom->documentElement;
+            $fragmentNodes = 'properties' === $fragmentRoot->localName ? \iterator_to_array($fragmentRoot->childNodes) : [$fragmentRoot];
+            foreach ($fragmentNodes as $fragmentNode) {
+                if ($fragmentNode instanceof \DOMElement) {
+                    $wrapperDom->documentElement->appendChild($wrapperDom->importNode($fragmentNode, true));
+                }
+            }
 
             $this->assertTrue(
                 $wrapperDom->schemaValidate($propertiesXsd),

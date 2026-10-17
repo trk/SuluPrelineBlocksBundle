@@ -132,9 +132,12 @@ final class DividerTest extends TestCase
 
         self::assertSame('section-divider', $divider->getElementId());
         $wrapper = $divider->getWrapperClasses();
-        self::assertStringContainsString('flex items-center', $wrapper);
+        self::assertStringNotContainsString('flex items-center', $wrapper);
         self::assertStringContainsString('mt-10', $wrapper);
         self::assertStringContainsString('mb-16', $wrapper);
         self::assertStringContainsString('my-divider', $wrapper);
+
+        $blockClasses = $divider->getBlockClasses();
+        self::assertStringContainsString('w-full flex items-center', $blockClasses);
     }
 }

@@ -5,14 +5,14 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>scroll_to</key>
     <meta>
-        <title lang="en">Scroll To / Back to Top</title>
-        <title lang="tr">Sayfa İçi Atlama / Başa Dön</title>
-        <title lang="ru">Прокрутка к элементу / Наверх</title>
-        <title lang="fr">Défilement / Haut de page</title>
-        <title lang="es">Desplazarse a / Volver arriba</title>
-        <title lang="de">Nach oben / Zu Element scrollen</title>
+        <title lang="en">Scroll To</title>
+        <title lang="tr">Kaydırma Bağlantısı</title>
+        <title lang="ru">Прокрутка к элементу</title>
+        <title lang="fr">Défilement vers</title>
+        <title lang="es">Desplazarse a</title>
+        <title lang="de">Scrollen zu</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>

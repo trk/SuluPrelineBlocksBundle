@@ -12,6 +12,7 @@
         <title lang="es">Vídeo</title>
         <title lang="de">Video</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" include_fields="container_padding_remove" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>
@@ -431,6 +432,8 @@
                         </param>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

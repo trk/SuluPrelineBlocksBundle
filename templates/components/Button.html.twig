@@ -1,16 +1,9 @@
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-{% if this.isGroup() %}
-    <div {{ attributes.defaults(this.getRootAttributes()) }}>
-        {% for item in this.getNormalizedItems() %}
-            <twig:Button :block="item" />
-        {% endfor %}
-    </div>
-{% else %}
-    {% set target = this.getLinkTarget() %}
+{% set target = this.getLinkTarget() %}
+{% if this.isBare() %}
     <a href="{{ this.getUrl() }}"
        {% if target %}target="{{ target }}"{% if target == '_blank' %} rel="noopener noreferrer"{% endif %}{% endif %}
        {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
-       {{ attributes.defaults(this.getRootAttributes()) }}
+       {{ attributes.defaults(this.getRootAttributesWithClass(this.getClasses())) }}
     >
         {% if this.getResolvedIcon() and this.getIconAlign() == 'left' %}
             <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
@@ -22,4 +15,31 @@
             <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
         {% endif %}
     </a>
+{% else %}
+    <div {{ attributes.defaults(this.getRootAttributes()) }}>
+        {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+        <div class="{{ this.blockClasses }}">
+            {% if this.isGroup() %}
+                {% for item in this.getNormalizedItems() %}
+                    <twig:Button :block="item" />
+                {% endfor %}
+            {% else %}
+                <a href="{{ this.getUrl() }}"
+                   {% if target %}target="{{ target }}"{% if target == '_blank' %} rel="noopener noreferrer"{% endif %}{% endif %}
+                   {% if this.getLinkTitle() %}title="{{ this.getLinkTitle() }}"{% endif %}
+                   class="{{ this.getClasses() }}"
+                >
+                    {% if this.getResolvedIcon() and this.getIconAlign() == 'left' %}
+                        <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
+                    {% endif %}
+                    {% if this.getTitle() %}
+                        <span>{{ this.getTitle() }}</span>
+                    {% endif %}
+                    {% if this.getResolvedIcon() and this.getIconAlign() == 'right' %}
+                        <i class="{{ this.getResolvedIcon() }} shrink-0" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
 {% endif %}

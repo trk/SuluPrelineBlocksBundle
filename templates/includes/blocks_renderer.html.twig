@@ -8,43 +8,43 @@
         {{ sulu_block_render(block_item, outer_context) }}
     {% endfor %}
 {% else %}
-    {% set section_buffer = [] %}
     {% set top_level_types = ['section', 'breadcrumbs'] %}
+    {% set top_level_entries = [] %}
+    {% set section_buffer = [] %}
+    {% set buffer_group = null %}
 
     {% for block_item in rendered_blocks %}
+        {% set item_group = block_item._section_group|default(null) %}
         {% if block_item.type|default('') in top_level_types %}
             {% if section_buffer|length > 0 %}
-                <twig:Section max_width="85rem" padding_y="default">
-                    <twig:Row layout="12-col" gap="md">
-                        <twig:Column col_span="12">
-                            <div class="w-full space-y-8">
-                                {% for buffered in section_buffer %}
-                                    {{ sulu_block_render(buffered, outer_context) }}
-                                {% endfor %}
-                            </div>
-                        </twig:Column>
-                    </twig:Row>
-                </twig:Section>
+                {% set top_level_entries = top_level_entries|merge([{is_auto_section: true, blocks: section_buffer}]) %}
+                {% set section_buffer = [] %}
+                {% set buffer_group = null %}
+            {% endif %}
+            {% set top_level_entries = top_level_entries|merge([{is_auto_section: false, block: block_item}]) %}
+        {% else %}
+            {% if section_buffer|length > 0 and item_group != buffer_group %}
+                {% set top_level_entries = top_level_entries|merge([{is_auto_section: true, blocks: section_buffer}]) %}
                 {% set section_buffer = [] %}
             {% endif %}
-
-            {{ sulu_block_render(block_item, outer_context) }}
-        {% else %}
             {% set section_buffer = section_buffer|merge([block_item]) %}
+            {% set buffer_group = item_group %}
         {% endif %}
     {% endfor %}
 
     {% if section_buffer|length > 0 %}
-        <twig:Section max_width="85rem" padding_y="default">
-            <twig:Row layout="12-col" gap="md">
-                <twig:Column col_span="12">
-                    <div class="w-full space-y-8">
-                        {% for buffered in section_buffer %}
-                            {{ sulu_block_render(buffered, outer_context) }}
-                        {% endfor %}
-                    </div>
-                </twig:Column>
-            </twig:Row>
-        </twig:Section>
+        {% set top_level_entries = top_level_entries|merge([{is_auto_section: true, blocks: section_buffer}]) %}
     {% endif %}
+
+    {% for entry in top_level_entries %}
+        {% if entry.is_auto_section %}
+            <twig:Section
+                :props="{ max_width: '85rem', padding: 'default' }"
+                :rows="[{ layout: '12-col', gap: 'md', columns: [{ col_span: '12', blocks: entry.blocks }] }]"
+                :context="outer_context"
+            />
+        {% else %}
+            {{ sulu_block_render(entry.block, outer_context) }}
+        {% endif %}
+    {% endfor %}
 {% endif %}

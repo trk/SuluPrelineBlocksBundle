@@ -62,7 +62,10 @@ final class Headline extends PrelineComponent
         return $this->isTextStroke() ? '[-webkit-text-stroke:1.5px_currentColor] text-transparent' : '';
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getHeadingClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
         $customSize = $this->nullableStringProp('size') ?? $this->nullableStringProp('title_size');
         $fallbackTagSize = PrelineClassMap::HEADLINE_TAG_SIZES[$this->getTag()] ?? PrelineClassMap::HEADLINE_TAG_SIZES['h2'];
@@ -71,7 +74,7 @@ final class Headline extends PrelineComponent
             ? PrelineClassMap::resolve(PrelineClassMap::HEADLINE_SIZES, $customSize, $fallbackTagSize)
             : $fallbackTagSize;
 
-        return parent::getWrapperClasses(
+        return $this->classes(
             'tracking-tight',
             $sizeClasses,
             $this->getTitleColor(),
@@ -84,12 +87,7 @@ final class Headline extends PrelineComponent
 
     public function getUrl(): ?string
     {
-        $link = $this->get('link');
-        if (null === $link || '' === $link) {
-            return null;
-        }
-
-        return PropsResolver::resolveUrl($link);
+        return $this->getLinkUrl('link');
     }
 
     public function getImageAlt(string $key = 'image', string $fallbackKey = ''): string

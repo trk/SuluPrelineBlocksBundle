@@ -62,9 +62,9 @@ final class PrelineBlockTransformer implements BlockTransformerInterface
             $block['icon_class'] = PropsResolver::resolveIcon($block['icon']);
         }
 
-        // 5. Pre-compute Grid classes if this is a grid block
+        // 5. Pre-compute Grid classes if this is a grid or gallery block
         $type = isset($block['type']) && \is_scalar($block['type']) ? (string) $block['type'] : '';
-        if ('grid' === $type) {
+        if (\in_array($type, ['grid', 'gallery'], true)) {
             $block['grid_classes'] = $this->computeGridClasses($props);
         }
 
@@ -81,11 +81,11 @@ final class PrelineBlockTransformer implements BlockTransformerInterface
      */
     private function computeGridClasses(array $props): string
     {
-        $colsDefault = isset($props['cols_default']) && \is_string($props['cols_default']) ? $props['cols_default'] : '1';
-        $colsSm = isset($props['cols_sm']) && \is_string($props['cols_sm']) ? $props['cols_sm'] : '';
-        $colsMd = isset($props['cols_md']) && \is_string($props['cols_md']) ? $props['cols_md'] : '2';
-        $colsLg = isset($props['cols_lg']) && \is_string($props['cols_lg']) ? $props['cols_lg'] : '3';
-        $colsXl = isset($props['cols_xl']) && \is_string($props['cols_xl']) ? $props['cols_xl'] : '';
+        $colsDefault = self::readColumnProp($props, 'columns_default', 'cols_default', '1');
+        $colsSm = self::readColumnProp($props, 'columns_sm', 'cols_sm', '');
+        $colsMd = self::readColumnProp($props, 'columns_md', 'cols_md', '2');
+        $colsLg = self::readColumnProp($props, 'columns_lg', 'cols_lg', '3');
+        $colsXl = self::readColumnProp($props, 'columns_xl', 'cols_xl', '');
         $gap = isset($props['gap']) && \is_string($props['gap']) ? $props['gap'] : 'md';
 
         $gapClass = match ($gap) {
@@ -217,5 +217,23 @@ final class PrelineBlockTransformer implements BlockTransformerInterface
         $stickyClass = $isSticky ? 'sticky top-24' : '';
 
         return \trim(\implode(' ', \array_filter([$spanClass, $stickyClass])));
+    }
+
+    /**
+     * @param array<string, mixed> $props
+     */
+    private static function readColumnProp(array $props, string $primaryKey, string $fallbackKey, string $default): string
+    {
+        foreach ([$primaryKey, $fallbackKey] as $key) {
+            $val = $props[$key] ?? null;
+            if (\is_string($val) && '' !== \trim($val)) {
+                return \trim($val);
+            }
+            if (\is_int($val)) {
+                return (string) $val;
+            }
+        }
+
+        return $default;
     }
 }

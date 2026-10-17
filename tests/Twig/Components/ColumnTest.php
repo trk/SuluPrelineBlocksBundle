@@ -13,21 +13,21 @@ final class ColumnTest extends TestCase
     {
         $col = new Column();
 
-        self::assertSame('auto', $col->get('col_span'));
+        self::assertSame('12', $col->get('col_span'));
         self::assertSame('none', $col->get('style'));
         self::assertSame('none', $col->get('padding'));
         self::assertSame('top', $col->get('vertical_align'));
         self::assertSame('start', $col->get('text_align'));
         self::assertFalse($col->get('is_sticky'));
         self::assertSame('default', $col->get('order'));
-        self::assertSame('', $col->getColSpanClasses());
+        self::assertSame('col-span-12', $col->getColSpanClasses());
         self::assertSame('', $col->getStyleClasses());
         self::assertSame('', $col->getPaddingClasses());
         self::assertSame('justify-start', $col->getVerticalAlignClasses());
         self::assertSame('text-start', $col->getTextAlignClass());
         self::assertSame('', $col->getOrderClasses());
         self::assertSame('', $col->getStickyClasses());
-        self::assertStringContainsString('flex flex-col w-full', $col->getColumnClasses());
+        self::assertSame('flex flex-col transition-all col-span-12 justify-start text-start', $col->getColumnClasses());
     }
 
     public function testSpansAndStylesFromProps(): void
@@ -42,6 +42,8 @@ final class ColumnTest extends TestCase
             'is_sticky' => true,
             'order' => 'first',
             'id' => 'col-main',
+            'max_width' => 'small',
+            'block_align' => 'center',
         ]);
 
         self::assertSame('col-main', $col->getElementId());
@@ -57,6 +59,8 @@ final class ColumnTest extends TestCase
         self::assertStringContainsString('col-span-12 md:col-span-6', $classes);
         self::assertStringContainsString('p-6 sm:p-8', $classes);
         self::assertStringContainsString('sticky top-20 self-start', $classes);
+        self::assertStringNotContainsString('max-w-', $classes);
+        self::assertStringNotContainsString('mx-auto', $classes);
     }
 
     public function testBlocksSupport(): void

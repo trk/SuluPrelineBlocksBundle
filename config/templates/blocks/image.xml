@@ -12,6 +12,7 @@
         <title lang="es">Imagen</title>
         <title lang="de">Bild</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" include_fields="container_padding_remove" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>
@@ -38,81 +39,8 @@
                 <title lang="fr">Paramètres</title>
             </meta>
             <properties>
-                <property name="aspect_ratio" type="single_select" colspan="6">
-                    <meta>
-                        <title lang="en">Aspect Ratio</title>
-                        <title lang="tr">En / Boy Oranı</title>
-                        <title lang="de">Seitenverhältnis</title>
-                        <title lang="ru">Соотношение сторон</title>
-                        <title lang="es">Relación de Aspecto</title>
-                        <title lang="fr">Rapport d&apos;Aspect</title>
-                    </meta>
-                    <params>
-                        <param name="default_value" value="auto"/>
-                        <param name="values" type="collection">
-                            <param name="auto">
-                                <meta>
-                                    <title lang="en">Auto</title>
-                                    <title lang="tr">Otomatik</title>
-                                    <title lang="de">Automatisch</title>
-                                    <title lang="ru">Авто</title>
-                                    <title lang="es">Automático</title>
-                                    <title lang="fr">Auto</title>
-                                </meta>
-                            </param>
-                            <param name="16/9">
-                                <meta>
-                                    <title lang="en">16:9 Widescreen</title>
-                                    <title lang="tr">16:9 Geniş Ekran</title>
-                                    <title lang="de">16:9 Breitbild</title>
-                                    <title lang="ru">16:9 Широкоэкранный</title>
-                                    <title lang="es">16:9 Panorámico</title>
-                                    <title lang="fr">16:9 Écran Large</title>
-                                </meta>
-                            </param>
-                            <param name="4/3">
-                                <meta>
-                                    <title lang="en">4:3 Standard</title>
-                                    <title lang="tr">4:3 Standart</title>
-                                    <title lang="de">4:3 Standard</title>
-                                    <title lang="ru">4:3 Стандартный</title>
-                                    <title lang="es">4:3 Estándar</title>
-                                    <title lang="fr">4:3 Standard</title>
-                                </meta>
-                            </param>
-                            <param name="1/1">
-                                <meta>
-                                    <title lang="en">1:1 Square</title>
-                                    <title lang="tr">1:1 Kare</title>
-                                    <title lang="de">1:1 Quadratisch</title>
-                                    <title lang="ru">1:1 Квадрат</title>
-                                    <title lang="es">1:1 Cuadrado</title>
-                                    <title lang="fr">1:1 Carré</title>
-                                </meta>
-                            </param>
-                            <param name="9/16">
-                                <meta>
-                                    <title lang="en">9:16 Portrait</title>
-                                    <title lang="tr">9:16 Dikey</title>
-                                    <title lang="de">9:16 Hochformat</title>
-                                    <title lang="ru">9:16 Портретный</title>
-                                    <title lang="es">9:16 Retrato</title>
-                                    <title lang="fr">9:16 Portrait</title>
-                                </meta>
-                            </param>
-                            <param name="21/9">
-                                <meta>
-                                    <title lang="en">21:9 Ultrawide</title>
-                                    <title lang="tr">21:9 Ultra Geniş</title>
-                                    <title lang="de">21:9 Ultrabreit</title>
-                                    <title lang="ru">21:9 Ультраширокий</title>
-                                    <title lang="es">21:9 Ultra Panorámico</title>
-                                    <title lang="fr">21:9 Ultra Large</title>
-                                </meta>
-                            </param>
-                        </param>
-                    </params>
-                </property>
+                <xi:include href="../fields/media_display.xml"
+                            xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/*)"/>
 
                 <property name="rounded" type="single_select" colspan="6">
                     <meta>
@@ -245,6 +173,8 @@
                         </param>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
     </properties>

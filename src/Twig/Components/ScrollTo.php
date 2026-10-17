@@ -131,12 +131,37 @@ final class ScrollTo extends PrelineComponent
         ]);
     }
 
+    public function isFloating(): bool
+    {
+        return 'floating' === $this->getDisplayMode();
+    }
+
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
     public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        if ('floating' === $this->getDisplayMode()) {
-            return parent::getWrapperClasses('fixed bottom-6 end-6 z-50', $extraBase, ...$moreParts);
+        return parent::getWrapperClasses(
+            $this->isFloating() ? 'fixed bottom-6 end-6 z-50' : '',
+            $extraBase,
+            ...$moreParts,
+        );
+    }
+
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    {
+        if ($this->isFloating()) {
+            return $this->classes('inline-block', $extraBase, ...$moreParts);
         }
 
-        return parent::getWrapperClasses('w-full flex items-center', $this->getAlignClasses(), $extraBase, ...$moreParts);
+        return $this->classes(
+            'w-full flex items-center',
+            $this->getAlignClasses(),
+            $extraBase,
+            ...$moreParts,
+        );
     }
 }

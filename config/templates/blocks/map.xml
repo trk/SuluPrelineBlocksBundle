@@ -9,7 +9,7 @@
     <title lang="es">Mapa</title>
     <title lang="fr">Carte</title>
   </meta>
-  <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
+  <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="text_align,text_align_breakpoint,text_align_fallback" include_fields="container_padding_remove"/>
   <properties>
         <section name="content">
             <meta>
@@ -37,87 +37,6 @@
                 <info_text lang="es">Introduzca una dirección o coordenadas</info_text>
                 <info_text lang="fr">Saisissez une adresse ou des coordonnées</info_text>
               </meta>
-            </property>
-            <property name="zoom" type="number">
-              <meta>
-                <title lang="en">Zoom Level</title>
-                <title lang="tr">Yak&#x131;nla&#x15F;t&#x131;rma D&#xFC;zeyi</title>
-                <title lang="de">Zoomstufe</title>
-                <title lang="ru">&#x423;&#x440;&#x43E;&#x432;&#x435;&#x43D;&#x44C; &#x43C;&#x430;&#x441;&#x448;&#x442;&#x430;&#x431;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;</title>
-                <title lang="es">Nivel de Zoom</title>
-                <title lang="fr">Niveau de Zoom</title>
-              </meta>
-              <params>
-                <param name="min" value="1"/>
-                <param name="max" value="20"/>
-                <param name="step" value="1"/>
-                <param name="default_value" value="14"/>
-              </params>
-            </property>
-            <property name="aspect_ratio" type="single_select">
-              <meta>
-                <title lang="en">Aspect Ratio</title>
-                <title lang="tr">En/Boy Oran&#x131;</title>
-                <title lang="de">Seitenverh&#xE4;ltnis</title>
-                <title lang="ru">&#x421;&#x43E;&#x43E;&#x442;&#x43D;&#x43E;&#x448;&#x435;&#x43D;&#x438;&#x435; &#x441;&#x442;&#x43E;&#x440;&#x43E;&#x43D;</title>
-                <title lang="es">Relaci&#xF3;n de Aspecto</title>
-                <title lang="fr">Rapport d'Aspect</title>
-              </meta>
-              <params>
-                <param name="default_value" value="16/9"/>
-                <param name="values" type="collection">
-                  <param name="16/9">
-                    <meta>
-                      <title lang="en">16:9 Widescreen</title>
-                      <title lang="tr">16:9 Geniş</title>
-                      <title lang="de">16:9 Breitbild</title>
-                      <title lang="ru">16:9 Широкоэкранный</title>
-                      <title lang="es">16:9 Panorámico</title>
-                      <title lang="fr">16:9 Écran Large</title>
-                    </meta>
-                  </param>
-                  <param name="4/3">
-                    <meta>
-                      <title lang="en">4:3 Standard</title>
-                      <title lang="tr">4:3 Standart</title>
-                      <title lang="de">4:3 Standard</title>
-                      <title lang="ru">4:3 Стандартный</title>
-                      <title lang="es">4:3 Estándar</title>
-                      <title lang="fr">4:3 Standard</title>
-                    </meta>
-                  </param>
-                  <param name="21/9">
-                    <meta>
-                      <title lang="en">21:9 Ultrawide</title>
-                      <title lang="tr">21:9 Ultra Geniş</title>
-                      <title lang="de">21:9 Ultrabreit</title>
-                      <title lang="ru">21:9 Ультраширокий</title>
-                      <title lang="es">21:9 Ultra Panorámico</title>
-                      <title lang="fr">21:9 Ultra Large</title>
-                    </meta>
-                  </param>
-                  <param name="1/1">
-                    <meta>
-                      <title lang="en">1:1 Square</title>
-                      <title lang="tr">1:1 Kare</title>
-                      <title lang="de">1:1 Quadrat</title>
-                      <title lang="ru">1:1 Квадрат</title>
-                      <title lang="es">1:1 Cuadrado</title>
-                      <title lang="fr">1:1 Carré</title>
-                    </meta>
-                  </param>
-                  <param name="auto">
-                    <meta>
-                      <title lang="en">Auto / Fixed Height</title>
-                      <title lang="tr">Otomatik / Sabit Y&#xFC;kseklik</title>
-                      <title lang="de">Auto / Feste H&#xF6;he</title>
-                      <title lang="ru">&#x410;&#x432;&#x442;&#x43E; / &#x424;&#x438;&#x43A;&#x441;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x43D;&#x430;&#x44F; &#x432;&#x44B;&#x441;&#x43E;&#x442;&#x430;</title>
-                      <title lang="es">Auto / Altura Fija</title>
-                      <title lang="fr">Auto / Hauteur Fixe</title>
-                    </meta>
-                  </param>
-                </param>
-              </params>
             </property>
             <block name="items" default-type="map_item">
               <meta>
@@ -224,6 +143,8 @@
                         <param name="default_value" value="14"/>
                     </params>
                 </property>
+
+                <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
   </properties>

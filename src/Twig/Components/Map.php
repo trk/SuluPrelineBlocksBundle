@@ -55,12 +55,34 @@ final class Map extends PrelineComponent
             return '';
         }
 
-        if (\str_contains($query, '<iframe') && 1 === \preg_match('/src="([^"]+)"/i', $query, $matches)) {
-            return $matches[1];
+        $fromIframe = false;
+        if (\str_contains($query, '<iframe')) {
+            if (1 !== \preg_match('/src="([^"]+)"/i', $query, $matches)) {
+                return '';
+            }
+            $query = \trim(\html_entity_decode($matches[1], \ENT_QUOTES | \ENT_HTML5, 'UTF-8'));
+            $fromIframe = true;
         }
 
-        if (\str_starts_with($query, 'https://') && (\str_contains($query, 'google.com/maps') || \str_contains($query, 'openstreetmap.org'))) {
-            return $query;
+        if ($fromIframe || 1 === \preg_match('/^[a-zA-Z][a-zA-Z0-9+.-]*:/', $query) || \str_starts_with($query, '//')) {
+            $parts = \parse_url($query);
+            if (!\is_array($parts)) {
+                return '';
+            }
+
+            $scheme = \strtolower((string) ($parts['scheme'] ?? ''));
+            $host = \strtolower((string) ($parts['host'] ?? ''));
+            $path = (string) ($parts['path'] ?? '');
+
+            if ('https' !== $scheme) {
+                return '';
+            }
+
+            $isGoogleMaps = \in_array($host, ['www.google.com', 'maps.google.com', 'google.com'], true)
+                && \str_starts_with($path, '/maps');
+            $isOpenStreetMap = \in_array($host, ['www.openstreetmap.org', 'openstreetmap.org'], true);
+
+            return ($isGoogleMaps || $isOpenStreetMap) ? $query : '';
         }
 
         return 'https://maps.google.com/maps?q=' . \rawurlencode($query) . '&z=' . $this->getZoom() . '&output=embed';
@@ -80,9 +102,12 @@ final class Map extends PrelineComponent
         );
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int, string|null|false>|null|false ...$moreParts
+     */
+    public function getMapFrameClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
+        return $this->classes(
             'relative w-full rounded-2xl overflow-hidden border border-card-line shadow-xs bg-surface',
             $extraBase,
             ...$moreParts,
@@ -150,5 +175,15 @@ final class Map extends PrelineComponent
     public function hasItems(): bool
     {
         return [] !== $this->getNormalizedItems();
+    }
+
+    public function getItemGridClasses(): string
+    {
+        return $this->classes('grid', PrelineClassMap::responsiveClasses(PrelineClassMap::GRID_COLUMNS, PrelineClassMap::MAP_ITEM_COLUMNS));
+    }
+
+    public function getItemImageSizes(): string
+    {
+        return $this->getSlotWidth()->divide(PrelineClassMap::MAP_ITEM_COLUMNS)->toSizes();
     }
 }

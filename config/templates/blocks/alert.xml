@@ -5,12 +5,12 @@
           xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
     <key>alert</key>
     <meta>
-        <title lang="en">Alert / Notification</title>
-        <title lang="tr">Uyarı / Bildirim</title>
-        <title lang="ru">Оповещение / Уведомление</title>
-        <title lang="fr">Alerte / Notification</title>
-        <title lang="es">Alerta / Notificación</title>
-        <title lang="de">Hinweis / Benachrichtigung</title>
+        <title lang="en">Alert</title>
+        <title lang="tr">Uyarı</title>
+        <title lang="ru">Оповещение</title>
+        <title lang="fr">Alerte</title>
+        <title lang="es">Alerta</title>
+        <title lang="de">Hinweis</title>
     </meta>
     <properties>
         <section name="content">

@@ -12,6 +12,7 @@
         <title lang="es">Subnavegación</title>
         <title lang="fr">Sous-navigation</title>
     </meta>
+    <tag name="sulu_block_suite.tabs" text_align="standard"/>
     <properties>
         <section name="content">
             <meta>

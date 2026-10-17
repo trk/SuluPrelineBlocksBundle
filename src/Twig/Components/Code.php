@@ -12,8 +12,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('Code', template: '@SuluPrelineBlocks/components/Code.html.twig')]
 final class Code extends PrelineComponent
 {
-    private ?string $uniqueId = null;
-
     protected function defaults(): array
     {
         return [
@@ -23,23 +21,24 @@ final class Code extends PrelineComponent
         ];
     }
 
-    protected function onReset(): void
-    {
-        $this->uniqueId = null;
-    }
-
     public function shouldRender(): bool
     {
         return $this->has('code');
     }
 
-    public function getId(): string
+    public function getCodeElementId(): string
     {
-        if (null === $this->uniqueId) {
-            $this->uniqueId = 'hs-code-' . \bin2hex(\random_bytes(4));
-        }
+        return 'hs-code-' . $this->getComponentUid();
+    }
 
-        return $this->uniqueId;
+    public function shouldShowCopy(): bool
+    {
+        return $this->boolProp('show_copy', true);
+    }
+
+    public function shouldShowLineNumbers(): bool
+    {
+        return $this->boolProp('show_line_numbers', false);
     }
 
     public function getLanguage(): string
@@ -66,10 +65,13 @@ final class Code extends PrelineComponent
         return '' === $raw ? [''] : \explode("\n", $raw);
     }
 
-    public function getWrapperClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
+    /**
+     * @param string|array<int|string, mixed>|null|false ...$moreParts
+     */
+    public function getBlockClasses(string $extraBase = '', string|array|null|false ...$moreParts): string
     {
-        return parent::getWrapperClasses(
-            'relative w-full rounded-2xl bg-card border border-card-line shadow-xl overflow-hidden my-4',
+        return $this->classes(
+            'relative w-full rounded-2xl bg-card border border-card-line overflow-hidden shadow-2xs',
             $extraBase,
             ...$moreParts,
         );
@@ -77,7 +79,7 @@ final class Code extends PrelineComponent
 
     public function getContainerClasses(): string
     {
-        return $this->getWrapperClasses();
+        return $this->getBlockClasses();
     }
 
     public function getHeaderClasses(): string

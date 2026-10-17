@@ -1,147 +1,155 @@
 {% set items = this.normalizedItems %}
 {% set img_url = this.imageUrl %}
-{% set popover_uid = this.elementId|default('hs-hotspot-' ~ random(100000, 999999)) %}
-{% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
-<div {{ attributes.defaults(this.getRootAttributes('relative w-full my-6')) }}>
-    {% if this.title %}
-        <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
-    {% endif %}
+{% set menu_width_classes = this.menuWidthClasses %}
+{% set menu_image_sizes = this.menuImageSizes %}
+{% set popover_uid = this.componentUid %}
+<div {{ attributes.defaults(this.getRootAttributes()) }}>
+    {% if this.scopedCss %}<style>{{ this.scopedCss|raw }}</style>{% endif %}
+    <div class="{{ this.blockClasses }}">
+        {% if this.title %}
+            <h3 class="text-xl font-bold text-foreground mb-4">{{ this.title }}</h3>
+        {% endif %}
 
-    {% if img_url %}
-        <div class="hotspot-container relative w-full rounded-2xl shadow-lg border border-border bg-muted">
-            <twig:Image
-                :bare="true"
-                :image_url="img_url"
-                :image_srcset="this.imageSrcSet"
-                :sizes="this.imageSizes"
-                :image_focus_style="this.imageFocusPointStyle"
-                :alt="this.title|default('Interactive media hotspots')"
-                img_class="w-full h-auto object-cover rounded-2xl"
-            />
+        {% if img_url %}
+            <div class="hotspot-container relative w-full rounded-2xl shadow-lg border border-border bg-muted">
+                <twig:Image
+                    :bare="true"
+                    :image_url="img_url"
+                    :image_srcset="this.imageSrcSet"
+                    :sizes="this.imageSizes"
+                    :image_focus_style="this.imageFocusPointStyle"
+                    :alt="this.title|default('Interactive media hotspots')"
+                    :loading="this.getImageLoading()"
+                    :fetchpriority="this.getImageFetchPriority()"
+                    img_class="w-full h-auto object-cover rounded-2xl"
+                />
 
-            {% for item in items %}
-                {% set marker_colors = this.markerColorClasses(item.marker_color) %}
-                {% set is_left = item.x < 35 %}
-                {% set is_right = item.x > 65 %}
-                {% set is_top = item.y <= 50 %}
-                {% set x_placement = is_left ? 'left-0' : (is_right ? 'right-0' : 'left-1/2 -translate-x-1/2') %}
-                {% set y_placement = is_top ? 'top-full mt-3' : 'bottom-full mb-3' %}
+                {% for item in items %}
+                    {% set marker_colors = this.markerColorClasses(item.marker_color) %}
+                    {% set is_left = item.x < 35 %}
+                    {% set is_right = item.x > 65 %}
+                    {% set is_top = item.y <= 50 %}
+                    {% set x_placement = is_left ? 'left-0' : (is_right ? 'right-0' : 'left-1/2 -translate-x-1/2') %}
+                    {% set y_placement = is_top ? 'top-full mt-3' : 'bottom-full mb-3' %}
 
-                <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">
-                    <div class="hs-dropdown hotspot-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:absolute] [--adaptive:none]">
-                        <button id="{{ popover_uid }}-item-{{ loop.index }}"
-                                type="button"
-                                class="hs-dropdown-toggle relative group flex items-center justify-center size-8 rounded-full transition-all duration-200 hover:scale-115 focus:outline-hidden focus:ring-4 {{ marker_colors.button }}"
-                                aria-haspopup="menu"
-                                aria-expanded="false"
-                                aria-label="{{ item.title|default('Marker ' ~ loop.index) }}">
+                    <div class="absolute z-20" style="left: {{ item.x }}%; top: {{ item.y }}%; transform: translate(-50%, -50%);">
+                        <div class="hs-dropdown hotspot-dropdown relative inline-flex {{ item.trigger == 'hover' ? '[--trigger:hover]' : '' }} [--strategy:absolute] [--adaptive:none] [--auto-close:outside]">
+                            <button id="{{ popover_uid }}-item-{{ loop.index }}"
+                                    type="button"
+                                    class="hs-dropdown-toggle relative group flex items-center justify-center size-8 rounded-full transition-all duration-200 hover:scale-115 focus:outline-hidden focus:ring-4 {{ marker_colors.button }}"
+                                    aria-haspopup="dialog"
+                                    aria-expanded="false"
+                                    aria-label="{{ item.title|default('Marker ' ~ loop.index) }}">
 
-                            {% if item.marker_type == 'pulse' %}
-                                <span class="absolute inline-flex size-full rounded-full animate-ping opacity-75 {{ marker_colors.ping }}"></span>
-                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
-                                    <span class="size-2 rounded-full bg-current"></span>
-                                </span>
-                            {% elseif item.marker_type == 'plus' %}
-                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
-                                    <svg class="size-3.5 fill-none stroke-current" stroke-width="2.5" viewBox="0 0 24 24">
-                                        <path d="M12 5v14M5 12h14"/>
-                                    </svg>
-                                </span>
-                            {% elseif item.marker_type == 'number' %}
-                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
-                                    {{ loop.index }}
-                                </span>
-                            {% elseif item.marker_type == 'pin' %}
-                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
-                                    <svg class="size-3.5 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
-                                        <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
-                                </span>
-                            {% elseif item.marker_type == 'icon' and item.icon_class %}
-                                <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
-                                    <i class="{{ item.icon_class }} text-xs" aria-hidden="true"></i>
-                                </span>
-                            {% else %}
-                                <span class="relative inline-flex items-center justify-center size-5 rounded-full {{ marker_colors.inner }}">
-                                    <span class="size-1.5 rounded-full bg-current"></span>
-                                </span>
-                            {% endif %}
-                        </button>
-
-                        <div class="hs-dropdown-menu hotspot-menu transition-[opacity,transform] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 w-72 sm:w-80 md:w-88 max-w-[calc(100vw-2.5rem)] shrink-0 bg-popover rounded-2xl shadow-2xl border border-popover-line overflow-hidden {{ y_placement }} {{ x_placement }}"
-                             role="menu"
-                             aria-orientation="vertical"
-                             aria-labelledby="{{ popover_uid }}-item-{{ loop.index }}">
-
-                            {% if item.video_url %}
-                                <div class="relative w-full aspect-video bg-black overflow-hidden">
-                                    <twig:Video
-                                        :bare="true"
-                                        :video_url="item.video_url"
-                                        :controls="true"
-                                        preload="metadata"
-                                        video_class="w-full h-full object-cover"
-                                    />
-                                </div>
-                            {% elseif item.image_url %}
-                                <div class="relative w-full h-36 bg-surface overflow-hidden">
-                                    <twig:Image
-                                        :bare="true"
-                                        :image_url="item.image_url"
-                                        :image_srcset="item.image_srcset"
-                                        sizes="(min-width: 400px) 320px, 100vw"
-                                        :image_focus_style="item.image_focus_style"
-                                        :alt="item.title|default('')"
-                                        img_class="w-full h-full object-cover"
-                                    />
-                                </div>
-                            {% endif %}
-
-                            <div class="p-4">
-                                <div class="flex items-center justify-between gap-2 mb-1.5">
-                                    {% if item.badge %}
-                                        <twig:Badge
-                                            :title="item.badge"
-                                            classes="inline-block py-0.5 px-2 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400"
-                                        />
-                                    {% endif %}
-                                    {% if item.meta %}
-                                        <span class="text-xs font-semibold text-muted-foreground-1 ms-auto">
-                                            {{ item.meta }}
-                                        </span>
-                                    {% endif %}
-                                </div>
-
-                                {% if item.title %}
-                                    <h4 class="font-bold text-sm text-foreground mb-1.5 leading-snug">
-                                        {{ item.title }}
-                                    </h4>
+                                {% if item.marker_type == 'pulse' %}
+                                    <span class="absolute inline-flex size-full rounded-full animate-ping opacity-75 {{ marker_colors.ping }}"></span>
+                                    <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                        <span class="size-2 rounded-full bg-current"></span>
+                                    </span>
+                                {% elseif item.marker_type == 'plus' %}
+                                    <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                        <svg class="size-3.5 fill-none stroke-current" stroke-width="2.5" viewBox="0 0 24 24">
+                                            <path d="M12 5v14M5 12h14"/>
+                                        </svg>
+                                    </span>
+                                {% elseif item.marker_type == 'number' %}
+                                    <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                        {{ loop.index }}
+                                    </span>
+                                {% elseif item.marker_type == 'pin' %}
+                                    <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                        <svg class="size-3.5 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+                                            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                    </span>
+                                {% elseif item.marker_type == 'icon' and item.icon_class %}
+                                    <span class="relative inline-flex items-center justify-center size-7 rounded-full text-xs font-bold {{ marker_colors.inner }}">
+                                        <i class="{{ item.icon_class }} text-xs" aria-hidden="true"></i>
+                                    </span>
+                                {% else %}
+                                    <span class="relative inline-flex items-center justify-center size-5 rounded-full {{ marker_colors.inner }}">
+                                        <span class="size-1.5 rounded-full bg-current"></span>
+                                    </span>
                                 {% endif %}
+                            </button>
 
-                                {% if item.content %}
-                                    <div class="text-xs text-muted-foreground-2 leading-relaxed mb-3 max-h-48 overflow-y-auto pr-1">
-                                        {{ item.content|raw }}
+                            <div class="hs-dropdown-menu hotspot-menu transition-[opacity,transform] duration-200 hs-dropdown-open:opacity-100 opacity-0 hidden z-40 {{ menu_width_classes }} shrink-0 bg-popover rounded-2xl shadow-2xl border border-popover-line overflow-hidden {{ y_placement }} {{ x_placement }}"
+                                 role="dialog"
+                                 aria-labelledby="{{ popover_uid }}-item-{{ loop.index }}">
+
+                                {% if item.video_url %}
+                                    <div class="relative w-full aspect-video bg-black overflow-hidden">
+                                        <twig:Video
+                                            :bare="true"
+                                            :video_url="item.video_url"
+                                            :controls="true"
+                                            preload="metadata"
+                                            video_class="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                {% elseif item.image_url %}
+                                    <div class="relative w-full h-36 bg-surface overflow-hidden">
+                                        <twig:Image
+                                            :bare="true"
+                                            :image_url="item.image_url"
+                                            :image_srcset="item.image_srcset"
+                                            :sizes="menu_image_sizes"
+                                            :image_focus_style="item.image_focus_style"
+                                            :alt="item.title|default('')"
+                                            loading="lazy"
+                                            fetchpriority="low"
+                                            img_class="w-full h-full object-cover"
+                                        />
                                     </div>
                                 {% endif %}
 
-                                {% if item.link %}
-                                    <twig:Button
-                                        :title="item.link_title"
-                                        :url="item.link"
-                                        icon="chevron-right"
-                                        icon_align="right"
-                                        variant="solid"
-                                        link_color="primary"
-                                        size="xs"
-                                        :full_width="true"
-                                    />
-                                {% endif %}
+                                <div class="p-4">
+                                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                                        {% if item.badge %}
+                                            <twig:Badge
+                                                :title="item.badge"
+                                                classes="inline-block py-0.5 px-2 rounded-full text-[10px] font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-400"
+                                            />
+                                        {% endif %}
+                                        {% if item.meta %}
+                                            <span class="text-xs font-semibold text-muted-foreground-1 ms-auto">
+                                                {{ item.meta }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if item.title %}
+                                        <h4 class="font-bold text-sm text-foreground mb-1.5 leading-snug">
+                                            {{ item.title }}
+                                        </h4>
+                                    {% endif %}
+
+                                    {% if item.content %}
+                                        <div class="text-xs text-muted-foreground-2 leading-relaxed mb-3 max-h-48 overflow-y-auto pr-1">
+                                            {{ item.content|raw }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if item.link %}
+                                        <twig:Button
+                                            :bare="true"
+                                            :title="item.link_title"
+                                            :url="item.link"
+                                            icon="chevron-right"
+                                            icon_align="right"
+                                            variant="solid"
+                                            link_color="primary"
+                                            size="xs"
+                                            :full_width="true"
+                                        />
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 </div>
