@@ -12,7 +12,7 @@
         <title lang="es">Sección</title>
         <title lang="fr">Section</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content,general"/>
+    <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>
@@ -33,7 +33,7 @@
                         <title lang="es">Filas</title>
                         <title lang="fr">Lignes</title>
                     </meta>
-                    <tag name="sulu_block_suite.tabs" shared="true" exclude="dynamic_content,general"/>
+                    <tag name="sulu_block_suite.tabs" shared="true" exclude="dynamic_content"/>
                     <types>
                         <xi:include href="../block-items/row_item.xml"/>
                     </types>
@@ -214,7 +214,7 @@
                 </property>
 
                 <xi:include href="../fields/padding.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
-                <xi:include href="../fields/margin.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
+                <xi:include href="../../forms/fields/margin.xml" xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:properties/sulu:*)"/>
             </properties>
         </section>
     </properties>

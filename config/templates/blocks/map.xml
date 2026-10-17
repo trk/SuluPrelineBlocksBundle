@@ -9,7 +9,7 @@
     <title lang="es">Mapa</title>
     <title lang="fr">Carte</title>
   </meta>
-  <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="text_align,text_align_breakpoint,text_align_fallback" include_fields="container_padding_remove"/>
+        <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
   <properties>
         <section name="content">
             <meta>
@@ -51,7 +51,7 @@
                 <xi:include href="../block-items/map_item.xml"/>
               </types>
             </block>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -147,5 +147,7 @@
                 <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
-  </properties>
+
+        <xi:include href="../../forms/general/general_map.xml"/>
+    </properties>
 </template>

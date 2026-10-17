@@ -38,7 +38,7 @@
                         <xi:include href="../block-items/accordion_item.xml"/>
                     </types>
                 </block>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -289,5 +289,7 @@
                 <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_justify.xml"/>
     </properties>
 </template>

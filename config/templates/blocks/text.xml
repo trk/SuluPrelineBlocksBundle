@@ -24,7 +24,7 @@
             </meta>
             <properties>
                 <xi:include href="../fields/content.xml"/>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -364,5 +364,7 @@
                 </property>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_justify.xml"/>
     </properties>
 </template>

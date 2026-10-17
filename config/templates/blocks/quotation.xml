@@ -49,7 +49,7 @@
 
                 <xi:include href="../fields/image.xml"/>
                 <xi:include href="../fields/link.xml"/>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -269,5 +269,7 @@
                 <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_justify.xml"/>
     </properties>
 </template>

@@ -12,7 +12,6 @@
         <title lang="es">Cuadrícula</title>
         <title lang="fr">Grille</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" include_fields="item_animation,container_padding_remove"/>
     <properties>
         <section name="content">
             <meta>
@@ -39,7 +38,7 @@
                         <xi:include href="../block-items/card.xml"/>
                     </types>
                 </block>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -748,5 +747,7 @@
                 <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_collection.xml"/>
     </properties>
 </template>

@@ -12,7 +12,6 @@
         <title lang="es">Presentación de diapositivas</title>
         <title lang="fr">Diaporama</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" include_fields="container_padding_remove"/>
     <properties>
         <section name="content">
             <meta>
@@ -39,7 +38,7 @@
                         <xi:include href="../block-items/slideshow_item.xml"/>
                     </types>
                 </block>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -281,5 +280,7 @@
                 <xi:include href="../fields/image_loading.xml"/>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_slider.xml"/>
     </properties>
 </template>

@@ -9,7 +9,6 @@
     <title lang="es">Navegación</title>
     <title lang="fr">Navigation</title>
   </meta>
-  <tag name="sulu_block_suite.tabs" text_align="standard"/>
   <properties>
         <section name="content">
             <meta>
@@ -35,7 +34,7 @@
                 <xi:include href="../block-items/nav_item.xml"/>
               </types>
             </block>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -63,5 +62,7 @@
                 </property>
             </properties>
         </section>
-  </properties>
+
+        <xi:include href="../../forms/general/general.xml"/>
+    </properties>
 </template>

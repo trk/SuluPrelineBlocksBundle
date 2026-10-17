@@ -23,10 +23,10 @@ final class LayoutOptionCoverageTest extends TestCase
     public static function optionProvider(): iterable
     {
         $bundle = self::TEMPLATES;
-        $suite = __DIR__ . '/../../../sulu-block-suite-bundle/config/forms/';
+        $forms = __DIR__ . '/../../config/forms/';
 
         yield 'section max_width' => [$bundle . 'blocks/section.xml', 'max_width', \array_keys(PrelineClassMap::SECTION_MAX_WIDTHS)];
-        yield 'block max_width' => [$suite . 'block_suite_general.xml', 'max_width', \array_keys(PrelineClassMap::BLOCK_MAX_WIDTHS)];
+        yield 'block max_width' => [$forms . 'general/general.xml', 'max_width', \array_keys(PrelineClassMap::BLOCK_MAX_WIDTHS)];
         yield 'row layout' => [$bundle . 'block-items/row_item.xml', 'layout', [...\array_keys(PrelineClassMap::ROW_LAYOUT_SPANS), 'auto']];
         yield 'column col_span' => [$bundle . 'block-items/column_item.xml', 'col_span', [...\array_map('strval', \array_keys(PrelineClassMap::COLUMN_SPAN_PRESETS)), 'auto']];
         yield 'column order' => [$bundle . 'block-items/column_item.xml', 'order', ['default', ...\array_keys(PrelineClassMap::COLUMN_ORDERS['md'])]];

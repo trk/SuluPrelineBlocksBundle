@@ -12,7 +12,7 @@
         <title lang="es">Cuenta regresiva</title>
         <title lang="de">Countdown</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="max_width,max_width_breakpoint,block_align,block_align_breakpoint,block_align_fallback" text_align="standard"/>
+        <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>
@@ -36,7 +36,7 @@
                         <title lang="de">Zieldatum und -uhrzeit</title>
                     </meta>
                 </property>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -342,5 +342,7 @@
                 </property>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_countdown.xml"/>
     </properties>
 </template>

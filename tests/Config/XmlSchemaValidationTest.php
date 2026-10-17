@@ -80,8 +80,16 @@ final class XmlSchemaValidationTest extends TestCase
         $this->assertFileExists($propertiesXsd);
 
         $bundleRoot = \dirname(__DIR__, 2);
-        $fieldFiles = \glob($bundleRoot . '/config/templates/fields/*.xml') ?: [];
-        $this->assertCount(25, $fieldFiles);
+        $templateFieldFiles = \glob($bundleRoot . '/config/templates/fields/*.xml') ?: [];
+        $this->assertCount(15, $templateFieldFiles);
+
+        $formFieldFiles = \glob($bundleRoot . '/config/forms/fields/*.xml') ?: [];
+        $this->assertCount(10, $formFieldFiles);
+
+        $generalSectionFiles = \glob($bundleRoot . '/config/forms/general/*.xml') ?: [];
+        $this->assertCount(9, $generalSectionFiles);
+
+        $fieldFiles = \array_merge($templateFieldFiles, $formFieldFiles, $generalSectionFiles);
 
         foreach ($fieldFiles as $xmlFile) {
             $fragmentDom = new \DOMDocument();
@@ -111,5 +119,55 @@ final class XmlSchemaValidationTest extends TestCase
                 \sprintf('Field fragment XML "%s" failed Sulu properties-1.0.xsd validation.', \basename($xmlFile)),
             );
         }
+    }
+
+    public function testPrelineBlocksGeneralSectionFieldMatrix(): void
+    {
+        $bundleRoot = \dirname(__DIR__, 2);
+        $blocksDir = $bundleRoot . '/config/templates/blocks/';
+
+        $loadGeneralFields = function (string $block): array {
+            $dom = new \DOMDocument();
+            $this->assertTrue($dom->load(__DIR__ . '/../../config/templates/blocks/' . $block . '.xml'));
+            $dom->xinclude();
+
+            $xpath = new \DOMXPath($dom);
+            $xpath->registerNamespace('s', 'http://schemas.sulu.io/template/template');
+
+            $fields = [];
+            $nodes = $xpath->query('//s:section[@name="general"]/s:properties/s:property');
+            foreach ($nodes ?: [] as $node) {
+                if ($node instanceof \DOMElement) {
+                    $fields[] = $node->getAttribute('name');
+                }
+            }
+
+            return $fields;
+        };
+
+        $this->assertSame([], $loadGeneralFields('section'));
+
+        foreach (['code', 'countdown'] as $noMaxWidthBlock) {
+            $fields = $loadGeneralFields($noMaxWidthBlock);
+            $this->assertNotContains('max_width', $fields);
+            $this->assertNotContains('block_align', $fields);
+        }
+
+        foreach (['code', 'divider', 'map'] as $noTextAlignBlock) {
+            $fields = $loadGeneralFields($noTextAlignBlock);
+            $this->assertNotContains('text_align', $fields);
+        }
+
+        foreach (['gallery', 'grid'] as $collectionBlock) {
+            $fields = $loadGeneralFields($collectionBlock);
+            $this->assertContains('item_animation', $fields);
+            $this->assertContains('container_padding_remove', $fields);
+        }
+
+        $this->assertNotContains('item_animation', $loadGeneralFields('headline'));
+        $this->assertNotContains('container_padding_remove', $loadGeneralFields('headline'));
+        $this->assertContains('container_padding_remove', $loadGeneralFields('video'));
+        $this->assertContains('container_padding_remove', $loadGeneralFields('map'));
+        $this->assertFileExists($blocksDir . 'headline.xml');
     }
 }

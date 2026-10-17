@@ -12,7 +12,7 @@
         <title lang="es">Icono</title>
         <title lang="de">Symbol</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" text_align="standard"/>
+        <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>
@@ -26,7 +26,7 @@
             <properties>
                 <xi:include href="../fields/icon.xml"/>
                 <xi:include href="../fields/link.xml"/>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -294,5 +294,7 @@
                 </property>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general.xml"/>
     </properties>
 </template>

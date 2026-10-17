@@ -28,7 +28,7 @@
                 <xi:include href="../fields/icon.xml"/>
                 <xi:include href="../fields/link.xml"/>
                 <xi:include href="../fields/link_title.xml"/>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -348,5 +348,7 @@
                 </property>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_justify.xml"/>
     </properties>
 </template>

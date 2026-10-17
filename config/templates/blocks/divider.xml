@@ -12,7 +12,7 @@
         <title lang="es">Separador</title>
         <title lang="de">Trennlinie</title>
     </meta>
-    <tag name="sulu_block_suite.tabs" exclude="dynamic_content" exclude_fields="text_align,text_align_breakpoint,text_align_fallback"/>
+        <tag name="sulu_block_suite.tabs" exclude="dynamic_content"/>
     <properties>
         <section name="content">
             <meta>
@@ -25,7 +25,7 @@
             </meta>
             <properties>
                 <xi:include href="../fields/icon.xml"/>
-            </properties>
+                    </properties>
         </section>
 
         <section name="settings">
@@ -319,6 +319,8 @@
                 </property>
             </properties>
         </section>
+
+        <xi:include href="../../forms/general/general_divider.xml"/>
     </properties>
 </template>
 
