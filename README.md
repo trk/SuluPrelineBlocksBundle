@@ -136,6 +136,25 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 @source "../../vendor/trk/sulu-preline-blocks-bundle/src/Twig/Components/**/*.php";
 ```
 
+### 5. Register Admin Preset Wireframes (Optional)
+
+To register Preline-specific SVG wireframes (`headline`, `text`, `button`, `card`, `alert`, `image`, `video`, `gallery`, `grid`, `overlay`, `quotation`, `divider`, `countdown`, `icon`, `scroll_to`, `section`) in Core's `presetWireframeRegistry`:
+
+1. Add `"sulu-preline-blocks-bundle"` to `assets/admin/package.json`:
+   ```json
+   {
+     "dependencies": {
+       "sulu-block-suite-bundle": "file:../../vendor/trk/sulu-block-suite-bundle/assets/admin",
+       "sulu-preline-blocks-bundle": "file:../../vendor/trk/sulu-preline-blocks-bundle/assets/admin"
+     }
+   }
+   ```
+2. Import it after `sulu-block-suite-bundle` in `assets/admin/app.js`:
+   ```javascript
+   import 'sulu-block-suite-bundle';
+   import 'sulu-preline-blocks-bundle';
+   ```
+
 ---
 
 ## Architecture & Override Mechanics
