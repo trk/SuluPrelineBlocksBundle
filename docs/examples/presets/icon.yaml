@@ -1,0 +1,46 @@
+icon:
+    presets:
+        plain_primary:
+            title:
+              tr: "Sade Mavi İkon"
+              en: "Plain Primary Icon"
+            description:
+              tr: "Kenarlıksız, sade birincil mavi ikon"
+              en: "Border-free plain primary blue icon"
+            props:
+              icon_style: "plain"
+              icon_size: "md"
+              icon_color: "primary"
+              align: "left"
+              margin_top: "sm"
+              margin_bottom: "sm"
+
+        circle_button:
+            title:
+              tr: "Yuvarlak İkon Buton"
+              en: "Solid Circle Icon Button"
+            description:
+              tr: "Mavi arka planlı modern yuvarlak ikon buton"
+              en: "Modern rounded solid blue circle icon button"
+            props:
+              icon_style: "circle_solid"
+              icon_size: "md"
+              icon_color: "primary"
+              align: "left"
+              margin_top: "sm"
+              margin_bottom: "sm"
+
+        soft_square:
+            title:
+              tr: "Yumuşak Kare Rozet"
+              en: "Soft Square Feature Badge"
+            description:
+              tr: "Açık mavi zeminli kare kutu ikon"
+              en: "Soft blue background rounded square feature icon"
+            props:
+              icon_style: "square_soft"
+              icon_size: "lg"
+              icon_color: "primary"
+              align: "left"
+              margin_top: "sm"
+              margin_bottom: "sm"

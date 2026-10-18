@@ -1,0 +1,73 @@
+overlay:
+    presets:
+        hero_gradient_bottom:
+            title:
+                en: 'Bottom Gradient Story Banner'
+                tr: 'Alt Gradyanlı Hikaye Afişi'
+            description:
+                en: 'Widescreen 16:9 banner with bottom dark gradient and bottom-left text'
+                tr: 'Alt kısmı koyu gradyanlı ve sol alt metin hizalı 16:9 geniş ekran afiş'
+            props:
+                overlay_position: 'bottom-left'
+                overlay_mode: 'always'
+                media_aspect_ratio: '16-9'
+                padding: 'lg'
+                overlay_style: 'gradient-bottom'
+                image_transition: 'scale-up'
+                rounded: '2xl'
+                shadow: 'md'
+                text_align: 'left'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                title: 'Sürdürülebilir Teknoloji Vizyonu'
+                meta: 'Kurumsal Dönüşüm'
+                content: '<p>Yeni nesil bulut çözümleriyle iş süreçlerinizi geleceğe taşıyın.</p>'
+
+        centered_dark_hero:
+            title:
+                en: 'Centered Dark Hero Cover'
+                tr: 'Ortalanmış Koyu Hero Kapak'
+            description:
+                en: 'Full-gradient dark hero banner with centered call to action'
+                tr: 'Merkezi metin hizalı, tam degrade katmanlı hero kapak alanı'
+            props:
+                overlay_position: 'center'
+                overlay_mode: 'always'
+                media_aspect_ratio: '21-9'
+                padding: 'lg'
+                overlay_style: 'gradient-full'
+                image_transition: 'none'
+                rounded: '2xl'
+                shadow: 'lg'
+                text_align: 'center'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                title: 'Dijital Dönüşümde Güçlü Ortağınız'
+                meta: '2026 Stratejisi'
+                content: '<p>Uçtan uca yazılım geliştirme ve danışmanlık hizmetlerimizle tanışın.</p>'
+
+        brand_spotlight_card:
+            title:
+                en: 'Primary Brand Spotlight'
+                tr: 'Marka Rengi Vurgu Kartı'
+            description:
+                en: 'Tinted primary overlay card with zoom effect on hover'
+                tr: 'Üzerine gelindiğinde yakınlaşan ana marka renk katmanlı vurgu kartı'
+            props:
+                overlay_position: 'bottom-left'
+                overlay_mode: 'always'
+                media_aspect_ratio: '4-3'
+                padding: 'default'
+                overlay_style: 'primary'
+                image_transition: 'scale-up'
+                rounded: 'xl'
+                shadow: 'md'
+                text_align: 'left'
+                margin_top: 'sm'
+                margin_bottom: 'md'
+            values:
+                title: 'Özel Çözüm Paketleri'
+                meta: 'Kurumsal'
+                content: '<p>Sektörünüze özel uyarlanmış modüllerle hızlı başlangıç yapın.</p>'

@@ -1,0 +1,61 @@
+alert:
+    presets:
+        info_banner:
+            title:
+                en: 'Information Notice'
+                tr: 'Bilgilendirme Duyurusu'
+            description:
+                en: 'Soft blue informational alert with automatic status icon'
+                tr: 'Otomatik durum ikonlu ve başlıklı yumuşak mavi bilgilendirme uyarısı'
+            props:
+                alert_style: 'info'
+                alert_variant: 'soft'
+                icon_display: 'auto'
+                dismissible: 'no'
+                rounded: 'xl'
+                title_size: 'md'
+                margin_top: 'md'
+                margin_bottom: 'md'
+            values:
+                title: 'Bilgilendirme'
+                content: '<p>Bu alan ziyaretçilerinize önemli bir sistem veya sayfa bilgisini nazikçe iletmek için kullanılır.</p>'
+
+        warning_callout:
+            title:
+                en: 'Warning Callout'
+                tr: 'Önemli Uyarı Kutusu'
+            description:
+                en: 'Outlined yellow warning box with dismiss button for important caveats'
+                tr: 'Önemli hatırlatmalar için kapatılabilir kenarlıklı sarı uyarı kutusu'
+            props:
+                alert_style: 'warning'
+                alert_variant: 'outline'
+                icon_display: 'auto'
+                dismissible: 'yes'
+                rounded: 'xl'
+                title_size: 'md'
+                margin_top: 'md'
+                margin_bottom: 'md'
+            values:
+                title: 'Dikkat Edilmesi Gerekenler'
+                content: '<p>İşleminize devam etmeden önce lütfen belirtilen koşulları ve gereksinimleri kontrol edin.</p>'
+
+        danger_solid:
+            title:
+                en: 'Critical Error Banner'
+                tr: 'Kritik Hata Bildirimi'
+            description:
+                en: 'High-contrast solid red alert for critical notices'
+                tr: 'Kritik duyurular için yüksek kontrastlı doygun kırmızı uyarı'
+            props:
+                alert_style: 'danger'
+                alert_variant: 'solid'
+                icon_display: 'auto'
+                dismissible: 'no'
+                rounded: 'xl'
+                title_size: 'lg'
+                margin_top: 'lg'
+                margin_bottom: 'lg'
+            values:
+                title: 'Kritik Bildirim'
+                content: '<p>Sistem bakım çalışması nedeniyle bu hizmet geçici olarak kullanılamamaktadır.</p>'

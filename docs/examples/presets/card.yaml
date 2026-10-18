@@ -1,0 +1,77 @@
+card:
+    presets:
+        hero_feature:
+            title:
+                en: 'Elevated Feature Card'
+                tr: 'Öne Çıkan Gölgeli Kart'
+            description:
+                en: 'Interactive elevated card with spacious padding and prominent heading'
+                tr: 'Geniş iç boşluklu, etkileşimli ve gölgeli öne çıkan özellik kartı'
+            props:
+                variant: 'interactive'
+                bg_color: 'white'
+                padding: 'lg'
+                rounded: '2xl'
+                media_align: 'top'
+                media_aspect_ratio: '16-9'
+                title_element: 'h2'
+                title_size: 'lg'
+                title_color: 'default'
+                text_align: 'left'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                title: 'Yeni Nesil Dijital Çözümler'
+                meta: 'Kurumsal Altyapı'
+                content: '<p>Modern mimari ve yüksek performanslı bileşenlerle web platformunuzu hızla ölçeklendirin.</p>'
+
+        minimal_outline:
+            title:
+                en: 'Minimalist Bordered Card'
+                tr: 'Minimalist Çerçeveli Kart'
+            description:
+                en: 'Clean bordered card layout with standard padding'
+                tr: 'Zarif kenarlıklı ve standart iç boşluklu sade kart düzeni'
+            props:
+                variant: 'bordered'
+                bg_color: 'white'
+                padding: 'default'
+                rounded: 'xl'
+                media_align: 'top'
+                media_aspect_ratio: '16-9'
+                title_element: 'h3'
+                title_size: 'md'
+                title_color: 'default'
+                text_align: 'left'
+                margin_top: 'sm'
+                margin_bottom: 'md'
+            values:
+                title: 'Esnek İçerik Yönetimi'
+                meta: 'Modüler Mimari'
+                content: '<p>Yeniden kullanılabilir bloklar ve hazır şablonlar ile sayfalarınızı dakikalar içinde oluşturun.</p>'
+
+        horizontal_split:
+            title:
+                en: 'Horizontal Media Split'
+                tr: 'Yatay Medya Kartı'
+            description:
+                en: 'Side-by-side image and content layout for featured stories'
+                tr: 'Öne çıkan hikayeler için yan yana görsel ve metin düzeni'
+            props:
+                variant: 'shadow'
+                bg_color: 'white'
+                padding: 'default'
+                rounded: '2xl'
+                media_align: 'left'
+                media_width: '1-2'
+                media_aspect_ratio: '16-9'
+                title_element: 'h3'
+                title_size: 'lg'
+                title_color: 'default'
+                text_align: 'left'
+                margin_top: 'md'
+                margin_bottom: 'md'
+            values:
+                title: 'Müşteri Başarı Hikayesi'
+                meta: 'Vaka Analizi'
+                content: '<p>Kurumsal dönüşüm sürecinde elde edilen %45 performans artışının detaylarını keşfedin.</p>'

@@ -1,0 +1,62 @@
+text:
+    presets:
+        lead_intro:
+            title:
+                en: 'Lead Introduction Paragraph'
+                tr: 'Vurgulu Giriş Paragrafı'
+            description:
+                en: 'Large readable lead text constrained to medium width'
+                tr: 'Orta genişlikte sınırlandırılmış büyük ve okunaklı giriş metni'
+            props:
+                size: 'lg'
+                text_style: 'lead'
+                color: 'default'
+                column: 'none'
+                dropcap: 'no'
+                max_width: '2xl'
+                text_align: 'left'
+                margin_top: 'sm'
+                margin_bottom: 'md'
+            values:
+                content: '<p>Kurumsal web platformumuz, içerik editörlerine hız ve esneklik kazandırırken ziyaretçilere modern, erişilebilir ve yüksek performanslı bir kullanıcı deneyimi sunar.</p>'
+
+        editorial_two_columns:
+            title:
+                en: 'Editorial 2-Column Article'
+                tr: '2 Sütunlu Dergi Metni'
+            description:
+                en: 'Newspaper-style two-column text with decorative drop cap'
+                tr: 'Büyük başlangıç harfli (dropcap) dergi/gazete tarzı iki sütunlu metin'
+            props:
+                size: 'md'
+                text_style: 'none'
+                color: 'default'
+                column: '1-2'
+                column_divider: 'yes'
+                dropcap: 'yes'
+                text_align: 'left'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                content: '<p>Modern dijital yayıncılıkta okunabilirlik ve görsel hiyerarşi en kritik unsurlardır. İki sütunlu metin düzeni, uzun makalelerin ve kurumsal hikayelerin masaüstü ekranlarda çok daha rahat takip edilmesini sağlar.</p><p>Başlangıç harfi vurgusu (dropcap) ise okuyucunun dikkatini doğrudan metnin giriş noktasına çekerek editoryal kaliteyi güçlendirir.</p>'
+
+        centered_statement:
+            title:
+                en: 'Centered Mission Statement'
+                tr: 'Ortalanmış Vizyon Metni'
+            description:
+                en: 'Extra-large centered statement for landing page highlights'
+                tr: 'Açılış sayfaları için ekstra büyük ortalanmış vizyon/misyon metni'
+            props:
+                size: 'xl'
+                text_style: 'large'
+                color: 'default'
+                column: 'none'
+                dropcap: 'no'
+                max_width: 'xl'
+                text_align: 'center'
+                block_align: 'center'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                content: '<p>"Teknolojiyi karmaşıklıktan arındırarak herkes için erişilebilir, hızlı ve sürdürülebilir dijital ürünler tasarlıyoruz."</p>'

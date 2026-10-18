@@ -1,0 +1,43 @@
+grid:
+    presets:
+        three_column_features:
+            title:
+                en: '3-Column Feature Cards'
+                tr: '3 Sütunlu Özellik Kartları'
+            description:
+                en: 'Balanced 3-column bordered card grid with medium spacing'
+                tr: 'Orta boşluklu ve kenarlıklı dengeli 3 sütunlu özellik kartları'
+            props:
+                layout_type: 'grid'
+                columns_default: '1'
+                columns_md: '2'
+                columns_lg: '3'
+                gap: 'md'
+                masonry: 'none'
+                card_variant: 'bordered'
+                media_align: 'top'
+                button_style: 'primary'
+                text_align: 'left'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+
+        four_column_minimal:
+            title:
+                en: '4-Column Minimal Grid'
+                tr: '4 Sütunlu Minimal Izgara'
+            description:
+                en: 'Clean 4-column flat grid layout for services or highlights'
+                tr: 'Hizmetler veya öne çıkanlar için sade 4 sütunlu ızgara düzeni'
+            props:
+                layout_type: 'grid'
+                columns_default: '1'
+                columns_md: '2'
+                columns_lg: '4'
+                gap: 'lg'
+                masonry: 'none'
+                card_variant: 'flat'
+                media_align: 'top'
+                button_style: 'link'
+                text_align: 'center'
+                margin_top: 'md'
+                margin_bottom: 'md'

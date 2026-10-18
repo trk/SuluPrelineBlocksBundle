@@ -111,7 +111,17 @@ return [
 ];
 ```
 
-### 3. Tailwind CSS 4 Configuration
+### 3. Initialize Project Templates, Shared Block Include & Visual Presets
+
+Run the initialization command to scaffold `config/templates/includes/content_block_types.xml`, `config/templates/snippets/{page_layout,reusable_block,block_preset}.xml`, and the 16 ready-made visual preset files (`config/blocks/presets/*.yaml`) from `docs/examples/` into your project without overwriting existing files:
+
+```bash
+php bin/console sulu:block-suite:init
+```
+
+*(Use `--no-presets` to skip copying YAML presets, `--dry-run` to preview, or `--force` to overwrite existing files.)*
+
+### 4. Tailwind CSS 4 Configuration
 
 In your website stylesheet (e.g. `assets/website/css/app.css`):
 
@@ -122,8 +132,8 @@ In your website stylesheet (e.g. `assets/website/css/app.css`):
 @source "../node_modules/preline/dist/*.js";
 @source "../../templates/**/*.twig";
 @source "../../src/Twig/Components/**/*.php";
-@source "../../packages/sulu-preline-blocks-bundle/templates/**/*.twig";
-@source "../../packages/sulu-preline-blocks-bundle/src/Twig/Components/**/*.php";
+@source "../../vendor/trk/sulu-preline-blocks-bundle/templates/**/*.twig";
+@source "../../vendor/trk/sulu-preline-blocks-bundle/src/Twig/Components/**/*.php";
 ```
 
 ---

@@ -1,0 +1,58 @@
+headline:
+    presets:
+        section_header_center:
+            title:
+                en: 'Centered Section Header'
+                tr: 'Ortalanmış Bölüm Başlığı'
+            description:
+                en: 'Centered H2 heading with extra-large typography and bottom spacing'
+                tr: 'Büyük tipografili ve alt boşluklu ortalanmış H2 bölüm başlığı'
+            props:
+                tag: 'h2'
+                size: 'xl'
+                title_color: 'default'
+                title_decoration: 'none'
+                title_text_stroke: 'no'
+                text_align: 'center'
+                margin_top: 'sm'
+                margin_bottom: 'lg'
+            values:
+                title: 'Öne Çıkan Çözümlerimiz'
+
+        underlined_accent:
+            title:
+                en: 'Underlined Accent Title'
+                tr: 'Altı Çizgili Vurgulu Başlık'
+            description:
+                en: 'Left-aligned H2 heading with primary accent underline bar'
+                tr: 'Ana renk alt çizgi vurgulu sola hizalı H2 başlık'
+            props:
+                tag: 'h2'
+                size: 'lg'
+                title_color: 'default'
+                title_decoration: 'divider'
+                title_text_stroke: 'no'
+                text_align: 'left'
+                margin_top: 'sm'
+                margin_bottom: 'md'
+            values:
+                title: 'Neden Bizi Tercih Etmelisiniz?'
+
+        hero_center_title:
+            title:
+                en: 'Hero Display Headline'
+                tr: 'Dev Manşet (Hero) Başlığı'
+            description:
+                en: '2XL primary hero H1 headline for landing page banners'
+                tr: 'Açılış bölümleri için ekstra büyük birincil renkli H1 manşet başlığı'
+            props:
+                tag: 'h1'
+                size: '2xl'
+                title_color: 'primary'
+                title_decoration: 'none'
+                title_text_stroke: 'no'
+                text_align: 'center'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+            values:
+                title: 'Geleceğin Dijital Deneyimini İnşa Edin'

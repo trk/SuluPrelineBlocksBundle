@@ -1,0 +1,55 @@
+video:
+    presets:
+        cinema_widescreen:
+            title:
+                en: 'Cinema Widescreen Player'
+                tr: 'Sinematik Geniş Ekran Video'
+            description:
+                en: '16:9 widescreen video with extra-large rounded corners and deep shadow'
+                tr: 'Yuvarlatılmış köşeli ve derin gölgeli 16:9 geniş ekran video oynatıcı'
+            props:
+                aspect_ratio: '16/9'
+                rounded: 'xl'
+                box_shadow: 'xl'
+                controls: 'true'
+                autoplay: 'none'
+                muted: 'false'
+                loop: 'false'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+
+        ambient_background_loop:
+            title:
+                en: 'Silent Autoplay Loop'
+                tr: 'Sessiz Otomatik Döngü (Loop)'
+            description:
+                en: 'Muted looping video without controls for product showcases'
+                tr: 'Ürün gösterimleri için kontrol çubuksuz, sessiz ve sürekli dönen video'
+            props:
+                aspect_ratio: '16/9'
+                rounded: 'lg'
+                box_shadow: 'md'
+                controls: 'false'
+                autoplay: 'true'
+                muted: 'true'
+                loop: 'true'
+                margin_top: 'sm'
+                margin_bottom: 'md'
+
+        ultrawide_showcase:
+            title:
+                en: 'Ultrawide 21:9 Showcase'
+                tr: 'Ultra Geniş (21:9) Sunum'
+            description:
+                en: 'Cinematic 21:9 aspect ratio with subtle shadow'
+                tr: 'Sinematik 21:9 en-boy oranlı ve zarif gölgeli sunum videosu'
+            props:
+                aspect_ratio: '21/9'
+                rounded: 'xl'
+                box_shadow: 'lg'
+                controls: 'true'
+                autoplay: 'none'
+                muted: 'false'
+                loop: 'false'
+                margin_top: 'md'
+                margin_bottom: 'lg'

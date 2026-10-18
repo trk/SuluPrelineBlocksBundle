@@ -1,0 +1,39 @@
+gallery:
+    presets:
+        masonry_lightbox:
+            title:
+                en: '3-Column Masonry Gallery'
+                tr: '3 Sütunlu Masonry Galeri'
+            description:
+                en: 'Rounded 3-column masonry media grid with zoom hover effect'
+                tr: 'Yakınlaştırma efektli 3 sütunlu yuvarlatılmış duvar (masonry) galerisi'
+            props:
+                columns_default: '1'
+                columns_md: '2'
+                columns_lg: '3'
+                gap: 'md'
+                masonry: 'columns'
+                overlay_position: 'bottom'
+                image_transition: 'zoom'
+                rounded: 'xl'
+                margin_top: 'md'
+                margin_bottom: 'lg'
+
+        compact_square_grid:
+            title:
+                en: '4-Column Compact Grid'
+                tr: '4 Sütunlu Kompakt Galeri'
+            description:
+                en: 'Compact 4-column thumbnail grid with centered hover overlay'
+                tr: 'Ortalanmış katmanlı kompakt 4 sütunlu görsel ızgarası'
+            props:
+                columns_default: '2'
+                columns_md: '3'
+                columns_lg: '4'
+                gap: 'sm'
+                masonry: 'none'
+                overlay_position: 'center'
+                image_transition: 'zoom'
+                rounded: 'md'
+                margin_top: 'sm'
+                margin_bottom: 'md'

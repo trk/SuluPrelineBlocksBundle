@@ -6,6 +6,7 @@ namespace Totoglu\SuluPrelineBlocksBundle\Tests\Config;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\AdminBundle\SuluAdminBundle;
+use Symfony\Component\Yaml\Yaml;
 
 final class XmlSchemaValidationTest extends TestCase
 {
@@ -172,5 +173,43 @@ final class XmlSchemaValidationTest extends TestCase
         $this->assertContains('container_padding_remove', $loadGeneralFields('video'));
         $this->assertContains('container_padding_remove', $loadGeneralFields('map'));
         $this->assertFileExists($blocksDir . 'headline.xml');
+    }
+
+    public function testExampleSnippetsIncludesAndPresetsAreValid(): void
+    {
+        $adminBundleRef = new \ReflectionClass(SuluAdminBundle::class);
+        $adminBundleDir = \dirname((string) $adminBundleRef->getFileName());
+        $templateXsd = $adminBundleDir . '/Resources/config/schema/template-1.0.xsd';
+
+        $bundleRoot = \dirname(__DIR__, 2);
+        $includeFile = $bundleRoot . '/docs/examples/includes/content_block_types.xml';
+        $this->assertFileExists($includeFile);
+
+        $snippetFiles = \glob($bundleRoot . '/docs/examples/snippets/*.xml') ?: [];
+        $this->assertCount(3, $snippetFiles);
+
+        foreach ($snippetFiles as $xmlFile) {
+            $dom = new \DOMDocument();
+            $this->assertTrue($dom->load($xmlFile), \sprintf('Failed to load example snippet XML "%s".', $xmlFile));
+            $dom->xinclude();
+            $this->assertTrue(
+                $dom->schemaValidate($templateXsd),
+                \sprintf('Example snippet XML "%s" failed Sulu template-1.0.xsd validation.', \basename($xmlFile)),
+            );
+        }
+
+        $presetFiles = \glob($bundleRoot . '/docs/examples/presets/*.yaml') ?: [];
+        $this->assertCount(16, $presetFiles);
+
+        foreach ($presetFiles as $presetFile) {
+            $blockKey = \basename($presetFile, '.yaml');
+            $parsed = Yaml::parseFile($presetFile);
+            $this->assertIsArray($parsed, \sprintf('Example preset YAML "%s" must parse to an array.', \basename($presetFile)));
+            $this->assertArrayHasKey($blockKey, $parsed, \sprintf('Example preset YAML "%s" must contain root key "%s".', \basename($presetFile), $blockKey));
+            $this->assertIsArray($parsed[$blockKey]);
+            $this->assertArrayHasKey('presets', $parsed[$blockKey]);
+            $this->assertIsArray($parsed[$blockKey]['presets']);
+            $this->assertNotEmpty($parsed[$blockKey]['presets']);
+        }
     }
 }

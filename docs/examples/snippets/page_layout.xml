@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xi="http://www.w3.org/2001/XInclude"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>page_layout</key>
+    <meta>
+        <title lang="en">Page Layout</title>
+        <title lang="tr">Sayfa Düzeni</title>
+        <title lang="de">Seitenlayout</title>
+        <title lang="ru">Макет страницы</title>
+        <title lang="es">Diseño de Página</title>
+        <title lang="fr">Mise en Page</title>
+    </meta>
+    <areas>
+        <area key="page_layout">
+            <meta>
+                <title lang="en">Global Page Layout</title>
+                <title lang="tr">Genel Sayfa Düzeni</title>
+                <title lang="de">Globales Seitenlayout</title>
+                <title lang="ru">Глобальный макет страницы</title>
+                <title lang="es">Diseño Global de Página</title>
+                <title lang="fr">Mise en Page Globale</title>
+            </meta>
+        </area>
+    </areas>
+    <properties>
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title lang="en">Layout Name</title>
+                <title lang="tr">Düzen Adı</title>
+                <title lang="de">Layoutname</title>
+                <title lang="ru">Название макета</title>
+                <title lang="es">Nombre del Diseño</title>
+                <title lang="fr">Nom de la Mise en Page</title>
+                <info_text lang="en">Descriptive name for this page layout</info_text>
+                <info_text lang="tr">Bu sayfa düzeni için açıklayıcı isim</info_text>
+                <info_text lang="de">Beschreibender Name für dieses Seitenlayout</info_text>
+                <info_text lang="ru">Описательное название для этого макета страницы</info_text>
+                <info_text lang="es">Nombre descriptivo para este diseño de página</info_text>
+                <info_text lang="fr">Nom descriptif pour cette mise en page</info_text>
+            </meta>
+            <params>
+                <param name="headline" value="true"/>
+            </params>
+        </property>
+        <property name="key" type="text_line">
+            <meta>
+                <title lang="en">Layout Key</title>
+                <title lang="tr">Düzen Anahtarı</title>
+                <title lang="de">Layout-Schlüssel</title>
+                <title lang="ru">Ключ макета</title>
+                <title lang="es">Clave del Diseño</title>
+                <title lang="fr">Clé de la Mise en Page</title>
+                <info_text lang="en">Unique identifier used for auto-resolving matching page layouts. If not specified, title is used.</info_text>
+                <info_text lang="tr">Sayfa şablonuyla otomatik eşleşme için benzersiz anahtar. Belirtilmezse başlık kullanılır.</info_text>
+                <info_text lang="de">Eindeutiger Bezeichner für die automatische Zuordnung. Falls leer, wird der Titel verwendet.</info_text>
+                <info_text lang="ru">Уникальный идентификатор для сопоставления. Если пусто, используется название.</info_text>
+                <info_text lang="es">Identificador único utilizado en Twig. Si no se especifica, se utiliza el título.</info_text>
+                <info_text lang="fr">Identifiant unique utilisé dans Twig. Si non spécifié, le titre est utilisé.</info_text>
+            </meta>
+        </property>
+        <property name="description" type="text_area">
+            <meta>
+                <title lang="en">Description / Notes</title>
+                <title lang="tr">Açıklama / Notlar</title>
+                <title lang="de">Beschreibung / Notizen</title>
+                <title lang="ru">Описание / Примечания</title>
+                <title lang="es">Descripción / Notas</title>
+                <title lang="fr">Description / Notes</title>
+            </meta>
+        </property>
+        <property name="blocks" type="block" default-type="section">
+            <meta>
+                <title lang="en">Layout Blocks</title>
+                <title lang="tr">Düzen Blokları</title>
+                <title lang="de">Layout-Blöcke</title>
+                <title lang="ru">Блоки макета</title>
+                <title lang="es">Bloques del Diseño</title>
+                <title lang="fr">Blocs de la Mise en Page</title>
+            </meta>
+            <types>
+                <xi:include href="../includes/content_block_types.xml"
+                            xpointer="xmlns(sulu=http://schemas.sulu.io/template/template)xpointer(/sulu:types/sulu:*)"/>
+                <type ref="breadcrumbs"/>
+                <type ref="reusable"/>
+            </types>
+        </property>
+    </properties>
+</template>

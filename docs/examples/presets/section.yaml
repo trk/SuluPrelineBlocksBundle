@@ -1,0 +1,25 @@
+section:
+    presets:
+        hero_dark_banner:
+            title:
+                en: 'Hero Spacious Section'
+                tr: 'Geniş Hero Bölümü'
+            description:
+                en: 'Standard 85rem container with large vertical padding for hero or feature areas'
+                tr: 'Hero veya öne çıkan alanlar için geniş dikey boşluklu 85rem konteyner'
+            props:
+                max_width: '85rem'
+                padding: 'lg'
+                bg_style: 'default'
+
+        muted_surface_section:
+            title:
+                en: 'Muted Surface Section'
+                tr: 'Mat Gri Zeminli Bölüm'
+            description:
+                en: 'Subtle gray surface section with standard vertical padding'
+                tr: 'Standart dikey boşluklu hafif gri zeminli içerik bölümü'
+            props:
+                max_width: '85rem'
+                padding: 'default'
+                bg_style: 'muted'

@@ -1,0 +1,49 @@
+divider:
+    presets:
+        subtle_line:
+            title:
+                en: 'Subtle Horizontal Line'
+                tr: 'İnce Yatay Çizgi'
+            description:
+                en: 'Clean muted horizontal rule with medium vertical spacing'
+                tr: 'Orta dikey boşluklu sade yatay ayırıcı çizgi'
+            props:
+                divider_style: 'line'
+                divider_color: 'muted'
+                divider_thickness: '1'
+                divider_width: 'full'
+                divider_align: 'center'
+                margin_top: 'md'
+                margin_bottom: 'md'
+
+        centered_small_accent:
+            title:
+                en: 'Centered Accent Bar'
+                tr: 'Ortalanmış Vurgu Çubuğu'
+            description:
+                en: 'Short thick primary-colored accent divider for section headers'
+                tr: 'Bölüm başlıkları için kısa ve kalın ana renkli vurgu çizgisi'
+            props:
+                divider_style: 'small'
+                divider_color: 'primary'
+                divider_thickness: '4'
+                divider_width: 'small'
+                divider_align: 'center'
+                margin_top: 'sm'
+                margin_bottom: 'sm'
+
+        dashed_section_break:
+            title:
+                en: 'Dashed Section Break'
+                tr: 'Kesikli Bölüm Ayırıcı'
+            description:
+                en: 'Half-width dashed divider centered between content blocks'
+                tr: 'İçerik blokları arasında ortalanmış yarım genişlikte kesikli ayırıcı'
+            props:
+                divider_style: 'dashed'
+                divider_color: 'default'
+                divider_thickness: '2'
+                divider_width: '1-2'
+                divider_align: 'center'
+                margin_top: 'lg'
+                margin_bottom: 'lg'
